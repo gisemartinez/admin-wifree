@@ -1,8 +1,9 @@
 @import org.pac4j.core.profile.CommonProfile
 @import java.util.{List => JList}
 @import controllers.admin.SurveyForm
+@import java.math.BigInteger
 
-@(profile: CommonProfile, surveyForm: Form[Survey])
+@(profile: CommonProfile, surveyForm: Form[Survey], isEditing: Boolean)
 
 @username = @{profile.getAttribute("realName").toString()}
 
@@ -59,10 +60,13 @@
 
                         <div>
                         @helper.repeat(surveyForm("fields"), min = 1) { field =>
+                            @if(isEditing) {
                             <div class="form-group row survey-fields-set" hidden>
-
+                            } else {
+                            <div class="form-group row survey-fields-set">
+                            }
                                 <span>
-                                    <h3>Pregunta 0</h3>
+                                    <h3>Pregunta @{field.label.last}</h3>
                                     <button type="button" class="btn btn-danger delete-button" onclick="deleteSection(this)">Borrar</button>
                                 </span>
 
@@ -73,8 +77,12 @@
                                     @helper.inputText(field("config")("order"), '_label -> Messages("surveys.label.order"), 'class -> "form-control col-md-7 col-xs-12")
                                     @helper.checkbox(field("config")("required"), '_label -> Messages("surveys.label.required"), 'class -> "form-control col-md-7 col-xs-12 question-text")
                                     @helper.inputText(field("config")("value"), 'class -> "form-control col-md-7 col-xs-12 question-text")
-                                    @helper.inputText(field("config")("maximum"), '_label -> Messages("surveys.label.maximum"), 'class -> "form-control col-md-7 col-xs-12 question-rating")
                                     
+                                    @if(field("type") != "rating" && !isEditing) {
+                                    } else {
+                                    @helper.inputText(field("config")("maximum"), '_label -> Messages("surveys.label.maximum"), 'class -> "form-control col-md-7 col-xs-12 question-rating")
+                                    }
+
                                     <div class="rating-options">
                                         <div>
                                             @helper.repeat(field("config")("otherOptions"), min = 1) { optionsField =>
