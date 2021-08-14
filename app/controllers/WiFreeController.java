@@ -1,5 +1,7 @@
 package controllers;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.pac4j.core.config.Config;
 import org.pac4j.core.profile.CommonProfile;
 import org.pac4j.core.profile.ProfileManager;
@@ -25,6 +27,9 @@ public abstract class WiFreeController extends Controller {
 	@Inject
 	protected PlaySessionStore playSessionStore;
 
+	@Inject
+	protected ObjectMapper objectMapper;
+
 	protected final Logger.ALogger logger = Logger.of(this.getClass());
 
 	protected Instant now() {
@@ -40,6 +45,14 @@ public abstract class WiFreeController extends Controller {
 		final ProfileManager<CommonProfile> profileManager = new ProfileManager<>(context);
 		Optional<CommonProfile> currentProfile = profileManager.get(true);
 		return currentProfile.orElseThrow(() -> new NoProfileFoundException("No profile in current session logged in. There should be a profile in session at this point."));
+	}
+
+	protected JsonNode getRequestJson() {
+		return request().body().asJson();
+	}
+
+	protected String getRequestJsonString() {
+		return getRequestJson().toString();
 	}
 
 	public static class NoProfileFoundException extends RuntimeException {

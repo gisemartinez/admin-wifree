@@ -38,6 +38,7 @@ GET			/loginForm								controllers.LoginController.loginForm
 GET         /api/socialuser/:email                  controllers.api.SocialUserController.getSocialUser(email: String)
 POST        /api/socialuser                         controllers.api.SocialUserController.saveSocialUser
 POST        /api/survey                             controllers.api.SurveyController.saveSurvey
+POST        /api/survey/answers                     controllers.api.SurveyAnswersController.saveAnswers
 GET         /api/admin/config/:portalId             controllers.api.PortalConfigController.getPortalConfig(portalId: Long)
 
 # Pac4J Temp Routes

@@ -34,7 +34,11 @@ public abstract class GenericDAO<T extends BaseModel> {
 	}
 
 	public void saveAll(T... objects) {
-		Ebean.saveAll(asList(objects));
+		saveAll(asList(objects));
+	}
+
+	public void saveAll(List<T> objects) {
+		Ebean.saveAll(objects);
 		logger.debug("Objects saved={}", objects);
 	}
 

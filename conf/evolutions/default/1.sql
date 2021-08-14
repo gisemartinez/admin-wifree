@@ -61,6 +61,17 @@ create table field (
   constraint pk_field primary key (id)
 );
 
+create table field_answer (
+  id                            bigserial not null,
+  field_id                      bigint not null,
+  user_id                       bigint not null,
+  answer                        varchar(255) not null,
+  when_created                  timestamptz not null,
+  when_modified                 timestamptz not null,
+  constraint uq_field_answer_field_id_user_id unique (field_id,user_id),
+  constraint pk_field_answer primary key (id)
+);
+
 create table network_user (
   id                            bigserial not null,
   portal_id                     bigint not null,
@@ -186,6 +197,12 @@ create index ix_analytics_query_filter_portal_id on analytics_query_filter (port
 alter table field add constraint fk_field_survey_id foreign key (survey_id) references survey (id) on delete restrict on update restrict;
 create index ix_field_survey_id on field (survey_id);
 
+alter table field_answer add constraint fk_field_answer_field_id foreign key (field_id) references field (id) on delete restrict on update restrict;
+create index ix_field_answer_field_id on field_answer (field_id);
+
+alter table field_answer add constraint fk_field_answer_user_id foreign key (user_id) references network_user (id) on delete restrict on update restrict;
+create index ix_field_answer_user_id on field_answer (user_id);
+
 alter table network_user add constraint fk_network_user_portal_id foreign key (portal_id) references portal (id) on delete restrict on update restrict;
 create index ix_network_user_portal_id on network_user (portal_id);
 
@@ -225,6 +242,12 @@ drop index if exists ix_analytics_query_filter_portal_id;
 alter table if exists field drop constraint if exists fk_field_survey_id;
 drop index if exists ix_field_survey_id;
 
+alter table if exists field_answer drop constraint if exists fk_field_answer_field_id;
+drop index if exists ix_field_answer_field_id;
+
+alter table if exists field_answer drop constraint if exists fk_field_answer_user_id;
+drop index if exists ix_field_answer_user_id;
+
 alter table if exists network_user drop constraint if exists fk_network_user_portal_id;
 drop index if exists ix_network_user_portal_id;
 
@@ -260,6 +283,8 @@ drop table if exists admin cascade;
 drop table if exists analytics_query_filter cascade;
 
 drop table if exists field cascade;
+
+drop table if exists field_answer cascade;
 
 drop table if exists network_user cascade;
 
