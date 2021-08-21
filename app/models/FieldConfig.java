@@ -5,6 +5,7 @@ import utils.StringHelper;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class FieldConfig {
@@ -49,10 +50,15 @@ public class FieldConfig {
         this.order = order;
     }
 
+    public FieldConfig copy() {
+        return new FieldConfig(key, label, order, required, value, maximum,
+                Objects.requireNonNull(otherOptions).stream().map(Option::copy).collect(Collectors.toList()));
+    }
+
     public String toLogString() {
-        return StringHelper.toLogString("key: " + key, "label: " + label, "order: " + order, "required: " + required,
-                "value: " + value, "maximum: " + maximum,
-                "otherOptions: " + (otherOptions != null ? otherOptions.stream().map(Option::toLogString).collect(Collectors.joining()) : ""));
+        return StringHelper.toLogString("key=" + key, "label=" + label, "order=" + order, "required=" + required,
+                "value=" + value, "maximum=" + maximum,
+                "otherOptions=" + (otherOptions != null ? otherOptions.stream().map(Option::toLogString).collect(Collectors.joining("\t\n")) : ""));
     }
 
     public String getKey() {

@@ -28,10 +28,17 @@ public class Survey extends BaseModel {
         this.enabled = enabled;
     }
 
+    public Survey copy() {
+        return new Survey(id, portal, title, fields.stream().map(Field::copy).collect(Collectors.toList()), enabled);
+    }
+
     @Override
     public String toLogString() {
-        return toLogString("id: " + id, "portalId: " + portal.getId(), "title: " + title, "enabled: " + enabled,
-                "fields: " + fields.stream().map(Field::toLogString).collect(Collectors.joining()));
+        return toLogString("id=" + id,
+                "portalId=" + portal.getId(),
+                "title=" + title,
+                "enabled=" + enabled,
+                "fields=\n\t" + fields.stream().map(Field::toLogString).collect(Collectors.joining("\n\t")));
     }
 
     public List<Field> getFields() {

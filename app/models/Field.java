@@ -22,9 +22,13 @@ public class Field extends BaseModel {
         this.config = config;
     }
 
+    public Field copy() {
+        return new Field(id, type, config.copy());
+    }
+
     @Override
     public String toLogString() {
-        return toLogString("id: " + id, "type: " + type, "config: " + config.toLogString());
+        return toLogString("id=" + id, "type=" + type, "config=\n\t" + config.toLogString());
     }
 
     public Survey getSurvey() {

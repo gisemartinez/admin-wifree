@@ -19,7 +19,8 @@ GET         /login                                  controllers.LoginController.
 POST		/connections/set-connection-timeout		controllers.admin.ConnectionsController.setConnectionTimeout
 POST		/analytics/create-analytics-query		controllers.admin.AnalyticsController.createAnalyticsQuery
 POST        /surveys/create-survey                  controllers.admin.SurveysController.createSurvey
-GET         /surveys/:surveyId/answers              controllers.admin.SurveysController.getSurveyAnswers(surveyId: Long)
+GET         /surveys/:surveyId/all-answers          controllers.admin.SurveysController.getSurveyAnswers(surveyId: Long)
+GET         /surveys/:surveyId/answers              controllers.admin.SurveysController.answeredSurvey(surveyId: Long)
 
 # Console routes
 GET			/console								controllers.ConsoleController.index

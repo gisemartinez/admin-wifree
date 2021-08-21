@@ -16,7 +16,7 @@ public class Option {
     }
 
     public String toLogString() {
-        return StringHelper.toLogString("index: " + index, "key: " + key);
+        return StringHelper.toLogString("index=" + index, "key=" + key);
     }
 
     public String getKey() {
@@ -33,5 +33,9 @@ public class Option {
 
     public void setIndex(Integer index) {
         this.index = index;
+    }
+
+    public Option copy() {
+        return new Option(index, key);
     }
 }

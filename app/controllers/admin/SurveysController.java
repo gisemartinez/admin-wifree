@@ -1,9 +1,12 @@
 package controllers.admin;
 
-import be.objectify.deadbolt.java.actions.SubjectPresent;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.ImmutableListMultimap;
 import controllers.WiFreeController;
 import daos.FieldAnswerDAO;
+import daos.SurveyDAO;
+import models.Field;
 import models.FieldAnswer;
 import models.NetworkUser;
 import models.Survey;
@@ -13,6 +16,12 @@ import play.mvc.Result;
 import services.SurveysService;
 
 import javax.inject.Inject;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static com.google.common.collect.Streams.*;
+import static java.util.stream.Collectors.toList;
 
 public class SurveysController extends WiFreeController {
 
@@ -20,7 +29,13 @@ public class SurveysController extends WiFreeController {
     SurveysService surveysService;
 
     @Inject
-    FieldAnswerDAO fieldAnswerDAO;
+    FieldAnswerDAO fieldAnswerDAO; // TODO quitar
+
+    @Inject
+    SurveyDAO surveyDAO; // TODO quitar
+
+    @Inject
+    ObjectMapper objectMapper; // TODO quitar
 
     public Result createSurvey() {
         Survey survey = formFactory.form(Survey.class).bindFromRequest().get();
@@ -29,13 +44,36 @@ public class SurveysController extends WiFreeController {
         return ok(createSurveyResponse.createdSurvey().toLogString());
     }
 
-    @SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
     public Result getSurveyAnswers(Long surveyId) {
         ImmutableListMultimap<NetworkUser, FieldAnswer> answersForSurvey = fieldAnswerDAO.findForSurvey(surveyId); // TODO quitar a una Function
 
         String rr = mapToString(answersForSurvey);
 
         return ok(rr); // TODO: devolver lo que realmente necesite la vista
+    }
+
+    public Result answeredSurvey(Long surveyId) throws JsonProcessingException {
+        ImmutableListMultimap<NetworkUser, FieldAnswer> answersForSurvey = fieldAnswerDAO.findForSurvey(surveyId);
+        Survey survey = surveyDAO.get(surveyId);
+
+        List<Survey> answeredSurveysPerUser = answersForSurvey.asMap().values().stream()
+                .map(userAnswers -> fillSurveyFieldsWithAnswers(survey, userAnswers))
+                .collect(toList());
+
+        return ok(answeredSurveysPerUser.stream().map(Survey::toLogString).collect(Collectors.joining("\n\n"))); // TODO: devolver algo para la vista
+    }
+
+    @SuppressWarnings("UnstableApiUsage")
+    private Survey fillSurveyFieldsWithAnswers(Survey survey, java.util.Collection<FieldAnswer> userAnswers) {
+        Survey answeredSurvey = survey.copy();
+        Stream<Field> fields = answeredSurvey.getFields().stream();
+        Stream<FieldAnswer> answers = userAnswers.stream();
+        forEachPair(fields, answers, (field, answer) -> answerField(answeredSurvey, field, answer));
+        return answeredSurvey;
+    }
+
+    private void answerField(Survey answeredSurvey, models.Field field, FieldAnswer answer) {
+        field.getConfig().setValue(answer.getAnswer());
     }
 
     // TODO quitar, es de prueba

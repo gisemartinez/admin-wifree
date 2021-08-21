@@ -38,7 +38,7 @@ public class StringHelper {
 	public static String toParagraph(Stream<String> lines) {
 		String paragraph = "";
 		if ( lines != null )
-			paragraph = lines.reduce( (l1, l2) -> new StringBuilder(l1).append("\n").append(l2).toString() ).orElse("");
+			paragraph = lines.reduce( (l1, l2) -> l1 + "\n" + l2).orElse("");
 		return paragraph;
 	}
 	
