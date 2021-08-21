@@ -156,12 +156,12 @@ public class AdminAppController extends WiFreeController {
 		return ok(views.html.admin.all_surveys.render(currentProfile, summaries));
 	}
 
-	private SurveySummary toSummary(Survey survey) {
-		return new SurveySummary(survey.getId(), survey.getTitle(), survey.getWhenCreated());
-	}
-
 	public Result portalSettings() {
 		return notFound();
+	}
+
+	private SurveySummary toSummary(Survey survey) {
+		return new SurveySummary(survey.getId(), survey.getTitle(), survey.getWhenCreated());
 	}
 
 	private List<VisitsByPeriod> takeLastWeek(List<VisitsByPeriod> list) {
