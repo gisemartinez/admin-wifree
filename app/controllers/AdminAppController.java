@@ -134,7 +134,7 @@ public class AdminAppController extends WiFreeController {
 	public Result surveys() throws NoProfileFoundException {
 		CommonProfile currentProfile = getCurrentProfile();
 		Form<Survey> form = formFactory.form(Survey.class);
-		return ok(views.html.admin.surveys.render(currentProfile, form, true));
+		return ok(views.html.admin.surveys.render(currentProfile, form, true, true, 0, 0));
 	}
 
 	@SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
@@ -142,7 +142,7 @@ public class AdminAppController extends WiFreeController {
 		CommonProfile currentProfile = getCurrentProfile();
 		Survey survey = new SurveyDAO().get(surveyId);
 		Form<Survey> form = formFactory.form(Survey.class).fill(survey);
-		return ok(views.html.admin.surveys.render(currentProfile, form, false));
+		return ok(views.html.admin.surveys.render(currentProfile, form, true, false, 0, 0));
 	}
 
 	@SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)

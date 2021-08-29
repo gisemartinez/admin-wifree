@@ -8,9 +8,9 @@ GET         /testTheme                              controllers.ApplicationContr
 
 GET         /admin                                  controllers.LoginController.index
 GET         /dashboard                              controllers.AdminAppController.dashboard
-GET         /surveys                                controllers.AdminAppController.surveys
-GET         /survey/:id                             controllers.AdminAppController.survey(id: Long)
-GET         /all-surveys                            controllers.AdminAppController.allSurveys
+GET         /create-survey                          controllers.AdminAppController.surveys
+GET         /surveys/:id                            controllers.AdminAppController.survey(id: Long)
+GET         /surveys                                controllers.AdminAppController.allSurveys
 GET         /analytics                              controllers.AdminAppController.analytics
 GET         /connections                            controllers.AdminAppController.connections
 GET			/portal-settings						controllers.AdminAppController.portalSettings
@@ -18,9 +18,11 @@ GET         /login                                  controllers.LoginController.
 
 POST		/connections/set-connection-timeout		controllers.admin.ConnectionsController.setConnectionTimeout
 POST		/analytics/create-analytics-query		controllers.admin.AnalyticsController.createAnalyticsQuery
+
+# Surveys
 POST        /surveys/create-survey                  controllers.admin.SurveysController.createSurvey
 GET         /surveys/:surveyId/all-answers          controllers.admin.SurveysController.getSurveyAnswers(surveyId: Long)
-GET         /surveys/:surveyId/answers              controllers.admin.SurveysController.answeredSurvey(surveyId: Long)
+GET         /surveys/:surveyId/answers              controllers.admin.SurveysController.answeredSurvey(surveyId: Long, offset: Int ?= 0)
 
 # Console routes
 GET			/console								controllers.ConsoleController.index

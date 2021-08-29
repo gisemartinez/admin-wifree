@@ -22,6 +22,17 @@ $(document).ready(function() {
     $("#newCheckboxInputButton").click(function() {
         cloneAndSelectInputs(true, true, false, "checkbox");
     });
+
+    Object.defineProperty(NodeList.prototype, "last", {
+        value: function last() {
+            if (this.length == 0)
+                return;
+            else
+                return this[this.length - 1];
+        },
+        writable: true,
+        configurable: true
+    });
 })
 
 function deleteSection(element) {
@@ -33,7 +44,7 @@ function deleteSection(element) {
      
     for (let i = nodeToRemoveIndex; i < allNodes.length; i++) {
         const node = allNodes[i];
-        let next = i+1;
+        let next = i + 1;
         let elementsToUpdate = node.querySelectorAll(`[id^=fields_${next}], [for^=fields_${next}], [name^="fields[${next}]"], h3`);
         elementsToUpdate.forEach(element => {
             let id = element.id;
@@ -41,11 +52,11 @@ function deleteSection(element) {
             let _for = element.getAttribute("for");
             let innerText = element.innerText;
 
-            if (id) element.id = id.replaceAll(`fields_${i+1}`, `fields_${i}`);
-            if (name) element.name = name.replaceAll(`fields[${i+1}`, `fields[${i}`);
-            if (_for) element.setAttribute("for", _for.replaceAll(`fields_${i+1}`, `fields_${i}`));
+            if (id) element.id = id.replaceAll(`fields_${next}`, `fields_${i}`);
+            if (name) element.name = name.replaceAll(`fields[${next}`, `fields[${i}`);
+            if (_for) element.setAttribute("for", _for.replaceAll(`fields_${next}`, `fields_${i}`));
             if (innerText && ["LABEL", "H3"].includes(element.tagName)) {
-                let newText = innerText.replaceAll(`fields.${i+1}`, `fields.${i}`).replaceAll(`Pregunta ${i+1}`, `Pregunta ${i}`);
+                let newText = innerText.replaceAll(`fields.${next}`, `fields.${i}`).replaceAll(`Pregunta ${next}`, `Pregunta ${i}`);
                 element.innerText = newText;
             }
         });
@@ -68,20 +79,29 @@ function addRatingOption(element) {
 }
 
 function cloneAndSelectInputs(hideText, hideRating, hideRadio, fieldType) {
+    // Get last index
     let i = Number($(".field-type").last().attr("id").match(/\d+/)[0]);
+    
+    // Get last existing node and clone it
     let allNodes = document.querySelectorAll(".survey-fields-set")
-    let node = allNodes[allNodes.length -1];
+    let node = allNodes.last();
     let parent = node.parentElement;
     let newNode = node.cloneNode(true);
-    newNode.innerHTML = newNode.innerHTML.replaceAll(`fields_${i}`, `fields_${i + 1}`).replaceAll(`fields[${i}]`, `fields[${i + 1}]`).replaceAll(`fields.${i}`, `fields.${i + 1}`).replaceAll(`Pregunta ${i}`, `Pregunta ${i+1}`);
+
+    // Update cloned node index number
+    newNode.innerHTML = newNode.innerHTML.replaceAll(`fields_${i}`, `fields_${i+1}`).replaceAll(`fields[${i}]`, `fields[${i+1}]`).replaceAll(`fields.${i}`, `fields.${i+1}`).replaceAll(`Pregunta ${i}`, `Pregunta ${i+1}`);
+    
+    // Hide not corresponding elements
     newNode.querySelectorAll(".question-text").forEach(e => e.parentNode.parentNode.hidden = hideText);
     newNode.querySelectorAll(".question-rating").forEach(e => e.parentNode.parentNode.hidden = hideRating);
     //newNode.querySelectorAll(".question-radio").forEach(e => e.parentNode.parentNode.hidden = hideRadio);
     newNode.querySelector(".rating-options").hidden = hideRadio;
+    
     let fieldTypeElement = newNode.querySelector(".field-type");
     fieldTypeElement.value = fieldType;
     fieldTypeElement.parentNode.parentNode.hidden = true;
     newNode.hidden = false;
     newNode.lastElementChild.lastElementChild.firstElementChild.replaceChildren(newNode.lastElementChild.lastElementChild.firstElementChild.firstElementChild)
+    //newNode.querySelectorAll(".question-radio").last().type = fieldType;
     parent.appendChild(newNode);
 }

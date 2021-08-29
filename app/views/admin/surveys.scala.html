@@ -3,7 +3,7 @@
 @import controllers.admin.SurveyForm
 @import java.math.BigInteger
 
-@(profile: CommonProfile, surveyForm: Form[Survey], isEditing: Boolean)
+@(profile: CommonProfile, surveyForm: Form[Survey], isEditing: Boolean, isCreating: Boolean, currentAnswer: Int = 0, totalAnswers: Int = 0)
 
 @username = @{profile.getAttribute("realName").toString()}
 
@@ -12,7 +12,30 @@
 
 <head>
     @parts.head("WiFree")
-    @parts.js.surveys_js()
+    @parts.js.surveys_js(isEditing)
+
+    <style>
+        .wifree-checkbox dl {
+            width: 100%;
+            overflow: hidden;
+            padding: 2px;
+            margin: 0
+            }
+        .wifree-checkbox dt {
+            float: left;
+            width: 25%;
+            /* adjust the width; make sure the total of both is 100% */
+            padding: 4px;
+            margin: 0
+        }
+        .wifree-checkbox dd {
+            float: left;
+            width: 75%;
+            /* adjust the width; make sure the total of both is 100% */
+            padding: 4px;
+            margin: 0
+        }
+    </style>
 </head>
 
 <body class="nav-md">
@@ -22,13 +45,9 @@
 
         <div class="col-md-3 left_col">
             <div class="left_col scroll-view">
-
                 @parts.menu_site_title()
-
                 @parts.menu_profile_quickinfo(username)
-
                 <br />
-
                 @parts.sidebar_menu()
                 @parts.menu_footer_buttons()
 
@@ -41,7 +60,33 @@
         <div class="right_col" role="main">
             <div class="row">
                 <div class="col-md-12 col-sm-6 col-xs-12">
-                    <h1>Create Survey</h1>
+                    @if(isCreating) {
+                    <h1>Crear Encuesta</h1>
+                    } else if (isEditing) {
+                    <h1>Editar Encuesta</h1>
+                    } else {
+                    <h1>Resultados de Encuesta</h1>
+                    }
+
+                    @if(!isEditing && !isCreating) {
+                    <div>
+                        @if(currentAnswer>1){
+                        <button type="button" class="btn btn-link" onclick="previous()">Anterior</button>
+                        } else {
+                        <button type="button" class="btn btn-link" disabled>Anterior</button>
+                        }
+                        <span>
+                            Respuesta 
+                            <input id="answerNumber" type="number" size="1" value="@currentAnswer" min="1" max="@totalAnswers">
+                            de <span id="totalAnswers">@totalAnswers</span>
+                        </span>
+                        @if(currentAnswer < totalAnswers){
+                        <button type="button" class="btn btn-link" onclick="next()">Siguiente</button>
+                        } else {
+                        <button type="button" class="btn btn-link" disabled>Siguiente</button>
+                        }
+                    </div>
+                    }
 
                     <div>
                         @helper.form(controllers.admin.routes.SurveysController.createSurvey(), 'id -> "surveyForm", Symbol("data-parsley-validate") -> "true", 'class -> "form-horizontal form-label-left") {
@@ -51,48 +96,53 @@
                             </div>
                         </div>
 
+                        @if(isEditing || isCreating) {
                         <button type="button" id="newInputButton" class="btn btn-primary">New Input</button>
                         <button type="button" id="newTextInputButton" class="btn btn-primary">@Messages("surveys.new-field.text")</button>
                         <button type="button" id="newRatingInputButton" class="btn btn-primary">@Messages("surveys.new-field.rating")</button>
                         <button type="button" id="newRadioInputButton" class="btn btn-primary">@Messages("surveys.new-field.radio")</button>
                         <button type="button" id="newSelectorInputButton" class="btn btn-primary">@Messages("surveys.new-field.selector")</button>
                         <button type="button" id="newCheckboxInputButton" class="btn btn-primary">@Messages("surveys.new-field.checkbox")</button>
+                        }
 
                         <div>
                         @helper.repeat(surveyForm("fields"), min = 1) { field =>
-                            @if(isEditing) {
+                            @if(isCreating) {
                             <div class="form-group row survey-fields-set" hidden>
                             } else {
                             <div class="form-group row survey-fields-set">
                             }
                                 <span>
                                     <h3>Pregunta @{field.label.last}</h3>
+                                    @if(isEditing || isCreating) {
                                     <button type="button" class="btn btn-danger delete-button" onclick="deleteSection(this)">Borrar</button>
+                                    } else {}
                                 </span>
 
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     @helper.inputText(field("type"), 'class -> "form-control col-md-7 col-xs-12 field-type")
                                     @helper.inputText(field("config")("key"), 'class -> "form-control col-md-7 col-xs-12")
                                     @helper.inputText(field("config")("label"), '_label -> Messages("surveys.label.label"), 'class -> "form-control col-md-7 col-xs-12")
-                                    @helper.inputText(field("config")("order"), '_label -> Messages("surveys.label.order"), 'class -> "form-control col-md-7 col-xs-12")
+                                    @helper.inputText(field("config")("order"), '_label -> Messages("surveys.label.order"), 'type -> "number", 'class -> "form-control col-md-7 col-xs-12", 'min -> "0")
                                     @helper.checkbox(field("config")("required"), '_label -> Messages("surveys.label.required"), 'class -> "form-control col-md-7 col-xs-12 question-text")
-                                    @helper.inputText(field("config")("value"), 'class -> "form-control col-md-7 col-xs-12 question-text")
-                                    
-                                    @if(field("type") != "rating" && !isEditing) {
+                                    @helper.inputText(field("config")("value"), '_label -> Messages("surveys.label.value"), 'class -> "form-control col-md-7 col-xs-12 question-text")
+                                    @if(field("type") != "rating" && !isEditing && !isCreating) {
                                     } else {
-                                    @helper.inputText(field("config")("maximum"), '_label -> Messages("surveys.label.maximum"), 'class -> "form-control col-md-7 col-xs-12 question-rating")
+                                    @helper.inputText(field("config")("maximum"), '_label -> Messages("surveys.label.maximum"), 'class -> "form-control col-md-7 col-xs-12 question-rating", 'type -> "number", 'min -> "2")
                                     }
 
                                     <div class="rating-options">
                                         <div>
                                             @helper.repeat(field("config")("otherOptions"), min = 1) { optionsField =>
-                                                <div class="rating-option">
+                                                <div class="rating-option wifree-checkbox">
                                                     @helper.inputText(optionsField("index"), '_label -> Messages("surveys.label.option.index"), 'type -> "number", 'class -> "form-control col-md-7 col-xs-12 question-radio")
                                                     @helper.inputText(optionsField("key"), '_label -> Messages("surveys.label.option.key"), 'class -> "form-control col-md-7 col-xs-12 question-radio")
                                                 </div>
                                             }
                                         </div>
+                                        @if(isEditing || isCreating) {
                                         <button type="button" class="btn btn-info" onclick="addRatingOption(this)">@Messages("surveys.add-option")</button>
+                                        }
                                     </div>
                                     
                                 </div>
@@ -101,11 +151,13 @@
                         </div>
 
                         <div class="ln_solid"></div>
+                        @if(isEditing || isCreating){
                         <div class="form-group">
                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                                 <button type="submit" class="btn btn-success">@Messages("submit")</button>
                             </div>
                         </div>
+                        }
                         }
                     </div>
                 </div>

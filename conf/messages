@@ -33,3 +33,4 @@ surveys.label.required=¿Es obligatorio?
 surveys.label.maximum=Cantidad de opciones
 surveys.label.option.index=Número de opción
 surveys.label.option.key=Valor de la opción
+surveys.label.value=Respuesta

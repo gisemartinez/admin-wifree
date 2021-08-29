@@ -11,19 +11,6 @@
 
 <head>
     @parts.head("WiFree")
-
-    <script>
-        $(document).ready(function() {
-            $(".clickable-row").click(function() {
-                window.location = $(this).data("href");
-            });
-        });
-    </script>
-    <style>
-        .clickable-row {
-            cursor: pointer;
-        }
-    </style>
 </head>
 
 <body class="nav-md">
@@ -64,14 +51,22 @@
                                         <th>#</th>
                                         <th>Titulo (TODO)</th>
                                         <th>Fecha de creación (TODO)</th>
+                                        <th></th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 @summaries.map { summary =>
-                                    <tr class="clickable-row" data-href="@routes.AdminAppController.survey(summary.id)">
+                                    <tr>
                                         <td class="a-center">@summary.id</td>
                                         <td>@summary.title</td>
                                         <td>@summary.creation</td>
+                                        <td class="text-center">
+                                            <a class="btn btn-primary" href="@routes.AdminAppController.survey(summary.id)" role="button">Editar</a>
+                                        </td>
+                                        <td class="text-center">
+                                            <a class="btn btn-info" href="@controllers.admin.routes.SurveysController.answeredSurvey(summary.id,0)" role="button">Ver Respuestas</a>
+                                        </td>
                                     </tr>
                                 }
                                 </tbody>
