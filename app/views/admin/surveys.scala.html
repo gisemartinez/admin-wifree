@@ -71,17 +71,17 @@
                     @if(!isEditing && !isCreating) {
                     <div>
                         @if(currentAnswer>1){
-                        <button type="button" class="btn btn-link" onclick="previous()">Anterior</button>
+                        <button type="button" class="btn btn-link" onclick="previous()" style="font-weight: bold;">Anterior</button>
                         } else {
                         <button type="button" class="btn btn-link" disabled>Anterior</button>
                         }
                         <span>
                             Respuesta 
-                            <input id="answerNumber" type="number" size="1" value="@currentAnswer" min="1" max="@totalAnswers">
+                            <input id="answerNumber" type="number" size="1" value="@currentAnswer" min="1" max="@totalAnswers" style="font-weight: bold;">
                             de <span id="totalAnswers">@totalAnswers</span>
                         </span>
                         @if(currentAnswer < totalAnswers){
-                        <button type="button" class="btn btn-link" onclick="next()">Siguiente</button>
+                        <button type="button" class="btn btn-link" onclick="next()" style="font-weight: bold;">Siguiente</button>
                         } else {
                         <button type="button" class="btn btn-link" disabled>Siguiente</button>
                         }

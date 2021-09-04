@@ -101,7 +101,28 @@ function cloneAndSelectInputs(hideText, hideRating, hideRadio, fieldType) {
     fieldTypeElement.value = fieldType;
     fieldTypeElement.parentNode.parentNode.hidden = true;
     newNode.hidden = false;
+
+    if (fieldType == "radio" || fieldType == "checkbox") {
+        let div = document.createElement("div");
+        div.setAttribute("class", "input-group");
+        let span = document.createElement("span");
+        span.setAttribute("class", "input-group-addon");
+        div.appendChild(span);
+        let preInput = document.createElement("input");
+        if (fieldType == "checkbox") {
+            preInput.setAttribute("type", "checkbox");
+        } else if (fieldType == "radio") {
+            preInput.setAttribute("type", "radio");
+        }
+        span.appendChild(preInput);
+        let input = newNode.querySelectorAll(".question-radio").last();
+        div.appendChild(input);
+        newNode.querySelectorAll(".rating-options")[0].querySelectorAll("dd")[1].replaceChildren(div);
+    }
+
     newNode.lastElementChild.lastElementChild.firstElementChild.replaceChildren(newNode.lastElementChild.lastElementChild.firstElementChild.firstElementChild)
+    
     //newNode.querySelectorAll(".question-radio").last().type = fieldType;
+    
     parent.appendChild(newNode);
 }
