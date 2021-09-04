@@ -33,6 +33,13 @@ public abstract class GenericDAO<T extends BaseModel> {
 		logger.debug("Object saved={}", object);
 	}
 
+	public void saveOrUpdate(T object) {
+		if (object.isNew())
+			save(object);
+		else
+			update(object);
+	}
+
 	public void saveAll(T... objects) {
 		saveAll(asList(objects));
 	}
@@ -40,6 +47,11 @@ public abstract class GenericDAO<T extends BaseModel> {
 	public void saveAll(List<T> objects) {
 		Ebean.saveAll(objects);
 		logger.debug("Objects saved={}", objects);
+	}
+
+	public void update(T object) {
+		Ebean.update(object);
+		logger.debug("Object updated={}", object);
 	}
 
 	public boolean delete(T object) {

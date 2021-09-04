@@ -25,11 +25,15 @@ public abstract class BaseModel extends Model implements Serializable, WiFreeEnt
 	@WhenModified
 	protected Timestamp whenModified;
 
+	public boolean isNew() {
+		return id == null || id == 0L;
+	}
+
 	public Long getId() {
 		return id;
 	}
 
-	protected void setId(Long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

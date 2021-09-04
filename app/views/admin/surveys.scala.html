@@ -92,8 +92,14 @@
                         @helper.form(controllers.admin.routes.SurveysController.createSurvey(), 'id -> "surveyForm", Symbol("data-parsley-validate") -> "true", 'class -> "form-horizontal form-label-left") {
                         <div class="form-group row survey-body">
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                @helper.inputText(surveyForm("title"), '_label -> Messages("surveys.label.title"), 'type -> "text", 'required -> "required", 'class -> "form-control col-md-7 col-xs-12")
+                                <h2>
+                                    @helper.inputText(surveyForm("title"), '_label -> Messages("surveys.label.title"), 'type -> "text", 'required -> "required", 'class -> "form-control col-md-7 col-xs-12")
+                                </h2>
                             </div>
+                        </div>
+
+                        <div style="display: none">
+                            @helper.inputText(surveyForm("id"))
                         </div>
 
                         @if(isEditing || isCreating) {
@@ -112,31 +118,64 @@
                             } else {
                             <div class="form-group row survey-fields-set">
                             }
-                                <span>
-                                    <h3>Pregunta @{field.label.last}</h3>
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <h3>Pregunta @{field.label.last}</h3>
+                                    </div>
+                                    
                                     @if(isEditing || isCreating) {
-                                    <button type="button" class="btn btn-danger delete-button" onclick="deleteSection(this)">Borrar</button>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <button type="button" class="btn btn-danger delete-button" onclick="deleteSection(this)">Borrar</button>
+                                    </div>
                                     } else {}
-                                </span>
+                                </div>
 
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     @helper.inputText(field("type"), 'class -> "form-control col-md-7 col-xs-12 field-type")
                                     @helper.inputText(field("config")("key"), 'class -> "form-control col-md-7 col-xs-12")
                                     @helper.inputText(field("config")("label"), '_label -> Messages("surveys.label.label"), 'class -> "form-control col-md-7 col-xs-12")
                                     @helper.inputText(field("config")("order"), '_label -> Messages("surveys.label.order"), 'type -> "number", 'class -> "form-control col-md-7 col-xs-12", 'min -> "0")
-                                    @helper.checkbox(field("config")("required"), '_label -> Messages("surveys.label.required"), 'class -> "form-control col-md-7 col-xs-12 question-text")
-                                    @helper.inputText(field("config")("value"), '_label -> Messages("surveys.label.value"), 'class -> "form-control col-md-7 col-xs-12 question-text")
-                                    @if(field("type") != "rating" && !isEditing && !isCreating) {
+                                    
+                                    <div class="wifree-checkbox">
+                                        @helper.checkbox(field("config")("required"), '_label -> Messages("surveys.label.required"), 'class -> "form-control col-md-3 col-xs-3", 'style -> "height: 20px; width: 5%;")
+                                    </div>
+    
+                                    @if(isEditing || isCreating) {
                                     } else {
-                                    @helper.inputText(field("config")("maximum"), '_label -> Messages("surveys.label.maximum"), 'class -> "form-control col-md-7 col-xs-12 question-rating", 'type -> "number", 'min -> "2")
+                                        @helper.inputText(field("config")("value"), '_label -> Messages("surveys.label.value"), 'class -> "form-control col-md-7 col-xs-12 question-text")
                                     }
 
+                                    @if(isCreating || field("type").value.get == "rating") {
+                                    <div>
+                                    } else {
+                                    <div hidden>
+                                    }
+                                        @helper.inputText(field("config")("maximum"), '_label -> Messages("surveys.label.maximum"), 'class -> "form-control col-md-7 col-xs-12 question-rating", 'type -> "number", 'min -> "2")
+                                    </div>
+
+                                    @if(isCreating || field("type").value.get == "checkbox" || field("type").value.get == "radio") {
                                     <div class="rating-options">
+                                    } else {
+                                    <div class="rating-options" hidden>
+                                    }
                                         <div>
                                             @helper.repeat(field("config")("otherOptions"), min = 1) { optionsField =>
                                                 <div class="rating-option wifree-checkbox">
-                                                    @helper.inputText(optionsField("index"), '_label -> Messages("surveys.label.option.index"), 'type -> "number", 'class -> "form-control col-md-7 col-xs-12 question-radio")
-                                                    @helper.inputText(optionsField("key"), '_label -> Messages("surveys.label.option.key"), 'class -> "form-control col-md-7 col-xs-12 question-radio")
+                                                    @if(isEditing || isCreating) {
+                                                        @helper.inputText(optionsField("index"), '_label -> Messages("surveys.label.option.index"), 'type -> "number", 'class -> "form-control col-md-7 col-xs-12 question-radio")
+                                                        @helper.inputText(optionsField("key"), '_label -> Messages("surveys.label.option.key"), 'class -> "form-control col-md-7 col-xs-12 question-radio")
+                                                    } else {
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                                @if(field("config")("value").value.get.contains(optionsField("key").value.get)) {
+                                                                    <input type="checkbox" checked>
+                                                                } else {
+                                                                    <input type="checkbox">
+                                                                }
+                                                            </span>
+                                                            <input type="text" value="@optionsField("key").value" class="form-control col-md-7 col-xs-12 question-radio">
+                                                        </div>
+                                                    }
                                                 </div>
                                             }
                                         </div>

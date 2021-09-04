@@ -22,11 +22,22 @@ public class CreateSurveyFunction extends WiFreeFunction<CreateSurveyRequest, Cr
             SurveyDAO surveyDAO = new SurveyDAO();
             Survey survey = request.survey();
             removeFirstEmptyField(survey);
+            fixFields(survey);
             setPortal(survey, request.portalId());
-            surveyDAO.save(survey);
+            surveyDAO.saveOrUpdate(survey);
             return new CreateSurveyResponse(survey, true, null);
         };
         return function;
+    }
+
+    private void fixFields(Survey survey) {
+        survey.getFields().forEach(field -> {
+            switch (field.getType()) {
+                case "textbox":
+                    field.getConfig().setOtherOptions(null);
+                    break;
+            }
+        });
     }
 
     private void setPortal(Survey survey, long portalId) {

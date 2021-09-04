@@ -1,4 +1,15 @@
 $(document).ready(function() {
+    Object.defineProperty(NodeList.prototype, "last", {
+        value: function last() {
+            if (this.length == 0)
+                return;
+            else
+                return this[this.length - 1];
+        },
+        writable: true,
+        configurable: true
+    });
+
     $("#newInputButton").click(function() {
         cloneAndSelectInputs(false, false, false, "");
     });
@@ -23,16 +34,9 @@ $(document).ready(function() {
         cloneAndSelectInputs(true, true, false, "checkbox");
     });
 
-    Object.defineProperty(NodeList.prototype, "last", {
-        value: function last() {
-            if (this.length == 0)
-                return;
-            else
-                return this[this.length - 1];
-        },
-        writable: true,
-        configurable: true
-    });
+    if (!window.location.href.includes("answers")) {
+        document.querySelectorAll(".rating-option").forEach(r => formatRatingOption(r));
+    }
 })
 
 function deleteSection(element) {
@@ -91,9 +95,12 @@ function cloneAndSelectInputs(hideText, hideRating, hideRadio, fieldType) {
     // Update cloned node index number
     newNode.innerHTML = newNode.innerHTML.replaceAll(`fields_${i}`, `fields_${i+1}`).replaceAll(`fields[${i}]`, `fields[${i+1}]`).replaceAll(`fields.${i}`, `fields.${i+1}`).replaceAll(`Pregunta ${i}`, `Pregunta ${i+1}`);
     
+    // Clear inputs values
+    newNode.querySelectorAll("input").forEach(i => i.setAttribute("value", ''));
+
     // Hide not corresponding elements
     newNode.querySelectorAll(".question-text").forEach(e => e.parentNode.parentNode.hidden = hideText);
-    newNode.querySelectorAll(".question-rating").forEach(e => e.parentNode.parentNode.hidden = hideRating);
+    newNode.querySelectorAll(".question-rating").forEach(e => e.parentNode.parentNode.parentNode.hidden = hideRating);
     //newNode.querySelectorAll(".question-radio").forEach(e => e.parentNode.parentNode.hidden = hideRadio);
     newNode.querySelector(".rating-options").hidden = hideRadio;
     
@@ -103,21 +110,10 @@ function cloneAndSelectInputs(hideText, hideRating, hideRadio, fieldType) {
     newNode.hidden = false;
 
     if (fieldType == "radio" || fieldType == "checkbox") {
-        let div = document.createElement("div");
-        div.setAttribute("class", "input-group");
-        let span = document.createElement("span");
-        span.setAttribute("class", "input-group-addon");
-        div.appendChild(span);
-        let preInput = document.createElement("input");
-        if (fieldType == "checkbox") {
-            preInput.setAttribute("type", "checkbox");
-        } else if (fieldType == "radio") {
-            preInput.setAttribute("type", "radio");
-        }
-        span.appendChild(preInput);
+        let div = createInlineRating(fieldType);
         let input = newNode.querySelectorAll(".question-radio").last();
         div.appendChild(input);
-        newNode.querySelectorAll(".rating-options")[0].querySelectorAll("dd")[1].replaceChildren(div);
+        newNode.querySelectorAll(".rating-options")[0].querySelectorAll("dd").last().replaceChildren(div);
     }
 
     newNode.lastElementChild.lastElementChild.firstElementChild.replaceChildren(newNode.lastElementChild.lastElementChild.firstElementChild.firstElementChild)
@@ -125,4 +121,28 @@ function cloneAndSelectInputs(hideText, hideRating, hideRadio, fieldType) {
     //newNode.querySelectorAll(".question-radio").last().type = fieldType;
     
     parent.appendChild(newNode);
+}
+
+function createInlineRating(fieldType) {
+    let div = document.createElement("div");
+    div.setAttribute("class", "input-group");
+    let span = document.createElement("span");
+    span.setAttribute("class", "input-group-addon");
+    div.appendChild(span);
+    let preInput = document.createElement("input");
+    if (fieldType == "checkbox") {
+        preInput.setAttribute("type", "checkbox");
+    } else if (fieldType == "radio") {
+        preInput.setAttribute("type", "radio");
+    }
+    span.appendChild(preInput);
+    return div;
+}
+
+function formatRatingOption(ratingOption) {
+    const fieldType = ratingOption.parentNode.parentNode.parentNode.querySelector(".field-type").value;
+    let input = ratingOption.querySelectorAll("input").last();
+    let div = createInlineRating(fieldType);
+    div.appendChild(input);
+    ratingOption.querySelectorAll("dd").last().replaceChildren(div);
 }
