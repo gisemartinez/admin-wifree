@@ -40,7 +40,7 @@ $(document).ready(function() {
 })
 
 function deleteSection(element) {
-    let nodeToRemove = element.parentNode.parentNode;
+    let nodeToRemove = element.parentNode.parentNode.parentNode;
     let nodeToRemoveIndex = Number(nodeToRemove.querySelector(".field-type").name.match(/\d+/)[0]);
     nodeToRemove.remove();
     
