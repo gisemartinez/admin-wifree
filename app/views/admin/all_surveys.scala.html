@@ -49,8 +49,9 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Titulo (TODO)</th>
-                                        <th>Fecha de creación (TODO)</th>
+                                        <th>Titulo</th>
+                                        <th>Fecha de creación</th>
+                                        <th></th>
                                         <th></th>
                                         <th></th>
                                     </tr>
@@ -66,6 +67,9 @@
                                         </td>
                                         <td class="text-center">
                                             <a class="btn btn-info" href="@controllers.admin.routes.SurveysController.answeredSurvey(summary.id,0)" role="button">Ver Respuestas</a>
+                                        </td>
+                                        <td class="text-center">
+                                            <a class="btn btn-success" href="@controllers.api.routes.SurveyAnswersController.answersCSV(summary.id)" role="button">Descargar Respuestas</a>
                                         </td>
                                     </tr>
                                 }
