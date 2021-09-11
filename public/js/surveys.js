@@ -57,6 +57,7 @@ function deleteSection(element) {
             let innerText = element.innerText;
 
             if (id) element.id = id.replaceAll(`fields_${next}`, `fields_${i}`);
+            if (id.includes("order")) element.setAttribute("value", i);
             if (name) element.name = name.replaceAll(`fields[${next}`, `fields[${i}`);
             if (_for) element.setAttribute("for", _for.replaceAll(`fields_${next}`, `fields_${i}`));
             if (innerText && ["LABEL", "H3"].includes(element.tagName)) {
@@ -103,6 +104,7 @@ function cloneAndSelectInputs(hideText, hideRating, hideRadio, fieldType) {
 
     // Update key number
     newNode.querySelector("#fields_" + (i+1) + "_config_key").setAttribute("value", nodeKey.replaceAll(i, i+1));
+    newNode.querySelector("#fields_" + (i+1) + "_config_order").setAttribute("value", i+1);
 
     // Hide not corresponding elements
     newNode.querySelectorAll(".question-text").forEach(e => e.parentNode.parentNode.hidden = hideText);

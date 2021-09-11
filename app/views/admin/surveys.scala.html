@@ -145,6 +145,7 @@
                                 </div>
 
                                 <div class="col-md-6 col-sm-6 col-xs-12">
+                                    @*** Type ***@
                                     @helper.inputText(field("type"), 'class -> "form-control col-md-7 col-xs-12 field-type")
 
                                     @*** Key START ***@
@@ -156,18 +157,31 @@
                                         @helper.inputText(field("config")("key"), 'class -> "form-control col-md-7 col-xs-12")
                                     }
                                     @*** Key END ***@
-                                   
-                                    @helper.inputText(field("config")("label"), '_label -> Messages("surveys.label.label"), 'class -> "form-control col-md-7 col-xs-12")
-                                    @helper.inputText(field("config")("order"), '_label -> Messages("surveys.label.order"), 'type -> "number", 'class -> "form-control col-md-7 col-xs-12", 'min -> "0")
                                     
+                                    @*** Label ***@
+                                    @helper.inputText(field("config")("label"), '_label -> Messages("surveys.label.label"), 'class -> "form-control col-md-7 col-xs-12")
+                                    
+                                    @*** Order ***@
+                                    <div hidden>
+                                        @if(isCreating) {
+                                            <input type="number" id="@{field("config")("order").id}" name="@{field("config")("order").name}" value="@{field.label.last.toString.toInt + 1}">
+                                        } else {
+                                            @helper.inputText(field("config")("order"), '_label -> Messages("surveys.label.order"), 'type -> "number", 'class -> "form-control col-md-7 col-xs-12", 'min -> "0")
+                                        }                               
+                                    </div>
+
+                                    @*** Required START ***@
                                     <div class="wifree-checkbox">
                                         @helper.checkbox(field("config")("required"), '_label -> Messages("surveys.label.required"), 'class -> "form-control col-md-3 col-xs-3", 'style -> "height: 20px; width: 5%;")
                                     </div>
-    
+                                    @*** Required END ***@
+
+                                    @*** Value START ***@
                                     @if(isEditing || isCreating) {
                                     } else {
                                         @helper.inputText(field("config")("value"), '_label -> Messages("surveys.label.value"), 'class -> "form-control col-md-7 col-xs-12 question-text")
                                     }
+                                    @*** Value END ***@
 
                                     @if(isCreating || field("type").value.get == "rating") {
                                     <div>
