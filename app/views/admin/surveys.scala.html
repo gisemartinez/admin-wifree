@@ -147,6 +147,7 @@
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     @helper.inputText(field("type"), 'class -> "form-control col-md-7 col-xs-12 field-type")
 
+                                    @*** Key START ***@
                                     @if(isCreating) {
                                         @defining("key_" + field.label.last) { keyValue =>
                                             <input type="text" id="@{field("config")("key").id}" name="@{field("config")("key").name}" value="@keyValue" hidden>
@@ -154,6 +155,7 @@
                                     } else {
                                         @helper.inputText(field("config")("key"), 'class -> "form-control col-md-7 col-xs-12")
                                     }
+                                    @*** Key END ***@
                                    
                                     @helper.inputText(field("config")("label"), '_label -> Messages("surveys.label.label"), 'class -> "form-control col-md-7 col-xs-12")
                                     @helper.inputText(field("config")("order"), '_label -> Messages("surveys.label.order"), 'type -> "number", 'class -> "form-control col-md-7 col-xs-12", 'min -> "0")
@@ -184,7 +186,9 @@
                                             @helper.repeat(field("config")("otherOptions"), min = 1) { optionsField =>
                                                 <div class="rating-option wifree-checkbox">
                                                     @if(isEditing || isCreating) {
+                                                        <div hidden>
                                                         @helper.inputText(optionsField("index"), '_label -> Messages("surveys.label.option.index"), 'type -> "number", 'class -> "form-control col-md-7 col-xs-12 question-radio")
+                                                        </div>
                                                         @helper.inputText(optionsField("key"), '_label -> Messages("surveys.label.option.key"), 'class -> "form-control col-md-7 col-xs-12 question-radio")
                                                     } else {
                                                         <div class="input-group">

@@ -69,7 +69,6 @@ function deleteSection(element) {
 }
 
 function addRatingOption(element) {
-    console.log("click en add rating option, elem: " + element);
     let options = element.parentNode.firstElementChild;
     let lastOption = options.lastElementChild;
     let newOption = lastOption.cloneNode(true);
@@ -78,6 +77,9 @@ function addRatingOption(element) {
     let lastQuestionOption = questionOptions[questionOptions.length - 1];
     let i = Number([...lastQuestionOption.name.matchAll(/\d+/g)][1][0]);
     newOption.innerHTML = newOption.innerHTML.replaceAll(`Options_${i}`, `Options_${i+1}`).replaceAll(`Options[${i}]`, `Options[${i+1}]`).replaceAll(`Options.${i}`, `Options.${i+1}`);
+    
+    newOption.querySelectorAll("input").forEach(x => x.setAttribute("value", ''));
+    newOption.querySelector("[id$=_index]").setAttribute("value", i+2);
 
     options.appendChild(newOption);
 }
@@ -97,8 +99,9 @@ function cloneAndSelectInputs(hideText, hideRating, hideRadio, fieldType) {
     newNode.innerHTML = newNode.innerHTML.replaceAll(`fields_${i}`, `fields_${i+1}`).replaceAll(`fields[${i}]`, `fields[${i+1}]`).replaceAll(`fields.${i}`, `fields.${i+1}`).replaceAll(`Pregunta ${i}`, `Pregunta ${i+1}`);
     
     // Clear inputs values
-    newNode.querySelectorAll("input").forEach(i => i.setAttribute("value", ''));
+    newNode.querySelectorAll("input").forEach(x => x.setAttribute("value", ''));
 
+    // Update key number
     newNode.querySelector("#fields_" + (i+1) + "_config_key").setAttribute("value", nodeKey.replaceAll(i, i+1));
 
     // Hide not corresponding elements
@@ -117,6 +120,9 @@ function cloneAndSelectInputs(hideText, hideRating, hideRadio, fieldType) {
         let input = newNode.querySelectorAll(".question-radio").last();
         div.appendChild(input);
         newNode.querySelectorAll(".rating-options")[0].querySelectorAll("dd").last().replaceChildren(div);
+
+        // Reset index
+        newNode.querySelector("[id$=_index]").setAttribute("value", 1);
     }
 
     newNode.lastElementChild.lastElementChild.firstElementChild.replaceChildren(newNode.lastElementChild.lastElementChild.firstElementChild.firstElementChild)
