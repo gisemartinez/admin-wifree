@@ -68,10 +68,11 @@ $(window).resize(function () {
 
 
 /** ******  tooltip  *********************** **/
-$(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-})
+//$(function () {
+//    $('[data-toggle="tooltip"]').tooltip()
+//})
 /** ******  /tooltip  *********************** **/
+
 /** ******  progressbar  *********************** **/
 if ($(".progress .progress-bar")[0]) {
     $('.progress .progress-bar').progressbar(); // bootstrap 3
@@ -118,6 +119,8 @@ if ($("input.flat")[0]) {
     });
 }
 /** ******  /iswitch  *********************** **/
+
+
 /** ******  star rating  *********************** **/
 // Starrr plugin (https://github.com/dobtco/starrr)
 var __slice = [].slice;
@@ -128,7 +131,7 @@ var __slice = [].slice;
     Starrr = (function () {
         Starrr.prototype.defaults = {
             rating: void 0,
-            numStars: 5,
+            //numStars: 5,
             change: function (e, value) {
             }
         };
@@ -148,16 +151,18 @@ var __slice = [].slice;
             }
             this.createStars();
             this.syncRating();
-            this.$el.on('mouseover.starrr', 'span', function (e) {
-                return _this.syncRating(_this.$el.find('span').index(e.currentTarget) + 1);
-            });
-            this.$el.on('mouseout.starrr', function () {
-                return _this.syncRating();
-            });
-            this.$el.on('click.starrr', 'span', function (e) {
-                return _this.setRating(_this.$el.find('span').index(e.currentTarget) + 1);
-            });
-            this.$el.on('starrr:change', this.options.change);
+
+            // Not interactable
+//            this.$el.on('mouseover.starrr', 'span', function (e) {
+//                return _this.syncRating(_this.$el.find('span').index(e.currentTarget) + 1);
+//            });
+//            this.$el.on('mouseout.starrr', function () {
+//                return _this.syncRating();
+//            });
+//            this.$el.on('click.starrr', 'span', function (e) {
+//                return _this.setRating(_this.$el.find('span').index(e.currentTarget) + 1);
+//            });
+//            this.$el.on('starrr:change', this.options.change);
         }
 
         Starrr.prototype.createStars = function () {
@@ -227,17 +232,19 @@ $(function () {
 
 $(document).ready(function () {
 
-    $('#stars').on('starrr:change', function (e, value) {
+    $('.stars').on('starrr:change', function (e, value) {
         $('#count').html(value);
     });
 
 
-    $('#stars-existing').on('starrr:change', function (e, value) {
+    $('.stars-existing').on('starrr:change', function (e, value) {
         $('#count-existing').html(value);
     });
 
 });
 /** ******  /star rating  *********************** **/
+
+
 /** ******  table  *********************** **/
 $('table input').on('ifChecked', function () {
     check_state = '';

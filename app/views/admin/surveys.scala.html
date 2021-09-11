@@ -188,7 +188,7 @@
                                     @if(isEditing || isCreating) {
                                     } else {
                                         @defining(field("type").value.get) { fieldType =>
-                                            @if(fieldType == "checkbox" || fieldType == "radio") {
+                                            @if(fieldType == "checkbox" || fieldType == "radio" || fieldType == "rating") {
                                             <div hidden>
                                             } else {
                                             <div>
@@ -199,13 +199,26 @@
                                     }
                                     @*** Value END ***@
 
+                                    @*** Maximum START ***@
                                     @if(isCreating || field("type").value.get == "rating") {
                                     <div>
                                     } else {
                                     <div hidden>
                                     }
+                                        @if(!isEditing && !isCreating && field("type").value.get == "rating") {
+                                        <label>Respuesta</label>
+                                        <div class="starrr lead stars-existing" data-rating="@field("config")("value").value.get">
+                                            @defining(1 to field("config")("maximum").value.get.toInt) { range =>
+                                                @range.map { number =>
+                                                    <span class="glyphicon .glyphicon-star-empty glyphicon-star"></span>
+                                                }
+                                            }
+                                        </div>
+                                        } else {
                                         @helper.inputText(field("config")("maximum"), '_label -> Messages("surveys.label.maximum"), 'class -> "form-control col-md-7 col-xs-12 question-rating", 'type -> "number", 'min -> "2")
+                                        }
                                     </div>
+                                    @*** Maximum END ***@
 
                                     @if(isCreating || field("type").value.get == "checkbox" || field("type").value.get == "radio") {
                                     <div class="rating-options">
