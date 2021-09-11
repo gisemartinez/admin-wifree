@@ -122,6 +122,10 @@
 
                         <div>
                         @helper.repeat(surveyForm("fields"), min = 1) { field =>
+                            <div style="display: none">
+                                @helper.inputText(field("id"))
+                            </div>
+
                             @if(isCreating) {
                             <div class="form-group row survey-fields-set" hidden>
                             } else {
