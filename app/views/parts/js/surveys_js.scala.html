@@ -4,4 +4,6 @@
 <script src="@routes.Assets.versioned("js/surveys.js")"></script>
 @if(!isEditing) {
 <script src="@routes.Assets.versioned("js/surveys_readonly.js")"></script>
+} else {
+<script src="@routes.Assets.versioned("js/surveys_editing.js")"></script>
 }

@@ -17,6 +17,7 @@ import play.mvc.Result;
 import services.SurveysService;
 
 import javax.inject.Inject;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -79,8 +80,8 @@ public class SurveysController extends WiFreeController {
     @SuppressWarnings("UnstableApiUsage")
     private Survey fillSurveyFieldsWithAnswers(Survey survey, java.util.Collection<FieldAnswer> userAnswers) {
         Survey answeredSurvey = survey.copy();
-        Stream<Field> fields = answeredSurvey.getFields().stream();
-        Stream<FieldAnswer> answers = userAnswers.stream();
+        Stream<Field> fields = answeredSurvey.getFields().stream().sorted(Comparator.comparing(field -> field.getConfig().getOrder()));
+        Stream<FieldAnswer> answers = userAnswers.stream().sorted(Comparator.comparing(answer -> answer.getField().getConfig().getOrder()));
         forEachPair(fields, answers, (field, answer) -> answerField(answeredSurvey, field, answer));
         return answeredSurvey;
     }

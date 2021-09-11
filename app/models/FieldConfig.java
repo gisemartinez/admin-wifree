@@ -4,8 +4,8 @@ package models;
 import utils.StringHelper;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class FieldConfig {
@@ -51,8 +51,10 @@ public class FieldConfig {
     }
 
     public FieldConfig copy() {
-        return new FieldConfig(key, label, order, required, value, maximum,
-                Objects.requireNonNull(otherOptions).stream().map(Option::copy).collect(Collectors.toList()));
+        List<Option> fixedOtherOptions = otherOptions == null
+                ? new ArrayList<>()
+                : otherOptions.stream().map(Option::copy).collect(Collectors.toList());
+        return new FieldConfig(key, label, order, required, value, maximum, fixedOtherOptions);
     }
 
     public String toLogString() {

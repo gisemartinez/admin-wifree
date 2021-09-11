@@ -100,7 +100,8 @@ function cloneAndSelectInputs(hideText, hideRating, hideRadio, fieldType) {
     newNode.innerHTML = newNode.innerHTML.replaceAll(`fields_${i}`, `fields_${i+1}`).replaceAll(`fields[${i}]`, `fields[${i+1}]`).replaceAll(`fields.${i}`, `fields.${i+1}`).replaceAll(`Pregunta ${i}`, `Pregunta ${i+1}`);
     
     // Clear inputs values
-    newNode.querySelectorAll("input").forEach(x => x.setAttribute("value", ''));
+    newNode.querySelectorAll("input").forEach(x => x.removeAttribute("value"));
+    newNode.querySelectorAll("input[type=checkbox]").forEach(x => x.setAttribute("value", "true"));
 
     // Update key number
     newNode.querySelector("#fields_" + (i+1) + "_config_key").setAttribute("value", nodeKey.replaceAll(i, i+1));
@@ -113,8 +114,7 @@ function cloneAndSelectInputs(hideText, hideRating, hideRadio, fieldType) {
     newNode.querySelector(".rating-options").hidden = hideRadio;
     
     let fieldTypeElement = newNode.querySelector(".field-type");
-    fieldTypeElement.value = fieldType;
-    fieldTypeElement.parentNode.parentNode.hidden = true;
+    fieldTypeElement.setAttribute("value", fieldType);
     newNode.hidden = false;
 
     if (fieldType == "radio" || fieldType == "checkbox") {
