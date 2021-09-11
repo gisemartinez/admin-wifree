@@ -60,6 +60,7 @@
         <div class="right_col" role="main">
             <div class="row">
                 <div class="col-md-12 col-sm-6 col-xs-12">
+                    @*** Title START ***@
                     @if(isCreating) {
                     <h1>Crear Encuesta</h1>
                     } else if (isEditing) {
@@ -67,7 +68,9 @@
                     } else {
                     <h1>Resultados de Encuesta</h1>
                     }
+                    @*** Title END ***@
 
+                    @*** Navigation Buttons START ***@
                     @if(!isEditing && !isCreating) {
                     <div>
                         @if(currentAnswer>1){
@@ -87,9 +90,12 @@
                         }
                     </div>
                     }
+                    @*** Navigation Buttons END ***@
 
+                    @*** Form START ***@
                     <div>
                         @helper.form(controllers.admin.routes.SurveysController.createSurvey(), 'id -> "surveyForm", Symbol("data-parsley-validate") -> "true", 'class -> "form-horizontal form-label-left") {
+                        @*** Question Title START ***@
                         <div class="form-group row survey-body">
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <h2>
@@ -97,11 +103,13 @@
                                 </h2>
                             </div>
                         </div>
+                        @*** Question Title END ***@
 
                         <div style="display: none">
                             @helper.inputText(surveyForm("id"))
                         </div>
 
+                        @*** Fields Buttons START ***@
                         @if(isEditing || isCreating) {
                         <button type="button" id="newInputButton" class="btn btn-primary">New Input</button>
                         <button type="button" id="newTextInputButton" class="btn btn-primary">@Messages("surveys.new-field.text")</button>
@@ -110,6 +118,7 @@
                         <button type="button" id="newSelectorInputButton" class="btn btn-primary">@Messages("surveys.new-field.selector")</button>
                         <button type="button" id="newCheckboxInputButton" class="btn btn-primary">@Messages("surveys.new-field.checkbox")</button>
                         }
+                        @*** Fields Buttons END ***@
 
                         <div>
                         @helper.repeat(surveyForm("fields"), min = 1) { field =>
@@ -120,7 +129,12 @@
                             }
                                 <div class="col-md-12 col-sm-12 col-xs-12">
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <h3>Pregunta @{field.label.last}</h3>
+                                        @if(isCreating) {
+                                            <h3>Pregunta @{field.label.last}</h3>
+                                        } else {
+                                            <h3>Pregunta @{field.label.last.toString.toInt + 1}</h3>
+                                        }
+                                        
                                     </div>
                                     
                                     @if(isEditing || isCreating) {
@@ -132,7 +146,15 @@
 
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     @helper.inputText(field("type"), 'class -> "form-control col-md-7 col-xs-12 field-type")
-                                    @helper.inputText(field("config")("key"), 'class -> "form-control col-md-7 col-xs-12")
+
+                                    @if(isCreating) {
+                                        @defining("key_" + field.label.last) { keyValue =>
+                                            <input type="text" id="@{field("config")("key").id}" name="@{field("config")("key").name}" value="@keyValue" hidden>
+                                        }
+                                    } else {
+                                        @helper.inputText(field("config")("key"), 'class -> "form-control col-md-7 col-xs-12")
+                                    }
+                                   
                                     @helper.inputText(field("config")("label"), '_label -> Messages("surveys.label.label"), 'class -> "form-control col-md-7 col-xs-12")
                                     @helper.inputText(field("config")("order"), '_label -> Messages("surveys.label.order"), 'type -> "number", 'class -> "form-control col-md-7 col-xs-12", 'min -> "0")
                                     
@@ -197,8 +219,9 @@
                             </div>
                         </div>
                         }
-                        }
+                    }
                     </div>
+                    @*** Form END ***@
                 </div>
             </div>
         </div>

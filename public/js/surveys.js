@@ -91,12 +91,15 @@ function cloneAndSelectInputs(hideText, hideRating, hideRadio, fieldType) {
     let node = allNodes.last();
     let parent = node.parentElement;
     let newNode = node.cloneNode(true);
+    let nodeKey = node.querySelector("#fields_" + i + "_config_key").value;
 
     // Update cloned node index number
     newNode.innerHTML = newNode.innerHTML.replaceAll(`fields_${i}`, `fields_${i+1}`).replaceAll(`fields[${i}]`, `fields[${i+1}]`).replaceAll(`fields.${i}`, `fields.${i+1}`).replaceAll(`Pregunta ${i}`, `Pregunta ${i+1}`);
     
     // Clear inputs values
     newNode.querySelectorAll("input").forEach(i => i.setAttribute("value", ''));
+
+    newNode.querySelector("#fields_" + (i+1) + "_config_key").setAttribute("value", nodeKey.replaceAll(i, i+1));
 
     // Hide not corresponding elements
     newNode.querySelectorAll(".question-text").forEach(e => e.parentNode.parentNode.hidden = hideText);
