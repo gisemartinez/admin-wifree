@@ -1,17 +1,21 @@
 package services;
 
+import daos.NetworkUserConnectionLogDAO;
 import daos.PortalDAO;
 import daos.PortalNetworkConfigurationDAO;
+import models.NetworkUserConnectionLog;
 import models.Portal;
 import models.PortalNetworkConfiguration;
 import models.types.LoginMethodType;
+import operations.responses.DatasetFilter;
 import views.dto.ConnectedUser;
 import views.dto.ConnectionsPage;
 
 import javax.inject.Inject;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Optional;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class ConnectionsService {
 
@@ -20,6 +24,9 @@ public class ConnectionsService {
 
 	@Inject
 	PortalDAO portalDAO;
+
+	@Inject
+	NetworkUserConnectionLogDAO connectionLogDAO;
 	
 	public void saveNetworkConfiguration(Integer connectionTimeout, LoginMethodType loginMethod, Long portalId) {
 		Portal portal = portalDAO.get(portalId);
@@ -45,10 +52,20 @@ public class ConnectionsService {
 	}
 
 	public ArrayList<ConnectedUser> connectedUsers() {
-		final ArrayList<ConnectedUser> connectedUsers = new ArrayList<>();
-		connectedUsers.add(new ConnectedUser(1, "Juan perez", new Date(), "iPhone X"));
-		connectedUsers.add(new ConnectedUser(2, "Roque Saenz Peña", new Date(), "Samsung S8+"));
-		return connectedUsers;
+		List<NetworkUserConnectionLog> logsLastFifteenMinutes = connectionLogDAO.findForFilter(DatasetFilter.usersConnectedLastFifteenMinutesFilter(1), Instant.now());
+
+		List<ConnectedUser> connectedUsers = logsLastFifteenMinutes.stream()
+				.sorted(Comparator.comparing(NetworkUserConnectionLog::getConnectionStartDate).reversed())
+				.map(l -> {
+					String formattedDate = l.getFormattedStartDate();
+					return new ConnectedUser(l.getNetworkUser().getId(), l.getNetworkUser().getName(), formattedDate, l.getUserDeviceMACAddress());
+				})
+				.collect(Collectors.toList());
+
+//		final ArrayList<ConnectedUser> connectedUsers = new ArrayList<>();
+//		connectedUsers.add(new ConnectedUser(1, "Juan perez", new Date(), "iPhone X"));
+//		connectedUsers.add(new ConnectedUser(2, "Roque Saenz Peña", new Date(), "Samsung S8+"));
+		return (ArrayList) connectedUsers;
 	}
 
 }

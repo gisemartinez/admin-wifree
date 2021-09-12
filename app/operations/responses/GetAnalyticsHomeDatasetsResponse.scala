@@ -4,12 +4,12 @@ import io.ebean.{Ebean, Expr, Expression, SqlQuery}
 import models.types.{DayOfTheWeek, Gender, RelativeTimePeriod, TimePeriodType}
 import operations.core.{ResponseType, WiFreeResponse}
 import utils.DateHelper
+
 import java.util.function.{Function => JFunction}
 import java.util.function.BiFunction
 import java.lang.{Long => JLong}
 import java.time.Instant
-
-import models.types.RelativeTimePeriod.{BEFORE_LAST_WEEK, LAST_WEEK, LAST_YEAR}
+import models.types.RelativeTimePeriod.{BEFORE_LAST_WEEK, LAST_FIFTEEN_MINUTES, LAST_WEEK, LAST_YEAR}
 import models.types.TimePeriodType.{ABSOLUTE, NONE, RELATIVE}
 
 import scala.collection.JavaConverters._
@@ -99,6 +99,8 @@ object DatasetFilter {
 	def usersConnectedLastYearFilter(portalId: Long): DatasetFilter = relativeTimePeriodFilter(portalId, LAST_YEAR)
 
 	def genderUsersConnectedLastYearFilter(portalId: Long, gender: Gender): DatasetFilter = relativeTimePeriodFilter(portalId, LAST_YEAR, Option(gender))
+
+	def usersConnectedLastFifteenMinutesFilter(portalId: Long): DatasetFilter = relativeTimePeriodFilter(portalId, LAST_FIFTEEN_MINUTES)
 
 	private def relativeTimePeriodFilter(portalId: Long, relativeTimePeriod: RelativeTimePeriod, gender: Option[Gender] = None) = DatasetFilter(
 		portalId = portalId,

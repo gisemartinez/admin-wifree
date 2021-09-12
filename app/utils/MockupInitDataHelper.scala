@@ -15,6 +15,8 @@ object MockupInitDataHelper {
   private val randomizer = new Random()
   private val end: Instant = DateHelper.now()
   private val start: Instant = DateHelper.oneYearAgo(end)
+  private val recentStart: Instant = DateHelper.oneDayAgo(end)
+  private val veryRecentStart: Instant = DateHelper.fifteenMinutesAgo(end)
 
   def run(pid: Long): Unit = {
     val portalDao = new PortalDAO()
@@ -51,7 +53,13 @@ object MockupInitDataHelper {
   private def random[A](seq: Seq[A]): A = seq(randomizer.nextInt(seq.length))
 
   private def randomDate(): Instant = {
-    val startSeconds = start.getEpochSecond
+    val selectedStart = ThreadLocalRandom.current().nextInt(1, 26) match {
+//      case 1 => veryRecentStart
+      case 1 => recentStart
+      case _ => start
+    }
+
+    val startSeconds = selectedStart.getEpochSecond
     val endSeconds = end.getEpochSecond
     val rnd = ThreadLocalRandom.current().nextLong(startSeconds, endSeconds)
     Instant.ofEpochSecond(rnd)

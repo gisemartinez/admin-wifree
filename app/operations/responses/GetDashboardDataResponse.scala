@@ -1,15 +1,15 @@
 package operations.responses
 
-import java.lang.Long
-import java.util.{Map => JMap}
-
 import models.types.Gender
 import operations.core.{ResponseType, WiFreeResponse}
 
+import java.util.{Map => JMap}
+import java.lang.{Long => JLong}
+
 case class GetDashboardDataResponse(usersConnectedLastWeek: Long,
-                                    usersByAgeLastWeek: JMap[(Integer, Integer), Long],
+                                    usersByAgeLastWeek: JMap[(Integer, Integer), JLong],
                                     newUsersLastWeek: Long,
-                                    usersByGenderLastWeek: JMap[Gender, Long],
+                                    usersByGenderLastWeek: JMap[Gender, JLong],
                                     busiestDayLastWeek: String,
                                     busiestTimeLastWeek: String,
                                     usersLoyalty: Double,

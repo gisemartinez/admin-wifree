@@ -4,6 +4,10 @@ import scala.Tuple2;
 
 import java.time.*;
 import java.time.temporal.ChronoUnit;
+import java.time.temporal.Temporal;
+import java.time.temporal.TemporalAmount;
+import java.time.temporal.TemporalUnit;
+import java.util.List;
 import java.util.function.Function;
 
 public class DateHelper {
@@ -39,6 +43,10 @@ public class DateHelper {
 
 	public static Instant oneDayAgo(Instant date) {
 		return processInstant(localDate -> localDate.minusDays(1), date);
+	}
+
+	public static Instant fifteenMinutesAgo(Instant date) {
+		return processInstantTime(localDate -> localDate.minus(Duration.ofMinutes(15)), date);
 	}
 
 	public static Instant oneWeekAgo(Instant date) {
@@ -88,6 +96,10 @@ public class DateHelper {
 		return toInstant(f.apply(toLocalDate(instant)));
 	}
 
+	private static Instant processInstantTime(Function<LocalDateTime, LocalDateTime> f, Instant instant) {
+		return toInstant(f.apply(toLocalDateTime(instant)));
+	}
+
 	private static LocalDate toLocalDate(Instant instant) {
 		return instant.atZone(zone).toLocalDate();
 	}
@@ -98,5 +110,9 @@ public class DateHelper {
 
 	private static Instant toInstant(LocalDate localDate) {
 		return localDate.atStartOfDay(zone).toInstant();
+	}
+
+	private static Instant toInstant(LocalDateTime localDateTime) {
+		return localDateTime.atZone(zone).toInstant();
 	}
 }

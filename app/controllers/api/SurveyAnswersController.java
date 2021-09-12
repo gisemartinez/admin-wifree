@@ -13,7 +13,6 @@ import operations.requests.SaveSurveyAnswersRequest;
 import operations.responses.SaveSurveyAnswersResponse;
 import play.mvc.Result;
 import services.SurveysService;
-import utils.StringHelper;
 
 import javax.inject.Inject;
 import java.io.File;

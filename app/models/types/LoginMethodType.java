@@ -13,12 +13,18 @@ import static java.util.Arrays.asList;
  */
 public enum LoginMethodType {
 
-	Google,
-	Facebook,
-	Twitter,
-	EmailAndPassword,
-	SocialLogin,
-	Survey;
+	Google("Google"),
+	Facebook("Facebook"),
+	Twitter("Twitter"),
+	EmailAndPassword("Correo Electronico"),
+	SocialLogin("Redes Sociales"),
+	Survey("Encuesta");
+
+	public final String name;
+
+	LoginMethodType(String name) {
+		this.name = name;
+	}
 
 	public static Seq<Tuple2<String, String>> portalLoginTypes() {
 		return loginMethods()
@@ -28,7 +34,7 @@ public enum LoginMethodType {
 	}
 
 	private static Tuple2<String, String> toTuple(LoginMethodType lm) {
-		return Tuple2.apply(lm.toString(), lm.toString());
+		return Tuple2.apply(lm.toString(), lm.name);
 	}
 
 	private static Decorators.AsScala<Iterator<LoginMethodType>> loginMethods() {
@@ -37,4 +43,5 @@ public enum LoginMethodType {
 		);
 	}
 
-}
+	}
+

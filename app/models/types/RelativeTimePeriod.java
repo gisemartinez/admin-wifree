@@ -11,7 +11,8 @@ import java.util.function.UnaryOperator;
 
 
 public enum RelativeTimePeriod {
-	
+
+	@EnumValue("LAST_FIFTEEN_MINUTES") LAST_FIFTEEN_MINUTES(buildExpression(DateHelper::fifteenMinutesAgo)),
 	@EnumValue("LAST_DAY") LAST_DAY(buildExpression(DateHelper::oneDayAgo)),
 	@EnumValue("LAST_WEEK") LAST_WEEK(buildExpression(DateHelper::oneWeekAgo)),
 	@EnumValue("LAST_MONTH") LAST_MONTH(buildExpression(DateHelper::oneMonthAgo)),

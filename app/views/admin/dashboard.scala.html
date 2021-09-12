@@ -59,7 +59,7 @@ jsConnectionsGraphDataLastWeek: JsValue)
 						<div class="tile-stats">
 							<div class="icon"><i class="fa fa-comments-o"></i></div>
 							<div class="count">179</div>
-							<h3>Users Online</h3>
+							<h3>Usuarios Conectados</h3>
 
 						</div>
 					</div>
@@ -67,7 +67,7 @@ jsConnectionsGraphDataLastWeek: JsValue)
 						<div class="tile-stats">
 							<div class="icon"><i class="fa fa-caret-square-o-right"></i></div>
 							<div class="count">-17%</div>
-							<h3>Online Comparison</h3>
+							<h3>Comparación de Conectados</h3>
 
 						</div>
 					</div>
@@ -75,28 +75,28 @@ jsConnectionsGraphDataLastWeek: JsValue)
 						<div class="tile-stats">
 							<div class="icon"><i class="fa fa-caret-square-o-right"></i></div>
 							<div class="count">54</div>
-							<h3>New Users</h3>
+							<h3>Nuevos Usuarios</h3>
 						</div>
 					</div>
 					<div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
 						<div class="tile-stats">
 							<div class="icon"><i class="fa fa-comments-o"></i></div>
 							<div class="count">14%</div>
-							<h3>User's Loyalty</h3>
+							<h3>Lealtad de Usuarios</h3>
 						</div>
 					</div>
 					<div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
 						<div class="tile-stats">
 							<div class="icon"><i class="fa fa-caret-square-o-right"></i></div>
 							<div class="count">Saturday</div>
-							<h3>Busiest day</h3>
+							<h3>Día Más Visitado</h3>
 						</div>
 					</div>
 					<div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
 						<div class="tile-stats">
 							<div class="icon"><i class="fa fa-comments-o"></i></div>
 							<div class="count">17:00</div>
-							<h3>Busiest time</h3>
+							<h3>Hora Más Visitada</h3>
 						</div>
 					</div>
 				</div>
@@ -136,7 +136,7 @@ jsConnectionsGraphDataLastWeek: JsValue)
 	  var echartLine = echarts.init(document.getElementById('echart_line'), theme);
       echartLine.setOption({
         title: {
-          text: 'Connected Users',
+          text: 'Usuarios conectados',
         },
         tooltip: {
           trigger: 'axis'
@@ -144,7 +144,7 @@ jsConnectionsGraphDataLastWeek: JsValue)
         legend: {
           x: 220,
           y: 40,
-          data: ['This week', 'Last week']
+          data: ['Esta semana', 'Semana anterior']
         },
         toolbox: {
           show: true,
@@ -173,13 +173,13 @@ jsConnectionsGraphDataLastWeek: JsValue)
         xAxis: [{
           type: 'category',
           boundaryGap: false,
-          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+          data: ['Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom']
         }],
         yAxis: [{
           type: 'value'
         }],
         series: [{
-          name: 'This week',
+          name: 'Esta semana',
           type: 'line',
           smooth: true,
           itemStyle: {
@@ -191,7 +191,7 @@ jsConnectionsGraphDataLastWeek: JsValue)
           },
           data: [10, 12, 21, 54, 260, 830, 710]
          }, {
-          name: 'Last week',
+          name: 'Semana anterior',
           type: 'line',
           smooth: true,
           itemStyle: {
@@ -209,7 +209,7 @@ jsConnectionsGraphDataLastWeek: JsValue)
       var echartBar = echarts.init(document.getElementById('echart_bar_horizontal'), theme);
       echartBar.setOption({
         title: {
-          text: 'Users Age',
+          text: 'Edad de usuarios',
         },
         tooltip: {
           trigger: 'axis'
@@ -241,7 +241,7 @@ jsConnectionsGraphDataLastWeek: JsValue)
       var echartDonut = echarts.init(document.getElementById('echart_donut'), theme);
       echartDonut.setOption({
         title: {
-          text: 'Users Gender',
+          text: 'Género de Usuarios',
         },
         tooltip: {
           trigger: 'item',
@@ -251,7 +251,7 @@ jsConnectionsGraphDataLastWeek: JsValue)
         legend: {
           x: 'center',
           y: 'bottom',
-          data: ['Male', 'Female', 'Other']
+          data: ['Masculino', 'Femenino', 'Otros']
         },
         toolbox: {
           show: true,
@@ -279,7 +279,7 @@ jsConnectionsGraphDataLastWeek: JsValue)
           }
         },
         series: [{
-          name: 'Users',
+          name: 'Usuario',
           type: 'pie',
           radius: ['35%', '55%'],
           itemStyle: {
@@ -304,13 +304,13 @@ jsConnectionsGraphDataLastWeek: JsValue)
           },
           data: [{
             value: 335,
-            name: 'Male'
+            name: 'Masculino'
           }, {
             value: 310,
-            name: 'Female'
+            name: 'Femenino'
           }, {
             value: 15,
-            name: 'Other'
+            name: 'Otros'
           }]
         }]
       });

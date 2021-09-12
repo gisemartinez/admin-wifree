@@ -3,6 +3,7 @@ package models;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import java.time.Instant;
+import java.time.ZoneId;
 
 /**
  * Created by jesu on 10/06/17.
@@ -33,6 +34,9 @@ public class NetworkUserConnectionLog extends BaseModel {
 		this.userDeviceMACAddress = userDeviceMACAddress;
 	}
 
+	public String getFormattedStartDate() {
+		return connectionStartDate.atZone(ZoneId.of("UTC-3")).toLocalDateTime().toString().replace("T", " ");
+	}
 
 	@Override
 	public String toLogString() {
