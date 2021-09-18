@@ -51,7 +51,7 @@ public class SocialLoginPortalConfigDTO extends WiFreeDTO {
                 .forEach(p -> map.put(p.getLoginMethod(), "TODO")); // TODO
     }
 
-    private static class SocialLoginKeysDTO extends WiFreeDTO {
+    public static class SocialLoginKeysDTO extends WiFreeDTO {
         public final String google;
         public final String facebook;
         public final String twitter;

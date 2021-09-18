@@ -1,12 +1,11 @@
 package models.types;
 
 import scala.Tuple2;
-import scala.collection.Iterator;
-import scala.collection.JavaConverters;
 import scala.collection.Seq;
-import scala.collection.convert.Decorators;
 
-import static java.util.Arrays.asList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Created by jesu on 09/06/17.
@@ -27,21 +26,13 @@ public enum LoginMethodType {
 	}
 
 	public static Seq<Tuple2<String, String>> portalLoginTypes() {
-		return loginMethods()
-				.asScala()
-				.map(LoginMethodType::toTuple)
-				.toSeq();
+		List<Tuple2<String, String>> collect = Stream.of(SocialLogin, Survey).map(LoginMethodType::toTuple).collect(Collectors.toList());
+		return scala.collection.JavaConverters.asScalaBuffer(collect).toList();
 	}
 
 	private static Tuple2<String, String> toTuple(LoginMethodType lm) {
 		return Tuple2.apply(lm.toString(), lm.name);
 	}
 
-	private static Decorators.AsScala<Iterator<LoginMethodType>> loginMethods() {
-		return JavaConverters.asScalaIteratorConverter(
-				asList(SocialLogin, Survey).iterator()
-		);
-	}
-
-	}
+}
 
