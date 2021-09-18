@@ -11,28 +11,34 @@ import services.core.ServiceType;
 import services.core.WiFreeFunction;
 import utils.StringHelper;
 
+import javax.inject.Inject;
 import java.util.function.Function;
 
 @SuppressWarnings("unused")
 public class CreateSurveyFunction extends WiFreeFunction<CreateSurveyRequest, CreateSurveyResponse> {
 
+    @Inject
+    SurveyDAO surveyDAO;
+
+    @Inject
+    PortalDAO portalDAO;
+
     @Override
     public Function<CreateSurveyRequest, CreateSurveyResponse> function() {
         function = request -> {
-            SurveyDAO surveyDAO = new SurveyDAO();
             Survey survey = request.survey();
             long portalId = request.portalId();
             removeFirstEmptyField(survey);
             fixFields(survey);
             setPortal(survey, portalId);
-            toggleEnabledSurveys(surveyDAO, portalId, survey);
+            toggleEnabledSurveys(portalId, survey);
             surveyDAO.saveOrUpdate(survey);
             return new CreateSurveyResponse(survey, true, null);
         };
         return function;
     }
 
-    private void toggleEnabledSurveys(SurveyDAO surveyDAO, long portalId, Survey survey) {
+    private void toggleEnabledSurveys(long portalId, Survey survey) {
         if (survey.isEnabled())
             surveyDAO.disableAll(portalId);
     }
@@ -48,7 +54,7 @@ public class CreateSurveyFunction extends WiFreeFunction<CreateSurveyRequest, Cr
     }
 
     private void setPortal(Survey survey, long portalId) {
-        Portal portal = new PortalDAO().get(portalId);
+        Portal portal = portalDAO.get(portalId);
         survey.setPortal(portal);
     }
 
