@@ -1,5 +1,7 @@
 package daos;
 
+import io.ebean.Ebean;
+import io.ebean.SqlUpdate;
 import models.Survey;
 
 import javax.annotation.Nullable;
@@ -22,6 +24,12 @@ public class SurveyDAO extends GenericDAO<Survey> {
     @Nullable
     public Survey findPortalActiveSurvey(Long portalId) {
         return find(and(eq("portal.id", portalId), eq("enabled", true)));
+    }
+
+    public void disableAll(Long portalId) {
+        SqlUpdate updateSql = Ebean.createSqlUpdate("UPDATE survey SET enabled = false WHERE portal_id = :portalId")
+                .setParameter("portalId", portalId);
+        updateSql.execute();
     }
 
     @Override
