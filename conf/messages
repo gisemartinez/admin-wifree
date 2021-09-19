@@ -13,7 +13,7 @@ menu.sidebar.analytics=Analytics
 menu.sidebar.users=Usuarios
 
 connections.title.timeout-settings=Configurar tiempo máximo de conexión
-connections.label.max-timeout=Tiempo máximo de conexión
+connections.label.max-timeout=Tiempo máximo de conexión (minutos)
 connections.label.login-method=Tipo de login
 connections.title.connected-users=Usuarios en línea
 connections.users-table.header.user-name=Nombre de usuario

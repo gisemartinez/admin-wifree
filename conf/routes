@@ -48,6 +48,7 @@ POST        /api/survey                             controllers.api.SurveyContro
 GET         /api/survey/:id/answers                 controllers.api.SurveyAnswersController.answersCSV(id: Long)
 POST        /api/survey/answers                     controllers.api.SurveyAnswersController.saveAnswers
 GET         /api/admin/config/:portalId             controllers.api.PortalConfigController.getPortalConfig(portalId: Long)
+GET         /api/client-landing/:portalId           controllers.api.PortalConfigController.getClientLanding(portalId: Long)
 
 # Pac4J Temp Routes
 GET         /loginForm                        		controllers.LoginController.loginForm()

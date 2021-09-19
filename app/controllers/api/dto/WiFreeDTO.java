@@ -5,7 +5,7 @@ import play.libs.Json;
 
 abstract class WiFreeDTO {
 
-    JsonNode toJson() {
+    public JsonNode toJson() {
         return Json.toJson(this);
     }
 
