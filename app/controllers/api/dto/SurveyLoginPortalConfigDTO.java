@@ -27,15 +27,4 @@ public class SurveyLoginPortalConfigDTO extends WiFreeDTO {
         this.surveyForm = surveyForm;
     }
 
-    public static class SurveyFormDTO {
-        public final String id;
-        public final String title;
-        public final List<JsonNode> fields;
-
-        SurveyFormDTO(String id, String title, List<JsonNode> fields) {
-            this.id = id;
-            this.title = title;
-            this.fields = fields;
-        }
-    }
 }
