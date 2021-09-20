@@ -1,13 +1,13 @@
 package controllers.api.dto;
 
-public class SocialKeys extends WiFreeDTO {
+public class SocialKeysDTO extends WiFreeDTO {
 
     public String clientId;
     public String secret;
 
-    public SocialKeys() {}
+    public SocialKeysDTO() {}
 
-    public SocialKeys(String clientId, String secret) {
+    public SocialKeysDTO(String clientId, String secret) {
         this.clientId = clientId;
         this.secret = secret;
     }

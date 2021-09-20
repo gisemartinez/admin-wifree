@@ -14,11 +14,13 @@ import play.mvc.Result;
 import scala.Tuple2;
 import services.AnalyticsService;
 import services.ConnectionsService;
+import services.LoginOptionsService;
 import services.SurveysService;
 import services.core.MinutesRange;
 import utils.DateHelper;
 import utils.JsonHelper;
 import views.dto.ConnectedUser;
+import views.dto.SocialKeysView;
 import views.dto.SurveySummary;
 
 import javax.inject.Inject;
@@ -42,6 +44,9 @@ public class AdminAppController extends WiFreeController {
 
 	@Inject
 	ConnectionsService connectionsService;
+
+	@Inject
+	LoginOptionsService loginOptionsService;
 
 	@SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
 	public Result dashboard() throws NoProfileFoundException {
@@ -163,7 +168,9 @@ public class AdminAppController extends WiFreeController {
 	@SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
 	public Result loginSettings() {
 		CommonProfile currentProfile = getCurrentProfile();
-		return ok(views.html.admin.login_options.render(currentProfile));
+		SocialKeysView socialKeys = loginOptionsService.getLoginOptions(portalId());
+		Form<SocialKeysView> socialKeysForm = formFactory.form(SocialKeysView.class).fill(socialKeys);
+		return ok(views.html.admin.login_options.render(currentProfile, socialKeysForm));
 	}
 
 	private SurveySummary toSummary(Survey survey) {

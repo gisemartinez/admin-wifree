@@ -1,6 +1,8 @@
 package models;
 
+import io.ebean.annotation.DbJsonB;
 import models.types.LoginMethodType;
+import models.types.SocialKeys;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -27,16 +29,21 @@ public class PortalLoginConfiguration extends BaseModel {
 
 	private String redirectURL;
 
+	@DbJsonB
+	private SocialKeys keys;
+
 
 	public PortalLoginConfiguration() {
 	}
 
-	public PortalLoginConfiguration(Portal portal, LoginMethodType loginMethod, boolean isSocialLogin, boolean enabled, String redirectURL) {
+	public PortalLoginConfiguration(Portal portal, LoginMethodType loginMethod, boolean isSocialLogin, boolean enabled,
+									String redirectURL, SocialKeys keys) {
 		this.portal = portal;
 		this.loginMethod = loginMethod;
 		this.isSocialLogin = isSocialLogin;
 		this.enabled = enabled;
 		this.redirectURL = redirectURL;
+		this.keys = keys;
 	}
 
 
@@ -89,5 +96,13 @@ public class PortalLoginConfiguration extends BaseModel {
 
 	public boolean hasSocialLoginEnabled() {
 		return isSocialLogin && enabled;
+	}
+
+	public SocialKeys getKeys() {
+		return keys;
+	}
+
+	public void setKeys(SocialKeys keys) {
+		this.keys = keys;
 	}
 }

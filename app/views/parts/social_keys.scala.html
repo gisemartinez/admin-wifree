@@ -1,0 +1,32 @@
+@(loginConfiguration: Field, title: String)
+
+<div class="col-md-6">
+    <h3>@title</h3>
+    <div hidden>
+        @helper.inputText(loginConfiguration("id"))
+        @helper.inputText(loginConfiguration("loginMethod"))
+        @helper.checkbox(loginConfiguration("socialLogin"))
+    </div>
+    <div class="form-group row">
+        <div class="col-md-10 col-sm-6 col-xs-6">
+            @helper.inputText(loginConfiguration("keys")("clientId"), '_label -> "Id de Cliente", 'class -> "form-control col-md-6 col-xs-12")
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-10 col-sm-6 col-xs-6">
+            @helper.inputText(loginConfiguration("keys")("secret"), '_label -> "Secreto", 'class -> "form-control col-md-6 col-xs-12")
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-10 col-sm-6 col-xs-6">
+            @helper.inputText(loginConfiguration("redirectURL"), '_label -> "URL de Redirección", 'class -> "form-control col-md-6 col-xs-12")
+        </div>
+    </div>
+    <div class="form-group row" hidden>
+        <div class="col-md-10 col-sm-6 col-xs-6">
+            <div class="wifree-checkbox">
+                @helper.checkbox(loginConfiguration("enabled"), '_label -> "Activado", 'class -> "form-control col-md-3 col-xs-3", 'style -> "height: 20px; width: 5%;")
+            </div>
+        </div>
+    </div>
+</div>

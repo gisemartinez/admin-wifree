@@ -2,12 +2,12 @@ package controllers.api.dto;
 
 public class SocialMediaKeysDTO extends WiFreeDTO {
 
-    public SocialKeys facebook;
-    public SocialKeys google;
+    public SocialKeysDTO facebook;
+    public SocialKeysDTO google;
 
     public SocialMediaKeysDTO() {}
 
-    public SocialMediaKeysDTO(SocialKeys facebook, SocialKeys google) {
+    public SocialMediaKeysDTO(SocialKeysDTO facebook, SocialKeysDTO google) {
         this.facebook = facebook;
         this.google = google;
     }

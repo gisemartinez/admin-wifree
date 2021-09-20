@@ -41,8 +41,8 @@ public class PortalConfigController extends WiFreeController {
             loginTypeOptions = new LoginTypeOptionsDTO(surveyForm);
         } else {
             // TODO leer de db
-            SocialKeys facebook = new SocialKeys("131065570894352", "a74151d55bae152570b3a0e8874086db");
-            SocialKeys google = new SocialKeys("500143808314-9psv199snl4g7e6dargf6f8sog0023u1.apps.googleusercontent.com", "8oJHj4r0tCWBxJ_wTFNBOtD2");
+            SocialKeysDTO facebook = new SocialKeysDTO("131065570894352", "a74151d55bae152570b3a0e8874086db");
+            SocialKeysDTO google = new SocialKeysDTO("500143808314-9psv199snl4g7e6dargf6f8sog0023u1.apps.googleusercontent.com", "8oJHj4r0tCWBxJ_wTFNBOtD2");
             SocialMediaKeysDTO socialMediaKeys = new SocialMediaKeysDTO(facebook, google);
             loginTypeOptions = new LoginTypeOptionsDTO(socialMediaKeys);
         }

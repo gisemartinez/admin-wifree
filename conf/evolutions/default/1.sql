@@ -161,6 +161,7 @@ create table portal_login_configuration (
   is_social_login               boolean default false not null,
   enabled                       boolean default false not null,
   redirect_url                  varchar(255),
+  keys                          jsonb,
   when_created                  timestamptz not null,
   when_modified                 timestamptz not null,
   constraint ck_portal_login_configuration_login_method check ( login_method in (0,1,2,3,4,5)),
