@@ -2,12 +2,12 @@ package controllers.api.dto;
 
 public class LoginTypeOptionsDTO extends WiFreeDTO {
 
-    public SurveyFormV2DTO surveyForm;
+    public SurveyFormDTO surveyForm;
     public SocialMediaKeysDTO socialMediaKeys;
 
     public LoginTypeOptionsDTO() {}
 
-    public LoginTypeOptionsDTO(SurveyFormV2DTO surveyForm) {
+    public LoginTypeOptionsDTO(SurveyFormDTO surveyForm) {
         this.surveyForm = surveyForm;
     }
 

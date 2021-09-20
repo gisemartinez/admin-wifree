@@ -1,22 +1,14 @@
 package controllers.api;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import controllers.WiFreeController;
 import controllers.api.dto.*;
 import daos.PortalDAO;
 import daos.SurveyDAO;
-import models.Portal;
 import models.Survey;
-import play.libs.Json;
 import play.mvc.Result;
 
 import javax.inject.Inject;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
-
-import static java.util.Optional.ofNullable;
 
 public class PortalConfigController extends WiFreeController {
 
@@ -25,12 +17,6 @@ public class PortalConfigController extends WiFreeController {
 
     @Inject
     private SurveyDAO surveyDAO;
-
-    public Result getPortalConfig(Long portalId) {
-        return ofNullable(portalDAO.get(portalId))
-                .map(portal -> ok(getLoginConfigDTO(portalId, portal)))
-                .orElse(badRequest("Portal [" + portalId + "] not found."));
-    }
 
     public Result clientLanding(Long portalId) {
         String uniqueId = UUID.randomUUID().toString(); // TODO hace falta?
@@ -49,9 +35,9 @@ public class PortalConfigController extends WiFreeController {
         String title = "Queremos ofrecerte el mejor servicio pero para eso necesitamos conocer tu impresion de nuestras instalaciones. No te preocupes, es totalmente anonima"; // TODO leer apropiadamente
 
         LoginTypeOptionsDTO loginTypeOptions;
-        if (loginType == "survey") {
+        if ("survey".equals(loginType)) {
             Survey portalActiveSurvey = surveyDAO.findPortalActiveSurvey(portalId);
-            SurveyFormV2DTO surveyForm = SurveyFormV2DTO.fromDomain(portalActiveSurvey);
+            SurveyFormDTO surveyForm = SurveyFormDTO.fromDomain(portalActiveSurvey);
             loginTypeOptions = new LoginTypeOptionsDTO(surveyForm);
         } else {
             // TODO leer de db
@@ -66,15 +52,6 @@ public class PortalConfigController extends WiFreeController {
         ClientDataDTO clientData = new ClientDataDTO(portalId.toString(), name);
         ClientAuthResponse clientAuthResponse = new ClientAuthResponse(authData, clientData);
         return ok(clientAuthResponse.toJson());
-    }
-
-    private JsonNode getLoginConfigDTO(Long portalId, Portal portal) {
-        if (portal.hasSocialLoginEnabled())
-            return SocialLoginPortalConfigDTO.json(portal);
-        else {
-            Survey portalActiveSurvey = surveyDAO.findPortalActiveSurvey(portalId);
-            return SurveyLoginPortalConfigDTO.json(portal, portalActiveSurvey);
-        }
     }
 
 }
