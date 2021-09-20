@@ -1,11 +1,8 @@
 @import org.pac4j.core.profile.CommonProfile
-@import java.util.{List => JList}
-@import controllers.admin.SurveyForm
-@import java.math.BigInteger
 
 @(profile: CommonProfile, surveyForm: Form[Survey], isEditing: Boolean, isCreating: Boolean, currentAnswer: Int = 0, totalAnswers: Int = 0)
 
-@username = @{profile.getAttribute("realName").toString()}
+@username = @{profile.getAttribute("realName").toString}
 
 <!DOCTYPE html>
 <html lang="es">

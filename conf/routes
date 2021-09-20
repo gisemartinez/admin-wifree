@@ -18,6 +18,7 @@ GET         /surveys                                controllers.AdminAppControll
 GET         /analytics                              controllers.AdminAppController.analytics
 GET         /connections                            controllers.AdminAppController.connections
 GET			/portal-settings						controllers.AdminAppController.portalSettings
+GET         /login-settings                         controllers.AdminAppController.loginSettings
 
 POST		/connections/set-connection-timeout		controllers.admin.ConnectionsController.setConnectionTimeout()
 POST		/analytics/create-analytics-query		controllers.admin.AnalyticsController.createAnalyticsQuery

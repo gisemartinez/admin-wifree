@@ -160,6 +160,12 @@ public class AdminAppController extends WiFreeController {
 		return notFound();
 	}
 
+	@SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
+	public Result loginSettings() {
+		CommonProfile currentProfile = getCurrentProfile();
+		return ok(views.html.admin.login_options.render(currentProfile));
+	}
+
 	private SurveySummary toSummary(Survey survey) {
 		return new SurveySummary(survey.getId(), survey.getTitle(), survey.getWhenCreated());
 	}
