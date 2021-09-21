@@ -3,11 +3,16 @@ package controllers.api;
 import controllers.WiFreeController;
 import controllers.api.dto.*;
 import daos.PortalDAO;
+import daos.PortalLoginConfigurationDAO;
 import daos.SurveyDAO;
+import models.Portal;
+import models.PortalLoginConfiguration;
 import models.Survey;
+import models.types.LoginMethodType;
 import play.mvc.Result;
 
 import javax.inject.Inject;
+import java.util.Map;
 import java.util.UUID;
 
 public class PortalConfigController extends WiFreeController {
@@ -17,11 +22,15 @@ public class PortalConfigController extends WiFreeController {
 
     @Inject
     private SurveyDAO surveyDAO;
+    
+    @Inject
+    private PortalLoginConfigurationDAO portalLoginConfigurationDAO;
 
     public Result clientLanding(Long portalId) {
+        Portal portal = portalDAO.get(portalId);
         String uniqueId = UUID.randomUUID().toString(); // TODO hace falta?
-        String title = "Esto es un titulo de no se que"; // TODO implementar ABM
-        String iframeURL = "https://www.refugiodelpescador.com/"; // TODO implementar ABM
+        String title = portal.getName();
+        String iframeURL = portal.getHomeURL(); // TODO implementar ABM
         LandingChoicesDTO landingChoices = new LandingChoicesDTO(title, iframeURL);
         String templateId = "template-2"; // TODO implementar ABM
         ClientLandingResponse clientLandingResponse = new ClientLandingResponse(uniqueId, landingChoices, portalId.toString(), templateId);
@@ -29,26 +38,27 @@ public class PortalConfigController extends WiFreeController {
     }
     
     public Result clientAuth(Long portalId) {
-        String uniqueId = UUID.randomUUID().toString(); // TODO hace falta?
-        String loginType = "survey"; // TODO leer valor
-        String id = "hotel-1"; // TODO id de encuesta o del portal/cliente?
-        String title = "Queremos ofrecerte el mejor servicio pero para eso necesitamos conocer tu impresion de nuestras instalaciones. No te preocupes, es totalmente anonima"; // TODO leer apropiadamente
+        Portal portal = portalDAO.get(portalId);
 
-        LoginTypeOptionsDTO loginTypeOptions;
-        if ("survey".equals(loginType)) {
+        String uniqueId = UUID.randomUUID().toString(); // TODO hace falta?
+        LoginMethodType loginMethodType = portal.getNetworkConfiguration().getLoginMethod();
+        String id = portalId.toString();
+
+        LoginTypeOptionsDTO loginTypeOptions = null;
+        if (loginMethodType == LoginMethodType.Survey) {
             Survey portalActiveSurvey = surveyDAO.findPortalActiveSurvey(portalId);
             SurveyFormDTO surveyForm = SurveyFormDTO.fromDomain(portalActiveSurvey);
             loginTypeOptions = new LoginTypeOptionsDTO(surveyForm);
         } else {
-            // TODO leer de db
-            SocialKeysDTO facebook = new SocialKeysDTO("131065570894352", "a74151d55bae152570b3a0e8874086db");
-            SocialKeysDTO google = new SocialKeysDTO("500143808314-9psv199snl4g7e6dargf6f8sog0023u1.apps.googleusercontent.com", "8oJHj4r0tCWBxJ_wTFNBOtD2");
+            Map<LoginMethodType, PortalLoginConfiguration> configs = portalLoginConfigurationDAO.findForPortal(portalId);
+            SocialKeysDTO facebook = SocialKeysDTO.fromDomain(configs.get(LoginMethodType.Facebook).getKeys());
+            SocialKeysDTO google = SocialKeysDTO.fromDomain(configs.get(LoginMethodType.Google).getKeys());
             SocialMediaKeysDTO socialMediaKeys = new SocialMediaKeysDTO(facebook, google);
             loginTypeOptions = new LoginTypeOptionsDTO(socialMediaKeys);
         }
 
-        AuthDataDTO authData = new AuthDataDTO(uniqueId, loginType, loginTypeOptions, portalId.toString());
-        String name = "Example client. Fixed to look like a hotel"; // TODO implementar ABM
+        AuthDataDTO authData = new AuthDataDTO(uniqueId, loginMethodType.id, loginTypeOptions, portalId.toString());
+        String name = portal.getName();
         ClientDataDTO clientData = new ClientDataDTO(portalId.toString(), name);
         ClientAuthResponse clientAuthResponse = new ClientAuthResponse(authData, clientData);
         return ok(clientAuthResponse.toJson());

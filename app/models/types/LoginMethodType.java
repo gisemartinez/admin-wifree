@@ -14,17 +14,19 @@ import static scala.collection.JavaConverters.asScalaBuffer;
  */
 public enum LoginMethodType {
 
-	Google("Google"),
-	Facebook("Facebook"),
-	Twitter("Twitter"),
-	EmailAndPassword("Correo Electronico"),
-	SocialLogin("Redes Sociales"),
-	Survey("Encuesta");
+	Google("Google", "google"),
+	Facebook("Facebook", "facebook"),
+	Twitter("Twitter", "twitter"),
+	EmailAndPassword("Correo Electronico", "email"),
+	SocialLogin("Redes Sociales", "socialLogin"),
+	Survey("Encuesta", "survey");
 
 	public final String name;
+	public final String id;
 
-	LoginMethodType(String name) {
+	LoginMethodType(String name, String id) {
 		this.name = name;
+		this.id = id;
 	}
 
 	public static Seq<Tuple2<String, String>> portalLoginTypes() {

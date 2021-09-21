@@ -1,5 +1,7 @@
 package controllers.api.dto;
 
+import models.types.SocialKeys;
+
 public class SocialKeysDTO extends WiFreeDTO {
 
     public String clientId;
@@ -10,5 +12,9 @@ public class SocialKeysDTO extends WiFreeDTO {
     public SocialKeysDTO(String clientId, String secret) {
         this.clientId = clientId;
         this.secret = secret;
+    }
+
+    public static SocialKeysDTO fromDomain(SocialKeys socialKeys) {
+        return new SocialKeysDTO(socialKeys.getClientId(), socialKeys.getSecret());
     }
 }
