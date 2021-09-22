@@ -17,7 +17,7 @@ public class FieldDTO extends WiFreeDTO {
     }
 
     public static FieldDTO fromDomain(Field field) {
-        FieldConfigDTO config = FieldConfigDTO.fromDomain(field.getConfig());
+        FieldConfigDTO config = FieldConfigDTO.fromDomain(field.getConfig(), field.getType());
         return new FieldDTO(field.getId().toString(), field.getType(), config);
     }
 
