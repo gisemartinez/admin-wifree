@@ -29,7 +29,8 @@ GET         /surveys/:surveyId/all-answers          controllers.admin.SurveysCon
 GET         /surveys/:surveyId/answers              controllers.admin.SurveysController.answeredSurvey(surveyId: Long, offset: Int ?= 0)
 
 # Login options
-POST /login-settings/social-keys                    controllers.admin.LoginOptionsController.saveSocialKeys
+POST /settings/social-keys                          controllers.admin.LoginOptionsController.saveSocialKeys
+POST /settings/portal-options                       controllers.admin.LoginOptionsController.savePortalOptions
 
 # Console routes
 GET			/console								controllers.ConsoleController.index

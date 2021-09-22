@@ -1,0 +1,108 @@
+@import org.pac4j.core.profile.CommonProfile
+@import views.dto.PortalOptionsView
+
+@import models.types.PortalApplicationType
+@(profile: CommonProfile, form: Form[PortalOptionsView])
+
+@username = @{profile.getAttribute("realName").toString}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    @parts.head("WiFree")
+
+    <style>
+        .wifree-checkbox dl {
+            width: 100%;
+            overflow: hidden;
+            padding: 2px;
+            margin: 0
+        }
+        .wifree-checkbox dt {
+            float: left;
+            width: 25%;
+            /* adjust the width; make sure the total of both is 100% */
+            padding: 4px;
+            margin: 0
+        }
+        .wifree-checkbox dd {
+            float: left;
+            width: 75%;
+            /* adjust the width; make sure the total of both is 100% */
+            padding: 4px;
+            margin: 0
+        }
+    </style>
+</head>
+
+<body class="nav-md">
+
+<div class="container body">
+
+    <div class="main_container">
+
+        <div class="col-md-3 left_col">
+            <div class="left_col scroll-view">
+                @parts.menu_site_title()
+                @parts.menu_profile_quickinfo(username)
+                <br />
+                @parts.sidebar_menu()
+                @parts.menu_footer_buttons()
+
+            </div>
+        </div>
+
+        @parts.top_navigation(username)
+
+        <!-- Page content -->
+        <div class="right_col" role="main">
+            <div class="row">
+                <div class="col-md-9 col-sm-6 col-xs-12">
+                    @helper.form(controllers.admin.routes.LoginOptionsController.savePortalOptions(),  'enctype -> "multipart/form-data") {
+                        <div>
+                            <h1>Configuración del Portal</h1>
+                            <div class="x-content">
+                                <div hidden>
+                                    @helper.inputText(form("portalId"))
+                                </div>
+
+                                @helper.inputText(form("homeURL"), '_label -> "URL de Redirección", 'class -> "form-control col-md-6 col-xs-12")
+
+                                <div class="form-group row">
+                                    <div class="col-md-3 col-sm-3 col-xs-6">
+                                        <div class="">
+                                        @helper.inputRadioGroup(form("templateType"), PortalApplicationType.appTypes(), '_label -> "Tema", 'required -> "required", 'class -> "")
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    @parts.portal_app(form("template"), "template")
+                                    @parts.portal_app(form("carrousel"), "carrousel")
+                                </div>
+
+                                @*** Submit Button START ***@
+                                <div class="form-group">
+                                    <div class="col-md-12 col-sm-6 col-xs-12 col-md-offset-10">
+                                        <button type="submit" class="btn btn-success">@Messages("submit")</button>
+                                    </div>
+                                </div>
+                                @*** Submit Button END ***@
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            @parts.footer_content()
+        </div>
+        <!-- Page content -->
+
+    </div>
+
+    @parts.resources_body()
+</div>
+
+</body>
+
+</html>

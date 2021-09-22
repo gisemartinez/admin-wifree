@@ -11,7 +11,7 @@
 			<li><a><i class="fa fa-gears"></i>
 				@Messages("menu.sidebar.portal-settings") <span class="fa fa-chevron-down"></span></a>
 				<ul class="nav child_menu" style="display: none">
-					<li><a href="general_elements.html">@Messages("menu.sidebar.portal-settings.applications")</a></li>
+					<li><a href="@routes.AdminAppController.portalSettings">@Messages("menu.sidebar.portal-settings.applications")</a></li>
 					<li><a href="@routes.AdminAppController.loginSettings">@Messages("menu.sidebar.portal-settings.login")</a></li>
 				</ul>
 			</li>

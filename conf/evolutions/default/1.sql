@@ -148,9 +148,10 @@ create table portal_app (
   type                          integer,
   name                          varchar(255),
   enabled                       boolean default false not null,
+  config                        jsonb,
   when_created                  timestamptz not null,
   when_modified                 timestamptz not null,
-  constraint ck_portal_app_type check ( type in (0,1,2,3,4,5)),
+  constraint ck_portal_app_type check ( type in (0,1,2,3,4,5,6,7)),
   constraint pk_portal_app primary key (id)
 );
 

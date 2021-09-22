@@ -1,11 +1,15 @@
 package models;
 
 import models.types.AccountType;
+import models.types.PortalApplicationType;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * Created by jesu on 08/06/17.
@@ -43,6 +47,10 @@ public class Portal extends BaseModel {
 
 	@OneToMany(cascade = CascadeType.ALL)
 	private Set<PortalLoginConfiguration> loginConfigurations = new HashSet<>();
+
+	public void setApplications(Set<PortalApp> applications) {
+		this.applications = applications;
+	}
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "portal")
 	private Set<PortalApp> applications = new HashSet<>();
@@ -166,5 +174,14 @@ public class Portal extends BaseModel {
 
 	public PortalNetworkConfiguration getNetworkConfiguration() {
 		return networkConfiguration;
+	}
+
+	public Set<PortalApp> getApplications() {
+		return applications;
+	}
+
+	public Map<PortalApplicationType, PortalApp> getApplicationsByType() {
+		return applications.stream()
+				.collect(Collectors.toMap(PortalApp::getType, Function.identity()));
 	}
 }

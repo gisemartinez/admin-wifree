@@ -8,3 +8,4 @@ target
 /RUNNING_PID
 .g8
 /wifree.iml
+public/img/client/*

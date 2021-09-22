@@ -14,12 +14,13 @@ import play.mvc.Result;
 import scala.Tuple2;
 import services.AnalyticsService;
 import services.ConnectionsService;
-import services.LoginOptionsService;
+import services.PortalAndLoginOptionsService;
 import services.SurveysService;
 import services.core.MinutesRange;
 import utils.DateHelper;
 import utils.JsonHelper;
 import views.dto.ConnectedUser;
+import views.dto.PortalOptionsView;
 import views.dto.SocialKeysView;
 import views.dto.SurveySummary;
 
@@ -29,7 +30,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Created by jesu on 27/06/17.
@@ -46,7 +46,7 @@ public class AdminAppController extends WiFreeController {
 	ConnectionsService connectionsService;
 
 	@Inject
-	LoginOptionsService loginOptionsService;
+	PortalAndLoginOptionsService optionsService;
 
 	@SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
 	public Result dashboard() throws NoProfileFoundException {
@@ -161,14 +161,17 @@ public class AdminAppController extends WiFreeController {
 		return ok(views.html.admin.all_surveys.render(currentProfile, summaries));
 	}
 
+	@SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
 	public Result portalSettings() {
-		return notFound();
+		PortalOptionsView portalOptions = optionsService.getPortalOptions(portalId());
+		Form<PortalOptionsView> form = formFactory.form(PortalOptionsView.class).fill(portalOptions);
+		return ok(views.html.admin.portal_options.render(getCurrentProfile(), form));
 	}
 
 	@SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
 	public Result loginSettings() {
 		CommonProfile currentProfile = getCurrentProfile();
-		SocialKeysView socialKeys = loginOptionsService.getLoginOptions(portalId());
+		SocialKeysView socialKeys = optionsService.getLoginOptions(portalId());
 		Form<SocialKeysView> socialKeysForm = formFactory.form(SocialKeysView.class).fill(socialKeys);
 		return ok(views.html.admin.login_options.render(currentProfile, socialKeysForm));
 	}

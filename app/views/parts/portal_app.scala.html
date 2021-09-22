@@ -1,0 +1,52 @@
+@(portalApp: Field, appType: String)
+
+@config = @{portalApp("config")}
+
+<div class="col-md-12">
+    <div hidden>
+        @helper.inputText(portalApp("id"))
+        @helper.inputText(portalApp("type"))
+        @helper.inputText(portalApp("name"))
+        @helper.checkbox(portalApp("enabled"))
+    </div>
+    @if(appType == "template") {
+        <div class="col-md-12">
+            <div class="form-group">
+                <div class="col-md-4 col-sm-6 col-xs-6">
+                    @helper.textarea(config("leftColumn"), '_label -> "Columna Izquierda", 'class -> "form-control col-md-6 col-xs-12")
+                </div>
+                <div class="col-md-4 col-sm-6 col-xs-6">
+                    @helper.textarea(config("middleColumn"), '_label -> "Columna Central", 'class -> "form-control col-md-6 col-xs-12")
+                </div>
+                <div class="col-md-4 col-sm-6 col-xs-6">
+                    @helper.textarea(config("rightColumn"), '_label -> "Columna Derecha", 'class -> "form-control col-md-6 col-xs-12")
+                </div>
+            </div>
+        </div>
+    } else {
+        <div class="file-upload">
+            <h3>Carrousel</h3>
+            <div class="col-md-12">
+                <h4>Imágenes Cargadas</h4>
+                <span>
+                @helper.repeatWithIndex(config("images")) { (image, i) =>
+                    @image("name").value.map { imgName =>
+                        <div class="col-md-2">
+                            <h6>Imágen @{i+1}</h6>
+                            <img src="@routes.Assets.versioned("img/client/"+imgName)" alt="Carrousel Imagen @{i+1}" width="150"/>
+                            <div hidden>
+                                <input id="image_@i" name="image.@i" value="@image("absolutePath").value.get"/>
+                            </div>
+                        </div>
+                    }
+                }
+                </span>
+            </div>
+
+            <div class="col-md-12">
+                <h4>Cargar Imágenes</h4>
+                @helper.inputFile(config("images"), '_label -> "", 'accept -> "image/*", Symbol("multiple") -> "")
+            </div>
+        </div>
+    }
+</div>
