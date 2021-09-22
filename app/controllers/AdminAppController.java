@@ -2,8 +2,7 @@ package controllers;
 
 import be.objectify.deadbolt.java.actions.SubjectPresent;
 import daos.SurveyDAO;
-import models.PortalNetworkConfiguration;
-import models.Survey;
+import models.*;
 import operations.requests.GetAllSurveysRequest;
 import operations.requests.GetAnalyticsDataRequest;
 import operations.responses.*;
@@ -25,10 +24,7 @@ import views.dto.SocialKeysView;
 import views.dto.SurveySummary;
 
 import javax.inject.Inject;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -138,8 +134,19 @@ public class AdminAppController extends WiFreeController {
 	@SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
 	public Result surveys() throws NoProfileFoundException {
 		CommonProfile currentProfile = getCurrentProfile();
-		Form<Survey> form = formFactory.form(Survey.class);
-		return ok(views.html.admin.surveys.render(currentProfile, form, true, true, 0, 0));
+
+		ArrayList<Field> fields = new ArrayList<>();
+		Field ageField = new Field(null, "textbox", new FieldConfig(null, "Edad", 1, true, null, null, null));
+		Field genreField = new Field(null, "radio", new FieldConfig(null, "Género", 2, true, null, null, Arrays.asList(new Option(1, "Femenino"), new Option(2, "Masculino"), new Option(3, "Otro"))));
+		fields.add(ageField);
+		fields.add(genreField);
+		Survey survey = new Survey(null, null, null, fields, false);
+		ageField.setSurvey(survey);
+		genreField.setSurvey(survey);
+
+		Form<Survey> form = formFactory.form(Survey.class).fill(survey);
+
+		return ok(views.html.admin.surveys.render(currentProfile, form, true, false, 0, 0));
 	}
 
 	@SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)

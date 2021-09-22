@@ -32,7 +32,8 @@ public class FieldConfig {
     // TODO Selector
 
 
-    public FieldConfig(String key, String label, Integer order, @Nullable Boolean required, @Nullable String value, @Nullable Integer maximum, @Nullable List<Option> otherOptions) {
+    public FieldConfig(String key, String label, Integer order, @Nullable Boolean required, @Nullable String value,
+                       @Nullable Integer maximum, @Nullable List<Option> otherOptions) {
         this.key = key;
         this.label = label;
         this.order = order;
