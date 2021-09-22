@@ -60,10 +60,13 @@ public class PortalConfigController extends WiFreeController {
             SurveyFormDTO surveyForm = SurveyFormDTO.fromDomain(portalActiveSurvey);
             loginTypeOptions = new LoginTypeOptionsDTO(surveyForm, images);
         } else {
-            Map<LoginMethodType, PortalLoginConfiguration> configs = portalLoginConfigurationDAO.findForPortal(portalId);
-            SocialMediaKeysDTO facebook = new SocialMediaKeysDTO(SocialKeysDTO.fromDomain(configs.get(LoginMethodType.Facebook).getKeys()));
-            SocialMediaKeysDTO google = new SocialMediaKeysDTO(SocialKeysDTO.fromDomain(configs.get(LoginMethodType.Google).getKeys()));
-            loginTypeOptions = new LoginTypeOptionsDTO(Arrays.asList(facebook, google), images);
+            List<PortalLoginConfiguration> configs = portalLoginConfigurationDAO.findEnabled(portalId);
+            List<SocialMediaKeysDTO> socialMediaKeys = configs.stream()
+                    .map(PortalLoginConfiguration::getKeys)
+                    .map(SocialKeysDTO::fromDomain)
+                    .map(SocialMediaKeysDTO::new)
+                    .collect(Collectors.toList());
+            loginTypeOptions = new LoginTypeOptionsDTO(socialMediaKeys, images);
         }
 
         AuthDataDTO authData = new AuthDataDTO(uniqueId, loginMethodType.id, loginTypeOptions, portalId.toString());

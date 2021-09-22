@@ -22,10 +22,12 @@
             @helper.inputText(loginConfiguration("redirectURL"), '_label -> "URL de Redirección", 'class -> "form-control col-md-6 col-xs-12")
         </div>
     </div>
-    <div class="form-group row" hidden>
+    <div class="form-group row">
         <div class="col-md-10 col-sm-6 col-xs-6">
             <div class="wifree-checkbox">
                 @helper.checkbox(loginConfiguration("enabled"), '_label -> "Activado", 'class -> "form-control col-md-3 col-xs-3", 'style -> "height: 20px; width: 5%;")
+                @*** Fix for non submitted checkbox value ***@
+                <input type="hidden" name="@loginConfiguration("enabled").name" value="0" />
             </div>
         </div>
     </div>
