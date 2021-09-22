@@ -3,10 +3,8 @@ package services;
 import daos.PortalAppDAO;
 import daos.PortalDAO;
 import daos.PortalLoginConfigurationDAO;
-import models.Portal;
-import models.PortalApp;
-import models.PortalAppConfig;
-import models.PortalLoginConfiguration;
+import daos.PortalNetworkConfigurationDAO;
+import models.*;
 import models.types.LoginMethodType;
 import models.types.PortalApplicationType;
 import views.dto.PortalOptionsView;
@@ -19,8 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import static models.types.LoginMethodType.Facebook;
-import static models.types.LoginMethodType.Google;
+import static models.types.LoginMethodType.*;
 
 public class PortalAndLoginOptionsService {
 
@@ -33,24 +30,40 @@ public class PortalAndLoginOptionsService {
     @Inject
     PortalAppDAO portalAppDAO;
 
+    @Inject
+    PortalNetworkConfigurationDAO networkConfigDAO;
+
     public SocialKeysView getLoginOptions(Long portalId) {
         Map<LoginMethodType, PortalLoginConfiguration> loginConfigurations = loginConfigDAO.findForPortal(portalId);
+        Optional<LoginMethodType> loginMethod = networkConfigDAO.getLoginMethod(portalId);
 
         return loginConfigurations.isEmpty()
                 ? SocialKeysView.initialize()
-                : new SocialKeysView(loginConfigurations.get(Google), loginConfigurations.get(Facebook));
+                : new SocialKeysView(loginMethod.orElse(Survey), loginConfigurations.get(Google), loginConfigurations.get(Facebook));
     }
 
     public void saveLoginOptions(SocialKeysView socialKeysView, Long portalId) {
         Portal portal = portalDAO.get(portalId);
+
+        PortalNetworkConfiguration networkConfiguration = portal.getNetworkConfiguration();
+        if (networkConfiguration == null) {
+            networkConfiguration = new PortalNetworkConfiguration(portal);
+        }
+        networkConfiguration.setLoginMethod(socialKeysView.getLoginMethod());
+        portal.setNetworkConfiguration(networkConfiguration);
+        networkConfigDAO.save(networkConfiguration);
+
         PortalLoginConfiguration google = socialKeysView.getGoogle();
         google.setKeysProvider();
         PortalLoginConfiguration facebook = socialKeysView.getFacebook();
         facebook.setKeysProvider();
+
         google.setPortal(portal);
         facebook.setPortal(portal);
         loginConfigDAO.saveOrUpdate(google);
         loginConfigDAO.saveOrUpdate(facebook);
+
+        portalDAO.save(portal);
     }
 
     public PortalOptionsView getPortalOptions(Long portalId) {

@@ -1,6 +1,7 @@
 package daos;
 
 import models.PortalNetworkConfiguration;
+import models.types.LoginMethodType;
 
 import javax.inject.Inject;
 import java.util.Optional;
@@ -20,6 +21,11 @@ public class PortalNetworkConfigurationDAO extends GenericDAO<PortalNetworkConfi
 	public Optional<Integer> getConnectionTimeout(Long portalId) {
 		return ofNullable(find(eq("portal.id", portalId)))
 				.map(PortalNetworkConfiguration::getConnectionTimeout);
+	}
+
+	public Optional<LoginMethodType> getLoginMethod(Long portalId) {
+		return ofNullable(findForPortal(portalId))
+				.map(PortalNetworkConfiguration::getLoginMethod);
 	}
 
 	public PortalNetworkConfiguration findForPortal(Long portalId) {

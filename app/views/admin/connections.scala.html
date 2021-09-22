@@ -50,7 +50,6 @@
 							<div class="x_panel">
 								<div class="x_title">
 									<h2>@Messages("connections.title.timeout-settings")</h2>
-									<!-- TODO: insert toolboox -->
 									<div class="clearfix"></div>
 								</div>
 								<div class="x-content">
@@ -60,14 +59,6 @@
 												@helper.inputText(networkConfigurationForm("connectionTimeout"), '_label -> Messages("connections.label.max-timeout"), 'type -> "number", 'required -> "required", 'class -> "form-control col-md-7 col-xs-12", 'min -> "1")
 											</div>
 										</div>
-										<div class="form-group row">
-											<div class="col-md-3 col-sm-3 col-xs-6">
-												<div class="">
-													@helper.inputRadioGroup(networkConfigurationForm("loginMethod"), LoginMethodType.portalLoginTypes(), '_label -> Messages("connections.label.login-method"), 'required -> "required", 'class -> "")
-												</div>
-											</div>
-										</div>
-										<div class="ln_solid"></div>
 										<div class="form-group">
 											<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
 												<button type="submit" class="btn btn-success">@Messages("submit")</button>

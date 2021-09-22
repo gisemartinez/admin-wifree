@@ -1,6 +1,7 @@
 @import org.pac4j.core.profile.CommonProfile
 @import views.dto.SocialKeysView
 
+@import models.types.LoginMethodType
 @(profile: CommonProfile, socialKeysForm: Form[SocialKeysView])
 
 @username = @{profile.getAttribute("realName").toString}
@@ -63,6 +64,14 @@
                         <h1>Configuración de Login</h1>
                         <div class="x-content">
                             @helper.form(controllers.admin.routes.LoginOptionsController.saveSocialKeys()) {
+                                <div class="form-group row">
+                                    <div class="col-md-3 col-sm-3 col-xs-6">
+                                        <div class="">
+                                        @helper.inputRadioGroup(socialKeysForm("loginMethod"), LoginMethodType.portalLoginTypes(), '_label -> Messages("connections.label.login-method"), 'required -> "required", 'class -> "")
+                                        </div>
+                                    </div>
+                                </div>
+                                
                                 <h2>Login Social</h2>
 
                                 @parts.social_keys(socialKeysForm("google"), "Google")

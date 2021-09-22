@@ -27,14 +27,13 @@ public class ConnectionsService {
 	@Inject
 	NetworkUserConnectionLogDAO connectionLogDAO;
 	
-	public void saveNetworkConfiguration(Integer connectionTimeout, LoginMethodType loginMethod, Long portalId) {
+	public void saveNetworkConfiguration(Integer connectionTimeout, Long portalId) {
 		Portal portal = portalDAO.get(portalId);
 		PortalNetworkConfiguration networkConfiguration = portal.getNetworkConfiguration();
 		if (networkConfiguration == null) {
 			networkConfiguration = new PortalNetworkConfiguration(portal);
 		}
 		networkConfiguration.setConnectionTimeout(connectionTimeout);
-		networkConfiguration.setLoginMethod(loginMethod);
 		portal.setNetworkConfiguration(networkConfiguration);
 		portalNetworkConfigurationDAO.save(networkConfiguration);
 		portalDAO.save(portal);
