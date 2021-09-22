@@ -1,0 +1,48 @@
+@import org.pac4j.core.profile.CommonProfile
+
+@(profile: CommonProfile)
+
+@username = @{profile.getAttribute("realName").toString}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    @parts.head("WiFree")
+</head>
+
+<body class="nav-md">
+<div class="container body">
+
+    <div class="main_container">
+        <div class="col-md-3 left_col">
+            <div class="left_col scroll-view">
+                @parts.menu_site_title()
+                @parts.menu_profile_quickinfo(username)
+                <br />
+                @parts.sidebar_menu()
+                @parts.menu_footer_buttons()
+
+            </div>
+        </div>
+
+        @parts.top_navigation(username)
+
+        <!-- Page content -->
+        <div class="right_col" role="main">
+            <div class="row">
+                <div class="col-md-12 col-sm-6 col-xs-12">
+                    @*** Title START ***@
+                    <h1>No se han registrado respuestas aún</h1>
+                    @*** Title END ***@
+                </div>
+            </div>
+            @parts.footer_content()
+        </div>
+    </div>
+    @parts.resources_body()
+</div>
+
+</body>
+
+</html>

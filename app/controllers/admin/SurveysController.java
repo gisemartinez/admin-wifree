@@ -4,6 +4,7 @@ import be.objectify.deadbolt.java.actions.SubjectPresent;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.collect.ImmutableListMultimap;
 import controllers.WiFreeController;
+import controllers.routes;
 import daos.FieldAnswerDAO;
 import daos.SurveyDAO;
 import models.Field;
@@ -39,7 +40,7 @@ public class SurveysController extends WiFreeController {
         Survey survey = formFactory.form(Survey.class).bindFromRequest().get();
         CreateSurveyResponse createSurveyResponse = surveysService.createSurvey(new CreateSurveyRequest(survey, portalId()));
 
-        return ok(createSurveyResponse.createdSurvey().toLogString());
+        return redirect(routes.AdminAppController.allSurveys());
     }
 
     public Result getSurveyAnswers(Long surveyId) {
@@ -53,28 +54,33 @@ public class SurveysController extends WiFreeController {
     @SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
     public Result answeredSurvey(Long surveyId, Integer offset) throws JsonProcessingException {
         ImmutableListMultimap<NetworkUser, FieldAnswer> answersForSurvey = fieldAnswerDAO.findForSurvey(surveyId);
-        Survey survey = surveyDAO.get(surveyId);
 
-        List<Survey> answeredSurveysPerUser = answersForSurvey.asMap().values().stream()
-                .map(userAnswers -> fillSurveyFieldsWithAnswers(survey, userAnswers))
-                .collect(toList());
+        if (answersForSurvey.isEmpty()) {
+            return ok(views.html.admin.survey_no_answers.render(getCurrentProfile()));
+        } else {
 
-        int totalAnswers = answeredSurveysPerUser.size();
-        int sanitizedOffset = totalAnswers > 0 ? Math.min(Math.max(offset, 0), totalAnswers - 1) : 0;
+            Survey survey = surveyDAO.get(surveyId);
 
-        Form<Survey> form = formFactory.form(Survey.class);
-        if (totalAnswers > 0) form = form.fill(answeredSurveysPerUser.get(sanitizedOffset));
+            List<Survey> answeredSurveysPerUser = answersForSurvey.asMap().values().stream()
+                    .map(userAnswers -> fillSurveyFieldsWithAnswers(survey, userAnswers))
+                    .collect(toList());
 
-        return ok(
-                views.html.admin.surveys.render(
-                        getCurrentProfile(),
-                        form,
-                        false,
-                        false,
-                        sanitizedOffset + 1,
-                        totalAnswers)
-        );
-//        return ok(answeredSurveysPerUser.stream().map(Survey::toLogString).collect(Collectors.joining("\n\n"))); // TODO: devolver algo para la vista
+            int totalAnswers = answeredSurveysPerUser.size();
+            int sanitizedOffset = totalAnswers > 0 ? Math.min(Math.max(offset, 0), totalAnswers - 1) : 0;
+
+            Form<Survey> form = formFactory.form(Survey.class);
+            if (totalAnswers > 0) form = form.fill(answeredSurveysPerUser.get(sanitizedOffset));
+
+            return ok(
+                    views.html.admin.surveys.render(
+                            getCurrentProfile(),
+                            form,
+                            false,
+                            false,
+                            sanitizedOffset + 1,
+                            totalAnswers)
+            );
+        }
     }
 
     @SuppressWarnings("UnstableApiUsage")
