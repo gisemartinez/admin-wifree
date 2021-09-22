@@ -32,9 +32,7 @@ public class PortalLoginConfiguration extends BaseModel {
 	@DbJsonB
 	private SocialKeys keys;
 
-
-	public PortalLoginConfiguration() {
-	}
+	public PortalLoginConfiguration() {}
 
 	public PortalLoginConfiguration(Portal portal, LoginMethodType loginMethod, boolean isSocialLogin, boolean enabled,
 									String redirectURL, SocialKeys keys) {
@@ -46,13 +44,15 @@ public class PortalLoginConfiguration extends BaseModel {
 		this.keys = keys;
 	}
 
+	public void setKeysProvider() {
+		keys.setProvider(loginMethod.id);
+	}
 
 	@Override
 	public String toLogString() {
 		return toLogString("id: " + id, "portal: " , "loginMethod: " + loginMethod, "isSocialLogin: " + isSocialLogin,
 				"enabled: " + enabled, "redirectURL: " + redirectURL);
 	}
-
 
 	public Portal getPortal() {
 		return portal;

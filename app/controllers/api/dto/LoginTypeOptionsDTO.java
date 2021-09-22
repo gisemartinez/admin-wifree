@@ -1,9 +1,11 @@
 package controllers.api.dto;
 
+import java.util.List;
+
 public class LoginTypeOptionsDTO extends WiFreeDTO {
 
     public SurveyFormDTO surveyForm;
-    public SocialMediaKeysDTO socialMediaKeys;
+    public List<SocialMediaKeysDTO> socialMediaKeys;
 
     public LoginTypeOptionsDTO() {}
 
@@ -11,7 +13,7 @@ public class LoginTypeOptionsDTO extends WiFreeDTO {
         this.surveyForm = surveyForm;
     }
 
-    public LoginTypeOptionsDTO(SocialMediaKeysDTO socialMediaKeys) {
+    public LoginTypeOptionsDTO(List<SocialMediaKeysDTO> socialMediaKeys) {
         this.socialMediaKeys = socialMediaKeys;
     }
 }

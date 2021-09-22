@@ -12,6 +12,7 @@ import models.types.LoginMethodType;
 import play.mvc.Result;
 
 import javax.inject.Inject;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.UUID;
 
@@ -51,10 +52,9 @@ public class PortalConfigController extends WiFreeController {
             loginTypeOptions = new LoginTypeOptionsDTO(surveyForm);
         } else {
             Map<LoginMethodType, PortalLoginConfiguration> configs = portalLoginConfigurationDAO.findForPortal(portalId);
-            SocialKeysDTO facebook = SocialKeysDTO.fromDomain(configs.get(LoginMethodType.Facebook).getKeys());
-            SocialKeysDTO google = SocialKeysDTO.fromDomain(configs.get(LoginMethodType.Google).getKeys());
-            SocialMediaKeysDTO socialMediaKeys = new SocialMediaKeysDTO(facebook, google);
-            loginTypeOptions = new LoginTypeOptionsDTO(socialMediaKeys);
+            SocialMediaKeysDTO facebook = new SocialMediaKeysDTO(SocialKeysDTO.fromDomain(configs.get(LoginMethodType.Facebook).getKeys()));
+            SocialMediaKeysDTO google = new SocialMediaKeysDTO(SocialKeysDTO.fromDomain(configs.get(LoginMethodType.Google).getKeys()));
+            loginTypeOptions = new LoginTypeOptionsDTO(Arrays.asList(facebook, google));
         }
 
         AuthDataDTO authData = new AuthDataDTO(uniqueId, loginMethodType.id, loginTypeOptions, portalId.toString());

@@ -46,6 +46,7 @@ public class CreateSurveyFunction extends WiFreeFunction<CreateSurveyRequest, Cr
     private void fixFields(Survey survey) {
         survey.getFields().forEach(field -> {
             switch (field.getType()) {
+                case "rating":
                 case "textbox":
                     field.getConfig().setOtherOptions(null);
                     break;

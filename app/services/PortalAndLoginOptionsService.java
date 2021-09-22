@@ -44,7 +44,9 @@ public class PortalAndLoginOptionsService {
     public void saveLoginOptions(SocialKeysView socialKeysView, Long portalId) {
         Portal portal = portalDAO.get(portalId);
         PortalLoginConfiguration google = socialKeysView.getGoogle();
+        google.setKeysProvider();
         PortalLoginConfiguration facebook = socialKeysView.getFacebook();
+        facebook.setKeysProvider();
         google.setPortal(portal);
         facebook.setPortal(portal);
         loginConfigDAO.saveOrUpdate(google);
