@@ -1,6 +1,5 @@
-@import views.dto.ConnectedUser
 @import org.pac4j.core.profile.CommonProfile
-@import models.types.LoginMethodType
+@import views.dto.ConnectedUser
 
 @(networkConfigurationForm: Form[PortalNetworkConfiguration],
 	connectedUsers: List[ConnectedUser],
@@ -14,11 +13,11 @@
 	<head>
 		@parts.head("WiFree")
 
-		<link href="@routes.Assets.versioned("../../../public/js/datatables/jquery.dataTables.min.css")" rel="stylesheet" type="text/css" />
-		<link href="@routes.Assets.versioned("../../../public/js/datatables/buttons.bootstrap.min.css")" rel="stylesheet" type="text/css" />
-		<link href="@routes.Assets.versioned("../../../public/js/datatables/fixedHeader.bootstrap.min.css")" rel="stylesheet" type="text/css" />
-		<link href="@routes.Assets.versioned("../../../public/js/datatables/responsive.bootstrap.min.css")" rel="stylesheet" type="text/css" />
-		<link href="@routes.Assets.versioned("../../../public/js/datatables/scroller.bootstrap.min.css")" rel="stylesheet" type="text/css" />
+		<link href="@routes.Assets.versioned("js/datatables/jquery.dataTables.min.css")" rel="stylesheet" type="text/css" />
+		<link href="@routes.Assets.versioned("js/datatables/buttons.bootstrap.min.css")" rel="stylesheet" type="text/css" />
+		<link href="@routes.Assets.versioned("js/datatables/fixedHeader.bootstrap.min.css")" rel="stylesheet" type="text/css" />
+		<link href="@routes.Assets.versioned("js/datatables/responsive.bootstrap.min.css")" rel="stylesheet" type="text/css" />
+		<link href="@routes.Assets.versioned("js/datatables/scroller.bootstrap.min.css")" rel="stylesheet" type="text/css" />
 	</head>
 
 	<body class="nav-md">
@@ -117,147 +116,7 @@
 
 		</div>
 
-		@parts.notifications()
-
-		@parts.js.daterangepicker()
-		@parts.js.chart_js()
 		@parts.js.skycons()
-
-		<!-- pace -->
-		<script>
-				$(function () {
-					$('#world-map-gdp').vectorMap({
-						map: 'world_mill_en',
-						backgroundColor: 'transparent',
-						zoomOnScroll: false,
-						series: {
-							regions: [{
-								values: gdpData,
-								scale: ['#E6F2F0', '#149B7E'],
-								normalizeFunction: 'polynomial'
-							}]
-						},
-						onRegionTipShow: function (e, el, code) {
-							el.html(el.html() + ' (GDP - ' + gdpData[code] + ')');
-						}
-					});
-				});
-		</script>
-
-		<!-- dashbord linegraph -->
-		<script>
-				Chart.defaults.global.legend = {
-					enabled: false
-				};
-
-				var data = {
-					labels: [
-						"Symbian",
-						"Blackberry",
-						"Other",
-						"Android",
-						"IOS"
-					],
-					datasets: [{
-						data: [15, 20, 30, 10, 30],
-						backgroundColor: [
-							"#BDC3C7",
-							"#9B59B6",
-							"#455C73",
-							"#26B99A",
-							"#3498DB"
-						],
-						hoverBackgroundColor: [
-							"#CFD4D8",
-							"#B370CF",
-							"#34495E",
-							"#36CAAB",
-							"#49A9EA"
-						]
-
-					}]
-				};
-
-				var canvasDoughnut = new Chart(document.getElementById("canvas1"), {
-					type: 'doughnut',
-					tooltipFillColor: "rgba(51, 51, 51, 0.55)",
-					data: data
-				});
-		</script>
-
-		<!-- datepicker -->
-		<script type="text/javascript">
-				$(document).ready(function () {
-
-					var cb = function (start, end, label) {
-						console.log(start.toISOString(), end.toISOString(), label);
-						$('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-						//alert("Callback has fired: [" + start.format('MMMM D, YYYY') + " to " + end.format('MMMM D, YYYY') + ", label = " + label + "]");
-					}
-
-					var optionSet1 = {
-						startDate: moment().subtract(29, 'days'),
-						endDate: moment(),
-						minDate: '01/01/2012',
-						maxDate: '12/31/2015',
-						dateLimit: {
-							days: 60
-						},
-						showDropdowns: true,
-						showWeekNumbers: true,
-						timePicker: false,
-						timePickerIncrement: 1,
-						timePicker12Hour: true,
-						ranges: {
-							'Today': [moment(), moment()],
-							'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-							'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-							'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-							'This Month': [moment().startOf('month'), moment().endOf('month')],
-							'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-						},
-						opens: 'left',
-						buttonClasses: ['btn btn-default'],
-						applyClass: 'btn-small btn-primary',
-						cancelClass: 'btn-small',
-						format: 'MM/DD/YYYY',
-						separator: ' to ',
-						locale: {
-							applyLabel: 'Submit',
-							cancelLabel: 'Clear',
-							fromLabel: 'From',
-							toLabel: 'To',
-							customRangeLabel: 'Custom',
-							daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
-							monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-							firstDay: 1
-						}
-					};
-					$('#reportrange span').html(moment().subtract(29, 'days').format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
-					$('#reportrange').daterangepicker(optionSet1, cb);
-					$('#reportrange').on('show.daterangepicker', function () {
-						console.log("show event fired");
-					});
-					$('#reportrange').on('hide.daterangepicker', function () {
-						console.log("hide event fired");
-					});
-					$('#reportrange').on('apply.daterangepicker', function (ev, picker) {
-						console.log("apply event fired, start/end dates are " + picker.startDate.format('MMMM D, YYYY') + " to " + picker.endDate.format('MMMM D, YYYY'));
-					});
-					$('#reportrange').on('cancel.daterangepicker', function (ev, picker) {
-						console.log("cancel event fired");
-					});
-					$('#options1').click(function () {
-						$('#reportrange').data('daterangepicker').setOptions(optionSet1, cb);
-					});
-					$('#options2').click(function () {
-						$('#reportrange').data('daterangepicker').setOptions(optionSet2, cb);
-					});
-					$('#destroy').click(function () {
-						$('#reportrange').data('daterangepicker').remove();
-					});
-				});
-		</script>
 
 		<script>
 				NProgress.done();
@@ -266,26 +125,26 @@
 		@parts.resources_body()
 
 		<!-- form validation -->
-		<script type="text/javascript" src="@routes.Assets.versioned("../../../public/js/parsley/parsley.min.js")"></script>
+		<script type="text/javascript" src="@routes.Assets.versioned("js/parsley/parsley.min.js")"></script>
 
-			<!-- Datatables-->
-		<script src="@routes.Assets.versioned("../../../public/js/datatables/jquery.dataTables.min.js")"></script>
-		<script src="@routes.Assets.versioned("../../../public/js/datatables/dataTables.bootstrap.js")"></script>
-		<script src="@routes.Assets.versioned("../../../public/js/datatables/dataTables.buttons.min.js")"></script>
-		<script src="@routes.Assets.versioned("../../../public/js/datatables/buttons.bootstrap.min.js")"></script>
-		<script src="@routes.Assets.versioned("../../../public/js/datatables/jszip.min.js")"></script>
-		<script src="@routes.Assets.versioned("../../../public/js/datatables/pdfmake.min.js")"></script>
-		<script src="@routes.Assets.versioned("../../../public/js/datatables/vfs_fonts.js")"></script>
-		<script src="@routes.Assets.versioned("../../../public/js/datatables/buttons.html5.min.js")"></script>
-		<script src="@routes.Assets.versioned("../../../public/js/datatables/buttons.print.min.js")"></script>
-		<script src="@routes.Assets.versioned("../../../public/js/datatables/dataTables.fixedHeader.min.js")"></script>
-		<script src="@routes.Assets.versioned("../../../public/js/datatables/dataTables.keyTable.min.js")"></script>
-		<script src="@routes.Assets.versioned("../../../public/js/datatables/dataTables.responsive.min.js")"></script>
-		<script src="@routes.Assets.versioned("../../../public/js/datatables/responsive.bootstrap.min.js")"></script>
-		<script src="@routes.Assets.versioned("../../../public/js/datatables/dataTables.scroller.min.js")"></script>
+		<!-- Datatables-->
+		<script src="@routes.Assets.versioned("js/datatables/jquery.dataTables.min.js")"></script>
+		<script src="@routes.Assets.versioned("js/datatables/dataTables.bootstrap.js")"></script>
+		<script src="@routes.Assets.versioned("js/datatables/dataTables.buttons.min.js")"></script>
+		<script src="@routes.Assets.versioned("js/datatables/buttons.bootstrap.min.js")"></script>
+		<script src="@routes.Assets.versioned("js/datatables/jszip.min.js")"></script>
+		<script src="@routes.Assets.versioned("js/datatables/pdfmake.min.js")"></script>
+		<script src="@routes.Assets.versioned("js/datatables/vfs_fonts.js")"></script>
+		<script src="@routes.Assets.versioned("js/datatables/buttons.html5.min.js")"></script>
+		<script src="@routes.Assets.versioned("js/datatables/buttons.print.min.js")"></script>
+		<script src="@routes.Assets.versioned("js/datatables/dataTables.fixedHeader.min.js")"></script>
+		<script src="@routes.Assets.versioned("js/datatables/dataTables.keyTable.min.js")"></script>
+		<script src="@routes.Assets.versioned("js/datatables/dataTables.responsive.min.js")"></script>
+		<script src="@routes.Assets.versioned("js/datatables/responsive.bootstrap.min.js")"></script>
+		<script src="@routes.Assets.versioned("js/datatables/dataTables.scroller.min.js")"></script>
 
 		<!-- pace -->
-		<script src="@routes.Assets.versioned("../../../public/js/pace/pace.min.js")"></script>
+		<script src="@routes.Assets.versioned("js/pace/pace.min.js")"></script>
 		<script>
 			var handleDataTableButtons = function() {
 				"use strict";
@@ -307,7 +166,19 @@
 						extend: "print",
 						className: "btn-sm"
 					}],
-					responsive: !0
+					responsive: !0,
+					language: {
+						search: "Buscar",
+						emptyTable: "Sin datos aún",
+						info: "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+						infoEmpty: "Mostrando 0 entradas de 0 en total",
+						paginate: {
+							first:      "Primero",
+							previous:   "Anterior",
+							next:       "Siguiente",
+							last:       "Último"
+						},
+					}
 				})
 			},
 			TableManageButtons = function() {
@@ -322,16 +193,14 @@
 		<script type="text/javascript">
 				$(document).ready(function() {
 					$('#usertable').dataTable();
-					$('#usertable').DataTable({
-						keys: true
-					});
 					$('#usertable').DataTable();
 					$('#datatable-scroller').DataTable({
-						ajax: "@routes.Assets.versioned("../../../public/js/datatables/json/scroller-demo.json")",
+						ajax: "@routes.Assets.versioned("js/datatables/json/scroller-demo.json")",
 						deferRender: true,
 						scrollY: 380,
 						scrollCollapse: true,
-						scroller: true
+						scroller: true,
+						keys: true
 					});
 					var table = $('#datatable-fixed-header').DataTable({
 						fixedHeader: true
@@ -339,7 +208,8 @@
 				});
 				TableManageButtons.init();
 		</script>
-			<!-- form validation -->
+
+		<!-- form validation -->
 		<script type="text/javascript">
 				$(document).ready(function() {
 					$.listen('parsley:field:validate', function() {
