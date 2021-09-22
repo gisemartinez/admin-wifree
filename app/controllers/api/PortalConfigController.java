@@ -1,5 +1,6 @@
 package controllers.api;
 
+import com.typesafe.config.Config;
 import controllers.WiFreeController;
 import controllers.api.dto.*;
 import daos.PortalDAO;
@@ -32,6 +33,9 @@ public class PortalConfigController extends WiFreeController {
     @Inject
     private PortalLoginConfigurationDAO portalLoginConfigurationDAO;
 
+    @Inject
+    Config config;
+
     public Result clientLanding(Long portalId) {
         Portal portal = portalDAO.get(portalId);
         String uniqueId = UUID.randomUUID().toString(); // TODO hace falta?
@@ -50,8 +54,8 @@ public class PortalConfigController extends WiFreeController {
         LoginMethodType loginMethodType = portal.getNetworkConfiguration().getLoginMethod();
         String id = portalId.toString();
         Map<PortalApplicationType, PortalApp> appsByType = portal.getApplicationsByType();
-        List<String> images = appsByType.get(PortalApplicationType.Carrousel).getConfig().getImages()
-                .stream().map(File::getAbsolutePath)
+        List<String> images = appsByType.get(PortalApplicationType.Carrousel).getConfig().getImages().stream()
+                .map(File::getName)
                 .collect(Collectors.toList());
 
         LoginTypeOptionsDTO loginTypeOptions = null;

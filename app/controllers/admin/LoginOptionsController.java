@@ -1,5 +1,6 @@
 package controllers.admin;
 
+import com.typesafe.config.Config;
 import controllers.WiFreeController;
 import controllers.routes;
 import play.data.Form;
@@ -24,6 +25,9 @@ public class LoginOptionsController extends WiFreeController {
 
     @Inject
     PortalAndLoginOptionsService portalAndLoginOptionsService;
+
+    @Inject
+    Config config;
 
     public Result saveSocialKeys() {
         final Form<SocialKeysView> form = formFactory.form(SocialKeysView.class);
@@ -72,9 +76,13 @@ public class LoginOptionsController extends WiFreeController {
         Http.MultipartFormData.FilePart<File> filePart = fileParts.get(i);
         File file = filePart.getFile();
         String extension = filePart.getContentType().split("/")[1];
-        String newPath = "public/img/client/image_" + portalOptions.getPortalId() + "_" + i + "." + extension;
+        String externalPathPrefix = config.getString("images.path");
+        String fileName = "image_" + portalOptions.getPortalId() + "_" + i + "." + extension;
+        String newPath = "public/img/client/" + fileName;
+        String externalPath = externalPathPrefix + fileName;
         try {
-            Files.move(file.toPath(), Paths.get(newPath), StandardCopyOption.REPLACE_EXISTING);
+            Files.copy(file.toPath(), Paths.get(newPath), StandardCopyOption.REPLACE_EXISTING);
+            Files.copy(file.toPath(), Paths.get(externalPath), StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
             e.printStackTrace();
         }
