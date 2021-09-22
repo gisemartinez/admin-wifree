@@ -97,7 +97,10 @@ function cloneAndSelectInputs(hideText, hideRating, hideRadio, fieldType) {
     let nodeKey = node.querySelector("#fields_" + i + "_config_key").value;
 
     // Update cloned node index number
-    newNode.innerHTML = newNode.innerHTML.replaceAll(`fields_${i}`, `fields_${i+1}`).replaceAll(`fields[${i}]`, `fields[${i+1}]`).replaceAll(`fields.${i}`, `fields.${i+1}`).replaceAll(`Pregunta ${i}`, `Pregunta ${i+1}`);
+    newNode.innerHTML = newNode.innerHTML.replaceAll(`fields_${i}`, `fields_${i+1}`)
+        .replaceAll(`fields[${i}]`, `fields[${i+1}]`)
+        .replaceAll(`fields.${i}`, `fields.${i+1}`)
+        .replaceAll(`Pregunta ${i}`, `Pregunta ${i+1}`);
     
     // Clear inputs values
     newNode.querySelectorAll("input").forEach(x => x.removeAttribute("value"));
@@ -117,11 +120,14 @@ function cloneAndSelectInputs(hideText, hideRating, hideRadio, fieldType) {
     fieldTypeElement.setAttribute("value", fieldType);
     newNode.hidden = false;
 
-    if (fieldType == "radio" || fieldType == "checkbox") {
+    if (fieldType === "radio" || fieldType === "checkbox") {
         let div = createInlineRating(fieldType);
         let input = newNode.querySelectorAll(".question-radio").last();
+        input.setAttribute("id", input.id.replace(/\d+_key/, "0_key"))
+        input.setAttribute("name", input.name.replace(/\d+].key/, "0].key"))
         div.appendChild(input);
-        newNode.querySelectorAll(".rating-options")[0].querySelectorAll("dd").last().replaceChildren(div);
+        let firstOption = newNode.querySelectorAll(".rating-options")[0].querySelector(".rating-option");
+        firstOption.querySelectorAll("dd").last().replaceChildren(div);
 
         // Reset index
         newNode.querySelector("[id$=_index]").setAttribute("value", 1);
@@ -141,9 +147,9 @@ function createInlineRating(fieldType) {
     span.setAttribute("class", "input-group-addon");
     div.appendChild(span);
     let preInput = document.createElement("input");
-    if (fieldType == "checkbox") {
+    if (fieldType === "checkbox") {
         preInput.setAttribute("type", "checkbox");
-    } else if (fieldType == "radio") {
+    } else if (fieldType === "radio") {
         preInput.setAttribute("type", "radio");
     }
     span.appendChild(preInput);
