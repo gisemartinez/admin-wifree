@@ -9,4 +9,5 @@ target
 .g8
 /wifree.iml
 public/img/client/*
+!public/img/client/.dummy
 /deploy
