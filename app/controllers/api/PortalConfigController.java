@@ -6,15 +6,20 @@ import daos.PortalDAO;
 import daos.PortalLoginConfigurationDAO;
 import daos.SurveyDAO;
 import models.Portal;
+import models.PortalApp;
 import models.PortalLoginConfiguration;
 import models.Survey;
 import models.types.LoginMethodType;
+import models.types.PortalApplicationType;
 import play.mvc.Result;
 
 import javax.inject.Inject;
+import java.io.File;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class PortalConfigController extends WiFreeController {
 
@@ -44,17 +49,21 @@ public class PortalConfigController extends WiFreeController {
         String uniqueId = UUID.randomUUID().toString(); // TODO hace falta?
         LoginMethodType loginMethodType = portal.getNetworkConfiguration().getLoginMethod();
         String id = portalId.toString();
+        Map<PortalApplicationType, PortalApp> appsByType = portal.getApplicationsByType();
+        List<String> images = appsByType.get(PortalApplicationType.Carrousel).getConfig().getImages()
+                .stream().map(File::getAbsolutePath)
+                .collect(Collectors.toList());
 
         LoginTypeOptionsDTO loginTypeOptions = null;
         if (loginMethodType == LoginMethodType.Survey) {
             Survey portalActiveSurvey = surveyDAO.findPortalActiveSurvey(portalId);
             SurveyFormDTO surveyForm = SurveyFormDTO.fromDomain(portalActiveSurvey);
-            loginTypeOptions = new LoginTypeOptionsDTO(surveyForm);
+            loginTypeOptions = new LoginTypeOptionsDTO(surveyForm, images);
         } else {
             Map<LoginMethodType, PortalLoginConfiguration> configs = portalLoginConfigurationDAO.findForPortal(portalId);
             SocialMediaKeysDTO facebook = new SocialMediaKeysDTO(SocialKeysDTO.fromDomain(configs.get(LoginMethodType.Facebook).getKeys()));
             SocialMediaKeysDTO google = new SocialMediaKeysDTO(SocialKeysDTO.fromDomain(configs.get(LoginMethodType.Google).getKeys()));
-            loginTypeOptions = new LoginTypeOptionsDTO(Arrays.asList(facebook, google));
+            loginTypeOptions = new LoginTypeOptionsDTO(Arrays.asList(facebook, google), images);
         }
 
         AuthDataDTO authData = new AuthDataDTO(uniqueId, loginMethodType.id, loginTypeOptions, portalId.toString());
