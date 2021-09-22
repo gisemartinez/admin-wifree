@@ -21,11 +21,11 @@ connections.users-table.header.connection-start=Inicio de conexión
 connections.users-table.header.user-device=Dispositivo
 
 surveys.label.title=Título de la encuesta
-surveys.new-field.text=Nuevo campo de texto
-surveys.new-field.rating=Nuevo campo de puntuación
-surveys.new-field.radio=Nuevo campo de opción única
+surveys.new-field.text=Pregunta de Texto
+surveys.new-field.rating=Pregunta de Puntuación
+surveys.new-field.radio=Pregunta de Casillas
 surveys.new-field.selector=Nuevo campo de selecciones
-surveys.new-field.checkbox=Nuevo campo de opciones múltiples
+surveys.new-field.checkbox=Pregunta de Varias Opciones
 surveys.add-option=Agregar opción
 surveys.label.label=Título de la pregunta
 surveys.label.order=Número de pregunta
