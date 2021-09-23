@@ -36,6 +36,9 @@
         <div class="right_col" role="main">
             <div class="row">
                 <div class="col-md-12 col-sm-6 col-xs-12">
+                    @if(json.data.isEmpty) {
+                        <h1>No se han registrado respuestas aún</h1>
+                    }
                     @json.data.map { data =>
                         <div class="col-md-12">
                             <div class="x_panel">
