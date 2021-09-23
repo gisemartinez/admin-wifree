@@ -76,515 +76,625 @@ graphicDataJson18: JsValue)
 		<div class="right_col" role="main">
 			<div class="row">
 				<div class="col-md-12 col-sm-6 col-xs-12">
+
 					<div class="x_panel">
 						<div class="x_content">
 							<div id="porMes" style="height:350px;"></div>
 						</div>
-
 					</div>
-					<div class="x_panel">
 
+					<div class="x_panel">
 						<div class="x_content">
 							<div id="porGenero" style="height:350px;"></div>
 						</div>
-
 					</div>
-					<div class="x_panel">
 
+					<div class="x_panel">
 						<div class="x_content">
 							<div id="porDiayHora" style="height:350px;"></div>
 						</div>
-
 					</div>
-					<div class="x_panel">
 
+					<div class="x_panel">
 						<div class="x_content">
 							<div id="porDuracion" style="height:350px;"></div>
 						</div>
-
 					</div>
-					<div class="x_panel">
 
+					<div class="x_panel">
 						<div class="x_content">
 							<div id="ultimasCuatro" style="height:350px;"></div>
 						</div>
-
 					</div>
 				</div>
 			</div>
 		</div>
 
 	</div>
-
+</div>
 	@parts.resources_body()
 
 	<script>
-					 //Grafico 1: Total de visitas por mes
-            var grafico1 = echarts.init(document.getElementById('porMes'), theme);
-            var graphicData = toJson('@graphicData');
-            grafico1.setOption({
-                title: {
-                   text: 'Visitas por Mes',
-                  // subtext: 'Subtitulo'
-                },
-                tooltip: {
-                  trigger: 'axis'
-                },
-                legend: {
-                  data: ['Visitas']
-                },
-                toolbox: {
-                  show: false
-                },
-                calculable: false,
-                xAxis: [{
-                  type: 'category',
-                  data: graphicData.map(function(e) { return e.name; }) //Trae el nombre de los meses
-                }],
-                yAxis: [{
-                  type: 'value'
-                }],
-                series: [{
-                  name: 'Visitas',
-                  type: 'bar',
-                  data: graphicData.map(function(e) { return e.value; }), //Trae el valor de cada mes
-                  markPoint: {
-                    data: [{
-                      type: 'max',
-                      name: 'Máxima cantidad de visitas'
-                    }, {
-                      type: 'min',
-                      name: 'Mínimo de visitas'
-                    }]
-                  },
-                  markLine: {
-                    data: [{
-                      type: 'average',
-                      name: 'Promedio de visitas'
-                    }]
-                  }
-                }]
-              });
-
-
-
-				//Visitas por mes y por género
-            	var graficoPorGenero = echarts.init(document.getElementById('porGenero'), theme);
-           		var graphicData2 = toJson('@graphicData2');
-              	var graphicData3 = toJson('@graphicData3');
-     			graficoPorGenero.setOption({
-                    title: {
-                      text: 'Visitas por mes y por género',
-                      //subtext: 'Graph Sub-text'
-                    },
-
-                    tooltip: {
-                      trigger: 'axis'
-                    },
-                    legend: {
-                      data: ['Hombres', 'Mujeres']
-                    },
-                    toolbox: {
-                      show: false
-                    },
-                    calculable: false,
-                    xAxis: [{
-                      type: 'category',
-                      data: graphicData2.map(function(e) { return e.name; })
-                    }],
-                    yAxis: [{
-                      type: 'value'
-                    }],
-                    series: [{
-                      name: 'Hombres',
-                      type: 'bar',
-                      data: graphicData2.map(function(e) { return e.value; }),
-                      markPoint: {
-                        data: [{
-                          type: 'max',
-                          name: 'Cantidad máxima de visitas hombres'
-                        }, {
-                          type: 'min',
-                          name: 'Cantidad mínima de visitas hombres'
-                        }]
-                      },
-                      markLine: {
-                        data: [{
-                          type: 'average',
-                          name: 'Promedio de visitas de hombres'
-                        }]
-                      }
-                    }, {
-                      name: 'Mujeres',
-                      type: 'bar',
-                      data: graphicData3.map(function(e) { return e.value; }),
-                      markPoint: {
-                        data: [{
-                          type: 'max',
-                          name: 'Cantidad máxima de visitas de mujeres'
-                        }, {
-                             type: 'min',
-                          name: 'Cantidad mínima de visitas de mujeres'
-                        }]
-                      },
-                      markLine: {
-                        data: [{
-                          type: 'average',
-                          name: 'Promedio de visitas de mujeres'
-                        }]
-                      }
-                    }]
-                  });
-
-
-				  //Gráfico por dia y rango horario (es promedio de visitas histórico por dia y hora)
-				  var echartLine = echarts.init(document.getElementById('porDiayHora'), theme);
-				  var graphicData4 = toJson('@graphicData4');
-				  var graphicData5 = toJson('@graphicData5');
-				  var graphicData6 = toJson('@graphicData6');
-				  var graphicData7 = toJson('@graphicData7');
-				  var graphicData8 = toJson('@graphicData8');
-				  var graphicData9 = toJson('@graphicData9');
-				  echartLine.setOption({
-					title: {
-					  text: 'Promedio de visitas por rangos horarios',
-					 // subtext: 'Subtitle'
-					},
-					tooltip: {
-					  trigger: 'axis'
-					},
-					legend: {
-					  x: 220,
-					  y: 40,
-					  data: ['0am-8am', '8am-11am', '11am-1pm', '1pm-4pm', '4pm-8pm', '8pm-0am']
-					},
-					toolbox: {
-					  show: true,
-					  feature: {
+			// Grafico 1: Total de visitas por mes
+			var grafico1 = echarts.init(document.getElementById('porMes'), theme);
+			var graphicData = toJson('@graphicData');
+			grafico1.setOption({
+				title: {
+					text: 'Visitas por Mes',
+					// subtext: 'Subtitulo'
+				},
+				tooltip: {
+					trigger: 'axis'
+				},
+				legend: {
+					data: ['Visitas']
+				},
+				toolbox: {
+					show: true,
+					feature: {
+						dataZoom: {
+							show: true,
+							yAxisIndex: "none"
+						},
+						dataView: {
+							show: true,
+							readOnly: false
+						},
 						magicType: {
-						  show: true,
-						  title: {
-							line: 'Line',
-							bar: 'Bar',
-							stack: 'Stack',
-							tiled: 'Tiled'
-						  },
-						  type: ['line', 'bar', 'stack', 'tiled']
+							show: true,
+							title: {
+								line: 'Líneas',
+								bar: 'Barras',
+								stack: 'Barras Apiladas',
+							},
+							type: ['line', 'bar', 'stack']
 						},
 						restore: {
-						  show: true,
-						  title: "Restore"
+							show: true,
+							title: "Restaurar"
 						},
 						saveAsImage: {
-						  show: true,
-						  title: "Save Image"
+							show: true,
+							title: "Guardar Imágen"
 						}
-					  }
+					}
+				},
+				calculable: false,
+				xAxis: [{
+					type: 'category',
+					data: graphicData.map(function (e) {
+						return e.name;
+					}) //Trae el nombre de los meses
+				}],
+				yAxis: [{
+					type: 'value'
+				}],
+				series: [{
+					name: 'Visitas',
+					type: 'bar',
+					data: graphicData.map(function (e) {
+						return e.value;
+					}), //Trae el valor de cada mes
+					markPoint: {
+						data: [{
+							type: 'max',
+							name: 'Máxima cantidad de visitas'
+						}, {
+							type: 'min',
+							name: 'Mínimo de visitas'
+						}]
 					},
-					calculable: true,
-					xAxis: [{
-					  type: 'category',
-					  boundaryGap: false,
-					  data: ['Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom']
-					}],
-					yAxis: [{
-					  type: 'value'
-					}],
-					series: [{
-					  name: '0am-8am',
-					  type: 'line',
-					  smooth: true,
-					  itemStyle: {
-						normal: {
-						  areaStyle: {
-							type: 'default'
-						  }
-						}
-					  },
-					  data: graphicData4.map(function(e) { return e.value; }) //Rango 0am a 8am
-					}, {
-					  name: '8am-11am',
-					  type: 'line',
-					  smooth: true,
-					  itemStyle: {
-						normal: {
-						  areaStyle: {
-							type: 'default'
-						  }
-						}
-					  },
-					  data: graphicData5.map(function(e) { return e.value; }) //Rango 8am a 11am
-					}, {
-					  name: '11am-1pm',
-					  type: 'line',
-					  smooth: true,
-					  itemStyle: {
-						normal: {
-						  areaStyle: {
-							type: 'default'
-						  }
-						}
-					  },
-					  data: graphicData6.map(function(e) { return e.value; }) //Rango 11am a 1pm
-					}, {
-					  name: '1pm-4pm',
-					  type: 'line',
-					  smooth: true,
-					  itemStyle: {
-						normal: {
-						  areaStyle: {
-							type: 'default'
-						  }
-						}
-					  },
-					  data: graphicData7.map(function(e) { return e.value; }) //Rango 1pm a 4pm
-					}, {
-					  name: '4pm-8pm',
-					  type: 'line',
-					  smooth: true,
-					  itemStyle: {
-						normal: {
-						  areaStyle: {
-							type: 'default'
-						  }
-						}
-					  },
-					  data: graphicData8.map(function(e) { return e.value; }) //Rango 4pm a 8pm
-					}, {
-					  name: '8pm-0am',
-					  type: 'line',
-					  smooth: true,
-					  itemStyle: {
-						normal: {
-						  areaStyle: {
-							type: 'default'
-						  }
-						}
-					  },
-					  data: graphicData9.map(function(e) { return e.value; }) //Rango 8pm a 0am
-					}]
-				  });
+					markLine: {
+						data: [{
+							type: 'average',
+							name: 'Promedio de visitas'
+						}]
+					}
+				}]
+			});
 
 
-            //Gráfico con visitas por duración de la última semana
-				  var echartLine = echarts.init(document.getElementById('porDuracion'), theme);
-				  var graphicData10 = toJson('@graphicData10');
-				  var graphicData11 = toJson('@graphicData11');
-				  var graphicData12 = toJson('@graphicData12');
-				  var graphicData13 = toJson('@graphicData13');
-				  var graphicData14 = toJson('@graphicData14');
-				  echartLine.setOption({
-					title: {
-					  text: 'Visitas por duración en la última semana',
-					 // subtext: 'Subtitle'
-					},
-					tooltip: {
-					  trigger: 'axis'
-					},
-					legend: {
-					  x: 220,
-					  y: 40,
-					  data: ['<15min', '15-30min', '30-45min', '45-60min', '>60min']
-					},
-					toolbox: {
-					  show: true,
-					  feature: {
+			// Grafico 2: Visitas por mes y por género
+			var graficoPorGenero = echarts.init(document.getElementById('porGenero'), theme);
+			var graphicData2 = toJson('@graphicData2');
+			var graphicData3 = toJson('@graphicData3');
+			graficoPorGenero.setOption({
+				title: {
+					text: 'Visitas por mes y por género',
+					//subtext: 'Graph Sub-text'
+				},
+
+				tooltip: {
+					trigger: 'axis'
+				},
+				legend: {
+					data: ['Hombres', 'Mujeres']
+				},
+				toolbox: {
+					show: true,
+					feature: {
+						dataZoom: {
+							show: true,
+							yAxisIndex: "none"
+						},
+						dataView: {
+							show: true,
+							readOnly: false
+						},
 						magicType: {
-						  show: true,
-						  title: {
-							line: 'Line',
-							bar: 'Bar',
-							stack: 'Stack',
-							tiled: 'Tiled'
-						  },
-						  type: ['line', 'bar', 'stack', 'tiled']
+							show: true,
+							title: {
+								line: 'Líneas',
+								bar: 'Barras',
+								stack: 'Barras Apiladas',
+							},
+							type: ['line', 'bar', 'stack']
 						},
 						restore: {
-						  show: true,
-						  title: "Restore"
+							show: true,
+							title: "Restaurar"
 						},
 						saveAsImage: {
-						  show: true,
-						  title: "Save Image"
+							show: true,
+							title: "Guardar Imágen"
 						}
-					  }
+					}
+				},
+				calculable: false,
+				xAxis: [{
+					type: 'category',
+					data: graphicData2.map(function (e) {
+						return e.name;
+					})
+				}],
+				yAxis: [{
+					type: 'value'
+				}],
+				series: [{
+					name: 'Hombres',
+					type: 'bar',
+					data: graphicData2.map(function (e) {
+						return e.value;
+					}),
+					markPoint: {
+						data: [{
+							type: 'max',
+							name: 'Cantidad máxima de visitas hombres'
+						}, {
+							type: 'min',
+							name: 'Cantidad mínima de visitas hombres'
+						}]
 					},
-					calculable: true,
-					xAxis: [{
-					  type: 'category',
-					  boundaryGap: false,
-					  data: graphicData10.map(function(e) { return e.name; })
-					}],
-					yAxis: [{
-					  type: 'value'
-					}],
-					series: [{
-					  name: '<15min',
-					  type: 'line',
-					  smooth: true,
-					  itemStyle: {
-						normal: {
-						  areaStyle: {
-							type: 'default'
-						  }
-						}
-					  },
-					  data: graphicData10.map(function(e) { return e.value; })
-					}, {
-					  name: '15-30min',
-					  type: 'line',
-					  smooth: true,
-					  itemStyle: {
-						normal: {
-						  areaStyle: {
-							type: 'default'
-						  }
-						}
-					  },
-					  data: graphicData11.map(function(e) { return e.value; })
-					}, {
-					  name: '30-45min',
-					  type: 'line',
-					  smooth: true,
-					  itemStyle: {
-						normal: {
-						  areaStyle: {
-							type: 'default'
-						  }
-						}
-					  },
-					  data: graphicData12.map(function(e) { return e.value; })
-					}, {
-					  name: '45-60min',
-					  type: 'line',
-					  smooth: true,
-					  itemStyle: {
-						normal: {
-						  areaStyle: {
-							type: 'default'
-						  }
-						}
-					  },
-					  data: graphicData13.map(function(e) { return e.value; })
-					}, {
-					  name: '>60min',
-					  type: 'line',
-					  smooth: true,
-					  itemStyle: {
-						normal: {
-						  areaStyle: {
-							type: 'default'
-						  }
-						}
-					  },
-					  data: graphicData14.map(function(e) { return e.value; })
-					}]
-				  });
+					markLine: {
+						data: [{
+							type: 'average',
+							name: 'Promedio de visitas de hombres'
+						}]
+					}
+				}, {
+					name: 'Mujeres',
+					type: 'bar',
+					data: graphicData3.map(function (e) {
+						return e.value;
+					}),
+					markPoint: {
+						data: [{
+							type: 'max',
+							name: 'Cantidad máxima de visitas de mujeres'
+						}, {
+							type: 'min',
+							name: 'Cantidad mínima de visitas de mujeres'
+						}]
+					},
+					markLine: {
+						data: [{
+							type: 'average',
+							name: 'Promedio de visitas de mujeres'
+						}]
+					}
+				}]
+			});
 
 
-
-                  //Gráfico con visitas por duración de la última semana
-				  var echartLine = echarts.init(document.getElementById('ultimasCuatro'), theme);
-				  var graphicData15 = toJson('@graphicData15');
-				  var graphicData16 = toJson('@graphicData16');
-				  var graphicData17 = toJson('@graphicData17');
-				  var graphicData18 = toJson('@graphicData18');
-				  echartLine.setOption({
-					title: {
-					  text: 'Visitas de las últimas cuatro semanas',
-					 // subtext: 'Subtitle'
-					},
-					tooltip: {
-					  trigger: 'axis'
-					},
-					legend: {
-					  x: 220,
-					  y: 40,
-					  data: ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4']
-					},
-					toolbox: {
-					  show: true,
-					  feature: {
+			// Grafico 3: Gráfico por dia y rango horario (es promedio de visitas histórico por dia y hora)
+			var echartLine = echarts.init(document.getElementById('porDiayHora'), theme);
+			var graphicData4 = toJson('@graphicData4');
+			var graphicData5 = toJson('@graphicData5');
+			var graphicData6 = toJson('@graphicData6');
+			var graphicData7 = toJson('@graphicData7');
+			var graphicData8 = toJson('@graphicData8');
+			var graphicData9 = toJson('@graphicData9');
+			echartLine.setOption({
+				title: {
+					text: 'Promedio de visitas por rangos horarios',
+					// subtext: 'Subtitle'
+				},
+				tooltip: {
+					trigger: 'axis'
+				},
+				legend: {
+					x: 220,
+					y: 40,
+					data: ['0am-8am', '8am-11am', '11am-1pm', '1pm-4pm', '4pm-8pm', '8pm-0am']
+				},
+				toolbox: {
+					show: true,
+					feature: {
+						dataZoom: {
+							show: true,
+							yAxisIndex: "none"
+						},
+						dataView: {
+							show: true,
+							readOnly: false
+						},
 						magicType: {
-						  show: true,
-						  title: {
-<!--							line: 'Line',-->
-							bar: 'Bar',
-							stack: 'Stack',
-							tiled: 'Tiled'
-						  },
-<!--						  type: ['line', 'bar', 'stack', 'tiled']-->
-                              type: ['bar', 'stack', 'tiled']
+							show: true,
+							title: {
+								line: 'Líneas',
+								bar: 'Barras',
+								stack: 'Barras Apiladas',
+							},
+							type: ['line', 'bar', 'stack']
 						},
 						restore: {
-						  show: true,
-						  title: "Restore"
+							show: true,
+							title: "Restaurar"
 						},
 						saveAsImage: {
-						  show: true,
-						  title: "Save Image"
+							show: true,
+							title: "Guardar Imágen"
 						}
-					  }
+					}
+				},
+				calculable: true,
+				xAxis: [{
+					type: 'category',
+					boundaryGap: false,
+					data: ['Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom']
+				}],
+				yAxis: [{
+					type: 'value'
+				}],
+				series: [{
+					name: '0am-8am',
+					type: 'line',
+					smooth: true,
+					itemStyle: {
+						normal: {
+							areaStyle: {
+								type: 'default'
+							}
+						}
 					},
-					calculable: true,
-					xAxis: [{
-					  type: 'category',
-					  boundaryGap: false,
-					  data: ['Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom']
-					}],
-					yAxis: [{
-					  type: 'value'
-					}],
-					series: [{
-					  name: 'Semana 1',
-					  type: 'bar',
-					  smooth: true,
-					  itemStyle: {
+					data: graphicData4.map(function (e) {
+						return e.value;
+					}) //Rango 0am a 8am
+				}, {
+					name: '8am-11am',
+					type: 'line',
+					smooth: true,
+					itemStyle: {
 						normal: {
-						  areaStyle: {
-							type: 'default'
-						  }
+							areaStyle: {
+								type: 'default'
+							}
 						}
-					  },
-					  data: graphicData15.map(function(e) { return e.value; })
-					}, {
-					  name: 'Semana 2',
-					  type: 'bar',
-					  smooth: true,
-					  itemStyle: {
+					},
+					data: graphicData5.map(function (e) {
+						return e.value;
+					}) //Rango 8am a 11am
+				}, {
+					name: '11am-1pm',
+					type: 'line',
+					smooth: true,
+					itemStyle: {
 						normal: {
-						  areaStyle: {
-							type: 'default'
-						  }
+							areaStyle: {
+								type: 'default'
+							}
 						}
-					  },
-					  data: graphicData16.map(function(e) { return e.value; })
-					}, {
-					  name: 'Semana 3',
-					  type: 'bar',
-					  smooth: true,
-					  itemStyle: {
+					},
+					data: graphicData6.map(function (e) {
+						return e.value;
+					}) //Rango 11am a 1pm
+				}, {
+					name: '1pm-4pm',
+					type: 'line',
+					smooth: true,
+					itemStyle: {
 						normal: {
-						  areaStyle: {
-							type: 'default'
-						  }
+							areaStyle: {
+								type: 'default'
+							}
 						}
-					  },
-					  data: graphicData17.map(function(e) { return e.value; })
-					}, {
-					  name: 'Semana 4',
-					  type: 'bar',
-					  smooth: true,
-					  itemStyle: {
+					},
+					data: graphicData7.map(function (e) {
+						return e.value;
+					}) //Rango 1pm a 4pm
+				}, {
+					name: '4pm-8pm',
+					type: 'line',
+					smooth: true,
+					itemStyle: {
 						normal: {
-						  areaStyle: {
-							type: 'default'
-						  }
+							areaStyle: {
+								type: 'default'
+							}
 						}
-					  },
-					  data: graphicData18.map(function(e) { return e.value; })
-					}]
-				  });
+					},
+					data: graphicData8.map(function (e) {
+						return e.value;
+					}) //Rango 4pm a 8pm
+				}, {
+					name: '8pm-0am',
+					type: 'line',
+					smooth: true,
+					itemStyle: {
+						normal: {
+							areaStyle: {
+								type: 'default'
+							}
+						}
+					},
+					data: graphicData9.map(function (e) {
+						return e.value;
+					}) //Rango 8pm a 0am
+				}]
+			});
+
+
+			// Grafico 4: Gráfico con visitas por duración de la última semana
+			var echartLine = echarts.init(document.getElementById('porDuracion'), theme);
+			var graphicData10 = toJson('@graphicData10');
+			var graphicData11 = toJson('@graphicData11');
+			var graphicData12 = toJson('@graphicData12');
+			var graphicData13 = toJson('@graphicData13');
+			var graphicData14 = toJson('@graphicData14');
+			echartLine.setOption({
+				title: {
+					text: 'Visitas por duración en la última semana',
+					// subtext: 'Subtitle'
+				},
+				tooltip: {
+					trigger: 'axis'
+				},
+				legend: {
+					x: 220,
+					y: 40,
+					data: ['<15min', '15-30min', '30-45min', '45-60min', '>60min']
+				},
+				toolbox: {
+					show: true,
+					feature: {
+						dataZoom: {
+							show: true,
+							yAxisIndex: "none"
+						},
+						dataView: {
+							show: true,
+							readOnly: false
+						},
+						magicType: {
+							show: true,
+							title: {
+								line: 'Líneas',
+								bar: 'Barras',
+								stack: 'Barras Apiladas'
+							},
+							type: ['line', 'bar', 'stack']
+						},
+						restore: {
+							show: true,
+							title: "Restaurar"
+						},
+						saveAsImage: {
+							show: true,
+							title: "Guardar Imágen"
+						}
+					}
+				},
+				calculable: true,
+				xAxis: [{
+					type: 'category',
+					boundaryGap: false,
+					data: graphicData10.map(function (e) {
+						return e.name;
+					})
+				}],
+				yAxis: [{
+					type: 'value'
+				}],
+				series: [{
+					name: '<15min',
+					type: 'line',
+					smooth: true,
+					itemStyle: {
+						normal: {
+							areaStyle: {
+								type: 'default'
+							}
+						}
+					},
+					data: graphicData10.map(function (e) {
+						return e.value;
+					})
+				}, {
+					name: '15-30min',
+					type: 'line',
+					smooth: true,
+					itemStyle: {
+						normal: {
+							areaStyle: {
+								type: 'default'
+							}
+						}
+					},
+					data: graphicData11.map(function (e) {
+						return e.value;
+					})
+				}, {
+					name: '30-45min',
+					type: 'line',
+					smooth: true,
+					itemStyle: {
+						normal: {
+							areaStyle: {
+								type: 'default'
+							}
+						}
+					},
+					data: graphicData12.map(function (e) {
+						return e.value;
+					})
+				}, {
+					name: '45-60min',
+					type: 'line',
+					smooth: true,
+					itemStyle: {
+						normal: {
+							areaStyle: {
+								type: 'default'
+							}
+						}
+					},
+					data: graphicData13.map(function (e) {
+						return e.value;
+					})
+				}, {
+					name: '>60min',
+					type: 'line',
+					smooth: true,
+					itemStyle: {
+						normal: {
+							areaStyle: {
+								type: 'default'
+							}
+						}
+					},
+					data: graphicData14.map(function (e) {
+						return e.value;
+					})
+				}]
+			});
+
+
+			// Grafico 5: Gráfico con visitas por duración de la última semana
+			var echartLine = echarts.init(document.getElementById('ultimasCuatro'), theme);
+			var graphicData15 = toJson('@graphicData15');
+			var graphicData16 = toJson('@graphicData16');
+			var graphicData17 = toJson('@graphicData17');
+			var graphicData18 = toJson('@graphicData18');
+			echartLine.setOption({
+				title: {
+					text: 'Visitas de las últimas cuatro semanas',
+					// subtext: 'Subtitle'
+				},
+				tooltip: {
+					trigger: 'axis'
+				},
+				legend: {
+					x: 220,
+					y: 40,
+					data: ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4']
+				},
+				toolbox: {
+					show: true,
+					feature: {
+						dataZoom: {
+							show: true,
+							yAxisIndex: "none"
+						},
+						dataView: {
+							show: true,
+							readOnly: false
+						},
+						magicType: {
+							show: true,
+							title: {
+								line: 'Líneas',
+								bar: 'Barras',
+								stack: 'Barras Apiladas'
+							},
+							type: ['line', 'bar', 'stack']
+						},
+						restore: {
+							show: true,
+							title: "Restaurar"
+						},
+						saveAsImage: {
+							show: true,
+							title: "Guardar Imágen"
+						}
+					}
+				},
+				calculable: true,
+				xAxis: [{
+					type: 'category',
+					boundaryGap: false,
+					data: ['Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom']
+				}],
+				yAxis: [{
+					type: 'value'
+				}],
+				series: [{
+					name: 'Semana 1',
+					type: 'bar',
+					smooth: true,
+					itemStyle: {
+						normal: {
+							areaStyle: {
+								type: 'default'
+							}
+						}
+					},
+					data: graphicData15.map(function (e) {
+						return e.value;
+					})
+				}, {
+					name: 'Semana 2',
+					type: 'bar',
+					smooth: true,
+					itemStyle: {
+						normal: {
+							areaStyle: {
+								type: 'default'
+							}
+						}
+					},
+					data: graphicData16.map(function (e) {
+						return e.value;
+					})
+				}, {
+					name: 'Semana 3',
+					type: 'bar',
+					smooth: true,
+					itemStyle: {
+						normal: {
+							areaStyle: {
+								type: 'default'
+							}
+						}
+					},
+					data: graphicData17.map(function (e) {
+						return e.value;
+					})
+				}, {
+					name: 'Semana 4',
+					type: 'bar',
+					smooth: true,
+					itemStyle: {
+						normal: {
+							areaStyle: {
+								type: 'default'
+							}
+						}
+					},
+					data: graphicData18.map(function (e) {
+						return e.value;
+					})
+				}]
+			});
 
 
 		</script>
