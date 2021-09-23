@@ -93,8 +93,33 @@ public class SurveysController extends WiFreeController {
                 .map(userAnswers -> fillSurveyFieldsWithAnswers(survey, userAnswers))
                 .collect(toList());
 
+        Stream<Field> fieldStream = surveys.stream().flatMap(s ->
+                s.getFields().stream().flatMap(f -> {
+                    if ("checkbox".equals(f.getType())) {
+                        return Arrays.stream(f.getConfig().getValue().split(",")).map(a -> {
+                            Field copy = f.copy();
+                            copy.getConfig().setValue(a.trim());
+                            return copy;
+                        });
+                    } else {
+                        return Stream.of(f);
+                    }
+                }));
+
         List<SummarizedAnswers> summarizedAnswers = surveys.stream()
-                .flatMap(s -> s.getFields().stream().map(field -> {
+                .flatMap(s ->
+                        s.getFields().stream().flatMap(f -> {
+                            if ("checkbox".equals(f.getType())) {
+                                return Arrays.stream(f.getConfig().getValue().split(",")).map(a -> {
+                                    Field copy = f.copy();
+                                    copy.getConfig().setValue(a.trim());
+                                    return copy;
+                                });
+                            } else {
+                                return Stream.of(f);
+                            }
+                        }))
+                .map(field -> {
                     FieldConfig config = field.getConfig();
                     String question = config.getLabel();
                     String type = field.getType();
@@ -105,7 +130,7 @@ public class SurveysController extends WiFreeController {
                             ? config.getOtherOptions().stream().map(Option::getKey).collect(toList())
                             : new ArrayList<>();
                     return new QuestionAnswer(question, type, answer, order, possibleAnswers, maximum);
-                }))
+                })
                 .collect(toImmutableListMultimap(x -> x.question, Function.identity()))
                 .asMap().entrySet().stream()
                 .map(entry -> {
