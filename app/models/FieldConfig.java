@@ -58,6 +58,10 @@ public class FieldConfig {
         return new FieldConfig(key, label, order, required, value, maximum, fixedOtherOptions);
     }
 
+    public boolean hasOptions() {
+        return otherOptions != null && !otherOptions.isEmpty();
+    }
+
     public String toLogString() {
         return StringHelper.toLogString("key=" + key, "label=" + label, "order=" + order, "required=" + required,
                 "value=" + value, "maximum=" + maximum,

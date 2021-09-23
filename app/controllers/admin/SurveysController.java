@@ -2,26 +2,29 @@ package controllers.admin;
 
 import be.objectify.deadbolt.java.actions.SubjectPresent;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.collect.ImmutableListMultimap;
 import controllers.WiFreeController;
 import controllers.routes;
 import daos.FieldAnswerDAO;
 import daos.SurveyDAO;
-import models.Field;
-import models.FieldAnswer;
-import models.NetworkUser;
-import models.Survey;
+import models.*;
 import operations.requests.CreateSurveyRequest;
 import operations.responses.CreateSurveyResponse;
 import play.data.Form;
+import play.libs.Json;
 import play.mvc.Result;
 import services.SurveysService;
 
 import javax.inject.Inject;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+
+import static com.google.common.collect.ImmutableListMultimap.toImmutableListMultimap;
 import static com.google.common.collect.Streams.*;
 import static java.util.stream.Collectors.toList;
 
@@ -58,7 +61,6 @@ public class SurveysController extends WiFreeController {
         if (answersForSurvey.isEmpty()) {
             return ok(views.html.admin.survey_no_answers.render(getCurrentProfile()));
         } else {
-
             Survey survey = surveyDAO.get(surveyId);
 
             List<Survey> answeredSurveysPerUser = answersForSurvey.asMap().values().stream()
@@ -80,6 +82,177 @@ public class SurveysController extends WiFreeController {
                             sanitizedOffset + 1,
                             totalAnswers)
             );
+        }
+    }
+
+    @SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
+    public Result getSurveyResults(Long surveyId) {
+        ImmutableListMultimap<NetworkUser, FieldAnswer> answersForSurvey = fieldAnswerDAO.findForSurvey(surveyId);
+        Survey survey = surveyDAO.get(surveyId);
+        List<Survey> surveys = answersForSurvey.asMap().values().stream()
+                .map(userAnswers -> fillSurveyFieldsWithAnswers(survey, userAnswers))
+                .collect(toList());
+
+        List<SummarizedAnswers> summarizedAnswers = surveys.stream()
+                .flatMap(s -> s.getFields().stream().map(field -> {
+                    FieldConfig config = field.getConfig();
+                    String question = config.getLabel();
+                    String type = field.getType();
+                    String answer = config.getValue();
+                    Integer order = config.getOrder();
+                    Integer maximum = config.getMaximum();
+                    List<String> possibleAnswers = config.hasOptions()
+                            ? config.getOtherOptions().stream().map(Option::getKey).collect(toList())
+                            : new ArrayList<>();
+                    return new QuestionAnswer(question, type, answer, order, possibleAnswers, maximum);
+                }))
+                .collect(toImmutableListMultimap(x -> x.question, Function.identity()))
+                .asMap().entrySet().stream()
+                .map(entry -> {
+                    String question = entry.getKey();
+                    Collection<QuestionAnswer> answers = entry.getValue();
+                    String type = answers.stream().findAny().map(x -> x.type).orElse("");
+                    Integer order = answers.stream().findAny().map(x -> x.order).orElse(-1);
+                    Integer maximum = answers.stream().findAny().map(x -> x.maximum).orElse(0);
+                    Map<String, Long> answersOccurrences = answers.stream().collect(Collectors.groupingBy(x -> x.answer, Collectors.counting()));
+                    if ("rating".equals(type)) {
+                        IntStream.range(1, maximum+1)
+                                .forEachOrdered(i -> answersOccurrences.putIfAbsent(String.valueOf(i), 0L));
+                    } else {
+                        answers.stream()
+                                .flatMap(qa -> qa.possibleAnswers.stream())
+                                .forEachOrdered(a -> answersOccurrences.putIfAbsent(a, 0L));
+                    }
+                    return new SummarizedAnswers(question, type, answersOccurrences, order);
+                })
+                .collect(toList());
+
+        List<AnswersJson> answers = summarizedAnswers.stream()
+                .map(x -> {
+                    List<String> labels = new ArrayList<>();
+                    List<Long> values = new ArrayList<>();
+                    x.answers.forEach((key, value) -> {
+                        labels.add(key);
+                        values.add(value);
+                    });
+                    return new AnswersJson(x.question, x.id, x.type, x.order, labels, values);
+                })
+                .collect(toList());
+
+        DataJson dataJson = new DataJson(answers);
+        JsonNode json = Json.toJson(dataJson);
+        Form<DataJson> form = formFactory.form(DataJson.class).fill(dataJson);
+        return ok(views.html.admin.surveys_results.render(getCurrentProfile(), json, form));
+    }
+
+    public static class DataJson {
+        public List<AnswersJson> data;
+
+        public DataJson() {
+        }
+
+        public DataJson(List<AnswersJson> data) {
+            this.data = data;
+        }
+
+        public List<AnswersJson> getData() {
+            return data;
+        }
+    }
+
+    public static class AnswersJson {
+        public final String question;
+        public final String id;
+        public final String type;
+        public final Integer order;
+        public final List<String> labels;
+        public final List<Long> values;
+
+        public AnswersJson(String question, String id, String type, Integer order, List<String> labels, List<Long> values) {
+            this.question = question;
+            this.id = id;
+            this.type = type;
+            this.order = order;
+            this.labels = labels;
+            this.values = values;
+        }
+
+        public String getQuestion() {
+            return question;
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        public Integer getOrder() {
+            return order;
+        }
+
+        public List<String> getLabels() {
+            return labels;
+        }
+
+        public List<Long> getValues() {
+            return values;
+        }
+    }
+
+    public static class SummarizedAnswers {
+        public final String question;
+        public final String type;
+        public final Map<String, Long> answers;
+        public final Integer order;
+        public final String id;
+
+        public SummarizedAnswers(String question, String type, Map<String, Long> answers, Integer order) {
+            this.question = question;
+            this.type = type;
+            this.answers = answers;
+            this.order = order;
+            this.id = "chart_" + order;
+        }
+    }
+
+    public static class QuestionAndType {
+        public final String question;
+        public final String type;
+
+        public QuestionAndType(String question, String type) {
+            this.question = question;
+            this.type = type;
+        }
+    }
+
+    public static class GroupedAnswers {
+        public final Map<String, String> answers;
+        public final String type;
+
+        public GroupedAnswers(Map<String, String> answers, String type) {
+            this.answers = answers;
+            this.type = type;
+        }
+    }
+
+    public static class QuestionAnswer {
+        public final String question;
+        public final String type;
+        public final String answer;
+        public final int order;
+        public final List<String> possibleAnswers;
+        public final Integer maximum;
+
+        public QuestionAnswer(String question, String type, String answer, int order, List<String> possibleAnswers, Integer maximum) {
+            this.question = question;
+            this.type = type;
+            this.answer = answer;
+            this.order = order;
+            this.possibleAnswers = possibleAnswers;
+            this.maximum = maximum;
         }
     }
 
