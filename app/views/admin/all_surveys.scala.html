@@ -54,6 +54,7 @@
                                         <th></th>
                                         <th></th>
                                         <th></th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -64,6 +65,9 @@
                                         <td>@summary.creation</td>
                                         <td class="text-center">
                                             <a class="btn btn-primary" href="@routes.AdminAppController.survey(summary.id)" role="button">Editar</a>
+                                        </td>
+                                        <td class="text-center">
+                                            <a class="btn btn-info" href="@controllers.admin.routes.SurveysController.getSurveyResults(summary.id)" role="button">Ver Resumen</a>
                                         </td>
                                         <td class="text-center">
                                             <a class="btn btn-info" href="@controllers.admin.routes.SurveysController.answeredSurvey(summary.id,0)" role="button">Ver Respuestas</a>

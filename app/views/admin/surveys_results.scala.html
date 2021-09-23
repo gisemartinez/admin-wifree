@@ -2,9 +2,9 @@
 @import com.fasterxml.jackson.databind.JsonNode
 @import controllers.admin.SurveysController.DataJson
 
-@(profile: CommonProfile, json: JsonNode, form: Form[DataJson])
+@(profile: CommonProfile, json: DataJson)
 
-@jsonString = @{json.toString}
+@jsonString = @{json.toJsonString}
 @username = @{profile.getAttribute("realName").toString}
 
 <!DOCTYPE html>
@@ -36,15 +36,15 @@
         <div class="right_col" role="main">
             <div class="row">
                 <div class="col-md-12 col-sm-6 col-xs-12">
-
-                    @helper.repeatWithIndex(form("data")) { (data, i) =>
-                        <div class="x_panel">
-                            <div class="x_content">
-                                <div id="@data("id").value" style="height:350px;"></div>
+                    @json.data.map { data =>
+                        <div class="col-md-12">
+                            <div class="x_panel">
+                                <div class="x_content">
+                                    <div id="@data.id" style="height:350px;"></div>
+                                </div>
                             </div>
                         </div>
                     }
-
                 </div>
             </div>
             @parts.footer_content()
@@ -74,20 +74,15 @@
                         title: {
                             text: data.question
                         },
-                        xAxis: {
-                            type: 'category',
-                            data: data.labels
-                        },
-                        yAxis: {
-                            type: 'value'
-                        },
                         tooltip: {
                             trigger: 'item'
                         },
                         legend: {
-                            top: 'bottom',
+                            orient: 'horizontal',
+                            left: 'left',
                             data: data.labels
                         },
+                        calculable: true,
                         toolbox: {
                             show: true,
                             feature: {
@@ -156,7 +151,22 @@
                         series: [
                             {
                                 data: data.values,
-                                type: 'bar'
+                                type: 'bar',
+                                markPoint: {
+                                    data: [{
+                                        type: 'max',
+                                        name: 'Máximo'
+                                    }, {
+                                        type: 'min',
+                                        name: 'Mínimo'
+                                    }]
+                                },
+                                markLine: {
+                                    data: [{
+                                        type: 'average',
+                                        name: 'Promedio'
+                                    }]
+                                }
                             }
                         ]
                     };

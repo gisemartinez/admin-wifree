@@ -140,15 +140,16 @@ public class SurveysController extends WiFreeController {
                 .collect(toList());
 
         DataJson dataJson = new DataJson(answers);
-        JsonNode json = Json.toJson(dataJson);
-        Form<DataJson> form = formFactory.form(DataJson.class).fill(dataJson);
-        return ok(views.html.admin.surveys_results.render(getCurrentProfile(), json, form));
+        return ok(views.html.admin.surveys_results.render(getCurrentProfile(), dataJson));
     }
 
     public static class DataJson {
         public List<AnswersJson> data;
 
-        public DataJson() {
+        public DataJson() {}
+
+        public String toJsonString() {
+            return Json.toJson(this).toString();
         }
 
         public DataJson(List<AnswersJson> data) {
@@ -175,6 +176,11 @@ public class SurveysController extends WiFreeController {
             this.order = order;
             this.labels = labels;
             this.values = values;
+        }
+
+        public String average() {
+            double average = values.stream().filter(n -> n > 0L).mapToInt(Long::intValue).average().orElse(0d);
+            return String.format("%,.2f", average);
         }
 
         public String getQuestion() {
