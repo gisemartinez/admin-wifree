@@ -208,16 +208,25 @@
                                         <div hidden>
                                         }
                                             @if(!isEditing && !isCreating && field("type").value.get == "rating") {
-                                            <label>Respuesta</label>
-                                            <div class="starrr lead stars-existing" data-rating="@field("config")("value").value.get">
-                                                @defining(1 to field("config")("maximum").value.get.toInt) { range =>
-                                                    @range.map { number =>
-                                                        <span class="glyphicon .glyphicon-star-empty glyphicon-star"></span>
+                                                <label>Respuesta</label>
+                                                <div class="lead">
+                                                    @defining(field("config")("maximum").value.get.toInt) { max =>
+                                                      @defining(field("config")("value").value.get.toInt) { v =>
+                                                        @defining(1 to v) { range =>
+                                                          @range.map { n =>
+                                                              <span class="glyphicon .glyphicon-star-empty glyphicon-star"></span>
+                                                          }
+                                                        }
+                                                        @defining(v+1 to max) { range =>
+                                                          @range.map { n =>
+                                                              <span class="glyphicon .glyphicon-star-empty glyphicon-star-empty"></span>
+                                                          }
+                                                        }
+                                                      }
                                                     }
-                                                }
-                                            </div>
+                                                </div>
                                             } else {
-                                            @helper.inputText(field("config")("maximum"), '_label -> Messages("surveys.label.maximum"), 'class -> "form-control col-md-7 col-xs-12 question-rating", 'type -> "number", 'min -> "2")
+                                                @helper.inputText(field("config")("maximum"), '_label -> Messages("surveys.label.maximum"), 'class -> "form-control col-md-7 col-xs-12 question-rating", 'type -> "number", 'min -> "2")
                                             }
                                         </div>
                                         @*** Maximum END ***@
