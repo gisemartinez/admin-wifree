@@ -13,13 +13,15 @@ public class AdminDAO extends GenericDAO<Admin> {
 		super(Admin.class);
 	}
 	
-	public String getPasswordForUser(String email) {
-		return Ebean.find(ENTITY_TYPE)
+	public String getPasswordForUser(String email) throws AdminNotFoundException {
+		Admin admin = Ebean.find(ENTITY_TYPE)
 				.select("password")
 				.where()
 				.eq("email", email)
-				.findOne()
-				.getPassword();
+				.findOne();
+		if (admin == null)
+			throw new AdminNotFoundException();
+		return admin.getPassword();
 	}
 
 	public Long getPortalForUser(String email) {

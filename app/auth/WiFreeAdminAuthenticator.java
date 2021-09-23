@@ -1,6 +1,7 @@
 package auth;
 
 import daos.AdminDAO;
+import daos.AdminNotFoundException;
 import models.Admin;
 import org.pac4j.core.context.Pac4jConstants;
 import org.pac4j.core.context.WebContext;
@@ -18,21 +19,26 @@ public class WiFreeAdminAuthenticator implements Authenticator<UsernamePasswordC
 	@Override
 	public void validate(UsernamePasswordCredentials credentials, WebContext context) throws HttpAction, CredentialsException {
 		if (credentials == null) {
-			throwsException("No credential");
+			throwsException("No hay credenciales");
 		}
 		String email = credentials.getUsername();
 		String password = credentials.getPassword();
 		if (CommonHelper.isBlank(email)) {
-			throwsException("Username cannot be blank");
+			throwsException("El nombre de usuario no puede ser vacío");
 		}
 		if (CommonHelper.isBlank(password)) {
-			throwsException("Password cannot be blank");
+			throwsException("La contraseña no puede ser vacía");
 		}
 
 		// TODO: define appropiate validation method
-		String dbPassword = getPasswordFor(email);
+		String dbPassword = null;
+		try {
+			dbPassword = getPasswordFor(email);
+		} catch (AdminNotFoundException e) {
+			throwsException("No se encontró usuario con nombre: " + email);
+		}
 		if (CommonHelper.areNotEquals(password, dbPassword)) {
-			throwsException("Password for: '" + email + "' does not match input password");
+			throwsException("Contraseña incorrecta para el usuario '" + email + "'");
 		}
 
 		final CommonProfile profile = new CommonProfile();
@@ -50,7 +56,7 @@ public class WiFreeAdminAuthenticator implements Authenticator<UsernamePasswordC
 		throw new CredentialsException(message);
 	}
 
-	private String getPasswordFor(String username) {
+	private String getPasswordFor(String username) throws AdminNotFoundException {
 		return adminDAO.getPasswordForUser(username);
 	}
 }
