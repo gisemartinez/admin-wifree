@@ -57,6 +57,7 @@ POST        /api/survey/answers                     controllers.api.SurveyAnswer
 # API routes new
 GET         /api/client-landing/:portalId           controllers.api.PortalConfigController.clientLanding(portalId: Long)
 GET         /api/client-auth/:portalId              controllers.api.PortalConfigController.clientAuth(portalId: Long)
+POST        /api/user-connected                     controllers.api.SocialUserController.saveUserConnected
 
 # Pac4J Temp Routes
 GET         /loginForm                        		controllers.LoginController.loginForm()

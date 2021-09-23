@@ -3,16 +3,21 @@ package controllers.api;
 import com.fasterxml.jackson.databind.JsonNode;
 import controllers.WiFreeController;
 import controllers.api.dto.NetworkUserDTO;
+import controllers.api.dto.UserAuthenticatedDTO;
+import daos.NetworkUserConnectionLogDAO;
 import daos.NetworkUserDAO;
 import daos.PortalDAO;
 import models.NetworkUser;
+import models.NetworkUserConnectionLog;
 import models.Portal;
 import models.types.Gender;
 import play.mvc.Result;
 import utils.DateHelper;
 
 import javax.inject.Inject;
+import java.io.IOException;
 import java.time.Instant;
+import java.util.Optional;
 
 import static java.util.Optional.ofNullable;
 
@@ -20,6 +25,39 @@ public class SocialUserController extends WiFreeController {
 
     @Inject
     private NetworkUserDAO networkUserDAO;
+
+    @Inject
+    private PortalDAO portalDAO;
+
+    @Inject
+    private NetworkUserConnectionLogDAO connectionLogDAO;
+
+    public Result saveUserConnected() throws IOException {
+        logRequest();
+
+        JsonNode json = request().body().asJson();
+        UserAuthenticatedDTO userDTO = objectMapper.readValue(json.toString(), UserAuthenticatedDTO.class);
+
+        Portal portal = portalDAO.get(userDTO.getPortalId());
+
+        NetworkUser user = networkUserDAO.findByEmail(userDTO.getEmail());
+        if (user == null) {
+            user = new NetworkUser(portal, userDTO.getName(), userDTO.getEmail(),
+                    "", userDTO.getConnectionTime(), true, "",
+                    Optional.ofNullable(userDTO.getGender()).map(Gender::valueOf).orElse(Gender.Undefined),
+                    null, null,
+                    null,
+                    Optional.ofNullable(userDTO.getAge()).orElse(0));
+        } else {
+            user.setLastConnection(userDTO.getConnectionTime());
+        }
+        networkUserDAO.save(user);
+
+        NetworkUserConnectionLog connectionLog = new NetworkUserConnectionLog(portal, user, userDTO.getConnectionTime(), Instant.now(), "");
+        connectionLogDAO.save(connectionLog);
+
+        return ok(userDTO.toJson());
+    }
 
     public Result getSocialUser(String email) {
         return ofNullable(networkUserDAO.findByEmail(email))
