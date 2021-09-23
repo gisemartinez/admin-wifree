@@ -3,7 +3,8 @@
 # ~~~~
 
 ### WiFree routes
-GET         /                                       controllers.ApplicationController.index()
+GET         /                                       controllers.AdminAppController.dashboard
+GET         /old-index                              controllers.ApplicationController.index()
 GET         /testTheme                              controllers.ApplicationController.testTheme
 
 ### Login routes
