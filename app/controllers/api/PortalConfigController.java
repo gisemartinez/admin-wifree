@@ -37,10 +37,12 @@ public class PortalConfigController extends WiFreeController {
     Config config;
 
     public Result clientLanding(Long portalId) {
+        logRequest();
+
         Portal portal = portalDAO.get(portalId);
         String uniqueId = UUID.randomUUID().toString(); // TODO hace falta?
         String title = portal.getName();
-        String iframeURL = portal.getHomeURL(); // TODO implementar ABM
+        String iframeURL = portal.getHomeURL();
         LandingChoicesDTO landingChoices = new LandingChoicesDTO(title, iframeURL);
         String templateId = "template-2"; // TODO implementar ABM
         ClientLandingResponse clientLandingResponse = new ClientLandingResponse(uniqueId, landingChoices, portalId.toString(), templateId);
@@ -48,6 +50,8 @@ public class PortalConfigController extends WiFreeController {
     }
     
     public Result clientAuth(Long portalId) {
+        logRequest();
+
         Portal portal = portalDAO.get(portalId);
 
         String uniqueId = UUID.randomUUID().toString(); // TODO hace falta?

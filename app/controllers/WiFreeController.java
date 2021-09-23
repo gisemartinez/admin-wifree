@@ -40,6 +40,10 @@ public abstract class WiFreeController extends Controller {
 		return (Long) getCurrentProfile().getAttribute("portal");
 	}
 
+	protected void logRequest() {
+		logger.info("*** Received request " + request().method() + " " + request().path() + " - Body: " + getRequestJsonString());
+	}
+
 	protected CommonProfile getCurrentProfile() {
 		final PlayWebContext context = new PlayWebContext(ctx(), playSessionStore);
 		final ProfileManager<CommonProfile> profileManager = new ProfileManager<>(context);
@@ -52,7 +56,7 @@ public abstract class WiFreeController extends Controller {
 	}
 
 	protected String getRequestJsonString() {
-		return getRequestJson().toString();
+		return Optional.ofNullable(getRequestJson()).map(JsonNode::toString).orElse("No body");
 	}
 
 	public static class NoProfileFoundException extends RuntimeException {

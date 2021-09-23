@@ -39,13 +39,18 @@ public class SurveyAnswersController extends WiFreeController {
     SurveyDAO surveyDAO; // TODO quitar
 
     public Result saveAnswers() throws IOException {
-        SurveyAnswersDTO surveyAnswers = objectMapper.readValue(getRequestJsonString(), SurveyAnswersDTO.class);
+        logRequest();
+
+        String requestJsonString = getRequestJsonString();
+        SurveyAnswersDTO surveyAnswers = objectMapper.readValue(requestJsonString, SurveyAnswersDTO.class);
         SaveSurveyAnswersRequest request = new SaveSurveyAnswersRequest(surveyAnswers.answers, surveyAnswers.user);
         SaveSurveyAnswersResponse response = surveysService.saveSurveyAnswers(request);
         return ok("Survey answers succeeded: " + response.success() + ", survey: " + response.surveyId() + ", user: " + response.userId());
     }
 
     public Result answersCSV(Long surveyId) throws FileNotFoundException {
+        logRequest();
+
         ImmutableListMultimap<NetworkUser, FieldAnswer> answersForSurvey = fieldAnswerDAO.findForSurvey(surveyId);
         Survey survey = surveyDAO.get(surveyId);
 
