@@ -76,14 +76,16 @@ public class PortalAndLoginOptionsService {
         PortalApp carrousel = applications.get(PortalApplicationType.Carrousel);
 
         return template == null || carrousel == null
-                ? PortalOptionsView.initialize(portalId, portal.getHomeURL())
-                : new PortalOptionsView(portalId, portal.getHomeURL(), template.getType(), template, carrousel);
+                ? PortalOptionsView.initialize(portalId, portal.getHomeURL(), portal.getName(), portal.getDescription())
+                : new PortalOptionsView(portalId, portal.getHomeURL(), template.getType(), template, carrousel, portal.getName(), portal.getDescription());
     }
 
     public void savePortalOptions(PortalOptionsView portalOptions, Long portalId, List<File> files) {
         Portal portal = portalDAO.get(portalId);
 
         portal.setHomeURL(portalOptions.getHomeURL());
+        portal.setName(portalOptions.getName());
+        portal.setDescription(portalOptions.getDescription());
 
         portalOptions.getTemplate().setPortal(portal);
 
