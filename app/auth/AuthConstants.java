@@ -9,7 +9,7 @@ public class AuthConstants {
 	public static final String ADMIN_LOGIN_URL = "/login";
 	public static final String CONSOLE_LOGIN_URL = "/console/login";
 	public static final String CALLBACK_URL = "/callback";
-	public static final String DEFAULT_LOGOUT_URL = "/?defaulturlafterlogout";
+	public static final String DEFAULT_LOGOUT_URL = "/dashboard";
 
 	public static final String[] CONSOLE_USERS = new String[] { "jesu772@gmail.com", "mcruz342@gmail.com", "nicohuvi@gmail.com", "gise.cpna@gmail.com" };
 	private static final String[] CONSOLE_PASSWORDS = new String[] {"wifreeConsole-jesu", "wifreeConsole-mauri", "wifreeConsole-nico", "wifreeConsole-gise"};
