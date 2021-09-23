@@ -10,7 +10,7 @@
         @helper.checkbox(portalApp("enabled"))
     </div>
     @if(appType == "template") {
-        <div class="col-md-12">
+        <div class="col-md-12" hidden>
             <div class="form-group">
                 <div class="col-md-4 col-sm-6 col-xs-6">
                     @helper.textarea(config("leftColumn"), '_label -> "Columna Izquierda", 'class -> "form-control col-md-6 col-xs-12")
