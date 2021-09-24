@@ -111,7 +111,7 @@ function cloneAndSelectInputs(hideText, hideRating, hideRadio, fieldType) {
 
     // Update key number
     newNode.querySelector("#fields_" + (i+1) + "_config_key").setAttribute("value", nodeKey.replaceAll(i, i+1));
-    newNode.querySelector("#fields_" + (i+1) + "_config_order").setAttribute("value", i+1);
+    newNode.querySelector("#fields_" + (i+1) + "_config_order").setAttribute("value", i+2);
 
     // Hide not corresponding elements
     newNode.querySelectorAll(".question-text").forEach(e => e.parentNode.parentNode.hidden = hideText);
