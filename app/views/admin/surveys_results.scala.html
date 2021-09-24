@@ -43,7 +43,18 @@
                         <div class="col-md-12">
                             <div class="x_panel">
                                 <div class="x_content">
-                                    <div id="@data.id" style="height:350px;"></div>
+                                    @if(data.`type` == "textbox" && data.question != "Edad") {
+                                            <h3>@data.question</h3>
+                                            @data.labels.map { answer =>
+                                                <div class="col-md-4">
+                                                    <div class="tile-stats">
+                                                        <h5 class="text-md-left">@answer</h5>
+                                                    </div>
+                                                </div>
+                                            }
+                                    } else {
+                                        <div id="@data.id" style="height:350px;"></div>
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -61,6 +72,10 @@
             let answers = toJson('@jsonString');
 
             answers.data.forEach(function(data) {
+                if (data.type === "textbox" && data.question !== "Edad") {
+                    return;
+                }
+
                 let chartDom = document.getElementById(data.id);
                 let myChart = echarts.init(chartDom, theme);
                 let option;
