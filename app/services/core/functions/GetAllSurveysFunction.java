@@ -19,7 +19,7 @@ public class GetAllSurveysFunction extends WiFreeFunction<GetAllSurveysRequest, 
         function = request -> {
             try {
                 SurveyDAO surveyDAO = new SurveyDAO();
-                List<Survey> allSurveys = surveyDAO.getAll();
+                List<Survey> allSurveys = surveyDAO.findByPortal(request.portalId());
                 return new GetAllSurveysResponse(allSurveys, true, null);
             } catch (Exception ex) {
                 return new GetAllSurveysResponse(emptyList(), false, null);
