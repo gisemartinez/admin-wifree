@@ -61,7 +61,7 @@ function deleteSection(element) {
             if (name) element.name = name.replaceAll(`fields[${next}`, `fields[${i}`);
             if (_for) element.setAttribute("for", _for.replaceAll(`fields_${next}`, `fields_${i}`));
             if (innerText && ["LABEL", "H3"].includes(element.tagName)) {
-                let newText = innerText.replaceAll(`fields.${next}`, `fields.${i}`).replaceAll(`Pregunta ${next}`, `Pregunta ${i}`);
+                let newText = innerText.replaceAll(`fields.${next}`, `fields.${i}`).replaceAll(`Pregunta ${next+1}`, `Pregunta ${next}`);
                 element.innerText = newText;
             }
         });
@@ -77,7 +77,10 @@ function addRatingOption(element) {
     let questionOptions = options.querySelectorAll(".question-radio");
     let lastQuestionOption = questionOptions[questionOptions.length - 1];
     let i = Number([...lastQuestionOption.name.matchAll(/\d+/g)][1][0]);
-    newOption.innerHTML = newOption.innerHTML.replaceAll(`Options_${i}`, `Options_${i+1}`).replaceAll(`Options[${i}]`, `Options[${i+1}]`).replaceAll(`Options.${i}`, `Options.${i+1}`);
+    newOption.innerHTML = newOption.innerHTML
+        .replaceAll(`Options_${i}`, `Options_${i+1}`)
+        .replaceAll(`Options[${i}]`, `Options[${i+1}]`)
+        .replaceAll(`Options.${i}`, `Options.${i+1}`);
     
     newOption.querySelectorAll("input").forEach(x => x.setAttribute("value", ''));
     newOption.querySelector("[id$=_index]").setAttribute("value", i+2);
@@ -100,7 +103,7 @@ function cloneAndSelectInputs(hideText, hideRating, hideRadio, fieldType) {
     newNode.innerHTML = newNode.innerHTML.replaceAll(`fields_${i}`, `fields_${i+1}`)
         .replaceAll(`fields[${i}]`, `fields[${i+1}]`)
         .replaceAll(`fields.${i}`, `fields.${i+1}`)
-        .replaceAll(`Pregunta ${i}`, `Pregunta ${i+1}`);
+        .replaceAll(`Pregunta ${i+1}`, `Pregunta ${i+2}`);
     
     // Clear inputs values
     newNode.querySelectorAll("input").forEach(x => x.removeAttribute("value"));
