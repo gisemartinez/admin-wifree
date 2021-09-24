@@ -156,10 +156,12 @@ public class SurveysController extends WiFreeController {
                 .map(x -> {
                     List<String> labels = new ArrayList<>();
                     List<Long> values = new ArrayList<>();
-                    x.answers.forEach((key, value) -> {
-                        labels.add(key);
-                        values.add(value);
-                    });
+                    x.answers.entrySet().stream()
+                            .sorted(Map.Entry.comparingByKey())
+                            .forEachOrdered(entry -> {
+                                labels.add(entry.getKey());
+                                values.add(entry.getValue());
+                            });
                     return new AnswersJson(x.question, x.id, x.type, x.order, labels, values);
                 })
                 .collect(toList());
