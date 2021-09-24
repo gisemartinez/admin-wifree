@@ -14,7 +14,7 @@ public class LoginAdminSuite extends WiFreeSuite {
 
 	@Test
 	public void testLoginAdmin() {
-		final RequestBuilder loginRequest = Helpers.fakeRequest().method(GET).uri("login");
+		final RequestBuilder loginRequest = Helpers.fakeRequest().method(GET).uri("/login");
 		final Result result = route(app, loginRequest);
 		assertEquals(OK, result.status());
 	}

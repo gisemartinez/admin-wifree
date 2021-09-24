@@ -1,26 +1,14 @@
 package utils;
 
-import com.google.common.collect.ImmutableMap;
 import io.ebean.Ebean;
 import org.apache.commons.io.FileUtils;
-import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import play.Application;
-import play.db.Database;
-import play.db.Databases;
-import play.db.evolutions.Evolutions;
 import play.test.Helpers;
-import play.test.WithApplication;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.HashSet;
-import java.util.Set;
 
 public class WiFreeSuite {
 
