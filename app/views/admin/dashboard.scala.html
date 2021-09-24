@@ -12,7 +12,8 @@ jsConnectionsGraphDataLastWeek: JsValue)
 @ageGraphData = @{jsAgeGraphData.toString()}
 @connectionsGraphDataThisWeek = @{jsConnectionsGraphDataThisWeek.toString()}
 @connectionsGraphDataLastWeek = @{jsConnectionsGraphDataLastWeek.toString()}
-@username = @{profile.getAttribute("realName").toString()}
+@username = @{profile.getAttribute("realName").toString}
+@portalId = @{profile.getAttribute("portal").toString}
 
 <!DOCTYPE html>
 <html lang="es">
@@ -59,7 +60,7 @@ jsConnectionsGraphDataLastWeek: JsValue)
 					<div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
 						<div class="tile-stats">
 							<div class="icon"><i class="fa fa-comments-o"></i></div>
-							<div class="count">@{ConnectionsService.connectedUsersValue}</div>
+							<div class="count">@{ConnectionsService.connectedValue(portalId)}</div>
 							<h3>Usuarios Conectados</h3>
 
 						</div>

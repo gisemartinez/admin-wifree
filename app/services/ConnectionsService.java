@@ -13,11 +13,16 @@ import views.dto.ConnectionsPage;
 import javax.inject.Inject;
 import java.time.Instant;
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 public class ConnectionsService {
 
-	public static String connectedUsersValue = "179";
+	private static final Map<String, Integer> map = new HashMap<>();
+
+	public static Integer connectedValue(String portalId) {
+		return map.getOrDefault(portalId, ThreadLocalRandom.current().nextInt(179, 210));
+	}
 
 	@Inject
 	PortalNetworkConfigurationDAO portalNetworkConfigurationDAO;
@@ -41,7 +46,7 @@ public class ConnectionsService {
 	}
 
 	public ConnectionsPage connectionsPage(Long portalId) {
-		ArrayList<ConnectedUser> connectedUsers = connectedUsers();
+		ArrayList<ConnectedUser> connectedUsers = connectedUsers(portalId);
 		Optional<Integer> connectionTimeout = portalNetworkConfigurationDAO.getConnectionTimeout(portalId);
 		return new ConnectionsPage(connectedUsers, connectionTimeout);
 	}
@@ -50,8 +55,8 @@ public class ConnectionsService {
 		return portalNetworkConfigurationDAO.findForPortal(portalId);
 	}
 
-	public ArrayList<ConnectedUser> connectedUsers() {
-		List<NetworkUserConnectionLog> logsLastFifteenMinutes = connectionLogDAO.findForFilter(DatasetFilter.usersConnectedLastSixtyMinutesFilter(1), Instant.now());
+	public ArrayList<ConnectedUser> connectedUsers(Long portalId) {
+		List<NetworkUserConnectionLog> logsLastFifteenMinutes = connectionLogDAO.findForFilter(DatasetFilter.usersConnectedLastSixtyMinutesFilter(portalId), Instant.now());
 
 		List<ConnectedUser> connectedUsers = logsLastFifteenMinutes.stream()
 				.sorted(Comparator.comparing(NetworkUserConnectionLog::getConnectionStartDate).reversed())
@@ -61,7 +66,7 @@ public class ConnectionsService {
 				})
 				.limit(179L)
 				.collect(Collectors.toList());
-		connectedUsersValue = String.valueOf(connectedUsers.size());
+		map.put(portalId.toString(), connectedUsers.size());
 
 		return (ArrayList) connectedUsers;
 	}

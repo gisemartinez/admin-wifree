@@ -45,7 +45,7 @@ public class ApplicationController extends WiFreeController {
 
 	public Result testTheme() {
 		final Form<PortalNetworkConfiguration> form = formFactory.form(PortalNetworkConfiguration.class);
-		final List<ConnectedUser> connectedUsers = connectionsService.connectedUsers();
+		final List<ConnectedUser> connectedUsers = connectionsService.connectedUsers(1L);
 		return ok(views.html.testTheme.render(form, connectedUsers));
 	}
 

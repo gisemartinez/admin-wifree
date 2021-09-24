@@ -127,7 +127,7 @@ public class AdminAppController extends WiFreeController {
 				? formFactory.form(PortalNetworkConfiguration.class)
 				: formFactory.form(PortalNetworkConfiguration.class).fill(portalNetworkConfiguration);
 		CommonProfile currentProfile = getCurrentProfile();
-		ArrayList<ConnectedUser> connectedUsers = connectionsService.connectedUsers();
+		ArrayList<ConnectedUser> connectedUsers = connectionsService.connectedUsers(portalId());
 		return ok(views.html.admin.connections.render(form, connectedUsers, currentProfile));
 	}
 
