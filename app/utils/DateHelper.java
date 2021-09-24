@@ -45,8 +45,8 @@ public class DateHelper {
 		return processInstant(localDate -> localDate.minusDays(1), date);
 	}
 
-	public static Instant fifteenMinutesAgo(Instant date) {
-		return processInstantTime(localDate -> localDate.minus(Duration.ofMinutes(15)), date);
+	public static Instant sixtyMinutesAgo(Instant date) {
+		return processInstantTime(localDate -> localDate.minus(Duration.ofMinutes(60)), date);
 	}
 
 	public static Instant oneWeekAgo(Instant date) {
@@ -100,19 +100,19 @@ public class DateHelper {
 		return toInstant(f.apply(toLocalDateTime(instant)));
 	}
 
-	private static LocalDate toLocalDate(Instant instant) {
+	public static LocalDate toLocalDate(Instant instant) {
 		return instant.atZone(zone).toLocalDate();
 	}
 
-	private static LocalDateTime toLocalDateTime(Instant instant) {
+	public static LocalDateTime toLocalDateTime(Instant instant) {
 		return instant.atZone(zone).toLocalDateTime();
 	}
 
-	private static Instant toInstant(LocalDate localDate) {
+	public static Instant toInstant(LocalDate localDate) {
 		return localDate.atStartOfDay(zone).toInstant();
 	}
 
-	private static Instant toInstant(LocalDateTime localDateTime) {
+	public static Instant toInstant(LocalDateTime localDateTime) {
 		return localDateTime.atZone(zone).toInstant();
 	}
 }

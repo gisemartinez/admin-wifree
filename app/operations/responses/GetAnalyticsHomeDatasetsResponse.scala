@@ -100,7 +100,7 @@ object DatasetFilter {
 
 	def genderUsersConnectedLastYearFilter(portalId: Long, gender: Gender): DatasetFilter = relativeTimePeriodFilter(portalId, LAST_YEAR, Option(gender))
 
-	def usersConnectedLastFifteenMinutesFilter(portalId: Long): DatasetFilter = relativeTimePeriodFilter(portalId, LAST_FIFTEEN_MINUTES)
+	def usersConnectedLastSixtyMinutesFilter(portalId: Long): DatasetFilter = relativeTimePeriodFilter(portalId, LAST_FIFTEEN_MINUTES)
 
 	private def relativeTimePeriodFilter(portalId: Long, relativeTimePeriod: RelativeTimePeriod, gender: Option[Gender] = None) = DatasetFilter(
 		portalId = portalId,

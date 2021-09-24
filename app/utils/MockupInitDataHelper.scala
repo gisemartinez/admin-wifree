@@ -16,7 +16,7 @@ object MockupInitDataHelper {
   private val end: Instant = DateHelper.now()
   private val start: Instant = DateHelper.oneYearAgo(end)
   private val recentStart: Instant = DateHelper.oneDayAgo(end)
-  private val veryRecentStart: Instant = DateHelper.fifteenMinutesAgo(end)
+  private val veryRecentStart: Instant = DateHelper.sixtyMinutesAgo(end)
 
   def run(pid: Long): Unit = {
     val portalDao = new PortalDAO()
@@ -25,7 +25,7 @@ object MockupInitDataHelper {
 
     val portal = portalDao.get(pid)
 
-    (1 to 400).foreach { uid =>
+    (1 to 300).foreach { uid =>
       val userName = s"Usuario Prueba $pid $uid"
       val userEmail = s"usuarioprueba_${pid}_${uid}@mail.com"
       val userOnline = random(Seq(true, false))
@@ -55,14 +55,18 @@ object MockupInitDataHelper {
   private def randomDate(): Instant = {
     val selectedStart = ThreadLocalRandom.current().nextInt(1, 26) match {
       case 1 => veryRecentStart
-//      case 1 => recentStart
       case _ => start
     }
 
     val startSeconds = selectedStart.getEpochSecond
     val endSeconds = end.getEpochSecond
     val rnd = ThreadLocalRandom.current().nextLong(startSeconds, endSeconds)
-    Instant.ofEpochSecond(rnd)
+    val randomStart = Instant.ofEpochSecond(rnd)
+
+    ThreadLocalRandom.current().nextInt(1, 30) match {
+      case n if (1 to 8).contains(n)  => DateHelper.toInstant(DateHelper.toLocalDateTime(randomDate()).withHour(17))
+      case _ => randomStart
+    }
   }
 
   private def randomMAC(): String = {

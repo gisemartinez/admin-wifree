@@ -62,7 +62,7 @@
                                     <tr>
                                         <td class="a-center">@summary.id</td>
                                         <td>@summary.title</td>
-                                        <td>@summary.creation</td>
+                                        <td>@{summary.creation.toString.substring(0, summary.creation.toString.length - 4)}</td>
                                         <td class="text-center">
                                             <a class="btn btn-primary" href="@routes.AdminAppController.survey(summary.id)" role="button">Editar</a>
                                         </td>
