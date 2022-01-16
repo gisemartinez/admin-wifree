@@ -35,7 +35,12 @@ libraryDependencies ++= Seq(
     "org.pac4j" % "pac4j-oidc" % pac4jVersion,
     "commons-io" % "commons-io" % "2.4",
     "be.objectify" % "deadbolt-java_2.12" % "2.6.3",
-    javaJdbc % Test,
+    "javax.xml.bind" % "jaxb-api" % "2.3.1",
+    "javax.annotation" % "javax.annotation-api" % "1.3.2",
+    "javax.el" % "javax.el-api" % "3.0.0",
+    "org.glassfish" % "javax.el" % "3.0.0",
+    "javax.xml.bind" % "jaxb-api" % "2.3.0",
+      javaJdbc % Test,
     "org.assertj" % "assertj-core" % "3.6.2" % Test,
     "org.awaitility" % "awaitility" % "2.0.0" % Test,
     "org.mockito" % "mockito-all" % "1.10.19" % Test
