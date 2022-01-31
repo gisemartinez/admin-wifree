@@ -1,0 +1,198 @@
+@import org.pac4j.core.profile.CommonProfile
+@import views.dto.ConnectedUser
+
+@(networkConfigurationForm: Form[PortalNetworkConfiguration],
+connectedUsers: List[ConnectedUser],
+profile: CommonProfile)
+
+@username = @{profile.getAttribute("realName").toString()}
+
+
+<!-- page content -->
+<div class="col" role="main">
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>@Messages("connections.title.connected-users")</h2>
+                    <!-- TODO: insert toolboox -->
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <table id="usertable" class="table table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th>
+                                <input type="checkbox" id="check-all" class="flat">
+                            </th>
+                            <th>@Messages("connections.users-table.header.user-name")</th>
+                            <th>@Messages("connections.users-table.header.connection-start")</th>
+                            <th>@Messages("connections.users-table.header.user-device")</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @connectedUsers.map { user =>
+                        <tr>
+                            <td class="a-center">
+                                <input type="checkbox" class="flat" name="table_records">
+                            </td>
+                            <td>@user.username</td>
+                            <td>@user.connectionStart</td>
+                            <td>@user.device</td>
+                        </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @parts.footer_content()
+
+</div>
+<!-- /page content -->
+
+@parts.js.skycons()
+
+<script>
+				NProgress.done();
+		
+</script>
+
+@parts.resources_body()
+
+<!-- form validation -->
+<script type="text/javascript" src="@routes.Assets.versioned("js/parsley/parsley.min.js")"></script>
+
+		<!-- Datatables-->
+		<script src="@routes.Assets.versioned("js/datatables/jquery.dataTables.min.js")"></script>
+<script src="@routes.Assets.versioned("js/datatables/dataTables.bootstrap.js")"></script>
+		<script src="@routes.Assets.versioned("js/datatables/dataTables.buttons.min.js")"></script>
+<script src="@routes.Assets.versioned("js/datatables/buttons.bootstrap.min.js")"></script>
+		<script src="@routes.Assets.versioned("js/datatables/jszip.min.js")"></script>
+<script src="@routes.Assets.versioned("js/datatables/pdfmake.min.js")"></script>
+		<script src="@routes.Assets.versioned("js/datatables/vfs_fonts.js")"></script>
+<script src="@routes.Assets.versioned("js/datatables/buttons.html5.min.js")"></script>
+		<script src="@routes.Assets.versioned("js/datatables/buttons.print.min.js")"></script>
+<script src="@routes.Assets.versioned("js/datatables/dataTables.fixedHeader.min.js")"></script>
+		<script src="@routes.Assets.versioned("js/datatables/dataTables.keyTable.min.js")"></script>
+<script src="@routes.Assets.versioned("js/datatables/dataTables.responsive.min.js")"></script>
+		<script src="@routes.Assets.versioned("js/datatables/responsive.bootstrap.min.js")"></script>
+<script src="@routes.Assets.versioned("js/datatables/dataTables.scroller.min.js")"></script>
+
+		<!-- pace -->
+		<script src="@routes.Assets.versioned("js/pace/pace.min.js")"></script>
+<script>
+			var handleDataTableButtons = function() {
+				"use strict";
+				0 !== $("#usertable").length && $("#usertable").DataTable({
+					dom: "Bfrtip",
+					buttons: [{
+						extend: "copy",
+						className: "btn-sm"
+					}, {
+						extend: "csv",
+						className: "btn-sm"
+					}, {
+						extend: "excel",
+						className: "btn-sm"
+					}, {
+						extend: "pdf",
+						className: "btn-sm"
+					}, {
+						extend: "print",
+						className: "btn-sm"
+					}],
+					responsive: !0,
+					language: {
+						search: "Buscar",
+						emptyTable: "Sin datos aún",
+						info: "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+						infoEmpty: "Mostrando 0 entradas de 0 en total",
+						paginate: {
+							first:      "Primero",
+							previous:   "Anterior",
+							next:       "Siguiente",
+							last:       "Último"
+						},
+					}
+				})
+			},
+			TableManageButtons = function() {
+				"use strict";
+				return {
+					init: function() {
+						handleDataTableButtons()
+					}
+				}
+			}();
+		
+</script>
+<script type="text/javascript">
+				$(document).ready(function() {
+					$('#usertable').dataTable();
+					$('#usertable').DataTable();
+					$('#usertable').css('width','100%')
+					$('#datatable-scroller').DataTable({
+						ajax: "@routes.Assets.versioned("js/datatables/json/scroller-demo.json")",
+						deferRender: true,
+						scrollY: true,
+						scrollX: true,
+						scrollCollapse: true,
+						scroller: true,
+						keys: true,
+						responsive: true
+					});
+					var table = $('#datatable-fixed-header').DataTable({
+						fixedHeader: true
+					});
+				});
+				TableManageButtons.init();
+		
+</script>
+
+<!-- form validation -->
+<script type="text/javascript">
+				$(document).ready(function() {
+					$.listen('parsley:field:validate', function() {
+						validateFront();
+					});
+					$('#connectionTimeoutForm .btn').on('click', function() {
+						$('#connectionTimeoutForm').parsley().validate();
+						validateFront();
+					});
+					var validateFront = function() {
+						if (true === $('#connectionTimeoutForm').parsley().isValid()) {
+							$('.bs-callout-info').removeClass('hidden');
+							$('.bs-callout-warning').addClass('hidden');
+						} else {
+							$('.bs-callout-info').addClass('hidden');
+							$('.bs-callout-warning').removeClass('hidden');
+						}
+					};
+				});
+
+				$(document).ready(function() {
+					$.listen('parsley:field:validate', function() {
+						validateFront();
+					});
+					$('#demo-form2 .btn').on('click', function() {
+						$('#demo-form2').parsley().validate();
+						validateFront();
+					});
+					var validateFront = function() {
+						if (true === $('#demo-form2').parsley().isValid()) {
+							$('.bs-callout-info').removeClass('hidden');
+							$('.bs-callout-warning').addClass('hidden');
+						} else {
+							$('.bs-callout-info').addClass('hidden');
+							$('.bs-callout-warning').removeClass('hidden');
+						}
+					};
+				});
+				try {
+					hljs.initHighlightingOnLoad();
+				} catch (err) {}
+		
+</script>

@@ -10,6 +10,7 @@ import org.pac4j.core.profile.CommonProfile;
 import play.api.libs.json.JsValue;
 import play.data.Form;
 import play.mvc.Result;
+import play.twirl.api.Content;
 import scala.Tuple2;
 import services.AnalyticsService;
 import services.ConnectionsService;
@@ -46,18 +47,40 @@ public class AdminAppController extends WiFreeController {
 
 	@SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
 	public Result dashboard() throws NoProfileFoundException {
-		JsValue[] dashboardMockedData = AdminMockedData.dashboard();
-		JsValue jsGenderGraphData = dashboardMockedData[0];
-		JsValue jsAgeGraphData = dashboardMockedData[1];
-		JsValue jsConnectionsGraphDataThisWeek = dashboardMockedData[2];
-		JsValue jsConnectionsGraphDataLastWeek = dashboardMockedData[3];
-		return ok(views.html.admin.dashboard.render(
-				getCurrentProfile(),
-				jsGenderGraphData,
-				jsAgeGraphData,
-				jsConnectionsGraphDataThisWeek,
-				jsConnectionsGraphDataLastWeek)
-		);
+		Content content;
+		CommonProfile currentProfile = getCurrentProfile();
+
+		if (getCurrentProfile().getAttribute("portal") == null) {
+			SocialKeysView socialKeys = optionsService.getLoginOptions(portalId());
+			Form<SocialKeysView> socialKeysForm = formFactory.form(SocialKeysView.class).fill(socialKeys);
+			Form<Portal> portalForm = formFactory.form(Portal.class);
+			content = views.html.admin.login_options.render(currentProfile, socialKeysForm, portalForm);
+		} else {
+			JsValue[] dashboardMockedData = AdminMockedData.dashboard();
+			JsValue jsGenderGraphData = dashboardMockedData[0];
+			JsValue jsAgeGraphData = dashboardMockedData[1];
+			JsValue jsConnectionsGraphDataThisWeek = dashboardMockedData[2];
+			JsValue jsConnectionsGraphDataLastWeek = dashboardMockedData[3];
+
+			PortalNetworkConfiguration portalNetworkConfiguration = connectionsService.networkConfiguration(portalId());
+			Form<PortalNetworkConfiguration> form = portalNetworkConfiguration == null
+					? formFactory.form(PortalNetworkConfiguration.class)
+					: formFactory.form(PortalNetworkConfiguration.class).fill(portalNetworkConfiguration);
+			ArrayList<ConnectedUser> connectedUsers = connectionsService.connectedUsers(portalId());
+			
+			content = views.html.admin.dashboard.render(
+					getCurrentProfile(),
+					jsGenderGraphData,
+					jsAgeGraphData,
+					jsConnectionsGraphDataThisWeek,
+					jsConnectionsGraphDataLastWeek,
+					form, 
+					connectedUsers
+					);
+		}
+		
+		return ok(content);
+		
 	}
 
 	@SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
@@ -180,7 +203,8 @@ public class AdminAppController extends WiFreeController {
 		CommonProfile currentProfile = getCurrentProfile();
 		SocialKeysView socialKeys = optionsService.getLoginOptions(portalId());
 		Form<SocialKeysView> socialKeysForm = formFactory.form(SocialKeysView.class).fill(socialKeys);
-		return ok(views.html.admin.login_options.render(currentProfile, socialKeysForm));
+		Form<Portal> portalForm = formFactory.form(Portal.class);
+		return ok(views.html.admin.login_options.render(currentProfile, socialKeysForm, portalForm));
 	}
 
 	private SurveySummary toSummary(Survey survey) {

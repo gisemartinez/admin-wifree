@@ -17,8 +17,7 @@
 			<div>
 				<h2>Create Admin</h2>
 				@helper.form(routes.ConsoleController.createAdmin()) {
-				<div class="form-group">
-					<input list="portals" name="portal">
+				<div class="form-group" list="portals" name="portal">
 					<datalist id="portals">
 						@portals.map { portal =>
 						<option value="@portal.getId">@portal.getName</option>

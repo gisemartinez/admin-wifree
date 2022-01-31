@@ -7,10 +7,13 @@ import org.pac4j.core.context.Pac4jConstants;
 import org.pac4j.core.context.WebContext;
 import org.pac4j.core.credentials.UsernamePasswordCredentials;
 import org.pac4j.core.credentials.authenticator.Authenticator;
+import org.pac4j.core.exception.AccountNotFoundException;
 import org.pac4j.core.exception.CredentialsException;
 import org.pac4j.core.exception.HttpAction;
 import org.pac4j.core.profile.CommonProfile;
 import org.pac4j.core.util.CommonHelper;
+
+import static play.mvc.Controller.flash;
 
 public class WiFreeAdminAuthenticator implements Authenticator<UsernamePasswordCredentials> {
 
@@ -43,11 +46,10 @@ public class WiFreeAdminAuthenticator implements Authenticator<UsernamePasswordC
 
 		final CommonProfile profile = new CommonProfile();
         Admin admin = adminDAO.getByEmail(email);
-        Long userPortal = admin.getPortal().getId();
         String realName = admin.getName();
 		profile.setId(email);
 		profile.addAttribute(Pac4jConstants.USERNAME, email);
-		profile.addAttribute("portal", userPortal);
+		profile.addAttribute("portal", admin.getPortal() != null ? admin.getPortal().getId() : null);
         profile.addAttribute("realName", realName);
 		credentials.setUserProfile(profile);
 	}

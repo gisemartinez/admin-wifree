@@ -1667,6 +1667,7 @@ h4.graph_title {
 .tile-stats {
   position: relative;
   display: block;
+  height: 13rem;
   margin-bottom: 12px;
   border: 1px solid #E4E4E4;
   -webkit-border-radius: 5px;

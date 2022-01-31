@@ -1,12 +1,15 @@
 @import play.api.libs.json.JsValue
 @import org.pac4j.core.profile.CommonProfile
-
+@import views.dto.ConnectedUser
 @import services.ConnectionsService
+
 @(profile: CommonProfile,
 jsGenderGraphData: JsValue,
 jsAgeGraphData: JsValue,
 jsConnectionsGraphDataThisWeek: JsValue,
-jsConnectionsGraphDataLastWeek: JsValue)
+jsConnectionsGraphDataLastWeek: JsValue,
+networkConfigurationForm: Form[PortalNetworkConfiguration],
+connectedUsers: List[ConnectedUser])
 
 @genderGraphData = @{jsGenderGraphData.toString()}
 @ageGraphData = @{jsAgeGraphData.toString()}
