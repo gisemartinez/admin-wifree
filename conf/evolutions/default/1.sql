@@ -133,12 +133,10 @@ create table portal (
   twitter_url                   varchar(255),
   google_plus_url               varchar(255),
   instagram_url                 varchar(255),
-  network_configuration_id      bigint,
   when_created                  timestamptz not null,
   when_modified                 timestamptz not null,
   constraint ck_portal_account_type check ( account_type in (0,1,2)),
   constraint uq_portal_owner_id unique (owner_id),
-  constraint uq_portal_network_configuration_id unique (network_configuration_id),
   constraint pk_portal primary key (id)
 );
 
@@ -172,6 +170,7 @@ create table portal_login_configuration (
 
 create table portal_network_configuration (
   id                            bigserial not null,
+  portal_id                     bigint not null,
   connection_timeout            integer,
   login_method                  integer,
   enable_bans                   boolean default false not null,
@@ -222,13 +221,14 @@ create index ix_network_user_social_network_account_network_user_id on network_u
 
 alter table portal add constraint fk_portal_owner_id foreign key (owner_id) references admin (id) on delete restrict on update restrict;
 
-alter table portal add constraint fk_portal_network_configuration_id foreign key (network_configuration_id) references portal_network_configuration (id) on delete restrict on update restrict;
-
 alter table portal_app add constraint fk_portal_app_portal_id foreign key (portal_id) references portal (id) on delete restrict on update restrict;
 create index ix_portal_app_portal_id on portal_app (portal_id);
 
 alter table portal_login_configuration add constraint fk_portal_login_configuration_portal_id foreign key (portal_id) references portal (id) on delete restrict on update restrict;
 create index ix_portal_login_configuration_portal_id on portal_login_configuration (portal_id);
+
+alter table portal_network_configuration add constraint fk_portal_network_configuration_portal_id foreign key (portal_id) references portal (id) on delete restrict on update restrict;
+create index ix_portal_network_configuration_portal_id on portal_network_configuration (portal_id);
 
 alter table survey add constraint fk_survey_portal_id foreign key (portal_id) references portal (id) on delete restrict on update restrict;
 create index ix_survey_portal_id on survey (portal_id);
@@ -267,13 +267,14 @@ drop index if exists ix_network_user_social_network_account_network_user_id;
 
 alter table if exists portal drop constraint if exists fk_portal_owner_id;
 
-alter table if exists portal drop constraint if exists fk_portal_network_configuration_id;
-
 alter table if exists portal_app drop constraint if exists fk_portal_app_portal_id;
 drop index if exists ix_portal_app_portal_id;
 
 alter table if exists portal_login_configuration drop constraint if exists fk_portal_login_configuration_portal_id;
 drop index if exists ix_portal_login_configuration_portal_id;
+
+alter table if exists portal_network_configuration drop constraint if exists fk_portal_network_configuration_portal_id;
+drop index if exists ix_portal_network_configuration_portal_id;
 
 alter table if exists survey drop constraint if exists fk_survey_portal_id;
 drop index if exists ix_survey_portal_id;

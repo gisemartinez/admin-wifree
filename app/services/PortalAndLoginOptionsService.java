@@ -12,10 +12,9 @@ import views.dto.SocialKeysView;
 
 import javax.inject.Inject;
 import java.io.File;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static models.types.LoginMethodType.*;
 
@@ -39,30 +38,19 @@ public class PortalAndLoginOptionsService {
 
         return loginConfigurations.isEmpty()
                 ? SocialKeysView.initialize()
-                : new SocialKeysView(loginMethod.orElse(Survey), loginConfigurations.get(Google), loginConfigurations.get(Facebook));
+                : new SocialKeysView(loginConfigurations.get(Google), loginConfigurations.get(Facebook));
     }
 
     public void saveLoginOptions(SocialKeysView socialKeysView, Long portalId) {
         Portal portal = portalDAO.get(portalId);
-
-        PortalNetworkConfiguration networkConfiguration = portal.getNetworkConfiguration();
-        if (networkConfiguration == null) {
-            networkConfiguration = new PortalNetworkConfiguration(portal);
-        }
-        networkConfiguration.setLoginMethod(socialKeysView.getLoginMethod());
-        portal.setNetworkConfiguration(networkConfiguration);
-        networkConfigDAO.save(networkConfiguration);
-
         PortalLoginConfiguration google = socialKeysView.getGoogle();
         google.setKeysProvider();
         PortalLoginConfiguration facebook = socialKeysView.getFacebook();
         facebook.setKeysProvider();
-
         google.setPortal(portal);
         facebook.setPortal(portal);
         loginConfigDAO.saveOrUpdate(google);
         loginConfigDAO.saveOrUpdate(facebook);
-
         portalDAO.save(portal);
     }
 
@@ -74,10 +62,18 @@ public class PortalAndLoginOptionsService {
         PortalApp templateTwo = applications.get(PortalApplicationType.TemplateTwo);
         PortalApp template = Optional.ofNullable(templateOne).orElse(Optional.ofNullable(templateTwo).orElse(null));
         PortalApp carrousel = applications.get(PortalApplicationType.Carrousel);
+        Set<PortalNetworkConfiguration> networkConfigurations = portal.getNetworkConfigurations();
 
         return template == null || carrousel == null
                 ? PortalOptionsView.initialize(portalId, portal.getHomeURL(), portal.getName(), portal.getDescription())
-                : new PortalOptionsView(portalId, portal.getHomeURL(), template.getType(), template, carrousel, portal.getName(), portal.getDescription());
+                : new PortalOptionsView(
+                portalId,
+                portal.getHomeURL(),
+                template.getType(),
+                template, carrousel,
+                portal.getName(), 
+                portal.getDescription(),
+                networkConfigurations.stream().map(PortalNetworkConfiguration::getLoginMethod).collect(Collectors.toList()));
     }
 
     public void savePortalOptions(PortalOptionsView portalOptions, Long portalId, List<File> files) {
@@ -99,6 +95,16 @@ public class PortalAndLoginOptionsService {
 
         portal.setApplications(portalApps);
 
+        List<PortalNetworkConfiguration> networkConfigurations = portalOptions.getLoginMethods().stream()
+                .map(loginMethodType -> {
+                            PortalNetworkConfiguration p = new PortalNetworkConfiguration(portal);
+                            p.setLoginMethod(loginMethodType);
+                            return p;
+                        }).collect(Collectors.toList());
+        
+        portal.setNetworkConfigurations(new HashSet<>(networkConfigurations));
+
+        networkConfigDAO.saveAll(networkConfigurations);
         portalDAO.saveOrUpdate(portal);
     }
 }

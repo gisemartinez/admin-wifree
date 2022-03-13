@@ -6,6 +6,7 @@ import models.types.PortalApplicationType;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
@@ -42,8 +43,8 @@ public class Portal extends BaseModel {
 
 	private String instagramURL;
 
-	@OneToOne
-	private PortalNetworkConfiguration networkConfiguration;
+	@OneToMany(cascade = CascadeType.ALL)
+	private Set<PortalNetworkConfiguration> networkConfigurations = new HashSet<>();
 
 	@OneToMany(cascade = CascadeType.ALL)
 	private Set<PortalLoginConfiguration> loginConfigurations = new HashSet<>();
@@ -168,12 +169,12 @@ public class Portal extends BaseModel {
 				.anyMatch(PortalLoginConfiguration::hasSocialLoginEnabled);
 	}
 
-	public void setNetworkConfiguration(PortalNetworkConfiguration networkConfiguration) {
-		this.networkConfiguration = networkConfiguration;
+	public void setNetworkConfigurations(Set<PortalNetworkConfiguration> networkConfigurations) {
+		this.networkConfigurations = networkConfigurations;
 	}
 
-	public PortalNetworkConfiguration getNetworkConfiguration() {
-		return networkConfiguration;
+	public Set<PortalNetworkConfiguration> getNetworkConfigurations() {
+		return networkConfigurations;
 	}
 
 	public Set<PortalApp> getApplications() {

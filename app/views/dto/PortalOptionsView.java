@@ -1,7 +1,12 @@
 package views.dto;
 
 import models.PortalApp;
+import models.types.LoginMethodType;
 import models.types.PortalApplicationType;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PortalOptionsView {
 
@@ -12,11 +17,13 @@ public class PortalOptionsView {
     private PortalApp carrousel;
     private String name;
     private String description;
+    private List<LoginMethodType> loginMethods;
 
-    public PortalOptionsView() {}
+    public PortalOptionsView() {
+    }
 
     public PortalOptionsView(Long portalId, String homeURL, PortalApplicationType templateType, PortalApp template,
-                             PortalApp carrousel, String name, String description) {
+                             PortalApp carrousel, String name, String description, List<LoginMethodType> loginMethods) {
         this.portalId = portalId;
         this.homeURL = homeURL;
         this.templateType = templateType;
@@ -24,11 +31,12 @@ public class PortalOptionsView {
         this.carrousel = carrousel;
         this.name = name;
         this.description = description;
+        this.loginMethods = loginMethods;
     }
 
     public static PortalOptionsView initialize(Long portalId, String homeURL, String name, String description) {
         return new PortalOptionsView(portalId, homeURL, PortalApplicationType.TemplateOne, PortalApp.templateOne(),
-                PortalApp.carrousel(), name, description);
+                PortalApp.carrousel(), name, description, new ArrayList<>());
     }
 
     public Long getPortalId() {
@@ -85,5 +93,13 @@ public class PortalOptionsView {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<LoginMethodType> getLoginMethods() {
+        return loginMethods;
+    }
+
+    public void setLoginMethods(List<LoginMethodType> loginMethods) {
+        this.loginMethods = loginMethods;
     }
 }

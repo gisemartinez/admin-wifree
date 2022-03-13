@@ -3,6 +3,7 @@ package models;
 import models.types.LoginMethodType;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 /**
@@ -11,7 +12,7 @@ import javax.persistence.OneToOne;
 @Entity
 public class PortalNetworkConfiguration extends BaseModel {
 
-	@OneToOne(mappedBy = "networkConfiguration")
+	@ManyToOne(optional = false)
 	private Portal portal;
 
 	private Integer connectionTimeout;
@@ -39,15 +40,10 @@ public class PortalNetworkConfiguration extends BaseModel {
 	public boolean hasPortal() {
 		return portal == null;
 	}
-
-	@Override
-	public Long getId() {
-		return portal.id;
-	}
-
+	
 	@Override
 	public String toLogString() {
-		return toLogString("id: " + portal.getId(), "connectionTimeout: " + connectionTimeout, "loginMethod: " + loginMethod, "enableBans: " + enableBans);
+		return toLogString("id: " + super.getId(), "portal_id: " + portal.getId(), "connectionTimeout: " + connectionTimeout, "loginMethod: " + loginMethod, "enableBans: " + enableBans);
 	}
 
 	public Integer getConnectionTimeout() {

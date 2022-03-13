@@ -12,14 +12,13 @@
 				<ul class="nav child_menu" style="display: none">
 					<li><a href="@routes.AdminAppController.portalSettings">@Messages("menu.sidebar.portal-settings.applications")</a></li>
 					<li><a href="@routes.AdminAppController.loginSettings">@Messages("menu.sidebar.portal-settings.login")</a></li>
-				</ul>
+					<li><a href="@routes.AdminAppController.surveys">@Messages("menu.sidebar.surveys.create")</a></li>				</ul>
 			</li>
 @*			<li><a><i class="fa fa-users"></i> @Messages("menu.sidebar.users") </a></li>*@
 
 			<li><a><i class="fa fa-stack-exchange"></i>
 				@Messages("menu.sidebar.surveys") <span class="fa fa-chevron-down"></span></a>
 				<ul class="nav child_menu" style="display: none">
-					<li><a href="@routes.AdminAppController.surveys">@Messages("menu.sidebar.surveys.create")</a></li>
 					<li><a href="@routes.AdminAppController.allSurveys">@Messages("menu.sidebar.surveys.view")</a></li>
 				</ul>
 			</li>

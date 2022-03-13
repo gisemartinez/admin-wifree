@@ -58,45 +58,12 @@
         <!-- Page content -->
         <div class="right_col" role="main">
             <div class="row">
-                <div class="title">Configuracion de portal</div>
-                <div class="x-content">
-                    @helper.form(controllers.routes.ConsoleController.createPortal()) {
-                    <div class="form-group row">
-                        <div class="col-md-3 col-sm-3 col-xs-6">
-                            <div class="">
-                                @helper.inputText(portalForm("title"), '_label -> Messages("connections.label.login-method"), 'required -> "required", 'class -> "")
-                            </div>
-                        </div>
-                    </div>
-
-                    <h2>Login Social</h2>
-
-                    @parts.social_keys(socialKeysForm("google"), "Google")
-                    @parts.social_keys(socialKeysForm("facebook"), "Facebook")
-
-                    <div class="form-group">
-                        <div class="col-md-12 col-sm-6 col-xs-12 col-md-offset-10">
-                            <button type="submit" class="btn btn-success">@Messages("submit")</button>
-                        </div>
-                    </div>
-                    }
-                </div>
-            </div>
-            <div class="row">
                 <div class="col-md-12 col-sm-6 col-xs-12">
                     @** Social Keys START **@
                     <div>
-                        <h1>Configuración de Login</h1>
+                        <h1>Configuración de Redes Sociales</h1>
                         <div class="x-content">
                             @helper.form(controllers.admin.routes.LoginOptionsController.saveSocialKeys()) {
-                                <div class="form-group row">
-                                    <div class="col-md-3 col-sm-3 col-xs-6">
-                                        <div class="">
-                                        @helper.inputRadioGroup(socialKeysForm("loginMethod"), LoginMethodType.portalLoginTypes(), '_label -> Messages("connections.label.login-method"), 'required -> "required", 'class -> "")
-                                        </div>
-                                    </div>
-                                </div>
-                                
                                 <h2>Login Social</h2>
 
                                 @parts.social_keys(socialKeysForm("google"), "Google")

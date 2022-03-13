@@ -35,13 +35,10 @@ public class ConnectionsService {
 	
 	public void saveNetworkConfiguration(Integer connectionTimeout, Long portalId) {
 		Portal portal = portalDAO.get(portalId);
-		PortalNetworkConfiguration networkConfiguration = portal.getNetworkConfiguration();
-		if (networkConfiguration == null) {
-			networkConfiguration = new PortalNetworkConfiguration(portal);
-		}
-		networkConfiguration.setConnectionTimeout(connectionTimeout);
-		portal.setNetworkConfiguration(networkConfiguration);
-		portalNetworkConfigurationDAO.save(networkConfiguration);
+		List<PortalNetworkConfiguration> networkConfigurations = new ArrayList<>(portal.getNetworkConfigurations());
+		networkConfigurations.forEach(n -> n.setConnectionTimeout(connectionTimeout));
+		portal.setNetworkConfigurations(new HashSet<>(networkConfigurations));
+		portalNetworkConfigurationDAO.saveAll(networkConfigurations);
 		portalDAO.save(portal);
 	}
 

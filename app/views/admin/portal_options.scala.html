@@ -2,6 +2,8 @@
 @import views.dto.PortalOptionsView
 
 @import models.types.PortalApplicationType
+@import models.types.LoginMethodType
+
 @(profile: CommonProfile, form: Form[PortalOptionsView])
 
 @username = @{profile.getAttribute("realName").toString}
@@ -75,6 +77,14 @@
                                     <div class="col-md-3 col-sm-3 col-xs-6">
                                         <div class="">
                                         @helper.inputRadioGroup(form("templateType"), PortalApplicationType.appTypes(), '_label -> "Tema", 'class -> "")
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-md-3 col-sm-3 col-xs-6">
+                                        <div class="">
+                                            @helper.inputRadioGroup(form("loginMethods"), LoginMethodType.portalLoginTypes(), '_label -> Messages("connections.label.login-method"), 'required -> "required", 'class -> "")
                                         </div>
                                     </div>
                                 </div>
