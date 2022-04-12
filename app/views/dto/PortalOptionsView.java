@@ -20,6 +20,7 @@ public class PortalOptionsView {
     private List<LoginMethodType> loginMethods;
 
     public PortalOptionsView() {
+        this.loginMethods = new ArrayList<>();
     }
 
     public PortalOptionsView(Long portalId, String homeURL, PortalApplicationType templateType, PortalApp template,

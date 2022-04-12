@@ -14,9 +14,9 @@ import javax.inject.Inject;
 import java.io.File;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-import static models.types.LoginMethodType.*;
+import static models.types.LoginMethodType.Facebook;
+import static models.types.LoginMethodType.Google;
 
 public class PortalAndLoginOptionsService {
 
@@ -98,6 +98,7 @@ public class PortalAndLoginOptionsService {
         List<PortalNetworkConfiguration> networkConfigurations = portalOptions.getLoginMethods().stream()
                 .map(loginMethodType -> {
                             PortalNetworkConfiguration p = new PortalNetworkConfiguration(portal);
+                            p.setId(UUID.randomUUID().getMostSignificantBits());
                             p.setLoginMethod(loginMethodType);
                             return p;
                         }).collect(Collectors.toList());
