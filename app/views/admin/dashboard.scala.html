@@ -15,40 +15,11 @@ connectedUsers: List[ConnectedUser])
 @ageGraphData = @{jsAgeGraphData.toString()}
 @connectionsGraphDataThisWeek = @{jsConnectionsGraphDataThisWeek.toString()}
 @connectionsGraphDataLastWeek = @{jsConnectionsGraphDataLastWeek.toString()}
-@username = @{profile.getAttribute("realName").toString}
 @portalId = @{profile.getAttribute("portal").toString}
 
-<!DOCTYPE html>
-<html lang="es">
 
-<head>
-    @parts.head("WiFree")
-</head>
-
-<body class="nav-md">
-<div class="container body">
-
-    <div class="main_container">
-
-        <div class="col-md-3 left_col">
-            <div class="left_col scroll-view">
-
-                @parts.menu_site_title()
-
-                @parts.menu_profile_quickinfo(username)
-
-                <br/>
-
-                @parts.sidebar_menu()
-                @parts.menu_footer_buttons()
-
-            </div>
-        </div>
-
-        @parts.top_navigation(username)
-
-        <!-- Page content -->
-        <div class="right_col" role="main">
+<!-- Page content -->
+<div class="right_col" role="main">
             <div class="">
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12">
@@ -101,9 +72,4 @@ connectedUsers: List[ConnectedUser])
 
         </div>
 
-        @parts.resources_body()
-    </div>
-</div>
-</body>
 <script src="@routes.Assets.versioned("js/dashboard.js")"></script>
-</html>

@@ -10,7 +10,7 @@ import org.pac4j.core.profile.CommonProfile;
 import play.api.libs.json.JsValue;
 import play.data.Form;
 import play.mvc.Result;
-import play.twirl.api.Content;
+import play.twirl.api.Html;
 import scala.Tuple2;
 import services.AnalyticsService;
 import services.ConnectionsService;
@@ -47,14 +47,14 @@ public class AdminAppController extends WiFreeController {
 
 	@SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
 	public Result dashboard() throws NoProfileFoundException {
-		Content content;
+		Html content;
 		CommonProfile currentProfile = getCurrentProfile();
-
+		
 		if (getCurrentProfile().getAttribute("portal") == null) {
 			SocialKeysView socialKeys = optionsService.getLoginOptions(portalId());
 			Form<SocialKeysView> socialKeysForm = formFactory.form(SocialKeysView.class).fill(socialKeys);
 			Form<Portal> portalForm = formFactory.form(Portal.class);
-			content = views.html.admin.login_options.render(currentProfile, socialKeysForm, portalForm);
+			content = views.html.admin.login_options.apply(currentProfile, socialKeysForm, portalForm);
 		} else {
 			JsValue[] dashboardMockedData = AdminMockedData.dashboard();
 			JsValue jsGenderGraphData = dashboardMockedData[0];
@@ -68,7 +68,7 @@ public class AdminAppController extends WiFreeController {
 					: formFactory.form(PortalNetworkConfiguration.class).fill(portalNetworkConfiguration);
 			ArrayList<ConnectedUser> connectedUsers = connectionsService.connectedUsers(portalId());
 			
-			content = views.html.admin.dashboard.render(
+			content = views.html.admin.dashboard.apply(
 					getCurrentProfile(),
 					jsGenderGraphData,
 					jsAgeGraphData,
@@ -79,8 +79,13 @@ public class AdminAppController extends WiFreeController {
 					);
 		}
 		
-		return ok(content);
-		
+		return ok(render(content));
+	}
+	
+	private Html render(Html content){
+		CommonProfile currentProfile = getCurrentProfile();
+		Html navbar = views.html.parts.side_navigation.apply(currentProfile);
+		return views.html.main.apply("Wifree", navbar, content);
 	}
 
 	@SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
@@ -195,7 +200,7 @@ public class AdminAppController extends WiFreeController {
 	public Result portalSettings() {
 		PortalOptionsView portalOptions = optionsService.getPortalOptions(portalId());
 		Form<PortalOptionsView> form = formFactory.form(PortalOptionsView.class).fill(portalOptions);
-		return ok(views.html.admin.portal_options.render(getCurrentProfile(), form));
+		return ok(render(views.html.admin.portal_options.render(getCurrentProfile(), form)));
 	}
 
 	@SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
