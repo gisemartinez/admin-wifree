@@ -10,6 +10,7 @@ import org.pac4j.play.store.PlaySessionStore;
 import play.Logger;
 import play.data.FormFactory;
 import play.mvc.Controller;
+import play.twirl.api.Html;
 import utils.DateHelper;
 
 import javax.inject.Inject;
@@ -65,4 +66,10 @@ public abstract class WiFreeController extends Controller {
 		}
 	}
 
+	/** Compose with main view where navbar is handled*/
+	public Html render(Html content){
+		CommonProfile currentProfile = getCurrentProfile();
+		Html navbar = views.html.parts.side_navigation.apply(currentProfile);
+		return views.html.main.apply("Wifree", navbar, content);
+	}
 }

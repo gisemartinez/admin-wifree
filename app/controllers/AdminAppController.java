@@ -204,6 +204,12 @@ public class AdminAppController extends WiFreeController {
 		Form<Portal> portalForm = formFactory.form(Portal.class);
 		return ok(render(views.html.admin.login_options.render(currentProfile, socialKeysForm, portalForm)));
 	}
+	
+	//TODO : list collected data from social logins 
+	@SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
+	public Result allCollectedSocialData() {
+		return ok(render(views.html.admin.collectedSocialData.render()));
+	}
 
 	private SurveySummary toSummary(Survey survey) {
 		return new SurveySummary(survey.getId(), survey.getTitle(), survey.getWhenCreated());
@@ -212,12 +218,5 @@ public class AdminAppController extends WiFreeController {
 	private List<VisitsByPeriod> takeLastWeek(List<VisitsByPeriod> list) {
 		int size = list.size();
 		return list.subList(size - Math.min(size, 7), size);
-	}
-
-	/** Compose with main view where navbar is handled*/
-	private Html render(Html content){
-		CommonProfile currentProfile = getCurrentProfile();
-		Html navbar = views.html.parts.side_navigation.apply(currentProfile);
-		return views.html.main.apply("Wifree", navbar, content);
 	}
 }

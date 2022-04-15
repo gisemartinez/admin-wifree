@@ -21,13 +21,17 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LoginOptionsController extends WiFreeController {
+public class SocialLoginController extends WiFreeController {
 
     @Inject
     PortalAndLoginOptionsService portalAndLoginOptionsService;
 
     @Inject
     Config config;
+
+    public Result results() {
+        return ok(render(views.html.admin.collectedSocialData.render()));
+    }
 
     public Result saveSocialKeys() {
         final Form<SocialKeysView> form = formFactory.form(SocialKeysView.class);

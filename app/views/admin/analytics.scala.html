@@ -56,12 +56,6 @@ graphicDataJson18: JsValue)
 
 			<div class="x_panel">
 				<div class="x_content">
-					<div id="porGenero" style="height:350px;"></div>
-				</div>
-			</div>
-
-			<div class="x_panel">
-				<div class="x_content">
 					<div id="porDiayHora" style="height:350px;"></div>
 				</div>
 			</div>
@@ -160,109 +154,6 @@ graphicDataJson18: JsValue)
 			}
 		}]
 	});
-
-
-	// Grafico 2: Visitas por mes y por género
-	var graficoPorGenero = echarts.init(document.getElementById('porGenero'), theme);
-	var graphicData2 = toJson('@graphicData2');
-	var graphicData3 = toJson('@graphicData3');
-	graficoPorGenero.setOption({
-		title: {
-			text: 'Visitas por mes y por género',
-			//subtext: 'Graph Sub-text'
-		},
-
-		tooltip: {
-			trigger: 'axis'
-		},
-		legend: {
-			data: ['Hombres', 'Mujeres']
-		},
-		toolbox: {
-			show: true,
-			feature: {
-				dataZoom: {
-					show: true,
-					yAxisIndex: "none"
-				},
-				dataView: {
-					show: true,
-					readOnly: false
-				},
-				magicType: {
-					show: true,
-					title: {
-						line: 'Líneas',
-						bar: 'Barras',
-						stack: 'Barras Apiladas',
-					},
-					type: ['line', 'bar', 'stack']
-				},
-				restore: {
-					show: true,
-					title: "Restaurar"
-				},
-				saveAsImage: {
-					show: true,
-					title: "Guardar Imágen"
-				}
-			}
-		},
-		calculable: false,
-		xAxis: [{
-			type: 'category',
-			data: graphicData2.map(function (e) {
-				return e.name;
-			})
-		}],
-		yAxis: [{
-			type: 'value'
-		}],
-		series: [{
-			name: 'Hombres',
-			type: 'bar',
-			data: graphicData2.map(function (e) {
-				return e.value;
-			}),
-			markPoint: {
-				data: [{
-					type: 'max',
-					name: 'Cantidad máxima de visitas hombres'
-				}, {
-					type: 'min',
-					name: 'Cantidad mínima de visitas hombres'
-				}]
-			},
-			markLine: {
-				data: [{
-					type: 'average',
-					name: 'Promedio de visitas de hombres'
-				}]
-			}
-		}, {
-			name: 'Mujeres',
-			type: 'bar',
-			data: graphicData3.map(function (e) {
-				return e.value;
-			}),
-			markPoint: {
-				data: [{
-					type: 'max',
-					name: 'Cantidad máxima de visitas de mujeres'
-				}, {
-					type: 'min',
-					name: 'Cantidad mínima de visitas de mujeres'
-				}]
-			},
-			markLine: {
-				data: [{
-					type: 'average',
-					name: 'Promedio de visitas de mujeres'
-				}]
-			}
-		}]
-	});
-
 
 	// Grafico 3: Gráfico por dia y rango horario (es promedio de visitas histórico por dia y hora)
 	var echartLine = echarts.init(document.getElementById('porDiayHora'), theme);
