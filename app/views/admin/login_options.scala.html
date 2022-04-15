@@ -6,87 +6,55 @@
 
 @username = @{profile.getAttribute("realName").toString}
 
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    @parts.head("WiFree")
-
-    <style>
-        .wifree-checkbox dl {
-            width: 100%;
-            overflow: hidden;
-            padding: 2px;
-            margin: 0
-        }
-        .wifree-checkbox dt {
-            float: left;
-            width: 25%;
-            /* adjust the width; make sure the total of both is 100% */
-            padding: 4px;
-            margin: 0
-        }
-        .wifree-checkbox dd {
-            float: left;
-            width: 75%;
-            /* adjust the width; make sure the total of both is 100% */
-            padding: 4px;
-            margin: 0
-        }
-    </style>
-</head>
-
-<body class="nav-md">
-
-<div class="container body">
-
-    <div class="main_container">
-
-        <div class="col-md-3 left_col">
-            <div class="left_col scroll-view">
-                @parts.menu_site_title()
-                @parts.menu_profile_quickinfo(username)
-                <br />
-                @parts.sidebar_menu()
-                @parts.menu_footer_buttons()
-
-            </div>
-        </div>
-
-        @parts.top_navigation(username)
-
-        <!-- Page content -->
-        <div class="right_col" role="main">
-            <div class="row">
-                <div class="col-md-12 col-sm-6 col-xs-12">
-                    @** Social Keys START **@
-                    <div>
-                        <h1>Configuración de Redes Sociales</h1>
-                        <div class="x-content">
-                            @helper.form(controllers.admin.routes.LoginOptionsController.saveSocialKeys()) {
-                                <h2>Login Social</h2>
-
-                                @parts.social_keys(socialKeysForm("google"), "Google")
-                                @parts.social_keys(socialKeysForm("facebook"), "Facebook")
-
-                                <div class="form-group">
-                                    <div class="col-md-12 col-sm-6 col-xs-12 col-md-offset-10">
-                                        <button type="submit" class="btn btn-success">@Messages("submit")</button>
-                                    </div>
-                                </div>
-                            }
-                        </div>
+<!-- Page content -->
+<div class="right_col" role="main">
+    <div class="row">
+        <div class="col-md-12 col-sm-6 col-xs-12">
+            @** Social Keys START **@
+            <div>
+                <h1>Configuración de Redes Sociales</h1>
+                <div class="x-content">
+                    @helper.form(controllers.admin.routes.LoginOptionsController.saveSocialKeys()) {
+                        <h2>Login Social</h2>
+                    <div class="form-group row">
+                        @parts.social_keys(socialKeysForm("google"), "Google")
                     </div>
-                    @** Social Keys END **@
+                    <div class="form-group row">
+                        @parts.social_keys(socialKeysForm("facebook"), "Facebook")
+                    </div>
+                        <div class="form-group">
+                            <div class="col-md-12 col-sm-6 col-xs-12 col-md-offset-10">
+                                <button type="submit" class="btn btn-success">@Messages("submit")</button>
+                            </div>
+                        </div>
+                    }
                 </div>
             </div>
-            @parts.footer_content()
+            @** Social Keys END **@
         </div>
-        <!-- Page content -->
     </div>
-    @parts.resources_body()
 </div>
-
-</body>
-
-</html>
+<!-- Page content -->
+<style>
+    .wifree-checkbox dl {
+        width: 100%;
+        overflow: hidden;
+        padding: 2px;
+        margin: 0
+    }
+    .wifree-checkbox dt {
+        float: left;
+        width: 25%;
+        /* adjust the width; make sure the total of both is 100% */
+        padding: 4px;
+        margin: 0
+    }
+    .wifree-checkbox dd {
+        float: left;
+        width: 75%;
+        /* adjust the width; make sure the total of both is 100% */
+        padding: 4px;
+        margin: 0
+    }
+</style>
+<script src="@routes.Assets.versioned("js/login_options.js")">

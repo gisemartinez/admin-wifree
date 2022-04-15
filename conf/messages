@@ -7,10 +7,10 @@ menu.sidebar.data=Recolección de datos
 menu.sidebar.data.redes=Redes Sociales
 menu.sidebar.data.surveys=Encuestas
 menu.sidebar.data.visitas=Visitas
-menu.sidebar.surveys.create=Encuestas
+menu.sidebar.surveys.manage=Encuestas
 menu.sidebar.portal-settings=Configuración
-menu.sidebar.portal-settings.applications=Portal
-menu.sidebar.portal-settings.login=Redes Sociales
+menu.sidebar.portal-settings.portal.manage=Portal
+menu.sidebar.portal-settings.socialLogin.manage=Redes Sociales
 menu.sidebar.users=Usuarios
 
 connections.title.timeout-settings=Configurar tiempo máximo de conexión

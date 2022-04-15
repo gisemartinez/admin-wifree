@@ -7,194 +7,162 @@
 @jsonString = @{json.toJsonString}
 @username = @{profile.getAttribute("realName").toString}
 
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    @parts.head("WiFree")
-</head>
-
-<body class="nav-md">
-<div class="container body">
-
-    <div class="main_container">
-
-        <div class="col-md-3 left_col">
-            <div class="left_col scroll-view">
-                @parts.menu_site_title()
-                @parts.menu_profile_quickinfo(username)
-                <br />
-                @parts.sidebar_menu()
-                @parts.menu_footer_buttons()
-
-            </div>
-        </div>
-
-        @parts.top_navigation(username)
-
         <!-- Page content -->
-        <div class="right_col" role="main">
-            <div class="row">
-                <div class="col-md-12 col-sm-6 col-xs-12">
-                    @if(json.data.isEmpty) {
-                        <h1>No se han registrado respuestas aún</h1>
-                    }
-                    @json.data.map { data =>
-                        <div class="col-md-12">
-                            <div class="x_panel">
-                                <div class="x_content">
-                                    @if(data.`type` == "textbox" && data.question != "Edad") {
-                                            <h3>@data.question</h3>
-                                            @data.labels.map { answer =>
-                                                <div class="col-md-4">
-                                                    <div class="tile-stats">
-                                                        <h5 class="text-md-left">@answer</h5>
-                                                    </div>
-                                                </div>
-                                            }
-                                    } else {
-                                        <div id="@data.id" style="height:350px;"></div>
+<div class="right_col" role="main">
+    <div class="row">
+        <div class="col-md-12 col-sm-6 col-xs-12">
+            @if(json.data.isEmpty) {
+                <h1>No se han registrado respuestas aún</h1>
+            }
+            @json.data.map { data =>
+                <div class="col-md-12">
+                    <div class="x_panel">
+                        <div class="x_content">
+                            @if(data.`type` == "textbox" && data.question != "Edad") {
+                                    <h3>@data.question</h3>
+                                    @data.labels.map { answer =>
+                                        <div class="col-md-4">
+                                            <div class="tile-stats">
+                                                <h5 class="text-md-left">@answer</h5>
+                                            </div>
+                                        </div>
                                     }
-                                </div>
-                            </div>
+                            } else {
+                                <div id="@data.id" style="height:350px;"></div>
+                            }
                         </div>
-                    }
+                    </div>
                 </div>
-            </div>
-            @parts.footer_content()
+            }
         </div>
-
     </div>
-
-    @parts.resources_body()
-
-    <script>
-            let answers = toJson('@jsonString');
-
-            answers.data.forEach(function(data) {
-                if (data.type === "textbox" && data.question !== "Edad") {
-                    return;
-                }
-
-                let chartDom = document.getElementById(data.id);
-                let myChart = echarts.init(chartDom, theme);
-                let option;
-
-                if (data.type === "radio") {
-                    let labelValue = data.labels.map(function (e, i) {
-                        return {
-                            name: e,
-                            value: data.values[i]
-                        };
-                    });
-
-                    option = {
-                        title: {
-                            text: data.question
-                        },
-                        tooltip: {
-                            trigger: 'item'
-                        },
-                        legend: {
-                            orient: 'horizontal',
-                            left: 'left',
-                            data: data.labels
-                        },
-                        calculable: true,
-                        toolbox: {
-                            show: true,
-                            feature: {
-                                dataZoom: {
-                                    show: true,
-                                    yAxisIndex: "none"
-                                },
-                                dataView: {
-                                    show: true,
-                                    readOnly: false
-                                },
-                                restore: {
-                                    show: true,
-                                    title: "Restaurar"
-                                },
-                                saveAsImage: {
-                                    show: true,
-                                    title: "Guardar Imágen"
-                                }
-                            }
-                        },
-                        series: [
-                            {
-                                type: 'pie',
-                                radius: '50%',
-                                data: labelValue,
-                            }
-                        ]
-                    };
-                } else {
-                    option = {
-                        title: {
-                            text: data.question
-                        },
-                        xAxis: {
-                            type: 'category',
-                            data: data.labels
-                        },
-                        yAxis: {
-                            type: 'value'
-                        },
-                        tooltip: {
-                            trigger: 'axis'
-                        },
-                        toolbox: {
-                            show: true,
-                            feature: {
-                                dataZoom: {
-                                    show: true,
-                                    yAxisIndex: "none"
-                                },
-                                dataView: {
-                                    show: true,
-                                    readOnly: false
-                                },
-                                restore: {
-                                    show: true,
-                                    title: "Restaurar"
-                                },
-                                saveAsImage: {
-                                    show: true,
-                                    title: "Guardar Imágen"
-                                }
-                            }
-                        },
-                        series: [
-                            {
-                                data: data.values,
-                                type: 'bar',
-                                markPoint: {
-                                    data: [{
-                                        type: 'max',
-                                        name: 'Máximo'
-                                    }, {
-                                        type: 'min',
-                                        name: 'Mínimo'
-                                    }]
-                                },
-                                markLine: {
-                                    data: [{
-                                        type: 'average',
-                                        name: 'Promedio'
-                                    }]
-                                }
-                            }
-                        ]
-                    };
-                }
-
-                option && myChart.setOption(option);
-            });
-    </script>
 </div>
 
-</body>
 
-</html>
+@parts.jslibs()
+
+<script>
+        let answers = toJson('@jsonString');
+
+        answers.data.forEach(function(data) {
+            if (data.type === "textbox" && data.question !== "Edad") {
+                return;
+            }
+
+            let chartDom = document.getElementById(data.id);
+            let myChart = echarts.init(chartDom, theme);
+            let option;
+
+            if (data.type === "radio") {
+                let labelValue = data.labels.map(function (e, i) {
+                    return {
+                        name: e,
+                        value: data.values[i]
+                    };
+                });
+
+                option = {
+                    title: {
+                        text: data.question
+                    },
+                    tooltip: {
+                        trigger: 'item'
+                    },
+                    legend: {
+                        orient: 'horizontal',
+                        left: 'left',
+                        data: data.labels
+                    },
+                    calculable: true,
+                    toolbox: {
+                        show: true,
+                        feature: {
+                            dataZoom: {
+                                show: true,
+                                yAxisIndex: "none"
+                            },
+                            dataView: {
+                                show: true,
+                                readOnly: false
+                            },
+                            restore: {
+                                show: true,
+                                title: "Restaurar"
+                            },
+                            saveAsImage: {
+                                show: true,
+                                title: "Guardar Imágen"
+                            }
+                        }
+                    },
+                    series: [
+                        {
+                            type: 'pie',
+                            radius: '50%',
+                            data: labelValue,
+                        }
+                    ]
+                };
+            } else {
+                option = {
+                    title: {
+                        text: data.question
+                    },
+                    xAxis: {
+                        type: 'category',
+                        data: data.labels
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    toolbox: {
+                        show: true,
+                        feature: {
+                            dataZoom: {
+                                show: true,
+                                yAxisIndex: "none"
+                            },
+                            dataView: {
+                                show: true,
+                                readOnly: false
+                            },
+                            restore: {
+                                show: true,
+                                title: "Restaurar"
+                            },
+                            saveAsImage: {
+                                show: true,
+                                title: "Guardar Imágen"
+                            }
+                        }
+                    },
+                    series: [
+                        {
+                            data: data.values,
+                            type: 'bar',
+                            markPoint: {
+                                data: [{
+                                    type: 'max',
+                                    name: 'Máximo'
+                                }, {
+                                    type: 'min',
+                                    name: 'Mínimo'
+                                }]
+                            },
+                            markLine: {
+                                data: [{
+                                    type: 'average',
+                                    name: 'Promedio'
+                                }]
+                            }
+                        }
+                    ]
+                };
+            }
+
+            option && myChart.setOption(option);
+        });
+</script>

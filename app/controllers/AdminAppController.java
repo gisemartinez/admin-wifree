@@ -82,12 +82,6 @@ public class AdminAppController extends WiFreeController {
 		return ok(render(content));
 	}
 	
-	private Html render(Html content){
-		CommonProfile currentProfile = getCurrentProfile();
-		Html navbar = views.html.parts.side_navigation.apply(currentProfile);
-		return views.html.main.apply("Wifree", navbar, content);
-	}
-
 	@SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
 	public Result analytics() throws NoProfileFoundException {
 		JsValue[] analyticsMockedData = AdminMockedData.analytics();
@@ -139,13 +133,12 @@ public class AdminAppController extends WiFreeController {
 		JsValue visits45to60Json = JsonHelper.toJson(takeLastWeek(visits45to60));
 		JsValue visits60toInfJson = JsonHelper.toJson(takeLastWeek(visits60toInf));
 
-		return ok(views.html.admin.analytics.render(currentProfile,
+		return ok(render(views.html.admin.analytics.render(currentProfile,
 				visitsByMonthJson,
 				visitsByPeriodMaleJson, visitsByPeriodFemaleJson,
 				visits0_8Json, visits8_11Json, visits11_13Json, visits13_16Json, visits16_20Json, visits20_24Json,
 				visits0to15Json, visits15to30Json, visits30to45Json, visits45to60Json, visits60toInfJson,
-				jsValue15, jsValue16, jsValue17, jsValue18));
-
+				jsValue15, jsValue16, jsValue17, jsValue18)));
 	}
 
 	@SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
@@ -156,7 +149,7 @@ public class AdminAppController extends WiFreeController {
 				: formFactory.form(PortalNetworkConfiguration.class).fill(portalNetworkConfiguration);
 		CommonProfile currentProfile = getCurrentProfile();
 		ArrayList<ConnectedUser> connectedUsers = connectionsService.connectedUsers(portalId());
-		return ok(views.html.admin.connections.render(form, connectedUsers, currentProfile));
+		return ok(render(views.html.admin.connections.render(form, connectedUsers, currentProfile)));
 	}
 
 	@SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
@@ -174,7 +167,7 @@ public class AdminAppController extends WiFreeController {
 
 		Form<Survey> form = formFactory.form(Survey.class).fill(survey);
 
-		return ok(views.html.admin.surveys.render(currentProfile, form, true, false, 0, 0));
+		return ok(render(views.html.admin.surveys.render(currentProfile, form, true, false, 0, 0)));
 	}
 
 	@SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
@@ -182,7 +175,7 @@ public class AdminAppController extends WiFreeController {
 		CommonProfile currentProfile = getCurrentProfile();
 		Survey survey = new SurveyDAO().get(surveyId);
 		Form<Survey> form = formFactory.form(Survey.class).fill(survey);
-		return ok(views.html.admin.surveys.render(currentProfile, form, true, false, 0, 0));
+		return ok(render(views.html.admin.surveys.render(currentProfile, form, true, false, 0, 0)));
 	}
 
 	@SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
@@ -193,7 +186,7 @@ public class AdminAppController extends WiFreeController {
 				.map(this::toSummary)
 				.sorted(Comparator.comparing(SurveySummary::creation).reversed())
 				.collect(Collectors.toList());
-		return ok(views.html.admin.all_surveys.render(currentProfile, summaries));
+		return ok(render(views.html.admin.all_surveys.render(currentProfile, summaries)));
 	}
 
 	@SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
@@ -209,7 +202,7 @@ public class AdminAppController extends WiFreeController {
 		SocialKeysView socialKeys = optionsService.getLoginOptions(portalId());
 		Form<SocialKeysView> socialKeysForm = formFactory.form(SocialKeysView.class).fill(socialKeys);
 		Form<Portal> portalForm = formFactory.form(Portal.class);
-		return ok(views.html.admin.login_options.render(currentProfile, socialKeysForm, portalForm));
+		return ok(render(views.html.admin.login_options.render(currentProfile, socialKeysForm, portalForm)));
 	}
 
 	private SurveySummary toSummary(Survey survey) {
@@ -221,4 +214,10 @@ public class AdminAppController extends WiFreeController {
 		return list.subList(size - Math.min(size, 7), size);
 	}
 
+	/** Compose with main view where navbar is handled*/
+	private Html render(Html content){
+		CommonProfile currentProfile = getCurrentProfile();
+		Html navbar = views.html.parts.side_navigation.apply(currentProfile);
+		return views.html.main.apply("Wifree", navbar, content);
+	}
 }

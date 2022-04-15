@@ -1,4 +1,4 @@
-@(portalConfigured: Boolean = true)
+@(socialLogin: Boolean = false, surveyLogin: Boolean = false )
 
 <!-- sidebar menu -->
 <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
@@ -10,9 +10,13 @@
 			<li><a><i class="fa fa-gears"></i>
 				@Messages("menu.sidebar.portal-settings") <span class="fa fa-chevron-down"></span></a>
 				<ul class="nav child_menu" style="display: none">
-					<li><a href="@routes.AdminAppController.portalSettings">@Messages("menu.sidebar.portal-settings.applications")</a></li>
-					<li><a href="@routes.AdminAppController.loginSettings">@Messages("menu.sidebar.portal-settings.login")</a></li>
-					<li><a href="@routes.AdminAppController.surveys">@Messages("menu.sidebar.surveys.create")</a></li>				</ul>
+					<li><a href="@routes.AdminAppController.portalSettings">@Messages("menu.sidebar.portal-settings.portal.manage")</a></li>
+					
+						<li><a href="@routes.AdminAppController.loginSettings">@Messages("menu.sidebar.portal-settings.socialLogin.manage")</a></li>
+					
+						<li><a href="@routes.AdminAppController.surveys">@Messages("menu.sidebar.surveys.manage")</a></li>
+					
+				</ul>
 			</li>
 @*			<li><a><i class="fa fa-users"></i> @Messages("menu.sidebar.users") </a></li>*@
 
