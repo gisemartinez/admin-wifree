@@ -3,8 +3,7 @@
 @import org.pac4j.core.profile.CommonProfile
 @import java.util.{List => JList}
 
-@(profile: CommonProfile,
-graphicDataJson: JsValue,
+@(graphicDataJson: JsValue,
 graphicDataJson2: JsValue,
 graphicDataJson3: JsValue,
 graphicDataJson4: JsValue,
@@ -23,7 +22,6 @@ graphicDataJson16: JsValue,
 graphicDataJson17: JsValue,
 graphicDataJson18: JsValue)
 
-@username = @{profile.getAttribute("realName").toString()}
 @graphicData = @{graphicDataJson.toString()}
 @graphicData2 = @{graphicDataJson2.toString()}
 @graphicData3 = @{graphicDataJson3.toString()}

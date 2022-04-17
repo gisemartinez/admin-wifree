@@ -3,12 +3,13 @@ package controllers.admin;
 import com.typesafe.config.Config;
 import controllers.WiFreeController;
 import controllers.routes;
+import models.Portal;
+import org.pac4j.core.profile.CommonProfile;
 import play.data.Form;
 import play.mvc.Http;
 import play.mvc.Result;
 import services.PortalAndLoginOptionsService;
 import views.dto.PortalOptionsView;
-import views.dto.SocialKeysView;
 
 import javax.inject.Inject;
 import java.io.File;
@@ -21,25 +22,14 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class SocialLoginController extends WiFreeController {
+public class PortalSettingsController extends WiFreeController {
 
     @Inject
     PortalAndLoginOptionsService portalAndLoginOptionsService;
 
     @Inject
     Config config;
-
-    public Result results() {
-        return ok(render(views.html.admin.collectedSocialData.render()));
-    }
-
-    public Result saveSocialKeys() {
-        final Form<SocialKeysView> form = formFactory.form(SocialKeysView.class);
-        final SocialKeysView socialKeys = form.bindFromRequest().get();
-        portalAndLoginOptionsService.saveLoginOptions(socialKeys, portalId());
-        return redirect(routes.AdminAppController.loginSettings());
-    }
-
+    
     public Result savePortalOptions() {
         final Form<PortalOptionsView> form = formFactory.form(PortalOptionsView.class);
         final PortalOptionsView portalOptions = form.bindFromRequest().get();
@@ -59,7 +49,10 @@ public class SocialLoginController extends WiFreeController {
                     .mapToObj(i -> moveFile(portalOptions, fileParts, i))
                     .collect(Collectors.toList());
 
-        portalAndLoginOptionsService.savePortalOptions(portalOptions, portalId(), files);
+        Portal portal = portalAndLoginOptionsService.savePortalOptions(portalOptions, portalId(), files);
+        CommonProfile currentProfile = getCurrentProfile();
+        currentProfile.removeAttribute("portal");
+        currentProfile.addAttribute("portal", portal);
         return redirect(routes.AdminAppController.portalSettings());
     }
 
@@ -92,5 +85,4 @@ public class SocialLoginController extends WiFreeController {
         }
         return new File(newPath);
     }
-
 }

@@ -7,6 +7,7 @@ import daos.PortalNetworkConfigurationDAO;
 import models.*;
 import models.types.LoginMethodType;
 import models.types.PortalApplicationType;
+import org.pac4j.core.profile.CommonProfile;
 import views.dto.PortalOptionsView;
 import views.dto.SocialKeysView;
 
@@ -76,7 +77,7 @@ public class PortalAndLoginOptionsService {
                 networkConfigurations.stream().map(PortalNetworkConfiguration::getLoginMethod).collect(Collectors.toList()));
     }
 
-    public void savePortalOptions(PortalOptionsView portalOptions, Long portalId, List<File> files) {
+    public Portal savePortalOptions(PortalOptionsView portalOptions, Long portalId, List<File> files) {
         Portal portal = portalDAO.get(portalId);
 
         portal.setHomeURL(portalOptions.getHomeURL());
@@ -107,5 +108,6 @@ public class PortalAndLoginOptionsService {
 
         networkConfigDAO.saveAll(networkConfigurations);
         portalDAO.saveOrUpdate(portal);
+        return portal;
     }
 }

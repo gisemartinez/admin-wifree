@@ -49,7 +49,7 @@ public class WiFreeAdminAuthenticator implements Authenticator<UsernamePasswordC
         String realName = admin.getName();
 		profile.setId(email);
 		profile.addAttribute(Pac4jConstants.USERNAME, email);
-		profile.addAttribute("portal", admin.getPortal() != null ? admin.getPortal().getId() : null);
+		profile.addAttribute("portal", admin.getPortal());
         profile.addAttribute("realName", realName);
 		credentials.setUserProfile(profile);
 	}

@@ -36,7 +36,7 @@
 <div class="right_col" role="main">
     <div class="row">
         <div class="col-md-9 col-sm-6 col-xs-12">
-            @helper.form(controllers.admin.routes.SocialLoginController.savePortalOptions(),  'enctype -> "multipart/form-data") {
+            @helper.form(controllers.admin.routes.PortalSettingsController.savePortalOptions(),  'enctype -> "multipart/form-data") {
                 <div>
                     <h1>Configuración del Portal</h1>
                     <div class="x-content">
@@ -60,7 +60,6 @@
                                     @helper.inputCheckboxGroup(
                                     form("loginMethods"),
                                     options = LoginMethodType.portalLoginTypes(),
-                                    'required -> "required",
                                     Symbol("_label") -> Messages("connections.label.login-method"),
                                     Symbol("_error") -> form("loginMethods").error.map(_.withMessage("Se debe elegir al menos un metodo")))                                        </div>
                             

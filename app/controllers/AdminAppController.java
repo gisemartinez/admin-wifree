@@ -33,190 +33,184 @@ import java.util.stream.Collectors;
  */
 public class AdminAppController extends WiFreeController {
 
-	@Inject
-	AnalyticsService analyticsService;
+    @Inject
+    AnalyticsService analyticsService;
 
-	@Inject
-	SurveysService surveysService;
+    @Inject
+    SurveysService surveysService;
 
-	@Inject
-	ConnectionsService connectionsService;
+    @Inject
+    ConnectionsService connectionsService;
 
-	@Inject
-	PortalAndLoginOptionsService optionsService;
+    @Inject
+    PortalAndLoginOptionsService optionsService;
 
-	@SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
-	public Result dashboard() throws NoProfileFoundException {
-		Html content;
-		CommonProfile currentProfile = getCurrentProfile();
-		
-		if (getCurrentProfile().getAttribute("portal") == null) {
-			SocialKeysView socialKeys = optionsService.getLoginOptions(portalId());
-			Form<SocialKeysView> socialKeysForm = formFactory.form(SocialKeysView.class).fill(socialKeys);
-			Form<Portal> portalForm = formFactory.form(Portal.class);
-			content = views.html.admin.login_options.apply(currentProfile, socialKeysForm, portalForm);
-		} else {
-			JsValue[] dashboardMockedData = AdminMockedData.dashboard();
-			JsValue jsGenderGraphData = dashboardMockedData[0];
-			JsValue jsAgeGraphData = dashboardMockedData[1];
-			JsValue jsConnectionsGraphDataThisWeek = dashboardMockedData[2];
-			JsValue jsConnectionsGraphDataLastWeek = dashboardMockedData[3];
+    @SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
+    public Result dashboard() throws NoProfileFoundException {
+        CommonProfile currentProfile = getCurrentProfile();
+        Optional<Portal> portal = Optional.ofNullable(currentProfile.getAttribute("portal", Portal.class));
 
-			PortalNetworkConfiguration portalNetworkConfiguration = connectionsService.networkConfiguration(portalId());
-			Form<PortalNetworkConfiguration> form = portalNetworkConfiguration == null
-					? formFactory.form(PortalNetworkConfiguration.class)
-					: formFactory.form(PortalNetworkConfiguration.class).fill(portalNetworkConfiguration);
-			ArrayList<ConnectedUser> connectedUsers = connectionsService.connectedUsers(portalId());
-			
-			content = views.html.admin.dashboard.apply(
-					getCurrentProfile(),
-					jsGenderGraphData,
-					jsAgeGraphData,
-					jsConnectionsGraphDataThisWeek,
-					jsConnectionsGraphDataLastWeek,
-					form, 
-					connectedUsers
-					);
-		}
-		
-		return ok(render(content));
-	}
-	
-	@SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
-	public Result analytics() throws NoProfileFoundException {
-		JsValue[] analyticsMockedData = AdminMockedData.analytics();
-		JsValue jsValue15 = analyticsMockedData[0];
-		JsValue jsValue16 = analyticsMockedData[1];
-		JsValue jsValue17 = analyticsMockedData[2];
-		JsValue jsValue18 = analyticsMockedData[3];
+        if (!portal.isPresent()) {
+            return redirect(routes.ConsoleController.index()); // with something
+        } else {
+            JsValue[] dashboardMockedData = AdminMockedData.dashboard();
+            JsValue jsGenderGraphData = dashboardMockedData[0];
+            JsValue jsAgeGraphData = dashboardMockedData[1];
+            JsValue jsConnectionsGraphDataThisWeek = dashboardMockedData[2];
+            JsValue jsConnectionsGraphDataLastWeek = dashboardMockedData[3];
 
-		CommonProfile currentProfile = getCurrentProfile();
-		Long portalId = portalId();
+            PortalNetworkConfiguration portalNetworkConfiguration = connectionsService.networkConfiguration(portalId());
+            Form<PortalNetworkConfiguration> form = portalNetworkConfiguration == null
+                    ? formFactory.form(PortalNetworkConfiguration.class)
+                    : formFactory.form(PortalNetworkConfiguration.class).fill(portalNetworkConfiguration);
+            ArrayList<ConnectedUser> connectedUsers = connectionsService.connectedUsers(portalId());
 
-		GetAnalyticsDataRequest analyticsRequest = new GetAnalyticsDataRequest(portalId, DateHelper.now());
+            return ok(render(views.html.admin.dashboard.apply(
+                    portal.get().getId().toString(),
+                    jsGenderGraphData,
+                    jsAgeGraphData,
+                    jsConnectionsGraphDataThisWeek,
+                    jsConnectionsGraphDataLastWeek,
+                    form,
+                    connectedUsers
+            )));
+        }
+    }
 
-		GetAnalyticsDataResponse analyticsData = analyticsService.getAnalyticsData(analyticsRequest);
+    @SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
+    public Result analytics() throws NoProfileFoundException {
+        JsValue[] analyticsMockedData = AdminMockedData.analytics();
+        JsValue jsValue15 = analyticsMockedData[0];
+        JsValue jsValue16 = analyticsMockedData[1];
+        JsValue jsValue17 = analyticsMockedData[2];
+        JsValue jsValue18 = analyticsMockedData[3];
 
-		List<VisitsByPeriod> visitsByMonth = analyticsData.visitsByMonthLastYear();
-		final JsValue visitsByMonthJson = JsonHelper.toJson(visitsByMonth);
+        Long portalId = portalId();
 
-		VisitsByPeriodByGender visitsByPeriodByGender = analyticsData.visitsByMonthLastYearByGender();
-		List<VisitsByPeriod> visitsByPeriodMale = visitsByPeriodByGender.male();
-		List<VisitsByPeriod> visitsByPeriodFemale = visitsByPeriodByGender.female();
-		JsValue visitsByPeriodMaleJson = JsonHelper.toJson(visitsByPeriodMale);
-		JsValue visitsByPeriodFemaleJson = JsonHelper.toJson(visitsByPeriodFemale);
+        GetAnalyticsDataRequest analyticsRequest = new GetAnalyticsDataRequest(portalId, DateHelper.now());
 
-		VisitsByDayByTimeRange visitsByDayByTimeRange = analyticsData.visitsByDayByTimeRange();
-		List<VisitsByPeriod> visits0_8 = visitsByDayByTimeRange.visits0_8();
-		List<VisitsByPeriod> visits8_11 = visitsByDayByTimeRange.visits8_11();
-		List<VisitsByPeriod> visits11_13 = visitsByDayByTimeRange.visits11_13();
-		List<VisitsByPeriod> visits13_16 = visitsByDayByTimeRange.visits13_16();
-		List<VisitsByPeriod> visits16_20 = visitsByDayByTimeRange.visits16_20();
-		List<VisitsByPeriod> visits20_24 = visitsByDayByTimeRange.visits20_24();
-		JsValue visits0_8Json = JsonHelper.toJson(visits0_8);
-		JsValue visits8_11Json = JsonHelper.toJson(visits8_11);
-		JsValue visits11_13Json = JsonHelper.toJson(visits11_13);
-		JsValue visits13_16Json = JsonHelper.toJson(visits13_16);
-		JsValue visits16_20Json = JsonHelper.toJson(visits16_20);
-		JsValue visits20_24Json = JsonHelper.toJson(visits20_24);
+        GetAnalyticsDataResponse analyticsData = analyticsService.getAnalyticsData(analyticsRequest);
 
-		List<VisitsByPeriod> emptyList = new ArrayList<>();
-		Map<Tuple2<Integer, Integer>, List<VisitsByPeriod>> visitsByDurationLastWeek = analyticsData.visitsByDurationLastWeek();
-		List<VisitsByPeriod> visits0to15 = visitsByDurationLastWeek.getOrDefault(MinutesRange.RANGE_0_TO_15, emptyList);
-		List<VisitsByPeriod> visits15to30 = visitsByDurationLastWeek.getOrDefault(MinutesRange.RANGE_15_TO_30, emptyList);
-		List<VisitsByPeriod> visits30to45 = visitsByDurationLastWeek.getOrDefault(MinutesRange.RANGE_30_TO_45, emptyList);
-		List<VisitsByPeriod> visits45to60 = visitsByDurationLastWeek.getOrDefault(MinutesRange.RANGE_45_TO_60, emptyList);
-		List<VisitsByPeriod> visits60toInf = visitsByDurationLastWeek.getOrDefault(MinutesRange.RANGE_60_TO_INF, emptyList);
-		JsValue visits0to15Json = JsonHelper.toJson(takeLastWeek(visits0to15));
-		JsValue visits15to30Json = JsonHelper.toJson(takeLastWeek(visits15to30));
-		JsValue visits30to45Json = JsonHelper.toJson(takeLastWeek(visits30to45));
-		JsValue visits45to60Json = JsonHelper.toJson(takeLastWeek(visits45to60));
-		JsValue visits60toInfJson = JsonHelper.toJson(takeLastWeek(visits60toInf));
+        List<VisitsByPeriod> visitsByMonth = analyticsData.visitsByMonthLastYear();
+        final JsValue visitsByMonthJson = JsonHelper.toJson(visitsByMonth);
 
-		return ok(render(views.html.admin.analytics.render(currentProfile,
-				visitsByMonthJson,
-				visitsByPeriodMaleJson, visitsByPeriodFemaleJson,
-				visits0_8Json, visits8_11Json, visits11_13Json, visits13_16Json, visits16_20Json, visits20_24Json,
-				visits0to15Json, visits15to30Json, visits30to45Json, visits45to60Json, visits60toInfJson,
-				jsValue15, jsValue16, jsValue17, jsValue18)));
-	}
+        VisitsByPeriodByGender visitsByPeriodByGender = analyticsData.visitsByMonthLastYearByGender();
+        List<VisitsByPeriod> visitsByPeriodMale = visitsByPeriodByGender.male();
+        List<VisitsByPeriod> visitsByPeriodFemale = visitsByPeriodByGender.female();
+        JsValue visitsByPeriodMaleJson = JsonHelper.toJson(visitsByPeriodMale);
+        JsValue visitsByPeriodFemaleJson = JsonHelper.toJson(visitsByPeriodFemale);
 
-	@SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
-	public Result connections() throws NoProfileFoundException {
-		PortalNetworkConfiguration portalNetworkConfiguration = connectionsService.networkConfiguration(portalId());
-		Form<PortalNetworkConfiguration> form = portalNetworkConfiguration == null
-				? formFactory.form(PortalNetworkConfiguration.class)
-				: formFactory.form(PortalNetworkConfiguration.class).fill(portalNetworkConfiguration);
-		CommonProfile currentProfile = getCurrentProfile();
-		ArrayList<ConnectedUser> connectedUsers = connectionsService.connectedUsers(portalId());
-		return ok(render(views.html.admin.connections.render(form, connectedUsers, currentProfile)));
-	}
+        VisitsByDayByTimeRange visitsByDayByTimeRange = analyticsData.visitsByDayByTimeRange();
+        List<VisitsByPeriod> visits0_8 = visitsByDayByTimeRange.visits0_8();
+        List<VisitsByPeriod> visits8_11 = visitsByDayByTimeRange.visits8_11();
+        List<VisitsByPeriod> visits11_13 = visitsByDayByTimeRange.visits11_13();
+        List<VisitsByPeriod> visits13_16 = visitsByDayByTimeRange.visits13_16();
+        List<VisitsByPeriod> visits16_20 = visitsByDayByTimeRange.visits16_20();
+        List<VisitsByPeriod> visits20_24 = visitsByDayByTimeRange.visits20_24();
+        JsValue visits0_8Json = JsonHelper.toJson(visits0_8);
+        JsValue visits8_11Json = JsonHelper.toJson(visits8_11);
+        JsValue visits11_13Json = JsonHelper.toJson(visits11_13);
+        JsValue visits13_16Json = JsonHelper.toJson(visits13_16);
+        JsValue visits16_20Json = JsonHelper.toJson(visits16_20);
+        JsValue visits20_24Json = JsonHelper.toJson(visits20_24);
 
-	@SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
-	public Result surveys() throws NoProfileFoundException {
-		CommonProfile currentProfile = getCurrentProfile();
+        List<VisitsByPeriod> emptyList = new ArrayList<>();
+        Map<Tuple2<Integer, Integer>, List<VisitsByPeriod>> visitsByDurationLastWeek = analyticsData.visitsByDurationLastWeek();
+        List<VisitsByPeriod> visits0to15 = visitsByDurationLastWeek.getOrDefault(MinutesRange.RANGE_0_TO_15, emptyList);
+        List<VisitsByPeriod> visits15to30 = visitsByDurationLastWeek.getOrDefault(MinutesRange.RANGE_15_TO_30, emptyList);
+        List<VisitsByPeriod> visits30to45 = visitsByDurationLastWeek.getOrDefault(MinutesRange.RANGE_30_TO_45, emptyList);
+        List<VisitsByPeriod> visits45to60 = visitsByDurationLastWeek.getOrDefault(MinutesRange.RANGE_45_TO_60, emptyList);
+        List<VisitsByPeriod> visits60toInf = visitsByDurationLastWeek.getOrDefault(MinutesRange.RANGE_60_TO_INF, emptyList);
+        JsValue visits0to15Json = JsonHelper.toJson(takeLastWeek(visits0to15));
+        JsValue visits15to30Json = JsonHelper.toJson(takeLastWeek(visits15to30));
+        JsValue visits30to45Json = JsonHelper.toJson(takeLastWeek(visits30to45));
+        JsValue visits45to60Json = JsonHelper.toJson(takeLastWeek(visits45to60));
+        JsValue visits60toInfJson = JsonHelper.toJson(takeLastWeek(visits60toInf));
 
-		ArrayList<Field> fields = new ArrayList<>();
-		Field ageField = new Field(null, "textbox", new FieldConfig(null, "Edad", 1, true, null, null, null));
-		Field genreField = new Field(null, "radio", new FieldConfig(null, "Género", 2, true, null, null, Arrays.asList(new Option(1, "Femenino"), new Option(2, "Masculino"), new Option(3, "Otro"))));
-		fields.add(ageField);
-		fields.add(genreField);
-		Survey survey = new Survey(null, null, null, fields, false);
-		ageField.setSurvey(survey);
-		genreField.setSurvey(survey);
+        return ok(render(views.html.admin.analytics.render(
+                visitsByMonthJson,
+                visitsByPeriodMaleJson, visitsByPeriodFemaleJson,
+                visits0_8Json, visits8_11Json, visits11_13Json, visits13_16Json, visits16_20Json, visits20_24Json,
+                visits0to15Json, visits15to30Json, visits30to45Json, visits45to60Json, visits60toInfJson,
+                jsValue15, jsValue16, jsValue17, jsValue18)));
+    }
 
-		Form<Survey> form = formFactory.form(Survey.class).fill(survey);
+    @SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
+    public Result connections() throws NoProfileFoundException {
+        PortalNetworkConfiguration portalNetworkConfiguration = connectionsService.networkConfiguration(portalId());
+        Form<PortalNetworkConfiguration> form = portalNetworkConfiguration == null
+                ? formFactory.form(PortalNetworkConfiguration.class)
+                : formFactory.form(PortalNetworkConfiguration.class).fill(portalNetworkConfiguration);
+        CommonProfile currentProfile = getCurrentProfile();
+        ArrayList<ConnectedUser> connectedUsers = connectionsService.connectedUsers(portalId());
+        return ok(render(views.html.admin.connections.render(form, connectedUsers, currentProfile)));
+    }
 
-		return ok(render(views.html.admin.surveys.render(currentProfile, form, true, false, 0, 0)));
-	}
+    @SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
+    public Result surveys() throws NoProfileFoundException {
+        CommonProfile currentProfile = getCurrentProfile();
 
-	@SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
-	public Result survey(Long surveyId) throws NoProfileFoundException {
-		CommonProfile currentProfile = getCurrentProfile();
-		Survey survey = new SurveyDAO().get(surveyId);
-		Form<Survey> form = formFactory.form(Survey.class).fill(survey);
-		return ok(render(views.html.admin.surveys.render(currentProfile, form, true, false, 0, 0)));
-	}
+        ArrayList<Field> fields = new ArrayList<>();
+        Field ageField = new Field(null, "textbox", new FieldConfig(null, "Edad", 1, true, null, null, null));
+        Field genreField = new Field(null, "radio", new FieldConfig(null, "Género", 2, true, null, null, Arrays.asList(new Option(1, "Femenino"), new Option(2, "Masculino"), new Option(3, "Otro"))));
+        fields.add(ageField);
+        fields.add(genreField);
+        Survey survey = new Survey(null, null, null, fields, false);
+        ageField.setSurvey(survey);
+        genreField.setSurvey(survey);
 
-	@SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
-	public Result allSurveys() throws NoProfileFoundException {
-		CommonProfile currentProfile = getCurrentProfile();
-		GetAllSurveysResponse getAllSurveysResponse = surveysService.getAllSurveys(new GetAllSurveysRequest(portalId()));
-		List<SurveySummary> summaries = getAllSurveysResponse.surveys().stream()
-				.map(this::toSummary)
-				.sorted(Comparator.comparing(SurveySummary::creation).reversed())
-				.collect(Collectors.toList());
-		return ok(render(views.html.admin.all_surveys.render(currentProfile, summaries)));
-	}
+        Form<Survey> form = formFactory.form(Survey.class).fill(survey);
 
-	@SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
-	public Result portalSettings() {
-		PortalOptionsView portalOptions = optionsService.getPortalOptions(portalId());
-		Form<PortalOptionsView> form = formFactory.form(PortalOptionsView.class).fill(portalOptions);
-		return ok(render(views.html.admin.portal_options.render(getCurrentProfile(), form)));
-	}
+        return ok(render(views.html.admin.surveys.render(currentProfile, form, true, false, 0, 0)));
+    }
 
-	@SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
-	public Result loginSettings() {
-		CommonProfile currentProfile = getCurrentProfile();
-		SocialKeysView socialKeys = optionsService.getLoginOptions(portalId());
-		Form<SocialKeysView> socialKeysForm = formFactory.form(SocialKeysView.class).fill(socialKeys);
-		Form<Portal> portalForm = formFactory.form(Portal.class);
-		return ok(render(views.html.admin.login_options.render(currentProfile, socialKeysForm, portalForm)));
-	}
-	
-	//TODO : list collected data from social logins 
-	@SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
-	public Result allCollectedSocialData() {
-		return ok(render(views.html.admin.collectedSocialData.render()));
-	}
+    @SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
+    public Result survey(Long surveyId) throws NoProfileFoundException {
+        CommonProfile currentProfile = getCurrentProfile();
+        Survey survey = new SurveyDAO().get(surveyId);
+        Form<Survey> form = formFactory.form(Survey.class).fill(survey);
+        return ok(render(views.html.admin.surveys.render(currentProfile, form, true, false, 0, 0)));
+    }
 
-	private SurveySummary toSummary(Survey survey) {
-		return new SurveySummary(survey.getId(), survey.getTitle(), survey.getWhenCreated());
-	}
+    @SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
+    public Result allSurveys() throws NoProfileFoundException {
+        CommonProfile currentProfile = getCurrentProfile();
+        GetAllSurveysResponse getAllSurveysResponse = surveysService.getAllSurveys(new GetAllSurveysRequest(portalId()));
+        List<SurveySummary> summaries = getAllSurveysResponse.surveys().stream()
+                .map(this::toSummary)
+                .sorted(Comparator.comparing(SurveySummary::creation).reversed())
+                .collect(Collectors.toList());
+        return ok(render(views.html.admin.all_surveys.render(currentProfile, summaries)));
+    }
 
-	private List<VisitsByPeriod> takeLastWeek(List<VisitsByPeriod> list) {
-		int size = list.size();
-		return list.subList(size - Math.min(size, 7), size);
-	}
+    @SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
+    public Result portalSettings() {
+        PortalOptionsView portalOptions = optionsService.getPortalOptions(portalId());
+        Form<PortalOptionsView> form = formFactory.form(PortalOptionsView.class).fill(portalOptions);
+        return ok(render(views.html.admin.portal_options.render(getCurrentProfile(), form)));
+    }
+
+    @SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
+    public Result loginSettings() {
+        CommonProfile currentProfile = getCurrentProfile();
+        SocialKeysView socialKeys = optionsService.getLoginOptions(portalId());
+        Form<SocialKeysView> socialKeysForm = formFactory.form(SocialKeysView.class).fill(socialKeys);
+        Form<Portal> portalForm = formFactory.form(Portal.class);
+        return ok(render(views.html.admin.login_options.render(currentProfile, socialKeysForm, portalForm)));
+    }
+
+    //TODO : list collected data from social logins 
+    @SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
+    public Result allCollectedSocialData() {
+        return ok(render(views.html.admin.collectedSocialData.render()));
+    }
+
+    private SurveySummary toSummary(Survey survey) {
+        return new SurveySummary(survey.getId(), survey.getTitle(), survey.getWhenCreated());
+    }
+
+    private List<VisitsByPeriod> takeLastWeek(List<VisitsByPeriod> list) {
+        int size = list.size();
+        return list.subList(size - Math.min(size, 7), size);
+    }
 }

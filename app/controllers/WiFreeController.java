@@ -2,6 +2,9 @@ package controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import models.Portal;
+import models.PortalNetworkConfiguration;
+import models.types.LoginMethodType;
 import org.pac4j.core.config.Config;
 import org.pac4j.core.profile.CommonProfile;
 import org.pac4j.core.profile.ProfileManager;
@@ -16,60 +19,74 @@ import utils.DateHelper;
 import javax.inject.Inject;
 import java.time.Instant;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public abstract class WiFreeController extends Controller {
 
-	@Inject
-	protected FormFactory formFactory;
+    @Inject
+    protected FormFactory formFactory;
 
-	@Inject
-	protected Config config;
+    @Inject
+    protected Config config;
 
-	@Inject
-	protected PlaySessionStore playSessionStore;
+    @Inject
+    protected PlaySessionStore playSessionStore;
 
-	@Inject
-	protected ObjectMapper objectMapper;
+    @Inject
+    protected ObjectMapper objectMapper;
 
-	protected final Logger.ALogger logger = Logger.of(this.getClass());
+    protected final Logger.ALogger logger = Logger.of(this.getClass());
 
-	protected Instant now() {
-		return DateHelper.now();
-	}
+    protected Instant now() {
+        return DateHelper.now();
+    }
 
-	protected Long portalId() {
-		return (Long) getCurrentProfile().getAttribute("portal");
-	}
+    protected Long portalId() {
+        return getCurrentProfile().getAttribute("portal", Portal.class).getId();
+    }
 
-	protected void logRequest() {
-		logger.info("*** Received request " + request().method() + " " + request().path() + " - Body: " + getRequestJsonString());
-	}
+    protected void logRequest() {
+        logger.info("*** Received request " + request().method() + " " + request().path() + " - Body: " + getRequestJsonString());
+    }
 
-	protected CommonProfile getCurrentProfile() {
-		final PlayWebContext context = new PlayWebContext(ctx(), playSessionStore);
-		final ProfileManager<CommonProfile> profileManager = new ProfileManager<>(context);
-		Optional<CommonProfile> currentProfile = profileManager.get(true);
-		return currentProfile.orElseThrow(() -> new NoProfileFoundException("No profile in current session logged in. There should be a profile in session at this point."));
-	}
+    protected CommonProfile getCurrentProfile() {
+        final PlayWebContext context = new PlayWebContext(ctx(), playSessionStore);
+        final ProfileManager<CommonProfile> profileManager = new ProfileManager<>(context);
+        Optional<CommonProfile> currentProfile = profileManager.get(true);
+        return currentProfile.orElseThrow(() -> new NoProfileFoundException("No profile in current session logged in. There should be a profile in session at this point."));
+    }
+    
+    protected JsonNode getRequestJson() {
+        return request().body().asJson();
+    }
 
-	protected JsonNode getRequestJson() {
-		return request().body().asJson();
-	}
+    protected String getRequestJsonString() {
+        return Optional.ofNullable(getRequestJson()).map(JsonNode::toString).orElse("No body");
+    }
 
-	protected String getRequestJsonString() {
-		return Optional.ofNullable(getRequestJson()).map(JsonNode::toString).orElse("No body");
-	}
+    public static class NoProfileFoundException extends RuntimeException {
+        NoProfileFoundException(String msg) {
+            super(msg);
+        }
+    }
 
-	public static class NoProfileFoundException extends RuntimeException {
-		NoProfileFoundException(String msg) {
-			super(msg);
-		}
-	}
-
-	/** Compose with main view where navbar is handled*/
-	public Html render(Html content){
-		CommonProfile currentProfile = getCurrentProfile();
-		Html navbar = views.html.parts.side_navigation.apply(currentProfile);
-		return views.html.main.apply("Wifree", navbar, content);
-	}
+    /**
+     * Compose with main view where navbar is handled
+     */
+    public Html render(Html content) {
+        CommonProfile currentProfile = getCurrentProfile();
+        Portal portal = getCurrentProfile().getAttribute("portal", Portal.class);
+        if (portal == null) {
+            return views.html.error403.apply();
+        }
+        Set<LoginMethodType> loginMethodTypes = portal.getNetworkConfigurations()
+                .stream()
+                .map(PortalNetworkConfiguration::getLoginMethod)
+                .collect(Collectors.toSet());
+        Html navbar = views.html.parts.side_navigation.apply(currentProfile,
+                loginMethodTypes.stream().anyMatch(p -> p.id.equals(LoginMethodType.SocialLogin.id)),
+                loginMethodTypes.stream().anyMatch(p -> p.id.equals(LoginMethodType.Survey.id)));
+        return views.html.main.apply("Wifree", navbar, content);
+    }
 }

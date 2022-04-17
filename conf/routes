@@ -21,40 +21,40 @@ GET         /manage/social-login                    controllers.AdminAppControll
 GET         /manage/surveys                         controllers.AdminAppController.surveys
 POST        /manage/surveys                         controllers.admin.SurveysController.createSurvey
 
-POST        /manage/social-login                    controllers.admin.SocialLoginController.saveSocialKeys
-POST        /manage/portal-settings                 controllers.admin.SocialLoginController.savePortalOptions
+POST        /manage/social-login                    controllers.admin.SocialLoginKeysController.saveSocialKeys
+POST        /manage/portal-settings                 controllers.admin.PortalSettingsController.savePortalOptions
 
 ### Data routes
 GET         /data/visitors                          controllers.AdminAppController.analytics
 GET         /data/surveys/:id                       controllers.AdminAppController.survey(id: Long)
-GET         /data/surveys                           controllers.AdminAppController.allSurveys
 GET         /data/social-login/results              controllers.AdminAppController.allCollectedSocialData
 GET         /data/surveys/:surveyId/all-answers     controllers.admin.SurveysController.getSurveyAnswers(surveyId: Long)
 GET         /data/surveys/:surveyId/answers         controllers.admin.SurveysController.answeredSurvey(surveyId: Long, offset: Int ?= 0)
 GET         /data/surveys/:surveyId/results         controllers.admin.SurveysController.getSurveyResults(surveyId: Long)
+GET         /data/surveys                           controllers.AdminAppController.allSurveys
 
-# Console routes
+### Console routes
 GET			/console								controllers.ConsoleController.index
 GET         /console/login      					controllers.ConsoleController.login
 POST		/console/create-admin					controllers.ConsoleController.createAdmin
 POST		/console/create-portal					controllers.ConsoleController.createPortal
 GET         /console/mockup/:portalId               controllers.ConsoleController.mockup(portalId: Long)
 
-# LoginController routes
+### LoginController routes
 GET			/loginForm								controllers.LoginController.loginForm
 
-# API routes
+### API routes
 GET         /api/socialuser/:email                  controllers.api.SocialUserController.getSocialUser(email: String)
 POST        /api/socialuser                         controllers.api.SocialUserController.saveSocialUser
 POST        /api/survey                             controllers.api.SurveyController.saveSurvey
 GET         /api/survey/:id/answers                 controllers.api.SurveyAnswersController.answersCSV(id: Long)
 POST        /api/survey/answers                     controllers.api.SurveyAnswersController.saveAnswers
-# API routes new
+### API routes new
 GET         /api/client-landing/:portalId           controllers.api.PortalConfigController.clientLanding(portalId: Long)
 GET         /api/client-auth/:portalId              controllers.api.PortalConfigController.clientAuth(portalId: Long)
 POST        /api/user-connected                     controllers.api.SocialUserController.saveUserConnected
 
-# Pac4J Temp Routes
+### Pac4J Temp Routes
 GET         /loginForm                        		controllers.LoginController.loginForm()
 GET         /form/index.html                 		controllers.LoginController.formIndex()
 GET         /form/index.html.json            		controllers.LoginController.formIndexJson()
@@ -65,7 +65,7 @@ GET         /casProxyCallback                		@org.pac4j.play.CallbackControlle
 POST        /casProxyCallback                		@org.pac4j.play.CallbackController.callback()
 GET         /logout                          		@org.pac4j.play.LogoutController.logout()
 
-# Map static resources from the /public folder to the /assets URL path
+### Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file        					controllers.Assets.versioned(path="/public", file: Asset)
 
 GET         /img/:name                              controllers.ImageController.image(name: String)

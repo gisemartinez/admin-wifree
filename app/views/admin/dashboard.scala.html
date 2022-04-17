@@ -1,9 +1,8 @@
 @import play.api.libs.json.JsValue
-@import org.pac4j.core.profile.CommonProfile
 @import views.dto.ConnectedUser
 @import services.ConnectionsService
 
-@(profile: CommonProfile,
+@(portalId: String,
 jsGenderGraphData: JsValue,
 jsAgeGraphData: JsValue,
 jsConnectionsGraphDataThisWeek: JsValue,
@@ -15,8 +14,6 @@ connectedUsers: List[ConnectedUser])
 @ageGraphData = @{jsAgeGraphData.toString()}
 @connectionsGraphDataThisWeek = @{jsConnectionsGraphDataThisWeek.toString()}
 @connectionsGraphDataLastWeek = @{jsConnectionsGraphDataLastWeek.toString()}
-@portalId = @{profile.getAttribute("portal").toString}
-
 
 <!-- Page content -->
 <div class="right_col" role="main">
@@ -65,7 +62,7 @@ connectedUsers: List[ConnectedUser])
 
 
                 <div class="row">
-                    @connectionsPart(networkConfigurationForm, connectedUsers,profile)
+                    @connectionsPart(networkConfigurationForm, connectedUsers)
                 </div>
                 <!-- /Page content -->
             </div>

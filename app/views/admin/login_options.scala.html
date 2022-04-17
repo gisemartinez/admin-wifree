@@ -14,7 +14,7 @@
             <div>
                 <h1>Configuración de Redes Sociales</h1>
                 <div class="x-content">
-                    @helper.form(controllers.admin.routes.SocialLoginController.saveSocialKeys()) {
+                    @helper.form(controllers.admin.routes.SocialLoginKeysController.saveSocialKeys()) {
                         <h2>Login Social</h2>
                     <div class="form-group row">
                         @parts.social_keys(socialKeysForm("google"), "Google")
