@@ -1,8 +1,5 @@
-@import org.pac4j.core.profile.CommonProfile
 
-@(profile: CommonProfile, surveyForm: Form[Survey], isEditing: Boolean, isCreating: Boolean, currentAnswer: Int = 0, totalAnswers: Int = 0)
-
-@username = @{profile.getAttribute("realName").toString}
+@(surveyForm: Form[Survey], isEditing: Boolean, isCreating: Boolean, currentAnswer: Int = 0, totalAnswers: Int = 0)
 
 @parts.js.surveys_js(isEditing)
 

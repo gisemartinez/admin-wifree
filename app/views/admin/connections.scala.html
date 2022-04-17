@@ -1,11 +1,7 @@
-@import org.pac4j.core.profile.CommonProfile
 @import views.dto.ConnectedUser
 
 @(networkConfigurationForm: Form[PortalNetworkConfiguration],
-connectedUsers: List[ConnectedUser],
-profile: CommonProfile)
-
-@username = @{profile.getAttribute("realName").toString()}
+connectedUsers: List[ConnectedUser])
 
 <!-- page content -->
 

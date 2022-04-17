@@ -59,7 +59,7 @@ public class SurveysController extends WiFreeController {
         ImmutableListMultimap<NetworkUser, FieldAnswer> answersForSurvey = fieldAnswerDAO.findForSurvey(surveyId);
 
         if (answersForSurvey.isEmpty()) {
-            return ok(render(views.html.admin.survey_no_answers.render(getCurrentProfile())));
+            return ok(render(views.html.admin.survey_no_answers.render()));
         } else {
             Survey survey = surveyDAO.get(surveyId);
 
@@ -74,7 +74,6 @@ public class SurveysController extends WiFreeController {
             if (totalAnswers > 0) form = form.fill(answeredSurveysPerUser.get(sanitizedOffset));
 
             return ok(render( views.html.admin.surveys.render(
-                    getCurrentProfile(),
                     form,
                     false,
                     false,
@@ -177,7 +176,7 @@ public class SurveysController extends WiFreeController {
                 .collect(toList());
 
         DataJson dataJson = new DataJson(answers);
-        return ok(render(views.html.admin.surveys_results.render(getCurrentProfile(), dataJson)));
+        return ok(render(views.html.admin.surveys_results.render(dataJson)));
     }
 
     public static class DataJson {

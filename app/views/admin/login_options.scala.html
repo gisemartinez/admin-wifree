@@ -1,10 +1,7 @@
-@import org.pac4j.core.profile.CommonProfile
 @import views.dto.SocialKeysView
 
 @import models.types.LoginMethodType
-@(profile: CommonProfile, socialKeysForm: Form[SocialKeysView], portalForm: Form[Portal])
-
-@username = @{profile.getAttribute("realName").toString}
+@(socialKeysForm: Form[SocialKeysView], portalForm: Form[Portal])
 
 <!-- Page content -->
 <div class="right_col" role="main">

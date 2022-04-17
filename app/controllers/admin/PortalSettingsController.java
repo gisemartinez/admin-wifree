@@ -50,6 +50,7 @@ public class PortalSettingsController extends WiFreeController {
                     .collect(Collectors.toList());
 
         Portal portal = portalAndLoginOptionsService.savePortalOptions(portalOptions, portalId(), files);
+        // refresh profile portal
         CommonProfile currentProfile = getCurrentProfile();
         currentProfile.removeAttribute("portal");
         currentProfile.addAttribute("portal", portal);

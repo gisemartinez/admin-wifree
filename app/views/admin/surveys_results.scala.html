@@ -1,11 +1,9 @@
-@import org.pac4j.core.profile.CommonProfile
 @import com.fasterxml.jackson.databind.JsonNode
 @import controllers.admin.SurveysController.DataJson
 
-@(profile: CommonProfile, json: DataJson)
+@(json: DataJson)
 
 @jsonString = @{json.toJsonString}
-@username = @{profile.getAttribute("realName").toString}
 
         <!-- Page content -->
 <div class="right_col" role="main">

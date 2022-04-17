@@ -1,10 +1,8 @@
-@import org.pac4j.core.profile.CommonProfile
 @import java.util.{List => JList}
 @import views.dto.SurveySummary
 
-@(profile: CommonProfile, summaries: JList[SurveySummary])
+@(summaries: JList[SurveySummary])
 
-@username = @{profile.getAttribute("realName").toString()}
         <!-- Page content -->
 <div class="right_col" role="main">
     <div class="row">

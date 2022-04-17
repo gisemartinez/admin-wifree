@@ -1,12 +1,9 @@
-@import org.pac4j.core.profile.CommonProfile
 @import views.dto.PortalOptionsView
 
 @import models.types.PortalApplicationType
 @import models.types.LoginMethodType
 
-@(profile: CommonProfile, form: Form[PortalOptionsView])
-
-@username = @{profile.getAttribute("realName").toString}
+@(form: Form[PortalOptionsView])
 
 <style>
     .wifree-checkbox dl {

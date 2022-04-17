@@ -10,7 +10,6 @@ import org.pac4j.core.profile.CommonProfile;
 import play.api.libs.json.JsValue;
 import play.data.Form;
 import play.mvc.Result;
-import play.twirl.api.Html;
 import scala.Tuple2;
 import services.AnalyticsService;
 import services.ConnectionsService;
@@ -141,15 +140,12 @@ public class AdminAppController extends WiFreeController {
         Form<PortalNetworkConfiguration> form = portalNetworkConfiguration == null
                 ? formFactory.form(PortalNetworkConfiguration.class)
                 : formFactory.form(PortalNetworkConfiguration.class).fill(portalNetworkConfiguration);
-        CommonProfile currentProfile = getCurrentProfile();
         ArrayList<ConnectedUser> connectedUsers = connectionsService.connectedUsers(portalId());
-        return ok(render(views.html.admin.connections.render(form, connectedUsers, currentProfile)));
+        return ok(render(views.html.admin.connections.render(form, connectedUsers)));
     }
 
     @SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
     public Result surveys() throws NoProfileFoundException {
-        CommonProfile currentProfile = getCurrentProfile();
-
         ArrayList<Field> fields = new ArrayList<>();
         Field ageField = new Field(null, "textbox", new FieldConfig(null, "Edad", 1, true, null, null, null));
         Field genreField = new Field(null, "radio", new FieldConfig(null, "Género", 2, true, null, null, Arrays.asList(new Option(1, "Femenino"), new Option(2, "Masculino"), new Option(3, "Otro"))));
@@ -161,42 +157,39 @@ public class AdminAppController extends WiFreeController {
 
         Form<Survey> form = formFactory.form(Survey.class).fill(survey);
 
-        return ok(render(views.html.admin.surveys.render(currentProfile, form, true, false, 0, 0)));
+        return ok(render(views.html.admin.surveys.render(form, true, false, 0, 0)));
     }
 
     @SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
     public Result survey(Long surveyId) throws NoProfileFoundException {
-        CommonProfile currentProfile = getCurrentProfile();
         Survey survey = new SurveyDAO().get(surveyId);
         Form<Survey> form = formFactory.form(Survey.class).fill(survey);
-        return ok(render(views.html.admin.surveys.render(currentProfile, form, true, false, 0, 0)));
+        return ok(render(views.html.admin.surveys.render(form, true, false, 0, 0)));
     }
 
     @SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
     public Result allSurveys() throws NoProfileFoundException {
-        CommonProfile currentProfile = getCurrentProfile();
         GetAllSurveysResponse getAllSurveysResponse = surveysService.getAllSurveys(new GetAllSurveysRequest(portalId()));
         List<SurveySummary> summaries = getAllSurveysResponse.surveys().stream()
                 .map(this::toSummary)
                 .sorted(Comparator.comparing(SurveySummary::creation).reversed())
                 .collect(Collectors.toList());
-        return ok(render(views.html.admin.all_surveys.render(currentProfile, summaries)));
+        return ok(render(views.html.admin.all_surveys.render(summaries)));
     }
 
     @SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
     public Result portalSettings() {
         PortalOptionsView portalOptions = optionsService.getPortalOptions(portalId());
         Form<PortalOptionsView> form = formFactory.form(PortalOptionsView.class).fill(portalOptions);
-        return ok(render(views.html.admin.portal_options.render(getCurrentProfile(), form)));
+        return ok(render(views.html.admin.portal_options.render(form)));
     }
 
     @SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
     public Result loginSettings() {
-        CommonProfile currentProfile = getCurrentProfile();
         SocialKeysView socialKeys = optionsService.getLoginOptions(portalId());
         Form<SocialKeysView> socialKeysForm = formFactory.form(SocialKeysView.class).fill(socialKeys);
         Form<Portal> portalForm = formFactory.form(Portal.class);
-        return ok(render(views.html.admin.login_options.render(currentProfile, socialKeysForm, portalForm)));
+        return ok(render(views.html.admin.login_options.render(socialKeysForm, portalForm)));
     }
 
     //TODO : list collected data from social logins 
