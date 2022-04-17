@@ -40,7 +40,7 @@ public class SurveyController extends WiFreeController {
         survey.getFields().forEach(field -> field.setSurvey(survey));
 
         // TODO guardar survey, crear dao
-        CreateSurveyResponse createSurveyResponse = surveysService.createSurvey(new CreateSurveyRequest(survey, 0));
+        CreateSurveyResponse createSurveyResponse = surveysService.createSurvey(new CreateSurveyRequest(survey, portalId));
 
         return ok(createSurveyResponse.isOk() + survey.getTitle());
     }
