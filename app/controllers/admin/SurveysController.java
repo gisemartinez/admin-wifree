@@ -39,6 +39,14 @@ public class SurveysController extends WiFreeController {
     @Inject
     SurveyDAO surveyDAO; // TODO quitar
 
+    @SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
+    public Result survey(Long surveyId) throws NoProfileFoundException {
+        Survey survey = new SurveyDAO().get(surveyId);
+        Form<Survey> form = formFactory.form(Survey.class).fill(survey);
+        return ok(render(views.html.admin.surveys.render(form, true, false, 0, 0)));
+    }
+    
+    @SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
     public Result createSurvey() {
         Survey survey = formFactory.form(Survey.class).bindFromRequest().get();
         CreateSurveyResponse createSurveyResponse = surveysService.createSurvey(new CreateSurveyRequest(survey, portalId()));

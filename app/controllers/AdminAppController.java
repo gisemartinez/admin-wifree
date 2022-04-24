@@ -159,14 +159,7 @@ public class AdminAppController extends WiFreeController {
 
         return ok(render(views.html.admin.surveys.render(form, true, false, 0, 0)));
     }
-
-    @SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
-    public Result survey(Long surveyId) throws NoProfileFoundException {
-        Survey survey = new SurveyDAO().get(surveyId);
-        Form<Survey> form = formFactory.form(Survey.class).fill(survey);
-        return ok(render(views.html.admin.surveys.render(form, true, false, 0, 0)));
-    }
-
+    
     @SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
     public Result allSurveys() throws NoProfileFoundException {
         GetAllSurveysResponse getAllSurveysResponse = surveysService.getAllSurveys(new GetAllSurveysRequest(portalId()));

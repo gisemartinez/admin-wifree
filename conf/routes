@@ -27,7 +27,7 @@ POST        /manage/portal-settings                 controllers.admin.PortalSett
 
 ### Data routes
 GET         /data/visitors                          controllers.AdminAppController.analytics
-GET         /data/surveys/:id                       controllers.AdminAppController.survey(id: Long)
+GET         /data/surveys/:id                       controllers.admin.SurveysController.survey(id: Long)
 GET         /data/social-login/results              controllers.AdminAppController.allCollectedSocialData
 GET         /data/surveys/:surveyId/all-answers     controllers.admin.SurveysController.getSurveyAnswers(surveyId: Long)
 GET         /data/surveys/:surveyId/answers         controllers.admin.SurveysController.answeredSurvey(surveyId: Long, offset: Int ?= 0)
