@@ -15,6 +15,7 @@ import javax.inject.Inject;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
@@ -75,10 +76,14 @@ public class PortalSettingsController extends WiFreeController {
         File file = filePart.getFile();
         String extension = filePart.getContentType().split("/")[1];
         String externalPathPrefix = config.getString("images.path");
+        Path externalPathPrefixPath = Paths.get(externalPathPrefix);
         String fileName = "image_" + portalOptions.getPortalId() + "_" + i + "." + extension;
         String newPath = "public/img/client/" + fileName;
         String externalPath = externalPathPrefix + fileName;
         try {
+            if (!Files.notExists(externalPathPrefixPath)){
+                Files.createDirectory(externalPathPrefixPath);
+            }
             Files.copy(file.toPath(), Paths.get(newPath), StandardCopyOption.REPLACE_EXISTING);
             Files.copy(file.toPath(), Paths.get(externalPath), StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
