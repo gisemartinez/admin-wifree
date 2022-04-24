@@ -25,7 +25,7 @@
         </div>
     } else {
         <div class="file-upload">
-            <h3>Carrousel</h3>
+            <h3>Carousel</h3>
             <div class="col-md-12">
                 <h4>Imágenes Cargadas</h4>
                 <span>
@@ -33,8 +33,8 @@
                     @image("name").value.map { imgName =>
                         <div class="col-md-2">
                             <h6>Imágen @{i+1}</h6>
-@*                            <img src="@routes.Assets.versioned("img/client/"+imgName)" alt="Carrousel Imagen @{i+1}" width="150"/>*@
-                            <img src="@routes.ImageController.image(imgName)" alt="Carrousel Imagen @{i+1}" width="150"/>
+@*                            <img src="@routes.Assets.versioned("img/client/"+imgName)" alt="Carousel Imagen @{i+1}" width="150"/>*@
+                            <img src="@routes.ImageController.image(imgName)" alt="Carousel Imagen @{i+1}" width="150"/>
                             <div hidden>
                                 <input id="image_@i" name="image.@i" value="@image("absolutePath").value.get"/>
                             </div>

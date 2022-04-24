@@ -62,16 +62,16 @@ public class PortalAndLoginOptionsService {
         PortalApp templateOne = applications.get(PortalApplicationType.TemplateOne);
         PortalApp templateTwo = applications.get(PortalApplicationType.TemplateTwo);
         PortalApp template = Optional.ofNullable(templateOne).orElse(Optional.ofNullable(templateTwo).orElse(null));
-        PortalApp carrousel = applications.get(PortalApplicationType.Carrousel);
+        PortalApp carousel = applications.get(PortalApplicationType.Carousel);
         Set<PortalNetworkConfiguration> networkConfigurations = portal.getNetworkConfigurations();
 
-        return template == null || carrousel == null
+        return template == null || carousel == null
                 ? PortalOptionsView.initialize(portalId, portal.getHomeURL(), portal.getName(), portal.getDescription())
                 : new PortalOptionsView(
                 portalId,
                 portal.getHomeURL(),
                 template.getType(),
-                template, carrousel,
+                template, carousel,
                 portal.getName(), 
                 portal.getDescription(),
                 networkConfigurations.stream().map(PortalNetworkConfiguration::getLoginMethod).collect(Collectors.toList()));
@@ -86,13 +86,13 @@ public class PortalAndLoginOptionsService {
 
         portalOptions.getTemplate().setPortal(portal);
 
-        PortalApp carrousel = PortalApp.carrousel();
-        carrousel.setPortal(portal);
-        carrousel.setConfig(new PortalAppConfig(files));
+        PortalApp carousel = PortalApp.carousel();
+        carousel.setPortal(portal);
+        carousel.setConfig(new PortalAppConfig(files));
 
         HashSet<PortalApp> portalApps = new HashSet<>();
         portalApps.add(portalOptions.getTemplate());
-        portalApps.add(carrousel);
+        portalApps.add(carousel);
 
         portal.setApplications(portalApps);
 

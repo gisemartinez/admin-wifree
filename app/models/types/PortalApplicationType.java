@@ -14,7 +14,7 @@ import static scala.collection.JavaConverters.asScalaBuffer;
  */
 public enum PortalApplicationType {
 
-	Carrousel("carrousel", "Carrousel"),
+	Carousel("carousel", "Carousel"),
 	Link("link", "Link"),
 	SocialMediaWidget("socialMediaWidget", "Widget"),
 	Image("image", "Imagen"),

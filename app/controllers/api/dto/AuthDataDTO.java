@@ -6,7 +6,7 @@ public class AuthDataDTO extends WiFreeDTO {
 
     public String uniqueId;
     public List<String> loginTypes;
-    public  List<LoginTypeOptionsDTO> loginTypeOptions;
+    public List<LoginTypeOptionsDTO> loginTypeOptions;
     public String client_id;
 
     public AuthDataDTO() {}

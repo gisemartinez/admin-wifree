@@ -33,7 +33,7 @@ public class PortalAppConfig {
         return new PortalAppConfig();
     }
 
-    public static PortalAppConfig carrousel() {
+    public static PortalAppConfig carousel() {
         return new PortalAppConfig(new ArrayList<>());
     }
 

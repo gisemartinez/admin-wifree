@@ -4,7 +4,6 @@ import models.PortalApp;
 import models.types.LoginMethodType;
 import models.types.PortalApplicationType;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +13,7 @@ public class PortalOptionsView {
     private String homeURL;
     private PortalApplicationType templateType;
     private PortalApp template;
-    private PortalApp carrousel;
+    private PortalApp carousel;
     private String name;
     private String description;
     private List<LoginMethodType> loginMethods;
@@ -24,12 +23,12 @@ public class PortalOptionsView {
     }
 
     public PortalOptionsView(Long portalId, String homeURL, PortalApplicationType templateType, PortalApp template,
-                             PortalApp carrousel, String name, String description, List<LoginMethodType> loginMethods) {
+                             PortalApp carousel, String name, String description, List<LoginMethodType> loginMethods) {
         this.portalId = portalId;
         this.homeURL = homeURL;
         this.templateType = templateType;
         this.template = template;
-        this.carrousel = carrousel;
+        this.carousel = carousel;
         this.name = name;
         this.description = description;
         this.loginMethods = loginMethods;
@@ -37,7 +36,7 @@ public class PortalOptionsView {
 
     public static PortalOptionsView initialize(Long portalId, String homeURL, String name, String description) {
         return new PortalOptionsView(portalId, homeURL, PortalApplicationType.TemplateOne, PortalApp.templateOne(),
-                PortalApp.carrousel(), name, description, new ArrayList<>());
+                PortalApp.carousel(), name, description, new ArrayList<>());
     }
 
     public Long getPortalId() {
@@ -64,12 +63,12 @@ public class PortalOptionsView {
         this.template = template;
     }
 
-    public PortalApp getCarrousel() {
-        return carrousel;
+    public PortalApp getCarousel() {
+        return carousel;
     }
 
-    public void setCarrousel(PortalApp carrousel) {
-        this.carrousel = carrousel;
+    public void setCarousel(PortalApp carousel) {
+        this.carousel = carousel;
     }
 
     public PortalApplicationType getTemplateType() {

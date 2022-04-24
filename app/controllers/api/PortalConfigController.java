@@ -54,16 +54,18 @@ public class PortalConfigController extends WiFreeController {
                 .collect(Collectors.toList());
         String id = portalId.toString();
         Map<PortalApplicationType, PortalApp> appsByType = portal.getApplicationsByType();
-        List<String> images = appsByType.get(PortalApplicationType.Carrousel).getConfig().getImages().stream()
+        List<String> images = appsByType.get(PortalApplicationType.Carousel).getConfig().getImages().stream()
                 .map(File::getName)
                 .collect(Collectors.toList());
 
         List<LoginTypeOptionsDTO> loginTypeOptions = new ArrayList<>();
 
         if (loginMethodTypes.contains(LoginMethodType.Survey)) {
-            Survey portalActiveSurvey = surveyDAO.findPortalActiveSurvey(portalId);
-            SurveyFormDTO surveyForm = SurveyFormDTO.fromDomain(portalActiveSurvey);
-            loginTypeOptions.add(new LoginTypeOptionsDTO(surveyForm, images));
+            Optional<Survey> portalActiveSurvey = Optional.ofNullable(surveyDAO.findPortalActiveSurvey(portalId));
+            if (portalActiveSurvey.isPresent()) {
+                SurveyFormDTO surveyForm = SurveyFormDTO.fromDomain(portalActiveSurvey.get());
+                loginTypeOptions.add(new LoginTypeOptionsDTO(surveyForm));
+            }
         }
         if (loginMethodTypes.contains(LoginMethodType.SocialLogin)) {
             List<PortalLoginConfiguration> configs = portalLoginConfigurationDAO.findEnabled(portalId);
@@ -72,13 +74,16 @@ public class PortalConfigController extends WiFreeController {
                     .map(SocialKeysDTO::fromDomain)
                     .map(SocialMediaKeysDTO::new)
                     .collect(Collectors.toList());
-            loginTypeOptions.add(new LoginTypeOptionsDTO(socialMediaKeys, images));
+            loginTypeOptions.add(new LoginTypeOptionsDTO(socialMediaKeys));
         }
 
-        AuthDataDTO authData = new AuthDataDTO(uniqueId, loginMethodTypes.stream().map(l -> l.id).collect(Collectors.toList()), loginTypeOptions, portalId.toString());
+        AuthDataDTO authData = new AuthDataDTO(uniqueId,
+                loginMethodTypes.stream().map(l -> l.id).collect(Collectors.toList()), 
+                loginTypeOptions, 
+                portalId.toString());
         String name = portal.getName();
-        ClientDataDTO clientData = new ClientDataDTO(portalId.toString(), name);
-        ClientAuthResponse clientAuthResponse = new ClientAuthResponse(authData, clientData);
+        ClientDataDTO clientData = new ClientDataDTO(portalId.toString(), name, portal.getDescription());
+        ClientAuthResponse clientAuthResponse = new ClientAuthResponse(authData, clientData, new CarouselDataDTO(images));
         return ok(clientAuthResponse.toJson());
     }
 

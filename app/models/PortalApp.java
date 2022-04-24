@@ -43,8 +43,8 @@ public class PortalApp extends BaseModel {
 		return new PortalApp(null, PortalApplicationType.TemplateTwo, null, true, PortalAppConfig.templateTwo());
 	}
 
-	public static PortalApp carrousel() {
-		return new PortalApp(null, PortalApplicationType.Carrousel, null, true, PortalAppConfig.carrousel());
+	public static PortalApp carousel() {
+		return new PortalApp(null, PortalApplicationType.Carousel, null, true, PortalAppConfig.carousel());
 	}
 
 	@Override
