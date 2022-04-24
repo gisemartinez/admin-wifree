@@ -7,7 +7,6 @@ import daos.PortalNetworkConfigurationDAO;
 import models.*;
 import models.types.LoginMethodType;
 import models.types.PortalApplicationType;
-import org.pac4j.core.profile.CommonProfile;
 import views.dto.PortalOptionsView;
 import views.dto.SocialKeysView;
 

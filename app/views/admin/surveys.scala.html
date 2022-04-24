@@ -23,13 +23,42 @@
         padding: 4px;
         margin: 0
     }
+    
+    .survey-header {
+        
+    }
+    .question-form-header {
+        display: flex;
+        gap: 5%;
+    }
+    
+    .question-buttons > div {
+        display: flex;
+        gap: 5%;
+        justify-content: space-between;
+        padding-bottom: 2%;
+    }
+    
+    .question-form-content {
+        
+    }
+    
+    .sticky {
+      position: fixed;
+      top: 0;
+      width: 100%
+    }
+
+    .sticky + .question-form-content {
+      padding-top: 15%;
+    }
 </style>
 
 <!-- Page content -->
 <div class="right_col" role="main">
     <div class="row">
         <div class="col-md-12 col-sm-6 col-xs-12">
-            @*** Title START ***@ 
+            @*** Title START ***@
             @if(isCreating || isEditing) {
                 <h1>Formulario de Encuesta</h1>
             } else {
@@ -59,17 +88,19 @@
                     }
                 </div>
             }
+            <div class="ln_solid"></div>
+
             @*** Navigation Buttons END ***@
             @*** Form START ***@
-            <div>
+            <div class="survey-body">
                 @helper.form(
                     controllers.admin.routes.SurveysController.createSurvey(), 
                     'id -> "surveyForm",
                     Symbol("data-parsley-validate") -> "true", 
                     'class -> "form-horizontal form-label-left"
-                ){
+                ){ 
                     @*** Question Title and Enabled START ***@
-                    <div class="form-group row survey-body">
+                    <div class="form-group row survey-header" id="survey-header">
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <h2>
                                 @helper.inputText(surveyForm("title"), 
@@ -85,37 +116,46 @@
                                     'style -> "height: 20px; width: 5%;")
                                 </div>
                             }
+                            @*** Fields Buttons START ***@
+                            @if(isEditing || isCreating) {
+                            <div class="question-buttons">
+                                <div>
+                                    <button type="button" id="newInputButton" class="btn btn-primary"
+                                            style="display: none">New Input
+                                    </button>
+                                </div>
+                                <div>
+                                    <div>@Messages("surveys.new-field.text")</div>
+                                    <button type="button" id="newTextInputButton" class="btn btn-info fa fa-plus" title="@Messages("surveys.new-field.text")">
+                                    </button>
+                                </div>
+                                <div>
+                                    <div>@Messages("surveys.new-field.rating")</div>
+                                    <button type="button" id="newRatingInputButton" class="btn btn-info fa fa-plus" title="@Messages("surveys.new-field.rating")">
+                                    </button>
+                                </div>
+                                <div>
+                                    <div>@Messages("surveys.new-field.radio")</div>
+                                    <button type="button" id="newRadioInputButton" class="btn btn-info fa fa-plus" title="@Messages("surveys.new-field.radio")">
+                                    </button>
+                                </div>
+                                <div>
+                                    <div>@Messages("surveys.new-field.checkbox")</div>
+                                    <button type="button" id="newCheckboxInputButton" class="btn btn-info fa fa-plus" title="@Messages("surveys.new-field.checkbox")">
+                                    </button>
+                                </div>
                             </div>
+                            }
                         </div>
-                        @*** Question Title and Enabled END ***@
-    
-                        <div style="display: none">
+                        
+                    </div>
+                    @*** Question Title and Enabled END ***@
+                    <div class="ln_solid"></div>
+
+                    <div style="display: none">
                             @helper.inputText(surveyForm("id"))
                         </div>
-    
-                        @*** Fields Buttons START ***@
-                        @if(isEditing || isCreating) {
-                            <div class="question-buttons">
-                                <button type="button" id="newInputButton" class="btn btn-primary" style="display: none">New Input
-                                </button>
-                                <button type="button" id="newTextInputButton" class="btn btn-primary">
-                                    @Messages("surveys.new-field.text")
-                                </button>
-                                <button type="button" id="newRatingInputButton" class="btn btn-primary">
-                                    @Messages("surveys.new-field.rating")
-                                </button>
-                                <button type="button" id="newRadioInputButton" class="btn btn-primary">
-                                    @Messages("surveys.new-field.radio")
-                                </button>
-                                <button type="button" id="newSelectorInputButton" class="btn btn-primary" style="display: none">
-                                    @Messages("surveys.new-field.selector")
-                                </button>
-                                <button type="button" id="newCheckboxInputButton" class="btn btn-primary">
-                                    @Messages("surveys.new-field.checkbox")
-                                </button>
-                            </div>
-                        }
-                        @*** Fields Buttons END ***@
+                
     
                         <div>
                             @helper.repeat(surveyForm("fields"), min = 1) { field =>
@@ -125,127 +165,125 @@
     
                                 @if(!isCreating) {
                                     <div class="form-group row survey-fields-set">
-                                
-                                        <div class="col-md-12 col-sm-12 col-xs-12">
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                @if(isCreating) {
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-6 col-xs-12 question-form-header">
+                                                    @if(isCreating) {
                                                     <h3>Pregunta @{field.label.last}</h3>
-                                                } else {
-                                                    <h3>Pregunta @{field.label.last.toString.toInt + 1}</h3>
-                                                }
-                                            </div>
-            
-                                            @if(isEditing || isCreating) {
-                                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                                    <button type="button" class="btn btn-danger delete-button"
-                                                            onclick="deleteSection(this)">Borrar
-                                                    </button>
-                                                </div>
-                                            }
-                                        </div>
-            
-                                        <div class="col-md-6 col-sm-6 col-xs-12">
-                                            @*** Type ***@
-                                            <div hidden>
-                                                @helper.inputText(field("type"), 
-                                                'class -> "form-control col-md-7 col-xs-12 field-type")
-                                            </div>
-            
-                                            @*** Key START ***@
-                                            <div hidden>
-                                                @if(isCreating) {
-                                                    @defining("key_" + field.label.last) { keyValue =>
-                                                        <input type="text" id="@{field(" config")("key").id}" name="@{field("config")("key").name}" value="@keyValue">
-                                                    }
-                                                } else {
-                                                    @helper.inputText(field("config")("key"), 
-                                                    'class -> "form-control col-md-7 col-xs-12")
-                                                }
-                                            </div>
-                                            @*** Key END ***@
-            
-                                            @*** Label ***@
-                                            @helper.inputText(field("config")("label"), 
-                                            '_label -> Messages("surveys.label.label"),
-                                            'class -> "form-control col-md-7 col-xs-12")
-            
-                                            @*** Order ***@
-                                            <div hidden>
-                                                @if(isCreating) {
-                                                    <input type="number" id="@{field(" config")("order").id}" name="@{field("config")("order").name}" value="@{field.label.last.toString.toInt + 1}">
-                                                } else { 
-                                                    @helper.inputText(field("config")("order"), 
-                                                        '_label ->
-                                                        Messages("surveys.label.order"), 'type -> "number", 'class -> "form-control col-md-7 col-xs-12", 'min -> "0")
-                                                }
-                                            </div>
-            
-                                            @*** Required START ***@
-                                            <div class="wifree-checkbox">
-                                                @helper.checkbox(field("config")("required"), 
-                                                '_label -> Messages("surveys.label.required"), 
-                                                'class -> "form-control col-md-3 col-xs-3",
-                                                'style -> "height: 20px; width: 5%;")
-                                            </div>
-                                            @*** Required END ***@
-            
-                                            @*** Value START ***@
-                                            @if(isEditing || isCreating) {
-                                            } else {
-                                                @defining(field("type").value.get) { fieldType =>
-                                                    @if(fieldType == "checkbox" || fieldType == "radio" || fieldType == "rating") {
-                                                        <div hidden>
-                                                            @helper.inputText(field("config")("value"),
-                                                            '_label -> Messages("surveys.label.value"),
-                                                            'class -> "form-control col-md-7 col-xs-12 question-text")
-                                                        </div>
                                                     } else {
-                                                        <div>
-                                                            @helper.inputText(field("config")("value"),
-                                                            '_label -> Messages("surveys.label.value"),
-                                                            'class -> "form-control col-md-7 col-xs-12 question-text")
-                                                        </div>
+                                                    <h3>Pregunta @{field.label.last.toString.toInt + 1}</h3>
                                                     }
+
+                                                    @if(isEditing || isCreating) {
+                                                    <button type="button" class="btn delete-button"
+                                                            onclick="deleteSection(this)">
+                                                        <i class="fa fa-trash" title="Borrar campo"></i>
+                                                    </button>
+                                                    }
+                                                </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-6 col-xs-12 question-form-content">
+                                                @*** Type ***@
+                                                <div hidden>
+                                                    @helper.inputText(field("type"),
+                                                    'class -> "form-control col-md-7 col-xs-12 field-type")
+                                                </div>
+
+                                                @*** Key START ***@
+                                                <div hidden>
+                                                    @if(isCreating) {
+                                                    @defining("key_" + field.label.last) { keyValue =>
+                                                    <input type="text" id="@{field(" config")("key").id}" name="@{field("config")("key").name}" value="@keyValue">
+                                                    }
+                                                    } else {
+                                                    @helper.inputText(field("config")("key"),
+                                                    'class -> "form-control col-md-7 col-xs-12")
+                                                    }
+                                                </div>
+                                                @*** Key END ***@
+
+                                                @*** Label ***@
+                                                @helper.inputText(field("config")("label"),
+                                                '_label -> Messages("surveys.label.label"),
+                                                'class -> "form-control col-md-7 col-xs-12")
+
+                                                @*** Order ***@
+                                                <div hidden>
+                                                    @if(isCreating) {
+                                                    <input type="number" id="@{field(" config")("order").id}" name="@{field("config")("order").name}" value="@{field.label.last.toString.toInt + 1}">
+                                                    } else {
+                                                    @helper.inputText(field("config")("order"),
+                                                    '_label ->
+                                                    Messages("surveys.label.order"), 'type -> "number", 'class -> "form-control col-md-7 col-xs-12", 'min -> "0")
+                                                    }
+                                                </div>
+
+                                                @*** Required START ***@
+                                                <div class="wifree-checkbox">
+                                                    @helper.checkbox(field("config")("required"),
+                                                    '_label -> Messages("surveys.label.required"),
+                                                    'class -> "form-control col-md-3 col-xs-3",
+                                                    'style -> "height: 20px; width: 5%;")
+                                                </div>
+                                                @*** Required END ***@
+
+                                                @*** Value START ***@
+                                                @if(isEditing || isCreating) {
+                                                } else {
+                                                @defining(field("type").value.get) { fieldType =>
+                                                @if(fieldType == "checkbox" || fieldType == "radio" || fieldType == "rating") {
+                                                <div hidden>
+                                                    @helper.inputText(field("config")("value"),
+                                                    '_label -> Messages("surveys.label.value"),
+                                                    'class -> "form-control col-md-7 col-xs-12 question-text")
+                                                </div>
+                                                } else {
+                                                <div>
+                                                    @helper.inputText(field("config")("value"),
+                                                    '_label -> Messages("surveys.label.value"),
+                                                    'class -> "form-control col-md-7 col-xs-12 question-text")
+                                                </div>
                                                 }
-                                            }
-                                            @*** Value END ***@
-        
-                                            @*** Maximum START ***@
-                                            @if(isCreating || field("type").value.get == "rating") {
+                                                }
+                                                }
+                                                @*** Value END ***@
+
+                                                @*** Maximum START ***@
+                                                @if(isCreating || field("type").value.get == "rating") {
                                                 <div>
                                                     @if(!isEditing && !isCreating && field("type").value.get == "rating") {
-                                                        <label>Respuesta</label>
-                                                        <div class="lead">
-                                                            @defining(field("config")("maximum").value.get.toInt) { max =>
-                                                                @defining(field("config")("value").value.get.toInt) { v =>
-                                                                    @defining(1 to v) { range =>
-                                                                        @range.map { n =>
-                                                                            <span class="glyphicon .glyphicon-star-empty glyphicon-star"></span>
-                                                                        }
-                                                                    }
-                                                                    @defining(v+1 to max) { range =>
-                                                                        @range.map { n =>
-                                                                            <span class="glyphicon .glyphicon-star-empty glyphicon-star-empty"></span>
-                                                                        }
-                                                                    }
-                                                                }
-                                                            }
-                                                        </div>
+                                                    <label>Respuesta</label>
+                                                    <div class="lead">
+                                                        @defining(field("config")("maximum").value.get.toInt) { max =>
+                                                        @defining(field("config")("value").value.get.toInt) { v =>
+                                                        @defining(1 to v) { range =>
+                                                        @range.map { n =>
+                                                        <span class="glyphicon .glyphicon-star-empty glyphicon-star"></span>
+                                                        }
+                                                        }
+                                                        @defining(v+1 to max) { range =>
+                                                        @range.map { n =>
+                                                        <span class="glyphicon .glyphicon-star-empty glyphicon-star-empty"></span>
+                                                        }
+                                                        }
+                                                        }
+                                                        }
+                                                    </div>
                                                     } else {
-                                                        @helper.inputText(field("config")("maximum"), 
-                                                        '_label -> Messages("surveys.label.maximum"), 
-                                                        'class -> "form-control col-md-7 col-xs-12 question-rating", 
-                                                        'type -> "number", 'min -> "2")
+                                                    @helper.inputText(field("config")("maximum"),
+                                                    '_label -> Messages("surveys.label.maximum"),
+                                                    'class -> "form-control col-md-7 col-xs-12 question-rating",
+                                                    'type -> "number", 'min -> "2")
                                                     }
                                                 </div>
-                                            }
-                                            @*** Maximum END ***@
-            
-                                            @if(isCreating || field("type").value.get == "checkbox" || field("type").value.get == "radio") {
+                                                }
+                                                @*** Maximum END ***@
+
+                                                @if(isCreating || field("type").value.get == "checkbox" || field("type").value.get == "radio") {
                                                 <div class="rating-options">
                                                     <div>
                                                         @if(!isEditing && !isCreating && field("type").value.fold(false)(x => x == "checkbox" || x == "radio")) {
-                                                            <label>Respuesta</label>
+                                                        <label>Respuesta</label>
                                                         }
                                                         @helper.repeat(field("config")("otherOptions"), min = 1) { optionsField =>
                                                             <div class="rating-option wifree-checkbox">
@@ -256,35 +294,44 @@
                                                                         'class -> "form-control col-md-7 col-xs-12 question-radio")
                                                                     </div>
                                                                     @helper.inputText(
-                                                                        optionsField("key"), 
-                                                                        '_label ->
-                                                                        Messages("surveys.label.option.key"), 
-                                                                        'class -> "form-control col-md-7 col-xs-12 question-radio")
-                                                                } else {
-                                                                    @if(field("type").value.fold(false)(x => x == "checkbox" || x == "radio")) {
+                                                                    optionsField("key"),
+                                                                    '_label ->
+                                                                    Messages("surveys.label.option.key"),
+                                                                    'class -> "form-control col-md-7 col-xs-12 question-radio")
+                                                                    } else {
+                                                                        @if(field("type").value.fold(false)(x => x == "checkbox" || x == "radio")) {
                                                                         <div class="input-group">
-                                                                            <span class="input-group-addon">
-                                                                                @if(field("config")("value").value.get.contains(optionsField("key").value.get)) {
-                                                                                    <input type="checkbox" checked>
-                                                                                } else {
-                                                                                    <input type="checkbox">
-                                                                                }
-                                                                            </span>
-                                                                            <input type="text" value="@optionsField(" key").value" class="form-control col-md-7 col-xs-12 question-radio">
+                                                                                        <span class="input-group-addon">
+                                                                                            @if(field("config")("value").value.get.contains(optionsField("key").value.get)) {
+                                                                                                <input type="checkbox" checked>
+                                                                                            } else {
+                                                                                                <input type="checkbox">
+                                                                                            }
+                                                                                        </span>
+                                                                            <input type="text" value="@optionsField("key").value" class="form-control col-md-7 col-xs-12 question-radio">
                                                                         </div>
+                                                                        }
                                                                     }
-                                                                }
+                                                            </div>
+                                                        }
+                                                        @if(isEditing || isCreating) {
+                                                            <div class="rating-option wifree-checkbox">
+                                                                <dl>
+                                                                    <dt>@Messages("surveys.add-option")</dt>
+                                                                    <dd>
+                                                                        <button type="button" class="btn btn-info"
+                                                                                onclick="addRatingOption(this)">
+                                                                            <i class="fa fa-plus" title="@Messages("surveys.add-option")"></i>
+                                                                        </button>
+                                                                    </dd>
+                                                                </dl>
                                                             </div>
                                                         }
                                                     </div>
-                                                    @if(isEditing || isCreating) {
-                                                        <button type="button" class="btn btn-info"
-                                                            onclick="addRatingOption(this)">@Messages("surveys.add-option")
-                                                        </button>
-                                                    }
                                                 </div>
-                                            }
-            
+                                                }
+
+                                            </div>
                                         </div>
                                     </div>
                                 }
@@ -292,6 +339,7 @@
                         </div>
     
                         <div class="ln_solid"></div>
+                        @*** Fields Buttons END ***@
                         @if(isEditing || isCreating){
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-6">

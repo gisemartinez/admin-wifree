@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
     Object.defineProperty(NodeList.prototype, "last", {
         value: function last() {
             if (this.length == 0)
@@ -10,42 +10,60 @@ $(document).ready(function() {
         configurable: true
     });
 
-    $("#newInputButton").click(function() {
+    $("#newInputButton").click(function () {
         cloneAndSelectInputs(false, false, false, "");
     });
 
-    $("#newTextInputButton").click(function() {
+    $("#newTextInputButton").click(function () {
         cloneAndSelectInputs(false, true, true, "textbox");
     });
 
-    $("#newRatingInputButton").click(function() {
+    $("#newRatingInputButton").click(function () {
         cloneAndSelectInputs(true, false, true, "rating");
     });
 
-    $("#newRadioInputButton").click(function() {
+    $("#newRadioInputButton").click(function () {
         cloneAndSelectInputs(true, true, false, "radio");
     });
 
-    $("#newSelectorInputButton").click(function() {
+    $("#newSelectorInputButton").click(function () {
         cloneAndSelectInputs(true, true, false, "selector");
     });
 
-    $("#newCheckboxInputButton").click(function() {
+    $("#newCheckboxInputButton").click(function () {
         cloneAndSelectInputs(true, true, false, "checkbox");
     });
 
     if (!window.location.href.includes("answers")) {
         document.querySelectorAll(".rating-option").forEach(r => formatRatingOption(r));
     }
+
+    /*     // When the user scrolls the page, execute myFunction
+      window.onscroll = function() {myFunction()};
+      
+      // Get the header
+      var header = document.getElementById("survey-header");
+      
+      // Get the offset position of the navbar
+      var sticky = header.offsetTop;
+      
+      // Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
+      function myFunction() {
+        if (window.pageYOffset > sticky) {
+          header.classList.add("sticky");
+        } else {
+          header.classList.remove("sticky");
+        }
+      }*/
 })
 
 function deleteSection(element) {
     let nodeToRemove = element.parentNode.parentNode.parentNode;
     let nodeToRemoveIndex = Number(nodeToRemove.querySelector(".field-type").name.match(/\d+/)[0]);
     nodeToRemove.remove();
-    
+
     let allNodes = document.querySelectorAll(".survey-fields-set");
-     
+
     for (let i = nodeToRemoveIndex; i < allNodes.length; i++) {
         const node = allNodes[i];
         let next = i + 1;
@@ -61,29 +79,29 @@ function deleteSection(element) {
             if (name) element.name = name.replaceAll(`fields[${next}`, `fields[${i}`);
             if (_for) element.setAttribute("for", _for.replaceAll(`fields_${next}`, `fields_${i}`));
             if (innerText && ["LABEL", "H3"].includes(element.tagName)) {
-                let newText = innerText.replaceAll(`fields.${next}`, `fields.${i}`).replaceAll(`Pregunta ${next+1}`, `Pregunta ${next}`);
+                let newText = innerText.replaceAll(`fields.${next}`, `fields.${i}`).replaceAll(`Pregunta ${next + 1}`, `Pregunta ${next}`);
                 element.innerText = newText;
             }
         });
     }
-    
+
 }
 
 function addRatingOption(element) {
     let options = element.parentNode.firstElementChild;
     let lastOption = options.lastElementChild;
     let newOption = lastOption.cloneNode(true);
-    
+
     let questionOptions = options.querySelectorAll(".question-radio");
     let lastQuestionOption = questionOptions[questionOptions.length - 1];
     let i = Number([...lastQuestionOption.name.matchAll(/\d+/g)][1][0]);
     newOption.innerHTML = newOption.innerHTML
-        .replaceAll(`Options_${i}`, `Options_${i+1}`)
-        .replaceAll(`Options[${i}]`, `Options[${i+1}]`)
-        .replaceAll(`Options.${i}`, `Options.${i+1}`);
-    
+        .replaceAll(`Options_${i}`, `Options_${i + 1}`)
+        .replaceAll(`Options[${i}]`, `Options[${i + 1}]`)
+        .replaceAll(`Options.${i}`, `Options.${i + 1}`);
+
     newOption.querySelectorAll("input").forEach(x => x.setAttribute("value", ''));
-    newOption.querySelector("[id$=_index]").setAttribute("value", i+2);
+    newOption.querySelector("[id$=_index]").setAttribute("value", i + 2);
 
     options.appendChild(newOption);
 }
@@ -91,7 +109,7 @@ function addRatingOption(element) {
 function cloneAndSelectInputs(hideText, hideRating, hideRadio, fieldType) {
     // Get last index
     let i = Number($(".field-type").last().attr("id").match(/\d+/)[0]);
-    
+
     // Get last existing node and clone it
     let allNodes = document.querySelectorAll(".survey-fields-set")
     let node = allNodes.last();
@@ -100,25 +118,25 @@ function cloneAndSelectInputs(hideText, hideRating, hideRadio, fieldType) {
     let nodeKey = node.querySelector("#fields_" + i + "_config_key").value;
 
     // Update cloned node index number
-    newNode.innerHTML = newNode.innerHTML.replaceAll(`fields_${i}`, `fields_${i+1}`)
-        .replaceAll(`fields[${i}]`, `fields[${i+1}]`)
-        .replaceAll(`fields.${i}`, `fields.${i+1}`)
-        .replaceAll(`Pregunta ${i+1}`, `Pregunta ${i+2}`);
-    
+    newNode.innerHTML = newNode.innerHTML.replaceAll(`fields_${i}`, `fields_${i + 1}`)
+        .replaceAll(`fields[${i}]`, `fields[${i + 1}]`)
+        .replaceAll(`fields.${i}`, `fields.${i + 1}`)
+        .replaceAll(`Pregunta ${i + 1}`, `Pregunta ${i + 2}`);
+
     // Clear inputs values
     newNode.querySelectorAll("input").forEach(x => x.removeAttribute("value"));
     newNode.querySelectorAll("input[type=checkbox]").forEach(x => x.setAttribute("value", "true"));
 
     // Update key number
-    newNode.querySelector("#fields_" + (i+1) + "_config_key").setAttribute("value", nodeKey.replaceAll(i, i+1));
-    newNode.querySelector("#fields_" + (i+1) + "_config_order").setAttribute("value", i+2);
+    newNode.querySelector("#fields_" + (i + 1) + "_config_key").setAttribute("value", nodeKey.replaceAll(i, i + 1));
+    newNode.querySelector("#fields_" + (i + 1) + "_config_order").setAttribute("value", i + 2);
 
     // Hide not corresponding elements
     newNode.querySelectorAll(".question-text").forEach(e => e.parentNode.parentNode.hidden = hideText);
     newNode.querySelectorAll(".question-rating").forEach(e => e.parentNode.parentNode.parentNode.hidden = hideRating);
     //newNode.querySelectorAll(".question-radio").forEach(e => e.parentNode.parentNode.hidden = hideRadio);
     newNode.querySelector(".rating-options").hidden = hideRadio;
-    
+
     let fieldTypeElement = newNode.querySelector(".field-type");
     fieldTypeElement.setAttribute("value", fieldType);
     newNode.hidden = false;
@@ -137,9 +155,9 @@ function cloneAndSelectInputs(hideText, hideRating, hideRadio, fieldType) {
     }
 
     newNode.lastElementChild.lastElementChild.firstElementChild.replaceChildren(newNode.lastElementChild.lastElementChild.firstElementChild.firstElementChild)
-    
+
     //newNode.querySelectorAll(".question-radio").last().type = fieldType;
-    
+
     parent.appendChild(newNode);
 }
 
@@ -163,6 +181,8 @@ function formatRatingOption(ratingOption) {
     const fieldType = ratingOption.parentNode.parentNode.parentNode.querySelector(".field-type").value;
     let input = ratingOption.querySelectorAll("input").last();
     let div = createInlineRating(fieldType);
-    div.appendChild(input);
-    ratingOption.querySelectorAll("dd").last().replaceChildren(div);
+    if (input) {
+        div.appendChild(input);
+        ratingOption.querySelectorAll("dd").last().replaceChildren(div);
+    }
 }
