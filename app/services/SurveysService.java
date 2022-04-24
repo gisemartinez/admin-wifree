@@ -1,5 +1,7 @@
 package services;
 
+import daos.SurveyDAO;
+import models.Survey;
 import operations.requests.CreateSurveyRequest;
 import operations.requests.GetAllSurveysRequest;
 import operations.requests.SaveSurveyAnswersRequest;
@@ -23,6 +25,9 @@ public class SurveysService extends WiFreeService {
     @Inject
     SaveSurveyAnswersFunction saveSurveyAnswers;
 
+    @Inject
+    private SurveyDAO surveyDAO;
+
     public CreateSurveyResponse createSurvey(CreateSurveyRequest createSurveyRequest) {
         return createSurvey.apply(createSurveyRequest);
     }
@@ -35,4 +40,7 @@ public class SurveysService extends WiFreeService {
         return saveSurveyAnswers.apply(saveSurveyAnswersRequest);
     }
 
+    public void deleteSurvey(Survey survey) {
+        surveyDAO.delete(survey);
+    }
 }

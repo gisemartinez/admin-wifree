@@ -32,7 +32,10 @@
                                 <td>@summary.title</td>
                                 <td>@{summary.creation.toString.substring(0, summary.creation.toString.length - 4)}</td>
                                 <td class="text-center">
-                                    <a class="btn btn-primary" href="@routes.AdminAppController.survey(summary.id)" role="button">Editar</a>
+                                    <a class="btn btn-primary fa fa-edit" href="@controllers.admin.routes.SurveysController.survey(summary.id)" role="button"></a>
+                                    @helper.form(controllers.admin.routes.SurveysController.deleteSurvey(summary.id)){
+                                        <button type="submit" class="btn btn-danger"><i class="fa fa-trash" title="Eliminar encuesta"></i></button>
+                                    }
                                 </td>
                                 <td class="text-center">
                                     <a class="btn btn-info" href="@controllers.admin.routes.SurveysController.getSurveyResults(summary.id)" role="button">Ver Resumen</a>

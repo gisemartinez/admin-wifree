@@ -20,6 +20,7 @@ GET			/manage/portal-settings					controllers.AdminAppController.portalSettings
 GET         /manage/social-login                    controllers.AdminAppController.loginSettings
 GET         /manage/surveys                         controllers.AdminAppController.surveys
 POST        /manage/surveys                         controllers.admin.SurveysController.createSurvey
+POST        /manage/surveys/delete/:surveyId        controllers.admin.SurveysController.deleteSurvey(surveyId: Long)
 
 POST        /manage/social-login                    controllers.admin.SocialLoginKeysController.saveSocialKeys
 POST        /manage/portal-settings                 controllers.admin.PortalSettingsController.savePortalOptions

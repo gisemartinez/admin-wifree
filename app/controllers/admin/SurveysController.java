@@ -45,7 +45,20 @@ public class SurveysController extends WiFreeController {
 
         return redirect(routes.AdminAppController.allSurveys());
     }
-
+    
+    @SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
+    public Result deleteSurvey(Long surveyId) {
+        ImmutableListMultimap<NetworkUser, FieldAnswer> answersForSurvey = fieldAnswerDAO.findForSurvey(surveyId);
+        if (answersForSurvey.isEmpty()) {
+            Survey survey = surveyDAO.get(surveyId);
+            surveysService.deleteSurvey(survey);
+            return redirect(routes.AdminAppController.allSurveys());
+        } else {
+            return redirect(controllers.admin.routes.SurveysController.getSurveyAnswers(surveyId));
+        }
+    }
+    
+    @SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
     public Result getSurveyAnswers(Long surveyId) {
         ImmutableListMultimap<NetworkUser, FieldAnswer> answersForSurvey = fieldAnswerDAO.findForSurvey(surveyId); // TODO quitar a una Function
 
@@ -150,7 +163,14 @@ public class SurveysController extends WiFreeController {
                 })
                 .collect(toList());
 
-        List<AnswersJson> answers = summarizedAnswers.stream()
+        List<AnswersJson> answers = buildAnswersJson(summarizedAnswers);
+
+        DataJson dataJson = new DataJson(answers);
+        return ok(render(views.html.admin.surveys_results.render(dataJson)));
+    }
+
+    private List<AnswersJson> buildAnswersJson(List<SummarizedAnswers> summarizedAnswers) {
+        return summarizedAnswers.stream()
                 .map(x -> {
                     List<String> labels = new ArrayList<>();
                     List<Long> values = new ArrayList<>();
@@ -164,19 +184,16 @@ public class SurveysController extends WiFreeController {
                                 });
                     } else {
                         x.answers.entrySet().stream()
-                            .sorted(Map.Entry.comparingByKey())
-                            .forEachOrdered(entry -> {
-                                labels.add(entry.getKey());
-                                values.add(entry.getValue());
-                            });
+                                .sorted(Map.Entry.comparingByKey())
+                                .forEachOrdered(entry -> {
+                                    labels.add(entry.getKey());
+                                    values.add(entry.getValue());
+                                });
                     }
 
                     return new AnswersJson(x.question, x.id, x.type, x.order, labels, values);
                 })
                 .collect(toList());
-
-        DataJson dataJson = new DataJson(answers);
-        return ok(render(views.html.admin.surveys_results.render(dataJson)));
     }
 
     public static class DataJson {
