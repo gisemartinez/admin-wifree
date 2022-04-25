@@ -73,22 +73,31 @@ public class PortalSettingsController extends WiFreeController {
 
     private File moveFile(PortalOptionsView portalOptions, List<Http.MultipartFormData.FilePart<File>> fileParts, int i) {
         Http.MultipartFormData.FilePart<File> filePart = fileParts.get(i);
+        String currentPath = Paths.get(".").toAbsolutePath().normalize().toString();
+
         File file = filePart.getFile();
         String extension = filePart.getContentType().split("/")[1];
-        String externalPathPrefix = config.getString("images.path");
-        Path externalPathPrefixPath = Paths.get(externalPathPrefix);
+        String sharedFolder = config.getString("images.path");
+        
+        String internalFolder = currentPath + "/public/img/client/";
+        
+        Path sharedFolderPath = Paths.get(sharedFolder);
+        Path internalFolderPath = Paths.get(internalFolder);
+        
         String fileName = "image_" + portalOptions.getPortalId() + "_" + i + "." + extension;
-        String newPath = "public/img/client/" + fileName;
-        String externalPath = externalPathPrefix + fileName;
+
         try {
-            if (!Files.notExists(externalPathPrefixPath)){
-                Files.createDirectory(externalPathPrefixPath);
+            if (Files.notExists(sharedFolderPath)){
+                Files.createDirectory(sharedFolderPath);
             }
-            Files.copy(file.toPath(), Paths.get(newPath), StandardCopyOption.REPLACE_EXISTING);
-            Files.copy(file.toPath(), Paths.get(externalPath), StandardCopyOption.REPLACE_EXISTING);
+            if (Files.notExists(internalFolderPath)){
+                Files.createDirectory(internalFolderPath);
+            }
+            Files.copy(file.toPath(), Paths.get(internalFolder + fileName), StandardCopyOption.REPLACE_EXISTING);
+            Files.copy(file.toPath(), Paths.get(sharedFolder + fileName), StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return new File(newPath);
+        return new File(internalFolder + fileName);
     }
 }
