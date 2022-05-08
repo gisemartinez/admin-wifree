@@ -1,12 +1,11 @@
 package services;
 
-import daos.PortalAppDAO;
-import daos.PortalDAO;
-import daos.PortalLoginConfigurationDAO;
-import daos.PortalNetworkConfigurationDAO;
+import daos.*;
 import models.*;
+import models.types.AccountType;
 import models.types.LoginMethodType;
 import models.types.PortalApplicationType;
+import org.pac4j.core.profile.CommonProfile;
 import views.dto.PortalOptionsView;
 import views.dto.SocialKeysView;
 
@@ -76,9 +75,17 @@ public class PortalAndLoginOptionsService {
                 networkConfigurations.stream().map(PortalNetworkConfiguration::getLoginMethod).collect(Collectors.toList()));
     }
 
-    public Portal savePortalOptions(PortalOptionsView portalOptions, Long portalId, List<File> files) {
-        Portal portal = portalDAO.get(portalId);
-
+    public Portal savePortalOptions(CommonProfile commonProfile, PortalOptionsView portalOptions, Long portalId, List<File> files) {
+        Portal portal;
+        if (portalId != null) {
+            portal = portalDAO.get(portalId);
+        } else {
+            portal = new Portal();
+            AdminDAO adminDAO = new AdminDAO();
+            Admin admin = adminDAO.getByEmail(commonProfile.getId());
+            portal.setOwner(admin);
+            portal.setAccountType(AccountType.Basic);
+        }
         portal.setHomeURL(portalOptions.getHomeURL());
         portal.setName(portalOptions.getName());
         portal.setDescription(portalOptions.getDescription());
@@ -95,18 +102,19 @@ public class PortalAndLoginOptionsService {
 
         portal.setApplications(portalApps);
 
+        Portal finalPortal = portal;
         List<PortalNetworkConfiguration> networkConfigurations = portalOptions.getLoginMethods().stream()
                 .map(loginMethodType -> {
-                            PortalNetworkConfiguration p = new PortalNetworkConfiguration(portal);
+                            PortalNetworkConfiguration p = new PortalNetworkConfiguration(finalPortal);
                             p.setId(UUID.randomUUID().getMostSignificantBits());
                             p.setLoginMethod(loginMethodType);
                             return p;
                         }).collect(Collectors.toList());
         
         portal.setNetworkConfigurations(new HashSet<>(networkConfigurations));
-
-        networkConfigDAO.saveAll(networkConfigurations);
+        
         portalDAO.saveOrUpdate(portal);
+        networkConfigDAO.saveAll(networkConfigurations);
         return portal;
     }
 }

@@ -50,7 +50,7 @@ public class AdminAppController extends WiFreeController {
         Optional<Portal> portal = Optional.ofNullable(currentProfile.getAttribute("portal", Portal.class));
 
         if (!portal.isPresent()) {
-            return redirect(routes.ConsoleController.index()); // with something
+            return redirect(controllers.routes.AdminAppController.portalSettings()); // with something
         } else {
             JsValue[] dashboardMockedData = AdminMockedData.dashboard();
             JsValue jsGenderGraphData = dashboardMockedData[0];
@@ -172,9 +172,16 @@ public class AdminAppController extends WiFreeController {
 
     @SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
     public Result portalSettings() {
+        CommonProfile currentProfile = getCurrentProfile();
+        Optional<Portal> portal = Optional.ofNullable(currentProfile.getAttribute("portal", Portal.class));
+        Form<PortalOptionsView> form = formFactory.form(PortalOptionsView.class);
+
+        if (!portal.isPresent()) {
+            return ok(render(views.html.admin.portal_options.render(form)));
+        }
+
         PortalOptionsView portalOptions = optionsService.getPortalOptions(portalId());
-        Form<PortalOptionsView> form = formFactory.form(PortalOptionsView.class).fill(portalOptions);
-        return ok(render(views.html.admin.portal_options.render(form)));
+        return ok(render(views.html.admin.portal_options.render(form.fill(portalOptions))));
     }
 
     @SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)

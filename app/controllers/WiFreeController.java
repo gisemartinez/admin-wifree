@@ -76,17 +76,23 @@ public abstract class WiFreeController extends Controller {
      */
     public Html render(Html content) {
         CommonProfile currentProfile = getCurrentProfile();
-        Portal portal = getCurrentProfile().getAttribute("portal", Portal.class);
-        if (portal == null) {
-            return views.html.error403.apply();
+        Optional<Portal> portalOptional = Optional.ofNullable(currentProfile.getAttribute("portal", Portal.class));
+        Html navbar;
+        if (!portalOptional.isPresent()) {
+             navbar = views.html.parts.side_navigation.apply(currentProfile,  false, false);
+        } else {
+            Portal portal = portalOptional.get();
+
+            Set<LoginMethodType> loginMethodTypes =
+                    portal.getNetworkConfigurations().stream()
+                    .map(n-> n.getLoginMethod())
+                    .collect(Collectors.toSet());
+
+            navbar = views.html.parts.side_navigation.apply(currentProfile,
+                    loginMethodTypes.stream().anyMatch(p -> p.id.equals(LoginMethodType.SocialLogin.id)),
+                    loginMethodTypes.stream().anyMatch(p -> p.id.equals(LoginMethodType.Survey.id)));
         }
-        Set<LoginMethodType> loginMethodTypes = portal.getNetworkConfigurations()
-                .stream()
-                .map(PortalNetworkConfiguration::getLoginMethod)
-                .collect(Collectors.toSet());
-        Html navbar = views.html.parts.side_navigation.apply(currentProfile,
-                loginMethodTypes.stream().anyMatch(p -> p.id.equals(LoginMethodType.SocialLogin.id)),
-                loginMethodTypes.stream().anyMatch(p -> p.id.equals(LoginMethodType.Survey.id)));
+
         return views.html.main.apply("Wifree", navbar, content);
     }
 }

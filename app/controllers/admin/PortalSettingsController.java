@@ -49,10 +49,10 @@ public class PortalSettingsController extends WiFreeController {
                 : IntStream.range(0, fileParts.size())
                     .mapToObj(i -> moveFile(portalOptions, fileParts, i))
                     .collect(Collectors.toList());
-
-        Portal portal = portalAndLoginOptionsService.savePortalOptions(portalOptions, portalId(), files);
-        // refresh profile portal
         CommonProfile currentProfile = getCurrentProfile();
+
+        Portal portal = portalAndLoginOptionsService.savePortalOptions(currentProfile, portalOptions, portalOptions.getPortalId(), files);
+        // refresh profile portal
         currentProfile.removeAttribute("portal");
         currentProfile.addAttribute("portal", portal);
         return redirect(routes.AdminAppController.portalSettings());
