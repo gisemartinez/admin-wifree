@@ -180,7 +180,7 @@ public class AdminAppController extends WiFreeController {
             return ok(render(views.html.admin.portal_options.render(form)));
         }
 
-        PortalOptionsView portalOptions = optionsService.getPortalOptions(portalId());
+        PortalOptionsView portalOptions = optionsService.getPortalOptions(portal.get().getId());
         return ok(render(views.html.admin.portal_options.render(form.fill(portalOptions))));
     }
 

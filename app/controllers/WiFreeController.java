@@ -79,7 +79,7 @@ public abstract class WiFreeController extends Controller {
         Optional<Portal> portalOptional = Optional.ofNullable(currentProfile.getAttribute("portal", Portal.class));
         Html navbar;
         if (!portalOptional.isPresent()) {
-             navbar = views.html.parts.side_navigation.apply(currentProfile,  false, false);
+             navbar = views.html.parts.side_navigation.apply(currentProfile, false, false, false);
         } else {
             Portal portal = portalOptional.get();
 
@@ -89,6 +89,7 @@ public abstract class WiFreeController extends Controller {
                     .collect(Collectors.toSet());
 
             navbar = views.html.parts.side_navigation.apply(currentProfile,
+                    true,
                     loginMethodTypes.stream().anyMatch(p -> p.id.equals(LoginMethodType.SocialLogin.id)),
                     loginMethodTypes.stream().anyMatch(p -> p.id.equals(LoginMethodType.Survey.id)));
         }

@@ -62,17 +62,18 @@ public class PortalAndLoginOptionsService {
         PortalApp template = Optional.ofNullable(templateOne).orElse(Optional.ofNullable(templateTwo).orElse(null));
         PortalApp carousel = applications.get(PortalApplicationType.Carousel);
         Set<PortalNetworkConfiguration> networkConfigurations = portal.getNetworkConfigurations();
+        List<LoginMethodType> loginMethodTypes = networkConfigurations.stream().map(PortalNetworkConfiguration::getLoginMethod).collect(Collectors.toList());
 
-        return template == null || carousel == null
+        return template == null && carousel == null
                 ? PortalOptionsView.initialize(portalId, portal.getHomeURL(), portal.getName(), portal.getDescription())
                 : new PortalOptionsView(
                 portalId,
                 portal.getHomeURL(),
                 template.getType(),
                 template, carousel,
-                portal.getName(), 
+                portal.getName(),
                 portal.getDescription(),
-                networkConfigurations.stream().map(PortalNetworkConfiguration::getLoginMethod).collect(Collectors.toList()));
+                loginMethodTypes);
     }
 
     public Portal savePortalOptions(CommonProfile commonProfile, PortalOptionsView portalOptions, Long portalId, List<File> files) {
@@ -90,31 +91,24 @@ public class PortalAndLoginOptionsService {
         portal.setName(portalOptions.getName());
         portal.setDescription(portalOptions.getDescription());
 
-        portalOptions.getTemplate().setPortal(portal);
-
         PortalApp carousel = PortalApp.carousel();
-        carousel.setPortal(portal);
         carousel.setConfig(new PortalAppConfig(files));
+        HashSet<PortalApp> portalApps = new HashSet<>(Arrays.asList(PortalApp.templateOne(), carousel));
+        portalApps.forEach(a -> a.setPortal(portal));
 
-        HashSet<PortalApp> portalApps = new HashSet<>();
-        portalApps.add(portalOptions.getTemplate());
-        portalApps.add(carousel);
-
-        portal.setApplications(portalApps);
-
-        Portal finalPortal = portal;
         List<PortalNetworkConfiguration> networkConfigurations = portalOptions.getLoginMethods().stream()
                 .map(loginMethodType -> {
-                            PortalNetworkConfiguration p = new PortalNetworkConfiguration(finalPortal);
-                            p.setId(UUID.randomUUID().getMostSignificantBits());
-                            p.setLoginMethod(loginMethodType);
-                            return p;
-                        }).collect(Collectors.toList());
+                    PortalNetworkConfiguration p = new PortalNetworkConfiguration(30, loginMethodType, true);
+                    p.setPortal(portal);
+                    return p;
+                }).collect(Collectors.toList());
+        
+        portal.setApplications(portalApps);
         
         portal.setNetworkConfigurations(new HashSet<>(networkConfigurations));
-        
+
         portalDAO.saveOrUpdate(portal);
-        networkConfigDAO.saveAll(networkConfigurations);
+        
         return portal;
     }
 }

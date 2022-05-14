@@ -72,7 +72,6 @@ public class PortalNetworkConfiguration extends BaseModel {
 
 	public void setPortal(Portal portal) {
 		this.portal = portal;
-		setId(portal.id);
 	}
 
 	public Portal getPortal() {

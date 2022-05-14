@@ -43,7 +43,7 @@ public class Portal extends BaseModel {
 
 	private String instagramURL;
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "portal")
 	private Set<PortalNetworkConfiguration> networkConfigurations = new HashSet<>();
 
 	@OneToMany(cascade = CascadeType.ALL)

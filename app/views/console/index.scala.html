@@ -17,44 +17,12 @@
 			<div>
 				<h2>Create Admin</h2>
 				@helper.form(routes.ConsoleController.createAdmin()) {
-				<div class="form-group" list="portals" name="portal">
-					<datalist id="portals">
-						@portals.map { portal =>
-						<option value="@portal.getId">@portal.getName</option>
-						}
-					</datalist>
+				<div class="form-group">
 					@helper.inputText(adminForm("name"), 'class -> "form-control")
 					@helper.inputText(adminForm("email"), 'class -> "form-control")
 					@helper.inputPassword(adminForm("password"), 'class -> "form-control")
 					<button type="submit" class="btn btn-primary">Submit</button>
 				</div>
-				}
-			</div>
-
-			<div>
-				<br><hr><br>
-			</div>
-
-			<div>
-				<h2>CreatePortal</h2>
-				@helper.form(routes.ConsoleController.createPortal()) {
-				@helper.inputText(portalForm("name"), 'class -> "form-control")
-				@helper.inputText(portalForm("description"), 'class -> "form-control")
-				<div class="form-check">
-					@helper.inputRadioGroup(portalForm("accountType"), ViewsHelper.accountTypes)
-				</div>
-				<input list="admins" name="owner">
-				<datalist id="admins">
-					@admins.map { admin =>
-					<option value="@admin.getId">@admin.getName</option>
-					}
-				</datalist>
-				@helper.inputText(portalForm("homeURL"), 'class -> "form-control")
-				@helper.inputText(portalForm("facebookURL"), 'class -> "form-control")
-				@helper.inputText(portalForm("twitterURL"), 'class -> "form-control")
-				@helper.inputText(portalForm("googlePlusURL"), 'class -> "form-control")
-				@helper.inputText(portalForm("instagramURL"), 'class -> "form-control")
-				<button type="submit" class="btn btn-primary">Submit</button>
 				}
 			</div>
 

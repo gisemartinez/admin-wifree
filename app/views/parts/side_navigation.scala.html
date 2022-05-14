@@ -6,7 +6,7 @@
 *@
 @import org.pac4j.core.profile.CommonProfile
 
-@(profile: CommonProfile, socialLoginEnabled: Boolean, surveysEnabled: Boolean)
+@(profile: CommonProfile, portalIsDefined: Boolean, socialLoginEnabled: Boolean, surveysEnabled: Boolean)
 
 @username = @{profile.getAttribute("realName").toString}
 
@@ -19,7 +19,7 @@
 
         <br/>
 
-        @parts.sidebar_menu(socialLoginEnabled, surveysEnabled)
+        @parts.sidebar_menu(portalIsDefined, socialLoginEnabled, surveysEnabled)
         @parts.menu_footer_buttons()
 
     </div>
