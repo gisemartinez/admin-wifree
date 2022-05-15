@@ -18,8 +18,8 @@ public enum LoginMethodType {
 	Facebook("Facebook", "facebook"),
 	Twitter("Twitter", "twitter"),
 	EmailAndPassword("Correo Electronico", "email"),
-	SocialLogin("Redes Sociales", "socialLogin"),
-	Survey("Encuesta", "survey");
+	SocialLogin("Autenticación por redes sociales", "socialLogin"),
+	Survey("Autenticación a través de encuesta", "survey");
 
 	public final String name;
 	public final String id;

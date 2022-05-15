@@ -27,6 +27,4 @@ public class AnalyticsService extends WiFreeService {
 	public GetAnalyticsDataResponse getAnalyticsData(GetAnalyticsDataRequest request) {
 		return processRequest(request);
 	}
-
-
 }

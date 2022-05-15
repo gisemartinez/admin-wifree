@@ -148,7 +148,7 @@ public class AdminAppController extends WiFreeController {
     public Result surveys() throws NoProfileFoundException {
         ArrayList<Field> fields = new ArrayList<>();
         Field ageField = new Field(null, "textbox", new FieldConfig(null, "Edad", 1, true, null, null, null));
-        Field genreField = new Field(null, "radio", new FieldConfig(null, "Género", 2, true, null, null, Arrays.asList(new Option(1, "Femenino"), new Option(2, "Masculino"), new Option(3, "Otro"))));
+        Field genreField = new Field(null, "radio", new FieldConfig(null, "Ténddsadero", 2, true, null, null, Arrays.asList(new Option(1, "Femenino"), new Option(2, "Masculino"), new Option(3, "Otro"))));
         fields.add(ageField);
         fields.add(genreField);
         Survey survey = new Survey(null, null, null, fields, false);

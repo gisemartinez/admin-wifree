@@ -42,10 +42,10 @@
                         </div>
 
                         @helper.inputText(form("name"), '_label -> "Nombre del Portal", 'class -> "form-control col-md-6 col-xs-12")
-                        @helper.inputText(form("description"), '_label -> "Descripción", 'class -> "form-control col-md-6 col-xs-12")
+                        @helper.inputText(form("description"), '_label -> "Texto inicial de bienvenida al visitante", 'class -> "form-control col-md-6 col-xs-12")
                         @helper.inputText(form("homeURL"), '_label -> "URL de Redirección", 'class -> "form-control col-md-6 col-xs-12")
 
-                        <div class="form-group row" hidden>
+                        <div class="form-group" hidden>
                             <div class="col-md-3 col-sm-3 col-xs-6">
                                 <div class="">
                                 @helper.inputRadioGroup(form("templateType"), PortalApplicationType.appTypes(), '_label -> "Tema", 'class -> "")
@@ -53,7 +53,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group">
                                     @helper.inputCheckboxGroup(
                                     form("loginMethods"),
                                     options = LoginMethodType.portalLoginTypes(),

@@ -15,7 +15,7 @@ menu.sidebar.users=Usuarios
 
 connections.title.timeout-settings=Configurar tiempo máximo de conexión
 connections.label.max-timeout=Tiempo máximo de conexión (minutos)
-connections.label.login-method=Tipo de login
+connections.label.login-method=Tipos de login ofrecidos al usuario
 connections.title.connected-users=Usuarios en línea
 connections.users-table.header.user-name=Nombre de usuario
 connections.users-table.header.connection-start=Inicio de conexión
