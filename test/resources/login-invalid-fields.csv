@@ -1,0 +1,3 @@
+givenField,notGivenField,value,expectedError
+username,password,jperez@mail.co,Por favor ingrese contraseña provista por Wifree
+password,username,aPassword,Por favor ingrese email provisto por Wifree

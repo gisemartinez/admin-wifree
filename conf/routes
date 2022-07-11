@@ -5,7 +5,6 @@
 ### Basic routes
 GET         /                                       controllers.AdminAppController.dashboard
 GET         /old-index                              controllers.ApplicationController.index()
-GET         /testTheme                              controllers.ApplicationController.testTheme
 GET         /admin                                  controllers.LoginController.index
 GET         /login                                  controllers.LoginController.login
 GET         /dashboard                              controllers.AdminAppController.dashboard
@@ -41,9 +40,6 @@ POST		/console/create-admin					controllers.ConsoleController.createAdmin
 POST		/console/create-portal					controllers.ConsoleController.createPortal
 GET         /console/mockup/:portalId               controllers.ConsoleController.mockup(portalId: Long)
 
-### LoginController routes
-GET			/loginForm								controllers.LoginController.loginForm
-
 ### API routes
 GET         /api/socialuser/:email                  controllers.api.SocialUserController.getSocialUser(email: String)
 POST        /api/socialuser                         controllers.api.SocialUserController.saveSocialUser
@@ -56,9 +52,6 @@ GET         /api/client-auth/:portalId              controllers.api.PortalConfig
 POST        /api/user-connected                     controllers.api.SocialUserController.saveUserConnected
 
 ### Pac4J Temp Routes
-GET         /loginForm                        		controllers.LoginController.loginForm()
-GET         /form/index.html                 		controllers.LoginController.formIndex()
-GET         /form/index.html.json            		controllers.LoginController.formIndexJson()
 GET         /protected/index.html             		controllers.LoginController.protectedIndex()
 GET         /callback                        		@org.pac4j.play.CallbackController.callback()
 POST        /callback                         		@org.pac4j.play.CallbackController.callback()

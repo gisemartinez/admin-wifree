@@ -42,11 +42,4 @@ public class ApplicationController extends WiFreeController {
 		logger.debug("Finishing index()...");
 		return ok(views.html.index.render(getProfiles(), token, sessionId));
 	}
-
-	public Result testTheme() {
-		final Form<PortalNetworkConfiguration> form = formFactory.form(PortalNetworkConfiguration.class);
-		final List<ConnectedUser> connectedUsers = connectionsService.connectedUsers(1L);
-		return ok(views.html.testTheme.render(form, connectedUsers));
-	}
-
 }
