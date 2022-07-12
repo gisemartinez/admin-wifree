@@ -26,13 +26,7 @@ public class ApplicationController extends WiFreeController {
 
 	@Inject
 	private ConnectionsService connectionsService;
-
-	private List<CommonProfile> getProfiles() {
-		final PlayWebContext context = new PlayWebContext(ctx(), playSessionStore);
-		final ProfileManager<CommonProfile> profileManager = new ProfileManager(context);
-		return profileManager.getAll(true);
-	}
-
+	
 	@Secure(clients = "AnonymousClient", authorizers = "csrfToken")
 	public Result index() {
 		logger.debug("Entering index()...");

@@ -18,6 +18,7 @@ import utils.DateHelper;
 
 import javax.inject.Inject;
 import java.time.Instant;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -48,6 +49,12 @@ public abstract class WiFreeController extends Controller {
 
     protected void logRequest() {
         logger.info("*** Received request " + request().method() + " " + request().path() + " - Body: " + getRequestJsonString());
+    }
+
+    public List<CommonProfile> getProfiles() {
+        final PlayWebContext context = new PlayWebContext(ctx(), playSessionStore);
+        final ProfileManager<CommonProfile> profileManager = new ProfileManager(context);
+        return profileManager.getAll(true);
     }
 
     protected CommonProfile getCurrentProfile() {

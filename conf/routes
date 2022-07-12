@@ -4,8 +4,6 @@
 
 ### Basic routes
 GET         /                                       controllers.AdminAppController.dashboard
-GET         /old-index                              controllers.ApplicationController.index()
-GET         /admin                                  controllers.LoginController.index
 GET         /login                                  controllers.LoginController.login
 GET         /dashboard                              controllers.AdminAppController.dashboard
 GET         /connections                            controllers.AdminAppController.connections
@@ -52,7 +50,6 @@ GET         /api/client-auth/:portalId              controllers.api.PortalConfig
 POST        /api/user-connected                     controllers.api.SocialUserController.saveUserConnected
 
 ### Pac4J Temp Routes
-GET         /protected/index.html             		controllers.LoginController.protectedIndex()
 GET         /callback                        		@org.pac4j.play.CallbackController.callback()
 POST        /callback                         		@org.pac4j.play.CallbackController.callback()
 GET         /casProxyCallback                		@org.pac4j.play.CallbackController.callback()

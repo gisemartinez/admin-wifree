@@ -18,11 +18,4 @@ public class LoginControllerSuite extends WiFreeSuite {
 		final Result result = route(app, loginRequest);
 		assertEquals(OK, result.status());
 	}
-
-	@Test
-	public void testIndex() {
-		final RequestBuilder loginRequest = Helpers.fakeRequest().method(GET).uri("/old-index");
-		final Result result = route(app, loginRequest);
-		assertEquals(OK, result.status());
-	}
 }

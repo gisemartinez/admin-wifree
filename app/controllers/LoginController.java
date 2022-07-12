@@ -25,44 +25,13 @@ import java.util.Optional;
 /**
  * Created by jesu on 27/06/17.
  */
-public class LoginController extends Controller {
-
-	@Inject
-	private Config config;
-
-	@Inject
-	private PlaySessionStore playSessionStore;
-
+public class LoginController extends WiFreeController {
+	
 	public Result login() {
 		final FormClient formClient = (FormClient) config.getClients().findClient("FormClient");
 		if(Optional.ofNullable(request().getQueryString("error")).isPresent()){
 			flash(request().getQueryString("error"), "Por favor, ingrese campos válidos para iniciar sesión");
 		}
 		return ok(views.html.admin.login.render(formClient.getCallbackUrl()));
-	}
-
-	private List<CommonProfile> getProfiles() {
-		final PlayWebContext context = new PlayWebContext(ctx(), playSessionStore);
-		final ProfileManager<CommonProfile> profileManager = new ProfileManager(context);
-		return profileManager.getAll(true);
-	}
-
-	@Secure(clients = "AnonymousClient", authorizers = "csrfToken")
-	public Result index() {
-		final PlayWebContext context = new PlayWebContext(ctx(), playSessionStore);
-		final String sessionId = context.getSessionIdentifier();
-		final String token = (String) context.getRequestAttribute(Pac4jConstants.CSRF_TOKEN);
-		// profiles (maybe be empty if not authenticated)
-		return ok(views.html.admin.index.render());
-	}
-
-	private Result protectedIndexView() {
-		// profiles
-		return ok(views.html.protectedIndex.render(getProfiles()));
-	}
-
-	@Secure
-	public Result protectedIndex() {
-		return protectedIndexView();
 	}
 }
