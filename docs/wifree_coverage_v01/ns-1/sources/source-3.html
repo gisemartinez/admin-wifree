@@ -1,0 +1,144 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > ApplicationController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">controllers</a>
+</div>
+
+<h1>Coverage Summary for Class: ApplicationController (controllers)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ApplicationController</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package controllers;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import models.PortalNetworkConfiguration;
+<i class="no-highlight">4</i>&nbsp;import org.pac4j.core.config.Config;
+<i class="no-highlight">5</i>&nbsp;import org.pac4j.core.context.Pac4jConstants;
+<i class="no-highlight">6</i>&nbsp;import org.pac4j.core.profile.CommonProfile;
+<i class="no-highlight">7</i>&nbsp;import org.pac4j.core.profile.ProfileManager;
+<i class="no-highlight">8</i>&nbsp;import org.pac4j.play.PlayWebContext;
+<i class="no-highlight">9</i>&nbsp;import org.pac4j.play.java.Secure;
+<i class="no-highlight">10</i>&nbsp;import org.pac4j.play.store.PlaySessionStore;
+<i class="no-highlight">11</i>&nbsp;import play.data.Form;
+<i class="no-highlight">12</i>&nbsp;import play.mvc.Result;
+<i class="no-highlight">13</i>&nbsp;import services.ConnectionsService;
+<i class="no-highlight">14</i>&nbsp;import views.dto.ConnectedUser;
+<i class="no-highlight">15</i>&nbsp;
+<i class="no-highlight">16</i>&nbsp;import javax.inject.Inject;
+<i class="no-highlight">17</i>&nbsp;import java.util.List;
+<i class="no-highlight">18</i>&nbsp;
+<b class="nc"><i class="no-highlight">19</i>&nbsp;public class ApplicationController extends WiFreeController {</b>
+<i class="no-highlight">20</i>&nbsp;
+<i class="no-highlight">21</i>&nbsp;	@Inject
+<i class="no-highlight">22</i>&nbsp;	private Config config;
+<i class="no-highlight">23</i>&nbsp;
+<i class="no-highlight">24</i>&nbsp;	@Inject
+<i class="no-highlight">25</i>&nbsp;	private PlaySessionStore playSessionStore;
+<i class="no-highlight">26</i>&nbsp;
+<i class="no-highlight">27</i>&nbsp;	@Inject
+<i class="no-highlight">28</i>&nbsp;	private ConnectionsService connectionsService;
+<i class="no-highlight">29</i>&nbsp;	
+<i class="no-highlight">30</i>&nbsp;	@Secure(clients = &quot;AnonymousClient&quot;, authorizers = &quot;csrfToken&quot;)
+<i class="no-highlight">31</i>&nbsp;	public Result index() {
+<b class="nc"><i class="no-highlight">32</i>&nbsp;		logger.debug(&quot;Entering index()...&quot;);</b>
+<b class="nc"><i class="no-highlight">33</i>&nbsp;		final PlayWebContext context = new PlayWebContext(ctx(), playSessionStore);</b>
+<b class="nc"><i class="no-highlight">34</i>&nbsp;		final String sessionId = context.getSessionIdentifier();</b>
+<b class="nc"><i class="no-highlight">35</i>&nbsp;		final String token = (String) context.getRequestAttribute(Pac4jConstants.CSRF_TOKEN);</b>
+<b class="nc"><i class="no-highlight">36</i>&nbsp;		logger.debug(&quot;Finishing index()...&quot;);</b>
+<b class="nc"><i class="no-highlight">37</i>&nbsp;		return ok(views.html.index.render(getProfiles(), token, sessionId));</b>
+<i class="no-highlight">38</i>&nbsp;	}
+<i class="no-highlight">39</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-07-12 12:17</div>
+</div>
+</body>
+</html>
