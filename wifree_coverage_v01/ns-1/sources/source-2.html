@@ -1,0 +1,214 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > AdminMockedData</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">controllers</a>
+</div>
+
+<h1>Coverage Summary for Class: AdminMockedData (controllers)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AdminMockedData</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/19)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package controllers;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import play.api.libs.json.JsValue;
+<i class="no-highlight">4</i>&nbsp;import play.api.libs.json.Json;
+<i class="no-highlight">5</i>&nbsp;
+<b class="nc"><i class="no-highlight">6</i>&nbsp;public class AdminMockedData {</b>
+<i class="no-highlight">7</i>&nbsp;
+<i class="no-highlight">8</i>&nbsp;    public static JsValue[] dashboard() {
+<b class="nc"><i class="no-highlight">9</i>&nbsp;        final String genderGraphData = &quot;[{\&quot;name\&quot;: \&quot;Direct Access\&quot;,\&quot;value\&quot;: 335},{\&quot;name\&quot;: \&quot;E-mail Marketing\&quot;,\&quot;value\&quot;: 310},{\&quot;name\&quot;: \&quot;Union Ad\&quot;,\&quot;value\&quot;: 234},{\&quot;name\&quot;: \&quot;Video Ads\&quot;,\&quot;value\&quot;: 135},{\&quot;name\&quot;: \&quot;Search Engine\&quot;,\&quot;value\&quot;: 1548}]&quot;;</b>
+<b class="nc"><i class="no-highlight">10</i>&nbsp;        final JsValue jsGenderGraphData = Json.parse(genderGraphData);</b>
+<b class="nc"><i class="no-highlight">11</i>&nbsp;        final String ageGraphData = &quot;[{\&quot;name\&quot;: \&quot;Direct Access\&quot;,\&quot;value\&quot;: 335},{\&quot;name\&quot;: \&quot;E-mail Marketing\&quot;,\&quot;value\&quot;: 310},{\&quot;name\&quot;: \&quot;Union Ad\&quot;,\&quot;value\&quot;: 234},{\&quot;name\&quot;: \&quot;Video Ads\&quot;,\&quot;value\&quot;: 135},{\&quot;name\&quot;: \&quot;Search Engine\&quot;,\&quot;value\&quot;: 1548}]&quot;;</b>
+<b class="nc"><i class="no-highlight">12</i>&nbsp;        final JsValue jsAgeGraphData = Json.parse(ageGraphData);</b>
+<b class="nc"><i class="no-highlight">13</i>&nbsp;        final String connectionsGraphDataThisWeek = &quot;[{\&quot;name\&quot;: \&quot;Direct Access\&quot;,\&quot;value\&quot;: 335},{\&quot;name\&quot;: \&quot;E-mail Marketing\&quot;,\&quot;value\&quot;: 310},{\&quot;name\&quot;: \&quot;Union Ad\&quot;,\&quot;value\&quot;: 234},{\&quot;name\&quot;: \&quot;Video Ads\&quot;,\&quot;value\&quot;: 135},{\&quot;name\&quot;: \&quot;Search Engine\&quot;,\&quot;value\&quot;: 1548}]&quot;;</b>
+<b class="nc"><i class="no-highlight">14</i>&nbsp;        final JsValue jsConnectionsGraphDataThisWeek = Json.parse(connectionsGraphDataThisWeek);</b>
+<b class="nc"><i class="no-highlight">15</i>&nbsp;        final String connectionsGraphDataLastWeek = &quot;[{\&quot;name\&quot;: \&quot;Direct Access\&quot;,\&quot;value\&quot;: 335},{\&quot;name\&quot;: \&quot;E-mail Marketing\&quot;,\&quot;value\&quot;: 310},{\&quot;name\&quot;: \&quot;Union Ad\&quot;,\&quot;value\&quot;: 234},{\&quot;name\&quot;: \&quot;Video Ads\&quot;,\&quot;value\&quot;: 135},{\&quot;name\&quot;: \&quot;Search Engine\&quot;,\&quot;value\&quot;: 1548}]&quot;;</b>
+<b class="nc"><i class="no-highlight">16</i>&nbsp;        final JsValue jsConnectionsGraphDataLastWeek = Json.parse(connectionsGraphDataLastWeek);</b>
+<b class="nc"><i class="no-highlight">17</i>&nbsp;        return new JsValue[] {jsGenderGraphData, jsAgeGraphData, jsConnectionsGraphDataThisWeek, jsConnectionsGraphDataLastWeek};</b>
+<i class="no-highlight">18</i>&nbsp;    }
+<i class="no-highlight">19</i>&nbsp;
+<i class="no-highlight">20</i>&nbsp;    public static JsValue[] analytics() {
+<i class="no-highlight">21</i>&nbsp;        /** Call something to get JSON
+<i class="no-highlight">22</i>&nbsp;         * 1 - Search configured graphics for this portal
+<i class="no-highlight">23</i>&nbsp;         * 2 - Return graphics:
+<i class="no-highlight">24</i>&nbsp;         * 		a) Search graphics&#39;s data
+<i class="no-highlight">25</i>&nbsp;         * 		b) Build graphics
+<i class="no-highlight">26</i>&nbsp;         */
+<i class="no-highlight">27</i>&nbsp;//		final Long portalId = 1L; // TODO
+<i class="no-highlight">28</i>&nbsp;//		final GetAnalyticsHomeDatasetsRequest request = new GetAnalyticsHomeDatasetsRequest(portalId);
+<i class="no-highlight">29</i>&nbsp;//		final CompletionStage&lt;GetAnalyticsHomeDatasetsResponse&gt; futureResponse = AnalyticsService.getAnalyticsHomeDatasets(request);
+<i class="no-highlight">30</i>&nbsp;//		futureResponse.thenApplyAsync(response -&gt; {
+<i class="no-highlight">31</i>&nbsp;//			response.datasetFilters();
+<i class="no-highlight">32</i>&nbsp;//			return null;
+<i class="no-highlight">33</i>&nbsp;//		});
+<i class="no-highlight">34</i>&nbsp;
+<i class="no-highlight">35</i>&nbsp;//		//Total visitas por mes en el año
+<i class="no-highlight">36</i>&nbsp;//		final String json = &quot;[{\&quot;name\&quot;: \&quot;Ene\&quot;,\&quot;value\&quot;: 400},{\&quot;name\&quot;: \&quot;Feb\&quot;,\&quot;value\&quot;: 335},{\&quot;name\&quot;: \&quot;Mar\&quot;,\&quot;value\&quot;: 780},{\&quot;name\&quot;: \&quot;Abr\&quot;,\&quot;value\&quot;: 100},{\&quot;name\&quot;: \&quot;May\&quot;,\&quot;value\&quot;: 1021},{\&quot;name\&quot;: \&quot;Jun\&quot;,\&quot;value\&quot;: 123},{\&quot;name\&quot;: \&quot;Jul\&quot;,\&quot;value\&quot;: 843},{\&quot;name\&quot;: \&quot;Ago\&quot;,\&quot;value\&quot;: 149},{\&quot;name\&quot;: \&quot;Sep\&quot;,\&quot;value\&quot;: 634},{\&quot;name\&quot;: \&quot;Oct\&quot;,\&quot;value\&quot;: 742},{\&quot;name\&quot;: \&quot;Nov\&quot;,\&quot;value\&quot;: 456},{\&quot;name\&quot;: \&quot;Dic\&quot;,\&quot;value\&quot;: 541}]&quot;;
+<i class="no-highlight">37</i>&nbsp;//		final JsValue visitsByMonthJson = Json.parse(json);
+<i class="no-highlight">38</i>&nbsp;//
+<i class="no-highlight">39</i>&nbsp;//		//Visitas de Hombres por mes
+<i class="no-highlight">40</i>&nbsp;//		final String json2 = &quot;[{\&quot;name\&quot;: \&quot;Ene\&quot;,\&quot;value\&quot;: 300},{\&quot;name\&quot;: \&quot;Feb\&quot;,\&quot;value\&quot;: 100},{\&quot;name\&quot;: \&quot;Mar\&quot;,\&quot;value\&quot;: 560},{\&quot;name\&quot;: \&quot;Abr\&quot;,\&quot;value\&quot;: 20},{\&quot;name\&quot;: \&quot;May\&quot;,\&quot;value\&quot;: 700},{\&quot;name\&quot;: \&quot;Jun\&quot;,\&quot;value\&quot;: 100},{\&quot;name\&quot;: \&quot;Jul\&quot;,\&quot;value\&quot;: 200},{\&quot;name\&quot;: \&quot;Ago\&quot;,\&quot;value\&quot;: 100},{\&quot;name\&quot;: \&quot;Sep\&quot;,\&quot;value\&quot;: 200},{\&quot;name\&quot;: \&quot;Oct\&quot;,\&quot;value\&quot;: 600},{\&quot;name\&quot;: \&quot;Nov\&quot;,\&quot;value\&quot;: 200},{\&quot;name\&quot;: \&quot;Dic\&quot;,\&quot;value\&quot;: 300}]&quot;;
+<i class="no-highlight">41</i>&nbsp;//		final JsValue visitsByPeriodMaleJson = Json.parse(json2);
+<i class="no-highlight">42</i>&nbsp;//
+<i class="no-highlight">43</i>&nbsp;//		//Visitas de Mujeres por mes
+<i class="no-highlight">44</i>&nbsp;//		final String json3 = &quot;[{\&quot;name\&quot;: \&quot;Ene\&quot;,\&quot;value\&quot;: 100},{\&quot;name\&quot;: \&quot;Feb\&quot;,\&quot;value\&quot;: 235},{\&quot;name\&quot;: \&quot;Mar\&quot;,\&quot;value\&quot;: 220},{\&quot;name\&quot;: \&quot;Abr\&quot;,\&quot;value\&quot;: 80},{\&quot;name\&quot;: \&quot;May\&quot;,\&quot;value\&quot;: 321},{\&quot;name\&quot;: \&quot;Jun\&quot;,\&quot;value\&quot;: 23},{\&quot;name\&quot;: \&quot;Jul\&quot;,\&quot;value\&quot;: 643},{\&quot;name\&quot;: \&quot;Ago\&quot;,\&quot;value\&quot;: 49},{\&quot;name\&quot;: \&quot;Sep\&quot;,\&quot;value\&quot;: 434},{\&quot;name\&quot;: \&quot;Oct\&quot;,\&quot;value\&quot;: 142},{\&quot;name\&quot;: \&quot;Nov\&quot;,\&quot;value\&quot;: 256},{\&quot;name\&quot;: \&quot;Dic\&quot;,\&quot;value\&quot;: 241}]&quot;;
+<i class="no-highlight">45</i>&nbsp;//		final JsValue visitsByPeriodFemaleJson = Json.parse(json3);
+<i class="no-highlight">46</i>&nbsp;
+<i class="no-highlight">47</i>&nbsp;//		//Visitas promedio en el rango horario 0am a 8am por DIA. Le agregué el nombre del dia para guiarme pero después no lo uso
+<i class="no-highlight">48</i>&nbsp;//		final String json4 = &quot;[{\&quot;name\&quot;: \&quot;Lunes\&quot;,\&quot;value\&quot;: 25},{\&quot;name\&quot;: \&quot;Martes\&quot;,\&quot;value\&quot;: 40},{\&quot;name\&quot;: \&quot;Miercoles\&quot;,\&quot;value\&quot;: 30},{\&quot;name\&quot;: \&quot;Jueves\&quot;,\&quot;value\&quot;: 5},{\&quot;name\&quot;: \&quot;Viernes\&quot;,\&quot;value\&quot;: 9},{\&quot;name\&quot;: \&quot;Sabado\&quot;,\&quot;value\&quot;: 80},{\&quot;name\&quot;: \&quot;Domingo\&quot;,\&quot;value\&quot;: 120}]&quot;;
+<i class="no-highlight">49</i>&nbsp;//		final JsValue visits0_8Json = Json.parse(json4);
+<i class="no-highlight">50</i>&nbsp;//
+<i class="no-highlight">51</i>&nbsp;//		//Visitas promedio en el rango horario 8am a 11am por DIA.
+<i class="no-highlight">52</i>&nbsp;//		final String json5 = &quot;[{\&quot;name\&quot;: \&quot;Lunes\&quot;,\&quot;value\&quot;: 75},{\&quot;name\&quot;: \&quot;Martes\&quot;,\&quot;value\&quot;: 80},{\&quot;name\&quot;: \&quot;Miercoles\&quot;,\&quot;value\&quot;: 100},{\&quot;name\&quot;: \&quot;Jueves\&quot;,\&quot;value\&quot;: 15},{\&quot;name\&quot;: \&quot;Viernes\&quot;,\&quot;value\&quot;: 80},{\&quot;name\&quot;: \&quot;Sabado\&quot;,\&quot;value\&quot;: 180},{\&quot;name\&quot;: \&quot;Domingo\&quot;,\&quot;value\&quot;: 200}]&quot;;
+<i class="no-highlight">53</i>&nbsp;//		final JsValue visits8_11Json = Json.parse(json5);
+<i class="no-highlight">54</i>&nbsp;//
+<i class="no-highlight">55</i>&nbsp;//		//Visitas promedio en el rango horario 11am a 1pm por DIA.
+<i class="no-highlight">56</i>&nbsp;//		final String json6 = &quot;[{\&quot;name\&quot;: \&quot;Lunes\&quot;,\&quot;value\&quot;: 230},{\&quot;name\&quot;: \&quot;Martes\&quot;,\&quot;value\&quot;: 350},{\&quot;name\&quot;: \&quot;Miercoles\&quot;,\&quot;value\&quot;: 280},{\&quot;name\&quot;: \&quot;Jueves\&quot;,\&quot;value\&quot;: 300},{\&quot;name\&quot;: \&quot;Viernes\&quot;,\&quot;value\&quot;: 315},{\&quot;name\&quot;: \&quot;Sabado\&quot;,\&quot;value\&quot;: 410},{\&quot;name\&quot;: \&quot;Domingo\&quot;,\&quot;value\&quot;: 360}]&quot;;
+<i class="no-highlight">57</i>&nbsp;//		final JsValue visits11_13Json = Json.parse(json6);
+<i class="no-highlight">58</i>&nbsp;//
+<i class="no-highlight">59</i>&nbsp;//		//Visitas promedio en el rango horario 1pm a 4pm por DIA.
+<i class="no-highlight">60</i>&nbsp;//		final String json7 = &quot;[{\&quot;name\&quot;: \&quot;Lunes\&quot;,\&quot;value\&quot;: 156},{\&quot;name\&quot;: \&quot;Martes\&quot;,\&quot;value\&quot;: 230},{\&quot;name\&quot;: \&quot;Miercoles\&quot;,\&quot;value\&quot;: 136},{\&quot;name\&quot;: \&quot;Jueves\&quot;,\&quot;value\&quot;: 136},{\&quot;name\&quot;: \&quot;Viernes\&quot;,\&quot;value\&quot;: 245},{\&quot;name\&quot;: \&quot;Sabado\&quot;,\&quot;value\&quot;: 146},{\&quot;name\&quot;: \&quot;Domingo\&quot;,\&quot;value\&quot;: 135}]&quot;;
+<i class="no-highlight">61</i>&nbsp;//		final JsValue visits13_16Json = Json.parse(json7);
+<i class="no-highlight">62</i>&nbsp;//
+<i class="no-highlight">63</i>&nbsp;//		//Visitas promedio en el rango horario 4pm a 8pm por DIA.
+<i class="no-highlight">64</i>&nbsp;//		final String json8 = &quot;[{\&quot;name\&quot;: \&quot;Lunes\&quot;,\&quot;value\&quot;: 136},{\&quot;name\&quot;: \&quot;Martes\&quot;,\&quot;value\&quot;: 146},{\&quot;name\&quot;: \&quot;Miercoles\&quot;,\&quot;value\&quot;: 80},{\&quot;name\&quot;: \&quot;Jueves\&quot;,\&quot;value\&quot;: 125},{\&quot;name\&quot;: \&quot;Viernes\&quot;,\&quot;value\&quot;: 136},{\&quot;name\&quot;: \&quot;Sabado\&quot;,\&quot;value\&quot;: 178},{\&quot;name\&quot;: \&quot;Domingo\&quot;,\&quot;value\&quot;: 145}]&quot;;
+<i class="no-highlight">65</i>&nbsp;//		final JsValue visits16_20Json = Json.parse(json8);
+<i class="no-highlight">66</i>&nbsp;//
+<i class="no-highlight">67</i>&nbsp;//		//Visitas promedio en el rango horario 8pm a 0am por DIA.
+<i class="no-highlight">68</i>&nbsp;//		final String json9 = &quot;[{\&quot;name\&quot;: \&quot;Lunes\&quot;,\&quot;value\&quot;: 136},{\&quot;name\&quot;: \&quot;Martes\&quot;,\&quot;value\&quot;: 236},{\&quot;name\&quot;: \&quot;Miercoles\&quot;,\&quot;value\&quot;: 184},{\&quot;name\&quot;: \&quot;Jueves\&quot;,\&quot;value\&quot;: 297},{\&quot;name\&quot;: \&quot;Viernes\&quot;,\&quot;value\&quot;: 278},{\&quot;name\&quot;: \&quot;Sabado\&quot;,\&quot;value\&quot;: 147},{\&quot;name\&quot;: \&quot;Domingo\&quot;,\&quot;value\&quot;: 185}]&quot;;
+<i class="no-highlight">69</i>&nbsp;//		final JsValue jsValue9 = Json.parse(json9);
+<i class="no-highlight">70</i>&nbsp;
+<i class="no-highlight">71</i>&nbsp;//		//Visitas con duración menor a 15 minutos de la última semana. Dice &quot;Lunes, Martes, etc&quot; Pero ahí debería ser cada día de la última semana
+<i class="no-highlight">72</i>&nbsp;//		final String json10 = &quot;[{\&quot;name\&quot;: \&quot;Lunes\&quot;,\&quot;value\&quot;: 130},{\&quot;name\&quot;: \&quot;Martes\&quot;,\&quot;value\&quot;: 150},{\&quot;name\&quot;: \&quot;Miercoles\&quot;,\&quot;value\&quot;: 100},{\&quot;name\&quot;: \&quot;Jueves\&quot;,\&quot;value\&quot;: 300},{\&quot;name\&quot;: \&quot;Viernes\&quot;,\&quot;value\&quot;: 123},{\&quot;name\&quot;: \&quot;Sabado\&quot;,\&quot;value\&quot;: 316},{\&quot;name\&quot;: \&quot;Domingo\&quot;,\&quot;value\&quot;: 231}]&quot;;
+<i class="no-highlight">73</i>&nbsp;//		final JsValue visits0to15Json = Json.parse(json10);
+<i class="no-highlight">74</i>&nbsp;//
+<i class="no-highlight">75</i>&nbsp;//		//Visitas con duración entre 15 y 30 min
+<i class="no-highlight">76</i>&nbsp;//		final String json11 = &quot;[{\&quot;name\&quot;: \&quot;Lunes\&quot;,\&quot;value\&quot;: 80},{\&quot;name\&quot;: \&quot;Martes\&quot;,\&quot;value\&quot;: 400},{\&quot;name\&quot;: \&quot;Miercoles\&quot;,\&quot;value\&quot;: 165},{\&quot;name\&quot;: \&quot;Jueves\&quot;,\&quot;value\&quot;: 180},{\&quot;name\&quot;: \&quot;Viernes\&quot;,\&quot;value\&quot;: 300},{\&quot;name\&quot;: \&quot;Sabado\&quot;,\&quot;value\&quot;: 97},{\&quot;name\&quot;: \&quot;Domingo\&quot;,\&quot;value\&quot;: 150}]&quot;;
+<i class="no-highlight">77</i>&nbsp;//		final JsValue jsValue11 = Json.parse(json11);
+<i class="no-highlight">78</i>&nbsp;//
+<i class="no-highlight">79</i>&nbsp;//		//Visitas con duración entre 30 y 45 min
+<i class="no-highlight">80</i>&nbsp;//		final String json12 = &quot;[{\&quot;name\&quot;: \&quot;Lunes\&quot;,\&quot;value\&quot;: 250},{\&quot;name\&quot;: \&quot;Martes\&quot;,\&quot;value\&quot;: 365},{\&quot;name\&quot;: \&quot;Miercoles\&quot;,\&quot;value\&quot;: 178},{\&quot;name\&quot;: \&quot;Jueves\&quot;,\&quot;value\&quot;: 365},{\&quot;name\&quot;: \&quot;Viernes\&quot;,\&quot;value\&quot;: 400},{\&quot;name\&quot;: \&quot;Sabado\&quot;,\&quot;value\&quot;: 154},{\&quot;name\&quot;: \&quot;Domingo\&quot;,\&quot;value\&quot;: 294}]&quot;;
+<i class="no-highlight">81</i>&nbsp;//		final JsValue jsValue12 = Json.parse(json12);
+<i class="no-highlight">82</i>&nbsp;//
+<i class="no-highlight">83</i>&nbsp;//		//Visitas con duración entre 45 y 60 min
+<i class="no-highlight">84</i>&nbsp;//		final String json13 = &quot;[{\&quot;name\&quot;: \&quot;Lunes\&quot;,\&quot;value\&quot;: 400},{\&quot;name\&quot;: \&quot;Martes\&quot;,\&quot;value\&quot;: 147},{\&quot;name\&quot;: \&quot;Miercoles\&quot;,\&quot;value\&quot;: 367},{\&quot;name\&quot;: \&quot;Jueves\&quot;,\&quot;value\&quot;: 153},{\&quot;name\&quot;: \&quot;Viernes\&quot;,\&quot;value\&quot;: 134},{\&quot;name\&quot;: \&quot;Sabado\&quot;,\&quot;value\&quot;: 187},{\&quot;name\&quot;: \&quot;Domingo\&quot;,\&quot;value\&quot;: 316}]&quot;;
+<i class="no-highlight">85</i>&nbsp;//		final JsValue jsValue13 = Json.parse(json13);
+<i class="no-highlight">86</i>&nbsp;//
+<i class="no-highlight">87</i>&nbsp;//		//Visitas con duración entre 45 y 60 min
+<i class="no-highlight">88</i>&nbsp;//		final String json14 = &quot;[{\&quot;name\&quot;: \&quot;Lunes\&quot;,\&quot;value\&quot;: 123},{\&quot;name\&quot;: \&quot;Martes\&quot;,\&quot;value\&quot;: 145},{\&quot;name\&quot;: \&quot;Miercoles\&quot;,\&quot;value\&quot;: 331},{\&quot;name\&quot;: \&quot;Jueves\&quot;,\&quot;value\&quot;: 166},{\&quot;name\&quot;: \&quot;Viernes\&quot;,\&quot;value\&quot;: 229},{\&quot;name\&quot;: \&quot;Sabado\&quot;,\&quot;value\&quot;: 326},{\&quot;name\&quot;: \&quot;Domingo\&quot;,\&quot;value\&quot;: 356}]&quot;;
+<i class="no-highlight">89</i>&nbsp;//		final JsValue jsValue14 = Json.parse(json14);
+<i class="no-highlight">90</i>&nbsp;
+<i class="no-highlight">91</i>&nbsp;        //Visitas de la semana 1
+<b class="nc"><i class="no-highlight">92</i>&nbsp;        final String json15 = &quot;[{\&quot;name\&quot;: \&quot;Lunes\&quot;,\&quot;value\&quot;: 236},{\&quot;name\&quot;: \&quot;Martes\&quot;,\&quot;value\&quot;: 365},{\&quot;name\&quot;: \&quot;Miercoles\&quot;,\&quot;value\&quot;: 256},{\&quot;name\&quot;: \&quot;Jueves\&quot;,\&quot;value\&quot;: 456},{\&quot;name\&quot;: \&quot;Viernes\&quot;,\&quot;value\&quot;: 365},{\&quot;name\&quot;: \&quot;Sabado\&quot;,\&quot;value\&quot;: 136},{\&quot;name\&quot;: \&quot;Domingo\&quot;,\&quot;value\&quot;: 229}]&quot;;</b>
+<b class="nc"><i class="no-highlight">93</i>&nbsp;        final JsValue jsValue15 = Json.parse(json15);</b>
+<i class="no-highlight">94</i>&nbsp;
+<i class="no-highlight">95</i>&nbsp;        //Visitas de la semana 2
+<b class="nc"><i class="no-highlight">96</i>&nbsp;        final String json16 = &quot;[{\&quot;name\&quot;: \&quot;Lunes\&quot;,\&quot;value\&quot;: 123},{\&quot;name\&quot;: \&quot;Martes\&quot;,\&quot;value\&quot;: 334},{\&quot;name\&quot;: \&quot;Miercoles\&quot;,\&quot;value\&quot;: 154},{\&quot;name\&quot;: \&quot;Jueves\&quot;,\&quot;value\&quot;: 326},{\&quot;name\&quot;: \&quot;Viernes\&quot;,\&quot;value\&quot;: 154},{\&quot;name\&quot;: \&quot;Sabado\&quot;,\&quot;value\&quot;: 265},{\&quot;name\&quot;: \&quot;Domingo\&quot;,\&quot;value\&quot;: 336}]&quot;;</b>
+<b class="nc"><i class="no-highlight">97</i>&nbsp;        final JsValue jsValue16 = Json.parse(json16);</b>
+<i class="no-highlight">98</i>&nbsp;
+<i class="no-highlight">99</i>&nbsp;        //Visitas de la semana 3
+<b class="nc"><i class="no-highlight">100</i>&nbsp;        final String json17 = &quot;[{\&quot;name\&quot;: \&quot;Lunes\&quot;,\&quot;value\&quot;: 236},{\&quot;name\&quot;: \&quot;Martes\&quot;,\&quot;value\&quot;: 496},{\&quot;name\&quot;: \&quot;Miercoles\&quot;,\&quot;value\&quot;: 345},{\&quot;name\&quot;: \&quot;Jueves\&quot;,\&quot;value\&quot;: 123},{\&quot;name\&quot;: \&quot;Viernes\&quot;,\&quot;value\&quot;: 423},{\&quot;name\&quot;: \&quot;Sabado\&quot;,\&quot;value\&quot;: 236},{\&quot;name\&quot;: \&quot;Domingo\&quot;,\&quot;value\&quot;: 114}]&quot;;</b>
+<b class="nc"><i class="no-highlight">101</i>&nbsp;        final JsValue jsValue17 = Json.parse(json17);</b>
+<i class="no-highlight">102</i>&nbsp;
+<i class="no-highlight">103</i>&nbsp;        //Visitas de la semana 4
+<b class="nc"><i class="no-highlight">104</i>&nbsp;        final String json18 = &quot;[{\&quot;name\&quot;: \&quot;Lunes\&quot;,\&quot;value\&quot;: 364},{\&quot;name\&quot;: \&quot;Martes\&quot;,\&quot;value\&quot;: 147},{\&quot;name\&quot;: \&quot;Miercoles\&quot;,\&quot;value\&quot;: 264},{\&quot;name\&quot;: \&quot;Jueves\&quot;,\&quot;value\&quot;: 164},{\&quot;name\&quot;: \&quot;Viernes\&quot;,\&quot;value\&quot;: 361},{\&quot;name\&quot;: \&quot;Sabado\&quot;,\&quot;value\&quot;: 265},{\&quot;name\&quot;: \&quot;Domingo\&quot;,\&quot;value\&quot;: 423}]&quot;;</b>
+<b class="nc"><i class="no-highlight">105</i>&nbsp;        final JsValue jsValue18 = Json.parse(json18);</b>
+<i class="no-highlight">106</i>&nbsp;
+<b class="nc"><i class="no-highlight">107</i>&nbsp;        return new JsValue[] {jsValue15, jsValue16, jsValue17, jsValue18};</b>
+<i class="no-highlight">108</i>&nbsp;    }
+<i class="no-highlight">109</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-07-12 12:17</div>
+</div>
+</body>
+</html>

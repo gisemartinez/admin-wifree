@@ -1,0 +1,165 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > AnalyticsController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">controllers.admin</a>
+</div>
+
+<h1>Coverage Summary for Class: AnalyticsController (controllers.admin)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AnalyticsController</td>
+<td class="coverageStat">
+  <span class="percent">
+    20%
+  </span>
+  <span class="absValue">
+    (1/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    6.2%
+  </span>
+  <span class="absValue">
+    (1/16)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">AnalyticsController$$FastClassByGuice$$8facefac</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    20%
+  </span>
+  <span class="absValue">
+    (1/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    6.2%
+  </span>
+  <span class="absValue">
+    (1/16)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package controllers.admin;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import controllers.WiFreeController;
+<i class="no-highlight">4</i>&nbsp;import models.AnalyticsQueryFilter;
+<i class="no-highlight">5</i>&nbsp;import operations.requests.CreateAnalyticsQueryFilterRequest;
+<i class="no-highlight">6</i>&nbsp;import operations.requests.RunAnalyticsQueryFilterRequest;
+<i class="no-highlight">7</i>&nbsp;import operations.responses.CreateAnalyticsQueryFilterResponse;
+<i class="no-highlight">8</i>&nbsp;import operations.responses.RunAnalyticsQueryFilterResponse;
+<i class="no-highlight">9</i>&nbsp;import play.data.Form;
+<i class="no-highlight">10</i>&nbsp;import play.mvc.Result;
+<i class="no-highlight">11</i>&nbsp;import services.AnalyticsService;
+<i class="no-highlight">12</i>&nbsp;
+<i class="no-highlight">13</i>&nbsp;import javax.inject.Inject;
+<i class="no-highlight">14</i>&nbsp;import java.util.concurrent.CompletionStage;
+<i class="no-highlight">15</i>&nbsp;
+<b class="fc"><i class="no-highlight">16</i>&nbsp;public class AnalyticsController extends WiFreeController {</b>
+<i class="no-highlight">17</i>&nbsp;
+<i class="no-highlight">18</i>&nbsp;	@Inject
+<i class="no-highlight">19</i>&nbsp;	private AnalyticsService analyticsService;
+<i class="no-highlight">20</i>&nbsp;	
+<i class="no-highlight">21</i>&nbsp;	public CompletionStage&lt;Result&gt; createAnalyticsQuery() {
+<b class="nc"><i class="no-highlight">22</i>&nbsp;		final Form&lt;AnalyticsQueryFilter&gt; form = formFactory.form(AnalyticsQueryFilter.class);</b>
+<b class="nc"><i class="no-highlight">23</i>&nbsp;		AnalyticsQueryFilter queryFilter = form.bindFromRequest().get();</b>
+<i class="no-highlight">24</i>&nbsp;		
+<b class="nc"><i class="no-highlight">25</i>&nbsp;		final CreateAnalyticsQueryFilterRequest request = new CreateAnalyticsQueryFilterRequest(queryFilter);</b>
+<b class="nc"><i class="no-highlight">26</i>&nbsp;		final CompletionStage&lt;CreateAnalyticsQueryFilterResponse&gt; futureResponse = analyticsService.createAnalyticsQueryFilter(request);</b>
+<i class="no-highlight">27</i>&nbsp;		
+<i class="no-highlight">28</i>&nbsp;		// TODO revisar
+<b class="nc"><i class="no-highlight">29</i>&nbsp;		return futureResponse.thenApplyAsync(response -&gt; {</b>
+<b class="nc"><i class="no-highlight">30</i>&nbsp;			if (response.isOk()) return ok();</b>
+<b class="nc"><i class="no-highlight">31</i>&nbsp;			else return badRequest();</b>
+<i class="no-highlight">32</i>&nbsp;		});
+<i class="no-highlight">33</i>&nbsp;	}
+<i class="no-highlight">34</i>&nbsp;	
+<i class="no-highlight">35</i>&nbsp;	public CompletionStage&lt;Result&gt; runAnalyticsQuery() {
+<b class="nc"><i class="no-highlight">36</i>&nbsp;		final Form&lt;AnalyticsQueryFilter&gt; form = formFactory.form(AnalyticsQueryFilter.class);</b>
+<b class="nc"><i class="no-highlight">37</i>&nbsp;		final AnalyticsQueryFilter queryFilter = form.bindFromRequest().get();</b>
+<i class="no-highlight">38</i>&nbsp;		
+<b class="nc"><i class="no-highlight">39</i>&nbsp;		final RunAnalyticsQueryFilterRequest request = new RunAnalyticsQueryFilterRequest(queryFilter);</b>
+<b class="nc"><i class="no-highlight">40</i>&nbsp;		final CompletionStage&lt;RunAnalyticsQueryFilterResponse&gt; futureResponse = analyticsService.runAnalyticsQueryFilter(request);</b>
+<i class="no-highlight">41</i>&nbsp;		
+<b class="nc"><i class="no-highlight">42</i>&nbsp;		futureResponse.thenApplyAsync(response -&gt; {</b>
+<b class="nc"><i class="no-highlight">43</i>&nbsp;			if (response.isOk()) return ok();</b>
+<b class="nc"><i class="no-highlight">44</i>&nbsp;			else return badRequest();</b>
+<i class="no-highlight">45</i>&nbsp;		});
+<i class="no-highlight">46</i>&nbsp;		
+<b class="nc"><i class="no-highlight">47</i>&nbsp;		throw new IllegalArgumentException(&quot;To be implemented&quot;);</b>
+<i class="no-highlight">48</i>&nbsp;	}
+<i class="no-highlight">49</i>&nbsp;	
+<i class="no-highlight">50</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-07-12 12:17</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,218 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > PortalSettingsController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">controllers.admin</a>
+</div>
+
+<h1>Coverage Summary for Class: PortalSettingsController (controllers.admin)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PortalSettingsController</td>
+<td class="coverageStat">
+  <span class="percent">
+    20%
+  </span>
+  <span class="absValue">
+    (1/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    2.2%
+  </span>
+  <span class="absValue">
+    (1/45)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">PortalSettingsController$$FastClassByGuice$$fbc98c01</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    20%
+  </span>
+  <span class="absValue">
+    (1/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    2.2%
+  </span>
+  <span class="absValue">
+    (1/45)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package controllers.admin;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import com.typesafe.config.Config;
+<i class="no-highlight">4</i>&nbsp;import controllers.WiFreeController;
+<i class="no-highlight">5</i>&nbsp;import controllers.routes;
+<i class="no-highlight">6</i>&nbsp;import models.Portal;
+<i class="no-highlight">7</i>&nbsp;import org.pac4j.core.profile.CommonProfile;
+<i class="no-highlight">8</i>&nbsp;import play.data.Form;
+<i class="no-highlight">9</i>&nbsp;import play.mvc.Http;
+<i class="no-highlight">10</i>&nbsp;import play.mvc.Result;
+<i class="no-highlight">11</i>&nbsp;import services.PortalAndLoginOptionsService;
+<i class="no-highlight">12</i>&nbsp;import views.dto.PortalOptionsView;
+<i class="no-highlight">13</i>&nbsp;
+<i class="no-highlight">14</i>&nbsp;import javax.inject.Inject;
+<i class="no-highlight">15</i>&nbsp;import java.io.File;
+<i class="no-highlight">16</i>&nbsp;import java.io.IOException;
+<i class="no-highlight">17</i>&nbsp;import java.nio.file.Files;
+<i class="no-highlight">18</i>&nbsp;import java.nio.file.Path;
+<i class="no-highlight">19</i>&nbsp;import java.nio.file.Paths;
+<i class="no-highlight">20</i>&nbsp;import java.nio.file.StandardCopyOption;
+<i class="no-highlight">21</i>&nbsp;import java.util.List;
+<i class="no-highlight">22</i>&nbsp;import java.util.Map;
+<i class="no-highlight">23</i>&nbsp;import java.util.stream.Collectors;
+<i class="no-highlight">24</i>&nbsp;import java.util.stream.IntStream;
+<i class="no-highlight">25</i>&nbsp;
+<b class="fc"><i class="no-highlight">26</i>&nbsp;public class PortalSettingsController extends WiFreeController {</b>
+<i class="no-highlight">27</i>&nbsp;
+<i class="no-highlight">28</i>&nbsp;    @Inject
+<i class="no-highlight">29</i>&nbsp;    PortalAndLoginOptionsService portalAndLoginOptionsService;
+<i class="no-highlight">30</i>&nbsp;
+<i class="no-highlight">31</i>&nbsp;    @Inject
+<i class="no-highlight">32</i>&nbsp;    Config config;
+<i class="no-highlight">33</i>&nbsp;    
+<i class="no-highlight">34</i>&nbsp;    public Result savePortalOptions() {
+<b class="nc"><i class="no-highlight">35</i>&nbsp;        final Form&lt;PortalOptionsView&gt; form = formFactory.form(PortalOptionsView.class);</b>
+<b class="nc"><i class="no-highlight">36</i>&nbsp;        final PortalOptionsView portalOptions = form.bindFromRequest().get();</b>
+<i class="no-highlight">37</i>&nbsp;
+<b class="nc"><i class="no-highlight">38</i>&nbsp;        Http.MultipartFormData&lt;File&gt; body = request().body().asMultipartFormData();</b>
+<i class="no-highlight">39</i>&nbsp;
+<b class="nc"><i class="no-highlight">40</i>&nbsp;        List&lt;String&gt; existingImages = getExistingImages(body);</b>
+<i class="no-highlight">41</i>&nbsp;
+<b class="nc"><i class="no-highlight">42</i>&nbsp;        List&lt;Http.MultipartFormData.FilePart&lt;File&gt;&gt; fileParts = body.getFiles()</b>
+<b class="nc"><i class="no-highlight">43</i>&nbsp;                .stream()</b>
+<b class="nc"><i class="no-highlight">44</i>&nbsp;                .filter(this::hasName)</b>
+<b class="nc"><i class="no-highlight">45</i>&nbsp;                .collect(Collectors.toList());</b>
+<i class="no-highlight">46</i>&nbsp;
+<b class="nc"><i class="no-highlight">47</i>&nbsp;        List&lt;File&gt; files = fileParts.isEmpty()</b>
+<b class="nc"><i class="no-highlight">48</i>&nbsp;                ? existingImages.stream().map(File::new).collect(Collectors.toList())</b>
+<b class="nc"><i class="no-highlight">49</i>&nbsp;                : IntStream.range(0, fileParts.size())</b>
+<b class="nc"><i class="no-highlight">50</i>&nbsp;                    .mapToObj(i -&gt; moveFile(portalOptions, fileParts, i))</b>
+<b class="nc"><i class="no-highlight">51</i>&nbsp;                    .collect(Collectors.toList());</b>
+<b class="nc"><i class="no-highlight">52</i>&nbsp;        CommonProfile currentProfile = getCurrentProfile();</b>
+<i class="no-highlight">53</i>&nbsp;
+<b class="nc"><i class="no-highlight">54</i>&nbsp;        Portal portal = portalAndLoginOptionsService.savePortalOptions(currentProfile, portalOptions, portalOptions.getPortalId(), files);</b>
+<i class="no-highlight">55</i>&nbsp;        // refresh profile portal
+<b class="nc"><i class="no-highlight">56</i>&nbsp;        currentProfile.removeAttribute(&quot;portal&quot;);</b>
+<b class="nc"><i class="no-highlight">57</i>&nbsp;        currentProfile.addAttribute(&quot;portal&quot;, portal);</b>
+<b class="nc"><i class="no-highlight">58</i>&nbsp;        return redirect(routes.AdminAppController.portalSettings());</b>
+<i class="no-highlight">59</i>&nbsp;    }
+<i class="no-highlight">60</i>&nbsp;
+<i class="no-highlight">61</i>&nbsp;    private List&lt;String&gt; getExistingImages(Http.MultipartFormData&lt;File&gt; body) {
+<b class="nc"><i class="no-highlight">62</i>&nbsp;        return body.asFormUrlEncoded()</b>
+<b class="nc"><i class="no-highlight">63</i>&nbsp;                .entrySet().stream()</b>
+<b class="nc"><i class="no-highlight">64</i>&nbsp;                .filter(x -&gt; x.getKey().startsWith(&quot;image.&quot;))</b>
+<b class="nc"><i class="no-highlight">65</i>&nbsp;                .sorted(Map.Entry.comparingByKey())</b>
+<b class="nc"><i class="no-highlight">66</i>&nbsp;                .map(x -&gt; x.getValue()[0])</b>
+<b class="nc"><i class="no-highlight">67</i>&nbsp;                .collect(Collectors.toList());</b>
+<i class="no-highlight">68</i>&nbsp;    }
+<i class="no-highlight">69</i>&nbsp;
+<i class="no-highlight">70</i>&nbsp;    private boolean hasName(Http.MultipartFormData.FilePart&lt;File&gt; f) {
+<b class="nc"><i class="no-highlight">71</i>&nbsp;        return !f.getFilename().isEmpty();</b>
+<i class="no-highlight">72</i>&nbsp;    }
+<i class="no-highlight">73</i>&nbsp;
+<i class="no-highlight">74</i>&nbsp;    private File moveFile(PortalOptionsView portalOptions, List&lt;Http.MultipartFormData.FilePart&lt;File&gt;&gt; fileParts, int i) {
+<b class="nc"><i class="no-highlight">75</i>&nbsp;        Http.MultipartFormData.FilePart&lt;File&gt; filePart = fileParts.get(i);</b>
+<b class="nc"><i class="no-highlight">76</i>&nbsp;        String currentPath = Paths.get(&quot;.&quot;).toAbsolutePath().normalize().toString();</b>
+<i class="no-highlight">77</i>&nbsp;
+<b class="nc"><i class="no-highlight">78</i>&nbsp;        File file = filePart.getFile();</b>
+<b class="nc"><i class="no-highlight">79</i>&nbsp;        String extension = filePart.getContentType().split(&quot;/&quot;)[1];</b>
+<b class="nc"><i class="no-highlight">80</i>&nbsp;        String sharedFolder = config.getString(&quot;images.path&quot;);</b>
+<i class="no-highlight">81</i>&nbsp;        
+<b class="nc"><i class="no-highlight">82</i>&nbsp;        String internalFolder = currentPath + &quot;/public/img/client/&quot;;</b>
+<i class="no-highlight">83</i>&nbsp;        
+<b class="nc"><i class="no-highlight">84</i>&nbsp;        Path sharedFolderPath = Paths.get(sharedFolder);</b>
+<b class="nc"><i class="no-highlight">85</i>&nbsp;        Path internalFolderPath = Paths.get(internalFolder);</b>
+<i class="no-highlight">86</i>&nbsp;        
+<b class="nc"><i class="no-highlight">87</i>&nbsp;        String fileName = &quot;image_&quot; + portalOptions.getPortalId() + &quot;_&quot; + i + &quot;.&quot; + extension;</b>
+<i class="no-highlight">88</i>&nbsp;
+<i class="no-highlight">89</i>&nbsp;        try {
+<b class="nc"><i class="no-highlight">90</i>&nbsp;            if (Files.notExists(sharedFolderPath)){</b>
+<b class="nc"><i class="no-highlight">91</i>&nbsp;                Files.createDirectory(sharedFolderPath);</b>
+<i class="no-highlight">92</i>&nbsp;            }
+<b class="nc"><i class="no-highlight">93</i>&nbsp;            if (Files.notExists(internalFolderPath)){</b>
+<b class="nc"><i class="no-highlight">94</i>&nbsp;                Files.createDirectory(internalFolderPath);</b>
+<i class="no-highlight">95</i>&nbsp;            }
+<b class="nc"><i class="no-highlight">96</i>&nbsp;            Files.copy(file.toPath(), Paths.get(internalFolder + fileName), StandardCopyOption.REPLACE_EXISTING);</b>
+<b class="nc"><i class="no-highlight">97</i>&nbsp;            Files.copy(file.toPath(), Paths.get(sharedFolder + fileName), StandardCopyOption.REPLACE_EXISTING);</b>
+<b class="nc"><i class="no-highlight">98</i>&nbsp;        } catch (IOException e) {</b>
+<b class="nc"><i class="no-highlight">99</i>&nbsp;            e.printStackTrace();</b>
+<b class="nc"><i class="no-highlight">100</i>&nbsp;        }</b>
+<b class="nc"><i class="no-highlight">101</i>&nbsp;        return new File(internalFolder + fileName);</b>
+<i class="no-highlight">102</i>&nbsp;    }
+<i class="no-highlight">103</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-07-12 12:17</div>
+</div>
+</body>
+</html>
