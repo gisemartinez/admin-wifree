@@ -30,7 +30,6 @@ public class WiFreeSuite {
 		String[] upsDowns = splittedEvolutionContent[1].split("# --- !Downs");
 		createDdl = upsDowns[0];
 		dropDdl = upsDowns[1];
-
 	}
 
 	@AfterClass
@@ -43,5 +42,4 @@ public class WiFreeSuite {
 		Ebean.execute(Ebean.createCallableSql(dropDdl));
 		Ebean.execute(Ebean.createCallableSql(createDdl));
 	}
-
 }
