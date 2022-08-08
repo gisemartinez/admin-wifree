@@ -2,15 +2,14 @@ package controllers.admin;
 
 import be.objectify.deadbolt.java.actions.SubjectPresent;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.collect.ImmutableListMultimap;
 import controllers.WiFreeController;
-import controllers.routes;
 import daos.FieldAnswerDAO;
 import daos.SurveyDAO;
 import models.*;
 import operations.requests.CreateSurveyRequest;
-import operations.responses.CreateSurveyResponse;
+import operations.requests.GetAllSurveysRequest;
+import operations.responses.GetAllSurveysResponse;
 import play.data.Form;
 import play.libs.Json;
 import play.mvc.Result;
@@ -23,9 +22,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-
 import static com.google.common.collect.ImmutableListMultimap.toImmutableListMultimap;
-import static com.google.common.collect.Streams.*;
+import static com.google.common.collect.Streams.forEachPair;
 import static java.util.stream.Collectors.toList;
 
 public class SurveysController extends WiFreeController {
@@ -34,10 +32,16 @@ public class SurveysController extends WiFreeController {
     SurveysService surveysService;
 
     @Inject
-    FieldAnswerDAO fieldAnswerDAO; // TODO quitar
+    FieldAnswerDAO fieldAnswerDAO;
 
     @Inject
-    SurveyDAO surveyDAO; // TODO quitar
+    SurveyDAO surveyDAO;
+
+    @SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
+    public Result allSurveys() throws NoProfileFoundException {
+        GetAllSurveysResponse getAllSurveysResponse = surveysService.getAllSurveys(new GetAllSurveysRequest(portalId()));
+        return ok(render(views.html.admin.all_surveys.render(SurveyFormHelper.buildSummaries(getAllSurveysResponse))));
+    }
 
     @SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
     public Result survey(Long surveyId) throws NoProfileFoundException {
@@ -45,27 +49,27 @@ public class SurveysController extends WiFreeController {
         Form<Survey> form = formFactory.form(Survey.class).fill(survey);
         return ok(render(views.html.admin.surveys.render(form, true, false, 0, 0)));
     }
-    
+
     @SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
     public Result createSurvey() {
         Survey survey = formFactory.form(Survey.class).bindFromRequest().get();
-        CreateSurveyResponse createSurveyResponse = surveysService.createSurvey(new CreateSurveyRequest(survey, portalId()));
+        surveysService.createSurvey(new CreateSurveyRequest(survey, portalId()));
 
-        return redirect(routes.AdminAppController.allSurveys());
+        return redirect(controllers.admin.routes.SurveysController.allSurveys());
     }
-    
+
     @SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
     public Result deleteSurvey(Long surveyId) {
         ImmutableListMultimap<NetworkUser, FieldAnswer> answersForSurvey = fieldAnswerDAO.findForSurvey(surveyId);
         if (answersForSurvey.isEmpty()) {
             Survey survey = surveyDAO.get(surveyId);
             surveysService.deleteSurvey(survey);
-            return redirect(routes.AdminAppController.allSurveys());
+            return redirect(controllers.admin.routes.SurveysController.allSurveys());
         } else {
             return redirect(controllers.admin.routes.SurveysController.getSurveyAnswers(surveyId));
         }
     }
-    
+
     @SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
     public Result getSurveyAnswers(Long surveyId) {
         ImmutableListMultimap<NetworkUser, FieldAnswer> answersForSurvey = fieldAnswerDAO.findForSurvey(surveyId); // TODO quitar a una Function
@@ -84,23 +88,22 @@ public class SurveysController extends WiFreeController {
         } else {
             Survey survey = surveyDAO.get(surveyId);
 
-            List<Survey> answeredSurveysPerUser = answersForSurvey.asMap().values().stream()
-                    .map(userAnswers -> fillSurveyFieldsWithAnswers(survey, userAnswers))
-                    .collect(toList());
+            List<Survey> answeredSurveysPerUser = answersForSurvey.asMap()
+                                                                  .values()
+                                                                  .stream()
+                                                                  .map(userAnswers -> fillSurveyFieldsWithAnswers(survey,
+                                                                                                                  userAnswers))
+                                                                  .collect(toList());
 
             int totalAnswers = answeredSurveysPerUser.size();
             int sanitizedOffset = totalAnswers > 0 ? Math.min(Math.max(offset, 0), totalAnswers - 1) : 0;
 
             Form<Survey> form = formFactory.form(Survey.class);
-            if (totalAnswers > 0) form = form.fill(answeredSurveysPerUser.get(sanitizedOffset));
+            if (totalAnswers > 0) {
+                form = form.fill(answeredSurveysPerUser.get(sanitizedOffset));
+            }
 
-            return ok(render( views.html.admin.surveys.render(
-                    form,
-                    false,
-                    false,
-                    sanitizedOffset + 1,
-                    totalAnswers))
-            );
+            return ok(render(views.html.admin.surveys.render(form, false, false, sanitizedOffset + 1, totalAnswers)));
         }
     }
 
@@ -108,36 +111,26 @@ public class SurveysController extends WiFreeController {
     public Result getSurveyResults(Long surveyId) {
         ImmutableListMultimap<NetworkUser, FieldAnswer> answersForSurvey = fieldAnswerDAO.findForSurvey(surveyId);
         Survey survey = surveyDAO.get(surveyId);
-        List<Survey> surveys = answersForSurvey.asMap().values().stream()
+        List<Survey> surveys = answersForSurvey
+                .asMap()
+                .values()
+                .stream()
                 .map(userAnswers -> fillSurveyFieldsWithAnswers(survey, userAnswers))
                 .collect(toList());
 
-        Stream<Field> fieldStream = surveys.stream().flatMap(s ->
-                s.getFields().stream().flatMap(f -> {
-                    if ("checkbox".equals(f.getType())) {
-                        return Arrays.stream(f.getConfig().getValue().split(",")).map(a -> {
-                            Field copy = f.copy();
-                            copy.getConfig().setValue(a.trim());
-                            return copy;
-                        });
-                    } else {
-                        return Stream.of(f);
-                    }
-                }));
+        Stream<Field> fieldStream = surveys.stream().flatMap(s -> s.getFields().stream().flatMap(f -> {
+            if (FieldConfig.FieldConfigTypes.Checkbox.equals(f.getType())) {
+                return Arrays.stream(f.getConfig().getValue().split(",")).map(a -> {
+                    Field copy = f.copy();
+                    copy.getConfig().setValue(a.trim());
+                    return copy;
+                });
+            } else {
+                return Stream.of(f);
+            }
+        }));
 
-        List<SummarizedAnswers> summarizedAnswers = surveys.stream()
-                .flatMap(s ->
-                        s.getFields().stream().flatMap(f -> {
-                            if ("checkbox".equals(f.getType())) {
-                                return Arrays.stream(f.getConfig().getValue().split(",")).map(a -> {
-                                    Field copy = f.copy();
-                                    copy.getConfig().setValue(a.trim());
-                                    return copy;
-                                });
-                            } else {
-                                return Stream.of(f);
-                            }
-                        }))
+        List<SummarizedAnswers> summarizedAnswers = fieldStream
                 .map(field -> {
                     FieldConfig config = field.getConfig();
                     String question = config.getLabel();
@@ -145,29 +138,60 @@ public class SurveysController extends WiFreeController {
                     String answer = config.getValue();
                     Integer order = config.getOrder();
                     Integer maximum = config.getMaximum();
-                    List<String> possibleAnswers = config.hasOptions()
-                            ? config.getOtherOptions().stream().map(Option::getKey).collect(toList())
-                            : new ArrayList<>();
-                    return new QuestionAnswer(question, type, answer, order, possibleAnswers, maximum);
+                    List<String> possibleAnswers = config
+                            .hasOptions() ? config.getOtherOptions()
+                                                  .stream()
+                                                  .map(Option::getKey)
+                                                  .collect(
+                                                          toList()) : new ArrayList<>();
+                    return new QuestionAnswer(question,
+                                              type,
+                                              answer,
+                                              order,
+                                              possibleAnswers,
+                                              maximum);
                 })
-                .collect(toImmutableListMultimap(x -> x.question, Function.identity()))
-                .asMap().entrySet().stream()
+                .collect(toImmutableListMultimap(x -> x.question,
+                                                 Function.identity()))
+                .asMap()
+                .entrySet()
+                .stream()
                 .map(entry -> {
                     String question = entry.getKey();
                     Collection<QuestionAnswer> answers = entry.getValue();
-                    String type = answers.stream().findAny().map(x -> x.type).orElse("");
-                    Integer order = answers.stream().findAny().map(x -> x.order).orElse(-1);
-                    Integer maximum = answers.stream().findAny().map(x -> x.maximum).orElse(0);
-                    Map<String, Long> answersOccurrences = answers.stream().collect(Collectors.groupingBy(x -> x.answer, Collectors.counting()));
-                    if ("rating".equals(type)) {
-                        IntStream.range(1, maximum+1)
-                                .forEachOrdered(i -> answersOccurrences.putIfAbsent(String.valueOf(i), 0L));
+                    String type = answers.stream()
+                                         .findAny()
+                                         .map(x -> x.type)
+                                         .orElse("");
+                    Integer order = answers.stream()
+                                           .findAny()
+                                           .map(x -> x.order)
+                                           .orElse(-1);
+                    Integer maximum = answers.stream()
+                                             .findAny()
+                                             .map(x -> x.maximum)
+                                             .orElse(0);
+                    Map<String, Long> answersOccurrences = answers.stream()
+                                                                  .collect(
+                                                                          Collectors.groupingBy(
+                                                                                  x -> x.answer,
+                                                                                  Collectors.counting()));
+                    if (FieldConfig.FieldConfigTypes.Rating.equals(type)) {
+                        IntStream.range(1, maximum + 1)
+                                 .forEachOrdered(i -> answersOccurrences.putIfAbsent(
+                                         String.valueOf(i),
+                                         0L));
                     } else {
                         answers.stream()
-                                .flatMap(qa -> qa.possibleAnswers.stream())
-                                .forEachOrdered(a -> answersOccurrences.putIfAbsent(a, 0L));
+                               .flatMap(qa -> qa.possibleAnswers.stream())
+                               .forEachOrdered(a -> answersOccurrences.putIfAbsent(
+                                       a,
+                                       0L));
                     }
-                    return new SummarizedAnswers(question, type, answersOccurrences, order);
+                    return new SummarizedAnswers(question,
+                                                 type,
+                                                 answersOccurrences,
+                                                 order);
                 })
                 .collect(toList());
 
@@ -178,36 +202,34 @@ public class SurveysController extends WiFreeController {
     }
 
     private List<AnswersJson> buildAnswersJson(List<SummarizedAnswers> summarizedAnswers) {
-        return summarizedAnswers.stream()
-                .map(x -> {
-                    List<String> labels = new ArrayList<>();
-                    List<Long> values = new ArrayList<>();
+        return summarizedAnswers.stream().map(x -> {
+            List<String> labels = new ArrayList<>();
+            List<Long> values = new ArrayList<>();
 
-                    if ("rating".equals(x.type)) {
-                        x.answers.entrySet().stream()
-                                .sorted(Comparator.comparingInt(e -> Integer.parseInt(e.getKey())))
-                                .forEachOrdered(entry -> {
-                                    labels.add(entry.getKey());
-                                    values.add(entry.getValue());
-                                });
-                    } else {
-                        x.answers.entrySet().stream()
-                                .sorted(Map.Entry.comparingByKey())
-                                .forEachOrdered(entry -> {
-                                    labels.add(entry.getKey());
-                                    values.add(entry.getValue());
-                                });
-                    }
+            if (FieldConfig.FieldConfigTypes.Rating.equals(x.type)) {
+                x.answers.entrySet()
+                         .stream()
+                         .sorted(Comparator.comparingInt(e -> Integer.parseInt(e.getKey())))
+                         .forEachOrdered(entry -> {
+                             labels.add(entry.getKey());
+                             values.add(entry.getValue());
+                         });
+            } else {
+                x.answers.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEachOrdered(entry -> {
+                    labels.add(entry.getKey());
+                    values.add(entry.getValue());
+                });
+            }
 
-                    return new AnswersJson(x.question, x.id, x.type, x.order, labels, values);
-                })
-                .collect(toList());
+            return new AnswersJson(x.question, x.id, x.type, x.order, labels, values);
+        }).collect(toList());
     }
 
     public static class DataJson {
         public List<AnswersJson> data;
 
-        public DataJson() {}
+        public DataJson() {
+        }
 
         public String toJsonString() {
             return Json.toJson(this).toString();
@@ -294,17 +316,7 @@ public class SurveysController extends WiFreeController {
             this.type = type;
         }
     }
-
-    public static class GroupedAnswers {
-        public final Map<String, String> answers;
-        public final String type;
-
-        public GroupedAnswers(Map<String, String> answers, String type) {
-            this.answers = answers;
-            this.type = type;
-        }
-    }
-
+    
     public static class QuestionAnswer {
         public final String question;
         public final String type;
@@ -326,8 +338,12 @@ public class SurveysController extends WiFreeController {
     @SuppressWarnings("UnstableApiUsage")
     private Survey fillSurveyFieldsWithAnswers(Survey survey, java.util.Collection<FieldAnswer> userAnswers) {
         Survey answeredSurvey = survey.copy();
-        Stream<Field> fields = answeredSurvey.getFields().stream().sorted(Comparator.comparing(field -> field.getConfig().getOrder()));
-        Stream<FieldAnswer> answers = userAnswers.stream().sorted(Comparator.comparing(answer -> answer.getField().getConfig().getOrder()));
+        Stream<Field> fields = answeredSurvey.getFields()
+                                             .stream()
+                                             .sorted(Comparator.comparing(field -> field.getConfig().getOrder()));
+        Stream<FieldAnswer> answers = userAnswers.stream().sorted(Comparator.comparing(answer -> answer.getField()
+                                                                                                       .getConfig()
+                                                                                                       .getOrder()));
         forEachPair(fields, answers, (field, answer) -> answerField(answeredSurvey, field, answer));
         return answeredSurvey;
     }
@@ -350,5 +366,4 @@ public class SurveysController extends WiFreeController {
         }
         return rr.toString();
     }
-
 }

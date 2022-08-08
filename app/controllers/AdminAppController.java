@@ -161,16 +161,6 @@ public class AdminAppController extends WiFreeController {
     }
     
     @SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
-    public Result allSurveys() throws NoProfileFoundException {
-        GetAllSurveysResponse getAllSurveysResponse = surveysService.getAllSurveys(new GetAllSurveysRequest(portalId()));
-        List<SurveySummary> summaries = getAllSurveysResponse.surveys().stream()
-                .map(this::toSummary)
-                .sorted(Comparator.comparing(SurveySummary::creation).reversed())
-                .collect(Collectors.toList());
-        return ok(render(views.html.admin.all_surveys.render(summaries)));
-    }
-
-    @SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
     public Result portalSettings() {
         CommonProfile currentProfile = getCurrentProfile();
         Optional<Portal> portal = Optional.ofNullable(currentProfile.getAttribute("portal", Portal.class));
@@ -197,10 +187,7 @@ public class AdminAppController extends WiFreeController {
     public Result allCollectedSocialData() {
         return ok(render(views.html.admin.collectedSocialData.render()));
     }
-
-    private SurveySummary toSummary(Survey survey) {
-        return new SurveySummary(survey.getId(), survey.getTitle(), survey.getWhenCreated());
-    }
+    
 
     private List<VisitsByPeriod> takeLastWeek(List<VisitsByPeriod> list) {
         int size = list.size();

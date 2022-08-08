@@ -22,7 +22,6 @@ public class SurveyController extends WiFreeController {
     @Inject
     private PortalDAO portalDAO;
 
-    // TODO no se que es esto, revisar
     public Result saveSurvey() {
         JsonNode bodyJson = request().body().asJson();
 
@@ -40,7 +39,8 @@ public class SurveyController extends WiFreeController {
         survey.getFields().forEach(field -> field.setSurvey(survey));
 
         // TODO guardar survey, crear dao
-        CreateSurveyResponse createSurveyResponse = surveysService.createSurvey(new CreateSurveyRequest(survey, portalId));
+        CreateSurveyResponse createSurveyResponse = surveysService.createSurvey(new CreateSurveyRequest(survey,
+                                                                                                        portalId));
 
         return ok(createSurveyResponse.isOk() + survey.getTitle());
     }
@@ -54,15 +54,16 @@ public class SurveyController extends WiFreeController {
         final String label = fieldConfigValue.findValue("label").asText();
         final int order = fieldConfigValue.findValue("order").asInt();
         FieldConfig fieldConfig;
-
+        
         switch (fieldType) {
-            case "textbox":
+            case FieldConfig.FieldConfigTypes.Textbox:
                 fieldConfig = createTextboxConfig(fieldConfigValue, key, label, order);
                 break;
-            case "rating":
+            case FieldConfig.FieldConfigTypes.Rating:
                 fieldConfig = createRatingFieldConfig(fieldConfigValue, key, label, order);
                 break;
-            case "radio":
+            case FieldConfig.FieldConfigTypes.Radio:
+            case FieldConfig.FieldConfigTypes.Checkbox:
                 fieldConfig = createRadioFieldConfig(fieldConfigValue, key, label, order);
                 break;
             default:
@@ -74,7 +75,8 @@ public class SurveyController extends WiFreeController {
 
     private FieldConfig createTextboxConfig(JsonNode fieldConfigValue, String key, String label, int order) {
         FieldConfig fieldConfig;
-        boolean required = Optional.ofNullable(fieldConfigValue.findValue("required")).map(JsonNode::asBoolean).orElse(false);
+        boolean required = Optional.ofNullable(fieldConfigValue.findValue("required")).map(JsonNode::asBoolean).orElse(
+                false);
         String value = Optional.ofNullable(fieldConfigValue.findValue("value")).map(JsonNode::asText).orElse(null);
         fieldConfig = new TextboxFieldConfig(key, label, required, order, value);
         return fieldConfig;
@@ -91,8 +93,8 @@ public class SurveyController extends WiFreeController {
         FieldConfig fieldConfig;
         final List<Option> options = new ArrayList<>();
         fieldConfigValue.withArray("options")
-                .elements()
-                .forEachRemaining(optionsNode -> createOption(options, optionsNode));
+                        .elements()
+                        .forEachRemaining(optionsNode -> createOption(options, optionsNode));
         fieldConfig = new RadioFieldConfig(key, label, order, options);
         return fieldConfig;
     }
@@ -102,5 +104,4 @@ public class SurveyController extends WiFreeController {
         String optionKey = optionsNode.findValue("key").asText();
         options.add(new Option(optionIndex, optionKey));
     }
-
 }

@@ -11,7 +11,6 @@ import static org.junit.Assert.assertEquals;
 import static play.test.Helpers.*;
 
 public class LoginControllerSuite extends WiFreeSuite {
-
 	@Test
 	public void testLogin() {
 		final RequestBuilder loginRequest = Helpers.fakeRequest().method(GET).uri("/login");

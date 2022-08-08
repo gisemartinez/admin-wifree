@@ -128,6 +128,7 @@ public class FieldConfig {
         public static final String Textbox = "textbox";
         public static final String Rating = "rating";
         public static final String Radio = "radio";
+        public static final String Checkbox = "checkbox";
     }
 
 }

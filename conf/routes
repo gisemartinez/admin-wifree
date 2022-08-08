@@ -29,7 +29,7 @@ GET         /data/social-login/results              controllers.AdminAppControll
 GET         /data/surveys/:surveyId/all-answers     controllers.admin.SurveysController.getSurveyAnswers(surveyId: Long)
 GET         /data/surveys/:surveyId/answers         controllers.admin.SurveysController.answeredSurvey(surveyId: Long, offset: Int ?= 0)
 GET         /data/surveys/:surveyId/results         controllers.admin.SurveysController.getSurveyResults(surveyId: Long)
-GET         /data/surveys                           controllers.AdminAppController.allSurveys
+GET         /data/surveys                           controllers.admin.SurveysController.allSurveys
 
 ### Console routes
 GET			/console								controllers.ConsoleController.index

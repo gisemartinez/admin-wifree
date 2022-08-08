@@ -31,7 +31,7 @@
 						<li><a href="@routes.AdminAppController.allCollectedSocialData">@Messages("menu.sidebar.data.redes")</a></li>
 						}
 						@if( surveyLogin ){
-						<li><a href="@routes.AdminAppController.allSurveys">@Messages("menu.sidebar.data.surveys")</a></li>
+						<li><a href="@controllers.admin.routes.SurveysController.allSurveys">@Messages("menu.sidebar.data.surveys")</a></li>
 						}
 						<li><a href="@routes.AdminAppController.analytics">@Messages("menu.sidebar.data.visitas") </a></li>
 					</ul>
