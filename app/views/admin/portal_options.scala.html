@@ -33,30 +33,42 @@
 <div class="right_col" role="main">
     <div class="row">
         <div class="col-md-9 col-sm-6 col-xs-12">
-            @helper.form(controllers.admin.routes.PortalSettingsController.savePortalOptions(),  'enctype -> "multipart/form-data") {
+            @helper.form(controllers.admin.routes.PortalSettingsController.savePortalOptions(),
+                Symbol("novalidate")-> "novalidate",
+                'class -> "needs-validation",
+                'enctype -> "multipart/form-data") {
                 <div>
                     <h1>Configuración del Portal</h1>
                     <div class="x-content">
                         <div hidden>
                             @helper.inputText(form("portalId"))
                         </div>
-
-                        @helper.inputText(form("name"), '_label -> "Nombre del Portal", 'class -> "form-control col-md-6 col-xs-12")
-                        @helper.inputText(form("description"), '_label -> "Texto inicial de bienvenida al visitante", 'class -> "form-control col-md-6 col-xs-12")
-                        @helper.inputText(form("homeURL"), '_label -> "URL de Redirección", 'class -> "form-control col-md-6 col-xs-12")
-
-                        <div class="form-group" hidden>
-                            <div class="col-md-3 col-sm-3 col-xs-6">
-                                <div class="">
-                                @helper.inputRadioGroup(form("templateType"), PortalApplicationType.appTypes(), '_label -> "Tema", 'class -> "")
-                                </div>
-                            </div>
+                        
+                        @helper.input(form("name"), '_label ->"Nombre del Portal") { (id, name, value, args) =>
+                        <input type="text" name="@name" id="@id" @toHtmlArgs(args)
+                               class="form-control col-md-6 col-xs-12"
+                               aria-describedby="inputGroupPrepend" placeholder="Portal de Mi tienda" required>
+                        <div id="empty-name" class="invalid-feedback">
+                            Por favor ingrese un nombre de portal
                         </div>
-
+                        }
+                        
+                        @helper.input(form("description"), '_label ->"Texto inicial de bienvenida al visitante") { (id, name, value, args) =>
+                            <input type="text" name="@name" id="@id" @toHtmlArgs(args) 
+                                   class="form-control col-md-6 col-xs-12"
+                                   aria-describedby="inputGroupPrepend" placeholder="Bienvenides! Es necesario autenticarse para poder utilizar WiFi" required>
+                            <div id="empty-description" class="invalid-feedback">
+                                Por favor ingrese un texto inicial de bienvenida al visitante
+                            </div>
+                        }
+                        
+                        @helper.inputText(form("homeURL"), '_label -> "URL de Redirección", 'class -> "form-control col-md-6 col-xs-12")
+                        
                         <div class="form-group">
                                     @helper.inputCheckboxGroup(
                                     form("loginMethods"),
                                     options = LoginMethodType.portalLoginTypes(),
+                                    Symbol("_required") -> "required",
                                     Symbol("_label") -> Messages("connections.label.login-method"),
                                     Symbol("_error") -> form("loginMethods").error.map(_.withMessage("Se debe elegir al menos un metodo")))                                        </div>
                             
@@ -79,4 +91,5 @@
         </div>
     </div>
 </div>
+<script src="@routes.Assets.versioned("js/removeDefaultTooltip.js")">
 <!-- Page content -->
