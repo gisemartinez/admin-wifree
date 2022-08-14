@@ -31,20 +31,4 @@ public class AnalyticsController extends WiFreeController {
 			else return badRequest();
 		});
 	}
-	
-	public CompletionStage<Result> runAnalyticsQuery() {
-		final Form<AnalyticsQueryFilter> form = formFactory.form(AnalyticsQueryFilter.class);
-		final AnalyticsQueryFilter queryFilter = form.bindFromRequest().get();
-		
-		final RunAnalyticsQueryFilterRequest request = new RunAnalyticsQueryFilterRequest(queryFilter);
-		final CompletionStage<RunAnalyticsQueryFilterResponse> futureResponse = analyticsService.runAnalyticsQueryFilter(request);
-		
-		futureResponse.thenApplyAsync(response -> {
-			if (response.isOk()) return ok();
-			else return badRequest();
-		});
-		
-		throw new IllegalArgumentException("To be implemented");
-	}
-	
 }

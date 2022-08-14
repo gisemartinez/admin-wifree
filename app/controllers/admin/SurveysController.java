@@ -2,13 +2,16 @@ package controllers.admin;
 
 import be.objectify.deadbolt.java.actions.SubjectPresent;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.collect.ImmutableListMultimap;
 import controllers.WiFreeController;
 import daos.FieldAnswerDAO;
+import daos.PortalDAO;
 import daos.SurveyDAO;
 import models.*;
 import operations.requests.CreateSurveyRequest;
 import operations.requests.GetAllSurveysRequest;
+import operations.responses.CreateSurveyResponse;
 import operations.responses.GetAllSurveysResponse;
 import play.data.Form;
 import play.libs.Json;
@@ -36,6 +39,9 @@ public class SurveysController extends WiFreeController {
 
     @Inject
     SurveyDAO surveyDAO;
+
+    @Inject
+    private PortalDAO portalDAO;
 
     @SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
     public Result allSurveys() throws NoProfileFoundException {
@@ -201,6 +207,106 @@ public class SurveysController extends WiFreeController {
         return ok(render(views.html.admin.surveys_results.render(dataJson)));
     }
 
+    @SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
+    public Result surveys() throws NoProfileFoundException {
+        ArrayList<Field> fields = new ArrayList<>();
+        Field ageField = new Field(null, "textbox", new FieldConfig(null, "Edad", 1, true, null, null, null));
+        Field genreField = new Field(null, "radio", new FieldConfig(null, "Género", 2, true, null, null, Arrays.asList(new Option(1, "Femenino"), new Option(2, "Masculino"), new Option(3, "Otro"))));
+        fields.add(ageField);
+        fields.add(genreField);
+        Survey survey = new Survey((new Random()).nextLong(), null, null, fields, false);
+        ageField.setSurvey(survey);
+        genreField.setSurvey(survey);
+
+        Form<Survey> form = formFactory.form(Survey.class).fill(survey);
+
+        return ok(render(views.html.admin.surveys.render(form, true, false, 0, 0)));
+    }
+
+    @SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
+    public Result saveSurvey() {
+        JsonNode bodyJson = request().body().asJson();
+
+        final long id = bodyJson.findValue("id").asLong();
+        final long portalId = bodyJson.findValue("portalId").asLong();
+        final Portal portal = portalDAO.get(portalId);
+        final String title = bodyJson.findValue("title").asText();
+        List<Field> fields = new ArrayList<>();
+
+        bodyJson.withArray("fields")
+                .elements()
+                .forEachRemaining(fieldNode -> createField(fields, fieldNode));
+
+        final Survey survey = new Survey(id, portal, title, fields, true);
+        survey.getFields().forEach(field -> field.setSurvey(survey));
+
+        // TODO guardar survey, crear dao
+        CreateSurveyResponse createSurveyResponse = surveysService.createSurvey(new CreateSurveyRequest(survey,
+                                                                                                        portalId));
+
+        return ok(createSurveyResponse.isOk() + survey.getTitle());
+    }
+
+    private void createField(List<Field> fields, JsonNode field) {
+        final long fieldId = field.findValue("id").asLong();
+        final String fieldType = field.findValue("type").asText();
+        final JsonNode fieldConfigValue = field.findValue("config");
+
+        final String key = fieldConfigValue.findValue("key").asText();
+        final String label = fieldConfigValue.findValue("label").asText();
+        final int order = fieldConfigValue.findValue("order").asInt();
+        FieldConfig fieldConfig;
+
+        switch (fieldType) {
+            case FieldConfig.FieldConfigTypes.Textbox:
+                fieldConfig = createTextboxConfig(fieldConfigValue, key, label, order);
+                break;
+            case FieldConfig.FieldConfigTypes.Rating:
+                fieldConfig = createRatingFieldConfig(fieldConfigValue, key, label, order);
+                break;
+            case FieldConfig.FieldConfigTypes.Radio:
+            case FieldConfig.FieldConfigTypes.Checkbox:
+                fieldConfig = createRadioFieldConfig(fieldConfigValue, key, label, order);
+                break;
+            default:
+                throw new RuntimeException("Error parsing received survey, unknown fieldType: " + fieldType);
+        }
+
+        fields.add(new Field(fieldId, fieldType, fieldConfig));
+    }
+
+    private FieldConfig createTextboxConfig(JsonNode fieldConfigValue, String key, String label, int order) {
+        FieldConfig fieldConfig;
+        boolean required = Optional.ofNullable(fieldConfigValue.findValue("required")).map(JsonNode::asBoolean).orElse(
+                false);
+        String value = Optional.ofNullable(fieldConfigValue.findValue("value")).map(JsonNode::asText).orElse(null);
+        fieldConfig = new TextboxFieldConfig(key, label, required, order, value);
+        return fieldConfig;
+    }
+
+    private FieldConfig createRatingFieldConfig(JsonNode fieldConfigValue, String key, String label, int order) {
+        FieldConfig fieldConfig;
+        int maximum = fieldConfigValue.findValue("maximum").asInt();
+        fieldConfig = new RatingFieldConfig(key, label, order, maximum);
+        return fieldConfig;
+    }
+
+    private FieldConfig createRadioFieldConfig(JsonNode fieldConfigValue, String key, String label, int order) {
+        FieldConfig fieldConfig;
+        final List<Option> options = new ArrayList<>();
+        fieldConfigValue.withArray("options")
+                        .elements()
+                        .forEachRemaining(optionsNode -> createOption(options, optionsNode));
+        fieldConfig = new RadioFieldConfig(key, label, order, options);
+        return fieldConfig;
+    }
+
+    private void createOption(List<Option> options, JsonNode optionsNode) {
+        Integer optionIndex = optionsNode.findValue("index").asInt();
+        String optionKey = optionsNode.findValue("key").asText();
+        options.add(new Option(optionIndex, optionKey));
+    }
+
     private List<AnswersJson> buildAnswersJson(List<SummarizedAnswers> summarizedAnswers) {
         return summarizedAnswers.stream().map(x -> {
             List<String> labels = new ArrayList<>();
@@ -316,7 +422,7 @@ public class SurveysController extends WiFreeController {
             this.type = type;
         }
     }
-    
+
     public static class QuestionAnswer {
         public final String question;
         public final String type;

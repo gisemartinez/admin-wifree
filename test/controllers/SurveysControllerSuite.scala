@@ -1,47 +1,27 @@
 package controllers
 
-import controllers.api.dto.FieldAnswerDTO
-import daos.{AdminDAO, PortalDAO, SurveyDAO}
+import controllers.admin.{
+  FieldConfigForm,
+  OptionForm,
+  SurveyForm,
+  SurveyFormHelper
+}
+import daos.SurveyDAO
 import io.ebean.Expr
 import models._
-import models.types.AccountType
-import operations.requests.SaveSurveyAnswersRequest
 import org.junit.Assert.{assertEquals, assertTrue}
 import org.junit.Test
+import play.api.libs.json.{JsValue, Json}
+import play.api.test.Helpers.GET
 import play.mvc.Http.Status.{OK, SEE_OTHER}
 import play.test.Helpers
 import play.test.Helpers.{GET, POST, contentAsString}
-import services.SurveysService
 import utils.{SuiteHelper, WiFreeSuite}
 
+import java.util.Calendar
 import scala.collection.JavaConverters._;
 
 class SurveysControllerSuite extends WiFreeSuite with SuiteHelper {
-  def adminWithPortal(): (Admin, Portal) = {
-    val admin =
-      new Admin(null, "Don Admin", "donadmin@mail.com", "donadmin", null, false)
-    val adminDAO = new AdminDAO
-    adminDAO.save(admin)
-
-    // Portal
-    val portal = new Portal(
-      "Test Portal",
-      "Portal de pruebas",
-      AccountType.Basic,
-      admin,
-      null,
-      null,
-      null,
-      null,
-      null
-    )
-
-    val portalDAO = new PortalDAO
-    portalDAO.save(portal)
-
-    (admin, portal)
-  }
-
   @Test def listAFewSurveys(): Unit = {
     val (admin, portal) = adminWithPortal()
 
@@ -144,8 +124,106 @@ class SurveysControllerSuite extends WiFreeSuite with SuiteHelper {
     assertTrue(afterDeletion.isEmpty)
   }
 
-  @Test def listSurveyAnswers(): Unit = {
+  @Test def saveSurvey(): Unit = {
     val (admin, portal) = adminWithPortal()
+    val surveyId = util.Random.nextInt()
+    val surveyTitle = "This is a survey with 1 field to answer"
+
+    val surveyToMap = Json.obj(
+      ("id", s"$surveyId"),
+      ("portalId", s"${portal.getId}"),
+      ("title", surveyTitle),
+      ("enabled", true),
+      (
+        "fields",
+        Json.arr(
+          List(
+            Json.obj(
+              ("id", 1),
+              ("type", FieldConfig.FieldConfigTypes.Textbox),
+              (
+                "config",
+                Json.obj(
+                  ("key", "key1"),
+                  ("label", "label 1"),
+                  ("order", 1),
+                  ("required", false),
+                  ("value", ""),
+                  ("maximum", 0)
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+
+    val saveRequestBuilder =
+      Helpers.fakeRequest
+        .method(POST)
+        .uri(s"/api/survey")
+        .bodyJson(surveyToMap)
+    val saveResult = execAuthCallAs(admin, saveRequestBuilder)
+
+    assertEquals(OK, saveResult.status)
+    val saveResultStr = contentAsString(saveResult)
+    assertTrue(saveResultStr.contains(surveyTitle))
+  }
+
+  @Test def createSurvey(): Unit = {
+    val (admin, _) = adminWithPortal()
+    val surveyTitle = "Created Survey at " + Calendar.getInstance().getTime()
+
+    val surveyForm =
+      SurveyForm(
+        surveyTitle,
+        true,
+        List(
+          FieldConfigForm(
+            FieldConfig.FieldConfigTypes.Textbox,
+            key = "key",
+            label = "label",
+            order = 1, // FieldConfig
+            required = false,
+            value = "", // Textfield
+            maximum = 0, // Rating
+            options = List.empty[OptionForm]
+          )
+        )
+      )
+    val surveyToMap = SurveyFormHelper.form.fill(surveyForm).data
+
+    val saveRequestBuilder =
+      Helpers.fakeRequest
+        .method(POST)
+        .uri(s"/manage/surveys")
+        .bodyForm(surveyToMap.asJava)
+    val saveResult = execAuthCallAs(admin, saveRequestBuilder)
+
+    assertEquals(SEE_OTHER, saveResult.status)
+    val surveyDAO = new SurveyDAO
+
+    val afterCreation =
+      scala.Option(surveyDAO.find(Expr.eq("title", surveyTitle)))
+
+    assertTrue(afterCreation.nonEmpty)
+  }
+
+  @Test def surveysTest(): Unit = {
+    val (admin, _) = adminWithPortal()
+
+    val requestBuilder =
+      Helpers.fakeRequest
+        .method(GET)
+        .uri("/manage/surveys")
+
+    val result = execAuthCallAs(admin, requestBuilder)
+    assertEquals(OK, result.status)
+  }
+
+  @Test def surveyResults(): Unit = {
+    val (admin, portal) = adminWithPortal()
+
     val surveyDAO = new SurveyDAO
     val survey =
       new Survey(
@@ -178,29 +256,56 @@ class SurveysControllerSuite extends WiFreeSuite with SuiteHelper {
         true
       )
     surveyDAO.save(survey)
+    val randomIdentifier = scala.util.Random.nextInt()
 
-    val surveysService: SurveysService =
-      WiFreeSuite.app.injector().instanceOf(classOf[SurveysService])
+    val json: JsValue = Json.parse(s"""
+{
+	"user": "$randomIdentifier",
+	"answers": [
+		{
+			"field": "1",
+			"answer": "14"
+		},
+		{
+			"field": "2",
+			"answer": "OptionA"
+		}
+	]
+}
+  """)
 
-    surveysService.saveSurveyAnswers(
-      SaveSurveyAnswersRequest(
-        List(
-          new FieldAnswerDTO(1, "Some Text"),
-          new FieldAnswerDTO(2, "OptionA,OptionB ")
-        ).asJava,
-        admin.getId
-      )
-    )
+    val session = sessionFor(admin)
+    val answerSurveyRequest =
+      Helpers.fakeRequest
+        .method(POST)
+        .session(session)
+        .uri(s"/api/survey/answers")
+        .bodyJson(json)
 
-    val requestBuilder =
+    val answerSurveyResult = Helpers.route(WiFreeSuite.app, answerSurveyRequest)
+
+    val surveyResultsRequest =
       Helpers.fakeRequest
         .method(GET)
+        .session(session)
         .uri(s"/data/surveys/${survey.getId}/results")
-    val result = execAuthCallAs(admin, requestBuilder)
-    val text = contentAsString(result)
-    assertEquals(OK, result.status)
+
+    val surveyResultsResult =
+      Helpers.route(WiFreeSuite.app, surveyResultsRequest)
+
+    val answerSurveyResultStr = contentAsString(answerSurveyResult)
+    val adminResultsResultStr = contentAsString(surveyResultsResult)
+    assertEquals(OK, answerSurveyResult.status)
+    assertEquals(OK, surveyResultsResult.status)
     assertTrue(
-      text.contains("Some Text")
+      answerSurveyResultStr.contains(
+        s"Survey answers succeeded: true, survey: 1, user: $randomIdentifier"
+      )
+    )
+    assertTrue(
+      adminResultsResultStr.contains(
+        "OptionA"
+      )
     )
   }
 }

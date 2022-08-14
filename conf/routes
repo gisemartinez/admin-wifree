@@ -15,7 +15,7 @@ POST		/analytics/create-analytics-query		controllers.admin.AnalyticsController.c
 ### Manage routes
 GET			/manage/portal-settings					controllers.AdminAppController.portalSettings
 GET         /manage/social-login                    controllers.AdminAppController.loginSettings
-GET         /manage/surveys                         controllers.AdminAppController.surveys
+GET         /manage/surveys                         controllers.admin.SurveysController.surveys
 POST        /manage/surveys                         controllers.admin.SurveysController.createSurvey
 POST        /manage/surveys/delete/:surveyId        controllers.admin.SurveysController.deleteSurvey(surveyId: Long)
 
@@ -33,15 +33,13 @@ GET         /data/surveys                           controllers.admin.SurveysCon
 
 ### Console routes
 GET			/console								controllers.ConsoleController.index
-GET         /console/login      					controllers.ConsoleController.login
 POST		/console/create-admin					controllers.ConsoleController.createAdmin
 POST		/console/create-portal					controllers.ConsoleController.createPortal
-GET         /console/mockup/:portalId               controllers.ConsoleController.mockup(portalId: Long)
 
 ### API routes
 GET         /api/socialuser/:email                  controllers.api.SocialUserController.getSocialUser(email: String)
 POST        /api/socialuser                         controllers.api.SocialUserController.saveSocialUser
-POST        /api/survey                             controllers.api.SurveyController.saveSurvey
+POST        /api/survey                             controllers.admin.SurveysController.saveSurvey
 GET         /api/survey/:id/answers                 controllers.api.SurveyAnswersController.answersCSV(id: Long)
 POST        /api/survey/answers                     controllers.api.SurveyAnswersController.saveAnswers
 ### API routes new

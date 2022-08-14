@@ -25,7 +25,14 @@
         </div>
     } else {
         <div class="file-upload">
-            <h3>Carousel</h3>
+            <h3>Carrousel de imágenes</h3>
+
+            <div class="col-md-12">
+                <h4>Cargar Imágenes</h4>
+                @helper.inputFile(config("images"), '_label -> "", 'accept -> "image/*", Symbol("multiple") -> "")
+            </div>
+
+            @if(config("images").indexes.length != 0) {
             <div class="col-md-12">
                 <h4>Imágenes Cargadas</h4>
                 <span>
@@ -42,12 +49,7 @@
                     }
                 }
                 </span>
-            </div>
-
-            <div class="col-md-12">
-                <h4>Cargar Imágenes</h4>
-                @helper.inputFile(config("images"), '_label -> "", 'accept -> "image/*", Symbol("multiple") -> "")
-            </div>
+            </div>}
         </div>
     }
 </div>

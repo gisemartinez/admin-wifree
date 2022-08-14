@@ -47,7 +47,7 @@
                         @helper.input(form("name"), '_label ->"Nombre del Portal") { (id, name, value, args) =>
                         <input type="text" name="@name" id="@id" @toHtmlArgs(args)
                                class="form-control col-md-6 col-xs-12"
-                               aria-describedby="inputGroupPrepend" placeholder="Portal de Mi tienda" required>
+                               aria-describedby="inputGroupPrepend" placeholder="Portal de Mi tienda" value="@value" required>
                         <div id="empty-name" class="invalid-feedback">
                             Por favor ingrese un nombre de portal
                         </div>
@@ -56,7 +56,7 @@
                         @helper.input(form("description"), '_label ->"Texto inicial de bienvenida al visitante") { (id, name, value, args) =>
                             <input type="text" name="@name" id="@id" @toHtmlArgs(args) 
                                    class="form-control col-md-6 col-xs-12"
-                                   aria-describedby="inputGroupPrepend" placeholder="Bienvenides! Es necesario autenticarse para poder utilizar WiFi" required>
+                                   aria-describedby="inputGroupPrepend" placeholder="Bienvenides! Es necesario autenticarse para poder utilizar WiFi" value="@value" required>
                             <div id="empty-description" class="invalid-feedback">
                                 Por favor ingrese un texto inicial de bienvenida al visitante
                             </div>

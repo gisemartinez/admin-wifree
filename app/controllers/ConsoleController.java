@@ -15,13 +15,7 @@ import java.util.List;
  * Created by jesu on 08/07/17.
  */
 public class ConsoleController extends WiFreeController {
-
-	public Result login() {
-		final FormClient formClient = (FormClient) config.getClients().findClient("ConsoleClient");
-		return ok(views.html.console.login.render(formClient.getCallbackUrl()));
-	}
-
-//	@SubjectPresent(handlerKey = "ConsoleClient", forceBeforeAuthCheck = true)
+	
 	public Result index() {
 		final PortalDAO portalDAO = new PortalDAO();
 		final List<Portal> portals = portalDAO.getAll();
@@ -43,10 +37,4 @@ public class ConsoleController extends WiFreeController {
 		portal.save();
 		return ok(views.html.console.created.render("*** Portal *** " + portal.toLogString() + " *** saved ***"));
 	}
-
-	public Result mockup(Long portalId) {
-		MockupInitDataHelper.run(portalId);
-		return ok("Mockups created");
-	}
-
 }
