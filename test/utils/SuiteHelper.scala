@@ -38,6 +38,14 @@ trait SuiteHelper {
     (admin, portal)
   }
 
+  def createAdmin(): Admin = {
+    val admin =
+      new Admin(null, "Don Admin", "donadmin@mail.com", "donadmin", null, false)
+    val adminDAO = new AdminDAO
+    adminDAO.save(admin)
+    admin
+  }
+
   def execAuthCallAs(admin: Admin, requestBuilder: RequestBuilder): Result = {
     val loginUserParams =
       Map(

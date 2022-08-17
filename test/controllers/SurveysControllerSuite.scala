@@ -12,7 +12,6 @@ import models._
 import org.junit.Assert.{assertEquals, assertTrue}
 import org.junit.Test
 import play.api.libs.json.{JsValue, Json}
-import play.api.test.Helpers.GET
 import play.mvc.Http.Status.{OK, SEE_OTHER}
 import play.test.Helpers
 import play.test.Helpers.{GET, POST, contentAsString}
@@ -290,13 +289,35 @@ class SurveysControllerSuite extends WiFreeSuite with SuiteHelper {
         .session(session)
         .uri(s"/data/surveys/${survey.getId}/results")
 
+    val answeredSurveyRequest =
+      Helpers.fakeRequest
+        .method(GET)
+        .session(session)
+        .uri(s"/data/surveys/${survey.getId}/answers")
+
+    val allAnswersSurveyRequest =
+      Helpers.fakeRequest
+        .method(GET)
+        .session(session)
+        .uri(s"/data/surveys/${survey.getId}/all-answers")
     val surveyResultsResult =
       Helpers.route(WiFreeSuite.app, surveyResultsRequest)
 
+    val answeredSurveyResult =
+      Helpers.route(WiFreeSuite.app, answeredSurveyRequest)
+
+    val allAnswersSurveyResult =
+      Helpers.route(WiFreeSuite.app, allAnswersSurveyRequest)
+
     val answerSurveyResultStr = contentAsString(answerSurveyResult)
     val adminResultsResultStr = contentAsString(surveyResultsResult)
+    val answeredSurveyResultStr = contentAsString(answeredSurveyResult)
+    val allAnswersSurveyResultStr = contentAsString(allAnswersSurveyResult)
+
     assertEquals(OK, answerSurveyResult.status)
     assertEquals(OK, surveyResultsResult.status)
+    assertEquals(OK, answeredSurveyResult.status)
+    assertEquals(OK, allAnswersSurveyResult.status)
     assertTrue(
       answerSurveyResultStr.contains(
         s"Survey answers succeeded: true, survey: 1, user: $randomIdentifier"
@@ -304,6 +325,18 @@ class SurveysControllerSuite extends WiFreeSuite with SuiteHelper {
     )
     assertTrue(
       adminResultsResultStr.contains(
+        "OptionA"
+      )
+    )
+
+    assertTrue(
+      answeredSurveyResultStr.contains(
+        "OptionA"
+      )
+    )
+
+    assertTrue(
+      allAnswersSurveyResultStr.contains(
         "OptionA"
       )
     )
