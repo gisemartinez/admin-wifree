@@ -1,6 +1,6 @@
 package controllers
 
-import org.junit.Assert.{assertEquals, assertTrue}
+import org.junit.Assert.assertEquals
 import org.junit.Test
 import play.mvc.Http.Status.OK
 import play.test.Helpers
@@ -21,17 +21,12 @@ class PortalConfigControllerSuite extends WiFreeSuite with SuiteHelper {
 
     assertEquals(OK, requestResult.status)
 
-    assertTrue(
-      requestResultStr.contains(
-        s"""{"uniqueId":"a622f7c9-2696-4d15-9396-0c3273ea06a5",
-          |"landingChoices":{"title":"${portal.getName}"},
-          |"client_id":"${portal.getId}",
-          |"template_id":"template-2"}""".stripMargin
-      )
-    )
+    val expectedResult =
+      s"""{"landingChoices":{"title":"${portal.getName}"},"client_id":"${portal.getId}","template_id":"template-2"}"""
+    assertEquals(requestResultStr, expectedResult)
   }
 
-  def clientAuth(): Unit = {
+  @Test def clientAuth(): Unit = {
     val (_, portal) = adminWithPortal()
     val requestBuilder =
       Helpers.fakeRequest
@@ -44,10 +39,8 @@ class PortalConfigControllerSuite extends WiFreeSuite with SuiteHelper {
 
     assertEquals(OK, requestResult.status)
 
-    assertTrue(
-      requestResultStr.contains(
-        s"Survey answers succeeded: true, survey: 1, user:"
-      )
-    )
+    val expectedResult =
+      s"""{"authData":{"loginTypes":["survey","socialLogin"],"loginTypeOptions":[{"socialMediaKeys":[]}],"client_id":"${portal.getId}"},"clientData":{"clientId":"${portal.getId}","name":"${portal.getName}","description":"${portal.getDescription}"},"carouselData":{"images":[]}}"""
+    assertEquals(expectedResult, requestResultStr)
   }
 }

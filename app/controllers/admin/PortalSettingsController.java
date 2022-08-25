@@ -49,6 +49,15 @@ public class PortalSettingsController extends WiFreeController {
                 : IntStream.range(0, fileParts.size())
                     .mapToObj(i -> moveFile(portalOptions, fileParts, i))
                     .collect(Collectors.toList());
+        
+        if (files.isEmpty()) {
+            flash("Error", "Debe cargar al menos una imagen");
+        }
+
+        if (portalOptions.getLoginMethods().isEmpty()) {
+            flash("Error", "Debe elegir al menos un modo de autenticación");
+        }
+        
         CommonProfile currentProfile = getCurrentProfile();
 
         Portal portal = portalAndLoginOptionsService.savePortalOptions(currentProfile, portalOptions, portalOptions.getPortalId(), files);

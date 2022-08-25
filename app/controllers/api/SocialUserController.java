@@ -68,6 +68,7 @@ public class SocialUserController extends WiFreeController {
     public Result saveSocialUser() {
         JsonNode bodyJson = request().body().asJson();
 
+        Long portalId = bodyJson.findValue("portalId").asLong();
         JsonNode names = bodyJson.withArray("names");
         JsonNode nameNode = names.get(0);
         String name = nameNode.findValue("displayName").asText();
@@ -90,7 +91,7 @@ public class SocialUserController extends WiFreeController {
         NetworkUserDAO networkUserDAO = new NetworkUserDAO();
         NetworkUser networkUser = networkUserDAO.findByEmail(email);
         if (networkUser == null) {
-            Portal portal = new PortalDAO().get(1L);
+            Portal portal = new PortalDAO().get(portalId);
             int age = createAge(year, month, day);
             networkUser = new NetworkUser(
                     portal,
@@ -106,7 +107,7 @@ public class SocialUserController extends WiFreeController {
                     null,
                     age
             );
-//            networkUserDAO.save(networkUser);
+            networkUserDAO.save(networkUser);
         }
 
         return ok(networkUser.toLogString());

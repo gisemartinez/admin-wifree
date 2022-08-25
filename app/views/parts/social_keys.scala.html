@@ -10,17 +10,21 @@
         <div class="form-group row">
             <div class="col-md-10 col-sm-6 col-xs-6">
                 <div class="wifree-checkbox">
-                    @helper.checkbox(loginConfiguration("enabled"), 
-                    '_label -> "Activado", 
-                    'id -> loginConfiguration("enabled").name,
-                    'class -> "form-control col-md-3 col-xs-3", 
-                    'style -> "height: 20px; width: 5%;")
-                    @*** Fix for non submitted checkbox value ***@
-                    <input type="hidden" name="@loginConfiguration("enabled").name" value="0" />
+                    @helper.input(loginConfiguration("enabled"),
+                    '_label -> "Activado",
+                    'class -> "form-control col-md-3 col-xs-3",
+                    'style -> "height: 20px; width: 5%;"){ (id, name, value, args) =>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="@name" id="@id" @if(value.get=="true"){checked}else{}>
+                            <label class="form-check-label" for="@id">
+                                Red social activa
+                            </label>
+                        </div>
+                    }
                 </div>
             </div>
         </div>
-    <div class="@loginConfiguration("enabled").name">
+    <div class="@loginConfiguration("keys")("name"))">
         <div class="form-group row">
                 <div class="col-md-10 col-sm-6 col-xs-6">
                     @helper.inputText(loginConfiguration("keys")("clientId"), '_label -> "Id de Cliente", 'class -> "form-control col-md-6 col-xs-12")

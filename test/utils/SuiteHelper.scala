@@ -1,8 +1,14 @@
 package utils
 
 import daos.{AdminDAO, PortalDAO}
-import models.types.AccountType
-import models.{Admin, Portal}
+import models.types.{AccountType, LoginMethodType}
+import models.{
+  Admin,
+  Portal,
+  PortalApp,
+  PortalAppConfig,
+  PortalNetworkConfiguration
+}
 import org.junit.Assert.assertEquals
 import play.mvc.Http.RequestBuilder
 import play.mvc.Http.Status.SEE_OTHER
@@ -31,10 +37,43 @@ trait SuiteHelper {
       null,
       null
     )
+    val carousel = {
+      val c = PortalApp.carousel()
+      c.setConfig(new PortalAppConfig(List().asJava));
+      c.setPortal(portal)
+      c
+    }
+    val template = {
+      val c = PortalApp.templateOne()
+      c.setPortal(portal)
+      c
+    }
+    val portalApps = Set(
+      template,
+      carousel
+    )
+    val portalNetworkConfigurationSurvey = {
+      val p = new PortalNetworkConfiguration(30, LoginMethodType.Survey, true)
+      p.setPortal(portal)
+      p
+    }
 
+    val portalNetworkConfigurationSocial = {
+      val p =
+        new PortalNetworkConfiguration(30, LoginMethodType.SocialLogin, true)
+      p.setPortal(portal)
+      p
+    }
+
+    portal.setApplications(portalApps.asJava)
+    portal.setNetworkConfigurations(
+      Set(
+        portalNetworkConfigurationSurvey,
+        portalNetworkConfigurationSocial
+      ).asJava
+    )
     val portalDAO = new PortalDAO
     portalDAO.save(portal)
-
     (admin, portal)
   }
 

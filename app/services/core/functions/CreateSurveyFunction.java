@@ -12,7 +12,12 @@ import services.core.WiFreeFunction;
 import utils.StringHelper;
 
 import javax.inject.Inject;
+import java.util.Collections;
+import java.util.List;
 import java.util.function.Function;
+import java.util.stream.Collectors;
+
+import static scala.collection.JavaConverters.asScalaBuffer;
 
 @SuppressWarnings("unused")
 public class CreateSurveyFunction extends WiFreeFunction<CreateSurveyRequest, CreateSurveyResponse> {
@@ -27,24 +32,35 @@ public class CreateSurveyFunction extends WiFreeFunction<CreateSurveyRequest, Cr
     public Function<CreateSurveyRequest, CreateSurveyResponse> function() {
         function = request -> {
             Survey survey = request.survey();
+            boolean surveyExists = surveyDAO.findById(survey.getId()).isPresent();
             long portalId = request.portalId();
-            removeFirstEmptyField(survey);
+            removeEmptyFields(survey);
             fixFields(survey);
             setPortal(survey, portalId);
             toggleEnabledSurveys(portalId, survey);
-            surveyDAO.saveOrUpdate(survey);
+            if (survey.getFields().isEmpty()) {
+                return new CreateSurveyResponse(survey, false, asScalaBuffer(Collections.singletonList("Por favor, ingrese opciones en la encuesta")).toList());
+            }
+            if (surveyExists) {
+                surveyDAO.saveOrUpdate(survey);
+            }
+            else {
+                surveyDAO.save(survey);
+            }
             return new CreateSurveyResponse(survey, true, null);
         };
         return function;
     }
 
     private void toggleEnabledSurveys(long portalId, Survey survey) {
-        if (survey.isEnabled())
+        if (survey.isEnabled()) {
             surveyDAO.disableAll(portalId);
+        }
     }
 
     private void fixFields(Survey survey) {
         survey.getFields().forEach(field -> {
+            field.setSurvey(survey);
             switch (field.getType()) {
                 case "rating":
                 case "textbox":
@@ -59,9 +75,9 @@ public class CreateSurveyFunction extends WiFreeFunction<CreateSurveyRequest, Cr
         survey.setPortal(portal);
     }
 
-    private void removeFirstEmptyField(Survey survey) {
-        Field firstField = survey.getFields().get(0);
-        if (StringHelper.isEmpty(firstField.getType())) survey.getFields().remove(firstField);
+    private void removeEmptyFields(Survey survey) {
+        List<Field> fields = survey.getFields().stream().filter(f -> StringHelper.isNotEmpty(f.getType())).collect(Collectors.toList());
+        survey.setFields(fields);
     }
 
     @Override

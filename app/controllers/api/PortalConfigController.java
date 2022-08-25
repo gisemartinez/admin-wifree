@@ -34,12 +34,13 @@ public class PortalConfigController extends WiFreeController {
         logRequest();
 
         Portal portal = portalDAO.get(portalId);
-        String uniqueId = UUID.randomUUID().toString(); // TODO hace falta?
         String title = portal.getName();
         String iframeURL = portal.getHomeURL();
         LandingChoicesDTO landingChoices = new LandingChoicesDTO(title, iframeURL);
         String templateId = "template-2"; // TODO implementar ABM
-        ClientLandingResponse clientLandingResponse = new ClientLandingResponse(uniqueId, landingChoices, portalId.toString(), templateId);
+        ClientLandingResponse clientLandingResponse = new ClientLandingResponse(landingChoices,
+                portalId.toString(),
+                templateId);
         return ok(clientLandingResponse.toJson());
     }
 
@@ -48,11 +49,9 @@ public class PortalConfigController extends WiFreeController {
 
         Portal portal = portalDAO.get(portalId);
 
-        String uniqueId = UUID.randomUUID().toString(); // TODO hace falta?
         List<LoginMethodType> loginMethodTypes = portal.getNetworkConfigurations().stream()
                 .map(PortalNetworkConfiguration::getLoginMethod)
                 .collect(Collectors.toList());
-        String id = portalId.toString();
         Map<PortalApplicationType, PortalApp> appsByType = portal.getApplicationsByType();
         List<String> images = appsByType.get(PortalApplicationType.Carousel).getConfig().getImages().stream()
                 .map(File::getName)
@@ -77,13 +76,15 @@ public class PortalConfigController extends WiFreeController {
             loginTypeOptions.add(new LoginTypeOptionsDTO(socialMediaKeys));
         }
 
-        AuthDataDTO authData = new AuthDataDTO(uniqueId,
-                loginMethodTypes.stream().map(l -> l.id).collect(Collectors.toList()), 
-                loginTypeOptions, 
+        AuthDataDTO authData = new AuthDataDTO(
+                loginMethodTypes.stream().map(l -> l.id).collect(Collectors.toList()),
+                loginTypeOptions,
                 portalId.toString());
         String name = portal.getName();
         ClientDataDTO clientData = new ClientDataDTO(portalId.toString(), name, portal.getDescription());
-        ClientAuthResponse clientAuthResponse = new ClientAuthResponse(authData, clientData, new CarouselDataDTO(images));
+        ClientAuthResponse clientAuthResponse = new ClientAuthResponse(authData,
+                clientData,
+                new CarouselDataDTO(images));
         return ok(clientAuthResponse.toJson());
     }
 

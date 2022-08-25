@@ -72,8 +72,11 @@
                                     Symbol("_label") -> Messages("connections.label.login-method"),
                                     Symbol("_error") -> form("loginMethods").error.map(_.withMessage("Se debe elegir al menos un metodo")))                                        </div>
                             
-                    </div>
-                        
+                        </div>
+                    @helper.input(form("portalId"),'_label ->"Vista previal" ) { (id, name, value, args) =>
+                     <a id="@id" name="preview" href='http://localhost:3000/route?mac=0a:f9:d3:c2:0c:4c&ip=127.0.0.0&link-login=http://localhost:3000/radiuscall&client=@value&link-orig=blah&error=blah&mac_client=blah&device=blah&chap-id=blah&chap-challenge=blah&mac-esc=blah'>Ir hacia el portal</a>
+                    }
+                    
                     <div class="row">
                         @parts.portal_app(form("template"), "template")
                         @parts.portal_app(form("carousel"), "carousel")

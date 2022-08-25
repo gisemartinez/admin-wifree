@@ -19,6 +19,10 @@
 	</head>
 	<body class="nav-md">
 	<div class="container body">
+		@flash.map{ case (name, value) =>
+		<div id="error" class="alert alert-danger" role="alert">@name: @value</div>
+		}
+
 		<div class="main_container">
 			@navbar
 			@content

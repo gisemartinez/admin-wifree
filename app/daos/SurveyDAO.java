@@ -7,6 +7,7 @@ import models.Survey;
 import javax.annotation.Nullable;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 import static io.ebean.Expr.and;
 import static io.ebean.Expr.eq;
@@ -24,6 +25,11 @@ public class SurveyDAO extends GenericDAO<Survey> {
     @Nullable
     public Survey findPortalActiveSurvey(Long portalId) {
         return find(and(eq("portal.id", portalId), eq("enabled", true)));
+    }
+
+    @Nullable
+    public Optional<Survey> findById(Long surveyId) {
+        return Optional.ofNullable(find(eq("id", surveyId)));
     }
 
     public void disableAll(Long portalId) {

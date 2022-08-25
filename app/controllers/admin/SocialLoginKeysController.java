@@ -3,6 +3,7 @@ package controllers.admin;
 import com.typesafe.config.Config;
 import controllers.WiFreeController;
 import controllers.routes;
+import models.PortalLoginConfiguration;
 import play.data.Form;
 import play.mvc.Http;
 import play.mvc.Result;
