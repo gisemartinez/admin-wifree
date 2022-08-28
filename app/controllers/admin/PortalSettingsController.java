@@ -52,10 +52,12 @@ public class PortalSettingsController extends WiFreeController {
         
         if (files.isEmpty()) {
             flash("Error", "Debe cargar al menos una imagen");
+            return ok(render(views.html.admin.portal_options.render(form.fill(portalOptions))));
         }
 
         if (portalOptions.getLoginMethods().isEmpty()) {
             flash("Error", "Debe elegir al menos un modo de autenticación");
+            return ok(render(views.html.admin.portal_options.render(form.fill(portalOptions))));
         }
         
         CommonProfile currentProfile = getCurrentProfile();

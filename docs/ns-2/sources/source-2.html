@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > ConnectionsController</title>
+  <title>Coverage Report > WiFreeAdminAuthenticator</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -17,15 +17,18 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">controllers.admin</a>
+    <a href="../index.html">auth</a>
 </div>
 
-<h1>Coverage Summary for Class: ConnectionsController (controllers.admin)</h1>
+<h1>Coverage Summary for Class: WiFreeAdminAuthenticator (auth)</h1>
 
 <table class="coverageStats">
-
 <tr>
   <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -36,46 +39,33 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">ConnectionsController</td>
+  <td class="name">WiFreeAdminAuthenticator</td>
 <td class="coverageStat">
   <span class="percent">
-    50%
+    100%
   </span>
   <span class="absValue">
-    (1/2)
+    (1/1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    20%
+    75%
   </span>
   <span class="absValue">
-    (1/5)
-  </span>
-</td>
-</tr>
-  <tr>
-    <td class="name">ConnectionsController$$FastClassByGuice$$9d8fa83b</td>
-  </tr>
-<tr>
-  <td class="name"><strong>Total</strong></td>
-<td class="coverageStat">
-  <span class="percent">
-    50%
-  </span>
-  <span class="absValue">
-    (1/2)
+    (3/4)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    20%
+    74.1%
   </span>
   <span class="absValue">
-    (1/5)
+    (20/27)
   </span>
 </td>
 </tr>
+
 </table>
 
 <br/>
@@ -83,30 +73,70 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package controllers.admin;
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package auth;
 <i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import controllers.WiFreeController;
-<i class="no-highlight">4</i>&nbsp;import core.constants.ConnectionsConstants;
-<i class="no-highlight">5</i>&nbsp;import models.PortalNetworkConfiguration;
-<i class="no-highlight">6</i>&nbsp;import play.data.Form;
-<i class="no-highlight">7</i>&nbsp;import play.mvc.Result;
-<i class="no-highlight">8</i>&nbsp;import services.ConnectionsService;
-<i class="no-highlight">9</i>&nbsp;
-<i class="no-highlight">10</i>&nbsp;import javax.inject.Inject;
-<i class="no-highlight">11</i>&nbsp;
-<b class="fc"><i class="no-highlight">12</i>&nbsp;public class ConnectionsController extends WiFreeController implements ConnectionsConstants {</b>
-<i class="no-highlight">13</i>&nbsp;
-<i class="no-highlight">14</i>&nbsp;	@Inject
-<i class="no-highlight">15</i>&nbsp;	private ConnectionsService connectionsService;
-<i class="no-highlight">16</i>&nbsp;
-<i class="no-highlight">17</i>&nbsp;	public Result setConnectionTimeout() {
-<b class="nc"><i class="no-highlight">18</i>&nbsp;		final Form&lt;PortalNetworkConfiguration&gt; form = formFactory.form(PortalNetworkConfiguration.class);</b>
-<b class="nc"><i class="no-highlight">19</i>&nbsp;		final PortalNetworkConfiguration portalNetworkConfiguration = form.bindFromRequest().get();</b>
-<b class="nc"><i class="no-highlight">20</i>&nbsp;		connectionsService.saveNetworkConfiguration(portalNetworkConfiguration.getConnectionTimeout(), portalId());</b>
-<b class="nc"><i class="no-highlight">21</i>&nbsp;		return redirect(controllers.routes.AdminAppController.connections()); // with something</b>
-<i class="no-highlight">22</i>&nbsp;	}
-<i class="no-highlight">23</i>&nbsp;
-<i class="no-highlight">24</i>&nbsp;}
+<i class="no-highlight">3</i>&nbsp;import daos.AdminDAO;
+<i class="no-highlight">4</i>&nbsp;import daos.AdminNotFoundException;
+<i class="no-highlight">5</i>&nbsp;import models.Admin;
+<i class="no-highlight">6</i>&nbsp;import org.pac4j.core.context.Pac4jConstants;
+<i class="no-highlight">7</i>&nbsp;import org.pac4j.core.context.WebContext;
+<i class="no-highlight">8</i>&nbsp;import org.pac4j.core.credentials.UsernamePasswordCredentials;
+<i class="no-highlight">9</i>&nbsp;import org.pac4j.core.credentials.authenticator.Authenticator;
+<i class="no-highlight">10</i>&nbsp;import org.pac4j.core.exception.AccountNotFoundException;
+<i class="no-highlight">11</i>&nbsp;import org.pac4j.core.exception.CredentialsException;
+<i class="no-highlight">12</i>&nbsp;import org.pac4j.core.exception.HttpAction;
+<i class="no-highlight">13</i>&nbsp;import org.pac4j.core.profile.CommonProfile;
+<i class="no-highlight">14</i>&nbsp;import org.pac4j.core.util.CommonHelper;
+<i class="no-highlight">15</i>&nbsp;
+<i class="no-highlight">16</i>&nbsp;import static play.mvc.Controller.flash;
+<i class="no-highlight">17</i>&nbsp;
+<b class="fc"><i class="no-highlight">18</i>&nbsp;public class WiFreeAdminAuthenticator implements Authenticator&lt;UsernamePasswordCredentials&gt; {</b>
+<i class="no-highlight">19</i>&nbsp;
+<b class="fc"><i class="no-highlight">20</i>&nbsp;	private final AdminDAO adminDAO = new AdminDAO();</b>
+<i class="no-highlight">21</i>&nbsp;
+<i class="no-highlight">22</i>&nbsp;	@Override
+<i class="no-highlight">23</i>&nbsp;	public void validate(UsernamePasswordCredentials credentials, WebContext context) throws HttpAction, CredentialsException {
+<b class="fc"><i class="no-highlight">24</i>&nbsp;		if (credentials == null) {</b>
+<b class="nc"><i class="no-highlight">25</i>&nbsp;			throwsException(&quot;No hay credenciales&quot;);</b>
+<i class="no-highlight">26</i>&nbsp;		}
+<b class="fc"><i class="no-highlight">27</i>&nbsp;		String email = credentials.getUsername();</b>
+<b class="fc"><i class="no-highlight">28</i>&nbsp;		String password = credentials.getPassword();</b>
+<b class="fc"><i class="no-highlight">29</i>&nbsp;		if (CommonHelper.isBlank(email)) {</b>
+<b class="nc"><i class="no-highlight">30</i>&nbsp;			throwsException(&quot;El nombre de usuario no puede ser vacío&quot;);</b>
+<i class="no-highlight">31</i>&nbsp;		}
+<b class="fc"><i class="no-highlight">32</i>&nbsp;		if (CommonHelper.isBlank(password)) {</b>
+<b class="nc"><i class="no-highlight">33</i>&nbsp;			throwsException(&quot;La contraseña no puede ser vacía&quot;);</b>
+<i class="no-highlight">34</i>&nbsp;		}
+<i class="no-highlight">35</i>&nbsp;
+<i class="no-highlight">36</i>&nbsp;		// TODO: define appropiate validation method
+<b class="fc"><i class="no-highlight">37</i>&nbsp;		String dbPassword = null;</b>
+<i class="no-highlight">38</i>&nbsp;		try {
+<b class="fc"><i class="no-highlight">39</i>&nbsp;			dbPassword = getPasswordFor(email);</b>
+<b class="nc"><i class="no-highlight">40</i>&nbsp;		} catch (AdminNotFoundException e) {</b>
+<b class="nc"><i class="no-highlight">41</i>&nbsp;			throwsException(&quot;No se encontró usuario con nombre: &quot; + email);</b>
+<b class="fc"><i class="no-highlight">42</i>&nbsp;		}</b>
+<b class="fc"><i class="no-highlight">43</i>&nbsp;		if (CommonHelper.areNotEquals(password, dbPassword)) {</b>
+<b class="nc"><i class="no-highlight">44</i>&nbsp;			throwsException(&quot;Contraseña incorrecta para el usuario &#39;&quot; + email + &quot;&#39;&quot;);</b>
+<i class="no-highlight">45</i>&nbsp;		}
+<i class="no-highlight">46</i>&nbsp;
+<b class="fc"><i class="no-highlight">47</i>&nbsp;		final CommonProfile profile = new CommonProfile();</b>
+<b class="fc"><i class="no-highlight">48</i>&nbsp;        Admin admin = adminDAO.getByEmail(email);</b>
+<b class="fc"><i class="no-highlight">49</i>&nbsp;        String realName = admin.getName();</b>
+<b class="fc"><i class="no-highlight">50</i>&nbsp;		profile.setId(email);</b>
+<b class="fc"><i class="no-highlight">51</i>&nbsp;		profile.addAttribute(Pac4jConstants.USERNAME, email);</b>
+<b class="fc"><i class="no-highlight">52</i>&nbsp;		profile.addAttribute(&quot;portal&quot;, admin.getPortal());</b>
+<b class="fc"><i class="no-highlight">53</i>&nbsp;        profile.addAttribute(&quot;realName&quot;, realName);</b>
+<b class="fc"><i class="no-highlight">54</i>&nbsp;		credentials.setUserProfile(profile);</b>
+<i class="no-highlight">55</i>&nbsp;	}
+<i class="no-highlight">56</i>&nbsp;
+<i class="no-highlight">57</i>&nbsp;	protected void throwsException(final String message) throws CredentialsException {
+<b class="nc"><i class="no-highlight">58</i>&nbsp;		throw new CredentialsException(message);</b>
+<i class="no-highlight">59</i>&nbsp;	}
+<i class="no-highlight">60</i>&nbsp;
+<i class="no-highlight">61</i>&nbsp;	private String getPasswordFor(String username) throws AdminNotFoundException {
+<b class="fc"><i class="no-highlight">62</i>&nbsp;		return adminDAO.getPasswordForUser(username);</b>
+<i class="no-highlight">63</i>&nbsp;	}
+<i class="no-highlight">64</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -133,7 +163,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-07-12 12:17</div>
+    <div style="float:right;">generated on 2022-08-27 21:21</div>
 </div>
 </body>
 </html>

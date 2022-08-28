@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > SurveyController</title>
+  <title>Coverage Report > ReversePortalSettingsController</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -17,15 +17,18 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">controllers.api</a>
+    <a href="../index.html">controllers.admin</a>
 </div>
 
-<h1>Coverage Summary for Class: SurveyController (controllers.api)</h1>
+<h1>Coverage Summary for Class: ReversePortalSettingsController (controllers.admin)</h1>
 
 <table class="coverageStats">
-
 <tr>
   <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -36,46 +39,33 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">SurveyController</td>
+  <td class="name">ReversePortalSettingsController</td>
 <td class="coverageStat">
   <span class="percent">
-    14.3%
+    100%
   </span>
   <span class="absValue">
-    (1/7)
+    (1/1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    2.2%
+    100%
   </span>
   <span class="absValue">
-    (1/45)
-  </span>
-</td>
-</tr>
-  <tr>
-    <td class="name">SurveyController$$FastClassByGuice$$257d5d41</td>
-  </tr>
-<tr>
-  <td class="name"><strong>Total</strong></td>
-<td class="coverageStat">
-  <span class="percent">
-    14.3%
-  </span>
-  <span class="absValue">
-    (1/7)
+    (3/3)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    2.2%
+    100%
   </span>
   <span class="absValue">
-    (1/45)
+    (4/4)
   </span>
 </td>
 </tr>
+
 </table>
 
 <br/>
@@ -83,112 +73,144 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package controllers.api;
-<i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import com.fasterxml.jackson.databind.JsonNode;
-<i class="no-highlight">4</i>&nbsp;import controllers.WiFreeController;
-<i class="no-highlight">5</i>&nbsp;import daos.PortalDAO;
-<i class="no-highlight">6</i>&nbsp;import models.*;
-<i class="no-highlight">7</i>&nbsp;import operations.requests.CreateSurveyRequest;
-<i class="no-highlight">8</i>&nbsp;import operations.responses.CreateSurveyResponse;
-<i class="no-highlight">9</i>&nbsp;import play.mvc.Result;
-<i class="no-highlight">10</i>&nbsp;import services.SurveysService;
-<i class="no-highlight">11</i>&nbsp;
-<i class="no-highlight">12</i>&nbsp;import javax.inject.Inject;
-<i class="no-highlight">13</i>&nbsp;import java.util.ArrayList;
-<i class="no-highlight">14</i>&nbsp;import java.util.List;
-<i class="no-highlight">15</i>&nbsp;import java.util.Optional;
-<i class="no-highlight">16</i>&nbsp;
-<b class="fc"><i class="no-highlight">17</i>&nbsp;public class SurveyController extends WiFreeController {</b>
-<i class="no-highlight">18</i>&nbsp;
-<i class="no-highlight">19</i>&nbsp;    @Inject
-<i class="no-highlight">20</i>&nbsp;    private SurveysService surveysService;
-<i class="no-highlight">21</i>&nbsp;
-<i class="no-highlight">22</i>&nbsp;    @Inject
-<i class="no-highlight">23</i>&nbsp;    private PortalDAO portalDAO;
-<i class="no-highlight">24</i>&nbsp;
-<i class="no-highlight">25</i>&nbsp;    // TODO no se que es esto, revisar
-<i class="no-highlight">26</i>&nbsp;    public Result saveSurvey() {
-<b class="nc"><i class="no-highlight">27</i>&nbsp;        JsonNode bodyJson = request().body().asJson();</b>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;// @GENERATOR:play-routes-compiler
+<i class="no-highlight">2</i>&nbsp;// @SOURCE:/Users/gimartinez/personal/wifree/conf/routes
+<i class="no-highlight">3</i>&nbsp;// @DATE:Fri Aug 19 08:55:29 CEST 2022
+<i class="no-highlight">4</i>&nbsp;
+<i class="no-highlight">5</i>&nbsp;import play.api.mvc.Call
+<i class="no-highlight">6</i>&nbsp;
+<i class="no-highlight">7</i>&nbsp;
+<i class="no-highlight">8</i>&nbsp;import _root_.controllers.Assets.Asset
+<i class="no-highlight">9</i>&nbsp;import _root_.play.libs.F
+<i class="no-highlight">10</i>&nbsp;
+<i class="no-highlight">11</i>&nbsp;// @LINE:12
+<i class="no-highlight">12</i>&nbsp;package controllers.admin {
+<i class="no-highlight">13</i>&nbsp;
+<i class="no-highlight">14</i>&nbsp;  // @LINE:23
+<b class="fc"><i class="no-highlight">15</i>&nbsp;  class ReversePortalSettingsController(_prefix: =&gt; String) {</b>
+<i class="no-highlight">16</i>&nbsp;    def _defaultPrefix: String = {
+<b class="fc"><i class="no-highlight">17</i>&nbsp;      if (_prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;</b>
+<i class="no-highlight">18</i>&nbsp;    }
+<i class="no-highlight">19</i>&nbsp;
+<i class="no-highlight">20</i>&nbsp;  
+<i class="no-highlight">21</i>&nbsp;    // @LINE:23
+<i class="no-highlight">22</i>&nbsp;    def savePortalOptions(): Call = {
+<i class="no-highlight">23</i>&nbsp;      
+<b class="fc"><i class="no-highlight">24</i>&nbsp;      Call(&quot;POST&quot;, _prefix + { _defaultPrefix } + &quot;manage/portal-settings&quot;)</b>
+<i class="no-highlight">25</i>&nbsp;    }
+<i class="no-highlight">26</i>&nbsp;  
+<i class="no-highlight">27</i>&nbsp;  }
 <i class="no-highlight">28</i>&nbsp;
-<b class="nc"><i class="no-highlight">29</i>&nbsp;        final long id = bodyJson.findValue(&quot;id&quot;).asLong();</b>
-<b class="nc"><i class="no-highlight">30</i>&nbsp;        final long portalId = bodyJson.findValue(&quot;portalId&quot;).asLong();</b>
-<b class="nc"><i class="no-highlight">31</i>&nbsp;        final Portal portal = portalDAO.get(portalId);</b>
-<b class="nc"><i class="no-highlight">32</i>&nbsp;        final String title = bodyJson.findValue(&quot;title&quot;).asText();</b>
-<b class="nc"><i class="no-highlight">33</i>&nbsp;        List&lt;Field&gt; fields = new ArrayList&lt;&gt;();</b>
+<i class="no-highlight">29</i>&nbsp;  // @LINE:22
+<b class="fc"><i class="no-highlight">30</i>&nbsp;  class ReverseSocialLoginKeysController(_prefix: =&gt; String) {</b>
+<i class="no-highlight">31</i>&nbsp;    def _defaultPrefix: String = {
+<i class="no-highlight">32</i>&nbsp;      if (_prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;
+<i class="no-highlight">33</i>&nbsp;    }
 <i class="no-highlight">34</i>&nbsp;
-<b class="nc"><i class="no-highlight">35</i>&nbsp;        bodyJson.withArray(&quot;fields&quot;)</b>
-<b class="nc"><i class="no-highlight">36</i>&nbsp;                .elements()</b>
-<b class="nc"><i class="no-highlight">37</i>&nbsp;                .forEachRemaining(fieldNode -&gt; createField(fields, fieldNode));</b>
-<i class="no-highlight">38</i>&nbsp;
-<b class="nc"><i class="no-highlight">39</i>&nbsp;        final Survey survey = new Survey(id, portal, title, fields, true);</b>
-<b class="nc"><i class="no-highlight">40</i>&nbsp;        survey.getFields().forEach(field -&gt; field.setSurvey(survey));</b>
-<i class="no-highlight">41</i>&nbsp;
-<i class="no-highlight">42</i>&nbsp;        // TODO guardar survey, crear dao
-<b class="nc"><i class="no-highlight">43</i>&nbsp;        CreateSurveyResponse createSurveyResponse = surveysService.createSurvey(new CreateSurveyRequest(survey, portalId));</b>
-<i class="no-highlight">44</i>&nbsp;
-<b class="nc"><i class="no-highlight">45</i>&nbsp;        return ok(createSurveyResponse.isOk() + survey.getTitle());</b>
-<i class="no-highlight">46</i>&nbsp;    }
-<i class="no-highlight">47</i>&nbsp;
-<i class="no-highlight">48</i>&nbsp;    private void createField(List&lt;Field&gt; fields, JsonNode field) {
-<b class="nc"><i class="no-highlight">49</i>&nbsp;        final long fieldId = field.findValue(&quot;id&quot;).asLong();</b>
-<b class="nc"><i class="no-highlight">50</i>&nbsp;        final String fieldType = field.findValue(&quot;type&quot;).asText();</b>
-<b class="nc"><i class="no-highlight">51</i>&nbsp;        final JsonNode fieldConfigValue = field.findValue(&quot;config&quot;);</b>
-<i class="no-highlight">52</i>&nbsp;
-<b class="nc"><i class="no-highlight">53</i>&nbsp;        final String key = fieldConfigValue.findValue(&quot;key&quot;).asText();</b>
-<b class="nc"><i class="no-highlight">54</i>&nbsp;        final String label = fieldConfigValue.findValue(&quot;label&quot;).asText();</b>
-<b class="nc"><i class="no-highlight">55</i>&nbsp;        final int order = fieldConfigValue.findValue(&quot;order&quot;).asInt();</b>
-<i class="no-highlight">56</i>&nbsp;        FieldConfig fieldConfig;
-<i class="no-highlight">57</i>&nbsp;
-<b class="nc"><i class="no-highlight">58</i>&nbsp;        switch (fieldType) {</b>
-<i class="no-highlight">59</i>&nbsp;            case &quot;textbox&quot;:
-<b class="nc"><i class="no-highlight">60</i>&nbsp;                fieldConfig = createTextboxConfig(fieldConfigValue, key, label, order);</b>
-<b class="nc"><i class="no-highlight">61</i>&nbsp;                break;</b>
-<i class="no-highlight">62</i>&nbsp;            case &quot;rating&quot;:
-<b class="nc"><i class="no-highlight">63</i>&nbsp;                fieldConfig = createRatingFieldConfig(fieldConfigValue, key, label, order);</b>
-<b class="nc"><i class="no-highlight">64</i>&nbsp;                break;</b>
-<i class="no-highlight">65</i>&nbsp;            case &quot;radio&quot;:
-<b class="nc"><i class="no-highlight">66</i>&nbsp;                fieldConfig = createRadioFieldConfig(fieldConfigValue, key, label, order);</b>
-<b class="nc"><i class="no-highlight">67</i>&nbsp;                break;</b>
-<i class="no-highlight">68</i>&nbsp;            default:
-<b class="nc"><i class="no-highlight">69</i>&nbsp;                throw new RuntimeException(&quot;Error parsing received survey, unknown fieldType: &quot; + fieldType);</b>
-<i class="no-highlight">70</i>&nbsp;        }
-<i class="no-highlight">71</i>&nbsp;
-<b class="nc"><i class="no-highlight">72</i>&nbsp;        fields.add(new Field(fieldId, fieldType, fieldConfig));</b>
-<i class="no-highlight">73</i>&nbsp;    }
-<i class="no-highlight">74</i>&nbsp;
-<i class="no-highlight">75</i>&nbsp;    private FieldConfig createTextboxConfig(JsonNode fieldConfigValue, String key, String label, int order) {
-<i class="no-highlight">76</i>&nbsp;        FieldConfig fieldConfig;
-<b class="nc"><i class="no-highlight">77</i>&nbsp;        boolean required = Optional.ofNullable(fieldConfigValue.findValue(&quot;required&quot;)).map(JsonNode::asBoolean).orElse(false);</b>
-<b class="nc"><i class="no-highlight">78</i>&nbsp;        String value = Optional.ofNullable(fieldConfigValue.findValue(&quot;value&quot;)).map(JsonNode::asText).orElse(null);</b>
-<b class="nc"><i class="no-highlight">79</i>&nbsp;        fieldConfig = new TextboxFieldConfig(key, label, required, order, value);</b>
-<b class="nc"><i class="no-highlight">80</i>&nbsp;        return fieldConfig;</b>
-<i class="no-highlight">81</i>&nbsp;    }
-<i class="no-highlight">82</i>&nbsp;
-<i class="no-highlight">83</i>&nbsp;    private FieldConfig createRatingFieldConfig(JsonNode fieldConfigValue, String key, String label, int order) {
-<i class="no-highlight">84</i>&nbsp;        FieldConfig fieldConfig;
-<b class="nc"><i class="no-highlight">85</i>&nbsp;        int maximum = fieldConfigValue.findValue(&quot;maximum&quot;).asInt();</b>
-<b class="nc"><i class="no-highlight">86</i>&nbsp;        fieldConfig = new RatingFieldConfig(key, label, order, maximum);</b>
-<b class="nc"><i class="no-highlight">87</i>&nbsp;        return fieldConfig;</b>
-<i class="no-highlight">88</i>&nbsp;    }
-<i class="no-highlight">89</i>&nbsp;
-<i class="no-highlight">90</i>&nbsp;    private FieldConfig createRadioFieldConfig(JsonNode fieldConfigValue, String key, String label, int order) {
-<i class="no-highlight">91</i>&nbsp;        FieldConfig fieldConfig;
-<b class="nc"><i class="no-highlight">92</i>&nbsp;        final List&lt;Option&gt; options = new ArrayList&lt;&gt;();</b>
-<b class="nc"><i class="no-highlight">93</i>&nbsp;        fieldConfigValue.withArray(&quot;options&quot;)</b>
-<b class="nc"><i class="no-highlight">94</i>&nbsp;                .elements()</b>
-<b class="nc"><i class="no-highlight">95</i>&nbsp;                .forEachRemaining(optionsNode -&gt; createOption(options, optionsNode));</b>
-<b class="nc"><i class="no-highlight">96</i>&nbsp;        fieldConfig = new RadioFieldConfig(key, label, order, options);</b>
-<b class="nc"><i class="no-highlight">97</i>&nbsp;        return fieldConfig;</b>
-<i class="no-highlight">98</i>&nbsp;    }
-<i class="no-highlight">99</i>&nbsp;
-<i class="no-highlight">100</i>&nbsp;    private void createOption(List&lt;Option&gt; options, JsonNode optionsNode) {
-<b class="nc"><i class="no-highlight">101</i>&nbsp;        Integer optionIndex = optionsNode.findValue(&quot;index&quot;).asInt();</b>
-<b class="nc"><i class="no-highlight">102</i>&nbsp;        String optionKey = optionsNode.findValue(&quot;key&quot;).asText();</b>
-<b class="nc"><i class="no-highlight">103</i>&nbsp;        options.add(new Option(optionIndex, optionKey));</b>
-<i class="no-highlight">104</i>&nbsp;    }
-<i class="no-highlight">105</i>&nbsp;
-<i class="no-highlight">106</i>&nbsp;}
+<i class="no-highlight">35</i>&nbsp;  
+<i class="no-highlight">36</i>&nbsp;    // @LINE:22
+<i class="no-highlight">37</i>&nbsp;    def saveSocialKeys(): Call = {
+<i class="no-highlight">38</i>&nbsp;      
+<i class="no-highlight">39</i>&nbsp;      Call(&quot;POST&quot;, _prefix + { _defaultPrefix } + &quot;manage/social-login&quot;)
+<i class="no-highlight">40</i>&nbsp;    }
+<i class="no-highlight">41</i>&nbsp;  
+<i class="no-highlight">42</i>&nbsp;  }
+<i class="no-highlight">43</i>&nbsp;
+<i class="no-highlight">44</i>&nbsp;  // @LINE:13
+<i class="no-highlight">45</i>&nbsp;  class ReverseAnalyticsController(_prefix: =&gt; String) {
+<i class="no-highlight">46</i>&nbsp;    def _defaultPrefix: String = {
+<i class="no-highlight">47</i>&nbsp;      if (_prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;
+<i class="no-highlight">48</i>&nbsp;    }
+<i class="no-highlight">49</i>&nbsp;
+<i class="no-highlight">50</i>&nbsp;  
+<i class="no-highlight">51</i>&nbsp;    // @LINE:13
+<i class="no-highlight">52</i>&nbsp;    def createAnalyticsQuery(): Call = {
+<i class="no-highlight">53</i>&nbsp;      
+<i class="no-highlight">54</i>&nbsp;      Call(&quot;POST&quot;, _prefix + { _defaultPrefix } + &quot;analytics/create-analytics-query&quot;)
+<i class="no-highlight">55</i>&nbsp;    }
+<i class="no-highlight">56</i>&nbsp;  
+<i class="no-highlight">57</i>&nbsp;  }
+<i class="no-highlight">58</i>&nbsp;
+<i class="no-highlight">59</i>&nbsp;  // @LINE:12
+<i class="no-highlight">60</i>&nbsp;  class ReverseConnectionsController(_prefix: =&gt; String) {
+<i class="no-highlight">61</i>&nbsp;    def _defaultPrefix: String = {
+<i class="no-highlight">62</i>&nbsp;      if (_prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;
+<i class="no-highlight">63</i>&nbsp;    }
+<i class="no-highlight">64</i>&nbsp;
+<i class="no-highlight">65</i>&nbsp;  
+<i class="no-highlight">66</i>&nbsp;    // @LINE:12
+<i class="no-highlight">67</i>&nbsp;    def setConnectionTimeout(): Call = {
+<i class="no-highlight">68</i>&nbsp;      
+<i class="no-highlight">69</i>&nbsp;      Call(&quot;POST&quot;, _prefix + { _defaultPrefix } + &quot;connections/set-connection-timeout&quot;)
+<i class="no-highlight">70</i>&nbsp;    }
+<i class="no-highlight">71</i>&nbsp;  
+<i class="no-highlight">72</i>&nbsp;  }
+<i class="no-highlight">73</i>&nbsp;
+<i class="no-highlight">74</i>&nbsp;  // @LINE:18
+<i class="no-highlight">75</i>&nbsp;  class ReverseSurveysController(_prefix: =&gt; String) {
+<i class="no-highlight">76</i>&nbsp;    def _defaultPrefix: String = {
+<i class="no-highlight">77</i>&nbsp;      if (_prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;
+<i class="no-highlight">78</i>&nbsp;    }
+<i class="no-highlight">79</i>&nbsp;
+<i class="no-highlight">80</i>&nbsp;  
+<i class="no-highlight">81</i>&nbsp;    // @LINE:30
+<i class="no-highlight">82</i>&nbsp;    def answeredSurvey(surveyId:Long, offset:Int = 0): Call = {
+<i class="no-highlight">83</i>&nbsp;      
+<i class="no-highlight">84</i>&nbsp;      Call(&quot;GET&quot;, _prefix + { _defaultPrefix } + &quot;data/surveys/&quot; + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind(&quot;surveyId&quot;, surveyId)) + &quot;/answers&quot; + play.core.routing.queryString(List(if(offset == 0) None else Some(implicitly[play.api.mvc.QueryStringBindable[Int]].unbind(&quot;offset&quot;, offset)))))
+<i class="no-highlight">85</i>&nbsp;    }
+<i class="no-highlight">86</i>&nbsp;  
+<i class="no-highlight">87</i>&nbsp;    // @LINE:19
+<i class="no-highlight">88</i>&nbsp;    def createSurvey(): Call = {
+<i class="no-highlight">89</i>&nbsp;      
+<i class="no-highlight">90</i>&nbsp;      Call(&quot;POST&quot;, _prefix + { _defaultPrefix } + &quot;manage/surveys&quot;)
+<i class="no-highlight">91</i>&nbsp;    }
+<i class="no-highlight">92</i>&nbsp;  
+<i class="no-highlight">93</i>&nbsp;    // @LINE:32
+<i class="no-highlight">94</i>&nbsp;    def allSurveys(): Call = {
+<i class="no-highlight">95</i>&nbsp;      
+<i class="no-highlight">96</i>&nbsp;      Call(&quot;GET&quot;, _prefix + { _defaultPrefix } + &quot;data/surveys&quot;)
+<i class="no-highlight">97</i>&nbsp;    }
+<i class="no-highlight">98</i>&nbsp;  
+<i class="no-highlight">99</i>&nbsp;    // @LINE:29
+<i class="no-highlight">100</i>&nbsp;    def getSurveyAnswers(surveyId:Long): Call = {
+<i class="no-highlight">101</i>&nbsp;      
+<i class="no-highlight">102</i>&nbsp;      Call(&quot;GET&quot;, _prefix + { _defaultPrefix } + &quot;data/surveys/&quot; + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind(&quot;surveyId&quot;, surveyId)) + &quot;/all-answers&quot;)
+<i class="no-highlight">103</i>&nbsp;    }
+<i class="no-highlight">104</i>&nbsp;  
+<i class="no-highlight">105</i>&nbsp;    // @LINE:27
+<i class="no-highlight">106</i>&nbsp;    def survey(id:Long): Call = {
+<i class="no-highlight">107</i>&nbsp;      
+<i class="no-highlight">108</i>&nbsp;      Call(&quot;GET&quot;, _prefix + { _defaultPrefix } + &quot;data/surveys/&quot; + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind(&quot;id&quot;, id)))
+<i class="no-highlight">109</i>&nbsp;    }
+<i class="no-highlight">110</i>&nbsp;  
+<i class="no-highlight">111</i>&nbsp;    // @LINE:42
+<i class="no-highlight">112</i>&nbsp;    def saveSurvey(): Call = {
+<i class="no-highlight">113</i>&nbsp;      
+<i class="no-highlight">114</i>&nbsp;      Call(&quot;POST&quot;, _prefix + { _defaultPrefix } + &quot;api/survey&quot;)
+<i class="no-highlight">115</i>&nbsp;    }
+<i class="no-highlight">116</i>&nbsp;  
+<i class="no-highlight">117</i>&nbsp;    // @LINE:20
+<i class="no-highlight">118</i>&nbsp;    def deleteSurvey(surveyId:Long): Call = {
+<i class="no-highlight">119</i>&nbsp;      
+<i class="no-highlight">120</i>&nbsp;      Call(&quot;POST&quot;, _prefix + { _defaultPrefix } + &quot;manage/surveys/delete/&quot; + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind(&quot;surveyId&quot;, surveyId)))
+<i class="no-highlight">121</i>&nbsp;    }
+<i class="no-highlight">122</i>&nbsp;  
+<i class="no-highlight">123</i>&nbsp;    // @LINE:31
+<i class="no-highlight">124</i>&nbsp;    def getSurveyResults(surveyId:Long): Call = {
+<i class="no-highlight">125</i>&nbsp;      
+<i class="no-highlight">126</i>&nbsp;      Call(&quot;GET&quot;, _prefix + { _defaultPrefix } + &quot;data/surveys/&quot; + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind(&quot;surveyId&quot;, surveyId)) + &quot;/results&quot;)
+<i class="no-highlight">127</i>&nbsp;    }
+<i class="no-highlight">128</i>&nbsp;  
+<i class="no-highlight">129</i>&nbsp;    // @LINE:18
+<i class="no-highlight">130</i>&nbsp;    def surveys(): Call = {
+<i class="no-highlight">131</i>&nbsp;      
+<i class="no-highlight">132</i>&nbsp;      Call(&quot;GET&quot;, _prefix + { _defaultPrefix } + &quot;manage/surveys&quot;)
+<i class="no-highlight">133</i>&nbsp;    }
+<i class="no-highlight">134</i>&nbsp;  
+<i class="no-highlight">135</i>&nbsp;  }
+<i class="no-highlight">136</i>&nbsp;
+<i class="no-highlight">137</i>&nbsp;
+<i class="no-highlight">138</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -215,7 +237,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-07-12 12:17</div>
+    <div style="float:right;">generated on 2022-08-27 21:21</div>
 </div>
 </body>
 </html>

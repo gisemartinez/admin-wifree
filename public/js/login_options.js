@@ -1,14 +1,16 @@
-function hideOptions(checkbox, target){
-    if (!checkbox.checked) {
-        $("[class='" + target + "']")[0].style.display = 'none';
-    } else {
-        $("[class='" + target + "']")[0].style.display = 'block';
-    }
-};
-
-function hideFormFields(document, target){
-    document.getElementById(target).addEventListener('change', (event) => {
-        hideOptions(event.currentTarget, target);
-    });
-    hideOptions(document.getElementById(target), target);
+function hideFormFields(document, target, fieldToHide){
+    $('#' + target + ':checkbox').change(changeFields(target, fieldToHide));
 }
+
+function changeFields(target,fieldToHide){
+    if($('#' + target).is(':checked')) {
+        $("#"+fieldToHide+"* input").prop('required',true);
+        $("#"+fieldToHide).css('display','block');
+    } else {
+        $("#"+fieldToHide+"* input").prop('required',false);
+        $("#"+fieldToHide).css('display','none');
+    }
+}
+
+
+    

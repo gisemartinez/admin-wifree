@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > SocialUserController</title>
+  <title>Coverage Report > ReverseAnalyticsController</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -17,15 +17,18 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">controllers.api</a>
+    <a href="../index.html">controllers.admin</a>
 </div>
 
-<h1>Coverage Summary for Class: SocialUserController (controllers.api)</h1>
+<h1>Coverage Summary for Class: ReverseAnalyticsController (controllers.admin)</h1>
 
 <table class="coverageStats">
-
 <tr>
   <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -36,46 +39,33 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">SocialUserController</td>
+  <td class="name">ReverseAnalyticsController</td>
 <td class="coverageStat">
   <span class="percent">
-    20%
+    100%
   </span>
   <span class="absValue">
-    (1/5)
+    (1/1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    2.1%
+    33.3%
   </span>
   <span class="absValue">
-    (1/47)
-  </span>
-</td>
-</tr>
-  <tr>
-    <td class="name">SocialUserController$$FastClassByGuice$$9bd01bbf</td>
-  </tr>
-<tr>
-  <td class="name"><strong>Total</strong></td>
-<td class="coverageStat">
-  <span class="percent">
-    20%
-  </span>
-  <span class="absValue">
-    (1/5)
+    (1/3)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    2.1%
+    50%
   </span>
   <span class="absValue">
-    (1/47)
+    (2/4)
   </span>
 </td>
 </tr>
+
 </table>
 
 <br/>
@@ -83,128 +73,144 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package controllers.api;
-<i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import com.fasterxml.jackson.databind.JsonNode;
-<i class="no-highlight">4</i>&nbsp;import controllers.WiFreeController;
-<i class="no-highlight">5</i>&nbsp;import controllers.api.dto.NetworkUserDTO;
-<i class="no-highlight">6</i>&nbsp;import controllers.api.dto.UserAuthenticatedDTO;
-<i class="no-highlight">7</i>&nbsp;import daos.NetworkUserConnectionLogDAO;
-<i class="no-highlight">8</i>&nbsp;import daos.NetworkUserDAO;
-<i class="no-highlight">9</i>&nbsp;import daos.PortalDAO;
-<i class="no-highlight">10</i>&nbsp;import models.NetworkUser;
-<i class="no-highlight">11</i>&nbsp;import models.NetworkUserConnectionLog;
-<i class="no-highlight">12</i>&nbsp;import models.Portal;
-<i class="no-highlight">13</i>&nbsp;import models.types.Gender;
-<i class="no-highlight">14</i>&nbsp;import play.mvc.Result;
-<i class="no-highlight">15</i>&nbsp;import utils.DateHelper;
-<i class="no-highlight">16</i>&nbsp;
-<i class="no-highlight">17</i>&nbsp;import javax.inject.Inject;
-<i class="no-highlight">18</i>&nbsp;import java.io.IOException;
-<i class="no-highlight">19</i>&nbsp;import java.time.Instant;
-<i class="no-highlight">20</i>&nbsp;import java.util.Optional;
-<i class="no-highlight">21</i>&nbsp;
-<i class="no-highlight">22</i>&nbsp;import static java.util.Optional.ofNullable;
-<i class="no-highlight">23</i>&nbsp;
-<b class="fc"><i class="no-highlight">24</i>&nbsp;public class SocialUserController extends WiFreeController {</b>
-<i class="no-highlight">25</i>&nbsp;
-<i class="no-highlight">26</i>&nbsp;    @Inject
-<i class="no-highlight">27</i>&nbsp;    private NetworkUserDAO networkUserDAO;
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;// @GENERATOR:play-routes-compiler
+<i class="no-highlight">2</i>&nbsp;// @SOURCE:/Users/gimartinez/personal/wifree/conf/routes
+<i class="no-highlight">3</i>&nbsp;// @DATE:Fri Aug 19 08:55:29 CEST 2022
+<i class="no-highlight">4</i>&nbsp;
+<i class="no-highlight">5</i>&nbsp;import play.api.mvc.Call
+<i class="no-highlight">6</i>&nbsp;
+<i class="no-highlight">7</i>&nbsp;
+<i class="no-highlight">8</i>&nbsp;import _root_.controllers.Assets.Asset
+<i class="no-highlight">9</i>&nbsp;import _root_.play.libs.F
+<i class="no-highlight">10</i>&nbsp;
+<i class="no-highlight">11</i>&nbsp;// @LINE:12
+<i class="no-highlight">12</i>&nbsp;package controllers.admin {
+<i class="no-highlight">13</i>&nbsp;
+<i class="no-highlight">14</i>&nbsp;  // @LINE:23
+<i class="no-highlight">15</i>&nbsp;  class ReversePortalSettingsController(_prefix: =&gt; String) {
+<i class="no-highlight">16</i>&nbsp;    def _defaultPrefix: String = {
+<i class="no-highlight">17</i>&nbsp;      if (_prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;
+<i class="no-highlight">18</i>&nbsp;    }
+<i class="no-highlight">19</i>&nbsp;
+<i class="no-highlight">20</i>&nbsp;  
+<i class="no-highlight">21</i>&nbsp;    // @LINE:23
+<i class="no-highlight">22</i>&nbsp;    def savePortalOptions(): Call = {
+<i class="no-highlight">23</i>&nbsp;      
+<i class="no-highlight">24</i>&nbsp;      Call(&quot;POST&quot;, _prefix + { _defaultPrefix } + &quot;manage/portal-settings&quot;)
+<i class="no-highlight">25</i>&nbsp;    }
+<i class="no-highlight">26</i>&nbsp;  
+<i class="no-highlight">27</i>&nbsp;  }
 <i class="no-highlight">28</i>&nbsp;
-<i class="no-highlight">29</i>&nbsp;    @Inject
-<i class="no-highlight">30</i>&nbsp;    private PortalDAO portalDAO;
-<i class="no-highlight">31</i>&nbsp;
-<i class="no-highlight">32</i>&nbsp;    @Inject
-<i class="no-highlight">33</i>&nbsp;    private NetworkUserConnectionLogDAO connectionLogDAO;
+<i class="no-highlight">29</i>&nbsp;  // @LINE:22
+<i class="no-highlight">30</i>&nbsp;  class ReverseSocialLoginKeysController(_prefix: =&gt; String) {
+<i class="no-highlight">31</i>&nbsp;    def _defaultPrefix: String = {
+<i class="no-highlight">32</i>&nbsp;      if (_prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;
+<i class="no-highlight">33</i>&nbsp;    }
 <i class="no-highlight">34</i>&nbsp;
-<i class="no-highlight">35</i>&nbsp;    public Result saveUserConnected() throws IOException {
-<b class="nc"><i class="no-highlight">36</i>&nbsp;        logRequest();</b>
-<i class="no-highlight">37</i>&nbsp;
-<b class="nc"><i class="no-highlight">38</i>&nbsp;        JsonNode json = request().body().asJson();</b>
-<b class="nc"><i class="no-highlight">39</i>&nbsp;        UserAuthenticatedDTO userDTO = objectMapper.readValue(json.toString(), UserAuthenticatedDTO.class);</b>
-<i class="no-highlight">40</i>&nbsp;
-<b class="nc"><i class="no-highlight">41</i>&nbsp;        Portal portal = portalDAO.get(userDTO.getPortalId());</b>
-<i class="no-highlight">42</i>&nbsp;
-<b class="nc"><i class="no-highlight">43</i>&nbsp;        NetworkUser user = networkUserDAO.findByEmail(userDTO.getEmail());</b>
-<b class="nc"><i class="no-highlight">44</i>&nbsp;        if (user == null) {</b>
-<b class="nc"><i class="no-highlight">45</i>&nbsp;            user = new NetworkUser(portal, userDTO.getName(), userDTO.getEmail(),</b>
-<b class="nc"><i class="no-highlight">46</i>&nbsp;                    &quot;&quot;, userDTO.getConnectionTime(), true, &quot;&quot;,</b>
-<b class="nc"><i class="no-highlight">47</i>&nbsp;                    Optional.ofNullable(userDTO.getGender()).map(Gender::valueOf).orElse(Gender.Undefined),</b>
-<i class="no-highlight">48</i>&nbsp;                    null, null,
-<i class="no-highlight">49</i>&nbsp;                    null,
-<b class="nc"><i class="no-highlight">50</i>&nbsp;                    Optional.ofNullable(userDTO.getAge()).orElse(0));</b>
-<i class="no-highlight">51</i>&nbsp;        } else {
-<b class="nc"><i class="no-highlight">52</i>&nbsp;            user.setLastConnection(userDTO.getConnectionTime());</b>
-<i class="no-highlight">53</i>&nbsp;        }
-<b class="nc"><i class="no-highlight">54</i>&nbsp;        networkUserDAO.save(user);</b>
-<i class="no-highlight">55</i>&nbsp;
-<b class="nc"><i class="no-highlight">56</i>&nbsp;        NetworkUserConnectionLog connectionLog = new NetworkUserConnectionLog(portal, user, userDTO.getConnectionTime(), Instant.now(), &quot;&quot;);</b>
-<b class="nc"><i class="no-highlight">57</i>&nbsp;        connectionLogDAO.save(connectionLog);</b>
+<i class="no-highlight">35</i>&nbsp;  
+<i class="no-highlight">36</i>&nbsp;    // @LINE:22
+<i class="no-highlight">37</i>&nbsp;    def saveSocialKeys(): Call = {
+<i class="no-highlight">38</i>&nbsp;      
+<i class="no-highlight">39</i>&nbsp;      Call(&quot;POST&quot;, _prefix + { _defaultPrefix } + &quot;manage/social-login&quot;)
+<i class="no-highlight">40</i>&nbsp;    }
+<i class="no-highlight">41</i>&nbsp;  
+<i class="no-highlight">42</i>&nbsp;  }
+<i class="no-highlight">43</i>&nbsp;
+<i class="no-highlight">44</i>&nbsp;  // @LINE:13
+<b class="fc"><i class="no-highlight">45</i>&nbsp;  class ReverseAnalyticsController(_prefix: =&gt; String) {</b>
+<i class="no-highlight">46</i>&nbsp;    def _defaultPrefix: String = {
+<b class="nc"><i class="no-highlight">47</i>&nbsp;      if (_prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;</b>
+<i class="no-highlight">48</i>&nbsp;    }
+<i class="no-highlight">49</i>&nbsp;
+<i class="no-highlight">50</i>&nbsp;  
+<i class="no-highlight">51</i>&nbsp;    // @LINE:13
+<i class="no-highlight">52</i>&nbsp;    def createAnalyticsQuery(): Call = {
+<i class="no-highlight">53</i>&nbsp;      
+<b class="nc"><i class="no-highlight">54</i>&nbsp;      Call(&quot;POST&quot;, _prefix + { _defaultPrefix } + &quot;analytics/create-analytics-query&quot;)</b>
+<i class="no-highlight">55</i>&nbsp;    }
+<i class="no-highlight">56</i>&nbsp;  
+<i class="no-highlight">57</i>&nbsp;  }
 <i class="no-highlight">58</i>&nbsp;
-<b class="nc"><i class="no-highlight">59</i>&nbsp;        return ok(userDTO.toJson());</b>
-<i class="no-highlight">60</i>&nbsp;    }
-<i class="no-highlight">61</i>&nbsp;
-<i class="no-highlight">62</i>&nbsp;    public Result getSocialUser(String email) {
-<b class="nc"><i class="no-highlight">63</i>&nbsp;        return ofNullable(networkUserDAO.findByEmail(email))</b>
-<b class="nc"><i class="no-highlight">64</i>&nbsp;                .map(networkUser -&gt; ok(NetworkUserDTO.json(networkUser)))</b>
-<b class="nc"><i class="no-highlight">65</i>&nbsp;                .orElse(badRequest(&quot;User [&quot; + email + &quot;] not found.&quot;));</b>
-<i class="no-highlight">66</i>&nbsp;    }
-<i class="no-highlight">67</i>&nbsp;
-<i class="no-highlight">68</i>&nbsp;    public Result saveSocialUser() {
-<b class="nc"><i class="no-highlight">69</i>&nbsp;        JsonNode bodyJson = request().body().asJson();</b>
-<i class="no-highlight">70</i>&nbsp;
-<b class="nc"><i class="no-highlight">71</i>&nbsp;        JsonNode names = bodyJson.withArray(&quot;names&quot;);</b>
-<b class="nc"><i class="no-highlight">72</i>&nbsp;        JsonNode nameNode = names.get(0);</b>
-<b class="nc"><i class="no-highlight">73</i>&nbsp;        String name = nameNode.findValue(&quot;displayName&quot;).asText();</b>
-<i class="no-highlight">74</i>&nbsp;
-<b class="nc"><i class="no-highlight">75</i>&nbsp;        JsonNode genders = bodyJson.withArray(&quot;genders&quot;);</b>
-<b class="nc"><i class="no-highlight">76</i>&nbsp;        JsonNode genderNode = genders.get(0);</b>
-<b class="nc"><i class="no-highlight">77</i>&nbsp;        String gender = genderNode.findValue(&quot;formattedValue&quot;).asText();</b>
-<i class="no-highlight">78</i>&nbsp;
-<b class="nc"><i class="no-highlight">79</i>&nbsp;        JsonNode birthdays = bodyJson.withArray(&quot;birthdays&quot;);</b>
-<b class="nc"><i class="no-highlight">80</i>&nbsp;        JsonNode birthdayNode = birthdays.get(0);</b>
-<b class="nc"><i class="no-highlight">81</i>&nbsp;        JsonNode date = birthdayNode.findValue(&quot;date&quot;);</b>
-<b class="nc"><i class="no-highlight">82</i>&nbsp;        int year = date.findValue(&quot;year&quot;).asInt();</b>
-<b class="nc"><i class="no-highlight">83</i>&nbsp;        int month = date.findValue(&quot;month&quot;).asInt();</b>
-<b class="nc"><i class="no-highlight">84</i>&nbsp;        int day = date.findValue(&quot;day&quot;).asInt();</b>
-<i class="no-highlight">85</i>&nbsp;
-<b class="nc"><i class="no-highlight">86</i>&nbsp;        JsonNode emailAddresses = bodyJson.withArray(&quot;emailAddresses&quot;);</b>
-<b class="nc"><i class="no-highlight">87</i>&nbsp;        JsonNode emailAddressNode = emailAddresses.get(0);</b>
-<b class="nc"><i class="no-highlight">88</i>&nbsp;        String email = emailAddressNode.findValue(&quot;value&quot;).asText();</b>
-<i class="no-highlight">89</i>&nbsp;
-<b class="nc"><i class="no-highlight">90</i>&nbsp;        NetworkUserDAO networkUserDAO = new NetworkUserDAO();</b>
-<b class="nc"><i class="no-highlight">91</i>&nbsp;        NetworkUser networkUser = networkUserDAO.findByEmail(email);</b>
-<b class="nc"><i class="no-highlight">92</i>&nbsp;        if (networkUser == null) {</b>
-<b class="nc"><i class="no-highlight">93</i>&nbsp;            Portal portal = new PortalDAO().get(1L);</b>
-<b class="nc"><i class="no-highlight">94</i>&nbsp;            int age = createAge(year, month, day);</b>
-<b class="nc"><i class="no-highlight">95</i>&nbsp;            networkUser = new NetworkUser(</b>
-<i class="no-highlight">96</i>&nbsp;                    portal,
-<i class="no-highlight">97</i>&nbsp;                    name,
-<i class="no-highlight">98</i>&nbsp;                    email,
-<i class="no-highlight">99</i>&nbsp;                    null,
-<b class="nc"><i class="no-highlight">100</i>&nbsp;                    Instant.now(),</b>
-<i class="no-highlight">101</i>&nbsp;                    true,
-<i class="no-highlight">102</i>&nbsp;                    &quot;hola123&quot;,
-<b class="nc"><i class="no-highlight">103</i>&nbsp;                    Gender.valueOf(gender),</b>
-<i class="no-highlight">104</i>&nbsp;                    null,
-<i class="no-highlight">105</i>&nbsp;                    null,
-<i class="no-highlight">106</i>&nbsp;                    null,
-<i class="no-highlight">107</i>&nbsp;                    age
-<i class="no-highlight">108</i>&nbsp;            );
-<i class="no-highlight">109</i>&nbsp;//            networkUserDAO.save(networkUser);
-<i class="no-highlight">110</i>&nbsp;        }
-<i class="no-highlight">111</i>&nbsp;
-<b class="nc"><i class="no-highlight">112</i>&nbsp;        return ok(networkUser.toLogString());</b>
-<i class="no-highlight">113</i>&nbsp;    }
-<i class="no-highlight">114</i>&nbsp;
-<i class="no-highlight">115</i>&nbsp;    private int createAge(int year, int month, int day) {
-<b class="nc"><i class="no-highlight">116</i>&nbsp;        return (int) DateHelper.yearsBetween(</b>
-<b class="nc"><i class="no-highlight">117</i>&nbsp;                Instant.now(),</b>
-<b class="nc"><i class="no-highlight">118</i>&nbsp;                Instant.parse(year + &quot;-&quot; + String.format(&quot;%02d&quot;, month) + &quot;-&quot; + String.format(&quot;%02d&quot;, day) + &quot;T00:00:00.000Z&quot;)</b>
-<i class="no-highlight">119</i>&nbsp;        );
-<i class="no-highlight">120</i>&nbsp;    }
-<i class="no-highlight">121</i>&nbsp;
-<i class="no-highlight">122</i>&nbsp;}
+<i class="no-highlight">59</i>&nbsp;  // @LINE:12
+<b class="fc"><i class="no-highlight">60</i>&nbsp;  class ReverseConnectionsController(_prefix: =&gt; String) {</b>
+<i class="no-highlight">61</i>&nbsp;    def _defaultPrefix: String = {
+<i class="no-highlight">62</i>&nbsp;      if (_prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;
+<i class="no-highlight">63</i>&nbsp;    }
+<i class="no-highlight">64</i>&nbsp;
+<i class="no-highlight">65</i>&nbsp;  
+<i class="no-highlight">66</i>&nbsp;    // @LINE:12
+<i class="no-highlight">67</i>&nbsp;    def setConnectionTimeout(): Call = {
+<i class="no-highlight">68</i>&nbsp;      
+<i class="no-highlight">69</i>&nbsp;      Call(&quot;POST&quot;, _prefix + { _defaultPrefix } + &quot;connections/set-connection-timeout&quot;)
+<i class="no-highlight">70</i>&nbsp;    }
+<i class="no-highlight">71</i>&nbsp;  
+<i class="no-highlight">72</i>&nbsp;  }
+<i class="no-highlight">73</i>&nbsp;
+<i class="no-highlight">74</i>&nbsp;  // @LINE:18
+<i class="no-highlight">75</i>&nbsp;  class ReverseSurveysController(_prefix: =&gt; String) {
+<i class="no-highlight">76</i>&nbsp;    def _defaultPrefix: String = {
+<i class="no-highlight">77</i>&nbsp;      if (_prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;
+<i class="no-highlight">78</i>&nbsp;    }
+<i class="no-highlight">79</i>&nbsp;
+<i class="no-highlight">80</i>&nbsp;  
+<i class="no-highlight">81</i>&nbsp;    // @LINE:30
+<i class="no-highlight">82</i>&nbsp;    def answeredSurvey(surveyId:Long, offset:Int = 0): Call = {
+<i class="no-highlight">83</i>&nbsp;      
+<i class="no-highlight">84</i>&nbsp;      Call(&quot;GET&quot;, _prefix + { _defaultPrefix } + &quot;data/surveys/&quot; + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind(&quot;surveyId&quot;, surveyId)) + &quot;/answers&quot; + play.core.routing.queryString(List(if(offset == 0) None else Some(implicitly[play.api.mvc.QueryStringBindable[Int]].unbind(&quot;offset&quot;, offset)))))
+<i class="no-highlight">85</i>&nbsp;    }
+<i class="no-highlight">86</i>&nbsp;  
+<i class="no-highlight">87</i>&nbsp;    // @LINE:19
+<i class="no-highlight">88</i>&nbsp;    def createSurvey(): Call = {
+<i class="no-highlight">89</i>&nbsp;      
+<i class="no-highlight">90</i>&nbsp;      Call(&quot;POST&quot;, _prefix + { _defaultPrefix } + &quot;manage/surveys&quot;)
+<i class="no-highlight">91</i>&nbsp;    }
+<i class="no-highlight">92</i>&nbsp;  
+<i class="no-highlight">93</i>&nbsp;    // @LINE:32
+<i class="no-highlight">94</i>&nbsp;    def allSurveys(): Call = {
+<i class="no-highlight">95</i>&nbsp;      
+<i class="no-highlight">96</i>&nbsp;      Call(&quot;GET&quot;, _prefix + { _defaultPrefix } + &quot;data/surveys&quot;)
+<i class="no-highlight">97</i>&nbsp;    }
+<i class="no-highlight">98</i>&nbsp;  
+<i class="no-highlight">99</i>&nbsp;    // @LINE:29
+<i class="no-highlight">100</i>&nbsp;    def getSurveyAnswers(surveyId:Long): Call = {
+<i class="no-highlight">101</i>&nbsp;      
+<i class="no-highlight">102</i>&nbsp;      Call(&quot;GET&quot;, _prefix + { _defaultPrefix } + &quot;data/surveys/&quot; + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind(&quot;surveyId&quot;, surveyId)) + &quot;/all-answers&quot;)
+<i class="no-highlight">103</i>&nbsp;    }
+<i class="no-highlight">104</i>&nbsp;  
+<i class="no-highlight">105</i>&nbsp;    // @LINE:27
+<i class="no-highlight">106</i>&nbsp;    def survey(id:Long): Call = {
+<i class="no-highlight">107</i>&nbsp;      
+<i class="no-highlight">108</i>&nbsp;      Call(&quot;GET&quot;, _prefix + { _defaultPrefix } + &quot;data/surveys/&quot; + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind(&quot;id&quot;, id)))
+<i class="no-highlight">109</i>&nbsp;    }
+<i class="no-highlight">110</i>&nbsp;  
+<i class="no-highlight">111</i>&nbsp;    // @LINE:42
+<i class="no-highlight">112</i>&nbsp;    def saveSurvey(): Call = {
+<i class="no-highlight">113</i>&nbsp;      
+<i class="no-highlight">114</i>&nbsp;      Call(&quot;POST&quot;, _prefix + { _defaultPrefix } + &quot;api/survey&quot;)
+<i class="no-highlight">115</i>&nbsp;    }
+<i class="no-highlight">116</i>&nbsp;  
+<i class="no-highlight">117</i>&nbsp;    // @LINE:20
+<i class="no-highlight">118</i>&nbsp;    def deleteSurvey(surveyId:Long): Call = {
+<i class="no-highlight">119</i>&nbsp;      
+<i class="no-highlight">120</i>&nbsp;      Call(&quot;POST&quot;, _prefix + { _defaultPrefix } + &quot;manage/surveys/delete/&quot; + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind(&quot;surveyId&quot;, surveyId)))
+<i class="no-highlight">121</i>&nbsp;    }
+<i class="no-highlight">122</i>&nbsp;  
+<i class="no-highlight">123</i>&nbsp;    // @LINE:31
+<i class="no-highlight">124</i>&nbsp;    def getSurveyResults(surveyId:Long): Call = {
+<i class="no-highlight">125</i>&nbsp;      
+<i class="no-highlight">126</i>&nbsp;      Call(&quot;GET&quot;, _prefix + { _defaultPrefix } + &quot;data/surveys/&quot; + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind(&quot;surveyId&quot;, surveyId)) + &quot;/results&quot;)
+<i class="no-highlight">127</i>&nbsp;    }
+<i class="no-highlight">128</i>&nbsp;  
+<i class="no-highlight">129</i>&nbsp;    // @LINE:18
+<i class="no-highlight">130</i>&nbsp;    def surveys(): Call = {
+<i class="no-highlight">131</i>&nbsp;      
+<i class="no-highlight">132</i>&nbsp;      Call(&quot;GET&quot;, _prefix + { _defaultPrefix } + &quot;manage/surveys&quot;)
+<i class="no-highlight">133</i>&nbsp;    }
+<i class="no-highlight">134</i>&nbsp;  
+<i class="no-highlight">135</i>&nbsp;  }
+<i class="no-highlight">136</i>&nbsp;
+<i class="no-highlight">137</i>&nbsp;
+<i class="no-highlight">138</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -231,7 +237,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-07-12 12:17</div>
+    <div style="float:right;">generated on 2022-08-27 21:21</div>
 </div>
 </body>
 </html>

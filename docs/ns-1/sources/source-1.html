@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > AdminAppController</title>
+  <title>Coverage Report > Filters</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -17,10 +17,10 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">controllers</a>
+    <a href="../index.html">&lt;empty package name&gt;</a>
 </div>
 
-<h1>Coverage Summary for Class: AdminAppController (controllers)</h1>
+<h1>Coverage Summary for Class: Filters (&lt;empty package name&gt;)</h1>
 
 <table class="coverageStats">
 
@@ -36,43 +36,43 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">AdminAppController</td>
+  <td class="name">Filters</td>
 <td class="coverageStat">
   <span class="percent">
-    9.1%
+    100%
   </span>
   <span class="absValue">
-    (1/11)
+    (1/1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    1.1%
+    100%
   </span>
   <span class="absValue">
-    (1/95)
+    (1/1)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">AdminAppController$$FastClassByGuice$$1e1ca0a5</td>
+    <td class="name">Filters$$FastClassByGuice$$30493bdb</td>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    9.1%
+    100%
   </span>
   <span class="absValue">
-    (1/11)
+    (1/1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    1.1%
+    100%
   </span>
   <span class="absValue">
-    (1/95)
+    (1/1)
   </span>
 </td>
 </tr>
@@ -83,215 +83,32 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package controllers;
-<i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import be.objectify.deadbolt.java.actions.SubjectPresent;
-<i class="no-highlight">4</i>&nbsp;import daos.SurveyDAO;
-<i class="no-highlight">5</i>&nbsp;import models.*;
-<i class="no-highlight">6</i>&nbsp;import operations.requests.GetAllSurveysRequest;
-<i class="no-highlight">7</i>&nbsp;import operations.requests.GetAnalyticsDataRequest;
-<i class="no-highlight">8</i>&nbsp;import operations.responses.*;
-<i class="no-highlight">9</i>&nbsp;import org.pac4j.core.profile.CommonProfile;
-<i class="no-highlight">10</i>&nbsp;import play.api.libs.json.JsValue;
-<i class="no-highlight">11</i>&nbsp;import play.data.Form;
-<i class="no-highlight">12</i>&nbsp;import play.mvc.Result;
-<i class="no-highlight">13</i>&nbsp;import scala.Tuple2;
-<i class="no-highlight">14</i>&nbsp;import services.AnalyticsService;
-<i class="no-highlight">15</i>&nbsp;import services.ConnectionsService;
-<i class="no-highlight">16</i>&nbsp;import services.PortalAndLoginOptionsService;
-<i class="no-highlight">17</i>&nbsp;import services.SurveysService;
-<i class="no-highlight">18</i>&nbsp;import services.core.MinutesRange;
-<i class="no-highlight">19</i>&nbsp;import utils.DateHelper;
-<i class="no-highlight">20</i>&nbsp;import utils.JsonHelper;
-<i class="no-highlight">21</i>&nbsp;import views.dto.ConnectedUser;
-<i class="no-highlight">22</i>&nbsp;import views.dto.PortalOptionsView;
-<i class="no-highlight">23</i>&nbsp;import views.dto.SocialKeysView;
-<i class="no-highlight">24</i>&nbsp;import views.dto.SurveySummary;
-<i class="no-highlight">25</i>&nbsp;
-<i class="no-highlight">26</i>&nbsp;import javax.inject.Inject;
-<i class="no-highlight">27</i>&nbsp;import java.util.*;
-<i class="no-highlight">28</i>&nbsp;import java.util.stream.Collectors;
-<i class="no-highlight">29</i>&nbsp;
-<i class="no-highlight">30</i>&nbsp;/**
-<i class="no-highlight">31</i>&nbsp; * Created by jesu on 27/06/17.
-<i class="no-highlight">32</i>&nbsp; */
-<b class="fc"><i class="no-highlight">33</i>&nbsp;public class AdminAppController extends WiFreeController {</b>
-<i class="no-highlight">34</i>&nbsp;
-<i class="no-highlight">35</i>&nbsp;    @Inject
-<i class="no-highlight">36</i>&nbsp;    AnalyticsService analyticsService;
-<i class="no-highlight">37</i>&nbsp;
-<i class="no-highlight">38</i>&nbsp;    @Inject
-<i class="no-highlight">39</i>&nbsp;    SurveysService surveysService;
-<i class="no-highlight">40</i>&nbsp;
-<i class="no-highlight">41</i>&nbsp;    @Inject
-<i class="no-highlight">42</i>&nbsp;    ConnectionsService connectionsService;
-<i class="no-highlight">43</i>&nbsp;
-<i class="no-highlight">44</i>&nbsp;    @Inject
-<i class="no-highlight">45</i>&nbsp;    PortalAndLoginOptionsService optionsService;
-<i class="no-highlight">46</i>&nbsp;
-<i class="no-highlight">47</i>&nbsp;    @SubjectPresent(handlerKey = &quot;FormClient&quot;, forceBeforeAuthCheck = true)
-<i class="no-highlight">48</i>&nbsp;    public Result dashboard() throws NoProfileFoundException {
-<b class="nc"><i class="no-highlight">49</i>&nbsp;        CommonProfile currentProfile = getCurrentProfile();</b>
-<b class="nc"><i class="no-highlight">50</i>&nbsp;        Optional&lt;Portal&gt; portal = Optional.ofNullable(currentProfile.getAttribute(&quot;portal&quot;, Portal.class));</b>
-<i class="no-highlight">51</i>&nbsp;
-<b class="nc"><i class="no-highlight">52</i>&nbsp;        if (!portal.isPresent()) {</b>
-<b class="nc"><i class="no-highlight">53</i>&nbsp;            return redirect(controllers.routes.AdminAppController.portalSettings()); // with something</b>
-<i class="no-highlight">54</i>&nbsp;        } else {
-<b class="nc"><i class="no-highlight">55</i>&nbsp;            JsValue[] dashboardMockedData = AdminMockedData.dashboard();</b>
-<b class="nc"><i class="no-highlight">56</i>&nbsp;            JsValue jsGenderGraphData = dashboardMockedData[0];</b>
-<b class="nc"><i class="no-highlight">57</i>&nbsp;            JsValue jsAgeGraphData = dashboardMockedData[1];</b>
-<b class="nc"><i class="no-highlight">58</i>&nbsp;            JsValue jsConnectionsGraphDataThisWeek = dashboardMockedData[2];</b>
-<b class="nc"><i class="no-highlight">59</i>&nbsp;            JsValue jsConnectionsGraphDataLastWeek = dashboardMockedData[3];</b>
-<i class="no-highlight">60</i>&nbsp;
-<b class="nc"><i class="no-highlight">61</i>&nbsp;            PortalNetworkConfiguration portalNetworkConfiguration = connectionsService.networkConfiguration(portalId());</b>
-<b class="nc"><i class="no-highlight">62</i>&nbsp;            Form&lt;PortalNetworkConfiguration&gt; form = portalNetworkConfiguration == null</b>
-<b class="nc"><i class="no-highlight">63</i>&nbsp;                    ? formFactory.form(PortalNetworkConfiguration.class)</b>
-<b class="nc"><i class="no-highlight">64</i>&nbsp;                    : formFactory.form(PortalNetworkConfiguration.class).fill(portalNetworkConfiguration);</b>
-<b class="nc"><i class="no-highlight">65</i>&nbsp;            ArrayList&lt;ConnectedUser&gt; connectedUsers = connectionsService.connectedUsers(portalId());</b>
-<i class="no-highlight">66</i>&nbsp;
-<b class="nc"><i class="no-highlight">67</i>&nbsp;            return ok(render(views.html.admin.dashboard.apply(</b>
-<b class="nc"><i class="no-highlight">68</i>&nbsp;                    portal.get().getId().toString(),</b>
-<i class="no-highlight">69</i>&nbsp;                    jsGenderGraphData,
-<i class="no-highlight">70</i>&nbsp;                    jsAgeGraphData,
-<i class="no-highlight">71</i>&nbsp;                    jsConnectionsGraphDataThisWeek,
-<i class="no-highlight">72</i>&nbsp;                    jsConnectionsGraphDataLastWeek,
-<i class="no-highlight">73</i>&nbsp;                    form,
-<i class="no-highlight">74</i>&nbsp;                    connectedUsers
-<i class="no-highlight">75</i>&nbsp;            )));
-<i class="no-highlight">76</i>&nbsp;        }
-<i class="no-highlight">77</i>&nbsp;    }
-<i class="no-highlight">78</i>&nbsp;
-<i class="no-highlight">79</i>&nbsp;    @SubjectPresent(handlerKey = &quot;FormClient&quot;, forceBeforeAuthCheck = true)
-<i class="no-highlight">80</i>&nbsp;    public Result analytics() throws NoProfileFoundException {
-<b class="nc"><i class="no-highlight">81</i>&nbsp;        JsValue[] analyticsMockedData = AdminMockedData.analytics();</b>
-<b class="nc"><i class="no-highlight">82</i>&nbsp;        JsValue jsValue15 = analyticsMockedData[0];</b>
-<b class="nc"><i class="no-highlight">83</i>&nbsp;        JsValue jsValue16 = analyticsMockedData[1];</b>
-<b class="nc"><i class="no-highlight">84</i>&nbsp;        JsValue jsValue17 = analyticsMockedData[2];</b>
-<b class="nc"><i class="no-highlight">85</i>&nbsp;        JsValue jsValue18 = analyticsMockedData[3];</b>
-<i class="no-highlight">86</i>&nbsp;
-<b class="nc"><i class="no-highlight">87</i>&nbsp;        Long portalId = portalId();</b>
-<i class="no-highlight">88</i>&nbsp;
-<b class="nc"><i class="no-highlight">89</i>&nbsp;        GetAnalyticsDataRequest analyticsRequest = new GetAnalyticsDataRequest(portalId, DateHelper.now());</b>
-<i class="no-highlight">90</i>&nbsp;
-<b class="nc"><i class="no-highlight">91</i>&nbsp;        GetAnalyticsDataResponse analyticsData = analyticsService.getAnalyticsData(analyticsRequest);</b>
-<i class="no-highlight">92</i>&nbsp;
-<b class="nc"><i class="no-highlight">93</i>&nbsp;        List&lt;VisitsByPeriod&gt; visitsByMonth = analyticsData.visitsByMonthLastYear();</b>
-<b class="nc"><i class="no-highlight">94</i>&nbsp;        final JsValue visitsByMonthJson = JsonHelper.toJson(visitsByMonth);</b>
-<i class="no-highlight">95</i>&nbsp;
-<b class="nc"><i class="no-highlight">96</i>&nbsp;        VisitsByPeriodByGender visitsByPeriodByGender = analyticsData.visitsByMonthLastYearByGender();</b>
-<b class="nc"><i class="no-highlight">97</i>&nbsp;        List&lt;VisitsByPeriod&gt; visitsByPeriodMale = visitsByPeriodByGender.male();</b>
-<b class="nc"><i class="no-highlight">98</i>&nbsp;        List&lt;VisitsByPeriod&gt; visitsByPeriodFemale = visitsByPeriodByGender.female();</b>
-<b class="nc"><i class="no-highlight">99</i>&nbsp;        JsValue visitsByPeriodMaleJson = JsonHelper.toJson(visitsByPeriodMale);</b>
-<b class="nc"><i class="no-highlight">100</i>&nbsp;        JsValue visitsByPeriodFemaleJson = JsonHelper.toJson(visitsByPeriodFemale);</b>
-<i class="no-highlight">101</i>&nbsp;
-<b class="nc"><i class="no-highlight">102</i>&nbsp;        VisitsByDayByTimeRange visitsByDayByTimeRange = analyticsData.visitsByDayByTimeRange();</b>
-<b class="nc"><i class="no-highlight">103</i>&nbsp;        List&lt;VisitsByPeriod&gt; visits0_8 = visitsByDayByTimeRange.visits0_8();</b>
-<b class="nc"><i class="no-highlight">104</i>&nbsp;        List&lt;VisitsByPeriod&gt; visits8_11 = visitsByDayByTimeRange.visits8_11();</b>
-<b class="nc"><i class="no-highlight">105</i>&nbsp;        List&lt;VisitsByPeriod&gt; visits11_13 = visitsByDayByTimeRange.visits11_13();</b>
-<b class="nc"><i class="no-highlight">106</i>&nbsp;        List&lt;VisitsByPeriod&gt; visits13_16 = visitsByDayByTimeRange.visits13_16();</b>
-<b class="nc"><i class="no-highlight">107</i>&nbsp;        List&lt;VisitsByPeriod&gt; visits16_20 = visitsByDayByTimeRange.visits16_20();</b>
-<b class="nc"><i class="no-highlight">108</i>&nbsp;        List&lt;VisitsByPeriod&gt; visits20_24 = visitsByDayByTimeRange.visits20_24();</b>
-<b class="nc"><i class="no-highlight">109</i>&nbsp;        JsValue visits0_8Json = JsonHelper.toJson(visits0_8);</b>
-<b class="nc"><i class="no-highlight">110</i>&nbsp;        JsValue visits8_11Json = JsonHelper.toJson(visits8_11);</b>
-<b class="nc"><i class="no-highlight">111</i>&nbsp;        JsValue visits11_13Json = JsonHelper.toJson(visits11_13);</b>
-<b class="nc"><i class="no-highlight">112</i>&nbsp;        JsValue visits13_16Json = JsonHelper.toJson(visits13_16);</b>
-<b class="nc"><i class="no-highlight">113</i>&nbsp;        JsValue visits16_20Json = JsonHelper.toJson(visits16_20);</b>
-<b class="nc"><i class="no-highlight">114</i>&nbsp;        JsValue visits20_24Json = JsonHelper.toJson(visits20_24);</b>
-<i class="no-highlight">115</i>&nbsp;
-<b class="nc"><i class="no-highlight">116</i>&nbsp;        List&lt;VisitsByPeriod&gt; emptyList = new ArrayList&lt;&gt;();</b>
-<b class="nc"><i class="no-highlight">117</i>&nbsp;        Map&lt;Tuple2&lt;Integer, Integer&gt;, List&lt;VisitsByPeriod&gt;&gt; visitsByDurationLastWeek = analyticsData.visitsByDurationLastWeek();</b>
-<b class="nc"><i class="no-highlight">118</i>&nbsp;        List&lt;VisitsByPeriod&gt; visits0to15 = visitsByDurationLastWeek.getOrDefault(MinutesRange.RANGE_0_TO_15, emptyList);</b>
-<b class="nc"><i class="no-highlight">119</i>&nbsp;        List&lt;VisitsByPeriod&gt; visits15to30 = visitsByDurationLastWeek.getOrDefault(MinutesRange.RANGE_15_TO_30, emptyList);</b>
-<b class="nc"><i class="no-highlight">120</i>&nbsp;        List&lt;VisitsByPeriod&gt; visits30to45 = visitsByDurationLastWeek.getOrDefault(MinutesRange.RANGE_30_TO_45, emptyList);</b>
-<b class="nc"><i class="no-highlight">121</i>&nbsp;        List&lt;VisitsByPeriod&gt; visits45to60 = visitsByDurationLastWeek.getOrDefault(MinutesRange.RANGE_45_TO_60, emptyList);</b>
-<b class="nc"><i class="no-highlight">122</i>&nbsp;        List&lt;VisitsByPeriod&gt; visits60toInf = visitsByDurationLastWeek.getOrDefault(MinutesRange.RANGE_60_TO_INF, emptyList);</b>
-<b class="nc"><i class="no-highlight">123</i>&nbsp;        JsValue visits0to15Json = JsonHelper.toJson(takeLastWeek(visits0to15));</b>
-<b class="nc"><i class="no-highlight">124</i>&nbsp;        JsValue visits15to30Json = JsonHelper.toJson(takeLastWeek(visits15to30));</b>
-<b class="nc"><i class="no-highlight">125</i>&nbsp;        JsValue visits30to45Json = JsonHelper.toJson(takeLastWeek(visits30to45));</b>
-<b class="nc"><i class="no-highlight">126</i>&nbsp;        JsValue visits45to60Json = JsonHelper.toJson(takeLastWeek(visits45to60));</b>
-<b class="nc"><i class="no-highlight">127</i>&nbsp;        JsValue visits60toInfJson = JsonHelper.toJson(takeLastWeek(visits60toInf));</b>
-<i class="no-highlight">128</i>&nbsp;
-<b class="nc"><i class="no-highlight">129</i>&nbsp;        return ok(render(views.html.admin.analytics.render(</b>
-<i class="no-highlight">130</i>&nbsp;                visitsByMonthJson,
-<i class="no-highlight">131</i>&nbsp;                visitsByPeriodMaleJson, visitsByPeriodFemaleJson,
-<i class="no-highlight">132</i>&nbsp;                visits0_8Json, visits8_11Json, visits11_13Json, visits13_16Json, visits16_20Json, visits20_24Json,
-<i class="no-highlight">133</i>&nbsp;                visits0to15Json, visits15to30Json, visits30to45Json, visits45to60Json, visits60toInfJson,
-<i class="no-highlight">134</i>&nbsp;                jsValue15, jsValue16, jsValue17, jsValue18)));
-<i class="no-highlight">135</i>&nbsp;    }
-<i class="no-highlight">136</i>&nbsp;
-<i class="no-highlight">137</i>&nbsp;    @SubjectPresent(handlerKey = &quot;FormClient&quot;, forceBeforeAuthCheck = true)
-<i class="no-highlight">138</i>&nbsp;    public Result connections() throws NoProfileFoundException {
-<b class="nc"><i class="no-highlight">139</i>&nbsp;        PortalNetworkConfiguration portalNetworkConfiguration = connectionsService.networkConfiguration(portalId());</b>
-<b class="nc"><i class="no-highlight">140</i>&nbsp;        Form&lt;PortalNetworkConfiguration&gt; form = portalNetworkConfiguration == null</b>
-<b class="nc"><i class="no-highlight">141</i>&nbsp;                ? formFactory.form(PortalNetworkConfiguration.class)</b>
-<b class="nc"><i class="no-highlight">142</i>&nbsp;                : formFactory.form(PortalNetworkConfiguration.class).fill(portalNetworkConfiguration);</b>
-<b class="nc"><i class="no-highlight">143</i>&nbsp;        ArrayList&lt;ConnectedUser&gt; connectedUsers = connectionsService.connectedUsers(portalId());</b>
-<b class="nc"><i class="no-highlight">144</i>&nbsp;        return ok(render(views.html.admin.connections.render(form, connectedUsers)));</b>
-<i class="no-highlight">145</i>&nbsp;    }
-<i class="no-highlight">146</i>&nbsp;
-<i class="no-highlight">147</i>&nbsp;    @SubjectPresent(handlerKey = &quot;FormClient&quot;, forceBeforeAuthCheck = true)
-<i class="no-highlight">148</i>&nbsp;    public Result surveys() throws NoProfileFoundException {
-<b class="nc"><i class="no-highlight">149</i>&nbsp;        ArrayList&lt;Field&gt; fields = new ArrayList&lt;&gt;();</b>
-<b class="nc"><i class="no-highlight">150</i>&nbsp;        Field ageField = new Field(null, &quot;textbox&quot;, new FieldConfig(null, &quot;Edad&quot;, 1, true, null, null, null));</b>
-<b class="nc"><i class="no-highlight">151</i>&nbsp;        Field genreField = new Field(null, &quot;radio&quot;, new FieldConfig(null, &quot;Ténddsadero&quot;, 2, true, null, null, Arrays.asList(new Option(1, &quot;Femenino&quot;), new Option(2, &quot;Masculino&quot;), new Option(3, &quot;Otro&quot;))));</b>
-<b class="nc"><i class="no-highlight">152</i>&nbsp;        fields.add(ageField);</b>
-<b class="nc"><i class="no-highlight">153</i>&nbsp;        fields.add(genreField);</b>
-<b class="nc"><i class="no-highlight">154</i>&nbsp;        Survey survey = new Survey(null, null, null, fields, false);</b>
-<b class="nc"><i class="no-highlight">155</i>&nbsp;        ageField.setSurvey(survey);</b>
-<b class="nc"><i class="no-highlight">156</i>&nbsp;        genreField.setSurvey(survey);</b>
-<i class="no-highlight">157</i>&nbsp;
-<b class="nc"><i class="no-highlight">158</i>&nbsp;        Form&lt;Survey&gt; form = formFactory.form(Survey.class).fill(survey);</b>
-<i class="no-highlight">159</i>&nbsp;
-<b class="nc"><i class="no-highlight">160</i>&nbsp;        return ok(render(views.html.admin.surveys.render(form, true, false, 0, 0)));</b>
-<i class="no-highlight">161</i>&nbsp;    }
-<i class="no-highlight">162</i>&nbsp;    
-<i class="no-highlight">163</i>&nbsp;    @SubjectPresent(handlerKey = &quot;FormClient&quot;, forceBeforeAuthCheck = true)
-<i class="no-highlight">164</i>&nbsp;    public Result allSurveys() throws NoProfileFoundException {
-<b class="nc"><i class="no-highlight">165</i>&nbsp;        GetAllSurveysResponse getAllSurveysResponse = surveysService.getAllSurveys(new GetAllSurveysRequest(portalId()));</b>
-<b class="nc"><i class="no-highlight">166</i>&nbsp;        List&lt;SurveySummary&gt; summaries = getAllSurveysResponse.surveys().stream()</b>
-<b class="nc"><i class="no-highlight">167</i>&nbsp;                .map(this::toSummary)</b>
-<b class="nc"><i class="no-highlight">168</i>&nbsp;                .sorted(Comparator.comparing(SurveySummary::creation).reversed())</b>
-<b class="nc"><i class="no-highlight">169</i>&nbsp;                .collect(Collectors.toList());</b>
-<b class="nc"><i class="no-highlight">170</i>&nbsp;        return ok(render(views.html.admin.all_surveys.render(summaries)));</b>
-<i class="no-highlight">171</i>&nbsp;    }
-<i class="no-highlight">172</i>&nbsp;
-<i class="no-highlight">173</i>&nbsp;    @SubjectPresent(handlerKey = &quot;FormClient&quot;, forceBeforeAuthCheck = true)
-<i class="no-highlight">174</i>&nbsp;    public Result portalSettings() {
-<b class="nc"><i class="no-highlight">175</i>&nbsp;        CommonProfile currentProfile = getCurrentProfile();</b>
-<b class="nc"><i class="no-highlight">176</i>&nbsp;        Optional&lt;Portal&gt; portal = Optional.ofNullable(currentProfile.getAttribute(&quot;portal&quot;, Portal.class));</b>
-<b class="nc"><i class="no-highlight">177</i>&nbsp;        Form&lt;PortalOptionsView&gt; form = formFactory.form(PortalOptionsView.class);</b>
-<i class="no-highlight">178</i>&nbsp;
-<b class="nc"><i class="no-highlight">179</i>&nbsp;        if (!portal.isPresent()) {</b>
-<b class="nc"><i class="no-highlight">180</i>&nbsp;            return ok(render(views.html.admin.portal_options.render(form)));</b>
-<i class="no-highlight">181</i>&nbsp;        }
-<i class="no-highlight">182</i>&nbsp;
-<b class="nc"><i class="no-highlight">183</i>&nbsp;        PortalOptionsView portalOptions = optionsService.getPortalOptions(portal.get().getId());</b>
-<b class="nc"><i class="no-highlight">184</i>&nbsp;        return ok(render(views.html.admin.portal_options.render(form.fill(portalOptions))));</b>
-<i class="no-highlight">185</i>&nbsp;    }
-<i class="no-highlight">186</i>&nbsp;
-<i class="no-highlight">187</i>&nbsp;    @SubjectPresent(handlerKey = &quot;FormClient&quot;, forceBeforeAuthCheck = true)
-<i class="no-highlight">188</i>&nbsp;    public Result loginSettings() {
-<b class="nc"><i class="no-highlight">189</i>&nbsp;        SocialKeysView socialKeys = optionsService.getLoginOptions(portalId());</b>
-<b class="nc"><i class="no-highlight">190</i>&nbsp;        Form&lt;SocialKeysView&gt; socialKeysForm = formFactory.form(SocialKeysView.class).fill(socialKeys);</b>
-<b class="nc"><i class="no-highlight">191</i>&nbsp;        Form&lt;Portal&gt; portalForm = formFactory.form(Portal.class);</b>
-<b class="nc"><i class="no-highlight">192</i>&nbsp;        return ok(render(views.html.admin.login_options.render(socialKeysForm, portalForm)));</b>
-<i class="no-highlight">193</i>&nbsp;    }
-<i class="no-highlight">194</i>&nbsp;
-<i class="no-highlight">195</i>&nbsp;    //TODO : list collected data from social logins 
-<i class="no-highlight">196</i>&nbsp;    @SubjectPresent(handlerKey = &quot;FormClient&quot;, forceBeforeAuthCheck = true)
-<i class="no-highlight">197</i>&nbsp;    public Result allCollectedSocialData() {
-<b class="nc"><i class="no-highlight">198</i>&nbsp;        return ok(render(views.html.admin.collectedSocialData.render()));</b>
-<i class="no-highlight">199</i>&nbsp;    }
-<i class="no-highlight">200</i>&nbsp;
-<i class="no-highlight">201</i>&nbsp;    private SurveySummary toSummary(Survey survey) {
-<b class="nc"><i class="no-highlight">202</i>&nbsp;        return new SurveySummary(survey.getId(), survey.getTitle(), survey.getWhenCreated());</b>
-<i class="no-highlight">203</i>&nbsp;    }
-<i class="no-highlight">204</i>&nbsp;
-<i class="no-highlight">205</i>&nbsp;    private List&lt;VisitsByPeriod&gt; takeLastWeek(List&lt;VisitsByPeriod&gt; list) {
-<b class="nc"><i class="no-highlight">206</i>&nbsp;        int size = list.size();</b>
-<b class="nc"><i class="no-highlight">207</i>&nbsp;        return list.subList(size - Math.min(size, 7), size);</b>
-<i class="no-highlight">208</i>&nbsp;    }
-<i class="no-highlight">209</i>&nbsp;}
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;import play.filters.csrf.CSRFFilter;
+<i class="no-highlight">2</i>&nbsp;import play.filters.headers.SecurityHeadersFilter;
+<i class="no-highlight">3</i>&nbsp;import play.filters.hosts.AllowedHostsFilter;
+<i class="no-highlight">4</i>&nbsp;import play.http.DefaultHttpFilters;
+<i class="no-highlight">5</i>&nbsp;
+<i class="no-highlight">6</i>&nbsp;import javax.inject.Inject;
+<i class="no-highlight">7</i>&nbsp;import javax.inject.Singleton;
+<i class="no-highlight">8</i>&nbsp;
+<i class="no-highlight">9</i>&nbsp;/**
+<i class="no-highlight">10</i>&nbsp; * This class configures filters that run on every request. This
+<i class="no-highlight">11</i>&nbsp; * class is queried by Play to get a list of filters.
+<i class="no-highlight">12</i>&nbsp; *
+<i class="no-highlight">13</i>&nbsp; * https://www.playframework.com/documentation/latest/ScalaCsrf
+<i class="no-highlight">14</i>&nbsp; * https://www.playframework.com/documentation/latest/AllowedHostsFilter
+<i class="no-highlight">15</i>&nbsp; * https://www.playframework.com/documentation/latest/SecurityHeaders
+<i class="no-highlight">16</i>&nbsp; */
+<i class="no-highlight">17</i>&nbsp;@Singleton
+<i class="no-highlight">18</i>&nbsp;public class Filters extends DefaultHttpFilters {
+<i class="no-highlight">19</i>&nbsp;
+<i class="no-highlight">20</i>&nbsp;    @Inject
+<i class="no-highlight">21</i>&nbsp;    public Filters(
+<i class="no-highlight">22</i>&nbsp;                   AllowedHostsFilter allowedHostsFilter,
+<b class="fc"><i class="no-highlight">23</i>&nbsp;                   SecurityHeadersFilter securityHeadersFilter) {</b>
+<i class="no-highlight">24</i>&nbsp;        //super( allowedHostsFilter, securityHeadersFilter);
+<i class="no-highlight">25</i>&nbsp;    }
+<i class="no-highlight">26</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -318,7 +135,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-07-12 12:17</div>
+    <div style="float:right;">generated on 2022-08-27 21:21</div>
 </div>
 </body>
 </html>

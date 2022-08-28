@@ -24,7 +24,7 @@
                 </div>
             </div>
         </div>
-    <div class="@loginConfiguration("keys")("name"))">
+    <div id="toHide@loginConfiguration("loginMethod").id">
         <div class="form-group row">
                 <div class="col-md-10 col-sm-6 col-xs-6">
                     @helper.inputText(loginConfiguration("keys")("clientId"), '_label -> "Id de Cliente", 'class -> "form-control col-md-6 col-xs-12")
@@ -40,7 +40,10 @@
 
 <script type="text/javascript">   
     $(document).ready(function() {
-        const target = '@loginConfiguration("enabled").name';
-        hideFormFields(document, target);
+        const target = '@loginConfiguration("enabled").id';
+        const fieldToHide = 'toHide@loginConfiguration("loginMethod").id';
+        hideFormFields(document, target, fieldToHide);
     });
 </script>
+
+<script src="@routes.Assets.versioned("js/removeDefaultTooltip.js")">

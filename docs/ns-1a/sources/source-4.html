@@ -1,0 +1,329 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > GetAnalyticsDataFunction</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">services.core.functions</a>
+</div>
+
+<h1>Coverage Summary for Class: GetAnalyticsDataFunction (services.core.functions)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GetAnalyticsDataFunction</td>
+<td class="coverageStat">
+  <span class="percent">
+    90.9%
+  </span>
+  <span class="absValue">
+    (20/22)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    96.6%
+  </span>
+  <span class="absValue">
+    (85/88)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">GetAnalyticsDataFunction$DayAndRange</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    91.3%
+  </span>
+  <span class="absValue">
+    (21/23)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    96.7%
+  </span>
+  <span class="absValue">
+    (88/91)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package services.core.functions;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import daos.NetworkUserConnectionLogDAO;
+<i class="no-highlight">4</i>&nbsp;import models.NetworkUserConnectionLog;
+<i class="no-highlight">5</i>&nbsp;import operations.requests.GetAnalyticsDataRequest;
+<i class="no-highlight">6</i>&nbsp;import operations.responses.*;
+<i class="no-highlight">7</i>&nbsp;import scala.Tuple2;
+<i class="no-highlight">8</i>&nbsp;import services.core.*;
+<i class="no-highlight">9</i>&nbsp;import utils.DateHelper;
+<i class="no-highlight">10</i>&nbsp;
+<i class="no-highlight">11</i>&nbsp;import java.time.DayOfWeek;
+<i class="no-highlight">12</i>&nbsp;import java.time.Instant;
+<i class="no-highlight">13</i>&nbsp;import java.util.*;
+<i class="no-highlight">14</i>&nbsp;import java.util.function.Function;
+<i class="no-highlight">15</i>&nbsp;import java.util.stream.Collectors;
+<i class="no-highlight">16</i>&nbsp;
+<i class="no-highlight">17</i>&nbsp;import static models.types.Gender.Female;
+<i class="no-highlight">18</i>&nbsp;import static models.types.Gender.Male;
+<i class="no-highlight">19</i>&nbsp;import static services.core.AnyRange.toRange;
+<i class="no-highlight">20</i>&nbsp;import static services.core.HourRange.*;
+<i class="no-highlight">21</i>&nbsp;
+<i class="no-highlight">22</i>&nbsp;@SuppressWarnings(&quot;unused&quot;)
+<b class="fc"><i class="no-highlight">23</i>&nbsp;public class GetAnalyticsDataFunction</b>
+<i class="no-highlight">24</i>&nbsp;        extends WiFreeFunction&lt;GetAnalyticsDataRequest, GetAnalyticsDataResponse&gt;
+<i class="no-highlight">25</i>&nbsp;        implements CanGroupLogs {
+<i class="no-highlight">26</i>&nbsp;
+<i class="no-highlight">27</i>&nbsp;    @Override
+<i class="no-highlight">28</i>&nbsp;    public Function&lt;GetAnalyticsDataRequest, GetAnalyticsDataResponse&gt; function() {
+<b class="fc"><i class="no-highlight">29</i>&nbsp;        function = request -&gt; {</b>
+<b class="fc"><i class="no-highlight">30</i>&nbsp;            long portalId = request.portalId();</b>
+<b class="fc"><i class="no-highlight">31</i>&nbsp;            Instant now = request.now();</b>
+<b class="fc"><i class="no-highlight">32</i>&nbsp;            NetworkUserConnectionLogDAO dao = new NetworkUserConnectionLogDAO();</b>
+<b class="fc"><i class="no-highlight">33</i>&nbsp;            DatasetFilter usersConnectedLastYearFilter = DatasetFilter.usersConnectedLastYearFilter(portalId);</b>
+<b class="fc"><i class="no-highlight">34</i>&nbsp;            DatasetFilter maleUsersConnectedLastYearFilter = DatasetFilter.genderUsersConnectedLastYearFilter(portalId, Male);</b>
+<b class="fc"><i class="no-highlight">35</i>&nbsp;            DatasetFilter femaleUsersConnectedLastYearFilter = DatasetFilter.genderUsersConnectedLastYearFilter(portalId, Female);</b>
+<b class="fc"><i class="no-highlight">36</i>&nbsp;            DatasetFilter usersConnectedLastWeekFilter = DatasetFilter.usersConnectedLastWeekFilter(portalId);</b>
+<i class="no-highlight">37</i>&nbsp;
+<b class="fc"><i class="no-highlight">38</i>&nbsp;            List&lt;NetworkUserConnectionLog&gt; usersConnectedLastYearLogs = dao.findForFilter(usersConnectedLastYearFilter, now);</b>
+<b class="fc"><i class="no-highlight">39</i>&nbsp;            List&lt;NetworkUserConnectionLog&gt; maleUsersConnectedLastYearLogs = dao.findForFilter(maleUsersConnectedLastYearFilter, now);</b>
+<b class="fc"><i class="no-highlight">40</i>&nbsp;            List&lt;NetworkUserConnectionLog&gt; femaleUsersConnectedLastYearLogs = dao.findForFilter(femaleUsersConnectedLastYearFilter, now);</b>
+<b class="fc"><i class="no-highlight">41</i>&nbsp;            List&lt;NetworkUserConnectionLog&gt; usersConnectedLastWeekLogs = dao.findForFilter(usersConnectedLastWeekFilter, now);</b>
+<i class="no-highlight">42</i>&nbsp;
+<b class="fc"><i class="no-highlight">43</i>&nbsp;            List&lt;VisitsByPeriod&gt; visitsByMonth = visitsByMonth(usersConnectedLastYearLogs);</b>
+<b class="fc"><i class="no-highlight">44</i>&nbsp;            VisitsByPeriodByGender visitsByMonthByGender = visitsByPeriodByGender(maleUsersConnectedLastYearLogs, femaleUsersConnectedLastYearLogs);</b>
+<b class="fc"><i class="no-highlight">45</i>&nbsp;            VisitsByDayByTimeRange averageVisitsByDayByTimeRange = averageVisitsByDayByTimeRange(usersConnectedLastYearLogs);</b>
+<b class="fc"><i class="no-highlight">46</i>&nbsp;            Map&lt;Tuple2&lt;Integer, Integer&gt;, List&lt;VisitsByPeriod&gt;&gt; visitsByDurationLastWeek = visitsByDurationLastWeek(usersConnectedLastWeekLogs);</b>
+<i class="no-highlight">47</i>&nbsp;
+<b class="fc"><i class="no-highlight">48</i>&nbsp;            return new GetAnalyticsDataResponse(visitsByMonth,</b>
+<i class="no-highlight">49</i>&nbsp;                    visitsByMonthByGender,
+<i class="no-highlight">50</i>&nbsp;                    averageVisitsByDayByTimeRange,
+<i class="no-highlight">51</i>&nbsp;                    visitsByDurationLastWeek);
+<i class="no-highlight">52</i>&nbsp;        };
+<b class="fc"><i class="no-highlight">53</i>&nbsp;        return function;</b>
+<i class="no-highlight">54</i>&nbsp;    }
+<i class="no-highlight">55</i>&nbsp;
+<i class="no-highlight">56</i>&nbsp;    private List&lt;VisitsByPeriod&gt; visitsByMonth(List&lt;NetworkUserConnectionLog&gt; usersConnectedLastYearLogs) {
+<b class="fc"><i class="no-highlight">57</i>&nbsp;        Map&lt;String, Long&gt; visitsByMonthMap = groupCounting(</b>
+<i class="no-highlight">58</i>&nbsp;                usersConnectedLastYearLogs,
+<i class="no-highlight">59</i>&nbsp;                NetworkUserConnectionLog::getConnectionStartDate,
+<i class="no-highlight">60</i>&nbsp;                this::instantToYearMonth
+<i class="no-highlight">61</i>&nbsp;        );
+<b class="fc"><i class="no-highlight">62</i>&nbsp;        ArrayList&lt;String&gt; months = new ArrayList&lt;&gt;(visitsByMonthMap.keySet());</b>
+<b class="fc"><i class="no-highlight">63</i>&nbsp;        months.sort(Comparator.naturalOrder());</b>
+<b class="fc"><i class="no-highlight">64</i>&nbsp;        return months.stream()</b>
+<b class="fc"><i class="no-highlight">65</i>&nbsp;                .map(month -&gt; new VisitsByPeriod(month, visitsByMonthMap.get(month)))</b>
+<b class="fc"><i class="no-highlight">66</i>&nbsp;                .collect(Collectors.toList());</b>
+<i class="no-highlight">67</i>&nbsp;    }
+<i class="no-highlight">68</i>&nbsp;
+<i class="no-highlight">69</i>&nbsp;    private VisitsByPeriodByGender visitsByPeriodByGender(List&lt;NetworkUserConnectionLog&gt; maleUsersConnectedLastYearLogs, List&lt;NetworkUserConnectionLog&gt; femaleUsersConnectedLastYearLogs) {
+<b class="fc"><i class="no-highlight">70</i>&nbsp;        List&lt;VisitsByPeriod&gt; maleVisitsByPeriod = visitsByMonth(maleUsersConnectedLastYearLogs);</b>
+<b class="fc"><i class="no-highlight">71</i>&nbsp;        List&lt;VisitsByPeriod&gt; femaleVisitsByPeriod = visitsByMonth(femaleUsersConnectedLastYearLogs);</b>
+<b class="fc"><i class="no-highlight">72</i>&nbsp;        return new VisitsByPeriodByGender(maleVisitsByPeriod, femaleVisitsByPeriod);</b>
+<i class="no-highlight">73</i>&nbsp;    }
+<i class="no-highlight">74</i>&nbsp;
+<i class="no-highlight">75</i>&nbsp;    private VisitsByDayByTimeRange averageVisitsByDayByTimeRange(List&lt;NetworkUserConnectionLog&gt; usersConnectedLastYearLogs) {
+<b class="fc"><i class="no-highlight">76</i>&nbsp;        Map&lt;DayAndRange, Long&gt; dayAndRangeVisits = groupCounting(</b>
+<i class="no-highlight">77</i>&nbsp;                usersConnectedLastYearLogs,
+<i class="no-highlight">78</i>&nbsp;                NetworkUserConnectionLog::getConnectionStartDate,
+<b class="fc"><i class="no-highlight">79</i>&nbsp;                date -&gt; new DayAndRange(DateHelper.dayOfWeek(date), toRange(HourRange.values, DateHelper.hourBeginning(date)))</b>
+<i class="no-highlight">80</i>&nbsp;        );
+<b class="fc"><i class="no-highlight">81</i>&nbsp;        return new VisitsByDayByTimeRange(</b>
+<b class="fc"><i class="no-highlight">82</i>&nbsp;            averageVisitsByDayByRange(dayAndRangeVisits, RANGE_0_TO_8),</b>
+<b class="fc"><i class="no-highlight">83</i>&nbsp;            averageVisitsByDayByRange(dayAndRangeVisits, RANGE_8_TO_11),</b>
+<b class="fc"><i class="no-highlight">84</i>&nbsp;            averageVisitsByDayByRange(dayAndRangeVisits, RANGE_11_TO_13),</b>
+<b class="fc"><i class="no-highlight">85</i>&nbsp;            averageVisitsByDayByRange(dayAndRangeVisits, RANGE_13_TO_16),</b>
+<b class="fc"><i class="no-highlight">86</i>&nbsp;            averageVisitsByDayByRange(dayAndRangeVisits, RANGE_16_TO_20),</b>
+<b class="fc"><i class="no-highlight">87</i>&nbsp;            averageVisitsByDayByRange(dayAndRangeVisits, RANGE_20_TO_24)</b>
+<i class="no-highlight">88</i>&nbsp;        );
+<i class="no-highlight">89</i>&nbsp;    }
+<i class="no-highlight">90</i>&nbsp;
+<i class="no-highlight">91</i>&nbsp;    private List&lt;VisitsByPeriod&gt; averageVisitsByDayByRange(Map&lt;DayAndRange, Long&gt; dayAndRangeVisits, Tuple2&lt;Integer, Integer&gt; range) {
+<b class="fc"><i class="no-highlight">92</i>&nbsp;        return dayAndRangeVisits.entrySet()</b>
+<b class="fc"><i class="no-highlight">93</i>&nbsp;                .stream()</b>
+<b class="fc"><i class="no-highlight">94</i>&nbsp;                .filter(entry -&gt; entry.getKey().timeRange.equals(range))</b>
+<b class="fc"><i class="no-highlight">95</i>&nbsp;                .collect(</b>
+<b class="fc"><i class="no-highlight">96</i>&nbsp;                        Collectors.groupingBy(</b>
+<b class="fc"><i class="no-highlight">97</i>&nbsp;                                entry -&gt; entry.getKey().dayOfWeek,</b>
+<b class="fc"><i class="no-highlight">98</i>&nbsp;                                Collectors.counting()</b>
+<i class="no-highlight">99</i>&nbsp;                        )
+<i class="no-highlight">100</i>&nbsp;                )
+<b class="fc"><i class="no-highlight">101</i>&nbsp;                .entrySet()</b>
+<b class="fc"><i class="no-highlight">102</i>&nbsp;                .stream()</b>
+<b class="fc"><i class="no-highlight">103</i>&nbsp;                .sorted(Comparator.comparing(Map.Entry::getKey))</b>
+<b class="fc"><i class="no-highlight">104</i>&nbsp;                .map(entry -&gt; new VisitsByPeriod(entry.getKey().name(), entry.getValue()))</b>
+<b class="fc"><i class="no-highlight">105</i>&nbsp;                .collect(Collectors.toList());</b>
+<i class="no-highlight">106</i>&nbsp;    }
+<i class="no-highlight">107</i>&nbsp;
+<i class="no-highlight">108</i>&nbsp;    private Map&lt;Tuple2&lt;Integer, Integer&gt;, List&lt;VisitsByPeriod&gt;&gt; visitsByDurationLastWeek(List&lt;NetworkUserConnectionLog&gt; usersConnectedLastWeekLogs) {
+<b class="fc"><i class="no-highlight">109</i>&nbsp;        Map&lt;Tuple2&lt;Integer, Integer&gt;, List&lt;NetworkUserConnectionLog&gt;&gt; logsByTimeRanges =</b>
+<b class="fc"><i class="no-highlight">110</i>&nbsp;                groupMapping(</b>
+<i class="no-highlight">111</i>&nbsp;                        usersConnectedLastWeekLogs,
+<i class="no-highlight">112</i>&nbsp;                        this::logToMinutesRange,
+<b class="fc"><i class="no-highlight">113</i>&nbsp;                        l -&gt; l</b>
+<i class="no-highlight">114</i>&nbsp;                );
+<i class="no-highlight">115</i>&nbsp;
+<b class="fc"><i class="no-highlight">116</i>&nbsp;        Map&lt;Tuple2&lt;Integer, Integer&gt;, Map&lt;String, List&lt;NetworkUserConnectionLog&gt;&gt;&gt; logsByDatesByTimeRanges = logsByTimeRanges.entrySet()</b>
+<b class="fc"><i class="no-highlight">117</i>&nbsp;                .stream()</b>
+<b class="fc"><i class="no-highlight">118</i>&nbsp;                .collect(Collectors.toMap(</b>
+<i class="no-highlight">119</i>&nbsp;                        Map.Entry::getKey,
+<b class="fc"><i class="no-highlight">120</i>&nbsp;                        entry -&gt; groupMapping(entry.getValue(),</b>
+<i class="no-highlight">121</i>&nbsp;                                this::logToYearMonthDay,
+<b class="fc"><i class="no-highlight">122</i>&nbsp;                                l -&gt; l)</b>
+<i class="no-highlight">123</i>&nbsp;                        )
+<i class="no-highlight">124</i>&nbsp;                );
+<b class="fc"><i class="no-highlight">125</i>&nbsp;        Map&lt;Tuple2&lt;Integer, Integer&gt;, List&lt;VisitsByPeriod&gt;&gt; visitsByDurationLastWeek = logsByDatesByTimeRanges.entrySet()</b>
+<b class="fc"><i class="no-highlight">126</i>&nbsp;                .stream()</b>
+<b class="fc"><i class="no-highlight">127</i>&nbsp;                .collect(Collectors.toMap(</b>
+<i class="no-highlight">128</i>&nbsp;                        Map.Entry::getKey,
+<b class="fc"><i class="no-highlight">129</i>&nbsp;                        entry -&gt; entry.getValue()</b>
+<b class="fc"><i class="no-highlight">130</i>&nbsp;                                .entrySet()</b>
+<b class="fc"><i class="no-highlight">131</i>&nbsp;                                .stream()</b>
+<b class="fc"><i class="no-highlight">132</i>&nbsp;                                .map(x -&gt; new VisitsByPeriod(x.getKey(), x.getValue().size()))</b>
+<b class="fc"><i class="no-highlight">133</i>&nbsp;                                .collect(Collectors.toList())));</b>
+<i class="no-highlight">134</i>&nbsp;
+<b class="fc"><i class="no-highlight">135</i>&nbsp;        List&lt;String&gt; allPeriods = visitsByDurationLastWeek.values()</b>
+<b class="fc"><i class="no-highlight">136</i>&nbsp;                .stream()</b>
+<b class="fc"><i class="no-highlight">137</i>&nbsp;                .flatMap(Collection::stream)</b>
+<b class="fc"><i class="no-highlight">138</i>&nbsp;                .map(VisitsByPeriod::period)</b>
+<b class="fc"><i class="no-highlight">139</i>&nbsp;                .distinct()</b>
+<b class="fc"><i class="no-highlight">140</i>&nbsp;                .collect(Collectors.toList());</b>
+<i class="no-highlight">141</i>&nbsp;
+<b class="fc"><i class="no-highlight">142</i>&nbsp;       allPeriods.forEach(period -&gt; {</b>
+<b class="fc"><i class="no-highlight">143</i>&nbsp;           for (Map.Entry&lt;Tuple2&lt;Integer, Integer&gt;, List&lt;VisitsByPeriod&gt;&gt; entry : visitsByDurationLastWeek.entrySet()) {</b>
+<b class="fc"><i class="no-highlight">144</i>&nbsp;               List&lt;VisitsByPeriod&gt; values = entry.getValue();</b>
+<b class="fc"><i class="no-highlight">145</i>&nbsp;               if (values.stream().noneMatch(v -&gt; v.period().equals(period))) {</b>
+<b class="nc"><i class="no-highlight">146</i>&nbsp;                   values.add(new VisitsByPeriod(period, 0));</b>
+<i class="no-highlight">147</i>&nbsp;               }
+<b class="fc"><i class="no-highlight">148</i>&nbsp;               values.sort(Comparator.comparing(VisitsByPeriod::period));</b>
+<b class="fc"><i class="no-highlight">149</i>&nbsp;               entry.setValue(takeLastWeek(values));</b>
+<b class="fc"><i class="no-highlight">150</i>&nbsp;           }</b>
+<i class="no-highlight">151</i>&nbsp;       });
+<i class="no-highlight">152</i>&nbsp;
+<b class="fc"><i class="no-highlight">153</i>&nbsp;        return visitsByDurationLastWeek;</b>
+<i class="no-highlight">154</i>&nbsp;    }
+<i class="no-highlight">155</i>&nbsp;
+<i class="no-highlight">156</i>&nbsp;    private List&lt;VisitsByPeriod&gt; takeLastWeek(List&lt;VisitsByPeriod&gt; list) {
+<b class="fc"><i class="no-highlight">157</i>&nbsp;        int size = list.size();</b>
+<b class="fc"><i class="no-highlight">158</i>&nbsp;        return list.subList(Math.max(size - 7, 0), size);</b>
+<i class="no-highlight">159</i>&nbsp;    }
+<i class="no-highlight">160</i>&nbsp;
+<i class="no-highlight">161</i>&nbsp;    private String logToYearMonthDay(NetworkUserConnectionLog l) {
+<b class="fc"><i class="no-highlight">162</i>&nbsp;        return l.getConnectionStartDate().toString().split(&quot;T&quot;)[0].substring(0, 10);</b>
+<i class="no-highlight">163</i>&nbsp;    }
+<i class="no-highlight">164</i>&nbsp;
+<i class="no-highlight">165</i>&nbsp;    private Tuple2&lt;Integer, Integer&gt; logToMinutesRange(NetworkUserConnectionLog l) {
+<b class="fc"><i class="no-highlight">166</i>&nbsp;        return toRange(MinutesRange.values, (int) (DateHelper.between(l.getConnectionEndDate(), l.getConnectionStartDate()) / 60));</b>
+<i class="no-highlight">167</i>&nbsp;    }
+<i class="no-highlight">168</i>&nbsp;
+<i class="no-highlight">169</i>&nbsp;    private String instantToYearMonth(Instant date) {
+<b class="fc"><i class="no-highlight">170</i>&nbsp;        return date.toString().split(&quot;T&quot;)[0].substring(0, 7);</b>
+<i class="no-highlight">171</i>&nbsp;    }
+<i class="no-highlight">172</i>&nbsp;
+<i class="no-highlight">173</i>&nbsp;    @Override
+<i class="no-highlight">174</i>&nbsp;    public Class&lt;GetAnalyticsDataRequest&gt; rqClass() {
+<b class="fc"><i class="no-highlight">175</i>&nbsp;        return GetAnalyticsDataRequest.class;</b>
+<i class="no-highlight">176</i>&nbsp;    }
+<i class="no-highlight">177</i>&nbsp;
+<i class="no-highlight">178</i>&nbsp;    @Override
+<i class="no-highlight">179</i>&nbsp;    public Class&lt;GetAnalyticsDataResponse&gt; rsClass() {
+<b class="nc"><i class="no-highlight">180</i>&nbsp;        return GetAnalyticsDataResponse.class;</b>
+<i class="no-highlight">181</i>&nbsp;    }
+<i class="no-highlight">182</i>&nbsp;
+<i class="no-highlight">183</i>&nbsp;    @Override
+<i class="no-highlight">184</i>&nbsp;    public ServiceType serviceType() {
+<b class="nc"><i class="no-highlight">185</i>&nbsp;        return ServiceType.TESTING_SERVICE;</b>
+<i class="no-highlight">186</i>&nbsp;    }
+<i class="no-highlight">187</i>&nbsp;
+<i class="no-highlight">188</i>&nbsp;    static class DayAndRange {
+<i class="no-highlight">189</i>&nbsp;        final DayOfWeek dayOfWeek;
+<i class="no-highlight">190</i>&nbsp;        final Tuple2&lt;Integer, Integer&gt; timeRange;
+<i class="no-highlight">191</i>&nbsp;
+<b class="fc"><i class="no-highlight">192</i>&nbsp;        DayAndRange(final DayOfWeek dayOfWeek, final Tuple2&lt;Integer, Integer&gt; timeRange) {</b>
+<b class="fc"><i class="no-highlight">193</i>&nbsp;            this.dayOfWeek = dayOfWeek;</b>
+<b class="fc"><i class="no-highlight">194</i>&nbsp;            this.timeRange = timeRange;</b>
+<i class="no-highlight">195</i>&nbsp;        }
+<i class="no-highlight">196</i>&nbsp;    }
+<i class="no-highlight">197</i>&nbsp;
+<i class="no-highlight">198</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-08-27 21:21</div>
+</div>
+</body>
+</html>

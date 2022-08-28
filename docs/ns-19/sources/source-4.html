@@ -1,0 +1,154 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Functions</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">services.core</a>
+</div>
+
+<h1>Coverage Summary for Class: Functions (services.core)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Functions</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (4/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    47.6%
+  </span>
+  <span class="absValue">
+    (10/21)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package services.core;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import core.PackageClassesFinder;
+<i class="no-highlight">4</i>&nbsp;import operations.core.WiFreeRequest;
+<i class="no-highlight">5</i>&nbsp;
+<i class="no-highlight">6</i>&nbsp;import java.util.Arrays;
+<i class="no-highlight">7</i>&nbsp;import java.util.HashMap;
+<i class="no-highlight">8</i>&nbsp;import java.util.List;
+<i class="no-highlight">9</i>&nbsp;import java.util.Map;
+<i class="no-highlight">10</i>&nbsp;
+<b class="nc"><i class="no-highlight">11</i>&nbsp;public class Functions {</b>
+<i class="no-highlight">12</i>&nbsp;	
+<b class="fc"><i class="no-highlight">13</i>&nbsp;	private static Map&lt;Class&lt;? extends WiFreeRequest&gt;, WiFreeFunction&gt; allFunctions = new HashMap&lt;&gt;();</b>
+<i class="no-highlight">14</i>&nbsp;	
+<i class="no-highlight">15</i>&nbsp;	static {
+<i class="no-highlight">16</i>&nbsp;		try {
+<b class="fc"><i class="no-highlight">17</i>&nbsp;			initialize();</b>
+<b class="nc"><i class="no-highlight">18</i>&nbsp;		} catch (IllegalAccessException e) {</b>
+<b class="nc"><i class="no-highlight">19</i>&nbsp;			e.printStackTrace();				// TODO print properly</b>
+<b class="nc"><i class="no-highlight">20</i>&nbsp;		} catch (InstantiationException e) {</b>
+<b class="nc"><i class="no-highlight">21</i>&nbsp;			e.printStackTrace();				// TODO print properly</b>
+<b class="fc"><i class="no-highlight">22</i>&nbsp;		}</b>
+<i class="no-highlight">23</i>&nbsp;	}
+<i class="no-highlight">24</i>&nbsp;	
+<i class="no-highlight">25</i>&nbsp;	public static &lt;RQ extends WiFreeRequest&gt; WiFreeFunction of(RQ request) {
+<b class="fc"><i class="no-highlight">26</i>&nbsp;		if (allFunctions.isEmpty()) {</b>
+<i class="no-highlight">27</i>&nbsp;			try {
+<b class="nc"><i class="no-highlight">28</i>&nbsp;				initialize();</b>
+<b class="nc"><i class="no-highlight">29</i>&nbsp;			} catch (IllegalAccessException e) {</b>
+<b class="nc"><i class="no-highlight">30</i>&nbsp;				e.printStackTrace();</b>
+<b class="nc"><i class="no-highlight">31</i>&nbsp;			} catch (InstantiationException e) {</b>
+<b class="nc"><i class="no-highlight">32</i>&nbsp;				e.printStackTrace();</b>
+<b class="nc"><i class="no-highlight">33</i>&nbsp;			}</b>
+<i class="no-highlight">34</i>&nbsp;		}
+<b class="fc"><i class="no-highlight">35</i>&nbsp;		return allFunctions.get(request.getClass());</b>
+<i class="no-highlight">36</i>&nbsp;	}
+<i class="no-highlight">37</i>&nbsp;	
+<i class="no-highlight">38</i>&nbsp;	private static void initialize() throws IllegalAccessException, InstantiationException {
+<b class="fc"><i class="no-highlight">39</i>&nbsp;		final List&lt;Class&lt;? extends WiFreeFunction&gt;&gt; functionsClasses = PackageClassesFinder.getFunctionsClasses();</b>
+<b class="fc"><i class="no-highlight">40</i>&nbsp;		for (Class&lt;? extends WiFreeFunction&gt; functionClass : functionsClasses) {</b>
+<b class="fc"><i class="no-highlight">41</i>&nbsp;			put(functionClass.newInstance());</b>
+<b class="fc"><i class="no-highlight">42</i>&nbsp;		}</b>
+<i class="no-highlight">43</i>&nbsp;	}
+<i class="no-highlight">44</i>&nbsp;
+<i class="no-highlight">45</i>&nbsp;	private static &lt;F extends WiFreeFunction&gt; void put(F... serviceFunctions) {
+<b class="fc"><i class="no-highlight">46</i>&nbsp;		Arrays.stream(serviceFunctions).forEach(function -&gt; allFunctions.put(function.rqClass(), function));</b>
+<i class="no-highlight">47</i>&nbsp;	}
+<i class="no-highlight">48</i>&nbsp;	
+<i class="no-highlight">49</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-08-27 21:21</div>
+</div>
+</body>
+</html>

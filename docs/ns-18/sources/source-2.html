@@ -1,0 +1,186 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > ConnectionsService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">services</a>
+</div>
+
+<h1>Coverage Summary for Class: ConnectionsService (services)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ConnectionsService</td>
+<td class="coverageStat">
+  <span class="percent">
+    62.5%
+  </span>
+  <span class="absValue">
+    (5/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    52.2%
+  </span>
+  <span class="absValue">
+    (12/23)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ConnectionsService$$FastClassByGuice$$f0413b50</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    62.5%
+  </span>
+  <span class="absValue">
+    (5/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    52.2%
+  </span>
+  <span class="absValue">
+    (12/23)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package services;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import daos.NetworkUserConnectionLogDAO;
+<i class="no-highlight">4</i>&nbsp;import daos.PortalDAO;
+<i class="no-highlight">5</i>&nbsp;import daos.PortalNetworkConfigurationDAO;
+<i class="no-highlight">6</i>&nbsp;import models.NetworkUserConnectionLog;
+<i class="no-highlight">7</i>&nbsp;import models.Portal;
+<i class="no-highlight">8</i>&nbsp;import models.PortalNetworkConfiguration;
+<i class="no-highlight">9</i>&nbsp;import operations.responses.DatasetFilter;
+<i class="no-highlight">10</i>&nbsp;import views.dto.ConnectedUser;
+<i class="no-highlight">11</i>&nbsp;import views.dto.ConnectionsPage;
+<i class="no-highlight">12</i>&nbsp;
+<i class="no-highlight">13</i>&nbsp;import javax.inject.Inject;
+<i class="no-highlight">14</i>&nbsp;import java.time.Instant;
+<i class="no-highlight">15</i>&nbsp;import java.util.*;
+<i class="no-highlight">16</i>&nbsp;import java.util.concurrent.ThreadLocalRandom;
+<i class="no-highlight">17</i>&nbsp;import java.util.stream.Collectors;
+<i class="no-highlight">18</i>&nbsp;
+<b class="fc"><i class="no-highlight">19</i>&nbsp;public class ConnectionsService {</b>
+<i class="no-highlight">20</i>&nbsp;
+<b class="fc"><i class="no-highlight">21</i>&nbsp;	private static final Map&lt;String, Integer&gt; map = new HashMap&lt;&gt;();</b>
+<i class="no-highlight">22</i>&nbsp;
+<i class="no-highlight">23</i>&nbsp;	public static Integer connectedValue(String portalId) {
+<b class="fc"><i class="no-highlight">24</i>&nbsp;		return map.getOrDefault(portalId, ThreadLocalRandom.current().nextInt(179, 210));</b>
+<i class="no-highlight">25</i>&nbsp;	}
+<i class="no-highlight">26</i>&nbsp;
+<i class="no-highlight">27</i>&nbsp;	@Inject
+<i class="no-highlight">28</i>&nbsp;	PortalNetworkConfigurationDAO portalNetworkConfigurationDAO;
+<i class="no-highlight">29</i>&nbsp;
+<i class="no-highlight">30</i>&nbsp;	@Inject
+<i class="no-highlight">31</i>&nbsp;	PortalDAO portalDAO;
+<i class="no-highlight">32</i>&nbsp;
+<i class="no-highlight">33</i>&nbsp;	@Inject
+<i class="no-highlight">34</i>&nbsp;	NetworkUserConnectionLogDAO connectionLogDAO;
+<i class="no-highlight">35</i>&nbsp;	
+<i class="no-highlight">36</i>&nbsp;	public void saveNetworkConfiguration(Integer connectionTimeout, Long portalId) {
+<b class="nc"><i class="no-highlight">37</i>&nbsp;		Portal portal = portalDAO.get(portalId);</b>
+<b class="nc"><i class="no-highlight">38</i>&nbsp;		List&lt;PortalNetworkConfiguration&gt; networkConfigurations = new ArrayList&lt;&gt;(portal.getNetworkConfigurations());</b>
+<b class="nc"><i class="no-highlight">39</i>&nbsp;		networkConfigurations.forEach(n -&gt; n.setConnectionTimeout(connectionTimeout));</b>
+<b class="nc"><i class="no-highlight">40</i>&nbsp;		portal.setNetworkConfigurations(new HashSet&lt;&gt;(networkConfigurations));</b>
+<b class="nc"><i class="no-highlight">41</i>&nbsp;		portalNetworkConfigurationDAO.saveAll(networkConfigurations);</b>
+<b class="nc"><i class="no-highlight">42</i>&nbsp;		portalDAO.save(portal);</b>
+<i class="no-highlight">43</i>&nbsp;	}
+<i class="no-highlight">44</i>&nbsp;
+<i class="no-highlight">45</i>&nbsp;	public ConnectionsPage connectionsPage(Long portalId) {
+<b class="nc"><i class="no-highlight">46</i>&nbsp;		ArrayList&lt;ConnectedUser&gt; connectedUsers = connectedUsers(portalId);</b>
+<b class="nc"><i class="no-highlight">47</i>&nbsp;		Optional&lt;Integer&gt; connectionTimeout = portalNetworkConfigurationDAO.getConnectionTimeout(portalId);</b>
+<b class="nc"><i class="no-highlight">48</i>&nbsp;		return new ConnectionsPage(connectedUsers, connectionTimeout);</b>
+<i class="no-highlight">49</i>&nbsp;	}
+<i class="no-highlight">50</i>&nbsp;
+<i class="no-highlight">51</i>&nbsp;	public PortalNetworkConfiguration networkConfiguration(Long portalId) {
+<b class="fc"><i class="no-highlight">52</i>&nbsp;		return portalNetworkConfigurationDAO.findForPortal(portalId);</b>
+<i class="no-highlight">53</i>&nbsp;	}
+<i class="no-highlight">54</i>&nbsp;
+<i class="no-highlight">55</i>&nbsp;	public ArrayList&lt;ConnectedUser&gt; connectedUsers(Long portalId) {
+<b class="fc"><i class="no-highlight">56</i>&nbsp;		List&lt;NetworkUserConnectionLog&gt; logsLastFifteenMinutes = connectionLogDAO.findForFilter(DatasetFilter.usersConnectedLastSixtyMinutesFilter(portalId), Instant.now());</b>
+<i class="no-highlight">57</i>&nbsp;
+<b class="fc"><i class="no-highlight">58</i>&nbsp;		List&lt;ConnectedUser&gt; connectedUsers = logsLastFifteenMinutes.stream()</b>
+<b class="fc"><i class="no-highlight">59</i>&nbsp;				.sorted(Comparator.comparing(NetworkUserConnectionLog::getConnectionStartDate).reversed())</b>
+<b class="fc"><i class="no-highlight">60</i>&nbsp;				.map(l -&gt; {</b>
+<b class="nc"><i class="no-highlight">61</i>&nbsp;					String formattedDate = l.getFormattedStartDate();</b>
+<b class="nc"><i class="no-highlight">62</i>&nbsp;					return new ConnectedUser(l.getNetworkUser().getId(), l.getNetworkUser().getName(), formattedDate, l.getUserDeviceMACAddress());</b>
+<i class="no-highlight">63</i>&nbsp;				})
+<b class="fc"><i class="no-highlight">64</i>&nbsp;				.limit(179L)</b>
+<b class="fc"><i class="no-highlight">65</i>&nbsp;				.collect(Collectors.toList());</b>
+<b class="fc"><i class="no-highlight">66</i>&nbsp;		map.put(portalId.toString(), connectedUsers.size());</b>
+<i class="no-highlight">67</i>&nbsp;
+<b class="fc"><i class="no-highlight">68</i>&nbsp;		return (ArrayList) connectedUsers;</b>
+<i class="no-highlight">69</i>&nbsp;	}
+<i class="no-highlight">70</i>&nbsp;
+<i class="no-highlight">71</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-08-27 21:21</div>
+</div>
+</body>
+</html>

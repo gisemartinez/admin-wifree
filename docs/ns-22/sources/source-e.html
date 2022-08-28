@@ -1,0 +1,185 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > side_navigation</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">views.html.parts</a>
+</div>
+
+<h1>Coverage Summary for Class: side_navigation (views.html.parts)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">side_navigation$</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (3/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (12/15)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (3/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (12/15)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;
+<i class="no-highlight">2</i>&nbsp;package views.html.parts
+<i class="no-highlight">3</i>&nbsp;
+<i class="no-highlight">4</i>&nbsp;import _root_.play.twirl.api.TwirlFeatureImports._
+<i class="no-highlight">5</i>&nbsp;import _root_.play.twirl.api.TwirlHelperImports._
+<i class="no-highlight">6</i>&nbsp;import _root_.play.twirl.api.Html
+<i class="no-highlight">7</i>&nbsp;import _root_.play.twirl.api.JavaScript
+<i class="no-highlight">8</i>&nbsp;import _root_.play.twirl.api.Txt
+<i class="no-highlight">9</i>&nbsp;import _root_.play.twirl.api.Xml
+<i class="no-highlight">10</i>&nbsp;import models._
+<i class="no-highlight">11</i>&nbsp;import controllers._
+<i class="no-highlight">12</i>&nbsp;import play.api.i18n._
+<i class="no-highlight">13</i>&nbsp;import views.html._
+<i class="no-highlight">14</i>&nbsp;import play.api.templates.PlayMagic._
+<i class="no-highlight">15</i>&nbsp;import java.lang._
+<i class="no-highlight">16</i>&nbsp;import java.util._
+<i class="no-highlight">17</i>&nbsp;import scala.collection.JavaConverters._
+<i class="no-highlight">18</i>&nbsp;import play.core.j.PlayMagicForJava._
+<i class="no-highlight">19</i>&nbsp;import play.mvc._
+<i class="no-highlight">20</i>&nbsp;import play.api.data.Field
+<i class="no-highlight">21</i>&nbsp;import play.mvc.Http.Context.Implicit._
+<i class="no-highlight">22</i>&nbsp;import play.data._
+<i class="no-highlight">23</i>&nbsp;import play.core.j.PlayFormsMagicForJava._
+<i class="no-highlight">24</i>&nbsp;/*7.2*/import org.pac4j.core.profile.CommonProfile
+<i class="no-highlight">25</i>&nbsp;
+<b class="fc"><i class="no-highlight">26</i>&nbsp;object side_navigation extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template4[CommonProfile,Boolean,Boolean,Boolean,play.twirl.api.HtmlFormat.Appendable] {</b>
+<i class="no-highlight">27</i>&nbsp;
+<i class="no-highlight">28</i>&nbsp;  /**/
+<i class="no-highlight">29</i>&nbsp;  def apply/*9.2*/(profile: CommonProfile, portalIsDefined: Boolean, socialLoginEnabled: Boolean, surveysEnabled: Boolean):play.twirl.api.HtmlFormat.Appendable = {
+<b class="fc"><i class="no-highlight">30</i>&nbsp;    _display_ {</b>
+<i class="no-highlight">31</i>&nbsp;      {
+<i class="no-highlight">32</i>&nbsp;
+<b class="fc"><i class="no-highlight">33</i>&nbsp;def /*11.2*/username/*11.10*/ = {{profile.getAttribute(&quot;realName&quot;).toString}};</b>
+<b class="fc"><i class="no-highlight">34</i>&nbsp;Seq[Any](format.raw/*10.1*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">35</i>&nbsp;&quot;&quot;&quot;),format.raw/*11.57*/(&quot;&quot;&quot;</b>
+<i class="no-highlight">36</i>&nbsp;
+<b class="fc"><i class="no-highlight">37</i>&nbsp;&quot;&quot;&quot;),format.raw/*13.1*/(&quot;&quot;&quot;&lt;div class=&quot;col-md-3 left_col&quot;&gt;</b>
+<i class="no-highlight">38</i>&nbsp;    &lt;div class=&quot;left_col scroll-view&quot;&gt;
+<i class="no-highlight">39</i>&nbsp;
+<b class="fc"><i class="no-highlight">40</i>&nbsp;        &quot;&quot;&quot;),_display_(/*16.10*/parts/*16.15*/.menu_site_title()),format.raw/*16.33*/(&quot;&quot;&quot;</b>
+<i class="no-highlight">41</i>&nbsp;
+<b class="fc"><i class="no-highlight">42</i>&nbsp;        &quot;&quot;&quot;),_display_(/*18.10*/parts/*18.15*/.menu_profile_quickinfo(username)),format.raw/*18.48*/(&quot;&quot;&quot;</b>
+<i class="no-highlight">43</i>&nbsp;
+<b class="fc"><i class="no-highlight">44</i>&nbsp;        &quot;&quot;&quot;),format.raw/*20.9*/(&quot;&quot;&quot;&lt;br/&gt;</b>
+<i class="no-highlight">45</i>&nbsp;
+<b class="fc"><i class="no-highlight">46</i>&nbsp;        &quot;&quot;&quot;),_display_(/*22.10*/parts/*22.15*/.sidebar_menu(portalIsDefined, socialLoginEnabled, surveysEnabled)),format.raw/*22.81*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">47</i>&nbsp;    &quot;&quot;&quot;),format.raw/*23.5*/(&quot;&quot;&quot;&lt;/div&gt;</b>
+<i class="no-highlight">48</i>&nbsp;&lt;/div&gt;
+<i class="no-highlight">49</i>&nbsp;
+<b class="fc"><i class="no-highlight">50</i>&nbsp;&quot;&quot;&quot;),_display_(/*26.2*/parts/*26.7*/.top_navigation(username)),format.raw/*26.32*/(&quot;&quot;&quot;</b>
+<i class="no-highlight">51</i>&nbsp;&quot;&quot;&quot;))
+<i class="no-highlight">52</i>&nbsp;      }
+<i class="no-highlight">53</i>&nbsp;    }
+<i class="no-highlight">54</i>&nbsp;  }
+<i class="no-highlight">55</i>&nbsp;
+<b class="nc"><i class="no-highlight">56</i>&nbsp;  def render(profile:CommonProfile,portalIsDefined:Boolean,socialLoginEnabled:Boolean,surveysEnabled:Boolean): play.twirl.api.HtmlFormat.Appendable = apply(profile,portalIsDefined,socialLoginEnabled,surveysEnabled)</b>
+<i class="no-highlight">57</i>&nbsp;
+<b class="nc"><i class="no-highlight">58</i>&nbsp;  def f:((CommonProfile,Boolean,Boolean,Boolean) =&gt; play.twirl.api.HtmlFormat.Appendable) = (profile,portalIsDefined,socialLoginEnabled,surveysEnabled) =&gt; apply(profile,portalIsDefined,socialLoginEnabled,surveysEnabled)</b>
+<i class="no-highlight">59</i>&nbsp;
+<b class="nc"><i class="no-highlight">60</i>&nbsp;  def ref: this.type = this</b>
+<i class="no-highlight">61</i>&nbsp;
+<i class="no-highlight">62</i>&nbsp;}
+<i class="no-highlight">63</i>&nbsp;
+<i class="no-highlight">64</i>&nbsp;
+<i class="no-highlight">65</i>&nbsp;              /*
+<i class="no-highlight">66</i>&nbsp;                  -- GENERATED --
+<i class="no-highlight">67</i>&nbsp;                  SOURCE: app/views/parts/side_navigation.scala.html
+<i class="no-highlight">68</i>&nbsp;                  HASH: c00f103ece17d1f3fb9240a37036068a8d4be810
+<i class="no-highlight">69</i>&nbsp;                  MATRIX: 657-&gt;255|1046-&gt;301|1229-&gt;408|1246-&gt;416|1323-&gt;406|1352-&gt;463|1381-&gt;465|1489-&gt;546|1503-&gt;551|1542-&gt;569|1580-&gt;580|1594-&gt;585|1648-&gt;618|1685-&gt;628|1728-&gt;644|1742-&gt;649|1829-&gt;715|1861-&gt;720|1903-&gt;736|1916-&gt;741|1962-&gt;766
+<i class="no-highlight">70</i>&nbsp;                  LINES: 24-&gt;7|29-&gt;9|33-&gt;11|33-&gt;11|34-&gt;10|35-&gt;11|37-&gt;13|40-&gt;16|40-&gt;16|40-&gt;16|42-&gt;18|42-&gt;18|42-&gt;18|44-&gt;20|46-&gt;22|46-&gt;22|46-&gt;22|47-&gt;23|50-&gt;26|50-&gt;26|50-&gt;26
+<i class="no-highlight">71</i>&nbsp;                  -- GENERATED --
+<i class="no-highlight">72</i>&nbsp;              */
+<i class="no-highlight">73</i>&nbsp;          
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-08-27 21:21</div>
+</div>
+</body>
+</html>
