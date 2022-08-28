@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > ServiceType</title>
+  <title>Coverage Report > menu_footer_buttons</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -17,18 +17,15 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">services.core</a>
+    <a href="../index.html">views.html.parts</a>
 </div>
 
-<h1>Coverage Summary for Class: ServiceType (services.core)</h1>
+<h1>Coverage Summary for Class: menu_footer_buttons (views.html.parts)</h1>
 
 <table class="coverageStats">
+
 <tr>
   <th class="name">Class</th>
-<th class="coverageStat 
-">
-  Class, %
-</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -38,14 +35,33 @@ Current scope:     <a href="../../index.html">all classes</a>
   Line, %
 </th>
 </tr>
+  <tr>
+    <td class="name">menu_footer_buttons$</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+  </tr>
 <tr>
-  <td class="name">ServiceType</td>
+  <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
     0%
   </span>
   <span class="absValue">
-    (0/1)
+    (0/5)
   </span>
 </td>
 <td class="coverageStat">
@@ -53,19 +69,10 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/1)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/2)
+    (0/7)
   </span>
 </td>
 </tr>
-
 </table>
 
 <br/>
@@ -73,13 +80,77 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package services.core;
-<i class="no-highlight">2</i>&nbsp;
-<b class="nc"><i class="no-highlight">3</i>&nbsp;public enum ServiceType {</b>
-<i class="no-highlight">4</i>&nbsp;	
-<b class="nc"><i class="no-highlight">5</i>&nbsp;	TESTING_SERVICE</b>
-<i class="no-highlight">6</i>&nbsp;	
-<i class="no-highlight">7</i>&nbsp;}
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;
+<i class="no-highlight">2</i>&nbsp;package views.html.parts
+<i class="no-highlight">3</i>&nbsp;
+<i class="no-highlight">4</i>&nbsp;import _root_.play.twirl.api.TwirlFeatureImports._
+<i class="no-highlight">5</i>&nbsp;import _root_.play.twirl.api.TwirlHelperImports._
+<i class="no-highlight">6</i>&nbsp;import _root_.play.twirl.api.Html
+<i class="no-highlight">7</i>&nbsp;import _root_.play.twirl.api.JavaScript
+<i class="no-highlight">8</i>&nbsp;import _root_.play.twirl.api.Txt
+<i class="no-highlight">9</i>&nbsp;import _root_.play.twirl.api.Xml
+<i class="no-highlight">10</i>&nbsp;import models._
+<i class="no-highlight">11</i>&nbsp;import controllers._
+<i class="no-highlight">12</i>&nbsp;import play.api.i18n._
+<i class="no-highlight">13</i>&nbsp;import views.html._
+<i class="no-highlight">14</i>&nbsp;import play.api.templates.PlayMagic._
+<i class="no-highlight">15</i>&nbsp;import java.lang._
+<i class="no-highlight">16</i>&nbsp;import java.util._
+<i class="no-highlight">17</i>&nbsp;import scala.collection.JavaConverters._
+<i class="no-highlight">18</i>&nbsp;import play.core.j.PlayMagicForJava._
+<i class="no-highlight">19</i>&nbsp;import play.mvc._
+<i class="no-highlight">20</i>&nbsp;import play.api.data.Field
+<i class="no-highlight">21</i>&nbsp;import play.mvc.Http.Context.Implicit._
+<i class="no-highlight">22</i>&nbsp;import play.data._
+<i class="no-highlight">23</i>&nbsp;import play.core.j.PlayFormsMagicForJava._
+<i class="no-highlight">24</i>&nbsp;
+<b class="nc"><i class="no-highlight">25</i>&nbsp;object menu_footer_buttons extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template0[play.twirl.api.HtmlFormat.Appendable] {</b>
+<i class="no-highlight">26</i>&nbsp;
+<i class="no-highlight">27</i>&nbsp;  /**/
+<i class="no-highlight">28</i>&nbsp;  def apply/*1.2*/():play.twirl.api.HtmlFormat.Appendable = {
+<b class="nc"><i class="no-highlight">29</i>&nbsp;    _display_ {</b>
+<i class="no-highlight">30</i>&nbsp;      {
+<i class="no-highlight">31</i>&nbsp;
+<i class="no-highlight">32</i>&nbsp;
+<b class="nc"><i class="no-highlight">33</i>&nbsp;Seq[Any](format.raw/*2.1*/(&quot;&quot;&quot;</b>
+<b class="nc"><i class="no-highlight">34</i>&nbsp;&quot;&quot;&quot;),format.raw/*3.1*/(&quot;&quot;&quot;&lt;!-- /menu footer buttons --&gt;</b>
+<i class="no-highlight">35</i>&nbsp;&lt;div class=&quot;sidebar-footer hidden-small&quot;&gt;
+<i class="no-highlight">36</i>&nbsp;	&lt;a data-toggle=&quot;tooltip&quot; data-placement=&quot;top&quot; title=&quot;Settings&quot;&gt;
+<i class="no-highlight">37</i>&nbsp;		&lt;span class=&quot;glyphicon glyphicon-cog&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+<i class="no-highlight">38</i>&nbsp;	&lt;/a&gt;
+<i class="no-highlight">39</i>&nbsp;	&lt;a data-toggle=&quot;tooltip&quot; data-placement=&quot;top&quot; title=&quot;FullScreen&quot;&gt;
+<i class="no-highlight">40</i>&nbsp;		&lt;span class=&quot;glyphicon glyphicon-fullscreen&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+<i class="no-highlight">41</i>&nbsp;	&lt;/a&gt;
+<i class="no-highlight">42</i>&nbsp;	&lt;a data-toggle=&quot;tooltip&quot; data-placement=&quot;top&quot; title=&quot;Lock&quot;&gt;
+<i class="no-highlight">43</i>&nbsp;		&lt;span class=&quot;glyphicon glyphicon-eye-close&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+<i class="no-highlight">44</i>&nbsp;	&lt;/a&gt;
+<i class="no-highlight">45</i>&nbsp;	&lt;a data-toggle=&quot;tooltip&quot; data-placement=&quot;top&quot; title=&quot;Logout&quot; href=&quot;/logout&quot;&gt;
+<i class="no-highlight">46</i>&nbsp;		&lt;span class=&quot;glyphicon glyphicon-off&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+<i class="no-highlight">47</i>&nbsp;	&lt;/a&gt;
+<i class="no-highlight">48</i>&nbsp;&lt;/div&gt;
+<i class="no-highlight">49</i>&nbsp;&lt;!-- /menu footer buttons --&gt;&quot;&quot;&quot;))
+<i class="no-highlight">50</i>&nbsp;      }
+<i class="no-highlight">51</i>&nbsp;    }
+<i class="no-highlight">52</i>&nbsp;  }
+<i class="no-highlight">53</i>&nbsp;
+<b class="nc"><i class="no-highlight">54</i>&nbsp;  def render(): play.twirl.api.HtmlFormat.Appendable = apply()</b>
+<i class="no-highlight">55</i>&nbsp;
+<b class="nc"><i class="no-highlight">56</i>&nbsp;  def f:(() =&gt; play.twirl.api.HtmlFormat.Appendable) = () =&gt; apply()</b>
+<i class="no-highlight">57</i>&nbsp;
+<b class="nc"><i class="no-highlight">58</i>&nbsp;  def ref: this.type = this</b>
+<i class="no-highlight">59</i>&nbsp;
+<i class="no-highlight">60</i>&nbsp;}
+<i class="no-highlight">61</i>&nbsp;
+<i class="no-highlight">62</i>&nbsp;
+<i class="no-highlight">63</i>&nbsp;              /*
+<i class="no-highlight">64</i>&nbsp;                  -- GENERATED --
+<i class="no-highlight">65</i>&nbsp;                  SOURCE: app/views/parts/menu_footer_buttons.scala.html
+<i class="no-highlight">66</i>&nbsp;                  HASH: c780320176e759527a6193427afdfd71b90b1b6f
+<i class="no-highlight">67</i>&nbsp;                  MATRIX: 961-&gt;1|1057-&gt;4|1084-&gt;5
+<i class="no-highlight">68</i>&nbsp;                  LINES: 28-&gt;1|33-&gt;2|34-&gt;3
+<i class="no-highlight">69</i>&nbsp;                  -- GENERATED --
+<i class="no-highlight">70</i>&nbsp;              */
+<i class="no-highlight">71</i>&nbsp;          
 </div>
 </pre>
 </div>
@@ -106,7 +177,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-08-27 21:21</div>
+    <div style="float:right;">generated on 2022-08-28 18:36</div>
 </div>
 </body>
 </html>

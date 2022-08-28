@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > ReverseSocialLoginKeysController</title>
+  <title>Coverage Report > ReversePortalSettingsController</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -20,7 +20,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">controllers.admin</a>
 </div>
 
-<h1>Coverage Summary for Class: ReverseSocialLoginKeysController (controllers.admin)</h1>
+<h1>Coverage Summary for Class: ReversePortalSettingsController (controllers.admin)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -39,7 +39,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">ReverseSocialLoginKeysController</td>
+  <td class="name">ReversePortalSettingsController</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -75,7 +75,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;// @GENERATOR:play-routes-compiler
 <i class="no-highlight">2</i>&nbsp;// @SOURCE:/Users/gimartinez/personal/wifree/conf/routes
-<i class="no-highlight">3</i>&nbsp;// @DATE:Fri Aug 19 08:55:29 CEST 2022
+<i class="no-highlight">3</i>&nbsp;// @DATE:Sun Aug 28 17:50:10 CEST 2022
 <i class="no-highlight">4</i>&nbsp;
 <i class="no-highlight">5</i>&nbsp;import play.api.mvc.Call
 <i class="no-highlight">6</i>&nbsp;
@@ -87,16 +87,16 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">12</i>&nbsp;package controllers.admin {
 <i class="no-highlight">13</i>&nbsp;
 <i class="no-highlight">14</i>&nbsp;  // @LINE:23
-<i class="no-highlight">15</i>&nbsp;  class ReversePortalSettingsController(_prefix: =&gt; String) {
+<b class="fc"><i class="no-highlight">15</i>&nbsp;  class ReversePortalSettingsController(_prefix: =&gt; String) {</b>
 <i class="no-highlight">16</i>&nbsp;    def _defaultPrefix: String = {
-<i class="no-highlight">17</i>&nbsp;      if (_prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;
+<b class="fc"><i class="no-highlight">17</i>&nbsp;      if (_prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;</b>
 <i class="no-highlight">18</i>&nbsp;    }
 <i class="no-highlight">19</i>&nbsp;
 <i class="no-highlight">20</i>&nbsp;  
 <i class="no-highlight">21</i>&nbsp;    // @LINE:23
 <i class="no-highlight">22</i>&nbsp;    def savePortalOptions(): Call = {
 <i class="no-highlight">23</i>&nbsp;      
-<i class="no-highlight">24</i>&nbsp;      Call(&quot;POST&quot;, _prefix + { _defaultPrefix } + &quot;manage/portal-settings&quot;)
+<b class="fc"><i class="no-highlight">24</i>&nbsp;      Call(&quot;POST&quot;, _prefix + { _defaultPrefix } + &quot;manage/portal-settings&quot;)</b>
 <i class="no-highlight">25</i>&nbsp;    }
 <i class="no-highlight">26</i>&nbsp;  
 <i class="no-highlight">27</i>&nbsp;  }
@@ -104,20 +104,20 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">29</i>&nbsp;  // @LINE:22
 <b class="fc"><i class="no-highlight">30</i>&nbsp;  class ReverseSocialLoginKeysController(_prefix: =&gt; String) {</b>
 <i class="no-highlight">31</i>&nbsp;    def _defaultPrefix: String = {
-<b class="fc"><i class="no-highlight">32</i>&nbsp;      if (_prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;</b>
+<i class="no-highlight">32</i>&nbsp;      if (_prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;
 <i class="no-highlight">33</i>&nbsp;    }
 <i class="no-highlight">34</i>&nbsp;
 <i class="no-highlight">35</i>&nbsp;  
 <i class="no-highlight">36</i>&nbsp;    // @LINE:22
 <i class="no-highlight">37</i>&nbsp;    def saveSocialKeys(): Call = {
 <i class="no-highlight">38</i>&nbsp;      
-<b class="fc"><i class="no-highlight">39</i>&nbsp;      Call(&quot;POST&quot;, _prefix + { _defaultPrefix } + &quot;manage/social-login&quot;)</b>
+<i class="no-highlight">39</i>&nbsp;      Call(&quot;POST&quot;, _prefix + { _defaultPrefix } + &quot;manage/social-login&quot;)
 <i class="no-highlight">40</i>&nbsp;    }
 <i class="no-highlight">41</i>&nbsp;  
 <i class="no-highlight">42</i>&nbsp;  }
 <i class="no-highlight">43</i>&nbsp;
 <i class="no-highlight">44</i>&nbsp;  // @LINE:13
-<b class="fc"><i class="no-highlight">45</i>&nbsp;  class ReverseAnalyticsController(_prefix: =&gt; String) {</b>
+<i class="no-highlight">45</i>&nbsp;  class ReverseAnalyticsController(_prefix: =&gt; String) {
 <i class="no-highlight">46</i>&nbsp;    def _defaultPrefix: String = {
 <i class="no-highlight">47</i>&nbsp;      if (_prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;
 <i class="no-highlight">48</i>&nbsp;    }
@@ -237,7 +237,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-08-27 21:21</div>
+    <div style="float:right;">generated on 2022-08-28 18:36</div>
 </div>
 </body>
 </html>

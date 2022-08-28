@@ -1,0 +1,208 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > sidebar_menu</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">views.html.parts</a>
+</div>
+
+<h1>Coverage Summary for Class: sidebar_menu (views.html.parts)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">sidebar_menu$</td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (2/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    87.9%
+  </span>
+  <span class="absValue">
+    (29/33)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (2/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    87.9%
+  </span>
+  <span class="absValue">
+    (29/33)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;
+<i class="no-highlight">2</i>&nbsp;package views.html.parts
+<i class="no-highlight">3</i>&nbsp;
+<i class="no-highlight">4</i>&nbsp;import _root_.play.twirl.api.TwirlFeatureImports._
+<i class="no-highlight">5</i>&nbsp;import _root_.play.twirl.api.TwirlHelperImports._
+<i class="no-highlight">6</i>&nbsp;import _root_.play.twirl.api.Html
+<i class="no-highlight">7</i>&nbsp;import _root_.play.twirl.api.JavaScript
+<i class="no-highlight">8</i>&nbsp;import _root_.play.twirl.api.Txt
+<i class="no-highlight">9</i>&nbsp;import _root_.play.twirl.api.Xml
+<i class="no-highlight">10</i>&nbsp;import models._
+<i class="no-highlight">11</i>&nbsp;import controllers._
+<i class="no-highlight">12</i>&nbsp;import play.api.i18n._
+<i class="no-highlight">13</i>&nbsp;import views.html._
+<i class="no-highlight">14</i>&nbsp;import play.api.templates.PlayMagic._
+<i class="no-highlight">15</i>&nbsp;import java.lang._
+<i class="no-highlight">16</i>&nbsp;import java.util._
+<i class="no-highlight">17</i>&nbsp;import scala.collection.JavaConverters._
+<i class="no-highlight">18</i>&nbsp;import play.core.j.PlayMagicForJava._
+<i class="no-highlight">19</i>&nbsp;import play.mvc._
+<i class="no-highlight">20</i>&nbsp;import play.api.data.Field
+<i class="no-highlight">21</i>&nbsp;import play.mvc.Http.Context.Implicit._
+<i class="no-highlight">22</i>&nbsp;import play.data._
+<i class="no-highlight">23</i>&nbsp;import play.core.j.PlayFormsMagicForJava._
+<i class="no-highlight">24</i>&nbsp;/*1.2*/import models.Portal;
+<i class="no-highlight">25</i>&nbsp;
+<b class="fc"><i class="no-highlight">26</i>&nbsp;object sidebar_menu extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template3[Boolean,Boolean,Boolean,play.twirl.api.HtmlFormat.Appendable] {</b>
+<i class="no-highlight">27</i>&nbsp;
+<i class="no-highlight">28</i>&nbsp;  /**/
+<b class="nc"><i class="no-highlight">29</i>&nbsp;  def apply/*3.2*/(isPortalDefined: Boolean, socialLogin: Boolean = false, surveyLogin: Boolean = false):play.twirl.api.HtmlFormat.Appendable = {</b>
+<b class="fc"><i class="no-highlight">30</i>&nbsp;    _display_ {</b>
+<i class="no-highlight">31</i>&nbsp;      {
+<i class="no-highlight">32</i>&nbsp;
+<i class="no-highlight">33</i>&nbsp;
+<b class="fc"><i class="no-highlight">34</i>&nbsp;Seq[Any](format.raw/*4.1*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">35</i>&nbsp;&quot;&quot;&quot;),format.raw/*5.1*/(&quot;&quot;&quot;&lt;!-- sidebar menu --&gt;</b>
+<i class="no-highlight">36</i>&nbsp;&lt;div id=&quot;sidebar-menu&quot; class=&quot;main_menu_side hidden-print main_menu&quot;&gt;
+<i class="no-highlight">37</i>&nbsp;
+<i class="no-highlight">38</i>&nbsp;	&lt;div class=&quot;menu_section&quot;&gt;
+<i class="no-highlight">39</i>&nbsp;		&lt;h3&gt;General&lt;/h3&gt;
+<i class="no-highlight">40</i>&nbsp;		&lt;ul class=&quot;nav side-menu&quot;&gt;
+<b class="fc"><i class="no-highlight">41</i>&nbsp;			&quot;&quot;&quot;),_display_(/*11.5*/if( isPortalDefined )/*11.26*/{_display_(Seq[Any](format.raw/*11.27*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">42</i>&nbsp;				&quot;&quot;&quot;),format.raw/*12.5*/(&quot;&quot;&quot;&lt;li&gt;&lt;a href=&quot;&quot;&quot;&quot;),_display_(/*12.19*/routes/*12.25*/.AdminAppController.dashboard),format.raw/*12.54*/(&quot;&quot;&quot;&quot;&gt;&lt;i class=&quot;fa fa-wifi&quot;&gt;&lt;/i&gt; &quot;&quot;&quot;),_display_(/*12.84*/Messages(&quot;menu.sidebar.connections&quot;)),format.raw/*12.120*/(&quot;&quot;&quot; &quot;&quot;&quot;),format.raw/*12.121*/(&quot;&quot;&quot;&lt;/a&gt;&lt;/li&gt;</b>
+<b class="fc"><i class="no-highlight">43</i>&nbsp;			&quot;&quot;&quot;)))}),format.raw/*13.5*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">44</i>&nbsp;			&quot;&quot;&quot;),format.raw/*14.4*/(&quot;&quot;&quot;&lt;li&gt;&lt;a&gt;&lt;i class=&quot;fa fa-gears&quot;&gt;&lt;/i&gt;</b>
+<b class="fc"><i class="no-highlight">45</i>&nbsp;				&quot;&quot;&quot;),_display_(/*15.6*/Messages(&quot;menu.sidebar.portal-settings&quot;)),format.raw/*15.46*/(&quot;&quot;&quot; &quot;&quot;&quot;),format.raw/*15.47*/(&quot;&quot;&quot;&lt;span class=&quot;fa fa-chevron-down&quot;&gt;&lt;/span&gt;&lt;/a&gt;</b>
+<i class="no-highlight">46</i>&nbsp;				&lt;ul class=&quot;nav child_menu&quot; style=&quot;display: none&quot;&gt;
+<b class="fc"><i class="no-highlight">47</i>&nbsp;					&lt;li&gt;&lt;a href=&quot;&quot;&quot;&quot;),_display_(/*17.20*/routes/*17.26*/.AdminAppController.portalSettings),format.raw/*17.60*/(&quot;&quot;&quot;&quot;&gt;&quot;&quot;&quot;),_display_(/*17.63*/Messages(&quot;menu.sidebar.portal-settings.portal.manage&quot;)),format.raw/*17.117*/(&quot;&quot;&quot;&lt;/a&gt;&lt;/li&gt;</b>
+<b class="fc"><i class="no-highlight">48</i>&nbsp;					&quot;&quot;&quot;),_display_(/*18.7*/if( socialLogin )/*18.24*/{_display_(Seq[Any](format.raw/*18.25*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">49</i>&nbsp;						&quot;&quot;&quot;),format.raw/*19.7*/(&quot;&quot;&quot;&lt;li&gt;&lt;a href=&quot;&quot;&quot;&quot;),_display_(/*19.21*/routes/*19.27*/.AdminAppController.loginSettings),format.raw/*19.60*/(&quot;&quot;&quot;&quot;&gt;&quot;&quot;&quot;),_display_(/*19.63*/Messages(&quot;menu.sidebar.portal-settings.socialLogin.manage&quot;)),format.raw/*19.122*/(&quot;&quot;&quot;&lt;/a&gt;&lt;/li&gt;</b>
+<b class="fc"><i class="no-highlight">50</i>&nbsp;					&quot;&quot;&quot;)))}),format.raw/*20.7*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">51</i>&nbsp;					&quot;&quot;&quot;),_display_(/*21.7*/if( surveyLogin )/*21.24*/{_display_(Seq[Any](format.raw/*21.25*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">52</i>&nbsp;						&quot;&quot;&quot;),format.raw/*22.7*/(&quot;&quot;&quot;&lt;li&gt;&lt;a href=&quot;&quot;&quot;&quot;),_display_(/*22.21*/controllers/*22.32*/.admin.routes.SurveysController.surveys),format.raw/*22.71*/(&quot;&quot;&quot;&quot;&gt;&quot;&quot;&quot;),_display_(/*22.74*/Messages(&quot;menu.sidebar.surveys.manage&quot;)),format.raw/*22.113*/(&quot;&quot;&quot;&lt;/a&gt;&lt;/li&gt;</b>
+<b class="fc"><i class="no-highlight">53</i>&nbsp;					&quot;&quot;&quot;)))}),format.raw/*23.7*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">54</i>&nbsp;				&quot;&quot;&quot;),format.raw/*24.5*/(&quot;&quot;&quot;&lt;/ul&gt;</b>
+<i class="no-highlight">55</i>&nbsp;			&lt;/li&gt;
+<b class="fc"><i class="no-highlight">56</i>&nbsp;			&quot;&quot;&quot;),_display_(/*26.5*/if( isPortalDefined )/*26.26*/{_display_(Seq[Any](format.raw/*26.27*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">57</i>&nbsp;				&quot;&quot;&quot;),format.raw/*27.5*/(&quot;&quot;&quot;&lt;li&gt;&lt;a&gt;&lt;i class=&quot;fa fa-stack-exchange&quot;&gt;&lt;/i&gt;</b>
+<b class="fc"><i class="no-highlight">58</i>&nbsp;					&quot;&quot;&quot;),_display_(/*28.7*/Messages(&quot;menu.sidebar.data&quot;)),format.raw/*28.36*/(&quot;&quot;&quot; &quot;&quot;&quot;),format.raw/*28.37*/(&quot;&quot;&quot;&lt;span class=&quot;fa fa-chevron-down&quot;&gt;&lt;/span&gt;&lt;/a&gt;</b>
+<i class="no-highlight">59</i>&nbsp;					&lt;ul class=&quot;nav child_menu&quot; style=&quot;display: none&quot;&gt;
+<b class="fc"><i class="no-highlight">60</i>&nbsp;						&quot;&quot;&quot;),_display_(/*30.8*/if( socialLogin )/*30.25*/{_display_(Seq[Any](format.raw/*30.26*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">61</i>&nbsp;						&quot;&quot;&quot;),format.raw/*31.7*/(&quot;&quot;&quot;&lt;li&gt;&lt;a href=&quot;&quot;&quot;&quot;),_display_(/*31.21*/routes/*31.27*/.AdminAppController.allCollectedSocialData),format.raw/*31.69*/(&quot;&quot;&quot;&quot;&gt;&quot;&quot;&quot;),_display_(/*31.72*/Messages(&quot;menu.sidebar.data.redes&quot;)),format.raw/*31.107*/(&quot;&quot;&quot;&lt;/a&gt;&lt;/li&gt;</b>
+<b class="fc"><i class="no-highlight">62</i>&nbsp;						&quot;&quot;&quot;)))}),format.raw/*32.8*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">63</i>&nbsp;						&quot;&quot;&quot;),_display_(/*33.8*/if( surveyLogin )/*33.25*/{_display_(Seq[Any](format.raw/*33.26*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">64</i>&nbsp;						&quot;&quot;&quot;),format.raw/*34.7*/(&quot;&quot;&quot;&lt;li&gt;&lt;a href=&quot;&quot;&quot;&quot;),_display_(/*34.21*/controllers/*34.32*/.admin.routes.SurveysController.allSurveys),format.raw/*34.74*/(&quot;&quot;&quot;&quot;&gt;&quot;&quot;&quot;),_display_(/*34.77*/Messages(&quot;menu.sidebar.data.surveys&quot;)),format.raw/*34.114*/(&quot;&quot;&quot;&lt;/a&gt;&lt;/li&gt;</b>
+<b class="fc"><i class="no-highlight">65</i>&nbsp;						&quot;&quot;&quot;)))}),format.raw/*35.8*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">66</i>&nbsp;						&quot;&quot;&quot;),format.raw/*36.7*/(&quot;&quot;&quot;&lt;li&gt;&lt;a href=&quot;&quot;&quot;&quot;),_display_(/*36.21*/routes/*36.27*/.AdminAppController.analytics),format.raw/*36.56*/(&quot;&quot;&quot;&quot;&gt;&quot;&quot;&quot;),_display_(/*36.59*/Messages(&quot;menu.sidebar.data.visitas&quot;)),format.raw/*36.96*/(&quot;&quot;&quot; &quot;&quot;&quot;),format.raw/*36.97*/(&quot;&quot;&quot;&lt;/a&gt;&lt;/li&gt;</b>
+<i class="no-highlight">67</i>&nbsp;					&lt;/ul&gt;
+<i class="no-highlight">68</i>&nbsp;				&lt;/li&gt;
+<b class="fc"><i class="no-highlight">69</i>&nbsp;			&quot;&quot;&quot;)))}),format.raw/*39.5*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">70</i>&nbsp;		&quot;&quot;&quot;),format.raw/*40.3*/(&quot;&quot;&quot;&lt;/ul&gt;</b>
+<i class="no-highlight">71</i>&nbsp;	&lt;/div&gt;
+<i class="no-highlight">72</i>&nbsp;
+<i class="no-highlight">73</i>&nbsp;&lt;/div&gt;
+<i class="no-highlight">74</i>&nbsp;&lt;!-- /sidebar menu --&gt;&quot;&quot;&quot;))
+<i class="no-highlight">75</i>&nbsp;      }
+<i class="no-highlight">76</i>&nbsp;    }
+<i class="no-highlight">77</i>&nbsp;  }
+<i class="no-highlight">78</i>&nbsp;
+<b class="nc"><i class="no-highlight">79</i>&nbsp;  def render(isPortalDefined:Boolean,socialLogin:Boolean,surveyLogin:Boolean): play.twirl.api.HtmlFormat.Appendable = apply(isPortalDefined,socialLogin,surveyLogin)</b>
+<i class="no-highlight">80</i>&nbsp;
+<b class="nc"><i class="no-highlight">81</i>&nbsp;  def f:((Boolean,Boolean,Boolean) =&gt; play.twirl.api.HtmlFormat.Appendable) = (isPortalDefined,socialLogin,surveyLogin) =&gt; apply(isPortalDefined,socialLogin,surveyLogin)</b>
+<i class="no-highlight">82</i>&nbsp;
+<b class="nc"><i class="no-highlight">83</i>&nbsp;  def ref: this.type = this</b>
+<i class="no-highlight">84</i>&nbsp;
+<i class="no-highlight">85</i>&nbsp;}
+<i class="no-highlight">86</i>&nbsp;
+<i class="no-highlight">87</i>&nbsp;
+<i class="no-highlight">88</i>&nbsp;              /*
+<i class="no-highlight">89</i>&nbsp;                  -- GENERATED --
+<i class="no-highlight">90</i>&nbsp;                  SOURCE: app/views/parts/sidebar_menu.scala.html
+<i class="no-highlight">91</i>&nbsp;                  HASH: 5c5f658718818abf2db544094ab18241fa4dd819
+<i class="no-highlight">92</i>&nbsp;                  MATRIX: 657-&gt;1|1007-&gt;25|1187-&gt;112|1214-&gt;113|1413-&gt;286|1443-&gt;307|1482-&gt;308|1514-&gt;313|1555-&gt;327|1570-&gt;333|1620-&gt;362|1677-&gt;392|1735-&gt;428|1765-&gt;429|1809-&gt;443|1840-&gt;447|1906-&gt;487|1967-&gt;527|1996-&gt;528|2141-&gt;646|2156-&gt;652|2211-&gt;686|2241-&gt;689|2317-&gt;743|2359-&gt;759|2385-&gt;776|2424-&gt;777|2458-&gt;784|2499-&gt;798|2514-&gt;804|2568-&gt;837|2598-&gt;840|2679-&gt;899|2725-&gt;915|2758-&gt;922|2784-&gt;939|2823-&gt;940|2857-&gt;947|2898-&gt;961|2918-&gt;972|2978-&gt;1011|3008-&gt;1014|3069-&gt;1053|3115-&gt;1069|3147-&gt;1074|3192-&gt;1093|3222-&gt;1114|3261-&gt;1115|3293-&gt;1120|3369-&gt;1170|3419-&gt;1199|3448-&gt;1200|3581-&gt;1307|3607-&gt;1324|3646-&gt;1325|3680-&gt;1332|3721-&gt;1346|3736-&gt;1352|3799-&gt;1394|3829-&gt;1397|3886-&gt;1432|3933-&gt;1449|3967-&gt;1457|3993-&gt;1474|4032-&gt;1475|4066-&gt;1482|4107-&gt;1496|4127-&gt;1507|4190-&gt;1549|4220-&gt;1552|4279-&gt;1589|4326-&gt;1606|4360-&gt;1613|4401-&gt;1627|4416-&gt;1633|4466-&gt;1662|4496-&gt;1665|4554-&gt;1702|4583-&gt;1703|4648-&gt;1738|4678-&gt;1741
+<i class="no-highlight">93</i>&nbsp;                  LINES: 24-&gt;1|29-&gt;3|34-&gt;4|35-&gt;5|41-&gt;11|41-&gt;11|41-&gt;11|42-&gt;12|42-&gt;12|42-&gt;12|42-&gt;12|42-&gt;12|42-&gt;12|42-&gt;12|43-&gt;13|44-&gt;14|45-&gt;15|45-&gt;15|45-&gt;15|47-&gt;17|47-&gt;17|47-&gt;17|47-&gt;17|47-&gt;17|48-&gt;18|48-&gt;18|48-&gt;18|49-&gt;19|49-&gt;19|49-&gt;19|49-&gt;19|49-&gt;19|49-&gt;19|50-&gt;20|51-&gt;21|51-&gt;21|51-&gt;21|52-&gt;22|52-&gt;22|52-&gt;22|52-&gt;22|52-&gt;22|52-&gt;22|53-&gt;23|54-&gt;24|56-&gt;26|56-&gt;26|56-&gt;26|57-&gt;27|58-&gt;28|58-&gt;28|58-&gt;28|60-&gt;30|60-&gt;30|60-&gt;30|61-&gt;31|61-&gt;31|61-&gt;31|61-&gt;31|61-&gt;31|61-&gt;31|62-&gt;32|63-&gt;33|63-&gt;33|63-&gt;33|64-&gt;34|64-&gt;34|64-&gt;34|64-&gt;34|64-&gt;34|64-&gt;34|65-&gt;35|66-&gt;36|66-&gt;36|66-&gt;36|66-&gt;36|66-&gt;36|66-&gt;36|66-&gt;36|69-&gt;39|70-&gt;40
+<i class="no-highlight">94</i>&nbsp;                  -- GENERATED --
+<i class="no-highlight">95</i>&nbsp;              */
+<i class="no-highlight">96</i>&nbsp;          
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-08-28 18:30</div>
+</div>
+</body>
+</html>

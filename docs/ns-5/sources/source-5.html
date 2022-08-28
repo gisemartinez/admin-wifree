@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > ReverseSurveysController</title>
+  <title>Coverage Report > SocialUserController</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -17,18 +17,15 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">controllers.admin.javascript</a>
+    <a href="../index.html">controllers.api</a>
 </div>
 
-<h1>Coverage Summary for Class: ReverseSurveysController (controllers.admin.javascript)</h1>
+<h1>Coverage Summary for Class: SocialUserController (controllers.api)</h1>
 
 <table class="coverageStats">
+
 <tr>
   <th class="name">Class</th>
-<th class="coverageStat 
-">
-  Class, %
-</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -39,33 +36,46 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">ReverseSurveysController</td>
+  <td class="name">SocialUserController</td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    80%
   </span>
   <span class="absValue">
-    (0/1)
+    (4/5)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    91.8%
   </span>
   <span class="absValue">
-    (0/11)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/39)
+    (45/49)
   </span>
 </td>
 </tr>
-
+  <tr>
+    <td class="name">SocialUserController$$FastClassByGuice$$9bd01bbf</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (4/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    91.8%
+  </span>
+  <span class="absValue">
+    (45/49)
+  </span>
+</td>
+</tr>
 </table>
 
 <br/>
@@ -73,201 +83,129 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;// @GENERATOR:play-routes-compiler
-<i class="no-highlight">2</i>&nbsp;// @SOURCE:/Users/gimartinez/personal/wifree/conf/routes
-<i class="no-highlight">3</i>&nbsp;// @DATE:Fri Aug 19 08:55:29 CEST 2022
-<i class="no-highlight">4</i>&nbsp;
-<i class="no-highlight">5</i>&nbsp;import play.api.routing.JavaScriptReverseRoute
-<i class="no-highlight">6</i>&nbsp;
-<i class="no-highlight">7</i>&nbsp;
-<i class="no-highlight">8</i>&nbsp;import _root_.controllers.Assets.Asset
-<i class="no-highlight">9</i>&nbsp;import _root_.play.libs.F
-<i class="no-highlight">10</i>&nbsp;
-<i class="no-highlight">11</i>&nbsp;// @LINE:12
-<i class="no-highlight">12</i>&nbsp;package controllers.admin.javascript {
-<i class="no-highlight">13</i>&nbsp;
-<i class="no-highlight">14</i>&nbsp;  // @LINE:23
-<i class="no-highlight">15</i>&nbsp;  class ReversePortalSettingsController(_prefix: =&gt; String) {
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package controllers.api;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import com.fasterxml.jackson.databind.JsonNode;
+<i class="no-highlight">4</i>&nbsp;import controllers.WiFreeController;
+<i class="no-highlight">5</i>&nbsp;import controllers.api.dto.NetworkUserDTO;
+<i class="no-highlight">6</i>&nbsp;import controllers.api.dto.UserAuthenticatedDTO;
+<i class="no-highlight">7</i>&nbsp;import daos.NetworkUserConnectionLogDAO;
+<i class="no-highlight">8</i>&nbsp;import daos.NetworkUserDAO;
+<i class="no-highlight">9</i>&nbsp;import daos.PortalDAO;
+<i class="no-highlight">10</i>&nbsp;import models.NetworkUser;
+<i class="no-highlight">11</i>&nbsp;import models.NetworkUserConnectionLog;
+<i class="no-highlight">12</i>&nbsp;import models.Portal;
+<i class="no-highlight">13</i>&nbsp;import models.types.Gender;
+<i class="no-highlight">14</i>&nbsp;import play.mvc.Result;
+<i class="no-highlight">15</i>&nbsp;import utils.DateHelper;
 <i class="no-highlight">16</i>&nbsp;
-<i class="no-highlight">17</i>&nbsp;    def _defaultPrefix: String = {
-<i class="no-highlight">18</i>&nbsp;      if (_prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;
-<i class="no-highlight">19</i>&nbsp;    }
-<i class="no-highlight">20</i>&nbsp;
-<i class="no-highlight">21</i>&nbsp;  
-<i class="no-highlight">22</i>&nbsp;    // @LINE:23
-<i class="no-highlight">23</i>&nbsp;    def savePortalOptions: JavaScriptReverseRoute = JavaScriptReverseRoute(
-<i class="no-highlight">24</i>&nbsp;      &quot;controllers.admin.PortalSettingsController.savePortalOptions&quot;,
-<i class="no-highlight">25</i>&nbsp;      &quot;&quot;&quot;
-<i class="no-highlight">26</i>&nbsp;        function() {
-<i class="no-highlight">27</i>&nbsp;          return _wA({method:&quot;POST&quot;, url:&quot;&quot;&quot;&quot; + _prefix + { _defaultPrefix } + &quot;&quot;&quot;&quot; + &quot;manage/portal-settings&quot;})
-<i class="no-highlight">28</i>&nbsp;        }
-<i class="no-highlight">29</i>&nbsp;      &quot;&quot;&quot;
-<i class="no-highlight">30</i>&nbsp;    )
-<i class="no-highlight">31</i>&nbsp;  
-<i class="no-highlight">32</i>&nbsp;  }
-<i class="no-highlight">33</i>&nbsp;
-<i class="no-highlight">34</i>&nbsp;  // @LINE:22
-<i class="no-highlight">35</i>&nbsp;  class ReverseSocialLoginKeysController(_prefix: =&gt; String) {
-<i class="no-highlight">36</i>&nbsp;
-<i class="no-highlight">37</i>&nbsp;    def _defaultPrefix: String = {
-<i class="no-highlight">38</i>&nbsp;      if (_prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;
-<i class="no-highlight">39</i>&nbsp;    }
+<i class="no-highlight">17</i>&nbsp;import javax.inject.Inject;
+<i class="no-highlight">18</i>&nbsp;import java.io.IOException;
+<i class="no-highlight">19</i>&nbsp;import java.time.Instant;
+<i class="no-highlight">20</i>&nbsp;import java.util.Optional;
+<i class="no-highlight">21</i>&nbsp;
+<i class="no-highlight">22</i>&nbsp;import static java.util.Optional.ofNullable;
+<i class="no-highlight">23</i>&nbsp;
+<b class="fc"><i class="no-highlight">24</i>&nbsp;public class SocialUserController extends WiFreeController {</b>
+<i class="no-highlight">25</i>&nbsp;
+<i class="no-highlight">26</i>&nbsp;    @Inject
+<i class="no-highlight">27</i>&nbsp;    private NetworkUserDAO networkUserDAO;
+<i class="no-highlight">28</i>&nbsp;
+<i class="no-highlight">29</i>&nbsp;    @Inject
+<i class="no-highlight">30</i>&nbsp;    private PortalDAO portalDAO;
+<i class="no-highlight">31</i>&nbsp;
+<i class="no-highlight">32</i>&nbsp;    @Inject
+<i class="no-highlight">33</i>&nbsp;    private NetworkUserConnectionLogDAO connectionLogDAO;
+<i class="no-highlight">34</i>&nbsp;
+<i class="no-highlight">35</i>&nbsp;    public Result saveUserConnected() throws IOException {
+<b class="fc"><i class="no-highlight">36</i>&nbsp;        logRequest();</b>
+<i class="no-highlight">37</i>&nbsp;
+<b class="fc"><i class="no-highlight">38</i>&nbsp;        JsonNode json = request().body().asJson();</b>
+<b class="fc"><i class="no-highlight">39</i>&nbsp;        UserAuthenticatedDTO userDTO = objectMapper.readValue(json.toString(), UserAuthenticatedDTO.class);</b>
 <i class="no-highlight">40</i>&nbsp;
-<i class="no-highlight">41</i>&nbsp;  
-<i class="no-highlight">42</i>&nbsp;    // @LINE:22
-<i class="no-highlight">43</i>&nbsp;    def saveSocialKeys: JavaScriptReverseRoute = JavaScriptReverseRoute(
-<i class="no-highlight">44</i>&nbsp;      &quot;controllers.admin.SocialLoginKeysController.saveSocialKeys&quot;,
-<i class="no-highlight">45</i>&nbsp;      &quot;&quot;&quot;
-<i class="no-highlight">46</i>&nbsp;        function() {
-<i class="no-highlight">47</i>&nbsp;          return _wA({method:&quot;POST&quot;, url:&quot;&quot;&quot;&quot; + _prefix + { _defaultPrefix } + &quot;&quot;&quot;&quot; + &quot;manage/social-login&quot;})
-<i class="no-highlight">48</i>&nbsp;        }
-<i class="no-highlight">49</i>&nbsp;      &quot;&quot;&quot;
-<i class="no-highlight">50</i>&nbsp;    )
-<i class="no-highlight">51</i>&nbsp;  
-<i class="no-highlight">52</i>&nbsp;  }
-<i class="no-highlight">53</i>&nbsp;
-<i class="no-highlight">54</i>&nbsp;  // @LINE:13
-<i class="no-highlight">55</i>&nbsp;  class ReverseAnalyticsController(_prefix: =&gt; String) {
-<i class="no-highlight">56</i>&nbsp;
-<i class="no-highlight">57</i>&nbsp;    def _defaultPrefix: String = {
-<i class="no-highlight">58</i>&nbsp;      if (_prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;
-<i class="no-highlight">59</i>&nbsp;    }
-<i class="no-highlight">60</i>&nbsp;
-<i class="no-highlight">61</i>&nbsp;  
-<i class="no-highlight">62</i>&nbsp;    // @LINE:13
-<i class="no-highlight">63</i>&nbsp;    def createAnalyticsQuery: JavaScriptReverseRoute = JavaScriptReverseRoute(
-<i class="no-highlight">64</i>&nbsp;      &quot;controllers.admin.AnalyticsController.createAnalyticsQuery&quot;,
-<i class="no-highlight">65</i>&nbsp;      &quot;&quot;&quot;
-<i class="no-highlight">66</i>&nbsp;        function() {
-<i class="no-highlight">67</i>&nbsp;          return _wA({method:&quot;POST&quot;, url:&quot;&quot;&quot;&quot; + _prefix + { _defaultPrefix } + &quot;&quot;&quot;&quot; + &quot;analytics/create-analytics-query&quot;})
-<i class="no-highlight">68</i>&nbsp;        }
-<i class="no-highlight">69</i>&nbsp;      &quot;&quot;&quot;
-<i class="no-highlight">70</i>&nbsp;    )
-<i class="no-highlight">71</i>&nbsp;  
-<i class="no-highlight">72</i>&nbsp;  }
-<i class="no-highlight">73</i>&nbsp;
-<i class="no-highlight">74</i>&nbsp;  // @LINE:12
-<i class="no-highlight">75</i>&nbsp;  class ReverseConnectionsController(_prefix: =&gt; String) {
-<i class="no-highlight">76</i>&nbsp;
-<i class="no-highlight">77</i>&nbsp;    def _defaultPrefix: String = {
-<i class="no-highlight">78</i>&nbsp;      if (_prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;
-<i class="no-highlight">79</i>&nbsp;    }
-<i class="no-highlight">80</i>&nbsp;
-<i class="no-highlight">81</i>&nbsp;  
-<i class="no-highlight">82</i>&nbsp;    // @LINE:12
-<i class="no-highlight">83</i>&nbsp;    def setConnectionTimeout: JavaScriptReverseRoute = JavaScriptReverseRoute(
-<i class="no-highlight">84</i>&nbsp;      &quot;controllers.admin.ConnectionsController.setConnectionTimeout&quot;,
-<i class="no-highlight">85</i>&nbsp;      &quot;&quot;&quot;
-<i class="no-highlight">86</i>&nbsp;        function() {
-<i class="no-highlight">87</i>&nbsp;          return _wA({method:&quot;POST&quot;, url:&quot;&quot;&quot;&quot; + _prefix + { _defaultPrefix } + &quot;&quot;&quot;&quot; + &quot;connections/set-connection-timeout&quot;})
-<i class="no-highlight">88</i>&nbsp;        }
-<i class="no-highlight">89</i>&nbsp;      &quot;&quot;&quot;
-<i class="no-highlight">90</i>&nbsp;    )
-<i class="no-highlight">91</i>&nbsp;  
-<i class="no-highlight">92</i>&nbsp;  }
-<i class="no-highlight">93</i>&nbsp;
-<i class="no-highlight">94</i>&nbsp;  // @LINE:18
-<b class="nc"><i class="no-highlight">95</i>&nbsp;  class ReverseSurveysController(_prefix: =&gt; String) {</b>
-<i class="no-highlight">96</i>&nbsp;
-<i class="no-highlight">97</i>&nbsp;    def _defaultPrefix: String = {
-<b class="nc"><i class="no-highlight">98</i>&nbsp;      if (_prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;</b>
-<i class="no-highlight">99</i>&nbsp;    }
-<i class="no-highlight">100</i>&nbsp;
-<i class="no-highlight">101</i>&nbsp;  
-<i class="no-highlight">102</i>&nbsp;    // @LINE:30
-<b class="nc"><i class="no-highlight">103</i>&nbsp;    def answeredSurvey: JavaScriptReverseRoute = JavaScriptReverseRoute(</b>
-<b class="nc"><i class="no-highlight">104</i>&nbsp;      &quot;controllers.admin.SurveysController.answeredSurvey&quot;,</b>
-<b class="nc"><i class="no-highlight">105</i>&nbsp;      &quot;&quot;&quot;</b>
-<i class="no-highlight">106</i>&nbsp;        function(surveyId0,offset1) {
-<b class="nc"><i class="no-highlight">107</i>&nbsp;          return _wA({method:&quot;GET&quot;, url:&quot;&quot;&quot;&quot; + _prefix + { _defaultPrefix } + &quot;&quot;&quot;&quot; + &quot;data/surveys/&quot; + encodeURIComponent((&quot;&quot;&quot; + implicitly[play.api.mvc.PathBindable[Long]].javascriptUnbind + &quot;&quot;&quot;)(&quot;surveyId&quot;, surveyId0)) + &quot;/answers&quot; + _qS([(offset1 == null ? null : (&quot;&quot;&quot; + implicitly[play.api.mvc.QueryStringBindable[Int]].javascriptUnbind + &quot;&quot;&quot;)(&quot;offset&quot;, offset1))])})</b>
-<i class="no-highlight">108</i>&nbsp;        }
-<i class="no-highlight">109</i>&nbsp;      &quot;&quot;&quot;
-<i class="no-highlight">110</i>&nbsp;    )
-<i class="no-highlight">111</i>&nbsp;  
-<i class="no-highlight">112</i>&nbsp;    // @LINE:19
-<b class="nc"><i class="no-highlight">113</i>&nbsp;    def createSurvey: JavaScriptReverseRoute = JavaScriptReverseRoute(</b>
-<b class="nc"><i class="no-highlight">114</i>&nbsp;      &quot;controllers.admin.SurveysController.createSurvey&quot;,</b>
-<b class="nc"><i class="no-highlight">115</i>&nbsp;      &quot;&quot;&quot;</b>
-<i class="no-highlight">116</i>&nbsp;        function() {
-<b class="nc"><i class="no-highlight">117</i>&nbsp;          return _wA({method:&quot;POST&quot;, url:&quot;&quot;&quot;&quot; + _prefix + { _defaultPrefix } + &quot;&quot;&quot;&quot; + &quot;manage/surveys&quot;})</b>
-<i class="no-highlight">118</i>&nbsp;        }
-<i class="no-highlight">119</i>&nbsp;      &quot;&quot;&quot;
-<i class="no-highlight">120</i>&nbsp;    )
-<i class="no-highlight">121</i>&nbsp;  
-<i class="no-highlight">122</i>&nbsp;    // @LINE:32
-<b class="nc"><i class="no-highlight">123</i>&nbsp;    def allSurveys: JavaScriptReverseRoute = JavaScriptReverseRoute(</b>
-<b class="nc"><i class="no-highlight">124</i>&nbsp;      &quot;controllers.admin.SurveysController.allSurveys&quot;,</b>
-<b class="nc"><i class="no-highlight">125</i>&nbsp;      &quot;&quot;&quot;</b>
-<i class="no-highlight">126</i>&nbsp;        function() {
-<b class="nc"><i class="no-highlight">127</i>&nbsp;          return _wA({method:&quot;GET&quot;, url:&quot;&quot;&quot;&quot; + _prefix + { _defaultPrefix } + &quot;&quot;&quot;&quot; + &quot;data/surveys&quot;})</b>
-<i class="no-highlight">128</i>&nbsp;        }
-<i class="no-highlight">129</i>&nbsp;      &quot;&quot;&quot;
-<i class="no-highlight">130</i>&nbsp;    )
-<i class="no-highlight">131</i>&nbsp;  
-<i class="no-highlight">132</i>&nbsp;    // @LINE:29
-<b class="nc"><i class="no-highlight">133</i>&nbsp;    def getSurveyAnswers: JavaScriptReverseRoute = JavaScriptReverseRoute(</b>
-<b class="nc"><i class="no-highlight">134</i>&nbsp;      &quot;controllers.admin.SurveysController.getSurveyAnswers&quot;,</b>
-<b class="nc"><i class="no-highlight">135</i>&nbsp;      &quot;&quot;&quot;</b>
-<i class="no-highlight">136</i>&nbsp;        function(surveyId0) {
-<b class="nc"><i class="no-highlight">137</i>&nbsp;          return _wA({method:&quot;GET&quot;, url:&quot;&quot;&quot;&quot; + _prefix + { _defaultPrefix } + &quot;&quot;&quot;&quot; + &quot;data/surveys/&quot; + encodeURIComponent((&quot;&quot;&quot; + implicitly[play.api.mvc.PathBindable[Long]].javascriptUnbind + &quot;&quot;&quot;)(&quot;surveyId&quot;, surveyId0)) + &quot;/all-answers&quot;})</b>
-<i class="no-highlight">138</i>&nbsp;        }
-<i class="no-highlight">139</i>&nbsp;      &quot;&quot;&quot;
-<i class="no-highlight">140</i>&nbsp;    )
-<i class="no-highlight">141</i>&nbsp;  
-<i class="no-highlight">142</i>&nbsp;    // @LINE:27
-<b class="nc"><i class="no-highlight">143</i>&nbsp;    def survey: JavaScriptReverseRoute = JavaScriptReverseRoute(</b>
-<b class="nc"><i class="no-highlight">144</i>&nbsp;      &quot;controllers.admin.SurveysController.survey&quot;,</b>
-<b class="nc"><i class="no-highlight">145</i>&nbsp;      &quot;&quot;&quot;</b>
-<i class="no-highlight">146</i>&nbsp;        function(id0) {
-<b class="nc"><i class="no-highlight">147</i>&nbsp;          return _wA({method:&quot;GET&quot;, url:&quot;&quot;&quot;&quot; + _prefix + { _defaultPrefix } + &quot;&quot;&quot;&quot; + &quot;data/surveys/&quot; + encodeURIComponent((&quot;&quot;&quot; + implicitly[play.api.mvc.PathBindable[Long]].javascriptUnbind + &quot;&quot;&quot;)(&quot;id&quot;, id0))})</b>
-<i class="no-highlight">148</i>&nbsp;        }
-<i class="no-highlight">149</i>&nbsp;      &quot;&quot;&quot;
-<i class="no-highlight">150</i>&nbsp;    )
-<i class="no-highlight">151</i>&nbsp;  
-<i class="no-highlight">152</i>&nbsp;    // @LINE:42
-<b class="nc"><i class="no-highlight">153</i>&nbsp;    def saveSurvey: JavaScriptReverseRoute = JavaScriptReverseRoute(</b>
-<b class="nc"><i class="no-highlight">154</i>&nbsp;      &quot;controllers.admin.SurveysController.saveSurvey&quot;,</b>
-<b class="nc"><i class="no-highlight">155</i>&nbsp;      &quot;&quot;&quot;</b>
-<i class="no-highlight">156</i>&nbsp;        function() {
-<b class="nc"><i class="no-highlight">157</i>&nbsp;          return _wA({method:&quot;POST&quot;, url:&quot;&quot;&quot;&quot; + _prefix + { _defaultPrefix } + &quot;&quot;&quot;&quot; + &quot;api/survey&quot;})</b>
-<i class="no-highlight">158</i>&nbsp;        }
-<i class="no-highlight">159</i>&nbsp;      &quot;&quot;&quot;
-<i class="no-highlight">160</i>&nbsp;    )
-<i class="no-highlight">161</i>&nbsp;  
-<i class="no-highlight">162</i>&nbsp;    // @LINE:20
-<b class="nc"><i class="no-highlight">163</i>&nbsp;    def deleteSurvey: JavaScriptReverseRoute = JavaScriptReverseRoute(</b>
-<b class="nc"><i class="no-highlight">164</i>&nbsp;      &quot;controllers.admin.SurveysController.deleteSurvey&quot;,</b>
-<b class="nc"><i class="no-highlight">165</i>&nbsp;      &quot;&quot;&quot;</b>
-<i class="no-highlight">166</i>&nbsp;        function(surveyId0) {
-<b class="nc"><i class="no-highlight">167</i>&nbsp;          return _wA({method:&quot;POST&quot;, url:&quot;&quot;&quot;&quot; + _prefix + { _defaultPrefix } + &quot;&quot;&quot;&quot; + &quot;manage/surveys/delete/&quot; + encodeURIComponent((&quot;&quot;&quot; + implicitly[play.api.mvc.PathBindable[Long]].javascriptUnbind + &quot;&quot;&quot;)(&quot;surveyId&quot;, surveyId0))})</b>
-<i class="no-highlight">168</i>&nbsp;        }
-<i class="no-highlight">169</i>&nbsp;      &quot;&quot;&quot;
-<i class="no-highlight">170</i>&nbsp;    )
-<i class="no-highlight">171</i>&nbsp;  
-<i class="no-highlight">172</i>&nbsp;    // @LINE:31
-<b class="nc"><i class="no-highlight">173</i>&nbsp;    def getSurveyResults: JavaScriptReverseRoute = JavaScriptReverseRoute(</b>
-<b class="nc"><i class="no-highlight">174</i>&nbsp;      &quot;controllers.admin.SurveysController.getSurveyResults&quot;,</b>
-<b class="nc"><i class="no-highlight">175</i>&nbsp;      &quot;&quot;&quot;</b>
-<i class="no-highlight">176</i>&nbsp;        function(surveyId0) {
-<b class="nc"><i class="no-highlight">177</i>&nbsp;          return _wA({method:&quot;GET&quot;, url:&quot;&quot;&quot;&quot; + _prefix + { _defaultPrefix } + &quot;&quot;&quot;&quot; + &quot;data/surveys/&quot; + encodeURIComponent((&quot;&quot;&quot; + implicitly[play.api.mvc.PathBindable[Long]].javascriptUnbind + &quot;&quot;&quot;)(&quot;surveyId&quot;, surveyId0)) + &quot;/results&quot;})</b>
-<i class="no-highlight">178</i>&nbsp;        }
-<i class="no-highlight">179</i>&nbsp;      &quot;&quot;&quot;
-<i class="no-highlight">180</i>&nbsp;    )
-<i class="no-highlight">181</i>&nbsp;  
-<i class="no-highlight">182</i>&nbsp;    // @LINE:18
-<b class="nc"><i class="no-highlight">183</i>&nbsp;    def surveys: JavaScriptReverseRoute = JavaScriptReverseRoute(</b>
-<b class="nc"><i class="no-highlight">184</i>&nbsp;      &quot;controllers.admin.SurveysController.surveys&quot;,</b>
-<b class="nc"><i class="no-highlight">185</i>&nbsp;      &quot;&quot;&quot;</b>
-<i class="no-highlight">186</i>&nbsp;        function() {
-<b class="nc"><i class="no-highlight">187</i>&nbsp;          return _wA({method:&quot;GET&quot;, url:&quot;&quot;&quot;&quot; + _prefix + { _defaultPrefix } + &quot;&quot;&quot;&quot; + &quot;manage/surveys&quot;})</b>
-<i class="no-highlight">188</i>&nbsp;        }
-<i class="no-highlight">189</i>&nbsp;      &quot;&quot;&quot;
-<i class="no-highlight">190</i>&nbsp;    )
-<i class="no-highlight">191</i>&nbsp;  
-<i class="no-highlight">192</i>&nbsp;  }
-<i class="no-highlight">193</i>&nbsp;
-<i class="no-highlight">194</i>&nbsp;
-<b class="nc"><i class="no-highlight">195</i>&nbsp;}</b>
+<b class="fc"><i class="no-highlight">41</i>&nbsp;        Portal portal = portalDAO.get(userDTO.getPortalId());</b>
+<i class="no-highlight">42</i>&nbsp;
+<b class="fc"><i class="no-highlight">43</i>&nbsp;        NetworkUser user = networkUserDAO.findByEmail(userDTO.getEmail());</b>
+<b class="fc"><i class="no-highlight">44</i>&nbsp;        if (user == null) {</b>
+<b class="fc"><i class="no-highlight">45</i>&nbsp;            user = new NetworkUser(portal, userDTO.getName(), userDTO.getEmail(),</b>
+<b class="fc"><i class="no-highlight">46</i>&nbsp;                    &quot;&quot;, userDTO.getConnectionTime(), true, &quot;&quot;,</b>
+<b class="fc"><i class="no-highlight">47</i>&nbsp;                    Optional.ofNullable(userDTO.getGender()).map(Gender::valueOf).orElse(Gender.Undefined),</b>
+<i class="no-highlight">48</i>&nbsp;                    null, null,
+<i class="no-highlight">49</i>&nbsp;                    null,
+<b class="fc"><i class="no-highlight">50</i>&nbsp;                    Optional.ofNullable(userDTO.getAge()).orElse(0));</b>
+<i class="no-highlight">51</i>&nbsp;        } else {
+<b class="nc"><i class="no-highlight">52</i>&nbsp;            user.setLastConnection(userDTO.getConnectionTime());</b>
+<i class="no-highlight">53</i>&nbsp;        }
+<b class="fc"><i class="no-highlight">54</i>&nbsp;        networkUserDAO.save(user);</b>
+<i class="no-highlight">55</i>&nbsp;
+<b class="fc"><i class="no-highlight">56</i>&nbsp;        NetworkUserConnectionLog connectionLog = new NetworkUserConnectionLog(portal, user, userDTO.getConnectionTime(), Instant.now(), &quot;&quot;);</b>
+<b class="fc"><i class="no-highlight">57</i>&nbsp;        connectionLogDAO.save(connectionLog);</b>
+<i class="no-highlight">58</i>&nbsp;
+<b class="fc"><i class="no-highlight">59</i>&nbsp;        return ok(userDTO.toJson());</b>
+<i class="no-highlight">60</i>&nbsp;    }
+<i class="no-highlight">61</i>&nbsp;
+<i class="no-highlight">62</i>&nbsp;    public Result getSocialUser(String email) {
+<b class="nc"><i class="no-highlight">63</i>&nbsp;        return ofNullable(networkUserDAO.findByEmail(email))</b>
+<b class="nc"><i class="no-highlight">64</i>&nbsp;                .map(networkUser -&gt; ok(NetworkUserDTO.json(networkUser)))</b>
+<b class="nc"><i class="no-highlight">65</i>&nbsp;                .orElse(badRequest(&quot;User [&quot; + email + &quot;] not found.&quot;));</b>
+<i class="no-highlight">66</i>&nbsp;    }
+<i class="no-highlight">67</i>&nbsp;
+<i class="no-highlight">68</i>&nbsp;    public Result saveSocialUser() {
+<b class="fc"><i class="no-highlight">69</i>&nbsp;        JsonNode bodyJson = request().body().asJson();</b>
+<i class="no-highlight">70</i>&nbsp;
+<b class="fc"><i class="no-highlight">71</i>&nbsp;        Long portalId = bodyJson.findValue(&quot;portalId&quot;).asLong();</b>
+<b class="fc"><i class="no-highlight">72</i>&nbsp;        JsonNode names = bodyJson.withArray(&quot;names&quot;);</b>
+<b class="fc"><i class="no-highlight">73</i>&nbsp;        JsonNode nameNode = names.get(0);</b>
+<b class="fc"><i class="no-highlight">74</i>&nbsp;        String name = nameNode.findValue(&quot;displayName&quot;).asText();</b>
+<i class="no-highlight">75</i>&nbsp;
+<b class="fc"><i class="no-highlight">76</i>&nbsp;        JsonNode genders = bodyJson.withArray(&quot;genders&quot;);</b>
+<b class="fc"><i class="no-highlight">77</i>&nbsp;        JsonNode genderNode = genders.get(0);</b>
+<b class="fc"><i class="no-highlight">78</i>&nbsp;        String gender = genderNode.findValue(&quot;formattedValue&quot;).asText();</b>
+<i class="no-highlight">79</i>&nbsp;
+<b class="fc"><i class="no-highlight">80</i>&nbsp;        JsonNode birthdays = bodyJson.withArray(&quot;birthdays&quot;);</b>
+<b class="fc"><i class="no-highlight">81</i>&nbsp;        JsonNode birthdayNode = birthdays.get(0);</b>
+<b class="fc"><i class="no-highlight">82</i>&nbsp;        JsonNode date = birthdayNode.findValue(&quot;date&quot;);</b>
+<b class="fc"><i class="no-highlight">83</i>&nbsp;        int year = date.findValue(&quot;year&quot;).asInt();</b>
+<b class="fc"><i class="no-highlight">84</i>&nbsp;        int month = date.findValue(&quot;month&quot;).asInt();</b>
+<b class="fc"><i class="no-highlight">85</i>&nbsp;        int day = date.findValue(&quot;day&quot;).asInt();</b>
+<i class="no-highlight">86</i>&nbsp;
+<b class="fc"><i class="no-highlight">87</i>&nbsp;        JsonNode emailAddresses = bodyJson.withArray(&quot;emailAddresses&quot;);</b>
+<b class="fc"><i class="no-highlight">88</i>&nbsp;        JsonNode emailAddressNode = emailAddresses.get(0);</b>
+<b class="fc"><i class="no-highlight">89</i>&nbsp;        String email = emailAddressNode.findValue(&quot;value&quot;).asText();</b>
+<i class="no-highlight">90</i>&nbsp;
+<b class="fc"><i class="no-highlight">91</i>&nbsp;        NetworkUserDAO networkUserDAO = new NetworkUserDAO();</b>
+<b class="fc"><i class="no-highlight">92</i>&nbsp;        NetworkUser networkUser = networkUserDAO.findByEmail(email);</b>
+<b class="fc"><i class="no-highlight">93</i>&nbsp;        if (networkUser == null) {</b>
+<b class="fc"><i class="no-highlight">94</i>&nbsp;            Portal portal = new PortalDAO().get(portalId);</b>
+<b class="fc"><i class="no-highlight">95</i>&nbsp;            int age = createAge(year, month, day);</b>
+<b class="fc"><i class="no-highlight">96</i>&nbsp;            networkUser = new NetworkUser(</b>
+<i class="no-highlight">97</i>&nbsp;                    portal,
+<i class="no-highlight">98</i>&nbsp;                    name,
+<i class="no-highlight">99</i>&nbsp;                    email,
+<i class="no-highlight">100</i>&nbsp;                    null,
+<b class="fc"><i class="no-highlight">101</i>&nbsp;                    Instant.now(),</b>
+<i class="no-highlight">102</i>&nbsp;                    true,
+<i class="no-highlight">103</i>&nbsp;                    &quot;hola123&quot;,
+<b class="fc"><i class="no-highlight">104</i>&nbsp;                    Gender.valueOf(gender),</b>
+<i class="no-highlight">105</i>&nbsp;                    null,
+<i class="no-highlight">106</i>&nbsp;                    null,
+<i class="no-highlight">107</i>&nbsp;                    null,
+<i class="no-highlight">108</i>&nbsp;                    age
+<i class="no-highlight">109</i>&nbsp;            );
+<b class="fc"><i class="no-highlight">110</i>&nbsp;            networkUserDAO.save(networkUser);</b>
+<i class="no-highlight">111</i>&nbsp;        }
+<i class="no-highlight">112</i>&nbsp;
+<b class="fc"><i class="no-highlight">113</i>&nbsp;        return ok(networkUser.toLogString());</b>
+<i class="no-highlight">114</i>&nbsp;    }
+<i class="no-highlight">115</i>&nbsp;
+<i class="no-highlight">116</i>&nbsp;    private int createAge(int year, int month, int day) {
+<b class="fc"><i class="no-highlight">117</i>&nbsp;        return (int) DateHelper.yearsBetween(</b>
+<b class="fc"><i class="no-highlight">118</i>&nbsp;                Instant.now(),</b>
+<b class="fc"><i class="no-highlight">119</i>&nbsp;                Instant.parse(year + &quot;-&quot; + String.format(&quot;%02d&quot;, month) + &quot;-&quot; + String.format(&quot;%02d&quot;, day) + &quot;T00:00:00.000Z&quot;)</b>
+<i class="no-highlight">120</i>&nbsp;        );
+<i class="no-highlight">121</i>&nbsp;    }
+<i class="no-highlight">122</i>&nbsp;
+<i class="no-highlight">123</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -294,7 +232,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-08-27 21:21</div>
+    <div style="float:right;">generated on 2022-08-28 18:36</div>
 </div>
 </body>
 </html>

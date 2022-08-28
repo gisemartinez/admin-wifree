@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > ScalaHelper</title>
+  <title>Coverage Report > main</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -17,10 +17,10 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">utils</a>
+    <a href="../index.html">views.html.parts</a>
 </div>
 
-<h1>Coverage Summary for Class: ScalaHelper (utils)</h1>
+<h1>Coverage Summary for Class: main (views.html.parts)</h1>
 
 <table class="coverageStats">
 
@@ -36,13 +36,13 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
   <tr>
-    <td class="name">ScalaHelper$</td>
+    <td class="name">main$</td>
 <td class="coverageStat">
   <span class="percent">
     0%
   </span>
   <span class="absValue">
-    (0/4)
+    (0/5)
   </span>
 </td>
 <td class="coverageStat">
@@ -50,26 +50,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/4)
-  </span>
-</td>
-  </tr>
-  <tr>
-    <td class="name">ScalaHelper$$anon$1</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/4)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/4)
+    (0/16)
   </span>
 </td>
   </tr>
@@ -80,7 +61,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/8)
+    (0/5)
   </span>
 </td>
 <td class="coverageStat">
@@ -88,7 +69,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/8)
+    (0/16)
   </span>
 </td>
 </tr>
@@ -99,31 +80,83 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package utils
-<i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import java.util.function.{BiFunction, Function =&gt; JFunction}
-<i class="no-highlight">4</i>&nbsp;
-<i class="no-highlight">5</i>&nbsp;import scala.language.implicitConversions
-<i class="no-highlight">6</i>&nbsp;
-<i class="no-highlight">7</i>&nbsp;object ScalaHelper {
-<i class="no-highlight">8</i>&nbsp;	
-<b class="nc"><i class="no-highlight">9</i>&nbsp;	implicit def toJavaFunction[U, V](f: (U) =&gt; V): JFunction[U, V] = new JFunction[U, V] {</b>
-<b class="nc"><i class="no-highlight">10</i>&nbsp;		override def apply(t: U): V = f(t)</b>
-<i class="no-highlight">11</i>&nbsp;		
-<i class="no-highlight">12</i>&nbsp;		override def compose[T](before: JFunction[_ &gt;: T, _ &lt;: U]):
-<b class="nc"><i class="no-highlight">13</i>&nbsp;		JFunction[T, V] = toJavaFunction(f.compose(x =&gt; before.apply(x)))</b>
-<i class="no-highlight">14</i>&nbsp;		
-<i class="no-highlight">15</i>&nbsp;		override def andThen[W](after: JFunction[_ &gt;: V, _ &lt;: W]):
-<b class="nc"><i class="no-highlight">16</i>&nbsp;		JFunction[U, W] = toJavaFunction(f.andThen(x =&gt; after.apply(x)))</b>
-<i class="no-highlight">17</i>&nbsp;	}
-<i class="no-highlight">18</i>&nbsp;	
-<b class="nc"><i class="no-highlight">19</i>&nbsp;	implicit def fromJavaFunction[U, V](f: JFunction[U,V]): U =&gt; V = f.apply</b>
-<i class="no-highlight">20</i>&nbsp;
-<b class="nc"><i class="no-highlight">21</i>&nbsp;	implicit def toJavaBiFunction[T, U, R](f: (T, U) =&gt; R): BiFunction[T, U, R] = (t: T, u: U) =&gt; f(t, u)</b>
-<i class="no-highlight">22</i>&nbsp;
-<i class="no-highlight">23</i>&nbsp;//	implicit def fromJavaBiFunction[T, U, R](f: BiFunction[T,U]): (T,U) =&gt; R = f.apply
-<i class="no-highlight">24</i>&nbsp;	
-<b class="nc"><i class="no-highlight">25</i>&nbsp;}</b>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;
+<i class="no-highlight">2</i>&nbsp;package views.html.parts
+<i class="no-highlight">3</i>&nbsp;
+<i class="no-highlight">4</i>&nbsp;import _root_.play.twirl.api.TwirlFeatureImports._
+<i class="no-highlight">5</i>&nbsp;import _root_.play.twirl.api.TwirlHelperImports._
+<i class="no-highlight">6</i>&nbsp;import _root_.play.twirl.api.Html
+<i class="no-highlight">7</i>&nbsp;import _root_.play.twirl.api.JavaScript
+<i class="no-highlight">8</i>&nbsp;import _root_.play.twirl.api.Txt
+<i class="no-highlight">9</i>&nbsp;import _root_.play.twirl.api.Xml
+<i class="no-highlight">10</i>&nbsp;import models._
+<i class="no-highlight">11</i>&nbsp;import controllers._
+<i class="no-highlight">12</i>&nbsp;import play.api.i18n._
+<i class="no-highlight">13</i>&nbsp;import views.html._
+<i class="no-highlight">14</i>&nbsp;import play.api.templates.PlayMagic._
+<i class="no-highlight">15</i>&nbsp;import java.lang._
+<i class="no-highlight">16</i>&nbsp;import java.util._
+<i class="no-highlight">17</i>&nbsp;import scala.collection.JavaConverters._
+<i class="no-highlight">18</i>&nbsp;import play.core.j.PlayMagicForJava._
+<i class="no-highlight">19</i>&nbsp;import play.mvc._
+<i class="no-highlight">20</i>&nbsp;import play.api.data.Field
+<i class="no-highlight">21</i>&nbsp;import play.mvc.Http.Context.Implicit._
+<i class="no-highlight">22</i>&nbsp;import play.data._
+<i class="no-highlight">23</i>&nbsp;import play.core.j.PlayFormsMagicForJava._
+<i class="no-highlight">24</i>&nbsp;
+<b class="nc"><i class="no-highlight">25</i>&nbsp;object main extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template2[String,Html,play.twirl.api.HtmlFormat.Appendable] {</b>
+<i class="no-highlight">26</i>&nbsp;
+<i class="no-highlight">27</i>&nbsp;  /*
+<i class="no-highlight">28</i>&nbsp; * This template is called from the `index` template. This template
+<i class="no-highlight">29</i>&nbsp; * handles the rendering of the page header and body tags. It takes
+<i class="no-highlight">30</i>&nbsp; * two arguments, a `String` for the title of the page and an `Html`
+<i class="no-highlight">31</i>&nbsp; * object to insert into the body of the page.
+<i class="no-highlight">32</i>&nbsp; */
+<i class="no-highlight">33</i>&nbsp;  def apply/*7.2*/(title: String)(content: Html):play.twirl.api.HtmlFormat.Appendable = {
+<b class="nc"><i class="no-highlight">34</i>&nbsp;    _display_ {</b>
+<i class="no-highlight">35</i>&nbsp;      {
+<i class="no-highlight">36</i>&nbsp;
+<i class="no-highlight">37</i>&nbsp;
+<b class="nc"><i class="no-highlight">38</i>&nbsp;Seq[Any](format.raw/*8.1*/(&quot;&quot;&quot;&lt;!DOCTYPE html&gt;</b>
+<i class="no-highlight">39</i>&nbsp;&lt;html lang=&quot;es&quot;&gt;
+<i class="no-highlight">40</i>&nbsp;	&lt;head&gt;
+<b class="nc"><i class="no-highlight">41</i>&nbsp;		&quot;&quot;&quot;),format.raw/*11.56*/(&quot;&quot;&quot;</b>
+<b class="nc"><i class="no-highlight">42</i>&nbsp;		&quot;&quot;&quot;),format.raw/*12.3*/(&quot;&quot;&quot;&lt;title&gt;&quot;&quot;&quot;),_display_(/*12.11*/title),format.raw/*12.16*/(&quot;&quot;&quot;&lt;/title&gt;</b>
+<b class="nc"><i class="no-highlight">43</i>&nbsp;		&lt;link rel=&quot;stylesheet&quot; media=&quot;screen&quot; href=&quot;&quot;&quot;&quot;),_display_(/*13.48*/routes/*13.54*/.Assets.versioned(&quot;css/main.css&quot;)),format.raw/*13.87*/(&quot;&quot;&quot;&quot;&gt;</b>
+<b class="nc"><i class="no-highlight">44</i>&nbsp;		&lt;link rel=&quot;shortcut icon&quot; type=&quot;image/png&quot; href=&quot;&quot;&quot;&quot;),_display_(/*14.53*/routes/*14.59*/.Assets.versioned(&quot;img/favicon.png&quot;)),format.raw/*14.95*/(&quot;&quot;&quot;&quot;&gt;</b>
+<i class="no-highlight">45</i>&nbsp;
+<b class="nc"><i class="no-highlight">46</i>&nbsp;		&quot;&quot;&quot;),_display_(/*16.4*/parts/*16.9*/.cssfiles()),format.raw/*16.20*/(&quot;&quot;&quot;</b>
+<b class="nc"><i class="no-highlight">47</i>&nbsp;	&quot;&quot;&quot;),format.raw/*17.2*/(&quot;&quot;&quot;&lt;/head&gt;</b>
+<i class="no-highlight">48</i>&nbsp;	&lt;body&gt;
+<b class="nc"><i class="no-highlight">49</i>&nbsp;		&quot;&quot;&quot;),format.raw/*20.26*/(&quot;&quot;&quot;</b>
+<b class="nc"><i class="no-highlight">50</i>&nbsp;		&quot;&quot;&quot;),_display_(/*21.4*/content),format.raw/*21.11*/(&quot;&quot;&quot;</b>
+<i class="no-highlight">51</i>&nbsp;
+<b class="nc"><i class="no-highlight">52</i>&nbsp;		&quot;&quot;&quot;),_display_(/*23.4*/parts/*23.9*/.jslibs()),format.raw/*23.18*/(&quot;&quot;&quot;</b>
+<b class="nc"><i class="no-highlight">53</i>&nbsp;	&quot;&quot;&quot;),format.raw/*24.2*/(&quot;&quot;&quot;&lt;/body&gt;</b>
+<i class="no-highlight">54</i>&nbsp;&lt;/html&gt;
+<i class="no-highlight">55</i>&nbsp;&quot;&quot;&quot;))
+<i class="no-highlight">56</i>&nbsp;      }
+<i class="no-highlight">57</i>&nbsp;    }
+<i class="no-highlight">58</i>&nbsp;  }
+<i class="no-highlight">59</i>&nbsp;
+<b class="nc"><i class="no-highlight">60</i>&nbsp;  def render(title:String,content:Html): play.twirl.api.HtmlFormat.Appendable = apply(title)(content)</b>
+<i class="no-highlight">61</i>&nbsp;
+<b class="nc"><i class="no-highlight">62</i>&nbsp;  def f:((String) =&gt; (Html) =&gt; play.twirl.api.HtmlFormat.Appendable) = (title) =&gt; (content) =&gt; apply(title)(content)</b>
+<i class="no-highlight">63</i>&nbsp;
+<b class="nc"><i class="no-highlight">64</i>&nbsp;  def ref: this.type = this</b>
+<i class="no-highlight">65</i>&nbsp;
+<i class="no-highlight">66</i>&nbsp;}
+<i class="no-highlight">67</i>&nbsp;
+<i class="no-highlight">68</i>&nbsp;
+<i class="no-highlight">69</i>&nbsp;              /*
+<i class="no-highlight">70</i>&nbsp;                  -- GENERATED --
+<i class="no-highlight">71</i>&nbsp;                  SOURCE: app/views/parts/main.scala.html
+<i class="no-highlight">72</i>&nbsp;                  HASH: d15ca3270ffd8b5c54d4708ef253ceb15329b4d1
+<i class="no-highlight">73</i>&nbsp;                  MATRIX: 1212-&gt;260|1336-&gt;291|1407-&gt;387|1437-&gt;390|1472-&gt;398|1498-&gt;403|1581-&gt;459|1596-&gt;465|1650-&gt;498|1732-&gt;553|1747-&gt;559|1804-&gt;595|1837-&gt;602|1850-&gt;607|1882-&gt;618|1911-&gt;620|1957-&gt;722|1987-&gt;726|2015-&gt;733|2046-&gt;738|2059-&gt;743|2089-&gt;752|2118-&gt;754
+<i class="no-highlight">74</i>&nbsp;                  LINES: 33-&gt;7|38-&gt;8|41-&gt;11|42-&gt;12|42-&gt;12|42-&gt;12|43-&gt;13|43-&gt;13|43-&gt;13|44-&gt;14|44-&gt;14|44-&gt;14|46-&gt;16|46-&gt;16|46-&gt;16|47-&gt;17|49-&gt;20|50-&gt;21|50-&gt;21|52-&gt;23|52-&gt;23|52-&gt;23|53-&gt;24
+<i class="no-highlight">75</i>&nbsp;                  -- GENERATED --
+<i class="no-highlight">76</i>&nbsp;              */
+<i class="no-highlight">77</i>&nbsp;          
 </div>
 </pre>
 </div>
@@ -150,7 +183,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-08-27 21:21</div>
+    <div style="float:right;">generated on 2022-08-28 18:30</div>
 </div>
 </body>
 </html>

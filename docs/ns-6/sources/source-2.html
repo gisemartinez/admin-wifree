@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > ReversePortalConfigController</title>
+  <title>Coverage Report > CarouselDataDTO</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -17,10 +17,10 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">controllers.api</a>
+    <a href="../index.html">controllers.api.dto</a>
 </div>
 
-<h1>Coverage Summary for Class: ReversePortalConfigController (controllers.api)</h1>
+<h1>Coverage Summary for Class: CarouselDataDTO (controllers.api.dto)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -39,7 +39,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">ReversePortalConfigController</td>
+  <td class="name">CarouselDataDTO</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -50,18 +50,18 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    25%
+    50%
   </span>
   <span class="absValue">
-    (1/4)
+    (1/2)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    40%
+    66.7%
   </span>
   <span class="absValue">
-    (2/5)
+    (2/3)
   </span>
 </td>
 </tr>
@@ -73,90 +73,20 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;// @GENERATOR:play-routes-compiler
-<i class="no-highlight">2</i>&nbsp;// @SOURCE:/Users/gimartinez/personal/wifree/conf/routes
-<i class="no-highlight">3</i>&nbsp;// @DATE:Fri Aug 19 08:55:29 CEST 2022
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package controllers.api.dto;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import java.util.List;
 <i class="no-highlight">4</i>&nbsp;
-<i class="no-highlight">5</i>&nbsp;import play.api.mvc.Call
-<i class="no-highlight">6</i>&nbsp;
+<i class="no-highlight">5</i>&nbsp;public class CarouselDataDTO extends WiFreeDTO {
+<i class="no-highlight">6</i>&nbsp;    public List&lt;String&gt; images;
 <i class="no-highlight">7</i>&nbsp;
-<i class="no-highlight">8</i>&nbsp;import _root_.controllers.Assets.Asset
-<i class="no-highlight">9</i>&nbsp;import _root_.play.libs.F
+<b class="nc"><i class="no-highlight">8</i>&nbsp;    public CarouselDataDTO() {</b>
+<i class="no-highlight">9</i>&nbsp;    }
 <i class="no-highlight">10</i>&nbsp;
-<i class="no-highlight">11</i>&nbsp;// @LINE:40
-<i class="no-highlight">12</i>&nbsp;package controllers.api {
-<i class="no-highlight">13</i>&nbsp;
-<i class="no-highlight">14</i>&nbsp;  // @LINE:40
-<i class="no-highlight">15</i>&nbsp;  class ReverseSocialUserController(_prefix: =&gt; String) {
-<i class="no-highlight">16</i>&nbsp;    def _defaultPrefix: String = {
-<i class="no-highlight">17</i>&nbsp;      if (_prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;
-<i class="no-highlight">18</i>&nbsp;    }
-<i class="no-highlight">19</i>&nbsp;
-<i class="no-highlight">20</i>&nbsp;  
-<i class="no-highlight">21</i>&nbsp;    // @LINE:41
-<i class="no-highlight">22</i>&nbsp;    def saveSocialUser(): Call = {
-<i class="no-highlight">23</i>&nbsp;      
-<i class="no-highlight">24</i>&nbsp;      Call(&quot;POST&quot;, _prefix + { _defaultPrefix } + &quot;api/socialuser&quot;)
-<i class="no-highlight">25</i>&nbsp;    }
-<i class="no-highlight">26</i>&nbsp;  
-<i class="no-highlight">27</i>&nbsp;    // @LINE:48
-<i class="no-highlight">28</i>&nbsp;    def saveUserConnected(): Call = {
-<i class="no-highlight">29</i>&nbsp;      
-<i class="no-highlight">30</i>&nbsp;      Call(&quot;POST&quot;, _prefix + { _defaultPrefix } + &quot;api/user-connected&quot;)
-<i class="no-highlight">31</i>&nbsp;    }
-<i class="no-highlight">32</i>&nbsp;  
-<i class="no-highlight">33</i>&nbsp;    // @LINE:40
-<i class="no-highlight">34</i>&nbsp;    def getSocialUser(email:String): Call = {
-<i class="no-highlight">35</i>&nbsp;      
-<i class="no-highlight">36</i>&nbsp;      Call(&quot;GET&quot;, _prefix + { _defaultPrefix } + &quot;api/socialuser/&quot; + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind(&quot;email&quot;, email)))
-<i class="no-highlight">37</i>&nbsp;    }
-<i class="no-highlight">38</i>&nbsp;  
-<i class="no-highlight">39</i>&nbsp;  }
-<i class="no-highlight">40</i>&nbsp;
-<i class="no-highlight">41</i>&nbsp;  // @LINE:43
-<i class="no-highlight">42</i>&nbsp;  class ReverseSurveyAnswersController(_prefix: =&gt; String) {
-<i class="no-highlight">43</i>&nbsp;    def _defaultPrefix: String = {
-<i class="no-highlight">44</i>&nbsp;      if (_prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;
-<i class="no-highlight">45</i>&nbsp;    }
-<i class="no-highlight">46</i>&nbsp;
-<i class="no-highlight">47</i>&nbsp;  
-<i class="no-highlight">48</i>&nbsp;    // @LINE:43
-<i class="no-highlight">49</i>&nbsp;    def answersCSV(id:Long): Call = {
-<i class="no-highlight">50</i>&nbsp;      
-<i class="no-highlight">51</i>&nbsp;      Call(&quot;GET&quot;, _prefix + { _defaultPrefix } + &quot;api/survey/&quot; + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind(&quot;id&quot;, id)) + &quot;/answers&quot;)
-<i class="no-highlight">52</i>&nbsp;    }
-<i class="no-highlight">53</i>&nbsp;  
-<i class="no-highlight">54</i>&nbsp;    // @LINE:44
-<i class="no-highlight">55</i>&nbsp;    def saveAnswers(): Call = {
-<i class="no-highlight">56</i>&nbsp;      
-<i class="no-highlight">57</i>&nbsp;      Call(&quot;POST&quot;, _prefix + { _defaultPrefix } + &quot;api/survey/answers&quot;)
-<i class="no-highlight">58</i>&nbsp;    }
-<i class="no-highlight">59</i>&nbsp;  
-<i class="no-highlight">60</i>&nbsp;  }
-<i class="no-highlight">61</i>&nbsp;
-<i class="no-highlight">62</i>&nbsp;  // @LINE:46
-<b class="fc"><i class="no-highlight">63</i>&nbsp;  class ReversePortalConfigController(_prefix: =&gt; String) {</b>
-<i class="no-highlight">64</i>&nbsp;    def _defaultPrefix: String = {
-<b class="nc"><i class="no-highlight">65</i>&nbsp;      if (_prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;</b>
-<i class="no-highlight">66</i>&nbsp;    }
-<i class="no-highlight">67</i>&nbsp;
-<i class="no-highlight">68</i>&nbsp;  
-<i class="no-highlight">69</i>&nbsp;    // @LINE:47
-<i class="no-highlight">70</i>&nbsp;    def clientAuth(portalId:Long): Call = {
-<i class="no-highlight">71</i>&nbsp;      
-<b class="nc"><i class="no-highlight">72</i>&nbsp;      Call(&quot;GET&quot;, _prefix + { _defaultPrefix } + &quot;api/client-auth/&quot; + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind(&quot;portalId&quot;, portalId)))</b>
-<i class="no-highlight">73</i>&nbsp;    }
-<i class="no-highlight">74</i>&nbsp;  
-<i class="no-highlight">75</i>&nbsp;    // @LINE:46
-<i class="no-highlight">76</i>&nbsp;    def clientLanding(portalId:Long): Call = {
-<i class="no-highlight">77</i>&nbsp;      
-<b class="nc"><i class="no-highlight">78</i>&nbsp;      Call(&quot;GET&quot;, _prefix + { _defaultPrefix } + &quot;api/client-landing/&quot; + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind(&quot;portalId&quot;, portalId)))</b>
-<i class="no-highlight">79</i>&nbsp;    }
-<i class="no-highlight">80</i>&nbsp;  
-<i class="no-highlight">81</i>&nbsp;  }
-<i class="no-highlight">82</i>&nbsp;
-<i class="no-highlight">83</i>&nbsp;
-<b class="fc"><i class="no-highlight">84</i>&nbsp;}</b>
+<b class="fc"><i class="no-highlight">11</i>&nbsp;    public CarouselDataDTO(List&lt;String&gt; images) {</b>
+<b class="fc"><i class="no-highlight">12</i>&nbsp;        this.images = images;</b>
+<i class="no-highlight">13</i>&nbsp;    }
+<i class="no-highlight">14</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -183,7 +113,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-08-27 21:21</div>
+    <div style="float:right;">generated on 2022-08-28 18:36</div>
 </div>
 </body>
 </html>

@@ -1,0 +1,215 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > jslibs</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">views.html.parts</a>
+</div>
+
+<h1>Coverage Summary for Class: jslibs (views.html.parts)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">jslibs$</td>
+<td class="coverageStat">
+  <span class="percent">
+    40%
+  </span>
+  <span class="absValue">
+    (2/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    89.7%
+  </span>
+  <span class="absValue">
+    (26/29)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    40%
+  </span>
+  <span class="absValue">
+    (2/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    89.7%
+  </span>
+  <span class="absValue">
+    (26/29)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;
+<i class="no-highlight">2</i>&nbsp;package views.html.parts
+<i class="no-highlight">3</i>&nbsp;
+<i class="no-highlight">4</i>&nbsp;import _root_.play.twirl.api.TwirlFeatureImports._
+<i class="no-highlight">5</i>&nbsp;import _root_.play.twirl.api.TwirlHelperImports._
+<i class="no-highlight">6</i>&nbsp;import _root_.play.twirl.api.Html
+<i class="no-highlight">7</i>&nbsp;import _root_.play.twirl.api.JavaScript
+<i class="no-highlight">8</i>&nbsp;import _root_.play.twirl.api.Txt
+<i class="no-highlight">9</i>&nbsp;import _root_.play.twirl.api.Xml
+<i class="no-highlight">10</i>&nbsp;import models._
+<i class="no-highlight">11</i>&nbsp;import controllers._
+<i class="no-highlight">12</i>&nbsp;import play.api.i18n._
+<i class="no-highlight">13</i>&nbsp;import views.html._
+<i class="no-highlight">14</i>&nbsp;import play.api.templates.PlayMagic._
+<i class="no-highlight">15</i>&nbsp;import java.lang._
+<i class="no-highlight">16</i>&nbsp;import java.util._
+<i class="no-highlight">17</i>&nbsp;import scala.collection.JavaConverters._
+<i class="no-highlight">18</i>&nbsp;import play.core.j.PlayMagicForJava._
+<i class="no-highlight">19</i>&nbsp;import play.mvc._
+<i class="no-highlight">20</i>&nbsp;import play.api.data.Field
+<i class="no-highlight">21</i>&nbsp;import play.mvc.Http.Context.Implicit._
+<i class="no-highlight">22</i>&nbsp;import play.data._
+<i class="no-highlight">23</i>&nbsp;import play.core.j.PlayFormsMagicForJava._
+<i class="no-highlight">24</i>&nbsp;
+<b class="fc"><i class="no-highlight">25</i>&nbsp;object jslibs extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template0[play.twirl.api.HtmlFormat.Appendable] {</b>
+<i class="no-highlight">26</i>&nbsp;
+<i class="no-highlight">27</i>&nbsp;  /**/
+<i class="no-highlight">28</i>&nbsp;  def apply/*1.2*/():play.twirl.api.HtmlFormat.Appendable = {
+<b class="fc"><i class="no-highlight">29</i>&nbsp;    _display_ {</b>
+<i class="no-highlight">30</i>&nbsp;      {
+<i class="no-highlight">31</i>&nbsp;
+<i class="no-highlight">32</i>&nbsp;
+<b class="fc"><i class="no-highlight">33</i>&nbsp;Seq[Any](format.raw/*2.1*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">34</i>&nbsp;&quot;&quot;&quot;),format.raw/*3.1*/(&quot;&quot;&quot;&lt;!-- WiFree utils --&gt;</b>
+<b class="fc"><i class="no-highlight">35</i>&nbsp;&lt;script src=&quot;&quot;&quot;&quot;),_display_(/*4.15*/routes/*4.21*/.Assets.versioned(&quot;js/wifree.js&quot;)),format.raw/*4.54*/(&quot;&quot;&quot;&quot;&gt;&lt;/script&gt;</b>
+<i class="no-highlight">36</i>&nbsp;
+<i class="no-highlight">37</i>&nbsp;&lt;!-- jQuery --&gt;
+<b class="fc"><i class="no-highlight">38</i>&nbsp;&lt;script src=&quot;&quot;&quot;&quot;),_display_(/*7.15*/routes/*7.21*/.Assets.versioned(&quot;js/jquery.min.js&quot;)),format.raw/*7.58*/(&quot;&quot;&quot;&quot;&gt;&lt;/script&gt;</b>
+<i class="no-highlight">39</i>&nbsp;
+<i class="no-highlight">40</i>&nbsp;&lt;!-- DateJS --&gt;
+<b class="fc"><i class="no-highlight">41</i>&nbsp;&lt;script src=&quot;&quot;&quot;&quot;),_display_(/*10.15*/routes/*10.21*/.Assets.versioned(&quot;js/flot/date.js&quot;)),format.raw/*10.57*/(&quot;&quot;&quot;&quot;&gt;&lt;/script&gt;</b>
+<i class="no-highlight">42</i>&nbsp;
+<i class="no-highlight">43</i>&nbsp;&lt;!-- bootstrap-daterangepicker --&gt;
+<b class="fc"><i class="no-highlight">44</i>&nbsp;&lt;script src=&quot;&quot;&quot;&quot;),_display_(/*13.15*/routes/*13.21*/.Assets.versioned(&quot;js/moment/moment.min.js&quot;)),format.raw/*13.65*/(&quot;&quot;&quot;&quot;&gt;&lt;/script&gt;</b>
+<b class="fc"><i class="no-highlight">45</i>&nbsp;&lt;script src=&quot;&quot;&quot;&quot;),_display_(/*14.15*/routes/*14.21*/.Assets.versioned(&quot;js/datepicker/daterangepicker.js&quot;)),format.raw/*14.74*/(&quot;&quot;&quot;&quot;&gt;&lt;/script&gt;</b>
+<i class="no-highlight">46</i>&nbsp;
+<i class="no-highlight">47</i>&nbsp;&lt;!-- Bootstrap --&gt;
+<b class="fc"><i class="no-highlight">48</i>&nbsp;&lt;script src=&quot;&quot;&quot;&quot;),_display_(/*17.15*/routes/*17.21*/.Assets.versioned(&quot;js/bootstrap.min.js&quot;)),format.raw/*17.61*/(&quot;&quot;&quot;&quot;&gt;&lt;/script&gt;</b>
+<i class="no-highlight">49</i>&nbsp;
+<i class="no-highlight">50</i>&nbsp;&lt;!-- NProgress --&gt;
+<b class="fc"><i class="no-highlight">51</i>&nbsp;&lt;script src=&quot;&quot;&quot;&quot;),_display_(/*20.15*/routes/*20.21*/.Assets.versioned(&quot;js/nprogress.js&quot;)),format.raw/*20.57*/(&quot;&quot;&quot;&quot;&gt;&lt;/script&gt;</b>
+<i class="no-highlight">52</i>&nbsp;
+<i class="no-highlight">53</i>&nbsp;&lt;!-- Chart.js --&gt;
+<b class="fc"><i class="no-highlight">54</i>&nbsp;&lt;script src=&quot;&quot;&quot;&quot;),_display_(/*23.15*/routes/*23.21*/.Assets.versioned(&quot;js/chartjs/chart.min.js&quot;)),format.raw/*23.65*/(&quot;&quot;&quot;&quot;&gt;&lt;/script&gt;</b>
+<i class="no-highlight">55</i>&nbsp;
+<i class="no-highlight">56</i>&nbsp;&lt;!-- gauge.js --&gt;
+<b class="fc"><i class="no-highlight">57</i>&nbsp;&lt;script src=&quot;&quot;&quot;&quot;),_display_(/*26.15*/routes/*26.21*/.Assets.versioned(&quot;js/gauge/gauge.min.js&quot;)),format.raw/*26.63*/(&quot;&quot;&quot;&quot;&gt;&lt;/script&gt;</b>
+<i class="no-highlight">58</i>&nbsp;
+<i class="no-highlight">59</i>&nbsp;&lt;!-- bootstrap progress js --&gt;
+<b class="fc"><i class="no-highlight">60</i>&nbsp;&quot;&quot;&quot;),_display_(/*29.2*/parts/*29.7*/.js.bootstrap_progress()),format.raw/*29.31*/(&quot;&quot;&quot;</b>
+<i class="no-highlight">61</i>&nbsp;
+<b class="fc"><i class="no-highlight">62</i>&nbsp;&quot;&quot;&quot;),format.raw/*31.1*/(&quot;&quot;&quot;&lt;!-- iCheck --&gt;</b>
+<b class="fc"><i class="no-highlight">63</i>&nbsp;&lt;script src=&quot;&quot;&quot;&quot;),_display_(/*32.15*/routes/*32.21*/.Assets.versioned(&quot;js/icheck/icheck.min.js&quot;)),format.raw/*32.65*/(&quot;&quot;&quot;&quot;&gt;&lt;/script&gt;</b>
+<i class="no-highlight">64</i>&nbsp;
+<i class="no-highlight">65</i>&nbsp;&lt;!-- Skycons --&gt;
+<b class="fc"><i class="no-highlight">66</i>&nbsp;&lt;script src=&quot;&quot;&quot;&quot;),_display_(/*35.15*/routes/*35.21*/.Assets.versioned(&quot;js/skycons/skycons.min.js&quot;)),format.raw/*35.67*/(&quot;&quot;&quot;&quot;&gt;&lt;/script&gt;</b>
+<i class="no-highlight">67</i>&nbsp;
+<i class="no-highlight">68</i>&nbsp;&lt;!-- Flot --&gt;
+<b class="fc"><i class="no-highlight">69</i>&nbsp;&lt;script src=&quot;&quot;&quot;&quot;),_display_(/*38.15*/routes/*38.21*/.Assets.versioned(&quot;js/flot/jquery.flot.js&quot;)),format.raw/*38.64*/(&quot;&quot;&quot;&quot;&gt;&lt;/script&gt;</b>
+<b class="fc"><i class="no-highlight">70</i>&nbsp;&lt;script src=&quot;&quot;&quot;&quot;),_display_(/*39.15*/routes/*39.21*/.Assets.versioned(&quot;js/flot/jquery.flot.pie.js&quot;)),format.raw/*39.68*/(&quot;&quot;&quot;&quot;&gt;&lt;/script&gt;</b>
+<b class="fc"><i class="no-highlight">71</i>&nbsp;&lt;script src=&quot;&quot;&quot;&quot;),_display_(/*40.15*/routes/*40.21*/.Assets.versioned(&quot;js/flot/jquery.flot.time.min.js&quot;)),format.raw/*40.73*/(&quot;&quot;&quot;&quot;&gt;&lt;/script&gt;</b>
+<b class="fc"><i class="no-highlight">72</i>&nbsp;&lt;script src=&quot;&quot;&quot;&quot;),_display_(/*41.15*/routes/*41.21*/.Assets.versioned(&quot;js/flot/jquery.flot.stack.js&quot;)),format.raw/*41.70*/(&quot;&quot;&quot;&quot;&gt;&lt;/script&gt;</b>
+<b class="fc"><i class="no-highlight">73</i>&nbsp;&lt;script src=&quot;&quot;&quot;&quot;),_display_(/*42.15*/routes/*42.21*/.Assets.versioned(&quot;js/flot/jquery.flot.resize.js&quot;)),format.raw/*42.71*/(&quot;&quot;&quot;&quot;&gt;&lt;/script&gt;</b>
+<i class="no-highlight">74</i>&nbsp;
+<i class="no-highlight">75</i>&nbsp;&lt;!-- Flot plugins --&gt;
+<b class="fc"><i class="no-highlight">76</i>&nbsp;&lt;script src=&quot;&quot;&quot;&quot;),_display_(/*45.15*/routes/*45.21*/.Assets.versioned(&quot;js/flot/jquery.flot.orderBars.js&quot;)),format.raw/*45.74*/(&quot;&quot;&quot;&quot;&gt;&lt;/script&gt;</b>
+<b class="fc"><i class="no-highlight">77</i>&nbsp;&lt;script src=&quot;&quot;&quot;&quot;),_display_(/*46.15*/routes/*46.21*/.Assets.versioned(&quot;js/flot/jquery.flot.spline.js&quot;)),format.raw/*46.71*/(&quot;&quot;&quot;&quot;&gt;&lt;/script&gt;</b>
+<b class="fc"><i class="no-highlight">78</i>&nbsp;&lt;script src=&quot;&quot;&quot;&quot;),_display_(/*47.15*/routes/*47.21*/.Assets.versioned(&quot;js/flot/curvedLines.js&quot;)),format.raw/*47.64*/(&quot;&quot;&quot;&quot;&gt;&lt;/script&gt;</b>
+<i class="no-highlight">79</i>&nbsp;
+<i class="no-highlight">80</i>&nbsp;&lt;!-- Custom Theme Scripts --&gt;
+<b class="fc"><i class="no-highlight">81</i>&nbsp;&lt;script src=&quot;&quot;&quot;&quot;),_display_(/*50.15*/routes/*50.21*/.Assets.versioned(&quot;js/gentelella.js&quot;)),format.raw/*50.58*/(&quot;&quot;&quot;&quot;&gt;&lt;/script&gt;&quot;&quot;&quot;))</b>
+<i class="no-highlight">82</i>&nbsp;      }
+<i class="no-highlight">83</i>&nbsp;    }
+<i class="no-highlight">84</i>&nbsp;  }
+<i class="no-highlight">85</i>&nbsp;
+<b class="nc"><i class="no-highlight">86</i>&nbsp;  def render(): play.twirl.api.HtmlFormat.Appendable = apply()</b>
+<i class="no-highlight">87</i>&nbsp;
+<b class="nc"><i class="no-highlight">88</i>&nbsp;  def f:(() =&gt; play.twirl.api.HtmlFormat.Appendable) = () =&gt; apply()</b>
+<i class="no-highlight">89</i>&nbsp;
+<b class="nc"><i class="no-highlight">90</i>&nbsp;  def ref: this.type = this</b>
+<i class="no-highlight">91</i>&nbsp;
+<i class="no-highlight">92</i>&nbsp;}
+<i class="no-highlight">93</i>&nbsp;
+<i class="no-highlight">94</i>&nbsp;
+<i class="no-highlight">95</i>&nbsp;              /*
+<i class="no-highlight">96</i>&nbsp;                  -- GENERATED --
+<i class="no-highlight">97</i>&nbsp;                  SOURCE: app/views/parts/jslibs.scala.html
+<i class="no-highlight">98</i>&nbsp;                  HASH: 2daa6b50cd26b471aa7600a6c7b942a189a9f1fa
+<i class="no-highlight">99</i>&nbsp;                  MATRIX: 948-&gt;1|1044-&gt;4|1071-&gt;5|1133-&gt;41|1147-&gt;47|1200-&gt;80|1269-&gt;123|1283-&gt;129|1340-&gt;166|1410-&gt;209|1425-&gt;215|1482-&gt;251|1571-&gt;313|1586-&gt;319|1651-&gt;363|1704-&gt;389|1719-&gt;395|1793-&gt;448|1866-&gt;494|1881-&gt;500|1942-&gt;540|2015-&gt;586|2030-&gt;592|2087-&gt;628|2159-&gt;673|2174-&gt;679|2239-&gt;723|2311-&gt;768|2326-&gt;774|2389-&gt;816|2460-&gt;861|2473-&gt;866|2518-&gt;890|2547-&gt;892|2604-&gt;922|2619-&gt;928|2684-&gt;972|2755-&gt;1016|2770-&gt;1022|2837-&gt;1068|2905-&gt;1109|2920-&gt;1115|2984-&gt;1158|3037-&gt;1184|3052-&gt;1190|3120-&gt;1237|3173-&gt;1263|3188-&gt;1269|3261-&gt;1321|3314-&gt;1347|3329-&gt;1353|3399-&gt;1402|3452-&gt;1428|3467-&gt;1434|3538-&gt;1484|3614-&gt;1533|3629-&gt;1539|3703-&gt;1592|3756-&gt;1618|3771-&gt;1624|3842-&gt;1674|3895-&gt;1700|3910-&gt;1706|3974-&gt;1749|4058-&gt;1806|4073-&gt;1812|4131-&gt;1849
+<i class="no-highlight">100</i>&nbsp;                  LINES: 28-&gt;1|33-&gt;2|34-&gt;3|35-&gt;4|35-&gt;4|35-&gt;4|38-&gt;7|38-&gt;7|38-&gt;7|41-&gt;10|41-&gt;10|41-&gt;10|44-&gt;13|44-&gt;13|44-&gt;13|45-&gt;14|45-&gt;14|45-&gt;14|48-&gt;17|48-&gt;17|48-&gt;17|51-&gt;20|51-&gt;20|51-&gt;20|54-&gt;23|54-&gt;23|54-&gt;23|57-&gt;26|57-&gt;26|57-&gt;26|60-&gt;29|60-&gt;29|60-&gt;29|62-&gt;31|63-&gt;32|63-&gt;32|63-&gt;32|66-&gt;35|66-&gt;35|66-&gt;35|69-&gt;38|69-&gt;38|69-&gt;38|70-&gt;39|70-&gt;39|70-&gt;39|71-&gt;40|71-&gt;40|71-&gt;40|72-&gt;41|72-&gt;41|72-&gt;41|73-&gt;42|73-&gt;42|73-&gt;42|76-&gt;45|76-&gt;45|76-&gt;45|77-&gt;46|77-&gt;46|77-&gt;46|78-&gt;47|78-&gt;47|78-&gt;47|81-&gt;50|81-&gt;50|81-&gt;50
+<i class="no-highlight">101</i>&nbsp;                  -- GENERATED --
+<i class="no-highlight">102</i>&nbsp;              */
+<i class="no-highlight">103</i>&nbsp;          
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-08-28 11:51</div>
+</div>
+</body>
+</html>

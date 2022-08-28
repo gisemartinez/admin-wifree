@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > PortalDataBinder</title>
+  <title>Coverage Report > Gender</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -17,10 +17,10 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">core.databinders</a>
+    <a href="../index.html">models.types</a>
 </div>
 
-<h1>Coverage Summary for Class: PortalDataBinder (core.databinders)</h1>
+<h1>Coverage Summary for Class: Gender (models.types)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -39,7 +39,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">PortalDataBinder</td>
+  <td class="name">Gender</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -50,18 +50,18 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    33.3%
+    100%
   </span>
   <span class="absValue">
-    (1/3)
+    (1/1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    33.3%
+    100%
   </span>
   <span class="absValue">
-    (1/3)
+    (6/6)
   </span>
 </td>
 </tr>
@@ -73,27 +73,22 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package core.databinders;
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package models.types;
 <i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import daos.PortalDAO;
-<i class="no-highlight">4</i>&nbsp;import models.Portal;
-<i class="no-highlight">5</i>&nbsp;import play.data.format.Formatters;
-<i class="no-highlight">6</i>&nbsp;
-<i class="no-highlight">7</i>&nbsp;import java.util.Locale;
-<i class="no-highlight">8</i>&nbsp;
-<b class="fc"><i class="no-highlight">9</i>&nbsp;public class PortalDataBinder extends Formatters.SimpleFormatter&lt;Portal&gt; implements WiFreeDataBinder&lt;Portal&gt; {</b>
-<i class="no-highlight">10</i>&nbsp;	
-<i class="no-highlight">11</i>&nbsp;	@Override
-<i class="no-highlight">12</i>&nbsp;	public Portal parse(String text, Locale locale) {
-<b class="nc"><i class="no-highlight">13</i>&nbsp;		return parseEntity(text, locale, new PortalDAO());</b>
-<i class="no-highlight">14</i>&nbsp;	}
-<i class="no-highlight">15</i>&nbsp;	
-<i class="no-highlight">16</i>&nbsp;	@Override
-<i class="no-highlight">17</i>&nbsp;	public String print(Portal portal, Locale locale) {
-<b class="nc"><i class="no-highlight">18</i>&nbsp;		return printEntity(portal, locale);</b>
-<i class="no-highlight">19</i>&nbsp;	}
-<i class="no-highlight">20</i>&nbsp;	
-<i class="no-highlight">21</i>&nbsp;}
+<i class="no-highlight">3</i>&nbsp;import io.ebean.annotation.EnumValue;
+<i class="no-highlight">4</i>&nbsp;
+<i class="no-highlight">5</i>&nbsp;/**
+<i class="no-highlight">6</i>&nbsp; * Created by jesu on 08/06/17.
+<i class="no-highlight">7</i>&nbsp; */
+<b class="fc"><i class="no-highlight">8</i>&nbsp;public enum Gender {</b>
+<i class="no-highlight">9</i>&nbsp;
+<b class="fc"><i class="no-highlight">10</i>&nbsp;	@EnumValue(&quot;Male&quot;) Male,</b>
+<b class="fc"><i class="no-highlight">11</i>&nbsp;	@EnumValue(&quot;Female&quot;) Female,</b>
+<b class="fc"><i class="no-highlight">12</i>&nbsp;	@EnumValue(&quot;Other&quot;) Other,</b>
+<b class="fc"><i class="no-highlight">13</i>&nbsp;	@EnumValue(&quot;Undefined&quot;) Undefined,</b>
+<b class="fc"><i class="no-highlight">14</i>&nbsp;	@EnumValue(&quot;Error&quot;) Error</b>
+<i class="no-highlight">15</i>&nbsp;
+<i class="no-highlight">16</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -120,7 +115,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-08-27 21:21</div>
+    <div style="float:right;">generated on 2022-08-28 18:36</div>
 </div>
 </body>
 </html>

@@ -64,13 +64,6 @@ public class SecurityModule extends AbstractModule {
 		return adminLoginClient;
 	}
 	
-//	@Provides
-//	protected FormClient consoleLoginClient() {
-//		final FormClient consoleLoginClient = new FormClient(baseUrl + AuthConstants.CONSOLE_LOGIN_URL, new WiFreeConsoleAuthenticator());
-//		consoleLoginClient.setName("ConsoleClient");
-//		return consoleLoginClient;
-//	}
-	
 	@Provides
 	protected org.pac4j.core.config.Config provideConfig(FormClient adminLoginClient) {
 		final Clients clients = new Clients(baseUrl + AuthConstants.CALLBACK_URL, adminLoginClient, new AnonymousClient());

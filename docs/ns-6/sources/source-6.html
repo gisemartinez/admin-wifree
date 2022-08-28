@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > SurveyAnswersController</title>
+  <title>Coverage Report > FieldAnswerDTO</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -17,15 +17,18 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">controllers.api</a>
+    <a href="../index.html">controllers.api.dto</a>
 </div>
 
-<h1>Coverage Summary for Class: SurveyAnswersController (controllers.api)</h1>
+<h1>Coverage Summary for Class: FieldAnswerDTO (controllers.api.dto)</h1>
 
 <table class="coverageStats">
-
 <tr>
   <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -36,46 +39,33 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">SurveyAnswersController</td>
+  <td class="name">FieldAnswerDTO</td>
 <td class="coverageStat">
   <span class="percent">
     100%
   </span>
   <span class="absValue">
-    (11/11)
+    (1/1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    96.4%
+    50%
   </span>
   <span class="absValue">
-    (53/55)
+    (1/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    25%
+  </span>
+  <span class="absValue">
+    (1/4)
   </span>
 </td>
 </tr>
-  <tr>
-    <td class="name">SurveyAnswersController$$FastClassByGuice$$e967cac</td>
-  </tr>
-<tr>
-  <td class="name"><strong>Total</strong></td>
-<td class="coverageStat">
-  <span class="percent">
-    100%
-  </span>
-  <span class="absValue">
-    (11/11)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    96.4%
-  </span>
-  <span class="absValue">
-    (53/55)
-  </span>
-</td>
-</tr>
+
 </table>
 
 <br/>
@@ -83,130 +73,21 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package controllers.api;
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package controllers.api.dto;
 <i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import com.google.common.collect.ImmutableListMultimap;
-<i class="no-highlight">4</i>&nbsp;import controllers.WiFreeController;
-<i class="no-highlight">5</i>&nbsp;import controllers.api.dto.SurveyAnswersDTO;
-<i class="no-highlight">6</i>&nbsp;import daos.FieldAnswerDAO;
-<i class="no-highlight">7</i>&nbsp;import daos.SurveyDAO;
-<i class="no-highlight">8</i>&nbsp;import models.Field;
-<i class="no-highlight">9</i>&nbsp;import models.FieldAnswer;
-<i class="no-highlight">10</i>&nbsp;import models.NetworkUser;
-<i class="no-highlight">11</i>&nbsp;import models.Survey;
-<i class="no-highlight">12</i>&nbsp;import operations.requests.SaveSurveyAnswersRequest;
-<i class="no-highlight">13</i>&nbsp;import operations.responses.SaveSurveyAnswersResponse;
-<i class="no-highlight">14</i>&nbsp;import play.mvc.Result;
-<i class="no-highlight">15</i>&nbsp;import services.SurveysService;
-<i class="no-highlight">16</i>&nbsp;
-<i class="no-highlight">17</i>&nbsp;import javax.inject.Inject;
-<i class="no-highlight">18</i>&nbsp;import java.io.File;
-<i class="no-highlight">19</i>&nbsp;import java.io.FileNotFoundException;
-<i class="no-highlight">20</i>&nbsp;import java.io.IOException;
-<i class="no-highlight">21</i>&nbsp;import java.io.PrintWriter;
-<i class="no-highlight">22</i>&nbsp;import java.text.SimpleDateFormat;
-<i class="no-highlight">23</i>&nbsp;import java.util.*;
-<i class="no-highlight">24</i>&nbsp;import java.util.stream.Collectors;
-<i class="no-highlight">25</i>&nbsp;import java.util.stream.Stream;
-<i class="no-highlight">26</i>&nbsp;
-<i class="no-highlight">27</i>&nbsp;import static com.google.common.collect.Streams.forEachPair;
-<i class="no-highlight">28</i>&nbsp;import static java.util.stream.Collectors.toList;
-<i class="no-highlight">29</i>&nbsp;
-<b class="fc"><i class="no-highlight">30</i>&nbsp;public class SurveyAnswersController extends WiFreeController {</b>
-<i class="no-highlight">31</i>&nbsp;
-<i class="no-highlight">32</i>&nbsp;    @Inject
-<i class="no-highlight">33</i>&nbsp;    SurveysService surveysService;
-<i class="no-highlight">34</i>&nbsp;
-<i class="no-highlight">35</i>&nbsp;    @Inject
-<i class="no-highlight">36</i>&nbsp;    FieldAnswerDAO fieldAnswerDAO; // TODO quitar
-<i class="no-highlight">37</i>&nbsp;
-<i class="no-highlight">38</i>&nbsp;    @Inject
-<i class="no-highlight">39</i>&nbsp;    SurveyDAO surveyDAO; // TODO quitar
-<i class="no-highlight">40</i>&nbsp;
-<i class="no-highlight">41</i>&nbsp;    public Result saveAnswers() throws IOException {
-<b class="fc"><i class="no-highlight">42</i>&nbsp;        logRequest();</b>
-<i class="no-highlight">43</i>&nbsp;
-<b class="fc"><i class="no-highlight">44</i>&nbsp;        String requestJsonString = getRequestJsonString();</b>
-<b class="fc"><i class="no-highlight">45</i>&nbsp;        SurveyAnswersDTO surveyAnswers = objectMapper.readValue(requestJsonString, SurveyAnswersDTO.class);</b>
-<b class="fc"><i class="no-highlight">46</i>&nbsp;        SaveSurveyAnswersRequest request = new SaveSurveyAnswersRequest(surveyAnswers.answers, surveyAnswers.user);</b>
-<b class="fc"><i class="no-highlight">47</i>&nbsp;        SaveSurveyAnswersResponse response = surveysService.saveSurveyAnswers(request);</b>
-<b class="fc"><i class="no-highlight">48</i>&nbsp;        return ok(&quot;Survey answers succeeded: &quot; + response.success() + &quot;, survey: &quot; + response.surveyId() + &quot;, user: &quot; + response.userId());</b>
-<i class="no-highlight">49</i>&nbsp;    }
-<i class="no-highlight">50</i>&nbsp;
-<i class="no-highlight">51</i>&nbsp;    public Result answersCSV(Long surveyId) throws FileNotFoundException {
-<b class="fc"><i class="no-highlight">52</i>&nbsp;        logRequest();</b>
-<i class="no-highlight">53</i>&nbsp;
-<b class="fc"><i class="no-highlight">54</i>&nbsp;        ImmutableListMultimap&lt;NetworkUser, FieldAnswer&gt; answersForSurvey = fieldAnswerDAO.findForSurvey(surveyId);</b>
-<b class="fc"><i class="no-highlight">55</i>&nbsp;        Survey survey = surveyDAO.get(surveyId);</b>
-<i class="no-highlight">56</i>&nbsp;
-<b class="fc"><i class="no-highlight">57</i>&nbsp;        List&lt;Survey&gt; answeredSurveysPerUser = answersForSurvey.asMap().values().stream()</b>
-<b class="fc"><i class="no-highlight">58</i>&nbsp;                .map(userAnswers -&gt; fillSurveyFieldsWithAnswers(survey, userAnswers))</b>
-<b class="fc"><i class="no-highlight">59</i>&nbsp;                .collect(toList());</b>
-<i class="no-highlight">60</i>&nbsp;
-<b class="fc"><i class="no-highlight">61</i>&nbsp;        String[] titles = {&quot;id&quot;, &quot;title&quot;, &quot;question_number&quot;, &quot;question&quot;, &quot;answer&quot;};</b>
-<b class="fc"><i class="no-highlight">62</i>&nbsp;        List&lt;String[]&gt; answers = answeredSurveysPerUser.stream().flatMap(s -&gt;</b>
-<b class="fc"><i class="no-highlight">63</i>&nbsp;                s.getFields().stream().flatMap(f -&gt; {</b>
-<b class="fc"><i class="no-highlight">64</i>&nbsp;                    if (&quot;checkbox&quot;.equals(f.getType())) {</b>
-<b class="fc"><i class="no-highlight">65</i>&nbsp;                        return Arrays.stream(f.getConfig().getValue().split(&quot;,&quot;)).map(a -&gt; {</b>
-<b class="fc"><i class="no-highlight">66</i>&nbsp;                            Field copy = f.copy();</b>
-<b class="fc"><i class="no-highlight">67</i>&nbsp;                            copy.getConfig().setValue(a.trim());</b>
-<b class="fc"><i class="no-highlight">68</i>&nbsp;                            return copy;</b>
-<i class="no-highlight">69</i>&nbsp;                        });
-<i class="no-highlight">70</i>&nbsp;                    } else {
-<b class="fc"><i class="no-highlight">71</i>&nbsp;                        return Stream.of(f);</b>
-<i class="no-highlight">72</i>&nbsp;                    }
-<b class="fc"><i class="no-highlight">73</i>&nbsp;                }).map(f -&gt; new String[] {</b>
-<b class="fc"><i class="no-highlight">74</i>&nbsp;                    s.getId().toString(),</b>
-<b class="fc"><i class="no-highlight">75</i>&nbsp;                    s.getTitle(),</b>
-<b class="fc"><i class="no-highlight">76</i>&nbsp;                        f.getConfig().getOrder().toString(),</b>
-<b class="fc"><i class="no-highlight">77</i>&nbsp;                        f.getConfig().getLabel(),</b>
-<b class="fc"><i class="no-highlight">78</i>&nbsp;                    f.getConfig().getValue()</b>
-<i class="no-highlight">79</i>&nbsp;                })
-<b class="fc"><i class="no-highlight">80</i>&nbsp;        ).collect(toList());</b>
-<b class="fc"><i class="no-highlight">81</i>&nbsp;        ArrayList&lt;String[]&gt; strings = new ArrayList&lt;&gt;();</b>
-<b class="fc"><i class="no-highlight">82</i>&nbsp;        strings.add(titles);</b>
-<b class="fc"><i class="no-highlight">83</i>&nbsp;        strings.addAll(answers);</b>
-<i class="no-highlight">84</i>&nbsp;
-<b class="fc"><i class="no-highlight">85</i>&nbsp;        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(&quot;yyyy_MM_dd&quot;);</b>
-<b class="fc"><i class="no-highlight">86</i>&nbsp;        String date = simpleDateFormat.format(new Date());</b>
-<b class="fc"><i class="no-highlight">87</i>&nbsp;        File csvOutputFile = new File(&quot;/tmp/survey_&quot; + surveyId + &quot;_answers_&quot; + date + &quot;.csv&quot;);</b>
-<b class="fc"><i class="no-highlight">88</i>&nbsp;        try (PrintWriter pw = new PrintWriter(csvOutputFile)) {</b>
-<b class="fc"><i class="no-highlight">89</i>&nbsp;            strings.stream()</b>
-<b class="fc"><i class="no-highlight">90</i>&nbsp;                    .map(this::convertToCSV)</b>
-<b class="fc"><i class="no-highlight">91</i>&nbsp;                    .forEach(pw::println);</b>
-<b class="fc"><i class="no-highlight">92</i>&nbsp;        }</b>
-<i class="no-highlight">93</i>&nbsp;
-<b class="fc"><i class="no-highlight">94</i>&nbsp;        return ok(csvOutputFile);</b>
-<i class="no-highlight">95</i>&nbsp;    }
-<i class="no-highlight">96</i>&nbsp;
-<i class="no-highlight">97</i>&nbsp;    private String convertToCSV(String[] data) {
-<b class="fc"><i class="no-highlight">98</i>&nbsp;        return Stream.of(data)</b>
-<b class="fc"><i class="no-highlight">99</i>&nbsp;                .map(this::escapeSpecialCharacters)</b>
-<b class="fc"><i class="no-highlight">100</i>&nbsp;                .collect(Collectors.joining(&quot;,&quot;));</b>
-<i class="no-highlight">101</i>&nbsp;    }
-<i class="no-highlight">102</i>&nbsp;
-<i class="no-highlight">103</i>&nbsp;    public String escapeSpecialCharacters(String data) {
-<b class="fc"><i class="no-highlight">104</i>&nbsp;        String escapedData = data.replaceAll(&quot;\\R&quot;, &quot; &quot;);</b>
-<b class="fc"><i class="no-highlight">105</i>&nbsp;        if (data.contains(&quot;,&quot;) || data.contains(&quot;\&quot;&quot;) || data.contains(&quot;&#39;&quot;)) {</b>
-<b class="nc"><i class="no-highlight">106</i>&nbsp;            data = data.replace(&quot;\&quot;&quot;, &quot;\&quot;\&quot;&quot;);</b>
-<b class="nc"><i class="no-highlight">107</i>&nbsp;            escapedData = &quot;\&quot;&quot; + data + &quot;\&quot;&quot;;</b>
-<i class="no-highlight">108</i>&nbsp;        }
-<b class="fc"><i class="no-highlight">109</i>&nbsp;        return escapedData;</b>
-<i class="no-highlight">110</i>&nbsp;    }
-<i class="no-highlight">111</i>&nbsp;
-<i class="no-highlight">112</i>&nbsp;    private Survey fillSurveyFieldsWithAnswers(Survey survey, java.util.Collection&lt;FieldAnswer&gt; userAnswers) {
-<b class="fc"><i class="no-highlight">113</i>&nbsp;        Survey answeredSurvey = survey.copy();</b>
-<b class="fc"><i class="no-highlight">114</i>&nbsp;        Stream&lt;Field&gt; fields = answeredSurvey.getFields().stream().sorted(Comparator.comparing(field -&gt; field.getConfig().getOrder()));</b>
-<b class="fc"><i class="no-highlight">115</i>&nbsp;        Stream&lt;FieldAnswer&gt; answers = userAnswers.stream().sorted(Comparator.comparing(answer -&gt; answer.getField().getConfig().getOrder()));</b>
-<b class="fc"><i class="no-highlight">116</i>&nbsp;        forEachPair(fields, answers, (field, answer) -&gt; answerField(answeredSurvey, field, answer));</b>
-<b class="fc"><i class="no-highlight">117</i>&nbsp;        return answeredSurvey;</b>
-<i class="no-highlight">118</i>&nbsp;    }
-<i class="no-highlight">119</i>&nbsp;
-<i class="no-highlight">120</i>&nbsp;    private void answerField(Survey answeredSurvey, models.Field field, FieldAnswer answer) {
-<b class="fc"><i class="no-highlight">121</i>&nbsp;        field.getConfig().setValue(answer.getAnswer());</b>
-<i class="no-highlight">122</i>&nbsp;    }
-<i class="no-highlight">123</i>&nbsp;
-<i class="no-highlight">124</i>&nbsp;}
+<i class="no-highlight">3</i>&nbsp;
+<i class="no-highlight">4</i>&nbsp;public class FieldAnswerDTO extends WiFreeDTO {
+<i class="no-highlight">5</i>&nbsp;
+<i class="no-highlight">6</i>&nbsp;    public Long field;
+<i class="no-highlight">7</i>&nbsp;    public String answer;
+<i class="no-highlight">8</i>&nbsp;
+<b class="fc"><i class="no-highlight">9</i>&nbsp;    public FieldAnswerDTO() {}</b>
+<i class="no-highlight">10</i>&nbsp;
+<b class="nc"><i class="no-highlight">11</i>&nbsp;    public FieldAnswerDTO(Long field, String answer) {</b>
+<b class="nc"><i class="no-highlight">12</i>&nbsp;        this.field = field;</b>
+<b class="nc"><i class="no-highlight">13</i>&nbsp;        this.answer = answer;</b>
+<i class="no-highlight">14</i>&nbsp;    }
+<i class="no-highlight">15</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -233,7 +114,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-08-27 21:21</div>
+    <div style="float:right;">generated on 2022-08-28 18:36</div>
 </div>
 </body>
 </html>

@@ -1,0 +1,212 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > social_keys</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">views.html.parts</a>
+</div>
+
+<h1>Coverage Summary for Class: social_keys (views.html.parts)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">social_keys$</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (3/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90%
+  </span>
+  <span class="absValue">
+    (27/30)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (3/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90%
+  </span>
+  <span class="absValue">
+    (27/30)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;
+<i class="no-highlight">2</i>&nbsp;package views.html.parts
+<i class="no-highlight">3</i>&nbsp;
+<i class="no-highlight">4</i>&nbsp;import _root_.play.twirl.api.TwirlFeatureImports._
+<i class="no-highlight">5</i>&nbsp;import _root_.play.twirl.api.TwirlHelperImports._
+<i class="no-highlight">6</i>&nbsp;import _root_.play.twirl.api.Html
+<i class="no-highlight">7</i>&nbsp;import _root_.play.twirl.api.JavaScript
+<i class="no-highlight">8</i>&nbsp;import _root_.play.twirl.api.Txt
+<i class="no-highlight">9</i>&nbsp;import _root_.play.twirl.api.Xml
+<i class="no-highlight">10</i>&nbsp;import models._
+<i class="no-highlight">11</i>&nbsp;import controllers._
+<i class="no-highlight">12</i>&nbsp;import play.api.i18n._
+<i class="no-highlight">13</i>&nbsp;import views.html._
+<i class="no-highlight">14</i>&nbsp;import play.api.templates.PlayMagic._
+<i class="no-highlight">15</i>&nbsp;import java.lang._
+<i class="no-highlight">16</i>&nbsp;import java.util._
+<i class="no-highlight">17</i>&nbsp;import scala.collection.JavaConverters._
+<i class="no-highlight">18</i>&nbsp;import play.core.j.PlayMagicForJava._
+<i class="no-highlight">19</i>&nbsp;import play.mvc._
+<i class="no-highlight">20</i>&nbsp;import play.api.data.Field
+<i class="no-highlight">21</i>&nbsp;import play.mvc.Http.Context.Implicit._
+<i class="no-highlight">22</i>&nbsp;import play.data._
+<i class="no-highlight">23</i>&nbsp;import play.core.j.PlayFormsMagicForJava._
+<i class="no-highlight">24</i>&nbsp;
+<b class="fc"><i class="no-highlight">25</i>&nbsp;object social_keys extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template2[Field,String,play.twirl.api.HtmlFormat.Appendable] {</b>
+<i class="no-highlight">26</i>&nbsp;
+<i class="no-highlight">27</i>&nbsp;  /**/
+<i class="no-highlight">28</i>&nbsp;  def apply/*1.2*/(loginConfiguration: Field, title: String):play.twirl.api.HtmlFormat.Appendable = {
+<b class="fc"><i class="no-highlight">29</i>&nbsp;    _display_ {</b>
+<i class="no-highlight">30</i>&nbsp;      {
+<i class="no-highlight">31</i>&nbsp;
+<i class="no-highlight">32</i>&nbsp;
+<b class="fc"><i class="no-highlight">33</i>&nbsp;Seq[Any](format.raw/*2.1*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">34</i>&nbsp;&quot;&quot;&quot;),format.raw/*3.1*/(&quot;&quot;&quot;&lt;div class=&quot;col-md-6&quot;&gt;</b>
+<b class="fc"><i class="no-highlight">35</i>&nbsp;    &lt;h3&gt;&quot;&quot;&quot;),_display_(/*4.10*/title),format.raw/*4.15*/(&quot;&quot;&quot;&lt;/h3&gt;</b>
+<i class="no-highlight">36</i>&nbsp;    &lt;div hidden&gt;
+<b class="fc"><i class="no-highlight">37</i>&nbsp;        &quot;&quot;&quot;),_display_(/*6.10*/helper/*6.16*/.inputText(loginConfiguration(&quot;id&quot;))),format.raw/*6.52*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">38</i>&nbsp;        &quot;&quot;&quot;),_display_(/*7.10*/helper/*7.16*/.inputText(loginConfiguration(&quot;loginMethod&quot;))),format.raw/*7.61*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">39</i>&nbsp;        &quot;&quot;&quot;),_display_(/*8.10*/helper/*8.16*/.checkbox(loginConfiguration(&quot;socialLogin&quot;))),format.raw/*8.60*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">40</i>&nbsp;    &quot;&quot;&quot;),format.raw/*9.5*/(&quot;&quot;&quot;&lt;/div&gt;</b>
+<i class="no-highlight">41</i>&nbsp;        &lt;div class=&quot;form-group row&quot;&gt;
+<i class="no-highlight">42</i>&nbsp;            &lt;div class=&quot;col-md-10 col-sm-6 col-xs-6&quot;&gt;
+<i class="no-highlight">43</i>&nbsp;                &lt;div class=&quot;wifree-checkbox&quot;&gt;
+<b class="fc"><i class="no-highlight">44</i>&nbsp;                    &quot;&quot;&quot;),_display_(/*13.22*/helper/*13.28*/.input(loginConfiguration(&quot;enabled&quot;),</b>
+<b class="fc"><i class="no-highlight">45</i>&nbsp;                    &#39;_label -&gt; &quot;Activado&quot;,</b>
+<b class="fc"><i class="no-highlight">46</i>&nbsp;                    &#39;class -&gt; &quot;form-control col-md-3 col-xs-3&quot;,</b>
+<b class="fc"><i class="no-highlight">47</i>&nbsp;                    &#39;style -&gt; &quot;height: 20px; width: 5%;&quot;)/*16.58*/{ (id, name, value, args) =&gt;_display_(Seq[Any](format.raw/*16.86*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">48</i>&nbsp;                        &quot;&quot;&quot;),format.raw/*17.25*/(&quot;&quot;&quot;&lt;div class=&quot;form-check&quot;&gt;</b>
+<b class="fc"><i class="no-highlight">49</i>&nbsp;                            &lt;input class=&quot;form-check-input&quot; type=&quot;checkbox&quot; name=&quot;&quot;&quot;&quot;),_display_(/*18.84*/name),format.raw/*18.88*/(&quot;&quot;&quot;&quot; id=&quot;&quot;&quot;&quot;),_display_(/*18.95*/id),format.raw/*18.97*/(&quot;&quot;&quot;&quot; &quot;&quot;&quot;),_display_(/*18.100*/if(value.get==&quot;true&quot;)/*18.121*/{_display_(Seq[Any](format.raw/*18.122*/(&quot;&quot;&quot;checked&quot;&quot;&quot;)))}/*18.130*/else/*18.134*/{}),format.raw/*18.136*/(&quot;&quot;&quot;&gt;</b>
+<b class="fc"><i class="no-highlight">50</i>&nbsp;                            &lt;label class=&quot;form-check-label&quot; for=&quot;&quot;&quot;&quot;),_display_(/*19.67*/id),format.raw/*19.69*/(&quot;&quot;&quot;&quot;&gt;</b>
+<i class="no-highlight">51</i>&nbsp;                                Red social activa
+<i class="no-highlight">52</i>&nbsp;                            &lt;/label&gt;
+<i class="no-highlight">53</i>&nbsp;                        &lt;/div&gt;
+<b class="fc"><i class="no-highlight">54</i>&nbsp;                    &quot;&quot;&quot;)))}),format.raw/*23.22*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">55</i>&nbsp;                &quot;&quot;&quot;),format.raw/*24.17*/(&quot;&quot;&quot;&lt;/div&gt;</b>
+<i class="no-highlight">56</i>&nbsp;            &lt;/div&gt;
+<i class="no-highlight">57</i>&nbsp;        &lt;/div&gt;
+<b class="fc"><i class="no-highlight">58</i>&nbsp;    &lt;div id=&quot;toHide&quot;&quot;&quot;),_display_(/*27.21*/loginConfiguration(&quot;loginMethod&quot;)/*27.54*/.id),format.raw/*27.57*/(&quot;&quot;&quot;&quot;&gt;</b>
+<i class="no-highlight">59</i>&nbsp;        &lt;div class=&quot;form-group row&quot;&gt;
+<i class="no-highlight">60</i>&nbsp;                &lt;div class=&quot;col-md-10 col-sm-6 col-xs-6&quot;&gt;
+<b class="fc"><i class="no-highlight">61</i>&nbsp;                    &quot;&quot;&quot;),_display_(/*30.22*/helper/*30.28*/.inputText(loginConfiguration(&quot;keys&quot;)(&quot;clientId&quot;), &#39;_label -&gt; &quot;Id de Cliente&quot;, &#39;class -&gt; &quot;form-control col-md-6 col-xs-12&quot;)),format.raw/*30.151*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">62</i>&nbsp;                &quot;&quot;&quot;),format.raw/*31.17*/(&quot;&quot;&quot;&lt;/div&gt;</b>
+<i class="no-highlight">63</i>&nbsp;            &lt;/div&gt;
+<i class="no-highlight">64</i>&nbsp;        &lt;div class=&quot;form-group row&quot;&gt;
+<i class="no-highlight">65</i>&nbsp;            &lt;div class=&quot;col-md-10 col-sm-6 col-xs-6&quot;&gt;
+<b class="fc"><i class="no-highlight">66</i>&nbsp;                &quot;&quot;&quot;),_display_(/*35.18*/helper/*35.24*/.inputText(loginConfiguration(&quot;keys&quot;)(&quot;secret&quot;), &#39;_label -&gt; &quot;Secreto&quot;, &#39;class -&gt; &quot;form-control col-md-6 col-xs-12&quot;)),format.raw/*35.139*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">67</i>&nbsp;            &quot;&quot;&quot;),format.raw/*36.13*/(&quot;&quot;&quot;&lt;/div&gt;</b>
+<i class="no-highlight">68</i>&nbsp;        &lt;/div&gt;
+<i class="no-highlight">69</i>&nbsp;    &lt;/div&gt;
+<i class="no-highlight">70</i>&nbsp;&lt;/div&gt;
+<i class="no-highlight">71</i>&nbsp;
+<i class="no-highlight">72</i>&nbsp;&lt;script type=&quot;text/javascript&quot;&gt;   
+<b class="fc"><i class="no-highlight">73</i>&nbsp;    $(document).ready(function() &quot;&quot;&quot;),format.raw/*42.34*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*42.35*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">74</i>&nbsp;        &quot;&quot;&quot;),format.raw/*43.9*/(&quot;&quot;&quot;const target = &#39;&quot;&quot;&quot;),_display_(/*43.26*/loginConfiguration(&quot;enabled&quot;)/*43.55*/.id),format.raw/*43.58*/(&quot;&quot;&quot;&#39;;</b>
+<b class="fc"><i class="no-highlight">75</i>&nbsp;        const fieldToHide = &#39;toHide&quot;&quot;&quot;),_display_(/*44.37*/loginConfiguration(&quot;loginMethod&quot;)/*44.70*/.id),format.raw/*44.73*/(&quot;&quot;&quot;&#39;;</b>
+<i class="no-highlight">76</i>&nbsp;        hideFormFields(document, target, fieldToHide);
+<b class="fc"><i class="no-highlight">77</i>&nbsp;    &quot;&quot;&quot;),format.raw/*46.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*46.6*/(&quot;&quot;&quot;);</b>
+<i class="no-highlight">78</i>&nbsp;&lt;/script&gt;&quot;&quot;&quot;))
+<i class="no-highlight">79</i>&nbsp;      }
+<i class="no-highlight">80</i>&nbsp;    }
+<i class="no-highlight">81</i>&nbsp;  }
+<i class="no-highlight">82</i>&nbsp;
+<b class="nc"><i class="no-highlight">83</i>&nbsp;  def render(loginConfiguration:Field,title:String): play.twirl.api.HtmlFormat.Appendable = apply(loginConfiguration,title)</b>
+<i class="no-highlight">84</i>&nbsp;
+<b class="nc"><i class="no-highlight">85</i>&nbsp;  def f:((Field,String) =&gt; play.twirl.api.HtmlFormat.Appendable) = (loginConfiguration,title) =&gt; apply(loginConfiguration,title)</b>
+<i class="no-highlight">86</i>&nbsp;
+<b class="nc"><i class="no-highlight">87</i>&nbsp;  def ref: this.type = this</b>
+<i class="no-highlight">88</i>&nbsp;
+<i class="no-highlight">89</i>&nbsp;}
+<i class="no-highlight">90</i>&nbsp;
+<i class="no-highlight">91</i>&nbsp;
+<i class="no-highlight">92</i>&nbsp;              /*
+<i class="no-highlight">93</i>&nbsp;                  -- GENERATED --
+<i class="no-highlight">94</i>&nbsp;                  SOURCE: app/views/parts/social_keys.scala.html
+<i class="no-highlight">95</i>&nbsp;                  HASH: fd6527e510e092090b04c125d0d0ddfabe6c011d
+<i class="no-highlight">96</i>&nbsp;                  MATRIX: 966-&gt;1|1102-&gt;44|1129-&gt;45|1187-&gt;77|1212-&gt;82|1270-&gt;114|1284-&gt;120|1340-&gt;156|1376-&gt;166|1390-&gt;172|1455-&gt;217|1491-&gt;227|1505-&gt;233|1569-&gt;277|1600-&gt;282|1792-&gt;447|1807-&gt;453|2018-&gt;655|2084-&gt;683|2137-&gt;708|2272-&gt;816|2297-&gt;820|2331-&gt;827|2354-&gt;829|2385-&gt;832|2416-&gt;853|2456-&gt;854|2484-&gt;862|2498-&gt;866|2522-&gt;868|2617-&gt;936|2640-&gt;938|2813-&gt;1080|2858-&gt;1097|2946-&gt;1158|2988-&gt;1191|3012-&gt;1194|3158-&gt;1313|3173-&gt;1319|3318-&gt;1442|3363-&gt;1459|3524-&gt;1593|3539-&gt;1599|3676-&gt;1714|3717-&gt;1727|3854-&gt;1836|3883-&gt;1837|3919-&gt;1846|3963-&gt;1863|4001-&gt;1892|4025-&gt;1895|4091-&gt;1934|4133-&gt;1967|4157-&gt;1970|4246-&gt;2032|4274-&gt;2033
+<i class="no-highlight">97</i>&nbsp;                  LINES: 28-&gt;1|33-&gt;2|34-&gt;3|35-&gt;4|35-&gt;4|37-&gt;6|37-&gt;6|37-&gt;6|38-&gt;7|38-&gt;7|38-&gt;7|39-&gt;8|39-&gt;8|39-&gt;8|40-&gt;9|44-&gt;13|44-&gt;13|47-&gt;16|47-&gt;16|48-&gt;17|49-&gt;18|49-&gt;18|49-&gt;18|49-&gt;18|49-&gt;18|49-&gt;18|49-&gt;18|49-&gt;18|49-&gt;18|49-&gt;18|50-&gt;19|50-&gt;19|54-&gt;23|55-&gt;24|58-&gt;27|58-&gt;27|58-&gt;27|61-&gt;30|61-&gt;30|61-&gt;30|62-&gt;31|66-&gt;35|66-&gt;35|66-&gt;35|67-&gt;36|73-&gt;42|73-&gt;42|74-&gt;43|74-&gt;43|74-&gt;43|74-&gt;43|75-&gt;44|75-&gt;44|75-&gt;44|77-&gt;46|77-&gt;46
+<i class="no-highlight">98</i>&nbsp;                  -- GENERATED --
+<i class="no-highlight">99</i>&nbsp;              */
+<i class="no-highlight">100</i>&nbsp;          
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-08-28 11:51</div>
+</div>
+</body>
+</html>

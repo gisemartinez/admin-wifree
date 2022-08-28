@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > PortalConfigController</title>
+  <title>Coverage Report > AuthDataDTO</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -17,15 +17,18 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">controllers.api</a>
+    <a href="../index.html">controllers.api.dto</a>
 </div>
 
-<h1>Coverage Summary for Class: PortalConfigController (controllers.api)</h1>
+<h1>Coverage Summary for Class: AuthDataDTO (controllers.api.dto)</h1>
 
 <table class="coverageStats">
-
 <tr>
   <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -36,46 +39,33 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">PortalConfigController</td>
+  <td class="name">AuthDataDTO</td>
 <td class="coverageStat">
   <span class="percent">
     100%
   </span>
   <span class="absValue">
-    (3/3)
+    (1/1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    95%
+    50%
   </span>
   <span class="absValue">
-    (38/40)
+    (1/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (4/5)
   </span>
 </td>
 </tr>
-  <tr>
-    <td class="name">PortalConfigController$$FastClassByGuice$$3f5eff75</td>
-  </tr>
-<tr>
-  <td class="name"><strong>Total</strong></td>
-<td class="coverageStat">
-  <span class="percent">
-    100%
-  </span>
-  <span class="absValue">
-    (3/3)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    95%
-  </span>
-  <span class="absValue">
-    (38/40)
-  </span>
-</td>
-</tr>
+
 </table>
 
 <br/>
@@ -83,97 +73,24 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package controllers.api;
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package controllers.api.dto;
 <i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import com.typesafe.config.Config;
-<i class="no-highlight">4</i>&nbsp;import controllers.WiFreeController;
-<i class="no-highlight">5</i>&nbsp;import controllers.api.dto.*;
-<i class="no-highlight">6</i>&nbsp;import daos.PortalDAO;
-<i class="no-highlight">7</i>&nbsp;import daos.PortalLoginConfigurationDAO;
-<i class="no-highlight">8</i>&nbsp;import daos.SurveyDAO;
-<i class="no-highlight">9</i>&nbsp;import models.*;
-<i class="no-highlight">10</i>&nbsp;import models.types.LoginMethodType;
-<i class="no-highlight">11</i>&nbsp;import models.types.PortalApplicationType;
-<i class="no-highlight">12</i>&nbsp;import play.mvc.Result;
-<i class="no-highlight">13</i>&nbsp;
-<i class="no-highlight">14</i>&nbsp;import javax.inject.Inject;
-<i class="no-highlight">15</i>&nbsp;import java.io.File;
-<i class="no-highlight">16</i>&nbsp;import java.util.*;
-<i class="no-highlight">17</i>&nbsp;import java.util.stream.Collectors;
-<i class="no-highlight">18</i>&nbsp;
-<b class="fc"><i class="no-highlight">19</i>&nbsp;public class PortalConfigController extends WiFreeController {</b>
-<i class="no-highlight">20</i>&nbsp;
-<i class="no-highlight">21</i>&nbsp;    @Inject
-<i class="no-highlight">22</i>&nbsp;    private PortalDAO portalDAO;
-<i class="no-highlight">23</i>&nbsp;
-<i class="no-highlight">24</i>&nbsp;    @Inject
-<i class="no-highlight">25</i>&nbsp;    private SurveyDAO surveyDAO;
-<i class="no-highlight">26</i>&nbsp;
-<i class="no-highlight">27</i>&nbsp;    @Inject
-<i class="no-highlight">28</i>&nbsp;    private PortalLoginConfigurationDAO portalLoginConfigurationDAO;
-<i class="no-highlight">29</i>&nbsp;
-<i class="no-highlight">30</i>&nbsp;    @Inject
-<i class="no-highlight">31</i>&nbsp;    Config config;
-<i class="no-highlight">32</i>&nbsp;
-<i class="no-highlight">33</i>&nbsp;    public Result clientLanding(Long portalId) {
-<b class="fc"><i class="no-highlight">34</i>&nbsp;        logRequest();</b>
-<i class="no-highlight">35</i>&nbsp;
-<b class="fc"><i class="no-highlight">36</i>&nbsp;        Portal portal = portalDAO.get(portalId);</b>
-<b class="fc"><i class="no-highlight">37</i>&nbsp;        String title = portal.getName();</b>
-<b class="fc"><i class="no-highlight">38</i>&nbsp;        String iframeURL = portal.getHomeURL();</b>
-<b class="fc"><i class="no-highlight">39</i>&nbsp;        LandingChoicesDTO landingChoices = new LandingChoicesDTO(title, iframeURL);</b>
-<b class="fc"><i class="no-highlight">40</i>&nbsp;        String templateId = &quot;template-2&quot;; // TODO implementar ABM</b>
-<b class="fc"><i class="no-highlight">41</i>&nbsp;        ClientLandingResponse clientLandingResponse = new ClientLandingResponse(landingChoices,</b>
-<b class="fc"><i class="no-highlight">42</i>&nbsp;                portalId.toString(),</b>
-<i class="no-highlight">43</i>&nbsp;                templateId);
-<b class="fc"><i class="no-highlight">44</i>&nbsp;        return ok(clientLandingResponse.toJson());</b>
-<i class="no-highlight">45</i>&nbsp;    }
-<i class="no-highlight">46</i>&nbsp;
-<i class="no-highlight">47</i>&nbsp;    public Result clientAuth(Long portalId) {
-<b class="fc"><i class="no-highlight">48</i>&nbsp;        logRequest();</b>
-<i class="no-highlight">49</i>&nbsp;
-<b class="fc"><i class="no-highlight">50</i>&nbsp;        Portal portal = portalDAO.get(portalId);</b>
-<i class="no-highlight">51</i>&nbsp;
-<b class="fc"><i class="no-highlight">52</i>&nbsp;        List&lt;LoginMethodType&gt; loginMethodTypes = portal.getNetworkConfigurations().stream()</b>
-<b class="fc"><i class="no-highlight">53</i>&nbsp;                .map(PortalNetworkConfiguration::getLoginMethod)</b>
-<b class="fc"><i class="no-highlight">54</i>&nbsp;                .collect(Collectors.toList());</b>
-<b class="fc"><i class="no-highlight">55</i>&nbsp;        Map&lt;PortalApplicationType, PortalApp&gt; appsByType = portal.getApplicationsByType();</b>
-<b class="fc"><i class="no-highlight">56</i>&nbsp;        List&lt;String&gt; images = appsByType.get(PortalApplicationType.Carousel).getConfig().getImages().stream()</b>
-<b class="fc"><i class="no-highlight">57</i>&nbsp;                .map(File::getName)</b>
-<b class="fc"><i class="no-highlight">58</i>&nbsp;                .collect(Collectors.toList());</b>
-<i class="no-highlight">59</i>&nbsp;
-<b class="fc"><i class="no-highlight">60</i>&nbsp;        List&lt;LoginTypeOptionsDTO&gt; loginTypeOptions = new ArrayList&lt;&gt;();</b>
-<i class="no-highlight">61</i>&nbsp;
-<b class="fc"><i class="no-highlight">62</i>&nbsp;        if (loginMethodTypes.contains(LoginMethodType.Survey)) {</b>
-<b class="fc"><i class="no-highlight">63</i>&nbsp;            Optional&lt;Survey&gt; portalActiveSurvey = Optional.ofNullable(surveyDAO.findPortalActiveSurvey(portalId));</b>
-<b class="fc"><i class="no-highlight">64</i>&nbsp;            if (portalActiveSurvey.isPresent()) {</b>
-<b class="nc"><i class="no-highlight">65</i>&nbsp;                SurveyFormDTO surveyForm = SurveyFormDTO.fromDomain(portalActiveSurvey.get());</b>
-<b class="nc"><i class="no-highlight">66</i>&nbsp;                loginTypeOptions.add(new LoginTypeOptionsDTO(surveyForm));</b>
-<i class="no-highlight">67</i>&nbsp;            }
-<i class="no-highlight">68</i>&nbsp;        }
-<b class="fc"><i class="no-highlight">69</i>&nbsp;        if (loginMethodTypes.contains(LoginMethodType.SocialLogin)) {</b>
-<b class="fc"><i class="no-highlight">70</i>&nbsp;            List&lt;PortalLoginConfiguration&gt; configs = portalLoginConfigurationDAO.findEnabled(portalId);</b>
-<b class="fc"><i class="no-highlight">71</i>&nbsp;            List&lt;SocialMediaKeysDTO&gt; socialMediaKeys = configs.stream()</b>
-<b class="fc"><i class="no-highlight">72</i>&nbsp;                    .map(PortalLoginConfiguration::getKeys)</b>
-<b class="fc"><i class="no-highlight">73</i>&nbsp;                    .map(SocialKeysDTO::fromDomain)</b>
-<b class="fc"><i class="no-highlight">74</i>&nbsp;                    .map(SocialMediaKeysDTO::new)</b>
-<b class="fc"><i class="no-highlight">75</i>&nbsp;                    .collect(Collectors.toList());</b>
-<b class="fc"><i class="no-highlight">76</i>&nbsp;            loginTypeOptions.add(new LoginTypeOptionsDTO(socialMediaKeys));</b>
-<i class="no-highlight">77</i>&nbsp;        }
-<i class="no-highlight">78</i>&nbsp;
-<b class="fc"><i class="no-highlight">79</i>&nbsp;        AuthDataDTO authData = new AuthDataDTO(</b>
-<b class="fc"><i class="no-highlight">80</i>&nbsp;                loginMethodTypes.stream().map(l -&gt; l.id).collect(Collectors.toList()),</b>
-<i class="no-highlight">81</i>&nbsp;                loginTypeOptions,
-<b class="fc"><i class="no-highlight">82</i>&nbsp;                portalId.toString());</b>
-<b class="fc"><i class="no-highlight">83</i>&nbsp;        String name = portal.getName();</b>
-<b class="fc"><i class="no-highlight">84</i>&nbsp;        ClientDataDTO clientData = new ClientDataDTO(portalId.toString(), name, portal.getDescription());</b>
-<b class="fc"><i class="no-highlight">85</i>&nbsp;        ClientAuthResponse clientAuthResponse = new ClientAuthResponse(authData,</b>
-<i class="no-highlight">86</i>&nbsp;                clientData,
-<i class="no-highlight">87</i>&nbsp;                new CarouselDataDTO(images));
-<b class="fc"><i class="no-highlight">88</i>&nbsp;        return ok(clientAuthResponse.toJson());</b>
-<i class="no-highlight">89</i>&nbsp;    }
-<i class="no-highlight">90</i>&nbsp;
-<i class="no-highlight">91</i>&nbsp;}
+<i class="no-highlight">3</i>&nbsp;import java.util.List;
+<i class="no-highlight">4</i>&nbsp;
+<i class="no-highlight">5</i>&nbsp;public class AuthDataDTO extends WiFreeDTO {
+<i class="no-highlight">6</i>&nbsp;    public List&lt;String&gt; loginTypes;
+<i class="no-highlight">7</i>&nbsp;    public List&lt;LoginTypeOptionsDTO&gt; loginTypeOptions;
+<i class="no-highlight">8</i>&nbsp;    public String client_id;
+<i class="no-highlight">9</i>&nbsp;
+<b class="nc"><i class="no-highlight">10</i>&nbsp;    public AuthDataDTO() {</b>
+<i class="no-highlight">11</i>&nbsp;    }
+<i class="no-highlight">12</i>&nbsp;
+<b class="fc"><i class="no-highlight">13</i>&nbsp;    public AuthDataDTO(List&lt;String&gt; loginTypes, List&lt;LoginTypeOptionsDTO&gt; loginTypeOptions, String client_id) {</b>
+<b class="fc"><i class="no-highlight">14</i>&nbsp;        this.loginTypes = loginTypes;</b>
+<b class="fc"><i class="no-highlight">15</i>&nbsp;        this.loginTypeOptions = loginTypeOptions;</b>
+<b class="fc"><i class="no-highlight">16</i>&nbsp;        this.client_id = client_id;</b>
+<i class="no-highlight">17</i>&nbsp;    }
+<i class="no-highlight">18</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -200,7 +117,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-08-27 21:21</div>
+    <div style="float:right;">generated on 2022-08-28 18:36</div>
 </div>
 </body>
 </html>

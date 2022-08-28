@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > DateHelper</title>
+  <title>Coverage Report > cssfiles</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -17,18 +17,15 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">utils</a>
+    <a href="../index.html">views.html.parts</a>
 </div>
 
-<h1>Coverage Summary for Class: DateHelper (utils)</h1>
+<h1>Coverage Summary for Class: cssfiles (views.html.parts)</h1>
 
 <table class="coverageStats">
+
 <tr>
   <th class="name">Class</th>
-<th class="coverageStat 
-">
-  Class, %
-</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -38,34 +35,44 @@ Current scope:     <a href="../../index.html">all classes</a>
   Line, %
 </th>
 </tr>
+  <tr>
+    <td class="name">cssfiles$</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+  </tr>
 <tr>
-  <td class="name">DateHelper</td>
+  <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    0%
   </span>
   <span class="absValue">
-    (1/1)
+    (0/5)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    70.8%
+    0%
   </span>
   <span class="absValue">
-    (17/24)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    68%
-  </span>
-  <span class="absValue">
-    (17/25)
+    (0/13)
   </span>
 </td>
 </tr>
-
 </table>
 
 <br/>
@@ -73,124 +80,76 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package utils;
-<i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import scala.Tuple2;
-<i class="no-highlight">4</i>&nbsp;
-<i class="no-highlight">5</i>&nbsp;import java.time.*;
-<i class="no-highlight">6</i>&nbsp;import java.time.temporal.ChronoUnit;
-<i class="no-highlight">7</i>&nbsp;import java.time.temporal.Temporal;
-<i class="no-highlight">8</i>&nbsp;import java.time.temporal.TemporalAmount;
-<i class="no-highlight">9</i>&nbsp;import java.time.temporal.TemporalUnit;
-<i class="no-highlight">10</i>&nbsp;import java.util.List;
-<i class="no-highlight">11</i>&nbsp;import java.util.function.Function;
-<i class="no-highlight">12</i>&nbsp;
-<b class="nc"><i class="no-highlight">13</i>&nbsp;public class DateHelper {</b>
-<i class="no-highlight">14</i>&nbsp;	
-<i class="no-highlight">15</i>&nbsp;//	private static final ZoneId zone = ZoneId.systemDefault();
-<b class="fc"><i class="no-highlight">16</i>&nbsp;	private static final ZoneId zone = ZoneId.of(&quot;UTC&quot;);</b>
-<i class="no-highlight">17</i>&nbsp;
-<i class="no-highlight">18</i>&nbsp;	// Public methods
-<i class="no-highlight">19</i>&nbsp;
-<i class="no-highlight">20</i>&nbsp;	public static DayOfWeek dayOfWeek(Instant date) {
-<b class="fc"><i class="no-highlight">21</i>&nbsp;		return toLocalDate(date).getDayOfWeek();</b>
-<i class="no-highlight">22</i>&nbsp;	}
-<i class="no-highlight">23</i>&nbsp;
-<i class="no-highlight">24</i>&nbsp;	public static int hourBeginning(Instant date) {
-<b class="fc"><i class="no-highlight">25</i>&nbsp;		return date.atZone(zone).getHour();</b>
-<i class="no-highlight">26</i>&nbsp;	}
-<i class="no-highlight">27</i>&nbsp;
-<i class="no-highlight">28</i>&nbsp;	public static Instant dayBeginning(Instant date) {
-<b class="fc"><i class="no-highlight">29</i>&nbsp;		return processInstant(localDate -&gt; localDate.atStartOfDay(zone).toLocalDate(), date);</b>
-<i class="no-highlight">30</i>&nbsp;	}
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;
+<i class="no-highlight">2</i>&nbsp;package views.html.parts
+<i class="no-highlight">3</i>&nbsp;
+<i class="no-highlight">4</i>&nbsp;import _root_.play.twirl.api.TwirlFeatureImports._
+<i class="no-highlight">5</i>&nbsp;import _root_.play.twirl.api.TwirlHelperImports._
+<i class="no-highlight">6</i>&nbsp;import _root_.play.twirl.api.Html
+<i class="no-highlight">7</i>&nbsp;import _root_.play.twirl.api.JavaScript
+<i class="no-highlight">8</i>&nbsp;import _root_.play.twirl.api.Txt
+<i class="no-highlight">9</i>&nbsp;import _root_.play.twirl.api.Xml
+<i class="no-highlight">10</i>&nbsp;import models._
+<i class="no-highlight">11</i>&nbsp;import controllers._
+<i class="no-highlight">12</i>&nbsp;import play.api.i18n._
+<i class="no-highlight">13</i>&nbsp;import views.html._
+<i class="no-highlight">14</i>&nbsp;import play.api.templates.PlayMagic._
+<i class="no-highlight">15</i>&nbsp;import java.lang._
+<i class="no-highlight">16</i>&nbsp;import java.util._
+<i class="no-highlight">17</i>&nbsp;import scala.collection.JavaConverters._
+<i class="no-highlight">18</i>&nbsp;import play.core.j.PlayMagicForJava._
+<i class="no-highlight">19</i>&nbsp;import play.mvc._
+<i class="no-highlight">20</i>&nbsp;import play.api.data.Field
+<i class="no-highlight">21</i>&nbsp;import play.mvc.Http.Context.Implicit._
+<i class="no-highlight">22</i>&nbsp;import play.data._
+<i class="no-highlight">23</i>&nbsp;import play.core.j.PlayFormsMagicForJava._
+<i class="no-highlight">24</i>&nbsp;
+<b class="nc"><i class="no-highlight">25</i>&nbsp;object cssfiles extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template0[play.twirl.api.HtmlFormat.Appendable] {</b>
+<i class="no-highlight">26</i>&nbsp;
+<i class="no-highlight">27</i>&nbsp;  /**/
+<i class="no-highlight">28</i>&nbsp;  def apply/*1.2*/():play.twirl.api.HtmlFormat.Appendable = {
+<b class="nc"><i class="no-highlight">29</i>&nbsp;    _display_ {</b>
+<i class="no-highlight">30</i>&nbsp;      {
 <i class="no-highlight">31</i>&nbsp;
-<i class="no-highlight">32</i>&nbsp;	public static Instant weekBeginning(Instant date) {
-<b class="nc"><i class="no-highlight">33</i>&nbsp;		return processInstant(localDate -&gt; localDate.with(DayOfWeek.MONDAY), date);</b>
-<i class="no-highlight">34</i>&nbsp;	}
-<i class="no-highlight">35</i>&nbsp;
-<i class="no-highlight">36</i>&nbsp;	public static Instant monthBeginning(Instant date) {
-<b class="nc"><i class="no-highlight">37</i>&nbsp;		return processInstant(localDate -&gt; localDate.withDayOfMonth(1), date);</b>
-<i class="no-highlight">38</i>&nbsp;	}
-<i class="no-highlight">39</i>&nbsp;
-<i class="no-highlight">40</i>&nbsp;	public static Instant yearBeginning(Instant date) {
-<b class="nc"><i class="no-highlight">41</i>&nbsp;		return processInstant(localDate -&gt; localDate.withDayOfYear(1), date);</b>
-<i class="no-highlight">42</i>&nbsp;	}
-<i class="no-highlight">43</i>&nbsp;
-<i class="no-highlight">44</i>&nbsp;	public static Instant oneDayAgo(Instant date) {
-<b class="nc"><i class="no-highlight">45</i>&nbsp;		return processInstant(localDate -&gt; localDate.minusDays(1), date);</b>
-<i class="no-highlight">46</i>&nbsp;	}
-<i class="no-highlight">47</i>&nbsp;
-<i class="no-highlight">48</i>&nbsp;	public static Instant sixtyMinutesAgo(Instant date) {
-<b class="fc"><i class="no-highlight">49</i>&nbsp;		return processInstantTime(localDate -&gt; localDate.minus(Duration.ofMinutes(60)), date);</b>
-<i class="no-highlight">50</i>&nbsp;	}
-<i class="no-highlight">51</i>&nbsp;
-<i class="no-highlight">52</i>&nbsp;	public static Instant oneWeekAgo(Instant date) {
-<b class="fc"><i class="no-highlight">53</i>&nbsp;		return processInstant(localDate -&gt; localDate.minusWeeks(1), date);</b>
-<i class="no-highlight">54</i>&nbsp;	}
-<i class="no-highlight">55</i>&nbsp;
-<i class="no-highlight">56</i>&nbsp;	public static Instant oneMonthAgo(Instant date) {
-<b class="nc"><i class="no-highlight">57</i>&nbsp;		return processInstant(localDate -&gt; localDate.minusMonths(1), date);</b>
-<i class="no-highlight">58</i>&nbsp;	}
-<i class="no-highlight">59</i>&nbsp;
-<i class="no-highlight">60</i>&nbsp;	public static Instant oneYearAgo(Instant date) {
-<b class="fc"><i class="no-highlight">61</i>&nbsp;		return processInstant(localDate -&gt; localDate.minusYears(1), date);</b>
-<i class="no-highlight">62</i>&nbsp;	}
-<i class="no-highlight">63</i>&nbsp;
-<i class="no-highlight">64</i>&nbsp;	public static Instant now() {
-<b class="fc"><i class="no-highlight">65</i>&nbsp;		return Instant.now();</b>
-<i class="no-highlight">66</i>&nbsp;	}
-<i class="no-highlight">67</i>&nbsp;
-<i class="no-highlight">68</i>&nbsp;	public static Instant min() {
-<b class="fc"><i class="no-highlight">69</i>&nbsp;		return Instant.parse(&quot;1970-01-01T00:00:00.000Z&quot;);</b>
-<i class="no-highlight">70</i>&nbsp;	}
-<i class="no-highlight">71</i>&nbsp;
-<i class="no-highlight">72</i>&nbsp;	public static Tuple2&lt;Instant, Instant&gt; strings2Dates(String dates) {
-<b class="nc"><i class="no-highlight">73</i>&nbsp;		final Tuple2&lt;String, String&gt; splittedDatesStrings = StringHelper.splitBlank(dates);</b>
-<b class="nc"><i class="no-highlight">74</i>&nbsp;		return Tuple2.apply(Instant.parse(splittedDatesStrings._1()), Instant.parse(splittedDatesStrings._2()));</b>
-<i class="no-highlight">75</i>&nbsp;	}
-<i class="no-highlight">76</i>&nbsp;
-<i class="no-highlight">77</i>&nbsp;	/**
-<i class="no-highlight">78</i>&nbsp;	 *
-<i class="no-highlight">79</i>&nbsp;	 * @param latestDate
-<i class="no-highlight">80</i>&nbsp;	 * @param earlierDate
-<i class="no-highlight">81</i>&nbsp;	 * @return The seconds between latestDate and earlierDate
-<i class="no-highlight">82</i>&nbsp;	 */
-<i class="no-highlight">83</i>&nbsp;	public static long between(Instant latestDate, Instant earlierDate) {
-<b class="fc"><i class="no-highlight">84</i>&nbsp;		return toLocalDateTime(earlierDate).until(toLocalDateTime(latestDate), ChronoUnit.SECONDS);</b>
-<i class="no-highlight">85</i>&nbsp;	}
-<i class="no-highlight">86</i>&nbsp;
-<i class="no-highlight">87</i>&nbsp;	public static long yearsBetween(Instant latestDate, Instant earlierDate) {
-<b class="fc"><i class="no-highlight">88</i>&nbsp;		return toLocalDateTime(earlierDate).until(toLocalDateTime(latestDate), ChronoUnit.YEARS);</b>
-<i class="no-highlight">89</i>&nbsp;	}
-<i class="no-highlight">90</i>&nbsp;
-<i class="no-highlight">91</i>&nbsp;
-<i class="no-highlight">92</i>&nbsp;
-<i class="no-highlight">93</i>&nbsp;	// Private methods
-<i class="no-highlight">94</i>&nbsp;
-<i class="no-highlight">95</i>&nbsp;	private static Instant processInstant(Function&lt;LocalDate, LocalDate&gt; f, Instant instant) {
-<b class="fc"><i class="no-highlight">96</i>&nbsp;		return toInstant(f.apply(toLocalDate(instant)));</b>
-<i class="no-highlight">97</i>&nbsp;	}
-<i class="no-highlight">98</i>&nbsp;
-<i class="no-highlight">99</i>&nbsp;	private static Instant processInstantTime(Function&lt;LocalDateTime, LocalDateTime&gt; f, Instant instant) {
-<b class="fc"><i class="no-highlight">100</i>&nbsp;		return toInstant(f.apply(toLocalDateTime(instant)));</b>
-<i class="no-highlight">101</i>&nbsp;	}
-<i class="no-highlight">102</i>&nbsp;
-<i class="no-highlight">103</i>&nbsp;	public static LocalDate toLocalDate(Instant instant) {
-<b class="fc"><i class="no-highlight">104</i>&nbsp;		return instant.atZone(zone).toLocalDate();</b>
-<i class="no-highlight">105</i>&nbsp;	}
-<i class="no-highlight">106</i>&nbsp;
-<i class="no-highlight">107</i>&nbsp;	public static LocalDateTime toLocalDateTime(Instant instant) {
-<b class="fc"><i class="no-highlight">108</i>&nbsp;		return instant.atZone(zone).toLocalDateTime();</b>
-<i class="no-highlight">109</i>&nbsp;	}
-<i class="no-highlight">110</i>&nbsp;
-<i class="no-highlight">111</i>&nbsp;	public static Instant toInstant(LocalDate localDate) {
-<b class="fc"><i class="no-highlight">112</i>&nbsp;		return localDate.atStartOfDay(zone).toInstant();</b>
-<i class="no-highlight">113</i>&nbsp;	}
-<i class="no-highlight">114</i>&nbsp;
-<i class="no-highlight">115</i>&nbsp;	public static Instant toInstant(LocalDateTime localDateTime) {
-<b class="fc"><i class="no-highlight">116</i>&nbsp;		return localDateTime.atZone(zone).toInstant();</b>
-<i class="no-highlight">117</i>&nbsp;	}
-<i class="no-highlight">118</i>&nbsp;}
+<i class="no-highlight">32</i>&nbsp;
+<b class="nc"><i class="no-highlight">33</i>&nbsp;Seq[Any](format.raw/*2.1*/(&quot;&quot;&quot;&lt;!-- Bootstrap --&gt;</b>
+<b class="nc"><i class="no-highlight">34</i>&nbsp;&lt;link href=&quot;&quot;&quot;&quot;),_display_(/*3.14*/routes/*3.20*/.Assets.versioned(&quot;vendors/bootstrap/dist/css/bootstrap.min.css&quot;)),format.raw/*3.85*/(&quot;&quot;&quot;&quot; rel=&quot;stylesheet&quot;&gt;</b>
+<i class="no-highlight">35</i>&nbsp;&lt;!-- Font Awesome --&gt;
+<b class="nc"><i class="no-highlight">36</i>&nbsp;&lt;link href=&quot;&quot;&quot;&quot;),_display_(/*5.14*/routes/*5.20*/.Assets.versioned(&quot;vendors/font-awesome/css/font-awesome.min.css&quot;)),format.raw/*5.86*/(&quot;&quot;&quot;&quot; rel=&quot;stylesheet&quot;&gt;</b>
+<i class="no-highlight">37</i>&nbsp;&lt;!-- NProgress --&gt;
+<b class="nc"><i class="no-highlight">38</i>&nbsp;&lt;link href=&quot;&quot;&quot;&quot;),_display_(/*7.14*/routes/*7.20*/.Assets.versioned(&quot;vendors/nprogress/nprogress.css&quot;)),format.raw/*7.72*/(&quot;&quot;&quot;&quot; rel=&quot;stylesheet&quot;&gt;</b>
+<i class="no-highlight">39</i>&nbsp;&lt;!-- iCheck --&gt;
+<b class="nc"><i class="no-highlight">40</i>&nbsp;&lt;link href=&quot;&quot;&quot;&quot;),_display_(/*9.14*/routes/*9.20*/.Assets.versioned(&quot;vendors/iCheck/skins/flat/green.css&quot;)),format.raw/*9.76*/(&quot;&quot;&quot;&quot; rel=&quot;stylesheet&quot;&gt;</b>
+<i class="no-highlight">41</i>&nbsp;
+<i class="no-highlight">42</i>&nbsp;&lt;!-- bootstrap-progressbar --&gt;
+<b class="nc"><i class="no-highlight">43</i>&nbsp;&lt;link href=&quot;&quot;&quot;&quot;),_display_(/*12.14*/routes/*12.20*/.Assets.versioned(&quot;vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css&quot;)),format.raw/*12.110*/(&quot;&quot;&quot;&quot; rel=&quot;stylesheet&quot;&gt;</b>
+<i class="no-highlight">44</i>&nbsp;&lt;!-- JQVMap --&gt;
+<b class="nc"><i class="no-highlight">45</i>&nbsp;&lt;link href=&quot;&quot;&quot;&quot;),_display_(/*14.14*/routes/*14.20*/.Assets.versioned(&quot;vendors/jqvmap/dist/jqvmap.min.css&quot;)),format.raw/*14.75*/(&quot;&quot;&quot;&quot; rel=&quot;stylesheet&quot;/&gt;</b>
+<i class="no-highlight">46</i>&nbsp;&lt;!-- bootstrap-daterangepicker --&gt;
+<b class="nc"><i class="no-highlight">47</i>&nbsp;&lt;link href=&quot;&quot;&quot;&quot;),_display_(/*16.14*/routes/*16.20*/.Assets.versioned(&quot;vendors/bootstrap-daterangepicker/daterangepicker.css&quot;)),format.raw/*16.94*/(&quot;&quot;&quot;&quot; rel=&quot;stylesheet&quot;&gt;</b>
+<i class="no-highlight">48</i>&nbsp;&quot;&quot;&quot;))
+<i class="no-highlight">49</i>&nbsp;      }
+<i class="no-highlight">50</i>&nbsp;    }
+<i class="no-highlight">51</i>&nbsp;  }
+<i class="no-highlight">52</i>&nbsp;
+<b class="nc"><i class="no-highlight">53</i>&nbsp;  def render(): play.twirl.api.HtmlFormat.Appendable = apply()</b>
+<i class="no-highlight">54</i>&nbsp;
+<b class="nc"><i class="no-highlight">55</i>&nbsp;  def f:(() =&gt; play.twirl.api.HtmlFormat.Appendable) = () =&gt; apply()</b>
+<i class="no-highlight">56</i>&nbsp;
+<b class="nc"><i class="no-highlight">57</i>&nbsp;  def ref: this.type = this</b>
+<i class="no-highlight">58</i>&nbsp;
+<i class="no-highlight">59</i>&nbsp;}
+<i class="no-highlight">60</i>&nbsp;
+<i class="no-highlight">61</i>&nbsp;
+<i class="no-highlight">62</i>&nbsp;              /*
+<i class="no-highlight">63</i>&nbsp;                  -- GENERATED --
+<i class="no-highlight">64</i>&nbsp;                  SOURCE: app/views/parts/cssfiles.scala.html
+<i class="no-highlight">65</i>&nbsp;                  HASH: dd848ea67091e9a99fdb7cc31587eccea4badbae
+<i class="no-highlight">66</i>&nbsp;                  MATRIX: 950-&gt;1|1046-&gt;4|1104-&gt;36|1118-&gt;42|1203-&gt;107|1284-&gt;162|1298-&gt;168|1384-&gt;234|1462-&gt;286|1476-&gt;292|1548-&gt;344|1623-&gt;393|1637-&gt;399|1713-&gt;455|1805-&gt;520|1820-&gt;526|1932-&gt;616|2008-&gt;665|2023-&gt;671|2099-&gt;726|2195-&gt;795|2210-&gt;801|2305-&gt;875
+<i class="no-highlight">67</i>&nbsp;                  LINES: 28-&gt;1|33-&gt;2|34-&gt;3|34-&gt;3|34-&gt;3|36-&gt;5|36-&gt;5|36-&gt;5|38-&gt;7|38-&gt;7|38-&gt;7|40-&gt;9|40-&gt;9|40-&gt;9|43-&gt;12|43-&gt;12|43-&gt;12|45-&gt;14|45-&gt;14|45-&gt;14|47-&gt;16|47-&gt;16|47-&gt;16
+<i class="no-highlight">68</i>&nbsp;                  -- GENERATED --
+<i class="no-highlight">69</i>&nbsp;              */
+<i class="no-highlight">70</i>&nbsp;          
 </div>
 </pre>
 </div>
@@ -217,7 +176,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-08-27 21:21</div>
+    <div style="float:right;">generated on 2022-08-28 18:30</div>
 </div>
 </body>
 </html>

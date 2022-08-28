@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > GetAllSurveysRequest</title>
+  <title>Coverage Report > GetAllSurveysFunction</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -17,10 +17,10 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">operations.requests</a>
+    <a href="../index.html">services.core.functions</a>
 </div>
 
-<h1>Coverage Summary for Class: GetAllSurveysRequest (operations.requests)</h1>
+<h1>Coverage Summary for Class: GetAllSurveysFunction (services.core.functions)</h1>
 
 <table class="coverageStats">
 
@@ -36,59 +36,43 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">GetAllSurveysRequest</td>
+  <td class="name">GetAllSurveysFunction</td>
 <td class="coverageStat">
   <span class="percent">
-    50%
+    66.7%
   </span>
   <span class="absValue">
-    (1/2)
+    (4/6)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    50%
+    63.6%
   </span>
   <span class="absValue">
-    (1/2)
+    (7/11)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">GetAllSurveysRequest$</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/1)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/1)
-  </span>
-</td>
+    <td class="name">GetAllSurveysFunction$$FastClassByGuice$$77798874</td>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    33.3%
+    66.7%
   </span>
   <span class="absValue">
-    (1/3)
+    (4/6)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    33.3%
+    63.6%
   </span>
   <span class="absValue">
-    (1/3)
+    (7/11)
   </span>
 </td>
 </tr>
@@ -99,16 +83,53 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package operations.requests
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package services.core.functions;
 <i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import operations.core.RequestType.GET_ALL_SURVEYS_REQUEST
-<i class="no-highlight">4</i>&nbsp;import operations.core.{RequestType, WiFreeRequest}
-<i class="no-highlight">5</i>&nbsp;
-<b class="pc"><i class="no-highlight">6</i>&nbsp;case class GetAllSurveysRequest(portalId: Long) extends WiFreeRequest {</b>
-<i class="no-highlight">7</i>&nbsp;
-<b class="nc"><i class="no-highlight">8</i>&nbsp;  override def requestType: RequestType = GET_ALL_SURVEYS_REQUEST</b>
+<i class="no-highlight">3</i>&nbsp;import daos.SurveyDAO;
+<i class="no-highlight">4</i>&nbsp;import models.Survey;
+<i class="no-highlight">5</i>&nbsp;import operations.requests.GetAllSurveysRequest;
+<i class="no-highlight">6</i>&nbsp;import operations.responses.GetAllSurveysResponse;
+<i class="no-highlight">7</i>&nbsp;import services.core.ServiceType;
+<i class="no-highlight">8</i>&nbsp;import services.core.WiFreeFunction;
 <i class="no-highlight">9</i>&nbsp;
-<i class="no-highlight">10</i>&nbsp;}
+<i class="no-highlight">10</i>&nbsp;import java.util.List;
+<i class="no-highlight">11</i>&nbsp;import java.util.function.Function;
+<i class="no-highlight">12</i>&nbsp;
+<i class="no-highlight">13</i>&nbsp;import static java.util.Collections.emptyList;
+<i class="no-highlight">14</i>&nbsp;
+<b class="fc"><i class="no-highlight">15</i>&nbsp;public class GetAllSurveysFunction extends WiFreeFunction&lt;GetAllSurveysRequest, GetAllSurveysResponse&gt; {</b>
+<i class="no-highlight">16</i>&nbsp;
+<i class="no-highlight">17</i>&nbsp;    @Override
+<i class="no-highlight">18</i>&nbsp;    public Function&lt;GetAllSurveysRequest, GetAllSurveysResponse&gt; function() {
+<b class="fc"><i class="no-highlight">19</i>&nbsp;        function = request -&gt; {</b>
+<i class="no-highlight">20</i>&nbsp;            try {
+<b class="fc"><i class="no-highlight">21</i>&nbsp;                SurveyDAO surveyDAO = new SurveyDAO();</b>
+<b class="fc"><i class="no-highlight">22</i>&nbsp;                List&lt;Survey&gt; allSurveys = surveyDAO.findByPortal(request.portalId());</b>
+<b class="fc"><i class="no-highlight">23</i>&nbsp;                return new GetAllSurveysResponse(allSurveys, true, null);</b>
+<b class="nc"><i class="no-highlight">24</i>&nbsp;            } catch (Exception ex) {</b>
+<b class="nc"><i class="no-highlight">25</i>&nbsp;                return new GetAllSurveysResponse(emptyList(), false, null);</b>
+<i class="no-highlight">26</i>&nbsp;            }
+<i class="no-highlight">27</i>&nbsp;
+<i class="no-highlight">28</i>&nbsp;        };
+<b class="fc"><i class="no-highlight">29</i>&nbsp;        return function;</b>
+<i class="no-highlight">30</i>&nbsp;    }
+<i class="no-highlight">31</i>&nbsp;
+<i class="no-highlight">32</i>&nbsp;    @Override
+<i class="no-highlight">33</i>&nbsp;    public Class&lt;GetAllSurveysRequest&gt; rqClass() {
+<b class="fc"><i class="no-highlight">34</i>&nbsp;        return GetAllSurveysRequest.class;</b>
+<i class="no-highlight">35</i>&nbsp;    }
+<i class="no-highlight">36</i>&nbsp;
+<i class="no-highlight">37</i>&nbsp;    @Override
+<i class="no-highlight">38</i>&nbsp;    public Class&lt;GetAllSurveysResponse&gt; rsClass() {
+<b class="nc"><i class="no-highlight">39</i>&nbsp;        return GetAllSurveysResponse.class;</b>
+<i class="no-highlight">40</i>&nbsp;    }
+<i class="no-highlight">41</i>&nbsp;
+<i class="no-highlight">42</i>&nbsp;    @Override
+<i class="no-highlight">43</i>&nbsp;    public ServiceType serviceType() {
+<b class="nc"><i class="no-highlight">44</i>&nbsp;        return ServiceType.TESTING_SERVICE;</b>
+<i class="no-highlight">45</i>&nbsp;    }
+<i class="no-highlight">46</i>&nbsp;
+<i class="no-highlight">47</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -135,7 +156,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-08-27 21:21</div>
+    <div style="float:right;">generated on 2022-08-28 18:36</div>
 </div>
 </body>
 </html>

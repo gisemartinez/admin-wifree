@@ -1,0 +1,182 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > resources_body</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">views.html.parts</a>
+</div>
+
+<h1>Coverage Summary for Class: resources_body (views.html.parts)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">resources_body$</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/18)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/18)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;
+<i class="no-highlight">2</i>&nbsp;package views.html.parts
+<i class="no-highlight">3</i>&nbsp;
+<i class="no-highlight">4</i>&nbsp;import _root_.play.twirl.api.TwirlFeatureImports._
+<i class="no-highlight">5</i>&nbsp;import _root_.play.twirl.api.TwirlHelperImports._
+<i class="no-highlight">6</i>&nbsp;import _root_.play.twirl.api.Html
+<i class="no-highlight">7</i>&nbsp;import _root_.play.twirl.api.JavaScript
+<i class="no-highlight">8</i>&nbsp;import _root_.play.twirl.api.Txt
+<i class="no-highlight">9</i>&nbsp;import _root_.play.twirl.api.Xml
+<i class="no-highlight">10</i>&nbsp;import models._
+<i class="no-highlight">11</i>&nbsp;import controllers._
+<i class="no-highlight">12</i>&nbsp;import play.api.i18n._
+<i class="no-highlight">13</i>&nbsp;import views.html._
+<i class="no-highlight">14</i>&nbsp;import play.api.templates.PlayMagic._
+<i class="no-highlight">15</i>&nbsp;import java.lang._
+<i class="no-highlight">16</i>&nbsp;import java.util._
+<i class="no-highlight">17</i>&nbsp;import scala.collection.JavaConverters._
+<i class="no-highlight">18</i>&nbsp;import play.core.j.PlayMagicForJava._
+<i class="no-highlight">19</i>&nbsp;import play.mvc._
+<i class="no-highlight">20</i>&nbsp;import play.api.data.Field
+<i class="no-highlight">21</i>&nbsp;import play.mvc.Http.Context.Implicit._
+<i class="no-highlight">22</i>&nbsp;import play.data._
+<i class="no-highlight">23</i>&nbsp;import play.core.j.PlayFormsMagicForJava._
+<i class="no-highlight">24</i>&nbsp;
+<b class="nc"><i class="no-highlight">25</i>&nbsp;object resources_body extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template0[play.twirl.api.HtmlFormat.Appendable] {</b>
+<i class="no-highlight">26</i>&nbsp;
+<i class="no-highlight">27</i>&nbsp;  /**/
+<i class="no-highlight">28</i>&nbsp;  def apply/*1.2*/():play.twirl.api.HtmlFormat.Appendable = {
+<b class="nc"><i class="no-highlight">29</i>&nbsp;    _display_ {</b>
+<i class="no-highlight">30</i>&nbsp;      {
+<i class="no-highlight">31</i>&nbsp;
+<i class="no-highlight">32</i>&nbsp;
+<b class="nc"><i class="no-highlight">33</i>&nbsp;Seq[Any](format.raw/*2.1*/(&quot;&quot;&quot;</b>
+<b class="nc"><i class="no-highlight">34</i>&nbsp;&quot;&quot;&quot;),format.raw/*3.1*/(&quot;&quot;&quot;&lt;!-- WiFree utils --&gt;</b>
+<b class="nc"><i class="no-highlight">35</i>&nbsp;&lt;script src=&quot;&quot;&quot;&quot;),_display_(/*4.15*/routes/*4.21*/.Assets.versioned(&quot;js/wifree.js&quot;)),format.raw/*4.54*/(&quot;&quot;&quot;&quot;&gt;&lt;/script&gt;</b>
+<i class="no-highlight">36</i>&nbsp;
+<b class="nc"><i class="no-highlight">37</i>&nbsp;&quot;&quot;&quot;),_display_(/*6.2*/parts/*6.7*/.js.gauge()),format.raw/*6.18*/(&quot;&quot;&quot;</b>
+<b class="nc"><i class="no-highlight">38</i>&nbsp;&quot;&quot;&quot;),_display_(/*7.2*/parts/*7.7*/.js.bootstrap_progress()),format.raw/*7.31*/(&quot;&quot;&quot;</b>
+<b class="nc"><i class="no-highlight">39</i>&nbsp;&quot;&quot;&quot;),_display_(/*8.2*/parts/*8.7*/.js.jcheck()),format.raw/*8.19*/(&quot;&quot;&quot;</b>
+<b class="nc"><i class="no-highlight">40</i>&nbsp;&quot;&quot;&quot;),_display_(/*9.2*/parts/*9.7*/.js.daterangepicker()),format.raw/*9.28*/(&quot;&quot;&quot;</b>
+<b class="nc"><i class="no-highlight">41</i>&nbsp;&quot;&quot;&quot;),_display_(/*10.2*/parts/*10.7*/.js.chart_js()),format.raw/*10.21*/(&quot;&quot;&quot;</b>
+<b class="nc"><i class="no-highlight">42</i>&nbsp;&quot;&quot;&quot;),_display_(/*11.2*/parts/*11.7*/.js.flot_js()),format.raw/*11.20*/(&quot;&quot;&quot;</b>
+<b class="nc"><i class="no-highlight">43</i>&nbsp;&quot;&quot;&quot;),_display_(/*12.2*/parts/*12.7*/.js.worldmap()),format.raw/*12.21*/(&quot;&quot;&quot;</b>
+<b class="nc"><i class="no-highlight">44</i>&nbsp;&quot;&quot;&quot;),_display_(/*13.2*/parts/*13.7*/.js.pace()),format.raw/*13.17*/(&quot;&quot;&quot;</b>
+<b class="nc"><i class="no-highlight">45</i>&nbsp;&quot;&quot;&quot;),_display_(/*14.2*/parts/*14.7*/.js.skycons()),format.raw/*14.20*/(&quot;&quot;&quot;</b>
+<i class="no-highlight">46</i>&nbsp;
+<b class="nc"><i class="no-highlight">47</i>&nbsp;&quot;&quot;&quot;),format.raw/*16.1*/(&quot;&quot;&quot;&lt;script src=&quot;&quot;&quot;&quot;),_display_(/*16.15*/routes/*16.21*/.Assets.versioned(&quot;js/gentelella.js&quot;)),format.raw/*16.58*/(&quot;&quot;&quot;&quot;&gt;&lt;/script&gt;</b>
+<i class="no-highlight">48</i>&nbsp;&quot;&quot;&quot;))
+<i class="no-highlight">49</i>&nbsp;      }
+<i class="no-highlight">50</i>&nbsp;    }
+<i class="no-highlight">51</i>&nbsp;  }
+<i class="no-highlight">52</i>&nbsp;
+<b class="nc"><i class="no-highlight">53</i>&nbsp;  def render(): play.twirl.api.HtmlFormat.Appendable = apply()</b>
+<i class="no-highlight">54</i>&nbsp;
+<b class="nc"><i class="no-highlight">55</i>&nbsp;  def f:(() =&gt; play.twirl.api.HtmlFormat.Appendable) = () =&gt; apply()</b>
+<i class="no-highlight">56</i>&nbsp;
+<b class="nc"><i class="no-highlight">57</i>&nbsp;  def ref: this.type = this</b>
+<i class="no-highlight">58</i>&nbsp;
+<i class="no-highlight">59</i>&nbsp;}
+<i class="no-highlight">60</i>&nbsp;
+<i class="no-highlight">61</i>&nbsp;
+<i class="no-highlight">62</i>&nbsp;              /*
+<i class="no-highlight">63</i>&nbsp;                  -- GENERATED --
+<i class="no-highlight">64</i>&nbsp;                  SOURCE: app/views/parts/resources_body.scala.html
+<i class="no-highlight">65</i>&nbsp;                  HASH: f347b6c5769d8a5f67db0c26278466cbf4ff083b
+<i class="no-highlight">66</i>&nbsp;                  MATRIX: 956-&gt;1|1052-&gt;4|1079-&gt;5|1141-&gt;41|1155-&gt;47|1208-&gt;80|1247-&gt;94|1259-&gt;99|1290-&gt;110|1317-&gt;112|1329-&gt;117|1373-&gt;141|1400-&gt;143|1412-&gt;148|1444-&gt;160|1471-&gt;162|1483-&gt;167|1524-&gt;188|1552-&gt;190|1565-&gt;195|1600-&gt;209|1628-&gt;211|1641-&gt;216|1675-&gt;229|1703-&gt;231|1716-&gt;236|1751-&gt;250|1779-&gt;252|1792-&gt;257|1823-&gt;267|1851-&gt;269|1864-&gt;274|1898-&gt;287|1927-&gt;289|1968-&gt;303|1983-&gt;309|2041-&gt;346
+<i class="no-highlight">67</i>&nbsp;                  LINES: 28-&gt;1|33-&gt;2|34-&gt;3|35-&gt;4|35-&gt;4|35-&gt;4|37-&gt;6|37-&gt;6|37-&gt;6|38-&gt;7|38-&gt;7|38-&gt;7|39-&gt;8|39-&gt;8|39-&gt;8|40-&gt;9|40-&gt;9|40-&gt;9|41-&gt;10|41-&gt;10|41-&gt;10|42-&gt;11|42-&gt;11|42-&gt;11|43-&gt;12|43-&gt;12|43-&gt;12|44-&gt;13|44-&gt;13|44-&gt;13|45-&gt;14|45-&gt;14|45-&gt;14|47-&gt;16|47-&gt;16|47-&gt;16|47-&gt;16
+<i class="no-highlight">68</i>&nbsp;                  -- GENERATED --
+<i class="no-highlight">69</i>&nbsp;              */
+<i class="no-highlight">70</i>&nbsp;          
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-08-28 18:30</div>
+</div>
+</body>
+</html>

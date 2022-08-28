@@ -14,13 +14,19 @@ object SurveyFormHelper {
     mapping(
       "title" -> text,
       "enabled" -> boolean,
-      "fields" -> list(fieldConfigMapping)
+      "fields" -> list(fieldMapping)
     )(SurveyForm.apply)(SurveyForm.unapply)
   )
 
+  private def fieldMapping = {
+    mapping(
+      "config" -> fieldConfigMapping,
+      "type" -> text
+    )(FieldForm.apply)(FieldForm.unapply)
+  }
+
   private def fieldConfigMapping = {
     mapping(
-      "fieldType" -> text,
       "key" -> text,
       "label" -> text,
       "order" -> number,
@@ -51,11 +57,15 @@ object SurveyFormHelper {
 case class SurveyForm(
     title: String,
     enabled: Boolean,
-    fields: List[FieldConfigForm]
-) {}
+    fields: List[FieldForm]
+)
+
+case class FieldForm(
+    config: FieldConfigForm,
+    fieldType: String
+)
 
 case class FieldConfigForm(
-    fieldType: String, // Field
     key: String,
     label: String,
     order: Int, // FieldConfig

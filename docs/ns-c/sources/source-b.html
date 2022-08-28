@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > PortalLoginConfigurationDAO</title>
+  <title>Coverage Report > NetworkUserMACAddress</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -17,15 +17,18 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">daos</a>
+    <a href="../index.html">models</a>
 </div>
 
-<h1>Coverage Summary for Class: PortalLoginConfigurationDAO (daos)</h1>
+<h1>Coverage Summary for Class: NetworkUserMACAddress (models)</h1>
 
 <table class="coverageStats">
-
 <tr>
   <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -36,46 +39,33 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">PortalLoginConfigurationDAO</td>
+  <td class="name">NetworkUserMACAddress</td>
 <td class="coverageStat">
   <span class="percent">
     100%
   </span>
   <span class="absValue">
-    (3/3)
+    (1/1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    30.8%
   </span>
   <span class="absValue">
-    (5/5)
-  </span>
-</td>
-</tr>
-  <tr>
-    <td class="name">PortalLoginConfigurationDAO$$FastClassByGuice$$f42dc9cc</td>
-  </tr>
-<tr>
-  <td class="name"><strong>Total</strong></td>
-<td class="coverageStat">
-  <span class="percent">
-    100%
-  </span>
-  <span class="absValue">
-    (3/3)
+    (4/13)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    25%
   </span>
   <span class="absValue">
-    (5/5)
+    (4/16)
   </span>
 </td>
 </tr>
+
 </table>
 
 <br/>
@@ -83,36 +73,58 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package daos;
-<i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import io.ebean.Expr;
-<i class="no-highlight">4</i>&nbsp;import models.PortalLoginConfiguration;
-<i class="no-highlight">5</i>&nbsp;import models.types.LoginMethodType;
-<i class="no-highlight">6</i>&nbsp;
-<i class="no-highlight">7</i>&nbsp;import java.util.List;
-<i class="no-highlight">8</i>&nbsp;import java.util.Map;
-<i class="no-highlight">9</i>&nbsp;import java.util.function.Function;
-<i class="no-highlight">10</i>&nbsp;import java.util.stream.Collectors;
-<i class="no-highlight">11</i>&nbsp;
-<i class="no-highlight">12</i>&nbsp;import static io.ebean.Expr.eq;
-<i class="no-highlight">13</i>&nbsp;
-<i class="no-highlight">14</i>&nbsp;public class PortalLoginConfigurationDAO extends GenericDAO&lt;PortalLoginConfiguration&gt; {
-<i class="no-highlight">15</i>&nbsp;
-<i class="no-highlight">16</i>&nbsp;    public PortalLoginConfigurationDAO() {
-<b class="fc"><i class="no-highlight">17</i>&nbsp;        super(PortalLoginConfiguration.class);</b>
-<i class="no-highlight">18</i>&nbsp;    }
-<i class="no-highlight">19</i>&nbsp;
-<i class="no-highlight">20</i>&nbsp;    public Map&lt;LoginMethodType, PortalLoginConfiguration&gt; findForPortal(Long portalId) {
-<b class="fc"><i class="no-highlight">21</i>&nbsp;        return listWhere(eq(&quot;portal.id&quot;, portalId))</b>
-<b class="fc"><i class="no-highlight">22</i>&nbsp;                .stream()</b>
-<b class="fc"><i class="no-highlight">23</i>&nbsp;                .collect(Collectors.toMap(PortalLoginConfiguration::getLoginMethod, Function.identity()));</b>
-<i class="no-highlight">24</i>&nbsp;    }
-<i class="no-highlight">25</i>&nbsp;
-<i class="no-highlight">26</i>&nbsp;    public List&lt;PortalLoginConfiguration&gt; findEnabled(Long portalId) {
-<b class="fc"><i class="no-highlight">27</i>&nbsp;        return listWhere(Expr.and(eq(&quot;portal.id&quot;, portalId), Expr.eq(&quot;enabled&quot;, true)));</b>
-<i class="no-highlight">28</i>&nbsp;    }
-<i class="no-highlight">29</i>&nbsp;
-<i class="no-highlight">30</i>&nbsp;}
+<div class="sourceCode" id="sourceCode"><b class="fc"><i class="no-highlight">1</i>&nbsp;package models;</b>
+<b class="nc"><i class="no-highlight">2</i>&nbsp;</b>
+<i class="no-highlight">3</i>&nbsp;import javax.persistence.Entity;
+<i class="no-highlight">4</i>&nbsp;import javax.persistence.ManyToOne;
+<i class="no-highlight">5</i>&nbsp;import javax.persistence.Table;
+<b class="nc"><i class="no-highlight">6</i>&nbsp;import javax.persistence.UniqueConstraint;</b>
+<b class="nc"><i class="no-highlight">7</i>&nbsp;import javax.validation.constraints.NotNull;</b>
+<i class="no-highlight">8</i>&nbsp;
+<i class="no-highlight">9</i>&nbsp;/**
+<b class="nc"><i class="no-highlight">10</i>&nbsp; * Created by jesu on 20/06/17.</b>
+<i class="no-highlight">11</i>&nbsp; */
+<i class="no-highlight">12</i>&nbsp;@Table(
+<b class="fc"><i class="no-highlight">13</i>&nbsp;		uniqueConstraints = @UniqueConstraint(columnNames = {&quot;network_user_id&quot;, &quot;mac_address&quot;})</b>
+<i class="no-highlight">14</i>&nbsp;)
+<i class="no-highlight">15</i>&nbsp;@Entity
+<b class="fc"><i class="no-highlight">16</i>&nbsp;public class NetworkUserMACAddress extends BaseModel {</b>
+<i class="no-highlight">17</i>&nbsp;
+<i class="no-highlight">18</i>&nbsp;	@ManyToOne(optional = false)
+<i class="no-highlight">19</i>&nbsp;	private NetworkUser networkUser;
+<i class="no-highlight">20</i>&nbsp;
+<i class="no-highlight">21</i>&nbsp;	@NotNull
+<i class="no-highlight">22</i>&nbsp;	private String macAddress;
+<i class="no-highlight">23</i>&nbsp;
+<i class="no-highlight">24</i>&nbsp;
+<b class="fc"><i class="no-highlight">25</i>&nbsp;	public NetworkUserMACAddress() {}</b>
+<i class="no-highlight">26</i>&nbsp;
+<b class="nc"><i class="no-highlight">27</i>&nbsp;	public NetworkUserMACAddress(NetworkUser networkUser, String macAddress) {</b>
+<b class="nc"><i class="no-highlight">28</i>&nbsp;		this.networkUser = networkUser;</b>
+<b class="nc"><i class="no-highlight">29</i>&nbsp;		this.macAddress = macAddress;</b>
+<i class="no-highlight">30</i>&nbsp;	}
+<i class="no-highlight">31</i>&nbsp;
+<i class="no-highlight">32</i>&nbsp;	@Override
+<i class="no-highlight">33</i>&nbsp;	public String toLogString() {
+<b class="nc"><i class="no-highlight">34</i>&nbsp;		return null;</b>
+<i class="no-highlight">35</i>&nbsp;	}
+<i class="no-highlight">36</i>&nbsp;
+<i class="no-highlight">37</i>&nbsp;	public NetworkUser getNetworkUser() {
+<b class="nc"><i class="no-highlight">38</i>&nbsp;		return networkUser;</b>
+<i class="no-highlight">39</i>&nbsp;	}
+<i class="no-highlight">40</i>&nbsp;
+<i class="no-highlight">41</i>&nbsp;	public void setNetworkUser(NetworkUser networkUser) {
+<b class="nc"><i class="no-highlight">42</i>&nbsp;		this.networkUser = networkUser;</b>
+<i class="no-highlight">43</i>&nbsp;	}
+<i class="no-highlight">44</i>&nbsp;
+<i class="no-highlight">45</i>&nbsp;	public String getMacAddress() {
+<b class="nc"><i class="no-highlight">46</i>&nbsp;		return macAddress;</b>
+<i class="no-highlight">47</i>&nbsp;	}
+<i class="no-highlight">48</i>&nbsp;
+<i class="no-highlight">49</i>&nbsp;	public void setMacAddress(String macAddress) {
+<b class="nc"><i class="no-highlight">50</i>&nbsp;		this.macAddress = macAddress;</b>
+<i class="no-highlight">51</i>&nbsp;	}
+<i class="no-highlight">52</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -139,7 +151,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-08-27 21:21</div>
+    <div style="float:right;">generated on 2022-08-28 18:30</div>
 </div>
 </body>
 </html>

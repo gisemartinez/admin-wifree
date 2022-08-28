@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > PortalAndLoginOptionsService</title>
+  <title>Coverage Report > login</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -17,10 +17,10 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">services</a>
+    <a href="../index.html">views.html.console</a>
 </div>
 
-<h1>Coverage Summary for Class: PortalAndLoginOptionsService (services)</h1>
+<h1>Coverage Summary for Class: login (views.html.console)</h1>
 
 <table class="coverageStats">
 
@@ -35,44 +35,41 @@ Current scope:     <a href="../../index.html">all classes</a>
   Line, %
 </th>
 </tr>
-<tr>
-  <td class="name">PortalAndLoginOptionsService</td>
-<td class="coverageStat">
-  <span class="percent">
-    83.3%
-  </span>
-  <span class="absValue">
-    (5/6)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    75.9%
-  </span>
-  <span class="absValue">
-    (41/54)
-  </span>
-</td>
-</tr>
   <tr>
-    <td class="name">PortalAndLoginOptionsService$$FastClassByGuice$$363085e5</td>
+    <td class="name">login$</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    83.3%
+    0%
   </span>
   <span class="absValue">
-    (5/6)
+    (0/5)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    75.9%
+    0%
   </span>
   <span class="absValue">
-    (41/54)
+    (0/8)
   </span>
 </td>
 </tr>
@@ -83,120 +80,73 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package services;
-<i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import daos.*;
-<i class="no-highlight">4</i>&nbsp;import models.*;
-<i class="no-highlight">5</i>&nbsp;import models.types.AccountType;
-<i class="no-highlight">6</i>&nbsp;import models.types.LoginMethodType;
-<i class="no-highlight">7</i>&nbsp;import models.types.PortalApplicationType;
-<i class="no-highlight">8</i>&nbsp;import org.pac4j.core.profile.CommonProfile;
-<i class="no-highlight">9</i>&nbsp;import views.dto.PortalOptionsView;
-<i class="no-highlight">10</i>&nbsp;import views.dto.SocialKeysView;
-<i class="no-highlight">11</i>&nbsp;
-<i class="no-highlight">12</i>&nbsp;import javax.inject.Inject;
-<i class="no-highlight">13</i>&nbsp;import java.io.File;
-<i class="no-highlight">14</i>&nbsp;import java.util.*;
-<i class="no-highlight">15</i>&nbsp;import java.util.stream.Collectors;
-<i class="no-highlight">16</i>&nbsp;
-<i class="no-highlight">17</i>&nbsp;import static models.types.LoginMethodType.Facebook;
-<i class="no-highlight">18</i>&nbsp;import static models.types.LoginMethodType.Google;
-<i class="no-highlight">19</i>&nbsp;
-<b class="fc"><i class="no-highlight">20</i>&nbsp;public class PortalAndLoginOptionsService {</b>
-<i class="no-highlight">21</i>&nbsp;
-<i class="no-highlight">22</i>&nbsp;    @Inject
-<i class="no-highlight">23</i>&nbsp;    PortalLoginConfigurationDAO loginConfigDAO;
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;
+<i class="no-highlight">2</i>&nbsp;package views.html.console
+<i class="no-highlight">3</i>&nbsp;
+<i class="no-highlight">4</i>&nbsp;import _root_.play.twirl.api.TwirlFeatureImports._
+<i class="no-highlight">5</i>&nbsp;import _root_.play.twirl.api.TwirlHelperImports._
+<i class="no-highlight">6</i>&nbsp;import _root_.play.twirl.api.Html
+<i class="no-highlight">7</i>&nbsp;import _root_.play.twirl.api.JavaScript
+<i class="no-highlight">8</i>&nbsp;import _root_.play.twirl.api.Txt
+<i class="no-highlight">9</i>&nbsp;import _root_.play.twirl.api.Xml
+<i class="no-highlight">10</i>&nbsp;import models._
+<i class="no-highlight">11</i>&nbsp;import controllers._
+<i class="no-highlight">12</i>&nbsp;import play.api.i18n._
+<i class="no-highlight">13</i>&nbsp;import views.html._
+<i class="no-highlight">14</i>&nbsp;import play.api.templates.PlayMagic._
+<i class="no-highlight">15</i>&nbsp;import java.lang._
+<i class="no-highlight">16</i>&nbsp;import java.util._
+<i class="no-highlight">17</i>&nbsp;import scala.collection.JavaConverters._
+<i class="no-highlight">18</i>&nbsp;import play.core.j.PlayMagicForJava._
+<i class="no-highlight">19</i>&nbsp;import play.mvc._
+<i class="no-highlight">20</i>&nbsp;import play.api.data.Field
+<i class="no-highlight">21</i>&nbsp;import play.mvc.Http.Context.Implicit._
+<i class="no-highlight">22</i>&nbsp;import play.data._
+<i class="no-highlight">23</i>&nbsp;import play.core.j.PlayFormsMagicForJava._
 <i class="no-highlight">24</i>&nbsp;
-<i class="no-highlight">25</i>&nbsp;    @Inject
-<i class="no-highlight">26</i>&nbsp;    PortalDAO portalDAO;
-<i class="no-highlight">27</i>&nbsp;
-<i class="no-highlight">28</i>&nbsp;    @Inject
-<i class="no-highlight">29</i>&nbsp;    PortalAppDAO portalAppDAO;
-<i class="no-highlight">30</i>&nbsp;
-<i class="no-highlight">31</i>&nbsp;    @Inject
-<i class="no-highlight">32</i>&nbsp;    PortalNetworkConfigurationDAO networkConfigDAO;
-<i class="no-highlight">33</i>&nbsp;
-<i class="no-highlight">34</i>&nbsp;    public SocialKeysView getLoginOptions(Long portalId) {
-<b class="fc"><i class="no-highlight">35</i>&nbsp;        Map&lt;LoginMethodType, PortalLoginConfiguration&gt; loginConfigurations = loginConfigDAO.findForPortal(portalId);</b>
-<b class="fc"><i class="no-highlight">36</i>&nbsp;        Optional&lt;LoginMethodType&gt; loginMethod = networkConfigDAO.getLoginMethod(portalId);</b>
-<i class="no-highlight">37</i>&nbsp;
-<b class="fc"><i class="no-highlight">38</i>&nbsp;        return loginConfigurations.isEmpty()</b>
-<b class="fc"><i class="no-highlight">39</i>&nbsp;                ? SocialKeysView.initialize()</b>
-<b class="nc"><i class="no-highlight">40</i>&nbsp;                : new SocialKeysView(loginConfigurations.get(Google), loginConfigurations.get(Facebook));</b>
-<i class="no-highlight">41</i>&nbsp;    }
-<i class="no-highlight">42</i>&nbsp;
-<i class="no-highlight">43</i>&nbsp;    public void saveLoginOptions(SocialKeysView socialKeysView, Long portalId) {
-<b class="nc"><i class="no-highlight">44</i>&nbsp;        Portal portal = portalDAO.get(portalId);</b>
-<b class="nc"><i class="no-highlight">45</i>&nbsp;        PortalLoginConfiguration google = socialKeysView.getGoogle();</b>
-<b class="nc"><i class="no-highlight">46</i>&nbsp;        google.setKeysProvider();</b>
-<b class="nc"><i class="no-highlight">47</i>&nbsp;        PortalLoginConfiguration facebook = socialKeysView.getFacebook();</b>
-<b class="nc"><i class="no-highlight">48</i>&nbsp;        facebook.setKeysProvider();</b>
-<b class="nc"><i class="no-highlight">49</i>&nbsp;        google.setPortal(portal);</b>
-<b class="nc"><i class="no-highlight">50</i>&nbsp;        facebook.setPortal(portal);</b>
-<b class="nc"><i class="no-highlight">51</i>&nbsp;        loginConfigDAO.saveOrUpdate(google);</b>
-<b class="nc"><i class="no-highlight">52</i>&nbsp;        loginConfigDAO.saveOrUpdate(facebook);</b>
-<b class="nc"><i class="no-highlight">53</i>&nbsp;        portalDAO.save(portal);</b>
-<i class="no-highlight">54</i>&nbsp;    }
+<b class="nc"><i class="no-highlight">25</i>&nbsp;object login extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template1[String,play.twirl.api.HtmlFormat.Appendable] {</b>
+<i class="no-highlight">26</i>&nbsp;
+<i class="no-highlight">27</i>&nbsp;  /**/
+<i class="no-highlight">28</i>&nbsp;  def apply/*1.2*/(url: String):play.twirl.api.HtmlFormat.Appendable = {
+<b class="nc"><i class="no-highlight">29</i>&nbsp;    _display_ {</b>
+<i class="no-highlight">30</i>&nbsp;      {
+<i class="no-highlight">31</i>&nbsp;
+<i class="no-highlight">32</i>&nbsp;
+<b class="nc"><i class="no-highlight">33</i>&nbsp;Seq[Any](format.raw/*2.1*/(&quot;&quot;&quot;</b>
+<b class="nc"><i class="no-highlight">34</i>&nbsp;&quot;&quot;&quot;),format.raw/*3.1*/(&quot;&quot;&quot;Console Login</b>
+<i class="no-highlight">35</i>&nbsp;&lt;p&gt;&lt;/p&gt;
+<i class="no-highlight">36</i>&nbsp;
+<b class="nc"><i class="no-highlight">37</i>&nbsp;&lt;form action=&quot;&quot;&quot;&quot;),_display_(/*6.16*/url),format.raw/*6.19*/(&quot;&quot;&quot;&quot; method=&quot;POST&quot;&gt;</b>
+<i class="no-highlight">38</i>&nbsp;	Username
+<i class="no-highlight">39</i>&nbsp;	&lt;input type=&quot;text&quot; label=&quot;Username&quot; name=&quot;username&quot; /&gt;
+<i class="no-highlight">40</i>&nbsp;	&lt;br&gt;
+<i class="no-highlight">41</i>&nbsp;	Password
+<i class="no-highlight">42</i>&nbsp;	&lt;input type=&quot;password&quot; label=&quot;password&quot; name=&quot;password&quot; /&gt;
+<i class="no-highlight">43</i>&nbsp;	&lt;br&gt;
+<i class="no-highlight">44</i>&nbsp;	&lt;input type=&quot;submit&quot; name=&quot;submit&quot; value=&quot;Submit&quot; /&gt;
+<i class="no-highlight">45</i>&nbsp;&lt;/form&gt;&quot;&quot;&quot;))
+<i class="no-highlight">46</i>&nbsp;      }
+<i class="no-highlight">47</i>&nbsp;    }
+<i class="no-highlight">48</i>&nbsp;  }
+<i class="no-highlight">49</i>&nbsp;
+<b class="nc"><i class="no-highlight">50</i>&nbsp;  def render(url:String): play.twirl.api.HtmlFormat.Appendable = apply(url)</b>
+<i class="no-highlight">51</i>&nbsp;
+<b class="nc"><i class="no-highlight">52</i>&nbsp;  def f:((String) =&gt; play.twirl.api.HtmlFormat.Appendable) = (url) =&gt; apply(url)</b>
+<i class="no-highlight">53</i>&nbsp;
+<b class="nc"><i class="no-highlight">54</i>&nbsp;  def ref: this.type = this</b>
 <i class="no-highlight">55</i>&nbsp;
-<i class="no-highlight">56</i>&nbsp;    public PortalOptionsView getPortalOptions(Long portalId) {
-<b class="fc"><i class="no-highlight">57</i>&nbsp;        Portal portal = portalDAO.get(portalId);</b>
+<i class="no-highlight">56</i>&nbsp;}
+<i class="no-highlight">57</i>&nbsp;
 <i class="no-highlight">58</i>&nbsp;
-<b class="fc"><i class="no-highlight">59</i>&nbsp;        Map&lt;PortalApplicationType, PortalApp&gt; applications = portal.getApplicationsByType();</b>
-<b class="fc"><i class="no-highlight">60</i>&nbsp;        PortalApp templateOne = applications.get(PortalApplicationType.TemplateOne);</b>
-<b class="fc"><i class="no-highlight">61</i>&nbsp;        PortalApp templateTwo = applications.get(PortalApplicationType.TemplateTwo);</b>
-<b class="fc"><i class="no-highlight">62</i>&nbsp;        PortalApp template = Optional.ofNullable(templateOne).orElse(Optional.ofNullable(templateTwo).orElse(null));</b>
-<b class="fc"><i class="no-highlight">63</i>&nbsp;        PortalApp carousel = applications.get(PortalApplicationType.Carousel);</b>
-<b class="fc"><i class="no-highlight">64</i>&nbsp;        Set&lt;PortalNetworkConfiguration&gt; networkConfigurations = portal.getNetworkConfigurations();</b>
-<b class="fc"><i class="no-highlight">65</i>&nbsp;        List&lt;LoginMethodType&gt; loginMethodTypes = networkConfigurations.stream().map(PortalNetworkConfiguration::getLoginMethod).collect(Collectors.toList());</b>
-<i class="no-highlight">66</i>&nbsp;
-<b class="fc"><i class="no-highlight">67</i>&nbsp;        return template == null &amp;&amp; carousel == null</b>
-<b class="nc"><i class="no-highlight">68</i>&nbsp;                ? PortalOptionsView.initialize(portalId, portal.getHomeURL(), portal.getName(), portal.getDescription())</b>
-<i class="no-highlight">69</i>&nbsp;                : new PortalOptionsView(
-<i class="no-highlight">70</i>&nbsp;                portalId,
-<b class="fc"><i class="no-highlight">71</i>&nbsp;                portal.getHomeURL(),</b>
-<b class="fc"><i class="no-highlight">72</i>&nbsp;                template.getType(),</b>
-<i class="no-highlight">73</i>&nbsp;                template, carousel,
-<b class="fc"><i class="no-highlight">74</i>&nbsp;                portal.getName(),</b>
-<b class="fc"><i class="no-highlight">75</i>&nbsp;                portal.getDescription(),</b>
-<i class="no-highlight">76</i>&nbsp;                loginMethodTypes);
-<i class="no-highlight">77</i>&nbsp;    }
-<i class="no-highlight">78</i>&nbsp;
-<i class="no-highlight">79</i>&nbsp;    public Portal savePortalOptions(CommonProfile commonProfile, PortalOptionsView portalOptions, Long portalId, List&lt;File&gt; files) {
-<i class="no-highlight">80</i>&nbsp;        Portal portal;
-<b class="fc"><i class="no-highlight">81</i>&nbsp;        if (portalId != null) {</b>
-<b class="nc"><i class="no-highlight">82</i>&nbsp;            portal = portalDAO.get(portalId);</b>
-<i class="no-highlight">83</i>&nbsp;        } else {
-<b class="fc"><i class="no-highlight">84</i>&nbsp;            portal = new Portal();</b>
-<b class="fc"><i class="no-highlight">85</i>&nbsp;            AdminDAO adminDAO = new AdminDAO();</b>
-<b class="fc"><i class="no-highlight">86</i>&nbsp;            Admin admin = adminDAO.getByEmail(commonProfile.getId());</b>
-<b class="fc"><i class="no-highlight">87</i>&nbsp;            portal.setOwner(admin);</b>
-<b class="fc"><i class="no-highlight">88</i>&nbsp;            portal.setAccountType(AccountType.Basic);</b>
-<i class="no-highlight">89</i>&nbsp;        }
-<b class="fc"><i class="no-highlight">90</i>&nbsp;        portal.setHomeURL(portalOptions.getHomeURL());</b>
-<b class="fc"><i class="no-highlight">91</i>&nbsp;        portal.setName(portalOptions.getName());</b>
-<b class="fc"><i class="no-highlight">92</i>&nbsp;        portal.setDescription(portalOptions.getDescription());</b>
-<i class="no-highlight">93</i>&nbsp;
-<b class="fc"><i class="no-highlight">94</i>&nbsp;        PortalApp carousel = PortalApp.carousel();</b>
-<b class="fc"><i class="no-highlight">95</i>&nbsp;        carousel.setConfig(new PortalAppConfig(files));</b>
-<b class="fc"><i class="no-highlight">96</i>&nbsp;        HashSet&lt;PortalApp&gt; portalApps = new HashSet&lt;&gt;(Arrays.asList(PortalApp.templateOne(), carousel));</b>
-<b class="fc"><i class="no-highlight">97</i>&nbsp;        portalApps.forEach(a -&gt; a.setPortal(portal));</b>
-<i class="no-highlight">98</i>&nbsp;
-<b class="fc"><i class="no-highlight">99</i>&nbsp;        List&lt;PortalNetworkConfiguration&gt; networkConfigurations = portalOptions.getLoginMethods().stream()</b>
-<b class="fc"><i class="no-highlight">100</i>&nbsp;                .map(loginMethodType -&gt; {</b>
-<b class="fc"><i class="no-highlight">101</i>&nbsp;                    PortalNetworkConfiguration p = new PortalNetworkConfiguration(30, loginMethodType, true);</b>
-<b class="fc"><i class="no-highlight">102</i>&nbsp;                    p.setPortal(portal);</b>
-<b class="fc"><i class="no-highlight">103</i>&nbsp;                    return p;</b>
-<b class="fc"><i class="no-highlight">104</i>&nbsp;                }).collect(Collectors.toList());</b>
-<i class="no-highlight">105</i>&nbsp;        
-<b class="fc"><i class="no-highlight">106</i>&nbsp;        portal.setApplications(portalApps);</b>
-<i class="no-highlight">107</i>&nbsp;        
-<b class="fc"><i class="no-highlight">108</i>&nbsp;        portal.setNetworkConfigurations(new HashSet&lt;&gt;(networkConfigurations));</b>
-<i class="no-highlight">109</i>&nbsp;
-<b class="fc"><i class="no-highlight">110</i>&nbsp;        portalDAO.saveOrUpdate(portal);</b>
-<i class="no-highlight">111</i>&nbsp;        
-<b class="fc"><i class="no-highlight">112</i>&nbsp;        return portal;</b>
-<i class="no-highlight">113</i>&nbsp;    }
-<i class="no-highlight">114</i>&nbsp;}
+<i class="no-highlight">59</i>&nbsp;              /*
+<i class="no-highlight">60</i>&nbsp;                  -- GENERATED --
+<i class="no-highlight">61</i>&nbsp;                  SOURCE: app/views/console/login.scala.html
+<i class="no-highlight">62</i>&nbsp;                  HASH: d8027bb4d307ee2aa6bb0d3e13a6f78b8ab02298
+<i class="no-highlight">63</i>&nbsp;                  MATRIX: 956-&gt;1|1063-&gt;15|1090-&gt;16|1154-&gt;54|1177-&gt;57
+<i class="no-highlight">64</i>&nbsp;                  LINES: 28-&gt;1|33-&gt;2|34-&gt;3|37-&gt;6|37-&gt;6
+<i class="no-highlight">65</i>&nbsp;                  -- GENERATED --
+<i class="no-highlight">66</i>&nbsp;              */
+<i class="no-highlight">67</i>&nbsp;          
 </div>
 </pre>
 </div>
@@ -223,7 +173,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-08-27 21:21</div>
+    <div style="float:right;">generated on 2022-08-28 18:36</div>
 </div>
 </body>
 </html>

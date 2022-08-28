@@ -1,0 +1,213 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > surveys_results</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">views.html.admin</a>
+</div>
+
+<h1>Coverage Summary for Class: surveys_results (views.html.admin)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">surveys_results$</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (6/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90.6%
+  </span>
+  <span class="absValue">
+    (29/32)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (6/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90.6%
+  </span>
+  <span class="absValue">
+    (29/32)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;
+<i class="no-highlight">2</i>&nbsp;package views.html.admin
+<i class="no-highlight">3</i>&nbsp;
+<i class="no-highlight">4</i>&nbsp;import _root_.play.twirl.api.TwirlFeatureImports._
+<i class="no-highlight">5</i>&nbsp;import _root_.play.twirl.api.TwirlHelperImports._
+<i class="no-highlight">6</i>&nbsp;import _root_.play.twirl.api.Html
+<i class="no-highlight">7</i>&nbsp;import _root_.play.twirl.api.JavaScript
+<i class="no-highlight">8</i>&nbsp;import _root_.play.twirl.api.Txt
+<i class="no-highlight">9</i>&nbsp;import _root_.play.twirl.api.Xml
+<i class="no-highlight">10</i>&nbsp;import models._
+<i class="no-highlight">11</i>&nbsp;import controllers._
+<i class="no-highlight">12</i>&nbsp;import play.api.i18n._
+<i class="no-highlight">13</i>&nbsp;import views.html._
+<i class="no-highlight">14</i>&nbsp;import play.api.templates.PlayMagic._
+<i class="no-highlight">15</i>&nbsp;import java.lang._
+<i class="no-highlight">16</i>&nbsp;import java.util._
+<i class="no-highlight">17</i>&nbsp;import scala.collection.JavaConverters._
+<i class="no-highlight">18</i>&nbsp;import play.core.j.PlayMagicForJava._
+<i class="no-highlight">19</i>&nbsp;import play.mvc._
+<i class="no-highlight">20</i>&nbsp;import play.api.data.Field
+<i class="no-highlight">21</i>&nbsp;import play.mvc.Http.Context.Implicit._
+<i class="no-highlight">22</i>&nbsp;import play.data._
+<i class="no-highlight">23</i>&nbsp;import play.core.j.PlayFormsMagicForJava._
+<i class="no-highlight">24</i>&nbsp;/*1.2*/import com.fasterxml.jackson.databind.JsonNode
+<i class="no-highlight">25</i>&nbsp;/*2.2*/import controllers.admin.SurveysController.DataJson
+<i class="no-highlight">26</i>&nbsp;
+<b class="fc"><i class="no-highlight">27</i>&nbsp;object surveys_results extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template1[DataJson,play.twirl.api.HtmlFormat.Appendable] {</b>
+<i class="no-highlight">28</i>&nbsp;
+<i class="no-highlight">29</i>&nbsp;  /**/
+<i class="no-highlight">30</i>&nbsp;  def apply/*4.2*/(json: DataJson):play.twirl.api.HtmlFormat.Appendable = {
+<b class="fc"><i class="no-highlight">31</i>&nbsp;    _display_ {</b>
+<i class="no-highlight">32</i>&nbsp;      {
+<i class="no-highlight">33</i>&nbsp;
+<b class="fc"><i class="no-highlight">34</i>&nbsp;def /*6.2*/jsonString/*6.12*/ = {{json.toJsonString}};</b>
+<b class="fc"><i class="no-highlight">35</i>&nbsp;Seq[Any](format.raw/*5.1*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">36</i>&nbsp;&quot;&quot;&quot;),format.raw/*6.35*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">37</i>&nbsp;&quot;&quot;&quot;),_display_(/*7.2*/parts/*7.7*/.js.echart()),format.raw/*7.19*/(&quot;&quot;&quot;</b>
+<i class="no-highlight">38</i>&nbsp;
+<b class="fc"><i class="no-highlight">39</i>&nbsp;        &quot;&quot;&quot;),format.raw/*9.9*/(&quot;&quot;&quot;&lt;!-- Page content --&gt;</b>
+<i class="no-highlight">40</i>&nbsp;&lt;div class=&quot;right_col&quot; role=&quot;main&quot;&gt;
+<i class="no-highlight">41</i>&nbsp;    &lt;div class=&quot;row&quot;&gt;
+<i class="no-highlight">42</i>&nbsp;        &lt;div class=&quot;col-md-12 col-sm-6 col-xs-12&quot;&gt;
+<b class="fc"><i class="no-highlight">43</i>&nbsp;            &quot;&quot;&quot;),_display_(/*13.14*/if(json.data.isEmpty)/*13.35*/ {_display_(Seq[Any](format.raw/*13.37*/(&quot;&quot;&quot;</b>
+<b class="nc"><i class="no-highlight">44</i>&nbsp;                &quot;&quot;&quot;),format.raw/*14.17*/(&quot;&quot;&quot;&lt;h1&gt;No se han registrado respuestas aún&lt;/h1&gt;</b>
+<b class="fc"><i class="no-highlight">45</i>&nbsp;            &quot;&quot;&quot;)))}),format.raw/*15.14*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">46</i>&nbsp;            &quot;&quot;&quot;),_display_(/*16.14*/json/*16.18*/.data.map/*16.27*/ { data =&gt;_display_(Seq[Any](format.raw/*16.37*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">47</i>&nbsp;                &quot;&quot;&quot;),format.raw/*17.17*/(&quot;&quot;&quot;&lt;div class=&quot;col-md-12&quot;&gt;</b>
+<i class="no-highlight">48</i>&nbsp;                    &lt;div class=&quot;x_panel&quot;&gt;
+<i class="no-highlight">49</i>&nbsp;                        &lt;div class=&quot;x_content&quot;&gt;
+<b class="fc"><i class="no-highlight">50</i>&nbsp;                            &quot;&quot;&quot;),_display_(/*20.30*/if(data.`type` == &quot;textbox&quot; &amp;&amp; data.question != &quot;Edad&quot;)/*20.85*/ {_display_(Seq[Any](format.raw/*20.87*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">51</i>&nbsp;                                    &quot;&quot;&quot;),format.raw/*21.37*/(&quot;&quot;&quot;&lt;h3&gt;&quot;&quot;&quot;),_display_(/*21.42*/data/*21.46*/.question),format.raw/*21.55*/(&quot;&quot;&quot;&lt;/h3&gt;</b>
+<b class="fc"><i class="no-highlight">52</i>&nbsp;                                    &quot;&quot;&quot;),_display_(/*22.38*/data/*22.42*/.labels.map/*22.53*/ { answer =&gt;_display_(Seq[Any](format.raw/*22.65*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">53</i>&nbsp;                                        &quot;&quot;&quot;),format.raw/*23.41*/(&quot;&quot;&quot;&lt;div class=&quot;col-md-4&quot;&gt;</b>
+<i class="no-highlight">54</i>&nbsp;                                            &lt;div class=&quot;tile-stats&quot;&gt;
+<b class="fc"><i class="no-highlight">55</i>&nbsp;                                                &lt;h5 class=&quot;text-md-left&quot;&gt;&quot;&quot;&quot;),_display_(/*25.75*/answer),format.raw/*25.81*/(&quot;&quot;&quot;&lt;/h5&gt;</b>
+<i class="no-highlight">56</i>&nbsp;                                            &lt;/div&gt;
+<i class="no-highlight">57</i>&nbsp;                                        &lt;/div&gt;
+<b class="fc"><i class="no-highlight">58</i>&nbsp;                                    &quot;&quot;&quot;)))}),format.raw/*28.38*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">59</i>&nbsp;                            &quot;&quot;&quot;)))}/*29.31*/else/*29.36*/{_display_(Seq[Any](format.raw/*29.37*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">60</i>&nbsp;                                &quot;&quot;&quot;),format.raw/*30.33*/(&quot;&quot;&quot;&lt;div id=&quot;&quot;&quot;&quot;),_display_(/*30.43*/data/*30.47*/.id),format.raw/*30.50*/(&quot;&quot;&quot;&quot; style=&quot;height:350px;&quot;&gt;&lt;/div&gt;</b>
+<b class="fc"><i class="no-highlight">61</i>&nbsp;                            &quot;&quot;&quot;)))}),format.raw/*31.30*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">62</i>&nbsp;                        &quot;&quot;&quot;),format.raw/*32.25*/(&quot;&quot;&quot;&lt;/div&gt;</b>
+<i class="no-highlight">63</i>&nbsp;                    &lt;/div&gt;
+<i class="no-highlight">64</i>&nbsp;                &lt;/div&gt;
+<b class="fc"><i class="no-highlight">65</i>&nbsp;            &quot;&quot;&quot;)))}),format.raw/*35.14*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">66</i>&nbsp;        &quot;&quot;&quot;),format.raw/*36.9*/(&quot;&quot;&quot;&lt;/div&gt;</b>
+<i class="no-highlight">67</i>&nbsp;    &lt;/div&gt;
+<i class="no-highlight">68</i>&nbsp;&lt;/div&gt;
+<i class="no-highlight">69</i>&nbsp;
+<i class="no-highlight">70</i>&nbsp;
+<b class="fc"><i class="no-highlight">71</i>&nbsp;&quot;&quot;&quot;),_display_(/*41.2*/parts/*41.7*/.jslibs()),format.raw/*41.16*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">72</i>&nbsp;&quot;&quot;&quot;),format.raw/*42.1*/(&quot;&quot;&quot;&lt;script src=&quot;&quot;&quot;&quot;),_display_(/*42.15*/routes/*42.21*/.Assets.versioned(&quot;js/survey_results.js&quot;)),format.raw/*42.62*/(&quot;&quot;&quot;&quot;&gt;&lt;/script&gt;</b>
+<i class="no-highlight">73</i>&nbsp;
+<i class="no-highlight">74</i>&nbsp;&lt;script&gt;
+<b class="fc"><i class="no-highlight">75</i>&nbsp;$(document).ready(function()&quot;&quot;&quot;),format.raw/*45.29*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*45.30*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">76</i>&nbsp;     &quot;&quot;&quot;),format.raw/*46.6*/(&quot;&quot;&quot;let answers = toJson(&#39;&quot;&quot;&quot;),_display_(/*46.29*/jsonString),format.raw/*46.39*/(&quot;&quot;&quot;&#39;);</b>
+<i class="no-highlight">77</i>&nbsp;     render(answers);
+<b class="fc"><i class="no-highlight">78</i>&nbsp;&quot;&quot;&quot;),format.raw/*48.1*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*48.2*/(&quot;&quot;&quot;);</b>
+<i class="no-highlight">79</i>&nbsp;&lt;/script&gt;&quot;&quot;&quot;))
+<i class="no-highlight">80</i>&nbsp;      }
+<i class="no-highlight">81</i>&nbsp;    }
+<i class="no-highlight">82</i>&nbsp;  }
+<i class="no-highlight">83</i>&nbsp;
+<b class="fc"><i class="no-highlight">84</i>&nbsp;  def render(json:DataJson): play.twirl.api.HtmlFormat.Appendable = apply(json)</b>
+<i class="no-highlight">85</i>&nbsp;
+<b class="nc"><i class="no-highlight">86</i>&nbsp;  def f:((DataJson) =&gt; play.twirl.api.HtmlFormat.Appendable) = (json) =&gt; apply(json)</b>
+<i class="no-highlight">87</i>&nbsp;
+<b class="nc"><i class="no-highlight">88</i>&nbsp;  def ref: this.type = this</b>
+<i class="no-highlight">89</i>&nbsp;
+<i class="no-highlight">90</i>&nbsp;}
+<i class="no-highlight">91</i>&nbsp;
+<i class="no-highlight">92</i>&nbsp;
+<i class="no-highlight">93</i>&nbsp;              /*
+<i class="no-highlight">94</i>&nbsp;                  -- GENERATED --
+<i class="no-highlight">95</i>&nbsp;                  SOURCE: app/views/admin/surveys_results.scala.html
+<i class="no-highlight">96</i>&nbsp;                  HASH: 559eb43146ccd27e4a8b97657a3596702392ad0a
+<i class="no-highlight">97</i>&nbsp;                  MATRIX: 657-&gt;1|711-&gt;49|1079-&gt;103|1173-&gt;122|1191-&gt;132|1243-&gt;120|1271-&gt;155|1298-&gt;157|1310-&gt;162|1342-&gt;174|1378-&gt;184|1549-&gt;328|1579-&gt;349|1619-&gt;351|1664-&gt;368|1753-&gt;426|1794-&gt;440|1807-&gt;444|1825-&gt;453|1873-&gt;463|1918-&gt;480|2088-&gt;623|2152-&gt;678|2192-&gt;680|2257-&gt;717|2289-&gt;722|2302-&gt;726|2332-&gt;735|2402-&gt;778|2415-&gt;782|2435-&gt;793|2485-&gt;805|2554-&gt;846|2747-&gt;1012|2774-&gt;1018|2946-&gt;1159|2995-&gt;1190|3008-&gt;1195|3047-&gt;1196|3108-&gt;1229|3145-&gt;1239|3158-&gt;1243|3182-&gt;1246|3273-&gt;1306|3326-&gt;1331|3427-&gt;1401|3463-&gt;1410|3517-&gt;1438|3530-&gt;1443|3560-&gt;1452|3588-&gt;1453|3629-&gt;1467|3644-&gt;1473|3706-&gt;1514|3784-&gt;1564|3813-&gt;1565|3846-&gt;1571|3896-&gt;1594|3927-&gt;1604|3980-&gt;1630|4008-&gt;1631
+<i class="no-highlight">98</i>&nbsp;                  LINES: 24-&gt;1|25-&gt;2|30-&gt;4|34-&gt;6|34-&gt;6|35-&gt;5|36-&gt;6|37-&gt;7|37-&gt;7|37-&gt;7|39-&gt;9|43-&gt;13|43-&gt;13|43-&gt;13|44-&gt;14|45-&gt;15|46-&gt;16|46-&gt;16|46-&gt;16|46-&gt;16|47-&gt;17|50-&gt;20|50-&gt;20|50-&gt;20|51-&gt;21|51-&gt;21|51-&gt;21|51-&gt;21|52-&gt;22|52-&gt;22|52-&gt;22|52-&gt;22|53-&gt;23|55-&gt;25|55-&gt;25|58-&gt;28|59-&gt;29|59-&gt;29|59-&gt;29|60-&gt;30|60-&gt;30|60-&gt;30|60-&gt;30|61-&gt;31|62-&gt;32|65-&gt;35|66-&gt;36|71-&gt;41|71-&gt;41|71-&gt;41|72-&gt;42|72-&gt;42|72-&gt;42|72-&gt;42|75-&gt;45|75-&gt;45|76-&gt;46|76-&gt;46|76-&gt;46|78-&gt;48|78-&gt;48
+<i class="no-highlight">99</i>&nbsp;                  -- GENERATED --
+<i class="no-highlight">100</i>&nbsp;              */
+<i class="no-highlight">101</i>&nbsp;          
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-08-28 18:36</div>
+</div>
+</body>
+</html>

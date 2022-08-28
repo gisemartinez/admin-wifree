@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > WiFreeResponse</title>
+  <title>Coverage Report > HourRange</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -17,10 +17,10 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">operations.core</a>
+    <a href="../index.html">services.core</a>
 </div>
 
-<h1>Coverage Summary for Class: WiFreeResponse (operations.core)</h1>
+<h1>Coverage Summary for Class: HourRange (services.core)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -39,7 +39,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">WiFreeResponse</td>
+  <td class="name">HourRange</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -58,10 +58,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    50%
+    87.5%
   </span>
   <span class="absValue">
-    (1/2)
+    (7/8)
   </span>
 </td>
 </tr>
@@ -73,20 +73,29 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package operations.core
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package services.core;
 <i class="no-highlight">2</i>&nbsp;
-<b class="fc"><i class="no-highlight">3</i>&nbsp;trait WiFreeResponse extends Operation {</b>
-<i class="no-highlight">4</i>&nbsp;	
-<i class="no-highlight">5</i>&nbsp;	val success: Boolean
-<i class="no-highlight">6</i>&nbsp;	val errors: List[String]	// TODO TBD
-<i class="no-highlight">7</i>&nbsp;	
-<b class="nc"><i class="no-highlight">8</i>&nbsp;	override def operationType: OperationType = OperationType.RESPONSE</b>
-<i class="no-highlight">9</i>&nbsp;	
-<i class="no-highlight">10</i>&nbsp;	def responseType: ResponseType
-<i class="no-highlight">11</i>&nbsp;	
-<i class="no-highlight">12</i>&nbsp;	def isOk(): Boolean
-<i class="no-highlight">13</i>&nbsp;	
-<i class="no-highlight">14</i>&nbsp;}
+<i class="no-highlight">3</i>&nbsp;import scala.Tuple2;
+<i class="no-highlight">4</i>&nbsp;
+<i class="no-highlight">5</i>&nbsp;import java.util.Arrays;
+<i class="no-highlight">6</i>&nbsp;import java.util.List;
+<i class="no-highlight">7</i>&nbsp;
+<i class="no-highlight">8</i>&nbsp;import static services.core.AnyRange.range;
+<i class="no-highlight">9</i>&nbsp;
+<b class="nc"><i class="no-highlight">10</i>&nbsp;public class HourRange {</b>
+<i class="no-highlight">11</i>&nbsp;
+<b class="fc"><i class="no-highlight">12</i>&nbsp;    public static final Tuple2&lt;Integer, Integer&gt; RANGE_0_TO_8 = range(0, 7);</b>
+<b class="fc"><i class="no-highlight">13</i>&nbsp;    public static final Tuple2&lt;Integer, Integer&gt; RANGE_8_TO_11 = range(8, 10);</b>
+<b class="fc"><i class="no-highlight">14</i>&nbsp;    public static final Tuple2&lt;Integer, Integer&gt; RANGE_11_TO_13 = range(11, 12);</b>
+<b class="fc"><i class="no-highlight">15</i>&nbsp;    public static final Tuple2&lt;Integer, Integer&gt; RANGE_13_TO_16 = range(13, 15);</b>
+<b class="fc"><i class="no-highlight">16</i>&nbsp;    public static final Tuple2&lt;Integer, Integer&gt; RANGE_16_TO_20 = range(16, 19);</b>
+<b class="fc"><i class="no-highlight">17</i>&nbsp;    public static final Tuple2&lt;Integer, Integer&gt; RANGE_20_TO_24 = range(20, 23);</b>
+<i class="no-highlight">18</i>&nbsp;
+<b class="fc"><i class="no-highlight">19</i>&nbsp;    public static final List&lt;Tuple2&lt;Integer, Integer&gt;&gt; values = Arrays.asList(</b>
+<i class="no-highlight">20</i>&nbsp;            RANGE_0_TO_8, RANGE_8_TO_11, RANGE_11_TO_13, RANGE_13_TO_16, RANGE_16_TO_20, RANGE_20_TO_24
+<i class="no-highlight">21</i>&nbsp;    );
+<i class="no-highlight">22</i>&nbsp;
+<i class="no-highlight">23</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -113,7 +122,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-08-27 21:21</div>
+    <div style="float:right;">generated on 2022-08-28 18:36</div>
 </div>
 </body>
 </html>

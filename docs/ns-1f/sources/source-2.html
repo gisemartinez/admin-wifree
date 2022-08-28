@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > analytics</title>
+  <title>Coverage Report > chart_js</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -17,10 +17,10 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">views.html.admin</a>
+    <a href="../index.html">views.html.parts.js</a>
 </div>
 
-<h1>Coverage Summary for Class: analytics (views.html.admin)</h1>
+<h1>Coverage Summary for Class: chart_js (views.html.parts.js)</h1>
 
 <table class="coverageStats">
 
@@ -36,21 +36,21 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
   <tr>
-    <td class="name">analytics$</td>
+    <td class="name">chart_js$</td>
 <td class="coverageStat">
   <span class="percent">
-    66.7%
+    0%
   </span>
   <span class="absValue">
-    (4/6)
+    (0/5)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    99.5%
+    0%
   </span>
   <span class="absValue">
-    (410/412)
+    (0/8)
   </span>
 </td>
   </tr>
@@ -58,18 +58,18 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    66.7%
+    0%
   </span>
   <span class="absValue">
-    (4/6)
+    (0/5)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    99.5%
+    0%
   </span>
   <span class="absValue">
-    (410/412)
+    (0/8)
   </span>
 </td>
 </tr>
@@ -81,7 +81,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <pre>
 <div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;
-<i class="no-highlight">2</i>&nbsp;package views.html.admin
+<i class="no-highlight">2</i>&nbsp;package views.html.parts.js
 <i class="no-highlight">3</i>&nbsp;
 <i class="no-highlight">4</i>&nbsp;import _root_.play.twirl.api.TwirlFeatureImports._
 <i class="no-highlight">5</i>&nbsp;import _root_.play.twirl.api.TwirlHelperImports._
@@ -103,594 +103,40 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">21</i>&nbsp;import play.mvc.Http.Context.Implicit._
 <i class="no-highlight">22</i>&nbsp;import play.data._
 <i class="no-highlight">23</i>&nbsp;import play.core.j.PlayFormsMagicForJava._
-<i class="no-highlight">24</i>&nbsp;/*1.2*/import play.api.libs.json.Json
-<i class="no-highlight">25</i>&nbsp;/*2.2*/import play.api.libs.json.JsValue
-<i class="no-highlight">26</i>&nbsp;/*3.2*/import java.util.{List =&gt; JList}
-<i class="no-highlight">27</i>&nbsp;
-<b class="fc"><i class="no-highlight">28</i>&nbsp;object analytics extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template18[JsValue,JsValue,JsValue,JsValue,JsValue,JsValue,JsValue,JsValue,JsValue,JsValue,JsValue,JsValue,JsValue,JsValue,JsValue,JsValue,JsValue,JsValue,play.twirl.api.HtmlFormat.Appendable] {</b>
-<i class="no-highlight">29</i>&nbsp;
-<i class="no-highlight">30</i>&nbsp;  /**/
-<i class="no-highlight">31</i>&nbsp;  def apply/*5.2*/(graphicDataJson: JsValue,
-<i class="no-highlight">32</i>&nbsp;graphicDataJson2: JsValue,
-<i class="no-highlight">33</i>&nbsp;graphicDataJson3: JsValue,
-<i class="no-highlight">34</i>&nbsp;graphicDataJson4: JsValue,
-<i class="no-highlight">35</i>&nbsp;graphicDataJson5: JsValue,
-<i class="no-highlight">36</i>&nbsp;graphicDataJson6: JsValue,
-<i class="no-highlight">37</i>&nbsp;graphicDataJson7: JsValue,
-<i class="no-highlight">38</i>&nbsp;graphicDataJson8: JsValue,
-<i class="no-highlight">39</i>&nbsp;graphicDataJson9: JsValue,
-<i class="no-highlight">40</i>&nbsp;graphicDataJson10: JsValue,
-<i class="no-highlight">41</i>&nbsp;graphicDataJson11: JsValue,
-<i class="no-highlight">42</i>&nbsp;graphicDataJson12: JsValue,
-<i class="no-highlight">43</i>&nbsp;graphicDataJson13: JsValue,
-<i class="no-highlight">44</i>&nbsp;graphicDataJson14: JsValue,
-<i class="no-highlight">45</i>&nbsp;graphicDataJson15: JsValue,
-<i class="no-highlight">46</i>&nbsp;graphicDataJson16: JsValue,
-<i class="no-highlight">47</i>&nbsp;graphicDataJson17: JsValue,
-<i class="no-highlight">48</i>&nbsp;graphicDataJson18: JsValue):play.twirl.api.HtmlFormat.Appendable = {
-<b class="fc"><i class="no-highlight">49</i>&nbsp;    _display_ {</b>
-<i class="no-highlight">50</i>&nbsp;      {
-<i class="no-highlight">51</i>&nbsp;
-<b class="fc"><i class="no-highlight">52</i>&nbsp;def /*24.2*/graphicData/*24.13*/ = {{graphicDataJson.toString()}};def /*25.2*/graphicData2/*25.14*/ = {{graphicDataJson2.toString()}};def /*26.2*/graphicData3/*26.14*/ = {{graphicDataJson3.toString()}};def /*27.2*/graphicData4/*27.14*/ = {{graphicDataJson4.toString()}};def /*28.2*/graphicData5/*28.14*/ = {{graphicDataJson5.toString()}};def /*29.2*/graphicData6/*29.14*/ = {{graphicDataJson6.toString()}};def /*30.2*/graphicData7/*30.14*/ = {{graphicDataJson7.toString()}};def /*31.2*/graphicData8/*31.14*/ = {{graphicDataJson8.toString()}};def /*32.2*/graphicData9/*32.14*/ = {{graphicDataJson9.toString()}};def /*33.2*/graphicData10/*33.15*/ = {{graphicDataJson10.toString()}};def /*34.2*/graphicData11/*34.15*/ = {{graphicDataJson11.toString()}};def /*35.2*/graphicData12/*35.15*/ = {{graphicDataJson12.toString()}};def /*36.2*/graphicData13/*36.15*/ = {{graphicDataJson13.toString()}};def /*37.2*/graphicData14/*37.15*/ = {{graphicDataJson14.toString()}};def /*38.2*/graphicData15/*38.15*/ = {{graphicDataJson15.toString()}};def /*39.2*/graphicData16/*39.15*/ = {{graphicDataJson16.toString()}};def /*40.2*/graphicData17/*40.15*/ = {{graphicDataJson17.toString()}};def /*41.2*/graphicData18/*41.15*/ = {{graphicDataJson18.toString()}};</b>
-<b class="fc"><i class="no-highlight">53</i>&nbsp;Seq[Any](format.raw/*23.1*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">54</i>&nbsp;&quot;&quot;&quot;),format.raw/*24.45*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">55</i>&nbsp;&quot;&quot;&quot;),format.raw/*25.47*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">56</i>&nbsp;&quot;&quot;&quot;),format.raw/*26.47*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">57</i>&nbsp;&quot;&quot;&quot;),format.raw/*27.47*/(&quot;&quot;&quot; &quot;&quot;&quot;),format.raw/*27.48*/(&quot;&quot;&quot;&lt;!--Promedio de visitas por dia en el rango horario 0am a 8 am--&gt;</b>
-<b class="fc"><i class="no-highlight">58</i>&nbsp;&quot;&quot;&quot;),format.raw/*28.47*/(&quot;&quot;&quot; &quot;&quot;&quot;),format.raw/*28.48*/(&quot;&quot;&quot;&lt;!--Promedio de visitas por dia en el rango horario 8am a 11 am--&gt;</b>
-<b class="fc"><i class="no-highlight">59</i>&nbsp;&quot;&quot;&quot;),format.raw/*29.47*/(&quot;&quot;&quot; &quot;&quot;&quot;),format.raw/*29.48*/(&quot;&quot;&quot;&lt;!--Promedio de visitas por dia en el rango horario 11am a 1 pm--&gt;</b>
-<b class="fc"><i class="no-highlight">60</i>&nbsp;&quot;&quot;&quot;),format.raw/*30.47*/(&quot;&quot;&quot; &quot;&quot;&quot;),format.raw/*30.48*/(&quot;&quot;&quot;&lt;!--Promedio de visitas por dia en el rango horario 1pm a 4 pm--&gt;</b>
-<b class="fc"><i class="no-highlight">61</i>&nbsp;&quot;&quot;&quot;),format.raw/*31.47*/(&quot;&quot;&quot; &quot;&quot;&quot;),format.raw/*31.48*/(&quot;&quot;&quot;&lt;!--Promedio de visitas por dia en el rango horario 4pm a 8 pm--&gt;</b>
-<b class="fc"><i class="no-highlight">62</i>&nbsp;&quot;&quot;&quot;),format.raw/*32.47*/(&quot;&quot;&quot; &quot;&quot;&quot;),format.raw/*32.48*/(&quot;&quot;&quot;&lt;!--Promedio de visitas por dia en el rango horario 8pm a 0 am--&gt;</b>
-<b class="fc"><i class="no-highlight">63</i>&nbsp;&quot;&quot;&quot;),format.raw/*33.49*/(&quot;&quot;&quot; &quot;&quot;&quot;),format.raw/*33.50*/(&quot;&quot;&quot;&lt;!--Visitas con duración menor a 15 minutos de toda la última semana--&gt;</b>
-<b class="fc"><i class="no-highlight">64</i>&nbsp;&quot;&quot;&quot;),format.raw/*34.49*/(&quot;&quot;&quot; &quot;&quot;&quot;),format.raw/*34.50*/(&quot;&quot;&quot;&lt;!--Visitas con duración 15-30min--&gt;</b>
-<b class="fc"><i class="no-highlight">65</i>&nbsp;&quot;&quot;&quot;),format.raw/*35.49*/(&quot;&quot;&quot; &quot;&quot;&quot;),format.raw/*35.50*/(&quot;&quot;&quot;&lt;!--Visitas con duración 30-45min--&gt;</b>
-<b class="fc"><i class="no-highlight">66</i>&nbsp;&quot;&quot;&quot;),format.raw/*36.49*/(&quot;&quot;&quot; &quot;&quot;&quot;),format.raw/*36.50*/(&quot;&quot;&quot;&lt;!--Visitas con duración 45-60min--&gt;</b>
-<b class="fc"><i class="no-highlight">67</i>&nbsp;&quot;&quot;&quot;),format.raw/*37.49*/(&quot;&quot;&quot; &quot;&quot;&quot;),format.raw/*37.50*/(&quot;&quot;&quot;&lt;!--Visitas con duración &gt;60min--&gt;</b>
-<b class="fc"><i class="no-highlight">68</i>&nbsp;&quot;&quot;&quot;),format.raw/*38.49*/(&quot;&quot;&quot; &quot;&quot;&quot;),format.raw/*38.50*/(&quot;&quot;&quot;&lt;!--Visitas de la semana 1--&gt;</b>
-<b class="fc"><i class="no-highlight">69</i>&nbsp;&quot;&quot;&quot;),format.raw/*39.49*/(&quot;&quot;&quot; &quot;&quot;&quot;),format.raw/*39.50*/(&quot;&quot;&quot;&lt;!--Visitas de la semana 2--&gt;</b>
-<b class="fc"><i class="no-highlight">70</i>&nbsp;&quot;&quot;&quot;),format.raw/*40.49*/(&quot;&quot;&quot; &quot;&quot;&quot;),format.raw/*40.50*/(&quot;&quot;&quot;&lt;!--Visitas de la semana 3--&gt;</b>
-<b class="fc"><i class="no-highlight">71</i>&nbsp;&quot;&quot;&quot;),format.raw/*41.49*/(&quot;&quot;&quot; &quot;&quot;&quot;),format.raw/*41.50*/(&quot;&quot;&quot;&lt;!--Visitas de la semana 4--&gt;</b>
-<i class="no-highlight">72</i>&nbsp;
-<i class="no-highlight">73</i>&nbsp;&lt;!-- Page content --&gt;
-<i class="no-highlight">74</i>&nbsp;&lt;div class=&quot;right_col&quot; role=&quot;main&quot;&gt;
-<i class="no-highlight">75</i>&nbsp;	&lt;div class=&quot;row&quot;&gt;
-<i class="no-highlight">76</i>&nbsp;		&lt;div class=&quot;col-md-12 col-sm-6 col-xs-12&quot;&gt;
-<b class="fc"><i class="no-highlight">77</i>&nbsp;			&quot;&quot;&quot;),_display_(/*47.5*/reportByDateRange()),format.raw/*47.24*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">78</i>&nbsp;			&quot;&quot;&quot;),format.raw/*48.4*/(&quot;&quot;&quot;&lt;div class=&quot;x_panel&quot;&gt;</b>
-<i class="no-highlight">79</i>&nbsp;				&lt;div class=&quot;x_content&quot;&gt;
-<i class="no-highlight">80</i>&nbsp;					&lt;div id=&quot;porMes&quot; style=&quot;height:350px;&quot;&gt;&lt;/div&gt;
-<i class="no-highlight">81</i>&nbsp;				&lt;/div&gt;
-<i class="no-highlight">82</i>&nbsp;			&lt;/div&gt;
-<i class="no-highlight">83</i>&nbsp;
-<i class="no-highlight">84</i>&nbsp;			&lt;div class=&quot;x_panel&quot;&gt;
-<i class="no-highlight">85</i>&nbsp;				&lt;div class=&quot;x_content&quot;&gt;
-<i class="no-highlight">86</i>&nbsp;					&lt;div id=&quot;porDiayHora&quot; style=&quot;height:350px;&quot;&gt;&lt;/div&gt;
-<i class="no-highlight">87</i>&nbsp;				&lt;/div&gt;
-<i class="no-highlight">88</i>&nbsp;			&lt;/div&gt;
-<i class="no-highlight">89</i>&nbsp;
-<i class="no-highlight">90</i>&nbsp;			&lt;div class=&quot;x_panel&quot;&gt;
-<i class="no-highlight">91</i>&nbsp;				&lt;div class=&quot;x_content&quot;&gt;
-<i class="no-highlight">92</i>&nbsp;					&lt;div id=&quot;porDuracion&quot; style=&quot;height:350px;&quot;&gt;&lt;/div&gt;
-<i class="no-highlight">93</i>&nbsp;				&lt;/div&gt;
-<i class="no-highlight">94</i>&nbsp;			&lt;/div&gt;
-<i class="no-highlight">95</i>&nbsp;
-<i class="no-highlight">96</i>&nbsp;			&lt;div class=&quot;x_panel&quot;&gt;
-<i class="no-highlight">97</i>&nbsp;				&lt;div class=&quot;x_content&quot;&gt;
-<i class="no-highlight">98</i>&nbsp;					&lt;div id=&quot;ultimasCuatro&quot; style=&quot;height:350px;&quot;&gt;&lt;/div&gt;
-<i class="no-highlight">99</i>&nbsp;				&lt;/div&gt;
-<i class="no-highlight">100</i>&nbsp;			&lt;/div&gt;
-<i class="no-highlight">101</i>&nbsp;		&lt;/div&gt;
-<i class="no-highlight">102</i>&nbsp;	&lt;/div&gt;
-<i class="no-highlight">103</i>&nbsp;&lt;/div&gt;
-<b class="fc"><i class="no-highlight">104</i>&nbsp;&quot;&quot;&quot;),_display_(/*74.2*/parts/*74.7*/.js.echart()),format.raw/*74.19*/(&quot;&quot;&quot;</b>
-<i class="no-highlight">105</i>&nbsp;
-<b class="fc"><i class="no-highlight">106</i>&nbsp;&quot;&quot;&quot;),format.raw/*76.1*/(&quot;&quot;&quot;&lt;script&gt;</b>
-<i class="no-highlight">107</i>&nbsp;	// Grafico 1: Total de visitas por mes
-<i class="no-highlight">108</i>&nbsp;	var grafico1 = echarts.init(document.getElementById(&#39;porMes&#39;), theme);
-<b class="fc"><i class="no-highlight">109</i>&nbsp;	var graphicData = toJson(&#39;&quot;&quot;&quot;),_display_(/*79.29*/graphicData),format.raw/*79.40*/(&quot;&quot;&quot;&#39;);</b>
-<b class="fc"><i class="no-highlight">110</i>&nbsp;	grafico1.setOption(&quot;&quot;&quot;),format.raw/*80.21*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*80.22*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">111</i>&nbsp;		&quot;&quot;&quot;),format.raw/*81.3*/(&quot;&quot;&quot;title: &quot;&quot;&quot;),format.raw/*81.10*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*81.11*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">112</i>&nbsp;			&quot;&quot;&quot;),format.raw/*82.4*/(&quot;&quot;&quot;text: &#39;Visitas por Mes&#39;,</b>
-<i class="no-highlight">113</i>&nbsp;			// subtext: &#39;Subtitulo&#39;
-<b class="fc"><i class="no-highlight">114</i>&nbsp;		&quot;&quot;&quot;),format.raw/*84.3*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*84.4*/(&quot;&quot;&quot;,</b>
-<b class="fc"><i class="no-highlight">115</i>&nbsp;		tooltip: &quot;&quot;&quot;),format.raw/*85.12*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*85.13*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">116</i>&nbsp;			&quot;&quot;&quot;),format.raw/*86.4*/(&quot;&quot;&quot;trigger: &#39;axis&#39;</b>
-<b class="fc"><i class="no-highlight">117</i>&nbsp;		&quot;&quot;&quot;),format.raw/*87.3*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*87.4*/(&quot;&quot;&quot;,</b>
-<b class="fc"><i class="no-highlight">118</i>&nbsp;		legend: &quot;&quot;&quot;),format.raw/*88.11*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*88.12*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">119</i>&nbsp;			&quot;&quot;&quot;),format.raw/*89.4*/(&quot;&quot;&quot;data: [&#39;Visitas&#39;]</b>
-<b class="fc"><i class="no-highlight">120</i>&nbsp;		&quot;&quot;&quot;),format.raw/*90.3*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*90.4*/(&quot;&quot;&quot;,</b>
-<b class="fc"><i class="no-highlight">121</i>&nbsp;		toolbox: &quot;&quot;&quot;),format.raw/*91.12*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*91.13*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">122</i>&nbsp;			&quot;&quot;&quot;),format.raw/*92.4*/(&quot;&quot;&quot;show: true,</b>
-<b class="fc"><i class="no-highlight">123</i>&nbsp;			feature: &quot;&quot;&quot;),format.raw/*93.13*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*93.14*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">124</i>&nbsp;				&quot;&quot;&quot;),format.raw/*94.5*/(&quot;&quot;&quot;dataZoom: &quot;&quot;&quot;),format.raw/*94.15*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*94.16*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">125</i>&nbsp;					&quot;&quot;&quot;),format.raw/*95.6*/(&quot;&quot;&quot;show: true,</b>
-<i class="no-highlight">126</i>&nbsp;					yAxisIndex: &quot;none&quot;
-<b class="fc"><i class="no-highlight">127</i>&nbsp;				&quot;&quot;&quot;),format.raw/*97.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*97.6*/(&quot;&quot;&quot;,</b>
-<b class="fc"><i class="no-highlight">128</i>&nbsp;				dataView: &quot;&quot;&quot;),format.raw/*98.15*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*98.16*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">129</i>&nbsp;					&quot;&quot;&quot;),format.raw/*99.6*/(&quot;&quot;&quot;show: true,</b>
-<i class="no-highlight">130</i>&nbsp;					readOnly: false
-<b class="fc"><i class="no-highlight">131</i>&nbsp;				&quot;&quot;&quot;),format.raw/*101.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*101.6*/(&quot;&quot;&quot;,</b>
-<b class="fc"><i class="no-highlight">132</i>&nbsp;				magicType: &quot;&quot;&quot;),format.raw/*102.16*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*102.17*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">133</i>&nbsp;					&quot;&quot;&quot;),format.raw/*103.6*/(&quot;&quot;&quot;show: true,</b>
-<b class="fc"><i class="no-highlight">134</i>&nbsp;					title: &quot;&quot;&quot;),format.raw/*104.13*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*104.14*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">135</i>&nbsp;						&quot;&quot;&quot;),format.raw/*105.7*/(&quot;&quot;&quot;line: &#39;Líneas&#39;,</b>
-<i class="no-highlight">136</i>&nbsp;						bar: &#39;Barras&#39;,
-<i class="no-highlight">137</i>&nbsp;						stack: &#39;Barras Apiladas&#39;,
-<b class="fc"><i class="no-highlight">138</i>&nbsp;					&quot;&quot;&quot;),format.raw/*108.6*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*108.7*/(&quot;&quot;&quot;,</b>
-<i class="no-highlight">139</i>&nbsp;					type: [&#39;line&#39;, &#39;bar&#39;, &#39;stack&#39;]
-<b class="fc"><i class="no-highlight">140</i>&nbsp;				&quot;&quot;&quot;),format.raw/*110.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*110.6*/(&quot;&quot;&quot;,</b>
-<b class="fc"><i class="no-highlight">141</i>&nbsp;				restore: &quot;&quot;&quot;),format.raw/*111.14*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*111.15*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">142</i>&nbsp;					&quot;&quot;&quot;),format.raw/*112.6*/(&quot;&quot;&quot;show: true,</b>
-<i class="no-highlight">143</i>&nbsp;					title: &quot;Restaurar&quot;
-<b class="fc"><i class="no-highlight">144</i>&nbsp;				&quot;&quot;&quot;),format.raw/*114.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*114.6*/(&quot;&quot;&quot;,</b>
-<b class="fc"><i class="no-highlight">145</i>&nbsp;				saveAsImage: &quot;&quot;&quot;),format.raw/*115.18*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*115.19*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">146</i>&nbsp;					&quot;&quot;&quot;),format.raw/*116.6*/(&quot;&quot;&quot;show: true,</b>
-<i class="no-highlight">147</i>&nbsp;					title: &quot;Guardar Imágen&quot;
-<b class="fc"><i class="no-highlight">148</i>&nbsp;				&quot;&quot;&quot;),format.raw/*118.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*118.6*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">149</i>&nbsp;			&quot;&quot;&quot;),format.raw/*119.4*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*119.5*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">150</i>&nbsp;		&quot;&quot;&quot;),format.raw/*120.3*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*120.4*/(&quot;&quot;&quot;,</b>
-<i class="no-highlight">151</i>&nbsp;		calculable: false,
-<b class="fc"><i class="no-highlight">152</i>&nbsp;		xAxis: [&quot;&quot;&quot;),format.raw/*122.11*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*122.12*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">153</i>&nbsp;			&quot;&quot;&quot;),format.raw/*123.4*/(&quot;&quot;&quot;type: &#39;category&#39;,</b>
-<b class="fc"><i class="no-highlight">154</i>&nbsp;			data: graphicData.map(function (e) &quot;&quot;&quot;),format.raw/*124.39*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*124.40*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">155</i>&nbsp;				&quot;&quot;&quot;),format.raw/*125.5*/(&quot;&quot;&quot;return e.name;</b>
-<b class="fc"><i class="no-highlight">156</i>&nbsp;			&quot;&quot;&quot;),format.raw/*126.4*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*126.5*/(&quot;&quot;&quot;) //Trae el nombre de los meses</b>
-<b class="fc"><i class="no-highlight">157</i>&nbsp;		&quot;&quot;&quot;),format.raw/*127.3*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*127.4*/(&quot;&quot;&quot;],</b>
-<b class="fc"><i class="no-highlight">158</i>&nbsp;		yAxis: [&quot;&quot;&quot;),format.raw/*128.11*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*128.12*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">159</i>&nbsp;			&quot;&quot;&quot;),format.raw/*129.4*/(&quot;&quot;&quot;type: &#39;value&#39;</b>
-<b class="fc"><i class="no-highlight">160</i>&nbsp;		&quot;&quot;&quot;),format.raw/*130.3*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*130.4*/(&quot;&quot;&quot;],</b>
-<b class="fc"><i class="no-highlight">161</i>&nbsp;		series: [&quot;&quot;&quot;),format.raw/*131.12*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*131.13*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">162</i>&nbsp;			&quot;&quot;&quot;),format.raw/*132.4*/(&quot;&quot;&quot;name: &#39;Visitas&#39;,</b>
-<i class="no-highlight">163</i>&nbsp;			type: &#39;bar&#39;,
-<b class="fc"><i class="no-highlight">164</i>&nbsp;			data: graphicData.map(function (e) &quot;&quot;&quot;),format.raw/*134.39*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*134.40*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">165</i>&nbsp;				&quot;&quot;&quot;),format.raw/*135.5*/(&quot;&quot;&quot;return e.value;</b>
-<b class="fc"><i class="no-highlight">166</i>&nbsp;			&quot;&quot;&quot;),format.raw/*136.4*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*136.5*/(&quot;&quot;&quot;), //Trae el valor de cada mes</b>
-<b class="fc"><i class="no-highlight">167</i>&nbsp;			markPoint: &quot;&quot;&quot;),format.raw/*137.15*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*137.16*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">168</i>&nbsp;				&quot;&quot;&quot;),format.raw/*138.5*/(&quot;&quot;&quot;data: [&quot;&quot;&quot;),format.raw/*138.12*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*138.13*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">169</i>&nbsp;					&quot;&quot;&quot;),format.raw/*139.6*/(&quot;&quot;&quot;type: &#39;max&#39;,</b>
-<i class="no-highlight">170</i>&nbsp;					name: &#39;Máxima cantidad de visitas&#39;
-<b class="fc"><i class="no-highlight">171</i>&nbsp;				&quot;&quot;&quot;),format.raw/*141.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*141.6*/(&quot;&quot;&quot;, &quot;&quot;&quot;),format.raw/*141.8*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*141.9*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">172</i>&nbsp;					&quot;&quot;&quot;),format.raw/*142.6*/(&quot;&quot;&quot;type: &#39;min&#39;,</b>
-<i class="no-highlight">173</i>&nbsp;					name: &#39;Mínimo de visitas&#39;
-<b class="fc"><i class="no-highlight">174</i>&nbsp;				&quot;&quot;&quot;),format.raw/*144.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*144.6*/(&quot;&quot;&quot;]</b>
-<b class="fc"><i class="no-highlight">175</i>&nbsp;			&quot;&quot;&quot;),format.raw/*145.4*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*145.5*/(&quot;&quot;&quot;,</b>
-<b class="fc"><i class="no-highlight">176</i>&nbsp;			markLine: &quot;&quot;&quot;),format.raw/*146.14*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*146.15*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">177</i>&nbsp;				&quot;&quot;&quot;),format.raw/*147.5*/(&quot;&quot;&quot;data: [&quot;&quot;&quot;),format.raw/*147.12*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*147.13*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">178</i>&nbsp;					&quot;&quot;&quot;),format.raw/*148.6*/(&quot;&quot;&quot;type: &#39;average&#39;,</b>
-<i class="no-highlight">179</i>&nbsp;					name: &#39;Promedio de visitas&#39;
-<b class="fc"><i class="no-highlight">180</i>&nbsp;				&quot;&quot;&quot;),format.raw/*150.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*150.6*/(&quot;&quot;&quot;]</b>
-<b class="fc"><i class="no-highlight">181</i>&nbsp;			&quot;&quot;&quot;),format.raw/*151.4*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*151.5*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">182</i>&nbsp;		&quot;&quot;&quot;),format.raw/*152.3*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*152.4*/(&quot;&quot;&quot;]</b>
-<b class="fc"><i class="no-highlight">183</i>&nbsp;	&quot;&quot;&quot;),format.raw/*153.2*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*153.3*/(&quot;&quot;&quot;);</b>
-<i class="no-highlight">184</i>&nbsp;
-<i class="no-highlight">185</i>&nbsp;	// Grafico 3: Gráfico por dia y rango horario (es promedio de visitas histórico por dia y hora)
-<i class="no-highlight">186</i>&nbsp;	var echartLine = echarts.init(document.getElementById(&#39;porDiayHora&#39;), theme);
-<b class="fc"><i class="no-highlight">187</i>&nbsp;	var graphicData4 = toJson(&#39;&quot;&quot;&quot;),_display_(/*157.30*/graphicData4),format.raw/*157.42*/(&quot;&quot;&quot;&#39;);</b>
-<b class="fc"><i class="no-highlight">188</i>&nbsp;	var graphicData5 = toJson(&#39;&quot;&quot;&quot;),_display_(/*158.30*/graphicData5),format.raw/*158.42*/(&quot;&quot;&quot;&#39;);</b>
-<b class="fc"><i class="no-highlight">189</i>&nbsp;	var graphicData6 = toJson(&#39;&quot;&quot;&quot;),_display_(/*159.30*/graphicData6),format.raw/*159.42*/(&quot;&quot;&quot;&#39;);</b>
-<b class="fc"><i class="no-highlight">190</i>&nbsp;	var graphicData7 = toJson(&#39;&quot;&quot;&quot;),_display_(/*160.30*/graphicData7),format.raw/*160.42*/(&quot;&quot;&quot;&#39;);</b>
-<b class="fc"><i class="no-highlight">191</i>&nbsp;	var graphicData8 = toJson(&#39;&quot;&quot;&quot;),_display_(/*161.30*/graphicData8),format.raw/*161.42*/(&quot;&quot;&quot;&#39;);</b>
-<b class="fc"><i class="no-highlight">192</i>&nbsp;	var graphicData9 = toJson(&#39;&quot;&quot;&quot;),_display_(/*162.30*/graphicData9),format.raw/*162.42*/(&quot;&quot;&quot;&#39;);</b>
-<b class="fc"><i class="no-highlight">193</i>&nbsp;	echartLine.setOption(&quot;&quot;&quot;),format.raw/*163.23*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*163.24*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">194</i>&nbsp;		&quot;&quot;&quot;),format.raw/*164.3*/(&quot;&quot;&quot;title: &quot;&quot;&quot;),format.raw/*164.10*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*164.11*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">195</i>&nbsp;			&quot;&quot;&quot;),format.raw/*165.4*/(&quot;&quot;&quot;text: &#39;Promedio de visitas por rangos horarios&#39;,</b>
-<i class="no-highlight">196</i>&nbsp;			// subtext: &#39;Subtitle&#39;
-<b class="fc"><i class="no-highlight">197</i>&nbsp;		&quot;&quot;&quot;),format.raw/*167.3*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*167.4*/(&quot;&quot;&quot;,</b>
-<b class="fc"><i class="no-highlight">198</i>&nbsp;		tooltip: &quot;&quot;&quot;),format.raw/*168.12*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*168.13*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">199</i>&nbsp;			&quot;&quot;&quot;),format.raw/*169.4*/(&quot;&quot;&quot;trigger: &#39;axis&#39;</b>
-<b class="fc"><i class="no-highlight">200</i>&nbsp;		&quot;&quot;&quot;),format.raw/*170.3*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*170.4*/(&quot;&quot;&quot;,</b>
-<b class="fc"><i class="no-highlight">201</i>&nbsp;		legend: &quot;&quot;&quot;),format.raw/*171.11*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*171.12*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">202</i>&nbsp;			&quot;&quot;&quot;),format.raw/*172.4*/(&quot;&quot;&quot;x: 220,</b>
-<i class="no-highlight">203</i>&nbsp;			y: 40,
-<i class="no-highlight">204</i>&nbsp;			data: [&#39;0am-8am&#39;, &#39;8am-11am&#39;, &#39;11am-1pm&#39;, &#39;1pm-4pm&#39;, &#39;4pm-8pm&#39;, &#39;8pm-0am&#39;]
-<b class="fc"><i class="no-highlight">205</i>&nbsp;		&quot;&quot;&quot;),format.raw/*175.3*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*175.4*/(&quot;&quot;&quot;,</b>
-<b class="fc"><i class="no-highlight">206</i>&nbsp;		toolbox: &quot;&quot;&quot;),format.raw/*176.12*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*176.13*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">207</i>&nbsp;			&quot;&quot;&quot;),format.raw/*177.4*/(&quot;&quot;&quot;show: true,</b>
-<b class="fc"><i class="no-highlight">208</i>&nbsp;			feature: &quot;&quot;&quot;),format.raw/*178.13*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*178.14*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">209</i>&nbsp;				&quot;&quot;&quot;),format.raw/*179.5*/(&quot;&quot;&quot;dataZoom: &quot;&quot;&quot;),format.raw/*179.15*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*179.16*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">210</i>&nbsp;					&quot;&quot;&quot;),format.raw/*180.6*/(&quot;&quot;&quot;show: true,</b>
-<i class="no-highlight">211</i>&nbsp;					yAxisIndex: &quot;none&quot;
-<b class="fc"><i class="no-highlight">212</i>&nbsp;				&quot;&quot;&quot;),format.raw/*182.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*182.6*/(&quot;&quot;&quot;,</b>
-<b class="fc"><i class="no-highlight">213</i>&nbsp;				dataView: &quot;&quot;&quot;),format.raw/*183.15*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*183.16*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">214</i>&nbsp;					&quot;&quot;&quot;),format.raw/*184.6*/(&quot;&quot;&quot;show: true,</b>
-<i class="no-highlight">215</i>&nbsp;					readOnly: false
-<b class="fc"><i class="no-highlight">216</i>&nbsp;				&quot;&quot;&quot;),format.raw/*186.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*186.6*/(&quot;&quot;&quot;,</b>
-<b class="fc"><i class="no-highlight">217</i>&nbsp;				magicType: &quot;&quot;&quot;),format.raw/*187.16*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*187.17*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">218</i>&nbsp;					&quot;&quot;&quot;),format.raw/*188.6*/(&quot;&quot;&quot;show: true,</b>
-<b class="fc"><i class="no-highlight">219</i>&nbsp;					title: &quot;&quot;&quot;),format.raw/*189.13*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*189.14*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">220</i>&nbsp;						&quot;&quot;&quot;),format.raw/*190.7*/(&quot;&quot;&quot;line: &#39;Líneas&#39;,</b>
-<i class="no-highlight">221</i>&nbsp;						bar: &#39;Barras&#39;,
-<i class="no-highlight">222</i>&nbsp;						stack: &#39;Barras Apiladas&#39;,
-<b class="fc"><i class="no-highlight">223</i>&nbsp;					&quot;&quot;&quot;),format.raw/*193.6*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*193.7*/(&quot;&quot;&quot;,</b>
-<i class="no-highlight">224</i>&nbsp;					type: [&#39;line&#39;, &#39;bar&#39;, &#39;stack&#39;]
-<b class="fc"><i class="no-highlight">225</i>&nbsp;				&quot;&quot;&quot;),format.raw/*195.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*195.6*/(&quot;&quot;&quot;,</b>
-<b class="fc"><i class="no-highlight">226</i>&nbsp;				restore: &quot;&quot;&quot;),format.raw/*196.14*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*196.15*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">227</i>&nbsp;					&quot;&quot;&quot;),format.raw/*197.6*/(&quot;&quot;&quot;show: true,</b>
-<i class="no-highlight">228</i>&nbsp;					title: &quot;Restaurar&quot;
-<b class="fc"><i class="no-highlight">229</i>&nbsp;				&quot;&quot;&quot;),format.raw/*199.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*199.6*/(&quot;&quot;&quot;,</b>
-<b class="fc"><i class="no-highlight">230</i>&nbsp;				saveAsImage: &quot;&quot;&quot;),format.raw/*200.18*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*200.19*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">231</i>&nbsp;					&quot;&quot;&quot;),format.raw/*201.6*/(&quot;&quot;&quot;show: true,</b>
-<i class="no-highlight">232</i>&nbsp;					title: &quot;Guardar Imágen&quot;
-<b class="fc"><i class="no-highlight">233</i>&nbsp;				&quot;&quot;&quot;),format.raw/*203.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*203.6*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">234</i>&nbsp;			&quot;&quot;&quot;),format.raw/*204.4*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*204.5*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">235</i>&nbsp;		&quot;&quot;&quot;),format.raw/*205.3*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*205.4*/(&quot;&quot;&quot;,</b>
-<i class="no-highlight">236</i>&nbsp;		calculable: true,
-<b class="fc"><i class="no-highlight">237</i>&nbsp;		xAxis: [&quot;&quot;&quot;),format.raw/*207.11*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*207.12*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">238</i>&nbsp;			&quot;&quot;&quot;),format.raw/*208.4*/(&quot;&quot;&quot;type: &#39;category&#39;,</b>
-<i class="no-highlight">239</i>&nbsp;			boundaryGap: false,
-<i class="no-highlight">240</i>&nbsp;			data: [&#39;Lun&#39;, &#39;Mar&#39;, &#39;Mie&#39;, &#39;Jue&#39;, &#39;Vie&#39;, &#39;Sab&#39;, &#39;Dom&#39;]
-<b class="fc"><i class="no-highlight">241</i>&nbsp;		&quot;&quot;&quot;),format.raw/*211.3*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*211.4*/(&quot;&quot;&quot;],</b>
-<b class="fc"><i class="no-highlight">242</i>&nbsp;		yAxis: [&quot;&quot;&quot;),format.raw/*212.11*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*212.12*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">243</i>&nbsp;			&quot;&quot;&quot;),format.raw/*213.4*/(&quot;&quot;&quot;type: &#39;value&#39;</b>
-<b class="fc"><i class="no-highlight">244</i>&nbsp;		&quot;&quot;&quot;),format.raw/*214.3*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*214.4*/(&quot;&quot;&quot;],</b>
-<b class="fc"><i class="no-highlight">245</i>&nbsp;		series: [&quot;&quot;&quot;),format.raw/*215.12*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*215.13*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">246</i>&nbsp;			&quot;&quot;&quot;),format.raw/*216.4*/(&quot;&quot;&quot;name: &#39;0am-8am&#39;,</b>
-<i class="no-highlight">247</i>&nbsp;			type: &#39;line&#39;,
-<i class="no-highlight">248</i>&nbsp;			smooth: true,
-<b class="fc"><i class="no-highlight">249</i>&nbsp;			itemStyle: &quot;&quot;&quot;),format.raw/*219.15*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*219.16*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">250</i>&nbsp;				&quot;&quot;&quot;),format.raw/*220.5*/(&quot;&quot;&quot;normal: &quot;&quot;&quot;),format.raw/*220.13*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*220.14*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">251</i>&nbsp;					&quot;&quot;&quot;),format.raw/*221.6*/(&quot;&quot;&quot;areaStyle: &quot;&quot;&quot;),format.raw/*221.17*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*221.18*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">252</i>&nbsp;						&quot;&quot;&quot;),format.raw/*222.7*/(&quot;&quot;&quot;type: &#39;default&#39;</b>
-<b class="fc"><i class="no-highlight">253</i>&nbsp;					&quot;&quot;&quot;),format.raw/*223.6*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*223.7*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">254</i>&nbsp;				&quot;&quot;&quot;),format.raw/*224.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*224.6*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">255</i>&nbsp;			&quot;&quot;&quot;),format.raw/*225.4*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*225.5*/(&quot;&quot;&quot;,</b>
-<b class="fc"><i class="no-highlight">256</i>&nbsp;			data: graphicData4.map(function (e) &quot;&quot;&quot;),format.raw/*226.40*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*226.41*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">257</i>&nbsp;				&quot;&quot;&quot;),format.raw/*227.5*/(&quot;&quot;&quot;return e.value;</b>
-<b class="fc"><i class="no-highlight">258</i>&nbsp;			&quot;&quot;&quot;),format.raw/*228.4*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*228.5*/(&quot;&quot;&quot;) //Rango 0am a 8am</b>
-<b class="fc"><i class="no-highlight">259</i>&nbsp;		&quot;&quot;&quot;),format.raw/*229.3*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*229.4*/(&quot;&quot;&quot;, &quot;&quot;&quot;),format.raw/*229.6*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*229.7*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">260</i>&nbsp;			&quot;&quot;&quot;),format.raw/*230.4*/(&quot;&quot;&quot;name: &#39;8am-11am&#39;,</b>
-<i class="no-highlight">261</i>&nbsp;			type: &#39;line&#39;,
-<i class="no-highlight">262</i>&nbsp;			smooth: true,
-<b class="fc"><i class="no-highlight">263</i>&nbsp;			itemStyle: &quot;&quot;&quot;),format.raw/*233.15*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*233.16*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">264</i>&nbsp;				&quot;&quot;&quot;),format.raw/*234.5*/(&quot;&quot;&quot;normal: &quot;&quot;&quot;),format.raw/*234.13*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*234.14*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">265</i>&nbsp;					&quot;&quot;&quot;),format.raw/*235.6*/(&quot;&quot;&quot;areaStyle: &quot;&quot;&quot;),format.raw/*235.17*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*235.18*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">266</i>&nbsp;						&quot;&quot;&quot;),format.raw/*236.7*/(&quot;&quot;&quot;type: &#39;default&#39;</b>
-<b class="fc"><i class="no-highlight">267</i>&nbsp;					&quot;&quot;&quot;),format.raw/*237.6*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*237.7*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">268</i>&nbsp;				&quot;&quot;&quot;),format.raw/*238.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*238.6*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">269</i>&nbsp;			&quot;&quot;&quot;),format.raw/*239.4*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*239.5*/(&quot;&quot;&quot;,</b>
-<b class="fc"><i class="no-highlight">270</i>&nbsp;			data: graphicData5.map(function (e) &quot;&quot;&quot;),format.raw/*240.40*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*240.41*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">271</i>&nbsp;				&quot;&quot;&quot;),format.raw/*241.5*/(&quot;&quot;&quot;return e.value;</b>
-<b class="fc"><i class="no-highlight">272</i>&nbsp;			&quot;&quot;&quot;),format.raw/*242.4*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*242.5*/(&quot;&quot;&quot;) //Rango 8am a 11am</b>
-<b class="fc"><i class="no-highlight">273</i>&nbsp;		&quot;&quot;&quot;),format.raw/*243.3*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*243.4*/(&quot;&quot;&quot;, &quot;&quot;&quot;),format.raw/*243.6*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*243.7*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">274</i>&nbsp;			&quot;&quot;&quot;),format.raw/*244.4*/(&quot;&quot;&quot;name: &#39;11am-1pm&#39;,</b>
-<i class="no-highlight">275</i>&nbsp;			type: &#39;line&#39;,
-<i class="no-highlight">276</i>&nbsp;			smooth: true,
-<b class="fc"><i class="no-highlight">277</i>&nbsp;			itemStyle: &quot;&quot;&quot;),format.raw/*247.15*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*247.16*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">278</i>&nbsp;				&quot;&quot;&quot;),format.raw/*248.5*/(&quot;&quot;&quot;normal: &quot;&quot;&quot;),format.raw/*248.13*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*248.14*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">279</i>&nbsp;					&quot;&quot;&quot;),format.raw/*249.6*/(&quot;&quot;&quot;areaStyle: &quot;&quot;&quot;),format.raw/*249.17*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*249.18*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">280</i>&nbsp;						&quot;&quot;&quot;),format.raw/*250.7*/(&quot;&quot;&quot;type: &#39;default&#39;</b>
-<b class="fc"><i class="no-highlight">281</i>&nbsp;					&quot;&quot;&quot;),format.raw/*251.6*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*251.7*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">282</i>&nbsp;				&quot;&quot;&quot;),format.raw/*252.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*252.6*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">283</i>&nbsp;			&quot;&quot;&quot;),format.raw/*253.4*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*253.5*/(&quot;&quot;&quot;,</b>
-<b class="fc"><i class="no-highlight">284</i>&nbsp;			data: graphicData6.map(function (e) &quot;&quot;&quot;),format.raw/*254.40*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*254.41*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">285</i>&nbsp;				&quot;&quot;&quot;),format.raw/*255.5*/(&quot;&quot;&quot;return e.value;</b>
-<b class="fc"><i class="no-highlight">286</i>&nbsp;			&quot;&quot;&quot;),format.raw/*256.4*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*256.5*/(&quot;&quot;&quot;) //Rango 11am a 1pm</b>
-<b class="fc"><i class="no-highlight">287</i>&nbsp;		&quot;&quot;&quot;),format.raw/*257.3*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*257.4*/(&quot;&quot;&quot;, &quot;&quot;&quot;),format.raw/*257.6*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*257.7*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">288</i>&nbsp;			&quot;&quot;&quot;),format.raw/*258.4*/(&quot;&quot;&quot;name: &#39;1pm-4pm&#39;,</b>
-<i class="no-highlight">289</i>&nbsp;			type: &#39;line&#39;,
-<i class="no-highlight">290</i>&nbsp;			smooth: true,
-<b class="fc"><i class="no-highlight">291</i>&nbsp;			itemStyle: &quot;&quot;&quot;),format.raw/*261.15*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*261.16*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">292</i>&nbsp;				&quot;&quot;&quot;),format.raw/*262.5*/(&quot;&quot;&quot;normal: &quot;&quot;&quot;),format.raw/*262.13*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*262.14*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">293</i>&nbsp;					&quot;&quot;&quot;),format.raw/*263.6*/(&quot;&quot;&quot;areaStyle: &quot;&quot;&quot;),format.raw/*263.17*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*263.18*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">294</i>&nbsp;						&quot;&quot;&quot;),format.raw/*264.7*/(&quot;&quot;&quot;type: &#39;default&#39;</b>
-<b class="fc"><i class="no-highlight">295</i>&nbsp;					&quot;&quot;&quot;),format.raw/*265.6*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*265.7*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">296</i>&nbsp;				&quot;&quot;&quot;),format.raw/*266.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*266.6*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">297</i>&nbsp;			&quot;&quot;&quot;),format.raw/*267.4*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*267.5*/(&quot;&quot;&quot;,</b>
-<b class="fc"><i class="no-highlight">298</i>&nbsp;			data: graphicData7.map(function (e) &quot;&quot;&quot;),format.raw/*268.40*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*268.41*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">299</i>&nbsp;				&quot;&quot;&quot;),format.raw/*269.5*/(&quot;&quot;&quot;return e.value;</b>
-<b class="fc"><i class="no-highlight">300</i>&nbsp;			&quot;&quot;&quot;),format.raw/*270.4*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*270.5*/(&quot;&quot;&quot;) //Rango 1pm a 4pm</b>
-<b class="fc"><i class="no-highlight">301</i>&nbsp;		&quot;&quot;&quot;),format.raw/*271.3*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*271.4*/(&quot;&quot;&quot;, &quot;&quot;&quot;),format.raw/*271.6*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*271.7*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">302</i>&nbsp;			&quot;&quot;&quot;),format.raw/*272.4*/(&quot;&quot;&quot;name: &#39;4pm-8pm&#39;,</b>
-<i class="no-highlight">303</i>&nbsp;			type: &#39;line&#39;,
-<i class="no-highlight">304</i>&nbsp;			smooth: true,
-<b class="fc"><i class="no-highlight">305</i>&nbsp;			itemStyle: &quot;&quot;&quot;),format.raw/*275.15*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*275.16*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">306</i>&nbsp;				&quot;&quot;&quot;),format.raw/*276.5*/(&quot;&quot;&quot;normal: &quot;&quot;&quot;),format.raw/*276.13*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*276.14*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">307</i>&nbsp;					&quot;&quot;&quot;),format.raw/*277.6*/(&quot;&quot;&quot;areaStyle: &quot;&quot;&quot;),format.raw/*277.17*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*277.18*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">308</i>&nbsp;						&quot;&quot;&quot;),format.raw/*278.7*/(&quot;&quot;&quot;type: &#39;default&#39;</b>
-<b class="fc"><i class="no-highlight">309</i>&nbsp;					&quot;&quot;&quot;),format.raw/*279.6*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*279.7*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">310</i>&nbsp;				&quot;&quot;&quot;),format.raw/*280.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*280.6*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">311</i>&nbsp;			&quot;&quot;&quot;),format.raw/*281.4*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*281.5*/(&quot;&quot;&quot;,</b>
-<b class="fc"><i class="no-highlight">312</i>&nbsp;			data: graphicData8.map(function (e) &quot;&quot;&quot;),format.raw/*282.40*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*282.41*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">313</i>&nbsp;				&quot;&quot;&quot;),format.raw/*283.5*/(&quot;&quot;&quot;return e.value;</b>
-<b class="fc"><i class="no-highlight">314</i>&nbsp;			&quot;&quot;&quot;),format.raw/*284.4*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*284.5*/(&quot;&quot;&quot;) //Rango 4pm a 8pm</b>
-<b class="fc"><i class="no-highlight">315</i>&nbsp;		&quot;&quot;&quot;),format.raw/*285.3*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*285.4*/(&quot;&quot;&quot;, &quot;&quot;&quot;),format.raw/*285.6*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*285.7*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">316</i>&nbsp;			&quot;&quot;&quot;),format.raw/*286.4*/(&quot;&quot;&quot;name: &#39;8pm-0am&#39;,</b>
-<i class="no-highlight">317</i>&nbsp;			type: &#39;line&#39;,
-<i class="no-highlight">318</i>&nbsp;			smooth: true,
-<b class="fc"><i class="no-highlight">319</i>&nbsp;			itemStyle: &quot;&quot;&quot;),format.raw/*289.15*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*289.16*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">320</i>&nbsp;				&quot;&quot;&quot;),format.raw/*290.5*/(&quot;&quot;&quot;normal: &quot;&quot;&quot;),format.raw/*290.13*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*290.14*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">321</i>&nbsp;					&quot;&quot;&quot;),format.raw/*291.6*/(&quot;&quot;&quot;areaStyle: &quot;&quot;&quot;),format.raw/*291.17*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*291.18*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">322</i>&nbsp;						&quot;&quot;&quot;),format.raw/*292.7*/(&quot;&quot;&quot;type: &#39;default&#39;</b>
-<b class="fc"><i class="no-highlight">323</i>&nbsp;					&quot;&quot;&quot;),format.raw/*293.6*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*293.7*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">324</i>&nbsp;				&quot;&quot;&quot;),format.raw/*294.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*294.6*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">325</i>&nbsp;			&quot;&quot;&quot;),format.raw/*295.4*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*295.5*/(&quot;&quot;&quot;,</b>
-<b class="fc"><i class="no-highlight">326</i>&nbsp;			data: graphicData9.map(function (e) &quot;&quot;&quot;),format.raw/*296.40*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*296.41*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">327</i>&nbsp;				&quot;&quot;&quot;),format.raw/*297.5*/(&quot;&quot;&quot;return e.value;</b>
-<b class="fc"><i class="no-highlight">328</i>&nbsp;			&quot;&quot;&quot;),format.raw/*298.4*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*298.5*/(&quot;&quot;&quot;) //Rango 8pm a 0am</b>
-<b class="fc"><i class="no-highlight">329</i>&nbsp;		&quot;&quot;&quot;),format.raw/*299.3*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*299.4*/(&quot;&quot;&quot;]</b>
-<b class="fc"><i class="no-highlight">330</i>&nbsp;	&quot;&quot;&quot;),format.raw/*300.2*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*300.3*/(&quot;&quot;&quot;);</b>
-<i class="no-highlight">331</i>&nbsp;
-<i class="no-highlight">332</i>&nbsp;
-<i class="no-highlight">333</i>&nbsp;	// Grafico 4: Gráfico con visitas por duración de la última semana
-<i class="no-highlight">334</i>&nbsp;	var echartLine = echarts.init(document.getElementById(&#39;porDuracion&#39;), theme);
-<b class="fc"><i class="no-highlight">335</i>&nbsp;	var graphicData10 = toJson(&#39;&quot;&quot;&quot;),_display_(/*305.31*/graphicData10),format.raw/*305.44*/(&quot;&quot;&quot;&#39;);</b>
-<b class="fc"><i class="no-highlight">336</i>&nbsp;	var graphicData11 = toJson(&#39;&quot;&quot;&quot;),_display_(/*306.31*/graphicData11),format.raw/*306.44*/(&quot;&quot;&quot;&#39;);</b>
-<b class="fc"><i class="no-highlight">337</i>&nbsp;	var graphicData12 = toJson(&#39;&quot;&quot;&quot;),_display_(/*307.31*/graphicData12),format.raw/*307.44*/(&quot;&quot;&quot;&#39;);</b>
-<b class="fc"><i class="no-highlight">338</i>&nbsp;	var graphicData13 = toJson(&#39;&quot;&quot;&quot;),_display_(/*308.31*/graphicData13),format.raw/*308.44*/(&quot;&quot;&quot;&#39;);</b>
-<b class="fc"><i class="no-highlight">339</i>&nbsp;	var graphicData14 = toJson(&#39;&quot;&quot;&quot;),_display_(/*309.31*/graphicData14),format.raw/*309.44*/(&quot;&quot;&quot;&#39;);</b>
-<b class="fc"><i class="no-highlight">340</i>&nbsp;	echartLine.setOption(&quot;&quot;&quot;),format.raw/*310.23*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*310.24*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">341</i>&nbsp;		&quot;&quot;&quot;),format.raw/*311.3*/(&quot;&quot;&quot;title: &quot;&quot;&quot;),format.raw/*311.10*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*311.11*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">342</i>&nbsp;			&quot;&quot;&quot;),format.raw/*312.4*/(&quot;&quot;&quot;text: &#39;Visitas por duración en la última semana&#39;,</b>
-<i class="no-highlight">343</i>&nbsp;			// subtext: &#39;Subtitle&#39;
-<b class="fc"><i class="no-highlight">344</i>&nbsp;		&quot;&quot;&quot;),format.raw/*314.3*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*314.4*/(&quot;&quot;&quot;,</b>
-<b class="fc"><i class="no-highlight">345</i>&nbsp;		tooltip: &quot;&quot;&quot;),format.raw/*315.12*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*315.13*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">346</i>&nbsp;			&quot;&quot;&quot;),format.raw/*316.4*/(&quot;&quot;&quot;trigger: &#39;axis&#39;</b>
-<b class="fc"><i class="no-highlight">347</i>&nbsp;		&quot;&quot;&quot;),format.raw/*317.3*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*317.4*/(&quot;&quot;&quot;,</b>
-<b class="fc"><i class="no-highlight">348</i>&nbsp;		legend: &quot;&quot;&quot;),format.raw/*318.11*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*318.12*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">349</i>&nbsp;			&quot;&quot;&quot;),format.raw/*319.4*/(&quot;&quot;&quot;x: 220,</b>
-<i class="no-highlight">350</i>&nbsp;			y: 40,
-<i class="no-highlight">351</i>&nbsp;			data: [&#39;&lt;15min&#39;, &#39;15-30min&#39;, &#39;30-45min&#39;, &#39;45-60min&#39;, &#39;&gt;60min&#39;]
-<b class="fc"><i class="no-highlight">352</i>&nbsp;		&quot;&quot;&quot;),format.raw/*322.3*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*322.4*/(&quot;&quot;&quot;,</b>
-<b class="fc"><i class="no-highlight">353</i>&nbsp;		toolbox: &quot;&quot;&quot;),format.raw/*323.12*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*323.13*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">354</i>&nbsp;			&quot;&quot;&quot;),format.raw/*324.4*/(&quot;&quot;&quot;show: true,</b>
-<b class="fc"><i class="no-highlight">355</i>&nbsp;			feature: &quot;&quot;&quot;),format.raw/*325.13*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*325.14*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">356</i>&nbsp;				&quot;&quot;&quot;),format.raw/*326.5*/(&quot;&quot;&quot;dataZoom: &quot;&quot;&quot;),format.raw/*326.15*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*326.16*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">357</i>&nbsp;					&quot;&quot;&quot;),format.raw/*327.6*/(&quot;&quot;&quot;show: true,</b>
-<i class="no-highlight">358</i>&nbsp;					yAxisIndex: &quot;none&quot;
-<b class="fc"><i class="no-highlight">359</i>&nbsp;				&quot;&quot;&quot;),format.raw/*329.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*329.6*/(&quot;&quot;&quot;,</b>
-<b class="fc"><i class="no-highlight">360</i>&nbsp;				dataView: &quot;&quot;&quot;),format.raw/*330.15*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*330.16*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">361</i>&nbsp;					&quot;&quot;&quot;),format.raw/*331.6*/(&quot;&quot;&quot;show: true,</b>
-<i class="no-highlight">362</i>&nbsp;					readOnly: false
-<b class="fc"><i class="no-highlight">363</i>&nbsp;				&quot;&quot;&quot;),format.raw/*333.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*333.6*/(&quot;&quot;&quot;,</b>
-<b class="fc"><i class="no-highlight">364</i>&nbsp;				magicType: &quot;&quot;&quot;),format.raw/*334.16*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*334.17*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">365</i>&nbsp;					&quot;&quot;&quot;),format.raw/*335.6*/(&quot;&quot;&quot;show: true,</b>
-<b class="fc"><i class="no-highlight">366</i>&nbsp;					title: &quot;&quot;&quot;),format.raw/*336.13*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*336.14*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">367</i>&nbsp;						&quot;&quot;&quot;),format.raw/*337.7*/(&quot;&quot;&quot;line: &#39;Líneas&#39;,</b>
-<i class="no-highlight">368</i>&nbsp;						bar: &#39;Barras&#39;,
-<i class="no-highlight">369</i>&nbsp;						stack: &#39;Barras Apiladas&#39;
-<b class="fc"><i class="no-highlight">370</i>&nbsp;					&quot;&quot;&quot;),format.raw/*340.6*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*340.7*/(&quot;&quot;&quot;,</b>
-<i class="no-highlight">371</i>&nbsp;					type: [&#39;line&#39;, &#39;bar&#39;, &#39;stack&#39;]
-<b class="fc"><i class="no-highlight">372</i>&nbsp;				&quot;&quot;&quot;),format.raw/*342.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*342.6*/(&quot;&quot;&quot;,</b>
-<b class="fc"><i class="no-highlight">373</i>&nbsp;				restore: &quot;&quot;&quot;),format.raw/*343.14*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*343.15*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">374</i>&nbsp;					&quot;&quot;&quot;),format.raw/*344.6*/(&quot;&quot;&quot;show: true,</b>
-<i class="no-highlight">375</i>&nbsp;					title: &quot;Restaurar&quot;
-<b class="fc"><i class="no-highlight">376</i>&nbsp;				&quot;&quot;&quot;),format.raw/*346.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*346.6*/(&quot;&quot;&quot;,</b>
-<b class="fc"><i class="no-highlight">377</i>&nbsp;				saveAsImage: &quot;&quot;&quot;),format.raw/*347.18*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*347.19*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">378</i>&nbsp;					&quot;&quot;&quot;),format.raw/*348.6*/(&quot;&quot;&quot;show: true,</b>
-<i class="no-highlight">379</i>&nbsp;					title: &quot;Guardar Imágen&quot;
-<b class="fc"><i class="no-highlight">380</i>&nbsp;				&quot;&quot;&quot;),format.raw/*350.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*350.6*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">381</i>&nbsp;			&quot;&quot;&quot;),format.raw/*351.4*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*351.5*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">382</i>&nbsp;		&quot;&quot;&quot;),format.raw/*352.3*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*352.4*/(&quot;&quot;&quot;,</b>
-<i class="no-highlight">383</i>&nbsp;		calculable: true,
-<b class="fc"><i class="no-highlight">384</i>&nbsp;		xAxis: [&quot;&quot;&quot;),format.raw/*354.11*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*354.12*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">385</i>&nbsp;			&quot;&quot;&quot;),format.raw/*355.4*/(&quot;&quot;&quot;type: &#39;category&#39;,</b>
-<i class="no-highlight">386</i>&nbsp;			boundaryGap: false,
-<b class="fc"><i class="no-highlight">387</i>&nbsp;			data: graphicData10.map(function (e) &quot;&quot;&quot;),format.raw/*357.41*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*357.42*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">388</i>&nbsp;				&quot;&quot;&quot;),format.raw/*358.5*/(&quot;&quot;&quot;return e.name;</b>
-<b class="fc"><i class="no-highlight">389</i>&nbsp;			&quot;&quot;&quot;),format.raw/*359.4*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*359.5*/(&quot;&quot;&quot;)</b>
-<b class="fc"><i class="no-highlight">390</i>&nbsp;		&quot;&quot;&quot;),format.raw/*360.3*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*360.4*/(&quot;&quot;&quot;],</b>
-<b class="fc"><i class="no-highlight">391</i>&nbsp;		yAxis: [&quot;&quot;&quot;),format.raw/*361.11*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*361.12*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">392</i>&nbsp;			&quot;&quot;&quot;),format.raw/*362.4*/(&quot;&quot;&quot;type: &#39;value&#39;</b>
-<b class="fc"><i class="no-highlight">393</i>&nbsp;		&quot;&quot;&quot;),format.raw/*363.3*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*363.4*/(&quot;&quot;&quot;],</b>
-<b class="fc"><i class="no-highlight">394</i>&nbsp;		series: [&quot;&quot;&quot;),format.raw/*364.12*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*364.13*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">395</i>&nbsp;			&quot;&quot;&quot;),format.raw/*365.4*/(&quot;&quot;&quot;name: &#39;&lt;15min&#39;,</b>
-<i class="no-highlight">396</i>&nbsp;			type: &#39;line&#39;,
-<i class="no-highlight">397</i>&nbsp;			smooth: true,
-<b class="fc"><i class="no-highlight">398</i>&nbsp;			itemStyle: &quot;&quot;&quot;),format.raw/*368.15*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*368.16*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">399</i>&nbsp;				&quot;&quot;&quot;),format.raw/*369.5*/(&quot;&quot;&quot;normal: &quot;&quot;&quot;),format.raw/*369.13*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*369.14*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">400</i>&nbsp;					&quot;&quot;&quot;),format.raw/*370.6*/(&quot;&quot;&quot;areaStyle: &quot;&quot;&quot;),format.raw/*370.17*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*370.18*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">401</i>&nbsp;						&quot;&quot;&quot;),format.raw/*371.7*/(&quot;&quot;&quot;type: &#39;default&#39;</b>
-<b class="fc"><i class="no-highlight">402</i>&nbsp;					&quot;&quot;&quot;),format.raw/*372.6*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*372.7*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">403</i>&nbsp;				&quot;&quot;&quot;),format.raw/*373.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*373.6*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">404</i>&nbsp;			&quot;&quot;&quot;),format.raw/*374.4*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*374.5*/(&quot;&quot;&quot;,</b>
-<b class="fc"><i class="no-highlight">405</i>&nbsp;			data: graphicData10.map(function (e) &quot;&quot;&quot;),format.raw/*375.41*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*375.42*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">406</i>&nbsp;				&quot;&quot;&quot;),format.raw/*376.5*/(&quot;&quot;&quot;return e.value;</b>
-<b class="fc"><i class="no-highlight">407</i>&nbsp;			&quot;&quot;&quot;),format.raw/*377.4*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*377.5*/(&quot;&quot;&quot;)</b>
-<b class="fc"><i class="no-highlight">408</i>&nbsp;		&quot;&quot;&quot;),format.raw/*378.3*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*378.4*/(&quot;&quot;&quot;, &quot;&quot;&quot;),format.raw/*378.6*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*378.7*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">409</i>&nbsp;			&quot;&quot;&quot;),format.raw/*379.4*/(&quot;&quot;&quot;name: &#39;15-30min&#39;,</b>
-<i class="no-highlight">410</i>&nbsp;			type: &#39;line&#39;,
-<i class="no-highlight">411</i>&nbsp;			smooth: true,
-<b class="fc"><i class="no-highlight">412</i>&nbsp;			itemStyle: &quot;&quot;&quot;),format.raw/*382.15*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*382.16*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">413</i>&nbsp;				&quot;&quot;&quot;),format.raw/*383.5*/(&quot;&quot;&quot;normal: &quot;&quot;&quot;),format.raw/*383.13*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*383.14*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">414</i>&nbsp;					&quot;&quot;&quot;),format.raw/*384.6*/(&quot;&quot;&quot;areaStyle: &quot;&quot;&quot;),format.raw/*384.17*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*384.18*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">415</i>&nbsp;						&quot;&quot;&quot;),format.raw/*385.7*/(&quot;&quot;&quot;type: &#39;default&#39;</b>
-<b class="fc"><i class="no-highlight">416</i>&nbsp;					&quot;&quot;&quot;),format.raw/*386.6*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*386.7*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">417</i>&nbsp;				&quot;&quot;&quot;),format.raw/*387.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*387.6*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">418</i>&nbsp;			&quot;&quot;&quot;),format.raw/*388.4*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*388.5*/(&quot;&quot;&quot;,</b>
-<b class="fc"><i class="no-highlight">419</i>&nbsp;			data: graphicData11.map(function (e) &quot;&quot;&quot;),format.raw/*389.41*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*389.42*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">420</i>&nbsp;				&quot;&quot;&quot;),format.raw/*390.5*/(&quot;&quot;&quot;return e.value;</b>
-<b class="fc"><i class="no-highlight">421</i>&nbsp;			&quot;&quot;&quot;),format.raw/*391.4*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*391.5*/(&quot;&quot;&quot;)</b>
-<b class="fc"><i class="no-highlight">422</i>&nbsp;		&quot;&quot;&quot;),format.raw/*392.3*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*392.4*/(&quot;&quot;&quot;, &quot;&quot;&quot;),format.raw/*392.6*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*392.7*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">423</i>&nbsp;			&quot;&quot;&quot;),format.raw/*393.4*/(&quot;&quot;&quot;name: &#39;30-45min&#39;,</b>
-<i class="no-highlight">424</i>&nbsp;			type: &#39;line&#39;,
-<i class="no-highlight">425</i>&nbsp;			smooth: true,
-<b class="fc"><i class="no-highlight">426</i>&nbsp;			itemStyle: &quot;&quot;&quot;),format.raw/*396.15*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*396.16*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">427</i>&nbsp;				&quot;&quot;&quot;),format.raw/*397.5*/(&quot;&quot;&quot;normal: &quot;&quot;&quot;),format.raw/*397.13*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*397.14*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">428</i>&nbsp;					&quot;&quot;&quot;),format.raw/*398.6*/(&quot;&quot;&quot;areaStyle: &quot;&quot;&quot;),format.raw/*398.17*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*398.18*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">429</i>&nbsp;						&quot;&quot;&quot;),format.raw/*399.7*/(&quot;&quot;&quot;type: &#39;default&#39;</b>
-<b class="fc"><i class="no-highlight">430</i>&nbsp;					&quot;&quot;&quot;),format.raw/*400.6*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*400.7*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">431</i>&nbsp;				&quot;&quot;&quot;),format.raw/*401.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*401.6*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">432</i>&nbsp;			&quot;&quot;&quot;),format.raw/*402.4*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*402.5*/(&quot;&quot;&quot;,</b>
-<b class="fc"><i class="no-highlight">433</i>&nbsp;			data: graphicData12.map(function (e) &quot;&quot;&quot;),format.raw/*403.41*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*403.42*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">434</i>&nbsp;				&quot;&quot;&quot;),format.raw/*404.5*/(&quot;&quot;&quot;return e.value;</b>
-<b class="fc"><i class="no-highlight">435</i>&nbsp;			&quot;&quot;&quot;),format.raw/*405.4*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*405.5*/(&quot;&quot;&quot;)</b>
-<b class="fc"><i class="no-highlight">436</i>&nbsp;		&quot;&quot;&quot;),format.raw/*406.3*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*406.4*/(&quot;&quot;&quot;, &quot;&quot;&quot;),format.raw/*406.6*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*406.7*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">437</i>&nbsp;			&quot;&quot;&quot;),format.raw/*407.4*/(&quot;&quot;&quot;name: &#39;45-60min&#39;,</b>
-<i class="no-highlight">438</i>&nbsp;			type: &#39;line&#39;,
-<i class="no-highlight">439</i>&nbsp;			smooth: true,
-<b class="fc"><i class="no-highlight">440</i>&nbsp;			itemStyle: &quot;&quot;&quot;),format.raw/*410.15*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*410.16*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">441</i>&nbsp;				&quot;&quot;&quot;),format.raw/*411.5*/(&quot;&quot;&quot;normal: &quot;&quot;&quot;),format.raw/*411.13*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*411.14*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">442</i>&nbsp;					&quot;&quot;&quot;),format.raw/*412.6*/(&quot;&quot;&quot;areaStyle: &quot;&quot;&quot;),format.raw/*412.17*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*412.18*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">443</i>&nbsp;						&quot;&quot;&quot;),format.raw/*413.7*/(&quot;&quot;&quot;type: &#39;default&#39;</b>
-<b class="fc"><i class="no-highlight">444</i>&nbsp;					&quot;&quot;&quot;),format.raw/*414.6*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*414.7*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">445</i>&nbsp;				&quot;&quot;&quot;),format.raw/*415.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*415.6*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">446</i>&nbsp;			&quot;&quot;&quot;),format.raw/*416.4*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*416.5*/(&quot;&quot;&quot;,</b>
-<b class="fc"><i class="no-highlight">447</i>&nbsp;			data: graphicData13.map(function (e) &quot;&quot;&quot;),format.raw/*417.41*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*417.42*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">448</i>&nbsp;				&quot;&quot;&quot;),format.raw/*418.5*/(&quot;&quot;&quot;return e.value;</b>
-<b class="fc"><i class="no-highlight">449</i>&nbsp;			&quot;&quot;&quot;),format.raw/*419.4*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*419.5*/(&quot;&quot;&quot;)</b>
-<b class="fc"><i class="no-highlight">450</i>&nbsp;		&quot;&quot;&quot;),format.raw/*420.3*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*420.4*/(&quot;&quot;&quot;, &quot;&quot;&quot;),format.raw/*420.6*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*420.7*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">451</i>&nbsp;			&quot;&quot;&quot;),format.raw/*421.4*/(&quot;&quot;&quot;name: &#39;&gt;60min&#39;,</b>
-<i class="no-highlight">452</i>&nbsp;			type: &#39;line&#39;,
-<i class="no-highlight">453</i>&nbsp;			smooth: true,
-<b class="fc"><i class="no-highlight">454</i>&nbsp;			itemStyle: &quot;&quot;&quot;),format.raw/*424.15*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*424.16*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">455</i>&nbsp;				&quot;&quot;&quot;),format.raw/*425.5*/(&quot;&quot;&quot;normal: &quot;&quot;&quot;),format.raw/*425.13*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*425.14*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">456</i>&nbsp;					&quot;&quot;&quot;),format.raw/*426.6*/(&quot;&quot;&quot;areaStyle: &quot;&quot;&quot;),format.raw/*426.17*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*426.18*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">457</i>&nbsp;						&quot;&quot;&quot;),format.raw/*427.7*/(&quot;&quot;&quot;type: &#39;default&#39;</b>
-<b class="fc"><i class="no-highlight">458</i>&nbsp;					&quot;&quot;&quot;),format.raw/*428.6*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*428.7*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">459</i>&nbsp;				&quot;&quot;&quot;),format.raw/*429.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*429.6*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">460</i>&nbsp;			&quot;&quot;&quot;),format.raw/*430.4*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*430.5*/(&quot;&quot;&quot;,</b>
-<b class="fc"><i class="no-highlight">461</i>&nbsp;			data: graphicData14.map(function (e) &quot;&quot;&quot;),format.raw/*431.41*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*431.42*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">462</i>&nbsp;				&quot;&quot;&quot;),format.raw/*432.5*/(&quot;&quot;&quot;return e.value;</b>
-<b class="fc"><i class="no-highlight">463</i>&nbsp;			&quot;&quot;&quot;),format.raw/*433.4*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*433.5*/(&quot;&quot;&quot;)</b>
-<b class="fc"><i class="no-highlight">464</i>&nbsp;		&quot;&quot;&quot;),format.raw/*434.3*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*434.4*/(&quot;&quot;&quot;]</b>
-<b class="fc"><i class="no-highlight">465</i>&nbsp;	&quot;&quot;&quot;),format.raw/*435.2*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*435.3*/(&quot;&quot;&quot;);</b>
-<i class="no-highlight">466</i>&nbsp;
-<i class="no-highlight">467</i>&nbsp;
-<i class="no-highlight">468</i>&nbsp;	// Grafico 5: Gráfico con visitas por duración de la última semana
-<i class="no-highlight">469</i>&nbsp;	var echartLine = echarts.init(document.getElementById(&#39;ultimasCuatro&#39;), theme);
-<b class="fc"><i class="no-highlight">470</i>&nbsp;	var graphicData15 = toJson(&#39;&quot;&quot;&quot;),_display_(/*440.31*/graphicData15),format.raw/*440.44*/(&quot;&quot;&quot;&#39;);</b>
-<b class="fc"><i class="no-highlight">471</i>&nbsp;	var graphicData16 = toJson(&#39;&quot;&quot;&quot;),_display_(/*441.31*/graphicData16),format.raw/*441.44*/(&quot;&quot;&quot;&#39;);</b>
-<b class="fc"><i class="no-highlight">472</i>&nbsp;	var graphicData17 = toJson(&#39;&quot;&quot;&quot;),_display_(/*442.31*/graphicData17),format.raw/*442.44*/(&quot;&quot;&quot;&#39;);</b>
-<b class="fc"><i class="no-highlight">473</i>&nbsp;	var graphicData18 = toJson(&#39;&quot;&quot;&quot;),_display_(/*443.31*/graphicData18),format.raw/*443.44*/(&quot;&quot;&quot;&#39;);</b>
-<b class="fc"><i class="no-highlight">474</i>&nbsp;	echartLine.setOption(&quot;&quot;&quot;),format.raw/*444.23*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*444.24*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">475</i>&nbsp;		&quot;&quot;&quot;),format.raw/*445.3*/(&quot;&quot;&quot;title: &quot;&quot;&quot;),format.raw/*445.10*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*445.11*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">476</i>&nbsp;			&quot;&quot;&quot;),format.raw/*446.4*/(&quot;&quot;&quot;text: &#39;Visitas de las últimas cuatro semanas&#39;,</b>
-<i class="no-highlight">477</i>&nbsp;			// subtext: &#39;Subtitle&#39;
-<b class="fc"><i class="no-highlight">478</i>&nbsp;		&quot;&quot;&quot;),format.raw/*448.3*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*448.4*/(&quot;&quot;&quot;,</b>
-<b class="fc"><i class="no-highlight">479</i>&nbsp;		tooltip: &quot;&quot;&quot;),format.raw/*449.12*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*449.13*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">480</i>&nbsp;			&quot;&quot;&quot;),format.raw/*450.4*/(&quot;&quot;&quot;trigger: &#39;axis&#39;</b>
-<b class="fc"><i class="no-highlight">481</i>&nbsp;		&quot;&quot;&quot;),format.raw/*451.3*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*451.4*/(&quot;&quot;&quot;,</b>
-<b class="fc"><i class="no-highlight">482</i>&nbsp;		legend: &quot;&quot;&quot;),format.raw/*452.11*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*452.12*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">483</i>&nbsp;			&quot;&quot;&quot;),format.raw/*453.4*/(&quot;&quot;&quot;x: 220,</b>
-<i class="no-highlight">484</i>&nbsp;			y: 40,
-<i class="no-highlight">485</i>&nbsp;			data: [&#39;Semana 1&#39;, &#39;Semana 2&#39;, &#39;Semana 3&#39;, &#39;Semana 4&#39;]
-<b class="fc"><i class="no-highlight">486</i>&nbsp;		&quot;&quot;&quot;),format.raw/*456.3*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*456.4*/(&quot;&quot;&quot;,</b>
-<b class="fc"><i class="no-highlight">487</i>&nbsp;		toolbox: &quot;&quot;&quot;),format.raw/*457.12*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*457.13*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">488</i>&nbsp;			&quot;&quot;&quot;),format.raw/*458.4*/(&quot;&quot;&quot;show: true,</b>
-<b class="fc"><i class="no-highlight">489</i>&nbsp;			feature: &quot;&quot;&quot;),format.raw/*459.13*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*459.14*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">490</i>&nbsp;				&quot;&quot;&quot;),format.raw/*460.5*/(&quot;&quot;&quot;dataZoom: &quot;&quot;&quot;),format.raw/*460.15*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*460.16*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">491</i>&nbsp;					&quot;&quot;&quot;),format.raw/*461.6*/(&quot;&quot;&quot;show: true,</b>
-<i class="no-highlight">492</i>&nbsp;					yAxisIndex: &quot;none&quot;
-<b class="fc"><i class="no-highlight">493</i>&nbsp;				&quot;&quot;&quot;),format.raw/*463.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*463.6*/(&quot;&quot;&quot;,</b>
-<b class="fc"><i class="no-highlight">494</i>&nbsp;				dataView: &quot;&quot;&quot;),format.raw/*464.15*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*464.16*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">495</i>&nbsp;					&quot;&quot;&quot;),format.raw/*465.6*/(&quot;&quot;&quot;show: true,</b>
-<i class="no-highlight">496</i>&nbsp;					readOnly: false
-<b class="fc"><i class="no-highlight">497</i>&nbsp;				&quot;&quot;&quot;),format.raw/*467.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*467.6*/(&quot;&quot;&quot;,</b>
-<b class="fc"><i class="no-highlight">498</i>&nbsp;				magicType: &quot;&quot;&quot;),format.raw/*468.16*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*468.17*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">499</i>&nbsp;					&quot;&quot;&quot;),format.raw/*469.6*/(&quot;&quot;&quot;show: true,</b>
-<b class="fc"><i class="no-highlight">500</i>&nbsp;					title: &quot;&quot;&quot;),format.raw/*470.13*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*470.14*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">501</i>&nbsp;						&quot;&quot;&quot;),format.raw/*471.7*/(&quot;&quot;&quot;line: &#39;Líneas&#39;,</b>
-<i class="no-highlight">502</i>&nbsp;						bar: &#39;Barras&#39;,
-<i class="no-highlight">503</i>&nbsp;						stack: &#39;Barras Apiladas&#39;
-<b class="fc"><i class="no-highlight">504</i>&nbsp;					&quot;&quot;&quot;),format.raw/*474.6*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*474.7*/(&quot;&quot;&quot;,</b>
-<i class="no-highlight">505</i>&nbsp;					type: [&#39;line&#39;, &#39;bar&#39;, &#39;stack&#39;]
-<b class="fc"><i class="no-highlight">506</i>&nbsp;				&quot;&quot;&quot;),format.raw/*476.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*476.6*/(&quot;&quot;&quot;,</b>
-<b class="fc"><i class="no-highlight">507</i>&nbsp;				restore: &quot;&quot;&quot;),format.raw/*477.14*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*477.15*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">508</i>&nbsp;					&quot;&quot;&quot;),format.raw/*478.6*/(&quot;&quot;&quot;show: true,</b>
-<i class="no-highlight">509</i>&nbsp;					title: &quot;Restaurar&quot;
-<b class="fc"><i class="no-highlight">510</i>&nbsp;				&quot;&quot;&quot;),format.raw/*480.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*480.6*/(&quot;&quot;&quot;,</b>
-<b class="fc"><i class="no-highlight">511</i>&nbsp;				saveAsImage: &quot;&quot;&quot;),format.raw/*481.18*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*481.19*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">512</i>&nbsp;					&quot;&quot;&quot;),format.raw/*482.6*/(&quot;&quot;&quot;show: true,</b>
-<i class="no-highlight">513</i>&nbsp;					title: &quot;Guardar Imágen&quot;
-<b class="fc"><i class="no-highlight">514</i>&nbsp;				&quot;&quot;&quot;),format.raw/*484.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*484.6*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">515</i>&nbsp;			&quot;&quot;&quot;),format.raw/*485.4*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*485.5*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">516</i>&nbsp;		&quot;&quot;&quot;),format.raw/*486.3*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*486.4*/(&quot;&quot;&quot;,</b>
-<i class="no-highlight">517</i>&nbsp;		calculable: true,
-<b class="fc"><i class="no-highlight">518</i>&nbsp;		xAxis: [&quot;&quot;&quot;),format.raw/*488.11*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*488.12*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">519</i>&nbsp;			&quot;&quot;&quot;),format.raw/*489.4*/(&quot;&quot;&quot;type: &#39;category&#39;,</b>
-<i class="no-highlight">520</i>&nbsp;			boundaryGap: false,
-<i class="no-highlight">521</i>&nbsp;			data: [&#39;Lun&#39;, &#39;Mar&#39;, &#39;Mie&#39;, &#39;Jue&#39;, &#39;Vie&#39;, &#39;Sab&#39;, &#39;Dom&#39;]
-<b class="fc"><i class="no-highlight">522</i>&nbsp;		&quot;&quot;&quot;),format.raw/*492.3*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*492.4*/(&quot;&quot;&quot;],</b>
-<b class="fc"><i class="no-highlight">523</i>&nbsp;		yAxis: [&quot;&quot;&quot;),format.raw/*493.11*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*493.12*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">524</i>&nbsp;			&quot;&quot;&quot;),format.raw/*494.4*/(&quot;&quot;&quot;type: &#39;value&#39;</b>
-<b class="fc"><i class="no-highlight">525</i>&nbsp;		&quot;&quot;&quot;),format.raw/*495.3*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*495.4*/(&quot;&quot;&quot;],</b>
-<b class="fc"><i class="no-highlight">526</i>&nbsp;		series: [&quot;&quot;&quot;),format.raw/*496.12*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*496.13*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">527</i>&nbsp;			&quot;&quot;&quot;),format.raw/*497.4*/(&quot;&quot;&quot;name: &#39;Semana 1&#39;,</b>
-<i class="no-highlight">528</i>&nbsp;			type: &#39;bar&#39;,
-<i class="no-highlight">529</i>&nbsp;			smooth: true,
-<b class="fc"><i class="no-highlight">530</i>&nbsp;			itemStyle: &quot;&quot;&quot;),format.raw/*500.15*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*500.16*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">531</i>&nbsp;				&quot;&quot;&quot;),format.raw/*501.5*/(&quot;&quot;&quot;normal: &quot;&quot;&quot;),format.raw/*501.13*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*501.14*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">532</i>&nbsp;					&quot;&quot;&quot;),format.raw/*502.6*/(&quot;&quot;&quot;areaStyle: &quot;&quot;&quot;),format.raw/*502.17*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*502.18*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">533</i>&nbsp;						&quot;&quot;&quot;),format.raw/*503.7*/(&quot;&quot;&quot;type: &#39;default&#39;</b>
-<b class="fc"><i class="no-highlight">534</i>&nbsp;					&quot;&quot;&quot;),format.raw/*504.6*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*504.7*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">535</i>&nbsp;				&quot;&quot;&quot;),format.raw/*505.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*505.6*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">536</i>&nbsp;			&quot;&quot;&quot;),format.raw/*506.4*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*506.5*/(&quot;&quot;&quot;,</b>
-<b class="fc"><i class="no-highlight">537</i>&nbsp;			data: graphicData15.map(function (e) &quot;&quot;&quot;),format.raw/*507.41*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*507.42*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">538</i>&nbsp;				&quot;&quot;&quot;),format.raw/*508.5*/(&quot;&quot;&quot;return e.value;</b>
-<b class="fc"><i class="no-highlight">539</i>&nbsp;			&quot;&quot;&quot;),format.raw/*509.4*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*509.5*/(&quot;&quot;&quot;)</b>
-<b class="fc"><i class="no-highlight">540</i>&nbsp;		&quot;&quot;&quot;),format.raw/*510.3*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*510.4*/(&quot;&quot;&quot;, &quot;&quot;&quot;),format.raw/*510.6*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*510.7*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">541</i>&nbsp;			&quot;&quot;&quot;),format.raw/*511.4*/(&quot;&quot;&quot;name: &#39;Semana 2&#39;,</b>
-<i class="no-highlight">542</i>&nbsp;			type: &#39;bar&#39;,
-<i class="no-highlight">543</i>&nbsp;			smooth: true,
-<b class="fc"><i class="no-highlight">544</i>&nbsp;			itemStyle: &quot;&quot;&quot;),format.raw/*514.15*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*514.16*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">545</i>&nbsp;				&quot;&quot;&quot;),format.raw/*515.5*/(&quot;&quot;&quot;normal: &quot;&quot;&quot;),format.raw/*515.13*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*515.14*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">546</i>&nbsp;					&quot;&quot;&quot;),format.raw/*516.6*/(&quot;&quot;&quot;areaStyle: &quot;&quot;&quot;),format.raw/*516.17*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*516.18*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">547</i>&nbsp;						&quot;&quot;&quot;),format.raw/*517.7*/(&quot;&quot;&quot;type: &#39;default&#39;</b>
-<b class="fc"><i class="no-highlight">548</i>&nbsp;					&quot;&quot;&quot;),format.raw/*518.6*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*518.7*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">549</i>&nbsp;				&quot;&quot;&quot;),format.raw/*519.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*519.6*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">550</i>&nbsp;			&quot;&quot;&quot;),format.raw/*520.4*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*520.5*/(&quot;&quot;&quot;,</b>
-<b class="fc"><i class="no-highlight">551</i>&nbsp;			data: graphicData16.map(function (e) &quot;&quot;&quot;),format.raw/*521.41*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*521.42*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">552</i>&nbsp;				&quot;&quot;&quot;),format.raw/*522.5*/(&quot;&quot;&quot;return e.value;</b>
-<b class="fc"><i class="no-highlight">553</i>&nbsp;			&quot;&quot;&quot;),format.raw/*523.4*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*523.5*/(&quot;&quot;&quot;)</b>
-<b class="fc"><i class="no-highlight">554</i>&nbsp;		&quot;&quot;&quot;),format.raw/*524.3*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*524.4*/(&quot;&quot;&quot;, &quot;&quot;&quot;),format.raw/*524.6*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*524.7*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">555</i>&nbsp;			&quot;&quot;&quot;),format.raw/*525.4*/(&quot;&quot;&quot;name: &#39;Semana 3&#39;,</b>
-<i class="no-highlight">556</i>&nbsp;			type: &#39;bar&#39;,
-<i class="no-highlight">557</i>&nbsp;			smooth: true,
-<b class="fc"><i class="no-highlight">558</i>&nbsp;			itemStyle: &quot;&quot;&quot;),format.raw/*528.15*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*528.16*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">559</i>&nbsp;				&quot;&quot;&quot;),format.raw/*529.5*/(&quot;&quot;&quot;normal: &quot;&quot;&quot;),format.raw/*529.13*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*529.14*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">560</i>&nbsp;					&quot;&quot;&quot;),format.raw/*530.6*/(&quot;&quot;&quot;areaStyle: &quot;&quot;&quot;),format.raw/*530.17*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*530.18*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">561</i>&nbsp;						&quot;&quot;&quot;),format.raw/*531.7*/(&quot;&quot;&quot;type: &#39;default&#39;</b>
-<b class="fc"><i class="no-highlight">562</i>&nbsp;					&quot;&quot;&quot;),format.raw/*532.6*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*532.7*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">563</i>&nbsp;				&quot;&quot;&quot;),format.raw/*533.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*533.6*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">564</i>&nbsp;			&quot;&quot;&quot;),format.raw/*534.4*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*534.5*/(&quot;&quot;&quot;,</b>
-<b class="fc"><i class="no-highlight">565</i>&nbsp;			data: graphicData17.map(function (e) &quot;&quot;&quot;),format.raw/*535.41*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*535.42*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">566</i>&nbsp;				&quot;&quot;&quot;),format.raw/*536.5*/(&quot;&quot;&quot;return e.value;</b>
-<b class="fc"><i class="no-highlight">567</i>&nbsp;			&quot;&quot;&quot;),format.raw/*537.4*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*537.5*/(&quot;&quot;&quot;)</b>
-<b class="fc"><i class="no-highlight">568</i>&nbsp;		&quot;&quot;&quot;),format.raw/*538.3*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*538.4*/(&quot;&quot;&quot;, &quot;&quot;&quot;),format.raw/*538.6*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*538.7*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">569</i>&nbsp;			&quot;&quot;&quot;),format.raw/*539.4*/(&quot;&quot;&quot;name: &#39;Semana 4&#39;,</b>
-<i class="no-highlight">570</i>&nbsp;			type: &#39;bar&#39;,
-<i class="no-highlight">571</i>&nbsp;			smooth: true,
-<b class="fc"><i class="no-highlight">572</i>&nbsp;			itemStyle: &quot;&quot;&quot;),format.raw/*542.15*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*542.16*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">573</i>&nbsp;				&quot;&quot;&quot;),format.raw/*543.5*/(&quot;&quot;&quot;normal: &quot;&quot;&quot;),format.raw/*543.13*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*543.14*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">574</i>&nbsp;					&quot;&quot;&quot;),format.raw/*544.6*/(&quot;&quot;&quot;areaStyle: &quot;&quot;&quot;),format.raw/*544.17*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*544.18*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">575</i>&nbsp;						&quot;&quot;&quot;),format.raw/*545.7*/(&quot;&quot;&quot;type: &#39;default&#39;</b>
-<b class="fc"><i class="no-highlight">576</i>&nbsp;					&quot;&quot;&quot;),format.raw/*546.6*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*546.7*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">577</i>&nbsp;				&quot;&quot;&quot;),format.raw/*547.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*547.6*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">578</i>&nbsp;			&quot;&quot;&quot;),format.raw/*548.4*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*548.5*/(&quot;&quot;&quot;,</b>
-<b class="fc"><i class="no-highlight">579</i>&nbsp;			data: graphicData18.map(function (e) &quot;&quot;&quot;),format.raw/*549.41*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*549.42*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">580</i>&nbsp;				&quot;&quot;&quot;),format.raw/*550.5*/(&quot;&quot;&quot;return e.value;</b>
-<b class="fc"><i class="no-highlight">581</i>&nbsp;			&quot;&quot;&quot;),format.raw/*551.4*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*551.5*/(&quot;&quot;&quot;)</b>
-<b class="fc"><i class="no-highlight">582</i>&nbsp;		&quot;&quot;&quot;),format.raw/*552.3*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*552.4*/(&quot;&quot;&quot;]</b>
-<b class="fc"><i class="no-highlight">583</i>&nbsp;	&quot;&quot;&quot;),format.raw/*553.2*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*553.3*/(&quot;&quot;&quot;);</b>
-<i class="no-highlight">584</i>&nbsp;
-<i class="no-highlight">585</i>&nbsp;
-<i class="no-highlight">586</i>&nbsp;&lt;/script&gt;
-<i class="no-highlight">587</i>&nbsp;
-<i class="no-highlight">588</i>&nbsp;
-<i class="no-highlight">589</i>&nbsp;&quot;&quot;&quot;))
-<i class="no-highlight">590</i>&nbsp;      }
-<i class="no-highlight">591</i>&nbsp;    }
-<i class="no-highlight">592</i>&nbsp;  }
-<i class="no-highlight">593</i>&nbsp;
-<b class="fc"><i class="no-highlight">594</i>&nbsp;  def render(graphicDataJson:JsValue,graphicDataJson2:JsValue,graphicDataJson3:JsValue,graphicDataJson4:JsValue,graphicDataJson5:JsValue,graphicDataJson6:JsValue,graphicDataJson7:JsValue,graphicDataJson8:JsValue,graphicDataJson9:JsValue,graphicDataJson10:JsValue,graphicDataJson11:JsValue,graphicDataJson12:JsValue,graphicDataJson13:JsValue,graphicDataJson14:JsValue,graphicDataJson15:JsValue,graphicDataJson16:JsValue,graphicDataJson17:JsValue,graphicDataJson18:JsValue): play.twirl.api.HtmlFormat.Appendable = apply(graphicDataJson,graphicDataJson2,graphicDataJson3,graphicDataJson4,graphicDataJson5,graphicDataJson6,graphicDataJson7,graphicDataJson8,graphicDataJson9,graphicDataJson10,graphicDataJson11,graphicDataJson12,graphicDataJson13,graphicDataJson14,graphicDataJson15,graphicDataJson16,graphicDataJson17,graphicDataJson18)</b>
-<i class="no-highlight">595</i>&nbsp;
-<b class="nc"><i class="no-highlight">596</i>&nbsp;  def f:((JsValue,JsValue,JsValue,JsValue,JsValue,JsValue,JsValue,JsValue,JsValue,JsValue,JsValue,JsValue,JsValue,JsValue,JsValue,JsValue,JsValue,JsValue) =&gt; play.twirl.api.HtmlFormat.Appendable) = (graphicDataJson,graphicDataJson2,graphicDataJson3,graphicDataJson4,graphicDataJson5,graphicDataJson6,graphicDataJson7,graphicDataJson8,graphicDataJson9,graphicDataJson10,graphicDataJson11,graphicDataJson12,graphicDataJson13,graphicDataJson14,graphicDataJson15,graphicDataJson16,graphicDataJson17,graphicDataJson18) =&gt; apply(graphicDataJson,graphicDataJson2,graphicDataJson3,graphicDataJson4,graphicDataJson5,graphicDataJson6,graphicDataJson7,graphicDataJson8,graphicDataJson9,graphicDataJson10,graphicDataJson11,graphicDataJson12,graphicDataJson13,graphicDataJson14,graphicDataJson15,graphicDataJson16,graphicDataJson17,graphicDataJson18)</b>
-<i class="no-highlight">597</i>&nbsp;
-<b class="nc"><i class="no-highlight">598</i>&nbsp;  def ref: this.type = this</b>
-<i class="no-highlight">599</i>&nbsp;
-<i class="no-highlight">600</i>&nbsp;}
-<i class="no-highlight">601</i>&nbsp;
-<i class="no-highlight">602</i>&nbsp;
-<i class="no-highlight">603</i>&nbsp;              /*
-<i class="no-highlight">604</i>&nbsp;                  -- GENERATED --
-<i class="no-highlight">605</i>&nbsp;                  SOURCE: app/views/admin/analytics.scala.html
-<i class="no-highlight">606</i>&nbsp;                  HASH: 9a68a4ffeb3d68f2822d8b3e09b1e3132ab60299
-<i class="no-highlight">607</i>&nbsp;                  MATRIX: 657-&gt;1|695-&gt;33|736-&gt;68|1215-&gt;103|1788-&gt;600|1808-&gt;611|1854-&gt;645|1875-&gt;657|1922-&gt;692|1943-&gt;704|1990-&gt;739|2011-&gt;751|2058-&gt;852|2079-&gt;864|2126-&gt;966|2147-&gt;978|2194-&gt;1080|2215-&gt;1092|2262-&gt;1193|2283-&gt;1205|2330-&gt;1306|2351-&gt;1318|2398-&gt;1419|2420-&gt;1432|2468-&gt;1540|2490-&gt;1553|2538-&gt;1626|2560-&gt;1639|2608-&gt;1712|2630-&gt;1725|2678-&gt;1798|2700-&gt;1811|2748-&gt;1882|2770-&gt;1895|2818-&gt;1961|2840-&gt;1974|2888-&gt;2040|2910-&gt;2053|2958-&gt;2119|2980-&gt;2132|3044-&gt;598|3073-&gt;643|3102-&gt;690|3131-&gt;737|3160-&gt;784|3189-&gt;785|3283-&gt;897|3312-&gt;898|3407-&gt;1011|3436-&gt;1012|3531-&gt;1125|3560-&gt;1126|3654-&gt;1238|3683-&gt;1239|3777-&gt;1351|3806-&gt;1352|3900-&gt;1466|3929-&gt;1467|4029-&gt;1587|4058-&gt;1588|4123-&gt;1673|4152-&gt;1674|4217-&gt;1759|4246-&gt;1760|4311-&gt;1845|4340-&gt;1846|4403-&gt;1929|4432-&gt;1930|4490-&gt;2008|4519-&gt;2009|4577-&gt;2087|4606-&gt;2088|4664-&gt;2166|4693-&gt;2167|4876-&gt;2324|4916-&gt;2343|4947-&gt;2347|5515-&gt;2889|5528-&gt;2894|5561-&gt;2906|5590-&gt;2908|5766-&gt;3057|5798-&gt;3068|5850-&gt;3092|5879-&gt;3093|5909-&gt;3096|5944-&gt;3103|5973-&gt;3104|6004-&gt;3108|6085-&gt;3162|6113-&gt;3163|6154-&gt;3176|6183-&gt;3177|6214-&gt;3181|6259-&gt;3199|6287-&gt;3200|6327-&gt;3212|6356-&gt;3213|6387-&gt;3217|6434-&gt;3237|6462-&gt;3238|6503-&gt;3251|6532-&gt;3252|6563-&gt;3256|6615-&gt;3280|6644-&gt;3281|6676-&gt;3286|6714-&gt;3296|6743-&gt;3297|6776-&gt;3303|6843-&gt;3343|6871-&gt;3344|6915-&gt;3360|6944-&gt;3361|6977-&gt;3367|7042-&gt;3404|7071-&gt;3405|7117-&gt;3422|7147-&gt;3423|7181-&gt;3429|7234-&gt;3453|7264-&gt;3454|7299-&gt;3461|7401-&gt;3535|7430-&gt;3536|7500-&gt;3578|7529-&gt;3579|7573-&gt;3594|7603-&gt;3595|7637-&gt;3601|7705-&gt;3641|7734-&gt;3642|7782-&gt;3661|7812-&gt;3662|7846-&gt;3668|7919-&gt;3713|7948-&gt;3714|7980-&gt;3718|8009-&gt;3719|8040-&gt;3722|8069-&gt;3723|8131-&gt;3756|8161-&gt;3757|8193-&gt;3761|8278-&gt;3817|8308-&gt;3818|8341-&gt;3823|8387-&gt;3841|8416-&gt;3842|8478-&gt;3876|8507-&gt;3877|8549-&gt;3890|8579-&gt;3891|8611-&gt;3895|8655-&gt;3911|8684-&gt;3912|8727-&gt;3926|8757-&gt;3927|8789-&gt;3931|8889-&gt;4002|8919-&gt;4003|8952-&gt;4008|8999-&gt;4027|9028-&gt;4028|9102-&gt;4073|9132-&gt;4074|9165-&gt;4079|9201-&gt;4086|9231-&gt;4087|9265-&gt;4093|9350-&gt;4150|9379-&gt;4151|9409-&gt;4153|9438-&gt;4154|9472-&gt;4160|9548-&gt;4208|9577-&gt;4209|9610-&gt;4214|9639-&gt;4215|9683-&gt;4230|9713-&gt;4231|9746-&gt;4236|9782-&gt;4243|9812-&gt;4244|9846-&gt;4250|9928-&gt;4304|9957-&gt;4305|9990-&gt;4310|10019-&gt;4311|10050-&gt;4314|10079-&gt;4315|10110-&gt;4318|10139-&gt;4319|10376-&gt;4528|10410-&gt;4540|10471-&gt;4573|10505-&gt;4585|10566-&gt;4618|10600-&gt;4630|10661-&gt;4663|10695-&gt;4675|10756-&gt;4708|10790-&gt;4720|10851-&gt;4753|10885-&gt;4765|10940-&gt;4791|10970-&gt;4792|11001-&gt;4795|11037-&gt;4802|11067-&gt;4803|11099-&gt;4807|11204-&gt;4884|11233-&gt;4885|11275-&gt;4898|11305-&gt;4899|11337-&gt;4903|11383-&gt;4921|11412-&gt;4922|11453-&gt;4934|11483-&gt;4935|11515-&gt;4939|11641-&gt;5037|11670-&gt;5038|11712-&gt;5051|11742-&gt;5052|11774-&gt;5056|11827-&gt;5080|11857-&gt;5081|11890-&gt;5086|11929-&gt;5096|11959-&gt;5097|11993-&gt;5103|12061-&gt;5143|12090-&gt;5144|12135-&gt;5160|12165-&gt;5161|12199-&gt;5167|12264-&gt;5204|12293-&gt;5205|12339-&gt;5222|12369-&gt;5223|12403-&gt;5229|12456-&gt;5253|12486-&gt;5254|12521-&gt;5261|12623-&gt;5335|12652-&gt;5336|12722-&gt;5378|12751-&gt;5379|12795-&gt;5394|12825-&gt;5395|12859-&gt;5401|12927-&gt;5441|12956-&gt;5442|13004-&gt;5461|13034-&gt;5462|13068-&gt;5468|13141-&gt;5513|13170-&gt;5514|13202-&gt;5518|13231-&gt;5519|13262-&gt;5522|13291-&gt;5523|13352-&gt;5555|13382-&gt;5556|13414-&gt;5560|13544-&gt;5662|13573-&gt;5663|13615-&gt;5676|13645-&gt;5677|13677-&gt;5681|13721-&gt;5697|13750-&gt;5698|13793-&gt;5712|13823-&gt;5713|13855-&gt;5717|13949-&gt;5782|13979-&gt;5783|14012-&gt;5788|14049-&gt;5796|14079-&gt;5797|14113-&gt;5803|14153-&gt;5814|14183-&gt;5815|14218-&gt;5822|14267-&gt;5843|14296-&gt;5844|14329-&gt;5849|14358-&gt;5850|14390-&gt;5854|14419-&gt;5855|14489-&gt;5896|14519-&gt;5897|14552-&gt;5902|14599-&gt;5921|14628-&gt;5922|14678-&gt;5944|14707-&gt;5945|14737-&gt;5947|14766-&gt;5948|14798-&gt;5952|14893-&gt;6018|14923-&gt;6019|14956-&gt;6024|14993-&gt;6032|15023-&gt;6033|15057-&gt;6039|15097-&gt;6050|15127-&gt;6051|15162-&gt;6058|15211-&gt;6079|15240-&gt;6080|15273-&gt;6085|15302-&gt;6086|15334-&gt;6090|15363-&gt;6091|15433-&gt;6132|15463-&gt;6133|15496-&gt;6138|15543-&gt;6157|15572-&gt;6158|15623-&gt;6181|15652-&gt;6182|15682-&gt;6184|15711-&gt;6185|15743-&gt;6189|15838-&gt;6255|15868-&gt;6256|15901-&gt;6261|15938-&gt;6269|15968-&gt;6270|16002-&gt;6276|16042-&gt;6287|16072-&gt;6288|16107-&gt;6295|16156-&gt;6316|16185-&gt;6317|16218-&gt;6322|16247-&gt;6323|16279-&gt;6327|16308-&gt;6328|16378-&gt;6369|16408-&gt;6370|16441-&gt;6375|16488-&gt;6394|16517-&gt;6395|16568-&gt;6418|16597-&gt;6419|16627-&gt;6421|16656-&gt;6422|16688-&gt;6426|16782-&gt;6491|16812-&gt;6492|16845-&gt;6497|16882-&gt;6505|16912-&gt;6506|16946-&gt;6512|16986-&gt;6523|17016-&gt;6524|17051-&gt;6531|17100-&gt;6552|17129-&gt;6553|17162-&gt;6558|17191-&gt;6559|17223-&gt;6563|17252-&gt;6564|17322-&gt;6605|17352-&gt;6606|17385-&gt;6611|17432-&gt;6630|17461-&gt;6631|17511-&gt;6653|17540-&gt;6654|17570-&gt;6656|17599-&gt;6657|17631-&gt;6661|17725-&gt;6726|17755-&gt;6727|17788-&gt;6732|17825-&gt;6740|17855-&gt;6741|17889-&gt;6747|17929-&gt;6758|17959-&gt;6759|17994-&gt;6766|18043-&gt;6787|18072-&gt;6788|18105-&gt;6793|18134-&gt;6794|18166-&gt;6798|18195-&gt;6799|18265-&gt;6840|18295-&gt;6841|18328-&gt;6846|18375-&gt;6865|18404-&gt;6866|18454-&gt;6888|18483-&gt;6889|18513-&gt;6891|18542-&gt;6892|18574-&gt;6896|18668-&gt;6961|18698-&gt;6962|18731-&gt;6967|18768-&gt;6975|18798-&gt;6976|18832-&gt;6982|18872-&gt;6993|18902-&gt;6994|18937-&gt;7001|18986-&gt;7022|19015-&gt;7023|19048-&gt;7028|19077-&gt;7029|19109-&gt;7033|19138-&gt;7034|19208-&gt;7075|19238-&gt;7076|19271-&gt;7081|19318-&gt;7100|19347-&gt;7101|19397-&gt;7123|19426-&gt;7124|19457-&gt;7127|19486-&gt;7128|19696-&gt;7310|19731-&gt;7323|19793-&gt;7357|19828-&gt;7370|19890-&gt;7404|19925-&gt;7417|19987-&gt;7451|20022-&gt;7464|20084-&gt;7498|20119-&gt;7511|20174-&gt;7537|20204-&gt;7538|20235-&gt;7541|20271-&gt;7548|20301-&gt;7549|20333-&gt;7553|20439-&gt;7631|20468-&gt;7632|20510-&gt;7645|20540-&gt;7646|20572-&gt;7650|20618-&gt;7668|20647-&gt;7669|20688-&gt;7681|20718-&gt;7682|20750-&gt;7686|20864-&gt;7772|20893-&gt;7773|20935-&gt;7786|20965-&gt;7787|20997-&gt;7791|21050-&gt;7815|21080-&gt;7816|21113-&gt;7821|21152-&gt;7831|21182-&gt;7832|21216-&gt;7838|21284-&gt;7878|21313-&gt;7879|21358-&gt;7895|21388-&gt;7896|21422-&gt;7902|21487-&gt;7939|21516-&gt;7940|21562-&gt;7957|21592-&gt;7958|21626-&gt;7964|21679-&gt;7988|21709-&gt;7989|21744-&gt;7996|21845-&gt;8069|21874-&gt;8070|21944-&gt;8112|21973-&gt;8113|22017-&gt;8128|22047-&gt;8129|22081-&gt;8135|22149-&gt;8175|22178-&gt;8176|22226-&gt;8195|22256-&gt;8196|22290-&gt;8202|22363-&gt;8247|22392-&gt;8248|22424-&gt;8252|22453-&gt;8253|22484-&gt;8256|22513-&gt;8257|22574-&gt;8289|22604-&gt;8290|22636-&gt;8294|22746-&gt;8375|22776-&gt;8376|22809-&gt;8381|22855-&gt;8399|22884-&gt;8400|22916-&gt;8404|22945-&gt;8405|22987-&gt;8418|23017-&gt;8419|23049-&gt;8423|23093-&gt;8439|23122-&gt;8440|23165-&gt;8454|23195-&gt;8455|23227-&gt;8459|23320-&gt;8523|23350-&gt;8524|23383-&gt;8529|23420-&gt;8537|23450-&gt;8538|23484-&gt;8544|23524-&gt;8555|23554-&gt;8556|23589-&gt;8563|23638-&gt;8584|23667-&gt;8585|23700-&gt;8590|23729-&gt;8591|23761-&gt;8595|23790-&gt;8596|23861-&gt;8638|23891-&gt;8639|23924-&gt;8644|23971-&gt;8663|24000-&gt;8664|24032-&gt;8668|24061-&gt;8669|24091-&gt;8671|24120-&gt;8672|24152-&gt;8676|24247-&gt;8742|24277-&gt;8743|24310-&gt;8748|24347-&gt;8756|24377-&gt;8757|24411-&gt;8763|24451-&gt;8774|24481-&gt;8775|24516-&gt;8782|24565-&gt;8803|24594-&gt;8804|24627-&gt;8809|24656-&gt;8810|24688-&gt;8814|24717-&gt;8815|24788-&gt;8857|24818-&gt;8858|24851-&gt;8863|24898-&gt;8882|24927-&gt;8883|24959-&gt;8887|24988-&gt;8888|25018-&gt;8890|25047-&gt;8891|25079-&gt;8895|25174-&gt;8961|25204-&gt;8962|25237-&gt;8967|25274-&gt;8975|25304-&gt;8976|25338-&gt;8982|25378-&gt;8993|25408-&gt;8994|25443-&gt;9001|25492-&gt;9022|25521-&gt;9023|25554-&gt;9028|25583-&gt;9029|25615-&gt;9033|25644-&gt;9034|25715-&gt;9076|25745-&gt;9077|25778-&gt;9082|25825-&gt;9101|25854-&gt;9102|25886-&gt;9106|25915-&gt;9107|25945-&gt;9109|25974-&gt;9110|26006-&gt;9114|26101-&gt;9180|26131-&gt;9181|26164-&gt;9186|26201-&gt;9194|26231-&gt;9195|26265-&gt;9201|26305-&gt;9212|26335-&gt;9213|26370-&gt;9220|26419-&gt;9241|26448-&gt;9242|26481-&gt;9247|26510-&gt;9248|26542-&gt;9252|26571-&gt;9253|26642-&gt;9295|26672-&gt;9296|26705-&gt;9301|26752-&gt;9320|26781-&gt;9321|26813-&gt;9325|26842-&gt;9326|26872-&gt;9328|26901-&gt;9329|26933-&gt;9333|27026-&gt;9397|27056-&gt;9398|27089-&gt;9403|27126-&gt;9411|27156-&gt;9412|27190-&gt;9418|27230-&gt;9429|27260-&gt;9430|27295-&gt;9437|27344-&gt;9458|27373-&gt;9459|27406-&gt;9464|27435-&gt;9465|27467-&gt;9469|27496-&gt;9470|27567-&gt;9512|27597-&gt;9513|27630-&gt;9518|27677-&gt;9537|27706-&gt;9538|27738-&gt;9542|27767-&gt;9543|27798-&gt;9546|27827-&gt;9547|28039-&gt;9731|28074-&gt;9744|28136-&gt;9778|28171-&gt;9791|28233-&gt;9825|28268-&gt;9838|28330-&gt;9872|28365-&gt;9885|28420-&gt;9911|28450-&gt;9912|28481-&gt;9915|28517-&gt;9922|28547-&gt;9923|28579-&gt;9927|28682-&gt;10002|28711-&gt;10003|28753-&gt;10016|28783-&gt;10017|28815-&gt;10021|28861-&gt;10039|28890-&gt;10040|28931-&gt;10052|28961-&gt;10053|28993-&gt;10057|29099-&gt;10135|29128-&gt;10136|29170-&gt;10149|29200-&gt;10150|29232-&gt;10154|29285-&gt;10178|29315-&gt;10179|29348-&gt;10184|29387-&gt;10194|29417-&gt;10195|29451-&gt;10201|29519-&gt;10241|29548-&gt;10242|29593-&gt;10258|29623-&gt;10259|29657-&gt;10265|29722-&gt;10302|29751-&gt;10303|29797-&gt;10320|29827-&gt;10321|29861-&gt;10327|29914-&gt;10351|29944-&gt;10352|29979-&gt;10359|30080-&gt;10432|30109-&gt;10433|30179-&gt;10475|30208-&gt;10476|30252-&gt;10491|30282-&gt;10492|30316-&gt;10498|30384-&gt;10538|30413-&gt;10539|30461-&gt;10558|30491-&gt;10559|30525-&gt;10565|30598-&gt;10610|30627-&gt;10611|30659-&gt;10615|30688-&gt;10616|30719-&gt;10619|30748-&gt;10620|30809-&gt;10652|30839-&gt;10653|30871-&gt;10657|31001-&gt;10759|31030-&gt;10760|31072-&gt;10773|31102-&gt;10774|31134-&gt;10778|31178-&gt;10794|31207-&gt;10795|31250-&gt;10809|31280-&gt;10810|31312-&gt;10814|31406-&gt;10879|31436-&gt;10880|31469-&gt;10885|31506-&gt;10893|31536-&gt;10894|31570-&gt;10900|31610-&gt;10911|31640-&gt;10912|31675-&gt;10919|31724-&gt;10940|31753-&gt;10941|31786-&gt;10946|31815-&gt;10947|31847-&gt;10951|31876-&gt;10952|31947-&gt;10994|31977-&gt;10995|32010-&gt;11000|32057-&gt;11019|32086-&gt;11020|32118-&gt;11024|32147-&gt;11025|32177-&gt;11027|32206-&gt;11028|32238-&gt;11032|32332-&gt;11097|32362-&gt;11098|32395-&gt;11103|32432-&gt;11111|32462-&gt;11112|32496-&gt;11118|32536-&gt;11129|32566-&gt;11130|32601-&gt;11137|32650-&gt;11158|32679-&gt;11159|32712-&gt;11164|32741-&gt;11165|32773-&gt;11169|32802-&gt;11170|32873-&gt;11212|32903-&gt;11213|32936-&gt;11218|32983-&gt;11237|33012-&gt;11238|33044-&gt;11242|33073-&gt;11243|33103-&gt;11245|33132-&gt;11246|33164-&gt;11250|33258-&gt;11315|33288-&gt;11316|33321-&gt;11321|33358-&gt;11329|33388-&gt;11330|33422-&gt;11336|33462-&gt;11347|33492-&gt;11348|33527-&gt;11355|33576-&gt;11376|33605-&gt;11377|33638-&gt;11382|33667-&gt;11383|33699-&gt;11387|33728-&gt;11388|33799-&gt;11430|33829-&gt;11431|33862-&gt;11436|33909-&gt;11455|33938-&gt;11456|33970-&gt;11460|33999-&gt;11461|34029-&gt;11463|34058-&gt;11464|34090-&gt;11468|34184-&gt;11533|34214-&gt;11534|34247-&gt;11539|34284-&gt;11547|34314-&gt;11548|34348-&gt;11554|34388-&gt;11565|34418-&gt;11566|34453-&gt;11573|34502-&gt;11594|34531-&gt;11595|34564-&gt;11600|34593-&gt;11601|34625-&gt;11605|34654-&gt;11606|34725-&gt;11648|34755-&gt;11649|34788-&gt;11654|34835-&gt;11673|34864-&gt;11674|34896-&gt;11678|34925-&gt;11679|34956-&gt;11682|34985-&gt;11683
-<i class="no-highlight">608</i>&nbsp;                  LINES: 24-&gt;1|25-&gt;2|26-&gt;3|31-&gt;5|52-&gt;24|52-&gt;24|52-&gt;25|52-&gt;25|52-&gt;26|52-&gt;26|52-&gt;27|52-&gt;27|52-&gt;28|52-&gt;28|52-&gt;29|52-&gt;29|52-&gt;30|52-&gt;30|52-&gt;31|52-&gt;31|52-&gt;32|52-&gt;32|52-&gt;33|52-&gt;33|52-&gt;34|52-&gt;34|52-&gt;35|52-&gt;35|52-&gt;36|52-&gt;36|52-&gt;37|52-&gt;37|52-&gt;38|52-&gt;38|52-&gt;39|52-&gt;39|52-&gt;40|52-&gt;40|52-&gt;41|52-&gt;41|53-&gt;23|54-&gt;24|55-&gt;25|56-&gt;26|57-&gt;27|57-&gt;27|58-&gt;28|58-&gt;28|59-&gt;29|59-&gt;29|60-&gt;30|60-&gt;30|61-&gt;31|61-&gt;31|62-&gt;32|62-&gt;32|63-&gt;33|63-&gt;33|64-&gt;34|64-&gt;34|65-&gt;35|65-&gt;35|66-&gt;36|66-&gt;36|67-&gt;37|67-&gt;37|68-&gt;38|68-&gt;38|69-&gt;39|69-&gt;39|70-&gt;40|70-&gt;40|71-&gt;41|71-&gt;41|77-&gt;47|77-&gt;47|78-&gt;48|104-&gt;74|104-&gt;74|104-&gt;74|106-&gt;76|109-&gt;79|109-&gt;79|110-&gt;80|110-&gt;80|111-&gt;81|111-&gt;81|111-&gt;81|112-&gt;82|114-&gt;84|114-&gt;84|115-&gt;85|115-&gt;85|116-&gt;86|117-&gt;87|117-&gt;87|118-&gt;88|118-&gt;88|119-&gt;89|120-&gt;90|120-&gt;90|121-&gt;91|121-&gt;91|122-&gt;92|123-&gt;93|123-&gt;93|124-&gt;94|124-&gt;94|124-&gt;94|125-&gt;95|127-&gt;97|127-&gt;97|128-&gt;98|128-&gt;98|129-&gt;99|131-&gt;101|131-&gt;101|132-&gt;102|132-&gt;102|133-&gt;103|134-&gt;104|134-&gt;104|135-&gt;105|138-&gt;108|138-&gt;108|140-&gt;110|140-&gt;110|141-&gt;111|141-&gt;111|142-&gt;112|144-&gt;114|144-&gt;114|145-&gt;115|145-&gt;115|146-&gt;116|148-&gt;118|148-&gt;118|149-&gt;119|149-&gt;119|150-&gt;120|150-&gt;120|152-&gt;122|152-&gt;122|153-&gt;123|154-&gt;124|154-&gt;124|155-&gt;125|156-&gt;126|156-&gt;126|157-&gt;127|157-&gt;127|158-&gt;128|158-&gt;128|159-&gt;129|160-&gt;130|160-&gt;130|161-&gt;131|161-&gt;131|162-&gt;132|164-&gt;134|164-&gt;134|165-&gt;135|166-&gt;136|166-&gt;136|167-&gt;137|167-&gt;137|168-&gt;138|168-&gt;138|168-&gt;138|169-&gt;139|171-&gt;141|171-&gt;141|171-&gt;141|171-&gt;141|172-&gt;142|174-&gt;144|174-&gt;144|175-&gt;145|175-&gt;145|176-&gt;146|176-&gt;146|177-&gt;147|177-&gt;147|177-&gt;147|178-&gt;148|180-&gt;150|180-&gt;150|181-&gt;151|181-&gt;151|182-&gt;152|182-&gt;152|183-&gt;153|183-&gt;153|187-&gt;157|187-&gt;157|188-&gt;158|188-&gt;158|189-&gt;159|189-&gt;159|190-&gt;160|190-&gt;160|191-&gt;161|191-&gt;161|192-&gt;162|192-&gt;162|193-&gt;163|193-&gt;163|194-&gt;164|194-&gt;164|194-&gt;164|195-&gt;165|197-&gt;167|197-&gt;167|198-&gt;168|198-&gt;168|199-&gt;169|200-&gt;170|200-&gt;170|201-&gt;171|201-&gt;171|202-&gt;172|205-&gt;175|205-&gt;175|206-&gt;176|206-&gt;176|207-&gt;177|208-&gt;178|208-&gt;178|209-&gt;179|209-&gt;179|209-&gt;179|210-&gt;180|212-&gt;182|212-&gt;182|213-&gt;183|213-&gt;183|214-&gt;184|216-&gt;186|216-&gt;186|217-&gt;187|217-&gt;187|218-&gt;188|219-&gt;189|219-&gt;189|220-&gt;190|223-&gt;193|223-&gt;193|225-&gt;195|225-&gt;195|226-&gt;196|226-&gt;196|227-&gt;197|229-&gt;199|229-&gt;199|230-&gt;200|230-&gt;200|231-&gt;201|233-&gt;203|233-&gt;203|234-&gt;204|234-&gt;204|235-&gt;205|235-&gt;205|237-&gt;207|237-&gt;207|238-&gt;208|241-&gt;211|241-&gt;211|242-&gt;212|242-&gt;212|243-&gt;213|244-&gt;214|244-&gt;214|245-&gt;215|245-&gt;215|246-&gt;216|249-&gt;219|249-&gt;219|250-&gt;220|250-&gt;220|250-&gt;220|251-&gt;221|251-&gt;221|251-&gt;221|252-&gt;222|253-&gt;223|253-&gt;223|254-&gt;224|254-&gt;224|255-&gt;225|255-&gt;225|256-&gt;226|256-&gt;226|257-&gt;227|258-&gt;228|258-&gt;228|259-&gt;229|259-&gt;229|259-&gt;229|259-&gt;229|260-&gt;230|263-&gt;233|263-&gt;233|264-&gt;234|264-&gt;234|264-&gt;234|265-&gt;235|265-&gt;235|265-&gt;235|266-&gt;236|267-&gt;237|267-&gt;237|268-&gt;238|268-&gt;238|269-&gt;239|269-&gt;239|270-&gt;240|270-&gt;240|271-&gt;241|272-&gt;242|272-&gt;242|273-&gt;243|273-&gt;243|273-&gt;243|273-&gt;243|274-&gt;244|277-&gt;247|277-&gt;247|278-&gt;248|278-&gt;248|278-&gt;248|279-&gt;249|279-&gt;249|279-&gt;249|280-&gt;250|281-&gt;251|281-&gt;251|282-&gt;252|282-&gt;252|283-&gt;253|283-&gt;253|284-&gt;254|284-&gt;254|285-&gt;255|286-&gt;256|286-&gt;256|287-&gt;257|287-&gt;257|287-&gt;257|287-&gt;257|288-&gt;258|291-&gt;261|291-&gt;261|292-&gt;262|292-&gt;262|292-&gt;262|293-&gt;263|293-&gt;263|293-&gt;263|294-&gt;264|295-&gt;265|295-&gt;265|296-&gt;266|296-&gt;266|297-&gt;267|297-&gt;267|298-&gt;268|298-&gt;268|299-&gt;269|300-&gt;270|300-&gt;270|301-&gt;271|301-&gt;271|301-&gt;271|301-&gt;271|302-&gt;272|305-&gt;275|305-&gt;275|306-&gt;276|306-&gt;276|306-&gt;276|307-&gt;277|307-&gt;277|307-&gt;277|308-&gt;278|309-&gt;279|309-&gt;279|310-&gt;280|310-&gt;280|311-&gt;281|311-&gt;281|312-&gt;282|312-&gt;282|313-&gt;283|314-&gt;284|314-&gt;284|315-&gt;285|315-&gt;285|315-&gt;285|315-&gt;285|316-&gt;286|319-&gt;289|319-&gt;289|320-&gt;290|320-&gt;290|320-&gt;290|321-&gt;291|321-&gt;291|321-&gt;291|322-&gt;292|323-&gt;293|323-&gt;293|324-&gt;294|324-&gt;294|325-&gt;295|325-&gt;295|326-&gt;296|326-&gt;296|327-&gt;297|328-&gt;298|328-&gt;298|329-&gt;299|329-&gt;299|330-&gt;300|330-&gt;300|335-&gt;305|335-&gt;305|336-&gt;306|336-&gt;306|337-&gt;307|337-&gt;307|338-&gt;308|338-&gt;308|339-&gt;309|339-&gt;309|340-&gt;310|340-&gt;310|341-&gt;311|341-&gt;311|341-&gt;311|342-&gt;312|344-&gt;314|344-&gt;314|345-&gt;315|345-&gt;315|346-&gt;316|347-&gt;317|347-&gt;317|348-&gt;318|348-&gt;318|349-&gt;319|352-&gt;322|352-&gt;322|353-&gt;323|353-&gt;323|354-&gt;324|355-&gt;325|355-&gt;325|356-&gt;326|356-&gt;326|356-&gt;326|357-&gt;327|359-&gt;329|359-&gt;329|360-&gt;330|360-&gt;330|361-&gt;331|363-&gt;333|363-&gt;333|364-&gt;334|364-&gt;334|365-&gt;335|366-&gt;336|366-&gt;336|367-&gt;337|370-&gt;340|370-&gt;340|372-&gt;342|372-&gt;342|373-&gt;343|373-&gt;343|374-&gt;344|376-&gt;346|376-&gt;346|377-&gt;347|377-&gt;347|378-&gt;348|380-&gt;350|380-&gt;350|381-&gt;351|381-&gt;351|382-&gt;352|382-&gt;352|384-&gt;354|384-&gt;354|385-&gt;355|387-&gt;357|387-&gt;357|388-&gt;358|389-&gt;359|389-&gt;359|390-&gt;360|390-&gt;360|391-&gt;361|391-&gt;361|392-&gt;362|393-&gt;363|393-&gt;363|394-&gt;364|394-&gt;364|395-&gt;365|398-&gt;368|398-&gt;368|399-&gt;369|399-&gt;369|399-&gt;369|400-&gt;370|400-&gt;370|400-&gt;370|401-&gt;371|402-&gt;372|402-&gt;372|403-&gt;373|403-&gt;373|404-&gt;374|404-&gt;374|405-&gt;375|405-&gt;375|406-&gt;376|407-&gt;377|407-&gt;377|408-&gt;378|408-&gt;378|408-&gt;378|408-&gt;378|409-&gt;379|412-&gt;382|412-&gt;382|413-&gt;383|413-&gt;383|413-&gt;383|414-&gt;384|414-&gt;384|414-&gt;384|415-&gt;385|416-&gt;386|416-&gt;386|417-&gt;387|417-&gt;387|418-&gt;388|418-&gt;388|419-&gt;389|419-&gt;389|420-&gt;390|421-&gt;391|421-&gt;391|422-&gt;392|422-&gt;392|422-&gt;392|422-&gt;392|423-&gt;393|426-&gt;396|426-&gt;396|427-&gt;397|427-&gt;397|427-&gt;397|428-&gt;398|428-&gt;398|428-&gt;398|429-&gt;399|430-&gt;400|430-&gt;400|431-&gt;401|431-&gt;401|432-&gt;402|432-&gt;402|433-&gt;403|433-&gt;403|434-&gt;404|435-&gt;405|435-&gt;405|436-&gt;406|436-&gt;406|436-&gt;406|436-&gt;406|437-&gt;407|440-&gt;410|440-&gt;410|441-&gt;411|441-&gt;411|441-&gt;411|442-&gt;412|442-&gt;412|442-&gt;412|443-&gt;413|444-&gt;414|444-&gt;414|445-&gt;415|445-&gt;415|446-&gt;416|446-&gt;416|447-&gt;417|447-&gt;417|448-&gt;418|449-&gt;419|449-&gt;419|450-&gt;420|450-&gt;420|450-&gt;420|450-&gt;420|451-&gt;421|454-&gt;424|454-&gt;424|455-&gt;425|455-&gt;425|455-&gt;425|456-&gt;426|456-&gt;426|456-&gt;426|457-&gt;427|458-&gt;428|458-&gt;428|459-&gt;429|459-&gt;429|460-&gt;430|460-&gt;430|461-&gt;431|461-&gt;431|462-&gt;432|463-&gt;433|463-&gt;433|464-&gt;434|464-&gt;434|465-&gt;435|465-&gt;435|470-&gt;440|470-&gt;440|471-&gt;441|471-&gt;441|472-&gt;442|472-&gt;442|473-&gt;443|473-&gt;443|474-&gt;444|474-&gt;444|475-&gt;445|475-&gt;445|475-&gt;445|476-&gt;446|478-&gt;448|478-&gt;448|479-&gt;449|479-&gt;449|480-&gt;450|481-&gt;451|481-&gt;451|482-&gt;452|482-&gt;452|483-&gt;453|486-&gt;456|486-&gt;456|487-&gt;457|487-&gt;457|488-&gt;458|489-&gt;459|489-&gt;459|490-&gt;460|490-&gt;460|490-&gt;460|491-&gt;461|493-&gt;463|493-&gt;463|494-&gt;464|494-&gt;464|495-&gt;465|497-&gt;467|497-&gt;467|498-&gt;468|498-&gt;468|499-&gt;469|500-&gt;470|500-&gt;470|501-&gt;471|504-&gt;474|504-&gt;474|506-&gt;476|506-&gt;476|507-&gt;477|507-&gt;477|508-&gt;478|510-&gt;480|510-&gt;480|511-&gt;481|511-&gt;481|512-&gt;482|514-&gt;484|514-&gt;484|515-&gt;485|515-&gt;485|516-&gt;486|516-&gt;486|518-&gt;488|518-&gt;488|519-&gt;489|522-&gt;492|522-&gt;492|523-&gt;493|523-&gt;493|524-&gt;494|525-&gt;495|525-&gt;495|526-&gt;496|526-&gt;496|527-&gt;497|530-&gt;500|530-&gt;500|531-&gt;501|531-&gt;501|531-&gt;501|532-&gt;502|532-&gt;502|532-&gt;502|533-&gt;503|534-&gt;504|534-&gt;504|535-&gt;505|535-&gt;505|536-&gt;506|536-&gt;506|537-&gt;507|537-&gt;507|538-&gt;508|539-&gt;509|539-&gt;509|540-&gt;510|540-&gt;510|540-&gt;510|540-&gt;510|541-&gt;511|544-&gt;514|544-&gt;514|545-&gt;515|545-&gt;515|545-&gt;515|546-&gt;516|546-&gt;516|546-&gt;516|547-&gt;517|548-&gt;518|548-&gt;518|549-&gt;519|549-&gt;519|550-&gt;520|550-&gt;520|551-&gt;521|551-&gt;521|552-&gt;522|553-&gt;523|553-&gt;523|554-&gt;524|554-&gt;524|554-&gt;524|554-&gt;524|555-&gt;525|558-&gt;528|558-&gt;528|559-&gt;529|559-&gt;529|559-&gt;529|560-&gt;530|560-&gt;530|560-&gt;530|561-&gt;531|562-&gt;532|562-&gt;532|563-&gt;533|563-&gt;533|564-&gt;534|564-&gt;534|565-&gt;535|565-&gt;535|566-&gt;536|567-&gt;537|567-&gt;537|568-&gt;538|568-&gt;538|568-&gt;538|568-&gt;538|569-&gt;539|572-&gt;542|572-&gt;542|573-&gt;543|573-&gt;543|573-&gt;543|574-&gt;544|574-&gt;544|574-&gt;544|575-&gt;545|576-&gt;546|576-&gt;546|577-&gt;547|577-&gt;547|578-&gt;548|578-&gt;548|579-&gt;549|579-&gt;549|580-&gt;550|581-&gt;551|581-&gt;551|582-&gt;552|582-&gt;552|583-&gt;553|583-&gt;553
-<i class="no-highlight">609</i>&nbsp;                  -- GENERATED --
-<i class="no-highlight">610</i>&nbsp;              */
-<i class="no-highlight">611</i>&nbsp;          
+<i class="no-highlight">24</i>&nbsp;
+<b class="nc"><i class="no-highlight">25</i>&nbsp;object chart_js extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template0[play.twirl.api.HtmlFormat.Appendable] {</b>
+<i class="no-highlight">26</i>&nbsp;
+<i class="no-highlight">27</i>&nbsp;  /**/
+<i class="no-highlight">28</i>&nbsp;  def apply/*1.2*/():play.twirl.api.HtmlFormat.Appendable = {
+<b class="nc"><i class="no-highlight">29</i>&nbsp;    _display_ {</b>
+<i class="no-highlight">30</i>&nbsp;      {
+<i class="no-highlight">31</i>&nbsp;
+<i class="no-highlight">32</i>&nbsp;
+<b class="nc"><i class="no-highlight">33</i>&nbsp;Seq[Any](format.raw/*2.1*/(&quot;&quot;&quot;</b>
+<b class="nc"><i class="no-highlight">34</i>&nbsp;&quot;&quot;&quot;),format.raw/*3.1*/(&quot;&quot;&quot;&lt;!-- chart js --&gt;</b>
+<b class="nc"><i class="no-highlight">35</i>&nbsp;&lt;script src=&quot;&quot;&quot;&quot;),_display_(/*4.15*/routes/*4.21*/.Assets.versioned(&quot;js/chartjs/chart.min.js&quot;)),format.raw/*4.65*/(&quot;&quot;&quot;&quot;&gt;&lt;/script&gt;&quot;&quot;&quot;))</b>
+<i class="no-highlight">36</i>&nbsp;      }
+<i class="no-highlight">37</i>&nbsp;    }
+<i class="no-highlight">38</i>&nbsp;  }
+<i class="no-highlight">39</i>&nbsp;
+<b class="nc"><i class="no-highlight">40</i>&nbsp;  def render(): play.twirl.api.HtmlFormat.Appendable = apply()</b>
+<i class="no-highlight">41</i>&nbsp;
+<b class="nc"><i class="no-highlight">42</i>&nbsp;  def f:(() =&gt; play.twirl.api.HtmlFormat.Appendable) = () =&gt; apply()</b>
+<i class="no-highlight">43</i>&nbsp;
+<b class="nc"><i class="no-highlight">44</i>&nbsp;  def ref: this.type = this</b>
+<i class="no-highlight">45</i>&nbsp;
+<i class="no-highlight">46</i>&nbsp;}
+<i class="no-highlight">47</i>&nbsp;
+<i class="no-highlight">48</i>&nbsp;
+<i class="no-highlight">49</i>&nbsp;              /*
+<i class="no-highlight">50</i>&nbsp;                  -- GENERATED --
+<i class="no-highlight">51</i>&nbsp;                  SOURCE: app/views/parts/js/chart_js.scala.html
+<i class="no-highlight">52</i>&nbsp;                  HASH: 3247c380c0fbfca3cd200577e1d32b5ce12008f8
+<i class="no-highlight">53</i>&nbsp;                  MATRIX: 953-&gt;1|1049-&gt;4|1076-&gt;5|1134-&gt;37|1148-&gt;43|1212-&gt;87
+<i class="no-highlight">54</i>&nbsp;                  LINES: 28-&gt;1|33-&gt;2|34-&gt;3|35-&gt;4|35-&gt;4|35-&gt;4
+<i class="no-highlight">55</i>&nbsp;                  -- GENERATED --
+<i class="no-highlight">56</i>&nbsp;              */
+<i class="no-highlight">57</i>&nbsp;          
 </div>
 </pre>
 </div>
@@ -717,7 +163,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-08-27 21:21</div>
+    <div style="float:right;">generated on 2022-08-28 11:51</div>
 </div>
 </body>
 </html>

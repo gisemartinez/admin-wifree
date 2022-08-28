@@ -1,0 +1,179 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > flot_js</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">views.html.parts.js</a>
+</div>
+
+<h1>Coverage Summary for Class: flot_js (views.html.parts.js)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">flot_js$</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/17)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/17)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;
+<i class="no-highlight">2</i>&nbsp;package views.html.parts.js
+<i class="no-highlight">3</i>&nbsp;
+<i class="no-highlight">4</i>&nbsp;import _root_.play.twirl.api.TwirlFeatureImports._
+<i class="no-highlight">5</i>&nbsp;import _root_.play.twirl.api.TwirlHelperImports._
+<i class="no-highlight">6</i>&nbsp;import _root_.play.twirl.api.Html
+<i class="no-highlight">7</i>&nbsp;import _root_.play.twirl.api.JavaScript
+<i class="no-highlight">8</i>&nbsp;import _root_.play.twirl.api.Txt
+<i class="no-highlight">9</i>&nbsp;import _root_.play.twirl.api.Xml
+<i class="no-highlight">10</i>&nbsp;import models._
+<i class="no-highlight">11</i>&nbsp;import controllers._
+<i class="no-highlight">12</i>&nbsp;import play.api.i18n._
+<i class="no-highlight">13</i>&nbsp;import views.html._
+<i class="no-highlight">14</i>&nbsp;import play.api.templates.PlayMagic._
+<i class="no-highlight">15</i>&nbsp;import java.lang._
+<i class="no-highlight">16</i>&nbsp;import java.util._
+<i class="no-highlight">17</i>&nbsp;import scala.collection.JavaConverters._
+<i class="no-highlight">18</i>&nbsp;import play.core.j.PlayMagicForJava._
+<i class="no-highlight">19</i>&nbsp;import play.mvc._
+<i class="no-highlight">20</i>&nbsp;import play.api.data.Field
+<i class="no-highlight">21</i>&nbsp;import play.mvc.Http.Context.Implicit._
+<i class="no-highlight">22</i>&nbsp;import play.data._
+<i class="no-highlight">23</i>&nbsp;import play.core.j.PlayFormsMagicForJava._
+<i class="no-highlight">24</i>&nbsp;
+<b class="nc"><i class="no-highlight">25</i>&nbsp;object flot_js extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template0[play.twirl.api.HtmlFormat.Appendable] {</b>
+<i class="no-highlight">26</i>&nbsp;
+<i class="no-highlight">27</i>&nbsp;  /**/
+<i class="no-highlight">28</i>&nbsp;  def apply/*1.2*/():play.twirl.api.HtmlFormat.Appendable = {
+<b class="nc"><i class="no-highlight">29</i>&nbsp;    _display_ {</b>
+<i class="no-highlight">30</i>&nbsp;      {
+<i class="no-highlight">31</i>&nbsp;
+<i class="no-highlight">32</i>&nbsp;
+<b class="nc"><i class="no-highlight">33</i>&nbsp;Seq[Any](format.raw/*2.1*/(&quot;&quot;&quot;</b>
+<b class="nc"><i class="no-highlight">34</i>&nbsp;&quot;&quot;&quot;),format.raw/*3.1*/(&quot;&quot;&quot;&lt;!-- flot js --&gt;</b>
+<i class="no-highlight">35</i>&nbsp;&lt;!--[if lte IE 8]&gt;&lt;script type=&quot;text/javascript&quot; src=&quot;js/excanvas.min.js&quot;&gt;&lt;/script&gt;&lt;![endif]--&gt;
+<b class="nc"><i class="no-highlight">36</i>&nbsp;&lt;script type=&quot;text/javascript&quot; src=&quot;&quot;&quot;&quot;),_display_(/*5.38*/routes/*5.44*/.Assets.versioned(&quot;js/flot/jquery.flot.js&quot;)),format.raw/*5.87*/(&quot;&quot;&quot;&quot;&gt;&lt;/script&gt;</b>
+<b class="nc"><i class="no-highlight">37</i>&nbsp;&lt;script type=&quot;text/javascript&quot; src=&quot;&quot;&quot;&quot;),_display_(/*6.38*/routes/*6.44*/.Assets.versioned(&quot;js/flot/jquery.flot.pie.js&quot;)),format.raw/*6.91*/(&quot;&quot;&quot;&quot;&gt;&lt;/script&gt;</b>
+<b class="nc"><i class="no-highlight">38</i>&nbsp;&lt;script type=&quot;text/javascript&quot; src=&quot;&quot;&quot;&quot;),_display_(/*7.38*/routes/*7.44*/.Assets.versioned(&quot;js/flot/jquery.flot.orderBars.js&quot;)),format.raw/*7.97*/(&quot;&quot;&quot;&quot;&gt;&lt;/script&gt;</b>
+<b class="nc"><i class="no-highlight">39</i>&nbsp;&lt;script type=&quot;text/javascript&quot; src=&quot;&quot;&quot;&quot;),_display_(/*8.38*/routes/*8.44*/.Assets.versioned(&quot;js/flot/jquery.flot.time.min.js&quot;)),format.raw/*8.96*/(&quot;&quot;&quot;&quot;&gt;&lt;/script&gt;</b>
+<b class="nc"><i class="no-highlight">40</i>&nbsp;&lt;script type=&quot;text/javascript&quot; src=&quot;&quot;&quot;&quot;),_display_(/*9.38*/routes/*9.44*/.Assets.versioned(&quot;js/flot/date.js&quot;)),format.raw/*9.80*/(&quot;&quot;&quot;&quot;&gt;&lt;/script&gt;</b>
+<b class="nc"><i class="no-highlight">41</i>&nbsp;&lt;script type=&quot;text/javascript&quot; src=&quot;&quot;&quot;&quot;),_display_(/*10.38*/routes/*10.44*/.Assets.versioned(&quot;js/flot/jquery.flot.spline.js&quot;)),format.raw/*10.94*/(&quot;&quot;&quot;&quot;&gt;&lt;/script&gt;</b>
+<b class="nc"><i class="no-highlight">42</i>&nbsp;&lt;script type=&quot;text/javascript&quot; src=&quot;&quot;&quot;&quot;),_display_(/*11.38*/routes/*11.44*/.Assets.versioned(&quot;js/flot/jquery.flot.stack.js&quot;)),format.raw/*11.93*/(&quot;&quot;&quot;&quot;&gt;&lt;/script&gt;</b>
+<b class="nc"><i class="no-highlight">43</i>&nbsp;&lt;script type=&quot;text/javascript&quot; src=&quot;&quot;&quot;&quot;),_display_(/*12.38*/routes/*12.44*/.Assets.versioned(&quot;js/flot/curvedLines.js&quot;)),format.raw/*12.87*/(&quot;&quot;&quot;&quot;&gt;&lt;/script&gt;</b>
+<b class="nc"><i class="no-highlight">44</i>&nbsp;&lt;script type=&quot;text/javascript&quot; src=&quot;&quot;&quot;&quot;),_display_(/*13.38*/routes/*13.44*/.Assets.versioned(&quot;js/flot/jquery.flot.resize.js&quot;)),format.raw/*13.94*/(&quot;&quot;&quot;&quot;&gt;&lt;/script&gt;</b>
+<b class="nc"><i class="no-highlight">45</i>&nbsp;&lt;script type=&quot;text/javascript&quot; src=&quot;&quot;&quot;&quot;),_display_(/*14.38*/routes/*14.44*/.Assets.versioned(&quot;js/flot/jquery.flot.tooltip.min.js&quot;)),format.raw/*14.99*/(&quot;&quot;&quot;&quot;&gt;&lt;/script&gt;&quot;&quot;&quot;))</b>
+<i class="no-highlight">46</i>&nbsp;      }
+<i class="no-highlight">47</i>&nbsp;    }
+<i class="no-highlight">48</i>&nbsp;  }
+<i class="no-highlight">49</i>&nbsp;
+<b class="nc"><i class="no-highlight">50</i>&nbsp;  def render(): play.twirl.api.HtmlFormat.Appendable = apply()</b>
+<i class="no-highlight">51</i>&nbsp;
+<b class="nc"><i class="no-highlight">52</i>&nbsp;  def f:(() =&gt; play.twirl.api.HtmlFormat.Appendable) = () =&gt; apply()</b>
+<i class="no-highlight">53</i>&nbsp;
+<b class="nc"><i class="no-highlight">54</i>&nbsp;  def ref: this.type = this</b>
+<i class="no-highlight">55</i>&nbsp;
+<i class="no-highlight">56</i>&nbsp;}
+<i class="no-highlight">57</i>&nbsp;
+<i class="no-highlight">58</i>&nbsp;
+<i class="no-highlight">59</i>&nbsp;              /*
+<i class="no-highlight">60</i>&nbsp;                  -- GENERATED --
+<i class="no-highlight">61</i>&nbsp;                  SOURCE: app/views/parts/js/flot_js.scala.html
+<i class="no-highlight">62</i>&nbsp;                  HASH: 9cb28982ac759be000b6416d4103bca27589d54f
+<i class="no-highlight">63</i>&nbsp;                  MATRIX: 952-&gt;1|1048-&gt;4|1075-&gt;5|1251-&gt;155|1265-&gt;161|1328-&gt;204|1403-&gt;253|1417-&gt;259|1484-&gt;306|1559-&gt;355|1573-&gt;361|1646-&gt;414|1721-&gt;463|1735-&gt;469|1807-&gt;521|1882-&gt;570|1896-&gt;576|1952-&gt;612|2028-&gt;661|2043-&gt;667|2114-&gt;717|2190-&gt;766|2205-&gt;772|2275-&gt;821|2351-&gt;870|2366-&gt;876|2430-&gt;919|2506-&gt;968|2521-&gt;974|2592-&gt;1024|2668-&gt;1073|2683-&gt;1079|2759-&gt;1134
+<i class="no-highlight">64</i>&nbsp;                  LINES: 28-&gt;1|33-&gt;2|34-&gt;3|36-&gt;5|36-&gt;5|36-&gt;5|37-&gt;6|37-&gt;6|37-&gt;6|38-&gt;7|38-&gt;7|38-&gt;7|39-&gt;8|39-&gt;8|39-&gt;8|40-&gt;9|40-&gt;9|40-&gt;9|41-&gt;10|41-&gt;10|41-&gt;10|42-&gt;11|42-&gt;11|42-&gt;11|43-&gt;12|43-&gt;12|43-&gt;12|44-&gt;13|44-&gt;13|44-&gt;13|45-&gt;14|45-&gt;14|45-&gt;14
+<i class="no-highlight">65</i>&nbsp;                  -- GENERATED --
+<i class="no-highlight">66</i>&nbsp;              */
+<i class="no-highlight">67</i>&nbsp;          
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-08-28 18:30</div>
+</div>
+</body>
+</html>

@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > SaveSurveyAnswersRequest</title>
+  <title>Coverage Report > SaveSurveyAnswersFunction</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -17,10 +17,10 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">operations.requests</a>
+    <a href="../index.html">services.core.functions</a>
 </div>
 
-<h1>Coverage Summary for Class: SaveSurveyAnswersRequest (operations.requests)</h1>
+<h1>Coverage Summary for Class: SaveSurveyAnswersFunction (services.core.functions)</h1>
 
 <table class="coverageStats">
 
@@ -36,59 +36,43 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">SaveSurveyAnswersRequest</td>
+  <td class="name">SaveSurveyAnswersFunction</td>
 <td class="coverageStat">
   <span class="percent">
-    50%
+    71.4%
   </span>
   <span class="absValue">
-    (1/2)
+    (5/7)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    50%
+    80.8%
   </span>
   <span class="absValue">
-    (1/2)
+    (21/26)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">SaveSurveyAnswersRequest$</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/1)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/1)
-  </span>
-</td>
+    <td class="name">SaveSurveyAnswersFunction$$FastClassByGuice$$304b5f44</td>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    33.3%
+    71.4%
   </span>
   <span class="absValue">
-    (1/3)
+    (5/7)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    33.3%
+    80.8%
   </span>
   <span class="absValue">
-    (1/3)
+    (21/26)
   </span>
 </td>
 </tr>
@@ -99,18 +83,95 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package operations.requests
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package services.core.functions;
 <i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import controllers.api.dto.FieldAnswerDTO
-<i class="no-highlight">4</i>&nbsp;import operations.core.{RequestType, WiFreeRequest}
-<i class="no-highlight">5</i>&nbsp;
-<i class="no-highlight">6</i>&nbsp;import java.util.{List =&gt; JList}
-<i class="no-highlight">7</i>&nbsp;
-<b class="pc"><i class="no-highlight">8</i>&nbsp;case class SaveSurveyAnswersRequest(fieldsAnswers: JList[FieldAnswerDTO], userId: Long) extends WiFreeRequest {</b>
-<i class="no-highlight">9</i>&nbsp;
-<b class="nc"><i class="no-highlight">10</i>&nbsp;  override def requestType: RequestType = RequestType.SAVE_SURVEY_ANSWERS_REQUEST</b>
-<i class="no-highlight">11</i>&nbsp;
-<i class="no-highlight">12</i>&nbsp;}
+<i class="no-highlight">3</i>&nbsp;import daos.FieldAnswerDAO;
+<i class="no-highlight">4</i>&nbsp;import daos.FieldDAO;
+<i class="no-highlight">5</i>&nbsp;import daos.NetworkUserDAO;
+<i class="no-highlight">6</i>&nbsp;import models.Field;
+<i class="no-highlight">7</i>&nbsp;import models.FieldAnswer;
+<i class="no-highlight">8</i>&nbsp;import models.NetworkUser;
+<i class="no-highlight">9</i>&nbsp;import models.Portal;
+<i class="no-highlight">10</i>&nbsp;import models.types.Gender;
+<i class="no-highlight">11</i>&nbsp;import operations.requests.SaveSurveyAnswersRequest;
+<i class="no-highlight">12</i>&nbsp;import operations.responses.SaveSurveyAnswersResponse;
+<i class="no-highlight">13</i>&nbsp;import play.Logger;
+<i class="no-highlight">14</i>&nbsp;import services.core.ServiceType;
+<i class="no-highlight">15</i>&nbsp;import services.core.WiFreeFunction;
+<i class="no-highlight">16</i>&nbsp;
+<i class="no-highlight">17</i>&nbsp;import javax.inject.Inject;
+<i class="no-highlight">18</i>&nbsp;import java.time.Instant;
+<i class="no-highlight">19</i>&nbsp;import java.util.List;
+<i class="no-highlight">20</i>&nbsp;import java.util.function.Function;
+<i class="no-highlight">21</i>&nbsp;import java.util.stream.Collectors;
+<i class="no-highlight">22</i>&nbsp;
+<b class="fc"><i class="no-highlight">23</i>&nbsp;public class SaveSurveyAnswersFunction extends WiFreeFunction&lt;SaveSurveyAnswersRequest, SaveSurveyAnswersResponse&gt; {</b>
+<i class="no-highlight">24</i>&nbsp;
+<b class="fc"><i class="no-highlight">25</i>&nbsp;    protected final Logger.ALogger logger = Logger.of(this.getClass());</b>
+<i class="no-highlight">26</i>&nbsp;
+<i class="no-highlight">27</i>&nbsp;    @Inject
+<i class="no-highlight">28</i>&nbsp;    private NetworkUserDAO networkUserDAO;
+<i class="no-highlight">29</i>&nbsp;
+<i class="no-highlight">30</i>&nbsp;    @Inject
+<i class="no-highlight">31</i>&nbsp;    private FieldDAO fieldDAO;
+<i class="no-highlight">32</i>&nbsp;
+<i class="no-highlight">33</i>&nbsp;    @Inject
+<i class="no-highlight">34</i>&nbsp;    private FieldAnswerDAO fieldAnswerDAO;
+<i class="no-highlight">35</i>&nbsp;
+<i class="no-highlight">36</i>&nbsp;    @Override
+<i class="no-highlight">37</i>&nbsp;    public Function&lt;SaveSurveyAnswersRequest, SaveSurveyAnswersResponse&gt; function() {
+<b class="fc"><i class="no-highlight">38</i>&nbsp;        function = request -&gt; {</b>
+<i class="no-highlight">39</i>&nbsp;            try {
+<b class="fc"><i class="no-highlight">40</i>&nbsp;                long userId = request.userId();</b>
+<i class="no-highlight">41</i>&nbsp;
+<b class="fc"><i class="no-highlight">42</i>&nbsp;                NetworkUser networkUser = networkUserDAO.get(userId);</b>
+<i class="no-highlight">43</i>&nbsp;
+<b class="fc"><i class="no-highlight">44</i>&nbsp;                if (networkUser == null) {</b>
+<b class="fc"><i class="no-highlight">45</i>&nbsp;                    Portal portal = fieldDAO.findPortal(request.fieldsAnswers().get(0).field);</b>
+<b class="fc"><i class="no-highlight">46</i>&nbsp;                    networkUser = new NetworkUser(portal, &quot;Usuario &quot; + userId, &quot;usuario_&quot; + userId + &quot;@mail.com&quot;, &quot;&quot;, Instant.now(),</b>
+<i class="no-highlight">47</i>&nbsp;                            true, &quot;&quot;, Gender.Undefined, null, null, null, 0);
+<b class="fc"><i class="no-highlight">48</i>&nbsp;                    networkUser.setId(userId);</b>
+<b class="fc"><i class="no-highlight">49</i>&nbsp;                    networkUserDAO.save(networkUser);</b>
+<i class="no-highlight">50</i>&nbsp;                }
+<i class="no-highlight">51</i>&nbsp;
+<b class="fc"><i class="no-highlight">52</i>&nbsp;                NetworkUser finalNetworkUser = networkUser;</b>
+<b class="fc"><i class="no-highlight">53</i>&nbsp;                List&lt;FieldAnswer&gt; surveyAnswers = request.fieldsAnswers().stream()</b>
+<b class="fc"><i class="no-highlight">54</i>&nbsp;                        .map(fieldAnswer -&gt; toModel(finalNetworkUser, fieldAnswer))</b>
+<b class="fc"><i class="no-highlight">55</i>&nbsp;                        .collect(Collectors.toList());</b>
+<i class="no-highlight">56</i>&nbsp;
+<b class="fc"><i class="no-highlight">57</i>&nbsp;                fieldAnswerDAO.saveAll(surveyAnswers);</b>
+<i class="no-highlight">58</i>&nbsp;
+<b class="fc"><i class="no-highlight">59</i>&nbsp;                Long surveyId = surveyAnswers.stream().map(x -&gt; x.getField().getSurvey().getId()).distinct().findAny().orElse(0L);</b>
+<i class="no-highlight">60</i>&nbsp;
+<b class="fc"><i class="no-highlight">61</i>&nbsp;                return new SaveSurveyAnswersResponse(true, surveyId, userId);</b>
+<b class="nc"><i class="no-highlight">62</i>&nbsp;            } catch (Exception e) {</b>
+<b class="nc"><i class="no-highlight">63</i>&nbsp;                logger.error(&quot;Error saving survey answers. Request: &quot; + request.toString(), e);</b>
+<b class="nc"><i class="no-highlight">64</i>&nbsp;                return new SaveSurveyAnswersResponse(false, 0, 0);</b>
+<i class="no-highlight">65</i>&nbsp;            }
+<i class="no-highlight">66</i>&nbsp;        };
+<b class="fc"><i class="no-highlight">67</i>&nbsp;        return function;</b>
+<i class="no-highlight">68</i>&nbsp;    }
+<i class="no-highlight">69</i>&nbsp;
+<i class="no-highlight">70</i>&nbsp;    private FieldAnswer toModel(NetworkUser networkUser, controllers.api.dto.FieldAnswerDTO fieldAnswer) {
+<b class="fc"><i class="no-highlight">71</i>&nbsp;        Field field = fieldDAO.get(fieldAnswer.field);</b>
+<b class="fc"><i class="no-highlight">72</i>&nbsp;        return new FieldAnswer(field, networkUser, fieldAnswer.answer);</b>
+<i class="no-highlight">73</i>&nbsp;    }
+<i class="no-highlight">74</i>&nbsp;
+<i class="no-highlight">75</i>&nbsp;    @Override
+<i class="no-highlight">76</i>&nbsp;    public Class&lt;SaveSurveyAnswersRequest&gt; rqClass() {
+<b class="fc"><i class="no-highlight">77</i>&nbsp;        return SaveSurveyAnswersRequest.class;</b>
+<i class="no-highlight">78</i>&nbsp;    }
+<i class="no-highlight">79</i>&nbsp;
+<i class="no-highlight">80</i>&nbsp;    @Override
+<i class="no-highlight">81</i>&nbsp;    public Class&lt;SaveSurveyAnswersResponse&gt; rsClass() {
+<b class="nc"><i class="no-highlight">82</i>&nbsp;        return SaveSurveyAnswersResponse.class;</b>
+<i class="no-highlight">83</i>&nbsp;    }
+<i class="no-highlight">84</i>&nbsp;
+<i class="no-highlight">85</i>&nbsp;    @Override
+<i class="no-highlight">86</i>&nbsp;    public ServiceType serviceType() {
+<b class="nc"><i class="no-highlight">87</i>&nbsp;        return ServiceType.TESTING_SERVICE;</b>
+<i class="no-highlight">88</i>&nbsp;    }
+<i class="no-highlight">89</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -137,7 +198,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-08-27 21:21</div>
+    <div style="float:right;">generated on 2022-08-28 18:36</div>
 </div>
 </body>
 </html>

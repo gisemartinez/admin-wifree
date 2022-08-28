@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > OptionForm</title>
+  <title>Coverage Report > FieldForm</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -20,7 +20,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">controllers.admin</a>
 </div>
 
-<h1>Coverage Summary for Class: OptionForm (controllers.admin)</h1>
+<h1>Coverage Summary for Class: FieldForm (controllers.admin)</h1>
 
 <table class="coverageStats">
 
@@ -36,40 +36,40 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">OptionForm</td>
+  <td class="name">FieldForm</td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/1)
+    (3/3)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/1)
+    (3/3)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">OptionForm$</td>
+    <td class="name">FieldForm$</td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/1)
+    (1/1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/1)
+    (1/1)
   </span>
 </td>
   </tr>
@@ -77,18 +77,18 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/2)
+    (4/4)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/2)
+    (4/4)
   </span>
 </td>
 </tr>
@@ -115,58 +115,68 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">14</i>&nbsp;    mapping(
 <i class="no-highlight">15</i>&nbsp;      &quot;title&quot; -&gt; text,
 <i class="no-highlight">16</i>&nbsp;      &quot;enabled&quot; -&gt; boolean,
-<i class="no-highlight">17</i>&nbsp;      &quot;fields&quot; -&gt; list(fieldConfigMapping)
+<i class="no-highlight">17</i>&nbsp;      &quot;fields&quot; -&gt; list(fieldMapping)
 <i class="no-highlight">18</i>&nbsp;    )(SurveyForm.apply)(SurveyForm.unapply)
 <i class="no-highlight">19</i>&nbsp;  )
 <i class="no-highlight">20</i>&nbsp;
-<i class="no-highlight">21</i>&nbsp;  private def fieldConfigMapping = {
+<i class="no-highlight">21</i>&nbsp;  private def fieldMapping = {
 <i class="no-highlight">22</i>&nbsp;    mapping(
-<i class="no-highlight">23</i>&nbsp;      &quot;fieldType&quot; -&gt; text,
-<i class="no-highlight">24</i>&nbsp;      &quot;key&quot; -&gt; text,
-<i class="no-highlight">25</i>&nbsp;      &quot;label&quot; -&gt; text,
-<i class="no-highlight">26</i>&nbsp;      &quot;order&quot; -&gt; number,
-<i class="no-highlight">27</i>&nbsp;      &quot;required&quot; -&gt; boolean,
-<i class="no-highlight">28</i>&nbsp;      &quot;value&quot; -&gt; text,
-<i class="no-highlight">29</i>&nbsp;      &quot;maximum&quot; -&gt; number,
-<i class="no-highlight">30</i>&nbsp;      &quot;options&quot; -&gt; list(optionMapping)
-<i class="no-highlight">31</i>&nbsp;    )(FieldConfigForm.apply)(FieldConfigForm.unapply)
-<i class="no-highlight">32</i>&nbsp;  }
-<i class="no-highlight">33</i>&nbsp;
-<i class="no-highlight">34</i>&nbsp;  private def optionMapping = mapping(
-<i class="no-highlight">35</i>&nbsp;    &quot;key&quot; -&gt; text
-<i class="no-highlight">36</i>&nbsp;  )(OptionForm.apply)(OptionForm.unapply)
-<i class="no-highlight">37</i>&nbsp;
-<i class="no-highlight">38</i>&nbsp;  def buildSummaries(
-<i class="no-highlight">39</i>&nbsp;      getAllSurveysResponse: GetAllSurveysResponse
-<i class="no-highlight">40</i>&nbsp;  ): java.util.List[SurveySummary] = {
-<i class="no-highlight">41</i>&nbsp;    getAllSurveysResponse.surveys.asScala.toList
-<i class="no-highlight">42</i>&nbsp;      .map(toSummary)
-<i class="no-highlight">43</i>&nbsp;      .sortBy(_.creation.getTime.toInt)(Ordering.Int.reverse)
-<i class="no-highlight">44</i>&nbsp;      .asJava
-<i class="no-highlight">45</i>&nbsp;  }
-<i class="no-highlight">46</i>&nbsp;
-<i class="no-highlight">47</i>&nbsp;  def toSummary(survey: Survey) =
-<i class="no-highlight">48</i>&nbsp;    new SurveySummary(survey.getId, survey.getTitle, survey.getWhenCreated)
-<i class="no-highlight">49</i>&nbsp;}
-<i class="no-highlight">50</i>&nbsp;
-<i class="no-highlight">51</i>&nbsp;case class SurveyForm(
-<i class="no-highlight">52</i>&nbsp;    title: String,
-<i class="no-highlight">53</i>&nbsp;    enabled: Boolean,
-<i class="no-highlight">54</i>&nbsp;    fields: List[FieldConfigForm]
-<i class="no-highlight">55</i>&nbsp;) {}
+<i class="no-highlight">23</i>&nbsp;      &quot;config&quot; -&gt; fieldConfigMapping,
+<i class="no-highlight">24</i>&nbsp;      &quot;type&quot; -&gt; text
+<i class="no-highlight">25</i>&nbsp;    )(FieldForm.apply)(FieldForm.unapply)
+<i class="no-highlight">26</i>&nbsp;  }
+<i class="no-highlight">27</i>&nbsp;
+<i class="no-highlight">28</i>&nbsp;  private def fieldConfigMapping = {
+<i class="no-highlight">29</i>&nbsp;    mapping(
+<i class="no-highlight">30</i>&nbsp;      &quot;key&quot; -&gt; text,
+<i class="no-highlight">31</i>&nbsp;      &quot;label&quot; -&gt; text,
+<i class="no-highlight">32</i>&nbsp;      &quot;order&quot; -&gt; number,
+<i class="no-highlight">33</i>&nbsp;      &quot;required&quot; -&gt; boolean,
+<i class="no-highlight">34</i>&nbsp;      &quot;value&quot; -&gt; text,
+<i class="no-highlight">35</i>&nbsp;      &quot;maximum&quot; -&gt; number,
+<i class="no-highlight">36</i>&nbsp;      &quot;options&quot; -&gt; list(optionMapping)
+<i class="no-highlight">37</i>&nbsp;    )(FieldConfigForm.apply)(FieldConfigForm.unapply)
+<i class="no-highlight">38</i>&nbsp;  }
+<i class="no-highlight">39</i>&nbsp;
+<i class="no-highlight">40</i>&nbsp;  private def optionMapping = mapping(
+<i class="no-highlight">41</i>&nbsp;    &quot;key&quot; -&gt; text
+<i class="no-highlight">42</i>&nbsp;  )(OptionForm.apply)(OptionForm.unapply)
+<i class="no-highlight">43</i>&nbsp;
+<i class="no-highlight">44</i>&nbsp;  def buildSummaries(
+<i class="no-highlight">45</i>&nbsp;      getAllSurveysResponse: GetAllSurveysResponse
+<i class="no-highlight">46</i>&nbsp;  ): java.util.List[SurveySummary] = {
+<i class="no-highlight">47</i>&nbsp;    getAllSurveysResponse.surveys.asScala.toList
+<i class="no-highlight">48</i>&nbsp;      .map(toSummary)
+<i class="no-highlight">49</i>&nbsp;      .sortBy(_.creation.getTime.toInt)(Ordering.Int.reverse)
+<i class="no-highlight">50</i>&nbsp;      .asJava
+<i class="no-highlight">51</i>&nbsp;  }
+<i class="no-highlight">52</i>&nbsp;
+<i class="no-highlight">53</i>&nbsp;  def toSummary(survey: Survey) =
+<i class="no-highlight">54</i>&nbsp;    new SurveySummary(survey.getId, survey.getTitle, survey.getWhenCreated)
+<i class="no-highlight">55</i>&nbsp;}
 <i class="no-highlight">56</i>&nbsp;
-<i class="no-highlight">57</i>&nbsp;case class FieldConfigForm(
-<i class="no-highlight">58</i>&nbsp;    fieldType: String, // Field
-<i class="no-highlight">59</i>&nbsp;    key: String,
-<i class="no-highlight">60</i>&nbsp;    label: String,
-<i class="no-highlight">61</i>&nbsp;    order: Int, // FieldConfig
-<i class="no-highlight">62</i>&nbsp;    required: Boolean,
-<i class="no-highlight">63</i>&nbsp;    value: String, // Textfield
-<i class="no-highlight">64</i>&nbsp;    maximum: Int, // Rating
-<i class="no-highlight">65</i>&nbsp;    options: List[OptionForm]
-<i class="no-highlight">66</i>&nbsp;) // Radio
+<i class="no-highlight">57</i>&nbsp;case class SurveyForm(
+<i class="no-highlight">58</i>&nbsp;    title: String,
+<i class="no-highlight">59</i>&nbsp;    enabled: Boolean,
+<i class="no-highlight">60</i>&nbsp;    fields: List[FieldForm]
+<i class="no-highlight">61</i>&nbsp;)
+<i class="no-highlight">62</i>&nbsp;
+<b class="fc"><i class="no-highlight">63</i>&nbsp;case class FieldForm(</b>
+<b class="fc"><i class="no-highlight">64</i>&nbsp;    config: FieldConfigForm,</b>
+<b class="fc"><i class="no-highlight">65</i>&nbsp;    fieldType: String</b>
+<i class="no-highlight">66</i>&nbsp;)
 <i class="no-highlight">67</i>&nbsp;
-<b class="nc"><i class="no-highlight">68</i>&nbsp;case class OptionForm(key: String)</b>
+<i class="no-highlight">68</i>&nbsp;case class FieldConfigForm(
+<i class="no-highlight">69</i>&nbsp;    key: String,
+<i class="no-highlight">70</i>&nbsp;    label: String,
+<i class="no-highlight">71</i>&nbsp;    order: Int, // FieldConfig
+<i class="no-highlight">72</i>&nbsp;    required: Boolean,
+<i class="no-highlight">73</i>&nbsp;    value: String, // Textfield
+<i class="no-highlight">74</i>&nbsp;    maximum: Int, // Rating
+<i class="no-highlight">75</i>&nbsp;    options: List[OptionForm]
+<i class="no-highlight">76</i>&nbsp;) // Radio
+<i class="no-highlight">77</i>&nbsp;
+<i class="no-highlight">78</i>&nbsp;case class OptionForm(key: String)
 </div>
 </pre>
 </div>
@@ -193,7 +203,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-08-27 21:21</div>
+    <div style="float:right;">generated on 2022-08-28 18:36</div>
 </div>
 </body>
 </html>

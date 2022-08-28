@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > CreateSurveyResponse</title>
+  <title>Coverage Report > JsonHelper</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -17,10 +17,10 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">operations.responses</a>
+    <a href="../index.html">utils</a>
 </div>
 
-<h1>Coverage Summary for Class: CreateSurveyResponse (operations.responses)</h1>
+<h1>Coverage Summary for Class: JsonHelper (utils)</h1>
 
 <table class="coverageStats">
 
@@ -35,41 +35,22 @@ Current scope:     <a href="../../index.html">all classes</a>
   Line, %
 </th>
 </tr>
-<tr>
-  <td class="name">CreateSurveyResponse</td>
-<td class="coverageStat">
-  <span class="percent">
-    66.7%
-  </span>
-  <span class="absValue">
-    (2/3)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    66.7%
-  </span>
-  <span class="absValue">
-    (2/3)
-  </span>
-</td>
-</tr>
   <tr>
-    <td class="name">CreateSurveyResponse$</td>
+    <td class="name">JsonHelper$</td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/1)
+    (2/2)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/1)
+    (2/2)
   </span>
 </td>
   </tr>
@@ -77,18 +58,18 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    50%
+    100%
   </span>
   <span class="absValue">
-    (2/4)
+    (2/2)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    50%
+    100%
   </span>
   <span class="absValue">
-    (2/4)
+    (2/2)
   </span>
 </td>
 </tr>
@@ -99,19 +80,20 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package operations.responses
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package utils
 <i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import models.Survey
-<i class="no-highlight">4</i>&nbsp;import operations.core.ResponseType.CREATE_SURVEY_RESPONSE
-<i class="no-highlight">5</i>&nbsp;import operations.core.{ResponseType, WiFreeResponse}
-<i class="no-highlight">6</i>&nbsp;
-<b class="pc"><i class="no-highlight">7</i>&nbsp;case class CreateSurveyResponse(createdSurvey: Survey, success: Boolean, errors: List[String]) extends WiFreeResponse {</b>
+<i class="no-highlight">3</i>&nbsp;import java.util.{List =&gt; JList}
+<i class="no-highlight">4</i>&nbsp;
+<i class="no-highlight">5</i>&nbsp;import operations.responses.VisitsByPeriod
+<i class="no-highlight">6</i>&nbsp;import play.api.libs.json._
+<i class="no-highlight">7</i>&nbsp;import scala.collection.JavaConverters._
 <i class="no-highlight">8</i>&nbsp;
-<b class="nc"><i class="no-highlight">9</i>&nbsp;  override def responseType: ResponseType = CREATE_SURVEY_RESPONSE</b>
-<i class="no-highlight">10</i>&nbsp;
-<b class="fc"><i class="no-highlight">11</i>&nbsp;  override def isOk(): Boolean = true</b>
-<i class="no-highlight">12</i>&nbsp;
-<i class="no-highlight">13</i>&nbsp;}
+<i class="no-highlight">9</i>&nbsp;
+<i class="no-highlight">10</i>&nbsp;object JsonHelper {
+<i class="no-highlight">11</i>&nbsp;
+<b class="fc"><i class="no-highlight">12</i>&nbsp;  def toJson(list: JList[VisitsByPeriod]): JsValue = Json.toJson(list.asScala)</b>
+<i class="no-highlight">13</i>&nbsp;
+<b class="fc"><i class="no-highlight">14</i>&nbsp;}</b>
 </div>
 </pre>
 </div>
@@ -138,7 +120,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-08-27 21:21</div>
+    <div style="float:right;">generated on 2022-08-28 18:36</div>
 </div>
 </body>
 </html>

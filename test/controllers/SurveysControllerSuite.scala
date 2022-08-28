@@ -2,6 +2,7 @@ package controllers
 
 import controllers.admin.{
   FieldConfigForm,
+  FieldForm,
   OptionForm,
   SurveyForm,
   SurveyFormHelper
@@ -12,7 +13,7 @@ import models._
 import org.junit.Assert.{assertEquals, assertTrue}
 import org.junit.Test
 import play.api.libs.json.{JsValue, Json}
-import play.mvc.Http.Status.{OK, SEE_OTHER}
+import play.mvc.Http.Status.{BAD_REQUEST, OK, SEE_OTHER}
 import play.test.Helpers
 import play.test.Helpers.{GET, POST, contentAsString}
 import utils.{SuiteHelper, WiFreeSuite}
@@ -178,15 +179,17 @@ class SurveysControllerSuite extends WiFreeSuite with SuiteHelper {
         surveyTitle,
         true,
         List(
-          FieldConfigForm(
-            FieldConfig.FieldConfigTypes.Textbox,
-            key = "key",
-            label = "label",
-            order = 1, // FieldConfig
-            required = false,
-            value = "", // Textfield
-            maximum = 0, // Rating
-            options = List.empty[OptionForm]
+          FieldForm(
+            FieldConfigForm(
+              key = "key",
+              label = "label",
+              order = 1, // FieldConfig
+              required = false,
+              value = "some", // Textfield
+              maximum = 0, // Rating
+              options = List.empty[OptionForm]
+            ),
+            FieldConfig.FieldConfigTypes.Rating
           )
         )
       )
@@ -206,6 +209,34 @@ class SurveysControllerSuite extends WiFreeSuite with SuiteHelper {
       scala.Option(surveyDAO.find(Expr.eq("title", surveyTitle)))
 
     assertTrue(afterCreation.nonEmpty)
+  }
+
+  @Test def createSurveyFail(): Unit = {
+    val (admin, _) = adminWithPortal()
+    val surveyTitle = "Created Survey at " + Calendar.getInstance().getTime()
+
+    val surveyForm =
+      SurveyForm(
+        surveyTitle,
+        true,
+        List.empty[FieldForm]
+      )
+    val surveyToMap = SurveyFormHelper.form.fill(surveyForm).data
+
+    val saveRequestBuilder =
+      Helpers.fakeRequest
+        .method(POST)
+        .uri(s"/manage/surveys")
+        .bodyForm(surveyToMap.asJava)
+    val saveResult = execAuthCallAs(admin, saveRequestBuilder)
+
+    assertEquals(BAD_REQUEST, saveResult.status)
+    val surveyDAO = new SurveyDAO
+
+    val afterCreation =
+      scala.Option(surveyDAO.find(Expr.eq("title", surveyTitle)))
+
+    assertTrue(afterCreation.isEmpty)
   }
 
   @Test def surveysTest(): Unit = {

@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > DayOfTheWeek</title>
+  <title>Coverage Report > RoutesPrefix</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -17,18 +17,15 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">models.types</a>
+    <a href="../index.html">router</a>
 </div>
 
-<h1>Coverage Summary for Class: DayOfTheWeek (models.types)</h1>
+<h1>Coverage Summary for Class: RoutesPrefix (router)</h1>
 
 <table class="coverageStats">
+
 <tr>
   <th class="name">Class</th>
-<th class="coverageStat 
-">
-  Class, %
-</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -38,14 +35,33 @@ Current scope:     <a href="../../index.html">all classes</a>
   Line, %
 </th>
 </tr>
+  <tr>
+    <td class="name">RoutesPrefix$</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+  </tr>
 <tr>
-  <td class="name">DayOfTheWeek</td>
+  <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
     100%
   </span>
   <span class="absValue">
-    (1/1)
+    (5/5)
   </span>
 </td>
 <td class="coverageStat">
@@ -53,19 +69,10 @@ Current scope:     <a href="../../index.html">all classes</a>
     100%
   </span>
   <span class="absValue">
-    (1/1)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    100%
-  </span>
-  <span class="absValue">
-    (11/11)
+    (5/5)
   </span>
 </td>
 </tr>
-
 </table>
 
 <br/>
@@ -73,24 +80,21 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package models.types;
-<i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import io.ebean.annotation.EnumValue;
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;// @GENERATOR:play-routes-compiler
+<i class="no-highlight">2</i>&nbsp;// @SOURCE:/Users/gimartinez/personal/wifree/conf/routes
+<i class="no-highlight">3</i>&nbsp;// @DATE:Sun Aug 28 17:50:10 CEST 2022
 <i class="no-highlight">4</i>&nbsp;
-<b class="fc"><i class="no-highlight">5</i>&nbsp;public enum DayOfTheWeek {</b>
-<i class="no-highlight">6</i>&nbsp;	
-<b class="fc"><i class="no-highlight">7</i>&nbsp;	@EnumValue(&quot;SUNDAY&quot;) SUNDAY,</b>
-<b class="fc"><i class="no-highlight">8</i>&nbsp;	@EnumValue(&quot;MONDAY&quot;) MONDAY,</b>
-<b class="fc"><i class="no-highlight">9</i>&nbsp;	@EnumValue(&quot;TUESDAY&quot;) TUESDAY,</b>
-<b class="fc"><i class="no-highlight">10</i>&nbsp;	@EnumValue(&quot;WEDNESDAY&quot;) WEDNESDAY,</b>
-<b class="fc"><i class="no-highlight">11</i>&nbsp;	@EnumValue(&quot;THURSDAY&quot;) THURSDAY,</b>
-<b class="fc"><i class="no-highlight">12</i>&nbsp;	@EnumValue(&quot;FRIDAY&quot;) FRIDAY,</b>
-<b class="fc"><i class="no-highlight">13</i>&nbsp;	@EnumValue(&quot;SATURDAY&quot;) SATURDAY,</b>
-<b class="fc"><i class="no-highlight">14</i>&nbsp;	@EnumValue(&quot;ALL&quot;) ALL,</b>
-<b class="fc"><i class="no-highlight">15</i>&nbsp;	@EnumValue(&quot;NONE&quot;) NONE,</b>
-<b class="fc"><i class="no-highlight">16</i>&nbsp;	@EnumValue(&quot;ERROR&quot;) ERROR</b>
-<i class="no-highlight">17</i>&nbsp;	
-<i class="no-highlight">18</i>&nbsp;}
+<i class="no-highlight">5</i>&nbsp;
+<i class="no-highlight">6</i>&nbsp;package router {
+<i class="no-highlight">7</i>&nbsp;  object RoutesPrefix {
+<b class="fc"><i class="no-highlight">8</i>&nbsp;    private var _prefix: String = &quot;/&quot;</b>
+<i class="no-highlight">9</i>&nbsp;    def setPrefix(p: String): Unit = {
+<b class="fc"><i class="no-highlight">10</i>&nbsp;      _prefix = p</b>
+<i class="no-highlight">11</i>&nbsp;    }
+<b class="fc"><i class="no-highlight">12</i>&nbsp;    def prefix: String = _prefix</b>
+<b class="fc"><i class="no-highlight">13</i>&nbsp;    val byNamePrefix: Function0[String] = { () =&gt; prefix }</b>
+<i class="no-highlight">14</i>&nbsp;  }
+<b class="fc"><i class="no-highlight">15</i>&nbsp;}</b>
 </div>
 </pre>
 </div>
@@ -117,7 +121,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-08-27 21:21</div>
+    <div style="float:right;">generated on 2022-08-28 18:36</div>
 </div>
 </body>
 </html>

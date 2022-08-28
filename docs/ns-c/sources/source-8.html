@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > NetworkUserDAO</title>
+  <title>Coverage Report > JsonContent</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -17,15 +17,18 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">daos</a>
+    <a href="../index.html">models</a>
 </div>
 
-<h1>Coverage Summary for Class: NetworkUserDAO (daos)</h1>
+<h1>Coverage Summary for Class: JsonContent (models)</h1>
 
 <table class="coverageStats">
-
 <tr>
   <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -36,46 +39,33 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">NetworkUserDAO</td>
+  <td class="name">JsonContent</td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    0%
   </span>
   <span class="absValue">
-    (2/2)
+    (0/1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    0%
   </span>
   <span class="absValue">
-    (2/2)
-  </span>
-</td>
-</tr>
-  <tr>
-    <td class="name">NetworkUserDAO$$FastClassByGuice$$9b654046</td>
-  </tr>
-<tr>
-  <td class="name"><strong>Total</strong></td>
-<td class="coverageStat">
-  <span class="percent">
-    100%
-  </span>
-  <span class="absValue">
-    (2/2)
+    (0/3)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    0%
   </span>
   <span class="absValue">
-    (2/2)
+    (0/11)
   </span>
 </td>
 </tr>
+
 </table>
 
 <br/>
@@ -83,28 +73,43 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package daos;
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package models;
 <i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import io.ebean.Expr;
-<i class="no-highlight">4</i>&nbsp;import models.NetworkUser;
-<i class="no-highlight">5</i>&nbsp;
-<i class="no-highlight">6</i>&nbsp;import javax.annotation.Nullable;
+<i class="no-highlight">3</i>&nbsp;import com.fasterxml.jackson.databind.JsonNode;
+<i class="no-highlight">4</i>&nbsp;import com.fasterxml.jackson.databind.ObjectMapper;
+<i class="no-highlight">5</i>&nbsp;import com.fasterxml.jackson.databind.node.ObjectNode;
+<i class="no-highlight">6</i>&nbsp;import play.twirl.api.Content;
 <i class="no-highlight">7</i>&nbsp;
-<i class="no-highlight">8</i>&nbsp;/**
-<i class="no-highlight">9</i>&nbsp; * Created by jesu on 20/06/17.
-<i class="no-highlight">10</i>&nbsp; */
-<i class="no-highlight">11</i>&nbsp;public class NetworkUserDAO extends GenericDAO&lt;NetworkUser&gt; {
-<i class="no-highlight">12</i>&nbsp;
-<i class="no-highlight">13</i>&nbsp;	public NetworkUserDAO() {
-<b class="fc"><i class="no-highlight">14</i>&nbsp;		super(NetworkUser.class);</b>
-<i class="no-highlight">15</i>&nbsp;	}
-<i class="no-highlight">16</i>&nbsp;
-<i class="no-highlight">17</i>&nbsp;	@Nullable
-<i class="no-highlight">18</i>&nbsp;	public NetworkUser findByEmail(String email) {
-<b class="fc"><i class="no-highlight">19</i>&nbsp;		return find(Expr.eq(&quot;email&quot;, email));</b>
+<i class="no-highlight">8</i>&nbsp;import java.io.IOException;
+<i class="no-highlight">9</i>&nbsp;
+<i class="no-highlight">10</i>&nbsp;public class JsonContent implements Content {
+<i class="no-highlight">11</i>&nbsp;
+<i class="no-highlight">12</i>&nbsp;	private final JsonNode json;
+<b class="nc"><i class="no-highlight">13</i>&nbsp;	private final String contentType = &quot;application/json&quot;;</b>
+<i class="no-highlight">14</i>&nbsp;
+<i class="no-highlight">15</i>&nbsp;	public JsonContent(final String content) {
+<b class="nc"><i class="no-highlight">16</i>&nbsp;		super();</b>
+<b class="nc"><i class="no-highlight">17</i>&nbsp;		final ObjectMapper mapper = new ObjectMapper();</b>
+<b class="nc"><i class="no-highlight">18</i>&nbsp;		this.json = mapper.createObjectNode();</b>
+<b class="nc"><i class="no-highlight">19</i>&nbsp;		((ObjectNode) this.json).put(&quot;content&quot;, content);</b>
 <i class="no-highlight">20</i>&nbsp;	}
-<i class="no-highlight">21</i>&nbsp;	
-<i class="no-highlight">22</i>&nbsp;}
+<i class="no-highlight">21</i>&nbsp;
+<i class="no-highlight">22</i>&nbsp;	@Override
+<i class="no-highlight">23</i>&nbsp;	public String body() {
+<b class="nc"><i class="no-highlight">24</i>&nbsp;		final ObjectMapper mapper = new ObjectMapper();</b>
+<i class="no-highlight">25</i>&nbsp;		try {
+<b class="nc"><i class="no-highlight">26</i>&nbsp;			return mapper.writeValueAsString(this.json);</b>
+<b class="nc"><i class="no-highlight">27</i>&nbsp;		} catch (final IOException e) {</b>
+<b class="nc"><i class="no-highlight">28</i>&nbsp;			e.printStackTrace();</b>
+<i class="no-highlight">29</i>&nbsp;		}
+<b class="nc"><i class="no-highlight">30</i>&nbsp;		return &quot;&quot;;</b>
+<i class="no-highlight">31</i>&nbsp;	}
+<i class="no-highlight">32</i>&nbsp;
+<i class="no-highlight">33</i>&nbsp;	@Override
+<i class="no-highlight">34</i>&nbsp;	public String contentType() {
+<b class="nc"><i class="no-highlight">35</i>&nbsp;		return this.contentType;</b>
+<i class="no-highlight">36</i>&nbsp;	}
+<i class="no-highlight">37</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -131,7 +136,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-08-27 21:21</div>
+    <div style="float:right;">generated on 2022-08-28 18:30</div>
 </div>
 </body>
 </html>

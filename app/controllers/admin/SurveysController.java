@@ -60,9 +60,9 @@ public class SurveysController extends WiFreeController {
     public Result createSurvey() {
         Survey survey = formFactory.form(Survey.class).bindFromRequest().get();
         CreateSurveyResponse s = surveysService.createSurvey(new CreateSurveyRequest(survey, portalId()));
-        if (s.isOk()) {
+        if (!s.isOk()) {
             flash("Error", s.errors().head());
-            return ok(render(views.html.admin.surveys.render(formFactory.form(Survey.class).fill(s.createdSurvey()).withError("Error", s.errors().head()), true, false, 0, 0)));
+            return badRequest(render(views.html.admin.surveys.render(formFactory.form(Survey.class).fill(s.createdSurvey()).withError("Error", s.errors().head()), true, false, 0, 0)));
         } else {
             return redirect(controllers.admin.routes.SurveysController.allSurveys());
         }

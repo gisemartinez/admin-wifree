@@ -1,0 +1,159 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > NetworkUserConnectionLogDAO</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">daos</a>
+</div>
+
+<h1>Coverage Summary for Class: NetworkUserConnectionLogDAO (daos)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">NetworkUserConnectionLogDAO</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (2/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    87.5%
+  </span>
+  <span class="absValue">
+    (14/16)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">NetworkUserConnectionLogDAO$$FastClassByGuice$$8c37bdf8</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (2/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    87.5%
+  </span>
+  <span class="absValue">
+    (14/16)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package daos;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import io.ebean.Ebean;
+<i class="no-highlight">4</i>&nbsp;import io.ebean.Expr;
+<i class="no-highlight">5</i>&nbsp;import io.ebean.Expression;
+<i class="no-highlight">6</i>&nbsp;import io.ebean.ExpressionList;
+<i class="no-highlight">7</i>&nbsp;import models.NetworkUserConnectionLog;
+<i class="no-highlight">8</i>&nbsp;import operations.responses.BuiltExpressions;
+<i class="no-highlight">9</i>&nbsp;import operations.responses.DatasetFilter;
+<i class="no-highlight">10</i>&nbsp;import scala.collection.JavaConverters;
+<i class="no-highlight">11</i>&nbsp;
+<i class="no-highlight">12</i>&nbsp;import java.time.Instant;
+<i class="no-highlight">13</i>&nbsp;import java.util.List;
+<i class="no-highlight">14</i>&nbsp;
+<i class="no-highlight">15</i>&nbsp;public class NetworkUserConnectionLogDAO extends GenericDAO&lt;NetworkUserConnectionLog&gt; {
+<i class="no-highlight">16</i>&nbsp;	
+<i class="no-highlight">17</i>&nbsp;	public NetworkUserConnectionLogDAO() {
+<b class="fc"><i class="no-highlight">18</i>&nbsp;		super(NetworkUserConnectionLog.class);</b>
+<i class="no-highlight">19</i>&nbsp;	}
+<i class="no-highlight">20</i>&nbsp;	
+<i class="no-highlight">21</i>&nbsp;	public List&lt;NetworkUserConnectionLog&gt; findForFilter(DatasetFilter filter, Instant now) {
+<b class="fc"><i class="no-highlight">22</i>&nbsp;		final ExpressionList&lt;NetworkUserConnectionLog&gt; whereExpressions = Ebean.createQuery(NetworkUserConnectionLog.class).where();</b>
+<b class="fc"><i class="no-highlight">23</i>&nbsp;		final BuiltExpressions expressions = filter.expressions();</b>
+<b class="fc"><i class="no-highlight">24</i>&nbsp;		expressions.timePeriodExpression().foreach(e -&gt; whereExpressions.add(e.apply(&quot;connectionStartDate&quot;, now)));</b>
+<b class="fc"><i class="no-highlight">25</i>&nbsp;		expressions.visitsAmountQuery().expression().foreach(whereExpressions::add);</b>
+<b class="fc"><i class="no-highlight">26</i>&nbsp;		for (Expression e : JavaConverters.seqAsJavaList(expressions.parameterlessExpressions())) {</b>
+<b class="fc"><i class="no-highlight">27</i>&nbsp;			whereExpressions.add(e);</b>
+<b class="fc"><i class="no-highlight">28</i>&nbsp;		}</b>
+<i class="no-highlight">29</i>&nbsp;		
+<b class="fc"><i class="no-highlight">30</i>&nbsp;		final List&lt;NetworkUserConnectionLog&gt; networkUserConnectionLogs = Ebean.createQuery(NetworkUserConnectionLog.class)</b>
+<b class="fc"><i class="no-highlight">31</i>&nbsp;				.select(&quot;*&quot;)</b>
+<b class="fc"><i class="no-highlight">32</i>&nbsp;				.where()</b>
+<b class="fc"><i class="no-highlight">33</i>&nbsp;				.addAll(whereExpressions)</b>
+<b class="fc"><i class="no-highlight">34</i>&nbsp;				.findList();</b>
+<i class="no-highlight">35</i>&nbsp;		
+<b class="fc"><i class="no-highlight">36</i>&nbsp;		return networkUserConnectionLogs;</b>
+<i class="no-highlight">37</i>&nbsp;	}
+<i class="no-highlight">38</i>&nbsp;
+<i class="no-highlight">39</i>&nbsp;	public List&lt;NetworkUserConnectionLog&gt; listForPortal(Long portalId) {
+<b class="nc"><i class="no-highlight">40</i>&nbsp;		Expression portalExpression = Expr.eq(&quot;portal.id&quot;, portalId);</b>
+<b class="nc"><i class="no-highlight">41</i>&nbsp;		return listWhere(portalExpression);</b>
+<i class="no-highlight">42</i>&nbsp;	}
+<i class="no-highlight">43</i>&nbsp;	
+<i class="no-highlight">44</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-08-28 18:36</div>
+</div>
+</body>
+</html>

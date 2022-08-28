@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > index</title>
+  <title>Coverage Report > gauge</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -17,10 +17,10 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">views.html.admin</a>
+    <a href="../index.html">views.html.parts.js</a>
 </div>
 
-<h1>Coverage Summary for Class: index (views.html.admin)</h1>
+<h1>Coverage Summary for Class: gauge (views.html.parts.js)</h1>
 
 <table class="coverageStats">
 
@@ -36,7 +36,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
   <tr>
-    <td class="name">index$</td>
+    <td class="name">gauge$</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -50,7 +50,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/7)
+    (0/9)
   </span>
 </td>
   </tr>
@@ -69,7 +69,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/7)
+    (0/9)
   </span>
 </td>
 </tr>
@@ -81,7 +81,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <pre>
 <div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;
-<i class="no-highlight">2</i>&nbsp;package views.html.admin
+<i class="no-highlight">2</i>&nbsp;package views.html.parts.js
 <i class="no-highlight">3</i>&nbsp;
 <i class="no-highlight">4</i>&nbsp;import _root_.play.twirl.api.TwirlFeatureImports._
 <i class="no-highlight">5</i>&nbsp;import _root_.play.twirl.api.TwirlHelperImports._
@@ -104,7 +104,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">22</i>&nbsp;import play.data._
 <i class="no-highlight">23</i>&nbsp;import play.core.j.PlayFormsMagicForJava._
 <i class="no-highlight">24</i>&nbsp;
-<b class="nc"><i class="no-highlight">25</i>&nbsp;object index extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template0[play.twirl.api.HtmlFormat.Appendable] {</b>
+<b class="nc"><i class="no-highlight">25</i>&nbsp;object gauge extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template0[play.twirl.api.HtmlFormat.Appendable] {</b>
 <i class="no-highlight">26</i>&nbsp;
 <i class="no-highlight">27</i>&nbsp;  /**/
 <i class="no-highlight">28</i>&nbsp;  def apply/*1.2*/():play.twirl.api.HtmlFormat.Appendable = {
@@ -113,33 +113,31 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">31</i>&nbsp;
 <i class="no-highlight">32</i>&nbsp;
 <b class="nc"><i class="no-highlight">33</i>&nbsp;Seq[Any](format.raw/*2.1*/(&quot;&quot;&quot;</b>
-<b class="nc"><i class="no-highlight">34</i>&nbsp;&quot;&quot;&quot;),format.raw/*3.1*/(&quot;&quot;&quot;Admin Landing</b>
-<i class="no-highlight">35</i>&nbsp;&lt;p&gt;&lt;/p&gt;
-<i class="no-highlight">36</i>&nbsp;&lt;a href=&quot;/login&quot;&gt;Ir a Admin Login&lt;/a&gt;
-<i class="no-highlight">37</i>&nbsp;&lt;p&gt;&lt;/p&gt;
-<i class="no-highlight">38</i>&nbsp;&lt;a href=&quot;/dashboard&quot;&gt;Ir a Admin Dashboard (requiere login)&lt;/a&gt;&quot;&quot;&quot;))
-<i class="no-highlight">39</i>&nbsp;      }
-<i class="no-highlight">40</i>&nbsp;    }
-<i class="no-highlight">41</i>&nbsp;  }
+<b class="nc"><i class="no-highlight">34</i>&nbsp;&quot;&quot;&quot;),format.raw/*3.1*/(&quot;&quot;&quot;&lt;!-- gauge js --&gt;</b>
+<b class="nc"><i class="no-highlight">35</i>&nbsp;&lt;script type=&quot;text/javascript&quot; src=&quot;&quot;&quot;&quot;),_display_(/*4.38*/routes/*4.44*/.Assets.versioned(&quot;js/gauge/gauge.min.js&quot;)),format.raw/*4.86*/(&quot;&quot;&quot;&quot;&gt;&lt;/script&gt;</b>
+<b class="nc"><i class="no-highlight">36</i>&nbsp;&lt;script type=&quot;text/javascript&quot; src=&quot;&quot;&quot;&quot;),_display_(/*5.38*/routes/*5.44*/.Assets.versioned(&quot;js/gauge/gauge_demo.js&quot;)),format.raw/*5.87*/(&quot;&quot;&quot;&quot;&gt;&lt;/script&gt;&quot;&quot;&quot;))</b>
+<i class="no-highlight">37</i>&nbsp;      }
+<i class="no-highlight">38</i>&nbsp;    }
+<i class="no-highlight">39</i>&nbsp;  }
+<i class="no-highlight">40</i>&nbsp;
+<b class="nc"><i class="no-highlight">41</i>&nbsp;  def render(): play.twirl.api.HtmlFormat.Appendable = apply()</b>
 <i class="no-highlight">42</i>&nbsp;
-<b class="nc"><i class="no-highlight">43</i>&nbsp;  def render(): play.twirl.api.HtmlFormat.Appendable = apply()</b>
+<b class="nc"><i class="no-highlight">43</i>&nbsp;  def f:(() =&gt; play.twirl.api.HtmlFormat.Appendable) = () =&gt; apply()</b>
 <i class="no-highlight">44</i>&nbsp;
-<b class="nc"><i class="no-highlight">45</i>&nbsp;  def f:(() =&gt; play.twirl.api.HtmlFormat.Appendable) = () =&gt; apply()</b>
+<b class="nc"><i class="no-highlight">45</i>&nbsp;  def ref: this.type = this</b>
 <i class="no-highlight">46</i>&nbsp;
-<b class="nc"><i class="no-highlight">47</i>&nbsp;  def ref: this.type = this</b>
+<i class="no-highlight">47</i>&nbsp;}
 <i class="no-highlight">48</i>&nbsp;
-<i class="no-highlight">49</i>&nbsp;}
-<i class="no-highlight">50</i>&nbsp;
-<i class="no-highlight">51</i>&nbsp;
-<i class="no-highlight">52</i>&nbsp;              /*
-<i class="no-highlight">53</i>&nbsp;                  -- GENERATED --
-<i class="no-highlight">54</i>&nbsp;                  SOURCE: app/views/admin/index.scala.html
-<i class="no-highlight">55</i>&nbsp;                  HASH: 43d55c0d88f0d798f4fb9f4181174d2a29a6ffc3
-<i class="no-highlight">56</i>&nbsp;                  MATRIX: 947-&gt;1|1043-&gt;4|1070-&gt;5
-<i class="no-highlight">57</i>&nbsp;                  LINES: 28-&gt;1|33-&gt;2|34-&gt;3
-<i class="no-highlight">58</i>&nbsp;                  -- GENERATED --
-<i class="no-highlight">59</i>&nbsp;              */
-<i class="no-highlight">60</i>&nbsp;          
+<i class="no-highlight">49</i>&nbsp;
+<i class="no-highlight">50</i>&nbsp;              /*
+<i class="no-highlight">51</i>&nbsp;                  -- GENERATED --
+<i class="no-highlight">52</i>&nbsp;                  SOURCE: app/views/parts/js/gauge.scala.html
+<i class="no-highlight">53</i>&nbsp;                  HASH: 3240abb53ed51011887654429bfcb1fcae4e0746
+<i class="no-highlight">54</i>&nbsp;                  MATRIX: 950-&gt;1|1046-&gt;4|1073-&gt;5|1154-&gt;60|1168-&gt;66|1230-&gt;108|1305-&gt;157|1319-&gt;163|1382-&gt;206
+<i class="no-highlight">55</i>&nbsp;                  LINES: 28-&gt;1|33-&gt;2|34-&gt;3|35-&gt;4|35-&gt;4|35-&gt;4|36-&gt;5|36-&gt;5|36-&gt;5
+<i class="no-highlight">56</i>&nbsp;                  -- GENERATED --
+<i class="no-highlight">57</i>&nbsp;              */
+<i class="no-highlight">58</i>&nbsp;          
 </div>
 </pre>
 </div>
@@ -166,7 +164,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-08-27 21:21</div>
+    <div style="float:right;">generated on 2022-08-28 11:51</div>
 </div>
 </body>
 </html>

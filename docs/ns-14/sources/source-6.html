@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > GetAnalyticsDataResponse</title>
+  <title>Coverage Report > ScalaHelper</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -17,10 +17,10 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">operations.responses</a>
+    <a href="../index.html">utils</a>
 </div>
 
-<h1>Coverage Summary for Class: GetAnalyticsDataResponse (operations.responses)</h1>
+<h1>Coverage Summary for Class: ScalaHelper (utils)</h1>
 
 <table class="coverageStats">
 
@@ -35,33 +35,14 @@ Current scope:     <a href="../../index.html">all classes</a>
   Line, %
 </th>
 </tr>
-<tr>
-  <td class="name">GetAnalyticsDataResponse</td>
-<td class="coverageStat">
-  <span class="percent">
-    75%
-  </span>
-  <span class="absValue">
-    (6/8)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    75%
-  </span>
-  <span class="absValue">
-    (6/8)
-  </span>
-</td>
-</tr>
   <tr>
-    <td class="name">GetAnalyticsDataResponse$</td>
+    <td class="name">ScalaHelper$</td>
 <td class="coverageStat">
   <span class="percent">
     0%
   </span>
   <span class="absValue">
-    (0/1)
+    (0/4)
   </span>
 </td>
 <td class="coverageStat">
@@ -69,7 +50,26 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/1)
+    (0/4)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ScalaHelper$$anon$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
   </span>
 </td>
   </tr>
@@ -77,18 +77,18 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    66.7%
+    0%
   </span>
   <span class="absValue">
-    (6/9)
+    (0/8)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    66.7%
+    0%
   </span>
   <span class="absValue">
-    (6/9)
+    (0/8)
   </span>
 </td>
 </tr>
@@ -99,47 +99,31 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package operations.responses
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package utils
 <i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import java.util.{List =&gt; JList, Map =&gt; JMap}
+<i class="no-highlight">3</i>&nbsp;import java.util.function.{BiFunction, Function =&gt; JFunction}
 <i class="no-highlight">4</i>&nbsp;
-<i class="no-highlight">5</i>&nbsp;import operations.core.{ResponseType, WiFreeResponse}
-<i class="no-highlight">6</i>&nbsp;import play.api.libs.json._
-<i class="no-highlight">7</i>&nbsp;import play.api.libs.functional.syntax._
-<i class="no-highlight">8</i>&nbsp;
-<b class="pc"><i class="no-highlight">9</i>&nbsp;case class GetAnalyticsDataResponse(visitsByMonthLastYear: JList[VisitsByPeriod],</b>
-<b class="fc"><i class="no-highlight">10</i>&nbsp;                                    visitsByMonthLastYearByGender: VisitsByPeriodByGender,</b>
-<b class="fc"><i class="no-highlight">11</i>&nbsp;                                    visitsByDayByTimeRange: VisitsByDayByTimeRange,</b>
-<b class="fc"><i class="no-highlight">12</i>&nbsp;                                    visitsByDurationLastWeek: JMap[(Integer, Integer), JList[VisitsByPeriod]]) extends WiFreeResponse {</b>
-<i class="no-highlight">13</i>&nbsp;
-<b class="fc"><i class="no-highlight">14</i>&nbsp;  override val success: Boolean = true</b>
-<b class="fc"><i class="no-highlight">15</i>&nbsp;  override val errors: List[String] = Nil</b>
-<i class="no-highlight">16</i>&nbsp;
-<b class="nc"><i class="no-highlight">17</i>&nbsp;  override def responseType: ResponseType = ResponseType.GET_ANALYTICS_DATA_RESPONSE</b>
-<i class="no-highlight">18</i>&nbsp;
-<b class="nc"><i class="no-highlight">19</i>&nbsp;  override def isOk(): Boolean = true</b>
+<i class="no-highlight">5</i>&nbsp;import scala.language.implicitConversions
+<i class="no-highlight">6</i>&nbsp;
+<i class="no-highlight">7</i>&nbsp;object ScalaHelper {
+<i class="no-highlight">8</i>&nbsp;	
+<b class="nc"><i class="no-highlight">9</i>&nbsp;	implicit def toJavaFunction[U, V](f: (U) =&gt; V): JFunction[U, V] = new JFunction[U, V] {</b>
+<b class="nc"><i class="no-highlight">10</i>&nbsp;		override def apply(t: U): V = f(t)</b>
+<i class="no-highlight">11</i>&nbsp;		
+<i class="no-highlight">12</i>&nbsp;		override def compose[T](before: JFunction[_ &gt;: T, _ &lt;: U]):
+<b class="nc"><i class="no-highlight">13</i>&nbsp;		JFunction[T, V] = toJavaFunction(f.compose(x =&gt; before.apply(x)))</b>
+<i class="no-highlight">14</i>&nbsp;		
+<i class="no-highlight">15</i>&nbsp;		override def andThen[W](after: JFunction[_ &gt;: V, _ &lt;: W]):
+<b class="nc"><i class="no-highlight">16</i>&nbsp;		JFunction[U, W] = toJavaFunction(f.andThen(x =&gt; after.apply(x)))</b>
+<i class="no-highlight">17</i>&nbsp;	}
+<i class="no-highlight">18</i>&nbsp;	
+<b class="nc"><i class="no-highlight">19</i>&nbsp;	implicit def fromJavaFunction[U, V](f: JFunction[U,V]): U =&gt; V = f.apply</b>
 <i class="no-highlight">20</i>&nbsp;
-<i class="no-highlight">21</i>&nbsp;}
+<b class="nc"><i class="no-highlight">21</i>&nbsp;	implicit def toJavaBiFunction[T, U, R](f: (T, U) =&gt; R): BiFunction[T, U, R] = (t: T, u: U) =&gt; f(t, u)</b>
 <i class="no-highlight">22</i>&nbsp;
-<i class="no-highlight">23</i>&nbsp;case class VisitsByPeriod(period: String, visits: Long)
-<i class="no-highlight">24</i>&nbsp;
-<i class="no-highlight">25</i>&nbsp;object VisitsByPeriod {
-<i class="no-highlight">26</i>&nbsp;
-<i class="no-highlight">27</i>&nbsp;  implicit val writes: OWrites[VisitsByPeriod] = (
-<i class="no-highlight">28</i>&nbsp;    (JsPath \ &quot;name&quot;).write[String] and
-<i class="no-highlight">29</i>&nbsp;      (JsPath \ &quot;value&quot;).write[Long]
-<i class="no-highlight">30</i>&nbsp;    )(unlift(VisitsByPeriod.unapply))
-<i class="no-highlight">31</i>&nbsp;
-<i class="no-highlight">32</i>&nbsp;}
-<i class="no-highlight">33</i>&nbsp;
-<i class="no-highlight">34</i>&nbsp;case class VisitsByPeriodByGender(male: JList[VisitsByPeriod], female: JList[VisitsByPeriod])
-<i class="no-highlight">35</i>&nbsp;
-<i class="no-highlight">36</i>&nbsp;case class VisitsByDayByTimeRange(visits0_8: JList[VisitsByPeriod],
-<i class="no-highlight">37</i>&nbsp;                                  visits8_11: JList[VisitsByPeriod],
-<i class="no-highlight">38</i>&nbsp;                                  visits11_13: JList[VisitsByPeriod],
-<i class="no-highlight">39</i>&nbsp;                                  visits13_16: JList[VisitsByPeriod],
-<i class="no-highlight">40</i>&nbsp;                                  visits16_20: JList[VisitsByPeriod],
-<i class="no-highlight">41</i>&nbsp;                                  visits20_24: JList[VisitsByPeriod])
+<i class="no-highlight">23</i>&nbsp;//	implicit def fromJavaBiFunction[T, U, R](f: BiFunction[T,U]): (T,U) =&gt; R = f.apply
+<i class="no-highlight">24</i>&nbsp;	
+<b class="nc"><i class="no-highlight">25</i>&nbsp;}</b>
 </div>
 </pre>
 </div>
@@ -166,7 +150,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-08-27 21:21</div>
+    <div style="float:right;">generated on 2022-08-28 18:36</div>
 </div>
 </body>
 </html>

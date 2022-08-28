@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > FieldAnswerDAO</title>
+  <title>Coverage Report > SecurityModule</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -17,10 +17,10 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">daos</a>
+    <a href="../index.html">modules</a>
 </div>
 
-<h1>Coverage Summary for Class: FieldAnswerDAO (daos)</h1>
+<h1>Coverage Summary for Class: SecurityModule (modules)</h1>
 
 <table class="coverageStats">
 
@@ -36,13 +36,13 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">FieldAnswerDAO</td>
+  <td class="name">SecurityModule</td>
 <td class="coverageStat">
   <span class="percent">
     100%
   </span>
   <span class="absValue">
-    (2/2)
+    (4/4)
   </span>
 </td>
 <td class="coverageStat">
@@ -50,12 +50,15 @@ Current scope:     <a href="../../index.html">all classes</a>
     100%
   </span>
   <span class="absValue">
-    (3/3)
+    (22/22)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">FieldAnswerDAO$$FastClassByGuice$$fe776da7</td>
+    <td class="name">SecurityModule$$FastClassByGuice$$2007733</td>
+  </tr>
+  <tr>
+    <td class="name">SecurityModule$WiFreePac4jRoleHandler</td>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
@@ -64,7 +67,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     100%
   </span>
   <span class="absValue">
-    (2/2)
+    (4/4)
   </span>
 </td>
 <td class="coverageStat">
@@ -72,7 +75,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     100%
   </span>
   <span class="absValue">
-    (3/3)
+    (22/22)
   </span>
 </td>
 </tr>
@@ -83,32 +86,86 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package daos;
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package modules;
 <i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import com.google.common.collect.ImmutableListMultimap;
-<i class="no-highlight">4</i>&nbsp;import io.ebean.Expr;
-<i class="no-highlight">5</i>&nbsp;import models.FieldAnswer;
-<i class="no-highlight">6</i>&nbsp;import models.NetworkUser;
-<i class="no-highlight">7</i>&nbsp;
-<i class="no-highlight">8</i>&nbsp;import java.util.List;
-<i class="no-highlight">9</i>&nbsp;import java.util.function.Function;
-<i class="no-highlight">10</i>&nbsp;
-<i class="no-highlight">11</i>&nbsp;import static com.google.common.collect.ImmutableListMultimap.toImmutableListMultimap;
-<i class="no-highlight">12</i>&nbsp;
-<i class="no-highlight">13</i>&nbsp;public class FieldAnswerDAO extends GenericDAO&lt;FieldAnswer&gt; {
-<i class="no-highlight">14</i>&nbsp;
-<i class="no-highlight">15</i>&nbsp;    public FieldAnswerDAO() {
-<b class="fc"><i class="no-highlight">16</i>&nbsp;        super(FieldAnswer.class);</b>
-<i class="no-highlight">17</i>&nbsp;    }
-<i class="no-highlight">18</i>&nbsp;
-<i class="no-highlight">19</i>&nbsp;    @SuppressWarnings(&quot;UnstableApiUsage&quot;)
-<i class="no-highlight">20</i>&nbsp;    public ImmutableListMultimap&lt;NetworkUser, FieldAnswer&gt; findForSurvey(Long surveyId) {
-<b class="fc"><i class="no-highlight">21</i>&nbsp;        List&lt;FieldAnswer&gt; fieldAnswers = listWhere(Expr.eq(&quot;field.survey.id&quot;, surveyId));</b>
-<i class="no-highlight">22</i>&nbsp;
-<b class="fc"><i class="no-highlight">23</i>&nbsp;        return fieldAnswers.stream().collect(toImmutableListMultimap(FieldAnswer::getUser, Function.identity()));</b>
-<i class="no-highlight">24</i>&nbsp;    }
-<i class="no-highlight">25</i>&nbsp;
-<i class="no-highlight">26</i>&nbsp;}
+<i class="no-highlight">3</i>&nbsp;import auth.AuthConstants;
+<i class="no-highlight">4</i>&nbsp;import auth.WiFreeAdminAuthenticator;
+<i class="no-highlight">5</i>&nbsp;import be.objectify.deadbolt.java.cache.HandlerCache;
+<i class="no-highlight">6</i>&nbsp;import com.google.inject.AbstractModule;
+<i class="no-highlight">7</i>&nbsp;import com.google.inject.Provides;
+<i class="no-highlight">8</i>&nbsp;import com.typesafe.config.Config;
+<i class="no-highlight">9</i>&nbsp;import org.pac4j.core.authorization.authorizer.RequireAnyRoleAuthorizer;
+<i class="no-highlight">10</i>&nbsp;import org.pac4j.core.client.Clients;
+<i class="no-highlight">11</i>&nbsp;import org.pac4j.core.client.direct.AnonymousClient;
+<i class="no-highlight">12</i>&nbsp;import org.pac4j.http.client.indirect.FormClient;
+<i class="no-highlight">13</i>&nbsp;import org.pac4j.play.CallbackController;
+<i class="no-highlight">14</i>&nbsp;import org.pac4j.play.LogoutController;
+<i class="no-highlight">15</i>&nbsp;import org.pac4j.play.deadbolt2.Pac4jHandlerCache;
+<i class="no-highlight">16</i>&nbsp;import org.pac4j.play.deadbolt2.Pac4jRoleHandler;
+<i class="no-highlight">17</i>&nbsp;import org.pac4j.play.store.PlayCacheSessionStore;
+<i class="no-highlight">18</i>&nbsp;import org.pac4j.play.store.PlaySessionStore;
+<i class="no-highlight">19</i>&nbsp;import play.Environment;
+<i class="no-highlight">20</i>&nbsp;import play.cache.SyncCacheApi;
+<i class="no-highlight">21</i>&nbsp;
+<i class="no-highlight">22</i>&nbsp;/**
+<i class="no-highlight">23</i>&nbsp; * Created by jesu on 11/07/17.
+<i class="no-highlight">24</i>&nbsp; */
+<i class="no-highlight">25</i>&nbsp;public class SecurityModule extends AbstractModule {
+<i class="no-highlight">26</i>&nbsp;
+<i class="no-highlight">27</i>&nbsp;	private final Config configuration;
+<i class="no-highlight">28</i>&nbsp;	
+<i class="no-highlight">29</i>&nbsp;	private final String baseUrl;
+<i class="no-highlight">30</i>&nbsp;	
+<i class="no-highlight">31</i>&nbsp;	private static class WiFreePac4jRoleHandler implements Pac4jRoleHandler { }
+<i class="no-highlight">32</i>&nbsp;
+<b class="fc"><i class="no-highlight">33</i>&nbsp;	public SecurityModule(final Environment environment, final Config configuration) {</b>
+<b class="fc"><i class="no-highlight">34</i>&nbsp;		this.configuration = configuration;</b>
+<b class="fc"><i class="no-highlight">35</i>&nbsp;		baseUrl = configuration.getString(&quot;baseUrl&quot;);</b>
+<i class="no-highlight">36</i>&nbsp;	}
+<i class="no-highlight">37</i>&nbsp;
+<i class="no-highlight">38</i>&nbsp;	@Override
+<i class="no-highlight">39</i>&nbsp;	protected void configure() {
+<b class="fc"><i class="no-highlight">40</i>&nbsp;		bind(HandlerCache.class).to(Pac4jHandlerCache.class);</b>
+<i class="no-highlight">41</i>&nbsp;
+<b class="fc"><i class="no-highlight">42</i>&nbsp;		bind(Pac4jRoleHandler.class).to(WiFreePac4jRoleHandler.class);</b>
+<b class="fc"><i class="no-highlight">43</i>&nbsp;		final PlayCacheSessionStore playCacheSessionStore = new PlayCacheSessionStore(getProvider(SyncCacheApi.class));</b>
+<i class="no-highlight">44</i>&nbsp;		//bind(PlaySessionStore.class).toInstance(playCacheSessionStore);
+<b class="fc"><i class="no-highlight">45</i>&nbsp;		bind(PlaySessionStore.class).to(PlayCacheSessionStore.class);</b>
+<i class="no-highlight">46</i>&nbsp;		
+<i class="no-highlight">47</i>&nbsp;		// callback
+<b class="fc"><i class="no-highlight">48</i>&nbsp;		final CallbackController callbackController = new CallbackController();</b>
+<b class="fc"><i class="no-highlight">49</i>&nbsp;		callbackController.setDefaultUrl(&quot;/&quot;);</b>
+<b class="fc"><i class="no-highlight">50</i>&nbsp;		callbackController.setMultiProfile(true);</b>
+<b class="fc"><i class="no-highlight">51</i>&nbsp;		bind(CallbackController.class).toInstance(callbackController);</b>
+<i class="no-highlight">52</i>&nbsp;
+<i class="no-highlight">53</i>&nbsp;		// logout
+<b class="fc"><i class="no-highlight">54</i>&nbsp;		final LogoutController logoutController = new LogoutController();</b>
+<b class="fc"><i class="no-highlight">55</i>&nbsp;		logoutController.setDefaultUrl(AuthConstants.DEFAULT_LOGOUT_URL);</b>
+<i class="no-highlight">56</i>&nbsp;		//logoutController.setDestroySession(true);
+<b class="fc"><i class="no-highlight">57</i>&nbsp;		bind(LogoutController.class).toInstance(logoutController);</b>
+<i class="no-highlight">58</i>&nbsp;	}
+<i class="no-highlight">59</i>&nbsp;	
+<i class="no-highlight">60</i>&nbsp;	@Provides
+<i class="no-highlight">61</i>&nbsp;	protected FormClient adminFormClient() {
+<b class="fc"><i class="no-highlight">62</i>&nbsp;		final FormClient adminLoginClient = new FormClient(baseUrl + AuthConstants.ADMIN_LOGIN_URL, new WiFreeAdminAuthenticator());</b>
+<i class="no-highlight">63</i>&nbsp;		//adminLoginClient.setName(&quot;AdminClient&quot;);
+<b class="fc"><i class="no-highlight">64</i>&nbsp;		return adminLoginClient;</b>
+<i class="no-highlight">65</i>&nbsp;	}
+<i class="no-highlight">66</i>&nbsp;	
+<i class="no-highlight">67</i>&nbsp;	@Provides
+<i class="no-highlight">68</i>&nbsp;	protected org.pac4j.core.config.Config provideConfig(FormClient adminLoginClient) {
+<b class="fc"><i class="no-highlight">69</i>&nbsp;		final Clients clients = new Clients(baseUrl + AuthConstants.CALLBACK_URL, adminLoginClient, new AnonymousClient());</b>
+<i class="no-highlight">70</i>&nbsp;		
+<b class="fc"><i class="no-highlight">71</i>&nbsp;		final org.pac4j.core.config.Config config = new org.pac4j.core.config.Config(clients);</b>
+<b class="fc"><i class="no-highlight">72</i>&nbsp;		config.addAuthorizer(&quot;admin&quot;, new RequireAnyRoleAuthorizer&lt;&gt;(&quot;ROLE_ADMIN&quot;));</b>
+<b class="fc"><i class="no-highlight">73</i>&nbsp;		config.addAuthorizer(&quot;custom&quot;, new CustomAuthorizer());</b>
+<i class="no-highlight">74</i>&nbsp;//		config.addMatcher(&quot;excludedPath&quot;, new PathMatcher().excludeRegex(&quot;^/facebook/notprotected\\.html$&quot;));
+<b class="fc"><i class="no-highlight">75</i>&nbsp;		config.setHttpActionAdapter(new DemoHttpActionAdapter());</b>
+<i class="no-highlight">76</i>&nbsp;		
+<b class="fc"><i class="no-highlight">77</i>&nbsp;		return config;</b>
+<i class="no-highlight">78</i>&nbsp;	}
+<i class="no-highlight">79</i>&nbsp;
+<i class="no-highlight">80</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -135,7 +192,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-08-27 21:21</div>
+    <div style="float:right;">generated on 2022-08-28 18:36</div>
 </div>
 </body>
 </html>

@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > PortalNetworkConfigurationDAO</title>
+  <title>Coverage Report > NetworkUserSocialNetworkAccount</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -17,15 +17,18 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">daos</a>
+    <a href="../index.html">models</a>
 </div>
 
-<h1>Coverage Summary for Class: PortalNetworkConfigurationDAO (daos)</h1>
+<h1>Coverage Summary for Class: NetworkUserSocialNetworkAccount (models)</h1>
 
 <table class="coverageStats">
-
 <tr>
   <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -36,46 +39,33 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">PortalNetworkConfigurationDAO</td>
+  <td class="name">NetworkUserSocialNetworkAccount</td>
 <td class="coverageStat">
   <span class="percent">
-    60%
+    100%
   </span>
   <span class="absValue">
-    (3/5)
+    (1/1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    44.4%
+    26.7%
   </span>
   <span class="absValue">
-    (4/9)
-  </span>
-</td>
-</tr>
-  <tr>
-    <td class="name">PortalNetworkConfigurationDAO$$FastClassByGuice$$91eac4d1</td>
-  </tr>
-<tr>
-  <td class="name"><strong>Total</strong></td>
-<td class="coverageStat">
-  <span class="percent">
-    60%
-  </span>
-  <span class="absValue">
-    (3/5)
+    (4/15)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    44.4%
+    21.1%
   </span>
   <span class="absValue">
-    (4/9)
+    (4/19)
   </span>
 </td>
 </tr>
+
 </table>
 
 <br/>
@@ -83,47 +73,67 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package daos;
-<i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import models.PortalNetworkConfiguration;
-<i class="no-highlight">4</i>&nbsp;import models.types.LoginMethodType;
-<i class="no-highlight">5</i>&nbsp;
-<i class="no-highlight">6</i>&nbsp;import javax.inject.Inject;
-<i class="no-highlight">7</i>&nbsp;import java.util.Optional;
-<i class="no-highlight">8</i>&nbsp;
-<i class="no-highlight">9</i>&nbsp;import static io.ebean.Expr.eq;
-<i class="no-highlight">10</i>&nbsp;import static java.util.Optional.ofNullable;
-<i class="no-highlight">11</i>&nbsp;
-<i class="no-highlight">12</i>&nbsp;public class PortalNetworkConfigurationDAO extends GenericDAO&lt;PortalNetworkConfiguration&gt; {
-<i class="no-highlight">13</i>&nbsp;
-<i class="no-highlight">14</i>&nbsp;	@Inject
-<i class="no-highlight">15</i>&nbsp;	private PortalDAO portalDAO;
-<i class="no-highlight">16</i>&nbsp;
-<i class="no-highlight">17</i>&nbsp;	public PortalNetworkConfigurationDAO() {
-<b class="fc"><i class="no-highlight">18</i>&nbsp;		super(PortalNetworkConfiguration.class);</b>
-<i class="no-highlight">19</i>&nbsp;	}
+<div class="sourceCode" id="sourceCode"><b class="fc"><i class="no-highlight">1</i>&nbsp;package models;</b>
+<b class="nc"><i class="no-highlight">2</i>&nbsp;</b>
+<i class="no-highlight">3</i>&nbsp;import models.types.SocialNetworkType;
+<i class="no-highlight">4</i>&nbsp;
+<i class="no-highlight">5</i>&nbsp;import javax.persistence.Entity;
+<b class="nc"><i class="no-highlight">6</i>&nbsp;import javax.persistence.ManyToOne;</b>
+<b class="nc"><i class="no-highlight">7</i>&nbsp;</b>
+<i class="no-highlight">8</i>&nbsp;/**
+<i class="no-highlight">9</i>&nbsp; * Created by jesu on 10/06/17.
+<b class="nc"><i class="no-highlight">10</i>&nbsp; */</b>
+<i class="no-highlight">11</i>&nbsp;@Entity
+<i class="no-highlight">12</i>&nbsp;public class NetworkUserSocialNetworkAccount extends BaseModel {
+<b class="fc"><i class="no-highlight">13</i>&nbsp;</b>
+<i class="no-highlight">14</i>&nbsp;	@ManyToOne(optional = false)
+<i class="no-highlight">15</i>&nbsp;	private NetworkUser networkUser;
+<b class="fc"><i class="no-highlight">16</i>&nbsp;</b>
+<i class="no-highlight">17</i>&nbsp;	private SocialNetworkType socialNetwork;
+<i class="no-highlight">18</i>&nbsp;
+<i class="no-highlight">19</i>&nbsp;	private String accountId;
 <i class="no-highlight">20</i>&nbsp;
-<i class="no-highlight">21</i>&nbsp;	public Optional&lt;Integer&gt; getConnectionTimeout(Long portalId) {
-<b class="nc"><i class="no-highlight">22</i>&nbsp;		return ofNullable(find(eq(&quot;portal.id&quot;, portalId)))</b>
-<b class="nc"><i class="no-highlight">23</i>&nbsp;				.map(PortalNetworkConfiguration::getConnectionTimeout);</b>
-<i class="no-highlight">24</i>&nbsp;	}
-<i class="no-highlight">25</i>&nbsp;
-<i class="no-highlight">26</i>&nbsp;	public Optional&lt;LoginMethodType&gt; getLoginMethod(Long portalId) {
-<b class="fc"><i class="no-highlight">27</i>&nbsp;		return ofNullable(findForPortal(portalId))</b>
-<b class="fc"><i class="no-highlight">28</i>&nbsp;				.map(PortalNetworkConfiguration::getLoginMethod);</b>
+<i class="no-highlight">21</i>&nbsp;
+<b class="fc"><i class="no-highlight">22</i>&nbsp;	public NetworkUserSocialNetworkAccount() {</b>
+<i class="no-highlight">23</i>&nbsp;	}
+<i class="no-highlight">24</i>&nbsp;
+<b class="nc"><i class="no-highlight">25</i>&nbsp;	public NetworkUserSocialNetworkAccount(NetworkUser networkUser, SocialNetworkType socialNetwork, String accountId) {</b>
+<b class="nc"><i class="no-highlight">26</i>&nbsp;				this.networkUser = networkUser;</b>
+<b class="nc"><i class="no-highlight">27</i>&nbsp;		this.socialNetwork = socialNetwork;</b>
+<b class="nc"><i class="no-highlight">28</i>&nbsp;		this.accountId = accountId;</b>
 <i class="no-highlight">29</i>&nbsp;	}
 <i class="no-highlight">30</i>&nbsp;
-<i class="no-highlight">31</i>&nbsp;	public PortalNetworkConfiguration findForPortal(Long portalId) {
-<b class="fc"><i class="no-highlight">32</i>&nbsp;		return find(eq(&quot;portal.id&quot;, portalId));</b>
-<i class="no-highlight">33</i>&nbsp;	}
-<i class="no-highlight">34</i>&nbsp;
-<i class="no-highlight">35</i>&nbsp;	@Override
-<i class="no-highlight">36</i>&nbsp;	public PortalNetworkConfiguration getOrCreate(Long portalId) {
-<b class="nc"><i class="no-highlight">37</i>&nbsp;		PortalNetworkConfiguration portalNetworkConfiguration = super.getOrCreate(portalId);</b>
-<b class="nc"><i class="no-highlight">38</i>&nbsp;		if (!portalNetworkConfiguration.hasPortal()) portalNetworkConfiguration.setPortal(portalDAO.get(portalId));</b>
-<b class="nc"><i class="no-highlight">39</i>&nbsp;		return portalNetworkConfiguration;</b>
+<i class="no-highlight">31</i>&nbsp;
+<i class="no-highlight">32</i>&nbsp;	@Override
+<i class="no-highlight">33</i>&nbsp;	public String toLogString() {
+<b class="nc"><i class="no-highlight">34</i>&nbsp;		return toLogString(&quot;id: &quot; + id, &quot;networkUser: &quot; + networkUser, &quot;socialNetwork: &quot; + socialNetwork, &quot;accountId: &quot; + accountId);</b>
+<i class="no-highlight">35</i>&nbsp;	}
+<i class="no-highlight">36</i>&nbsp;
+<i class="no-highlight">37</i>&nbsp;
+<i class="no-highlight">38</i>&nbsp;	public NetworkUser getNetworkUser() {
+<b class="nc"><i class="no-highlight">39</i>&nbsp;		return networkUser;</b>
 <i class="no-highlight">40</i>&nbsp;	}
-<i class="no-highlight">41</i>&nbsp;}
+<i class="no-highlight">41</i>&nbsp;
+<i class="no-highlight">42</i>&nbsp;	public void setNetworkUser(NetworkUser networkUser) {
+<b class="nc"><i class="no-highlight">43</i>&nbsp;		this.networkUser = networkUser;</b>
+<i class="no-highlight">44</i>&nbsp;	}
+<i class="no-highlight">45</i>&nbsp;
+<i class="no-highlight">46</i>&nbsp;	public SocialNetworkType getSocialNetwork() {
+<b class="nc"><i class="no-highlight">47</i>&nbsp;		return socialNetwork;</b>
+<i class="no-highlight">48</i>&nbsp;	}
+<i class="no-highlight">49</i>&nbsp;
+<i class="no-highlight">50</i>&nbsp;	public void setSocialNetwork(SocialNetworkType socialNetwork) {
+<b class="nc"><i class="no-highlight">51</i>&nbsp;		this.socialNetwork = socialNetwork;</b>
+<i class="no-highlight">52</i>&nbsp;	}
+<i class="no-highlight">53</i>&nbsp;
+<i class="no-highlight">54</i>&nbsp;	public String getAccountId() {
+<b class="nc"><i class="no-highlight">55</i>&nbsp;		return accountId;</b>
+<i class="no-highlight">56</i>&nbsp;	}
+<i class="no-highlight">57</i>&nbsp;
+<i class="no-highlight">58</i>&nbsp;	public void setAccountId(String accountId) {
+<b class="nc"><i class="no-highlight">59</i>&nbsp;		this.accountId = accountId;</b>
+<i class="no-highlight">60</i>&nbsp;	}
+<i class="no-highlight">61</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -150,7 +160,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-08-27 21:21</div>
+    <div style="float:right;">generated on 2022-08-28 18:30</div>
 </div>
 </body>
 </html>
