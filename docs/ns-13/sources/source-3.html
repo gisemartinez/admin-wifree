@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > GetAllSurveysFunction</title>
+  <title>Coverage Report > main</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -17,10 +17,10 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">services.core.functions</a>
+    <a href="../index.html">views.html</a>
 </div>
 
-<h1>Coverage Summary for Class: GetAllSurveysFunction (services.core.functions)</h1>
+<h1>Coverage Summary for Class: main (views.html)</h1>
 
 <table class="coverageStats">
 
@@ -35,44 +35,41 @@ Current scope:     <a href="../../index.html">all classes</a>
   Line, %
 </th>
 </tr>
-<tr>
-  <td class="name">GetAllSurveysFunction</td>
-<td class="coverageStat">
-  <span class="percent">
-    66.7%
-  </span>
-  <span class="absValue">
-    (4/6)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    63.6%
-  </span>
-  <span class="absValue">
-    (7/11)
-  </span>
-</td>
-</tr>
   <tr>
-    <td class="name">GetAllSurveysFunction$$FastClassByGuice$$77798874</td>
+    <td class="name">main$</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (3/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    85.7%
+  </span>
+  <span class="absValue">
+    (18/21)
+  </span>
+</td>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    66.7%
+    50%
   </span>
   <span class="absValue">
-    (4/6)
+    (3/6)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    63.6%
+    85.7%
   </span>
   <span class="absValue">
-    (7/11)
+    (18/21)
   </span>
 </td>
 </tr>
@@ -83,53 +80,91 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package services.core.functions;
-<i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import daos.SurveyDAO;
-<i class="no-highlight">4</i>&nbsp;import models.Survey;
-<i class="no-highlight">5</i>&nbsp;import operations.requests.GetAllSurveysRequest;
-<i class="no-highlight">6</i>&nbsp;import operations.responses.GetAllSurveysResponse;
-<i class="no-highlight">7</i>&nbsp;import services.core.ServiceType;
-<i class="no-highlight">8</i>&nbsp;import services.core.WiFreeFunction;
-<i class="no-highlight">9</i>&nbsp;
-<i class="no-highlight">10</i>&nbsp;import java.util.List;
-<i class="no-highlight">11</i>&nbsp;import java.util.function.Function;
-<i class="no-highlight">12</i>&nbsp;
-<i class="no-highlight">13</i>&nbsp;import static java.util.Collections.emptyList;
-<i class="no-highlight">14</i>&nbsp;
-<b class="fc"><i class="no-highlight">15</i>&nbsp;public class GetAllSurveysFunction extends WiFreeFunction&lt;GetAllSurveysRequest, GetAllSurveysResponse&gt; {</b>
-<i class="no-highlight">16</i>&nbsp;
-<i class="no-highlight">17</i>&nbsp;    @Override
-<i class="no-highlight">18</i>&nbsp;    public Function&lt;GetAllSurveysRequest, GetAllSurveysResponse&gt; function() {
-<b class="fc"><i class="no-highlight">19</i>&nbsp;        function = request -&gt; {</b>
-<i class="no-highlight">20</i>&nbsp;            try {
-<b class="fc"><i class="no-highlight">21</i>&nbsp;                SurveyDAO surveyDAO = new SurveyDAO();</b>
-<b class="fc"><i class="no-highlight">22</i>&nbsp;                List&lt;Survey&gt; allSurveys = surveyDAO.findByPortal(request.portalId());</b>
-<b class="fc"><i class="no-highlight">23</i>&nbsp;                return new GetAllSurveysResponse(allSurveys, true, null);</b>
-<b class="nc"><i class="no-highlight">24</i>&nbsp;            } catch (Exception ex) {</b>
-<b class="nc"><i class="no-highlight">25</i>&nbsp;                return new GetAllSurveysResponse(emptyList(), false, null);</b>
-<i class="no-highlight">26</i>&nbsp;            }
-<i class="no-highlight">27</i>&nbsp;
-<i class="no-highlight">28</i>&nbsp;        };
-<b class="fc"><i class="no-highlight">29</i>&nbsp;        return function;</b>
-<i class="no-highlight">30</i>&nbsp;    }
-<i class="no-highlight">31</i>&nbsp;
-<i class="no-highlight">32</i>&nbsp;    @Override
-<i class="no-highlight">33</i>&nbsp;    public Class&lt;GetAllSurveysRequest&gt; rqClass() {
-<b class="fc"><i class="no-highlight">34</i>&nbsp;        return GetAllSurveysRequest.class;</b>
-<i class="no-highlight">35</i>&nbsp;    }
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;
+<i class="no-highlight">2</i>&nbsp;package views.html
+<i class="no-highlight">3</i>&nbsp;
+<i class="no-highlight">4</i>&nbsp;import _root_.play.twirl.api.TwirlFeatureImports._
+<i class="no-highlight">5</i>&nbsp;import _root_.play.twirl.api.TwirlHelperImports._
+<i class="no-highlight">6</i>&nbsp;import _root_.play.twirl.api.Html
+<i class="no-highlight">7</i>&nbsp;import _root_.play.twirl.api.JavaScript
+<i class="no-highlight">8</i>&nbsp;import _root_.play.twirl.api.Txt
+<i class="no-highlight">9</i>&nbsp;import _root_.play.twirl.api.Xml
+<i class="no-highlight">10</i>&nbsp;import models._
+<i class="no-highlight">11</i>&nbsp;import controllers._
+<i class="no-highlight">12</i>&nbsp;import play.api.i18n._
+<i class="no-highlight">13</i>&nbsp;import views.html._
+<i class="no-highlight">14</i>&nbsp;import play.api.templates.PlayMagic._
+<i class="no-highlight">15</i>&nbsp;import java.lang._
+<i class="no-highlight">16</i>&nbsp;import java.util._
+<i class="no-highlight">17</i>&nbsp;import scala.collection.JavaConverters._
+<i class="no-highlight">18</i>&nbsp;import play.core.j.PlayMagicForJava._
+<i class="no-highlight">19</i>&nbsp;import play.mvc._
+<i class="no-highlight">20</i>&nbsp;import play.api.data.Field
+<i class="no-highlight">21</i>&nbsp;import play.mvc.Http.Context.Implicit._
+<i class="no-highlight">22</i>&nbsp;import play.data._
+<i class="no-highlight">23</i>&nbsp;import play.core.j.PlayFormsMagicForJava._
+<i class="no-highlight">24</i>&nbsp;
+<b class="fc"><i class="no-highlight">25</i>&nbsp;object main extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template3[String,Html,Html,play.twirl.api.HtmlFormat.Appendable] {</b>
+<i class="no-highlight">26</i>&nbsp;
+<i class="no-highlight">27</i>&nbsp;  /*
+<i class="no-highlight">28</i>&nbsp; * This template is called from the `index` template. This template
+<i class="no-highlight">29</i>&nbsp; * handles the rendering of the page header and body tags. It takes
+<i class="no-highlight">30</i>&nbsp; * two arguments, a `String` for the title of the page and an `Html`
+<i class="no-highlight">31</i>&nbsp; * object to insert into the body of the page.
+<i class="no-highlight">32</i>&nbsp; */
+<i class="no-highlight">33</i>&nbsp;  def apply/*8.2*/(title: String, navbar: Html)(content: Html):play.twirl.api.HtmlFormat.Appendable = {
+<b class="fc"><i class="no-highlight">34</i>&nbsp;    _display_ {</b>
+<i class="no-highlight">35</i>&nbsp;      {
 <i class="no-highlight">36</i>&nbsp;
-<i class="no-highlight">37</i>&nbsp;    @Override
-<i class="no-highlight">38</i>&nbsp;    public Class&lt;GetAllSurveysResponse&gt; rsClass() {
-<b class="nc"><i class="no-highlight">39</i>&nbsp;        return GetAllSurveysResponse.class;</b>
-<i class="no-highlight">40</i>&nbsp;    }
-<i class="no-highlight">41</i>&nbsp;
-<i class="no-highlight">42</i>&nbsp;    @Override
-<i class="no-highlight">43</i>&nbsp;    public ServiceType serviceType() {
-<b class="nc"><i class="no-highlight">44</i>&nbsp;        return ServiceType.TESTING_SERVICE;</b>
-<i class="no-highlight">45</i>&nbsp;    }
-<i class="no-highlight">46</i>&nbsp;
-<i class="no-highlight">47</i>&nbsp;}
+<i class="no-highlight">37</i>&nbsp;
+<b class="fc"><i class="no-highlight">38</i>&nbsp;Seq[Any](format.raw/*9.1*/(&quot;&quot;&quot;</b>
+<i class="no-highlight">39</i>&nbsp;
+<b class="fc"><i class="no-highlight">40</i>&nbsp;&quot;&quot;&quot;),format.raw/*11.1*/(&quot;&quot;&quot;&lt;!DOCTYPE html&gt;</b>
+<i class="no-highlight">41</i>&nbsp;&lt;html lang=&quot;es&quot;&gt;
+<i class="no-highlight">42</i>&nbsp;	&lt;head&gt;
+<b class="fc"><i class="no-highlight">43</i>&nbsp;		&quot;&quot;&quot;),format.raw/*14.56*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">44</i>&nbsp;		&quot;&quot;&quot;),format.raw/*15.3*/(&quot;&quot;&quot;&lt;title&gt;&quot;&quot;&quot;),_display_(/*15.11*/title),format.raw/*15.16*/(&quot;&quot;&quot;&lt;/title&gt;</b>
+<b class="fc"><i class="no-highlight">45</i>&nbsp;		&lt;link rel=&quot;stylesheet&quot; media=&quot;screen&quot; href=&quot;&quot;&quot;&quot;),_display_(/*16.48*/routes/*16.54*/.Assets.versioned(&quot;css/main.css&quot;)),format.raw/*16.87*/(&quot;&quot;&quot;&quot;&gt;</b>
+<b class="fc"><i class="no-highlight">46</i>&nbsp;		&lt;link rel=&quot;shortcut icon&quot; type=&quot;image/png&quot; href=&quot;&quot;&quot;&quot;),_display_(/*17.53*/routes/*17.59*/.Assets.versioned(&quot;img/favicon.png&quot;)),format.raw/*17.95*/(&quot;&quot;&quot;&quot;&gt;</b>
+<b class="fc"><i class="no-highlight">47</i>&nbsp;		&quot;&quot;&quot;),_display_(/*18.4*/parts/*18.9*/.head(&quot;WiFree&quot;)),format.raw/*18.24*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">48</i>&nbsp;	&quot;&quot;&quot;),format.raw/*19.2*/(&quot;&quot;&quot;&lt;/head&gt;</b>
+<i class="no-highlight">49</i>&nbsp;	&lt;body class=&quot;nav-md&quot;&gt;
+<i class="no-highlight">50</i>&nbsp;	&lt;div class=&quot;container body&quot;&gt;
+<b class="fc"><i class="no-highlight">51</i>&nbsp;		&quot;&quot;&quot;),_display_(/*22.4*/flash/*22.9*/.map/*22.13*/{ case (name, value) =&gt;_display_(Seq[Any](format.raw/*22.36*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">52</i>&nbsp;		&quot;&quot;&quot;),format.raw/*23.3*/(&quot;&quot;&quot;&lt;div id=&quot;error&quot; class=&quot;alert alert-danger&quot; role=&quot;alert&quot;&gt;&quot;&quot;&quot;),_display_(/*23.60*/name),format.raw/*23.64*/(&quot;&quot;&quot;: &quot;&quot;&quot;),_display_(/*23.67*/value),format.raw/*23.72*/(&quot;&quot;&quot;&lt;/div&gt;</b>
+<b class="fc"><i class="no-highlight">53</i>&nbsp;		&quot;&quot;&quot;)))}),format.raw/*24.4*/(&quot;&quot;&quot;</b>
+<i class="no-highlight">54</i>&nbsp;
+<b class="fc"><i class="no-highlight">55</i>&nbsp;		&quot;&quot;&quot;),format.raw/*26.3*/(&quot;&quot;&quot;&lt;div class=&quot;main_container&quot;&gt;</b>
+<b class="fc"><i class="no-highlight">56</i>&nbsp;			&quot;&quot;&quot;),_display_(/*27.5*/navbar),format.raw/*27.11*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">57</i>&nbsp;			&quot;&quot;&quot;),_display_(/*28.5*/content),format.raw/*28.12*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">58</i>&nbsp;			&quot;&quot;&quot;),_display_(/*29.5*/parts/*29.10*/.jslibs()),format.raw/*29.19*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">59</i>&nbsp;		&quot;&quot;&quot;),format.raw/*30.3*/(&quot;&quot;&quot;&lt;/div&gt;</b>
+<i class="no-highlight">60</i>&nbsp;	&lt;/div&gt;
+<i class="no-highlight">61</i>&nbsp;	&lt;/body&gt;
+<i class="no-highlight">62</i>&nbsp;&lt;/html&gt;
+<i class="no-highlight">63</i>&nbsp;&quot;&quot;&quot;))
+<i class="no-highlight">64</i>&nbsp;      }
+<i class="no-highlight">65</i>&nbsp;    }
+<i class="no-highlight">66</i>&nbsp;  }
+<i class="no-highlight">67</i>&nbsp;
+<b class="nc"><i class="no-highlight">68</i>&nbsp;  def render(title:String,navbar:Html,content:Html): play.twirl.api.HtmlFormat.Appendable = apply(title,navbar)(content)</b>
+<i class="no-highlight">69</i>&nbsp;
+<b class="nc"><i class="no-highlight">70</i>&nbsp;  def f:((String,Html) =&gt; (Html) =&gt; play.twirl.api.HtmlFormat.Appendable) = (title,navbar) =&gt; (content) =&gt; apply(title,navbar)(content)</b>
+<i class="no-highlight">71</i>&nbsp;
+<b class="nc"><i class="no-highlight">72</i>&nbsp;  def ref: this.type = this</b>
+<i class="no-highlight">73</i>&nbsp;
+<i class="no-highlight">74</i>&nbsp;}
+<i class="no-highlight">75</i>&nbsp;
+<i class="no-highlight">76</i>&nbsp;
+<i class="no-highlight">77</i>&nbsp;              /*
+<i class="no-highlight">78</i>&nbsp;                  -- GENERATED --
+<i class="no-highlight">79</i>&nbsp;                  SOURCE: app/views/main.scala.html
+<i class="no-highlight">80</i>&nbsp;                  HASH: b24d69de6dddf47182e5d9a05af619fb599d0b44
+<i class="no-highlight">81</i>&nbsp;                  MATRIX: 1211-&gt;261|1349-&gt;306|1378-&gt;308|1449-&gt;404|1479-&gt;407|1514-&gt;415|1540-&gt;420|1623-&gt;476|1638-&gt;482|1692-&gt;515|1774-&gt;570|1789-&gt;576|1846-&gt;612|1878-&gt;618|1891-&gt;623|1927-&gt;638|1956-&gt;640|2046-&gt;704|2059-&gt;709|2072-&gt;713|2133-&gt;736|2163-&gt;739|2247-&gt;796|2272-&gt;800|2302-&gt;803|2328-&gt;808|2368-&gt;818|2399-&gt;822|2458-&gt;855|2485-&gt;861|2516-&gt;866|2544-&gt;873|2575-&gt;878|2589-&gt;883|2619-&gt;892|2649-&gt;895
+<i class="no-highlight">82</i>&nbsp;                  LINES: 33-&gt;8|38-&gt;9|40-&gt;11|43-&gt;14|44-&gt;15|44-&gt;15|44-&gt;15|45-&gt;16|45-&gt;16|45-&gt;16|46-&gt;17|46-&gt;17|46-&gt;17|47-&gt;18|47-&gt;18|47-&gt;18|48-&gt;19|51-&gt;22|51-&gt;22|51-&gt;22|51-&gt;22|52-&gt;23|52-&gt;23|52-&gt;23|52-&gt;23|52-&gt;23|53-&gt;24|55-&gt;26|56-&gt;27|56-&gt;27|57-&gt;28|57-&gt;28|58-&gt;29|58-&gt;29|58-&gt;29|59-&gt;30
+<i class="no-highlight">83</i>&nbsp;                  -- GENERATED --
+<i class="no-highlight">84</i>&nbsp;              */
+<i class="no-highlight">85</i>&nbsp;          
 </div>
 </pre>
 </div>
@@ -156,7 +191,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-08-28 18:36</div>
+    <div style="float:right;">generated on 2022-08-28 18:56</div>
 </div>
 </body>
 </html>

@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > ReverseSurveysController</title>
+  <title>Coverage Report > SurveysController</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -20,15 +20,12 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">controllers.admin</a>
 </div>
 
-<h1>Coverage Summary for Class: ReverseSurveysController (controllers.admin)</h1>
+<h1>Coverage Summary for Class: SurveysController (controllers.admin)</h1>
 
 <table class="coverageStats">
+
 <tr>
   <th class="name">Class</th>
-<th class="coverageStat 
-">
-  Class, %
-</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -39,7 +36,86 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">ReverseSurveysController</td>
+  <td class="name">SurveysController</td>
+<td class="coverageStat">
+  <span class="percent">
+    83.3%
+  </span>
+  <span class="absValue">
+    (25/30)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    85.3%
+  </span>
+  <span class="absValue">
+    (168/197)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">SurveysController$$FastClassByGuice$$1d28df3f</td>
+  </tr>
+  <tr>
+    <td class="name">SurveysController$AnswersJson</td>
+<td class="coverageStat">
+  <span class="percent">
+    87.5%
+  </span>
+  <span class="absValue">
+    (7/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    86.7%
+  </span>
+  <span class="absValue">
+    (13/15)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">SurveysController$DataJson</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (3/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (4/5)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">SurveysController$QuestionAndType</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">SurveysController$QuestionAnswer</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -50,22 +126,51 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    75%
+    100%
   </span>
   <span class="absValue">
-    (9/12)
+    (7/7)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">SurveysController$SummarizedAnswers</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    76.9%
+    100%
   </span>
   <span class="absValue">
-    (10/13)
+    (6/6)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    82.2%
+  </span>
+  <span class="absValue">
+    (37/45)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    85%
+  </span>
+  <span class="absValue">
+    (198/233)
   </span>
 </td>
 </tr>
-
 </table>
 
 <br/>
@@ -73,144 +178,485 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;// @GENERATOR:play-routes-compiler
-<i class="no-highlight">2</i>&nbsp;// @SOURCE:/Users/gimartinez/personal/wifree/conf/routes
-<i class="no-highlight">3</i>&nbsp;// @DATE:Sun Aug 28 17:50:10 CEST 2022
-<i class="no-highlight">4</i>&nbsp;
-<i class="no-highlight">5</i>&nbsp;import play.api.mvc.Call
-<i class="no-highlight">6</i>&nbsp;
-<i class="no-highlight">7</i>&nbsp;
-<i class="no-highlight">8</i>&nbsp;import _root_.controllers.Assets.Asset
-<i class="no-highlight">9</i>&nbsp;import _root_.play.libs.F
-<i class="no-highlight">10</i>&nbsp;
-<i class="no-highlight">11</i>&nbsp;// @LINE:12
-<i class="no-highlight">12</i>&nbsp;package controllers.admin {
-<i class="no-highlight">13</i>&nbsp;
-<i class="no-highlight">14</i>&nbsp;  // @LINE:23
-<i class="no-highlight">15</i>&nbsp;  class ReversePortalSettingsController(_prefix: =&gt; String) {
-<i class="no-highlight">16</i>&nbsp;    def _defaultPrefix: String = {
-<i class="no-highlight">17</i>&nbsp;      if (_prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;
-<i class="no-highlight">18</i>&nbsp;    }
-<i class="no-highlight">19</i>&nbsp;
-<i class="no-highlight">20</i>&nbsp;  
-<i class="no-highlight">21</i>&nbsp;    // @LINE:23
-<i class="no-highlight">22</i>&nbsp;    def savePortalOptions(): Call = {
-<i class="no-highlight">23</i>&nbsp;      
-<i class="no-highlight">24</i>&nbsp;      Call(&quot;POST&quot;, _prefix + { _defaultPrefix } + &quot;manage/portal-settings&quot;)
-<i class="no-highlight">25</i>&nbsp;    }
-<i class="no-highlight">26</i>&nbsp;  
-<i class="no-highlight">27</i>&nbsp;  }
-<i class="no-highlight">28</i>&nbsp;
-<i class="no-highlight">29</i>&nbsp;  // @LINE:22
-<i class="no-highlight">30</i>&nbsp;  class ReverseSocialLoginKeysController(_prefix: =&gt; String) {
-<i class="no-highlight">31</i>&nbsp;    def _defaultPrefix: String = {
-<i class="no-highlight">32</i>&nbsp;      if (_prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;
-<i class="no-highlight">33</i>&nbsp;    }
-<i class="no-highlight">34</i>&nbsp;
-<i class="no-highlight">35</i>&nbsp;  
-<i class="no-highlight">36</i>&nbsp;    // @LINE:22
-<i class="no-highlight">37</i>&nbsp;    def saveSocialKeys(): Call = {
-<i class="no-highlight">38</i>&nbsp;      
-<i class="no-highlight">39</i>&nbsp;      Call(&quot;POST&quot;, _prefix + { _defaultPrefix } + &quot;manage/social-login&quot;)
-<i class="no-highlight">40</i>&nbsp;    }
-<i class="no-highlight">41</i>&nbsp;  
-<i class="no-highlight">42</i>&nbsp;  }
-<i class="no-highlight">43</i>&nbsp;
-<i class="no-highlight">44</i>&nbsp;  // @LINE:13
-<i class="no-highlight">45</i>&nbsp;  class ReverseAnalyticsController(_prefix: =&gt; String) {
-<i class="no-highlight">46</i>&nbsp;    def _defaultPrefix: String = {
-<i class="no-highlight">47</i>&nbsp;      if (_prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;
-<i class="no-highlight">48</i>&nbsp;    }
-<i class="no-highlight">49</i>&nbsp;
-<i class="no-highlight">50</i>&nbsp;  
-<i class="no-highlight">51</i>&nbsp;    // @LINE:13
-<i class="no-highlight">52</i>&nbsp;    def createAnalyticsQuery(): Call = {
-<i class="no-highlight">53</i>&nbsp;      
-<i class="no-highlight">54</i>&nbsp;      Call(&quot;POST&quot;, _prefix + { _defaultPrefix } + &quot;analytics/create-analytics-query&quot;)
-<i class="no-highlight">55</i>&nbsp;    }
-<i class="no-highlight">56</i>&nbsp;  
-<i class="no-highlight">57</i>&nbsp;  }
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package controllers.admin;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import be.objectify.deadbolt.java.actions.SubjectPresent;
+<i class="no-highlight">4</i>&nbsp;import com.fasterxml.jackson.core.JsonProcessingException;
+<i class="no-highlight">5</i>&nbsp;import com.fasterxml.jackson.databind.JsonNode;
+<i class="no-highlight">6</i>&nbsp;import com.google.common.collect.ImmutableListMultimap;
+<i class="no-highlight">7</i>&nbsp;import controllers.WiFreeController;
+<i class="no-highlight">8</i>&nbsp;import daos.FieldAnswerDAO;
+<i class="no-highlight">9</i>&nbsp;import daos.PortalDAO;
+<i class="no-highlight">10</i>&nbsp;import daos.SurveyDAO;
+<i class="no-highlight">11</i>&nbsp;import models.*;
+<i class="no-highlight">12</i>&nbsp;import operations.requests.CreateSurveyRequest;
+<i class="no-highlight">13</i>&nbsp;import operations.requests.GetAllSurveysRequest;
+<i class="no-highlight">14</i>&nbsp;import operations.responses.CreateSurveyResponse;
+<i class="no-highlight">15</i>&nbsp;import operations.responses.GetAllSurveysResponse;
+<i class="no-highlight">16</i>&nbsp;import play.data.Form;
+<i class="no-highlight">17</i>&nbsp;import play.libs.Json;
+<i class="no-highlight">18</i>&nbsp;import play.mvc.Result;
+<i class="no-highlight">19</i>&nbsp;import services.SurveysService;
+<i class="no-highlight">20</i>&nbsp;
+<i class="no-highlight">21</i>&nbsp;import javax.inject.Inject;
+<i class="no-highlight">22</i>&nbsp;import java.util.*;
+<i class="no-highlight">23</i>&nbsp;import java.util.function.Function;
+<i class="no-highlight">24</i>&nbsp;import java.util.stream.Collectors;
+<i class="no-highlight">25</i>&nbsp;import java.util.stream.IntStream;
+<i class="no-highlight">26</i>&nbsp;import java.util.stream.Stream;
+<i class="no-highlight">27</i>&nbsp;
+<i class="no-highlight">28</i>&nbsp;import static com.google.common.collect.ImmutableListMultimap.toImmutableListMultimap;
+<i class="no-highlight">29</i>&nbsp;import static com.google.common.collect.Streams.forEachPair;
+<i class="no-highlight">30</i>&nbsp;import static java.util.stream.Collectors.toList;
+<i class="no-highlight">31</i>&nbsp;
+<b class="fc"><i class="no-highlight">32</i>&nbsp;public class SurveysController extends WiFreeController {</b>
+<i class="no-highlight">33</i>&nbsp;
+<i class="no-highlight">34</i>&nbsp;    @Inject
+<i class="no-highlight">35</i>&nbsp;    SurveysService surveysService;
+<i class="no-highlight">36</i>&nbsp;
+<i class="no-highlight">37</i>&nbsp;    @Inject
+<i class="no-highlight">38</i>&nbsp;    FieldAnswerDAO fieldAnswerDAO;
+<i class="no-highlight">39</i>&nbsp;
+<i class="no-highlight">40</i>&nbsp;    @Inject
+<i class="no-highlight">41</i>&nbsp;    SurveyDAO surveyDAO;
+<i class="no-highlight">42</i>&nbsp;
+<i class="no-highlight">43</i>&nbsp;    @Inject
+<i class="no-highlight">44</i>&nbsp;    private PortalDAO portalDAO;
+<i class="no-highlight">45</i>&nbsp;
+<i class="no-highlight">46</i>&nbsp;    @SubjectPresent(handlerKey = &quot;FormClient&quot;, forceBeforeAuthCheck = true)
+<i class="no-highlight">47</i>&nbsp;    public Result allSurveys() throws NoProfileFoundException {
+<b class="fc"><i class="no-highlight">48</i>&nbsp;        GetAllSurveysResponse getAllSurveysResponse = surveysService.getAllSurveys(new GetAllSurveysRequest(portalId()));</b>
+<b class="fc"><i class="no-highlight">49</i>&nbsp;        return ok(render(views.html.admin.all_surveys.render(SurveyFormHelper.buildSummaries(getAllSurveysResponse))));</b>
+<i class="no-highlight">50</i>&nbsp;    }
+<i class="no-highlight">51</i>&nbsp;
+<i class="no-highlight">52</i>&nbsp;    @SubjectPresent(handlerKey = &quot;FormClient&quot;, forceBeforeAuthCheck = true)
+<i class="no-highlight">53</i>&nbsp;    public Result survey(Long surveyId) throws NoProfileFoundException {
+<b class="fc"><i class="no-highlight">54</i>&nbsp;        Survey survey = new SurveyDAO().get(surveyId);</b>
+<b class="fc"><i class="no-highlight">55</i>&nbsp;        Form&lt;Survey&gt; form = formFactory.form(Survey.class).fill(survey);</b>
+<b class="fc"><i class="no-highlight">56</i>&nbsp;        return ok(render(views.html.admin.surveys.render(form, true, false, 0, 0)));</b>
+<i class="no-highlight">57</i>&nbsp;    }
 <i class="no-highlight">58</i>&nbsp;
-<i class="no-highlight">59</i>&nbsp;  // @LINE:12
-<i class="no-highlight">60</i>&nbsp;  class ReverseConnectionsController(_prefix: =&gt; String) {
-<i class="no-highlight">61</i>&nbsp;    def _defaultPrefix: String = {
-<i class="no-highlight">62</i>&nbsp;      if (_prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;
-<i class="no-highlight">63</i>&nbsp;    }
-<i class="no-highlight">64</i>&nbsp;
-<i class="no-highlight">65</i>&nbsp;  
-<i class="no-highlight">66</i>&nbsp;    // @LINE:12
-<i class="no-highlight">67</i>&nbsp;    def setConnectionTimeout(): Call = {
-<i class="no-highlight">68</i>&nbsp;      
-<i class="no-highlight">69</i>&nbsp;      Call(&quot;POST&quot;, _prefix + { _defaultPrefix } + &quot;connections/set-connection-timeout&quot;)
-<i class="no-highlight">70</i>&nbsp;    }
-<i class="no-highlight">71</i>&nbsp;  
-<i class="no-highlight">72</i>&nbsp;  }
-<i class="no-highlight">73</i>&nbsp;
-<i class="no-highlight">74</i>&nbsp;  // @LINE:18
-<b class="fc"><i class="no-highlight">75</i>&nbsp;  class ReverseSurveysController(_prefix: =&gt; String) {</b>
-<i class="no-highlight">76</i>&nbsp;    def _defaultPrefix: String = {
-<b class="fc"><i class="no-highlight">77</i>&nbsp;      if (_prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;</b>
-<i class="no-highlight">78</i>&nbsp;    }
-<i class="no-highlight">79</i>&nbsp;
-<i class="no-highlight">80</i>&nbsp;  
-<i class="no-highlight">81</i>&nbsp;    // @LINE:30
-<b class="nc"><i class="no-highlight">82</i>&nbsp;    def answeredSurvey(surveyId:Long, offset:Int = 0): Call = {</b>
-<i class="no-highlight">83</i>&nbsp;      
-<b class="fc"><i class="no-highlight">84</i>&nbsp;      Call(&quot;GET&quot;, _prefix + { _defaultPrefix } + &quot;data/surveys/&quot; + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind(&quot;surveyId&quot;, surveyId)) + &quot;/answers&quot; + play.core.routing.queryString(List(if(offset == 0) None else Some(implicitly[play.api.mvc.QueryStringBindable[Int]].unbind(&quot;offset&quot;, offset)))))</b>
-<i class="no-highlight">85</i>&nbsp;    }
-<i class="no-highlight">86</i>&nbsp;  
-<i class="no-highlight">87</i>&nbsp;    // @LINE:19
-<i class="no-highlight">88</i>&nbsp;    def createSurvey(): Call = {
-<i class="no-highlight">89</i>&nbsp;      
-<b class="fc"><i class="no-highlight">90</i>&nbsp;      Call(&quot;POST&quot;, _prefix + { _defaultPrefix } + &quot;manage/surveys&quot;)</b>
-<i class="no-highlight">91</i>&nbsp;    }
-<i class="no-highlight">92</i>&nbsp;  
-<i class="no-highlight">93</i>&nbsp;    // @LINE:32
-<i class="no-highlight">94</i>&nbsp;    def allSurveys(): Call = {
-<i class="no-highlight">95</i>&nbsp;      
-<b class="fc"><i class="no-highlight">96</i>&nbsp;      Call(&quot;GET&quot;, _prefix + { _defaultPrefix } + &quot;data/surveys&quot;)</b>
-<i class="no-highlight">97</i>&nbsp;    }
-<i class="no-highlight">98</i>&nbsp;  
-<i class="no-highlight">99</i>&nbsp;    // @LINE:29
-<i class="no-highlight">100</i>&nbsp;    def getSurveyAnswers(surveyId:Long): Call = {
-<i class="no-highlight">101</i>&nbsp;      
-<b class="nc"><i class="no-highlight">102</i>&nbsp;      Call(&quot;GET&quot;, _prefix + { _defaultPrefix } + &quot;data/surveys/&quot; + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind(&quot;surveyId&quot;, surveyId)) + &quot;/all-answers&quot;)</b>
-<i class="no-highlight">103</i>&nbsp;    }
-<i class="no-highlight">104</i>&nbsp;  
-<i class="no-highlight">105</i>&nbsp;    // @LINE:27
-<i class="no-highlight">106</i>&nbsp;    def survey(id:Long): Call = {
-<i class="no-highlight">107</i>&nbsp;      
-<b class="fc"><i class="no-highlight">108</i>&nbsp;      Call(&quot;GET&quot;, _prefix + { _defaultPrefix } + &quot;data/surveys/&quot; + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind(&quot;id&quot;, id)))</b>
-<i class="no-highlight">109</i>&nbsp;    }
-<i class="no-highlight">110</i>&nbsp;  
-<i class="no-highlight">111</i>&nbsp;    // @LINE:42
-<i class="no-highlight">112</i>&nbsp;    def saveSurvey(): Call = {
-<i class="no-highlight">113</i>&nbsp;      
-<b class="nc"><i class="no-highlight">114</i>&nbsp;      Call(&quot;POST&quot;, _prefix + { _defaultPrefix } + &quot;api/survey&quot;)</b>
-<i class="no-highlight">115</i>&nbsp;    }
-<i class="no-highlight">116</i>&nbsp;  
-<i class="no-highlight">117</i>&nbsp;    // @LINE:20
-<i class="no-highlight">118</i>&nbsp;    def deleteSurvey(surveyId:Long): Call = {
-<i class="no-highlight">119</i>&nbsp;      
-<b class="fc"><i class="no-highlight">120</i>&nbsp;      Call(&quot;POST&quot;, _prefix + { _defaultPrefix } + &quot;manage/surveys/delete/&quot; + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind(&quot;surveyId&quot;, surveyId)))</b>
-<i class="no-highlight">121</i>&nbsp;    }
-<i class="no-highlight">122</i>&nbsp;  
-<i class="no-highlight">123</i>&nbsp;    // @LINE:31
-<i class="no-highlight">124</i>&nbsp;    def getSurveyResults(surveyId:Long): Call = {
-<i class="no-highlight">125</i>&nbsp;      
-<b class="fc"><i class="no-highlight">126</i>&nbsp;      Call(&quot;GET&quot;, _prefix + { _defaultPrefix } + &quot;data/surveys/&quot; + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[Long]].unbind(&quot;surveyId&quot;, surveyId)) + &quot;/results&quot;)</b>
-<i class="no-highlight">127</i>&nbsp;    }
-<i class="no-highlight">128</i>&nbsp;  
-<i class="no-highlight">129</i>&nbsp;    // @LINE:18
-<i class="no-highlight">130</i>&nbsp;    def surveys(): Call = {
-<i class="no-highlight">131</i>&nbsp;      
-<b class="fc"><i class="no-highlight">132</i>&nbsp;      Call(&quot;GET&quot;, _prefix + { _defaultPrefix } + &quot;manage/surveys&quot;)</b>
-<i class="no-highlight">133</i>&nbsp;    }
-<i class="no-highlight">134</i>&nbsp;  
-<i class="no-highlight">135</i>&nbsp;  }
-<i class="no-highlight">136</i>&nbsp;
-<i class="no-highlight">137</i>&nbsp;
-<b class="fc"><i class="no-highlight">138</i>&nbsp;}</b>
+<i class="no-highlight">59</i>&nbsp;    @SubjectPresent(handlerKey = &quot;FormClient&quot;, forceBeforeAuthCheck = true)
+<i class="no-highlight">60</i>&nbsp;    public Result createSurvey() {
+<b class="fc"><i class="no-highlight">61</i>&nbsp;        Survey survey = formFactory.form(Survey.class).bindFromRequest().get();</b>
+<b class="fc"><i class="no-highlight">62</i>&nbsp;        CreateSurveyResponse s = surveysService.createSurvey(new CreateSurveyRequest(survey, portalId()));</b>
+<b class="fc"><i class="no-highlight">63</i>&nbsp;        if (!s.isOk()) {</b>
+<b class="fc"><i class="no-highlight">64</i>&nbsp;            flash(&quot;Error&quot;, s.errors().head());</b>
+<b class="fc"><i class="no-highlight">65</i>&nbsp;            return badRequest(render(views.html.admin.surveys.render(formFactory.form(Survey.class).fill(s.createdSurvey()).withError(&quot;Error&quot;, s.errors().head()), true, false, 0, 0)));</b>
+<i class="no-highlight">66</i>&nbsp;        } else {
+<b class="fc"><i class="no-highlight">67</i>&nbsp;            return redirect(controllers.admin.routes.SurveysController.allSurveys());</b>
+<i class="no-highlight">68</i>&nbsp;        }
+<i class="no-highlight">69</i>&nbsp;    }
+<i class="no-highlight">70</i>&nbsp;
+<i class="no-highlight">71</i>&nbsp;    @SubjectPresent(handlerKey = &quot;FormClient&quot;, forceBeforeAuthCheck = true)
+<i class="no-highlight">72</i>&nbsp;    public Result deleteSurvey(Long surveyId) {
+<b class="fc"><i class="no-highlight">73</i>&nbsp;        ImmutableListMultimap&lt;NetworkUser, FieldAnswer&gt; answersForSurvey = fieldAnswerDAO.findForSurvey(surveyId);</b>
+<b class="fc"><i class="no-highlight">74</i>&nbsp;        if (answersForSurvey.isEmpty()) {</b>
+<b class="fc"><i class="no-highlight">75</i>&nbsp;            Survey survey = surveyDAO.get(surveyId);</b>
+<b class="fc"><i class="no-highlight">76</i>&nbsp;            surveysService.deleteSurvey(survey);</b>
+<b class="fc"><i class="no-highlight">77</i>&nbsp;            return redirect(controllers.admin.routes.SurveysController.allSurveys());</b>
+<i class="no-highlight">78</i>&nbsp;        } else {
+<b class="nc"><i class="no-highlight">79</i>&nbsp;            return redirect(controllers.admin.routes.SurveysController.getSurveyAnswers(surveyId));</b>
+<i class="no-highlight">80</i>&nbsp;        }
+<i class="no-highlight">81</i>&nbsp;    }
+<i class="no-highlight">82</i>&nbsp;
+<i class="no-highlight">83</i>&nbsp;    @SubjectPresent(handlerKey = &quot;FormClient&quot;, forceBeforeAuthCheck = true)
+<i class="no-highlight">84</i>&nbsp;    public Result getSurveyAnswers(Long surveyId) {
+<b class="fc"><i class="no-highlight">85</i>&nbsp;        ImmutableListMultimap&lt;NetworkUser, FieldAnswer&gt; answersForSurvey = fieldAnswerDAO.findForSurvey(surveyId); // TODO quitar a una Function</b>
+<i class="no-highlight">86</i>&nbsp;
+<b class="fc"><i class="no-highlight">87</i>&nbsp;        String rr = mapToString(answersForSurvey);</b>
+<i class="no-highlight">88</i>&nbsp;
+<b class="fc"><i class="no-highlight">89</i>&nbsp;        return ok(rr); // TODO: devolver lo que realmente necesite la vista</b>
+<i class="no-highlight">90</i>&nbsp;    }
+<i class="no-highlight">91</i>&nbsp;
+<i class="no-highlight">92</i>&nbsp;    @SubjectPresent(handlerKey = &quot;FormClient&quot;, forceBeforeAuthCheck = true)
+<i class="no-highlight">93</i>&nbsp;    public Result answeredSurvey(Long surveyId, Integer offset) throws JsonProcessingException {
+<b class="fc"><i class="no-highlight">94</i>&nbsp;        ImmutableListMultimap&lt;NetworkUser, FieldAnswer&gt; answersForSurvey = fieldAnswerDAO.findForSurvey(surveyId);</b>
+<i class="no-highlight">95</i>&nbsp;
+<b class="fc"><i class="no-highlight">96</i>&nbsp;        if (answersForSurvey.isEmpty()) {</b>
+<b class="nc"><i class="no-highlight">97</i>&nbsp;            return ok(render(views.html.admin.survey_no_answers.render()));</b>
+<i class="no-highlight">98</i>&nbsp;        } else {
+<b class="fc"><i class="no-highlight">99</i>&nbsp;            Survey survey = surveyDAO.get(surveyId);</b>
+<i class="no-highlight">100</i>&nbsp;
+<b class="fc"><i class="no-highlight">101</i>&nbsp;            List&lt;Survey&gt; answeredSurveysPerUser = answersForSurvey.asMap()</b>
+<b class="fc"><i class="no-highlight">102</i>&nbsp;                                                                  .values()</b>
+<b class="fc"><i class="no-highlight">103</i>&nbsp;                                                                  .stream()</b>
+<b class="fc"><i class="no-highlight">104</i>&nbsp;                                                                  .map(userAnswers -&gt; fillSurveyFieldsWithAnswers(survey,</b>
+<i class="no-highlight">105</i>&nbsp;                                                                                                                  userAnswers))
+<b class="fc"><i class="no-highlight">106</i>&nbsp;                                                                  .collect(toList());</b>
+<i class="no-highlight">107</i>&nbsp;
+<b class="fc"><i class="no-highlight">108</i>&nbsp;            int totalAnswers = answeredSurveysPerUser.size();</b>
+<b class="fc"><i class="no-highlight">109</i>&nbsp;            int sanitizedOffset = totalAnswers &gt; 0 ? Math.min(Math.max(offset, 0), totalAnswers - 1) : 0;</b>
+<i class="no-highlight">110</i>&nbsp;
+<b class="fc"><i class="no-highlight">111</i>&nbsp;            Form&lt;Survey&gt; form = formFactory.form(Survey.class);</b>
+<b class="fc"><i class="no-highlight">112</i>&nbsp;            if (totalAnswers &gt; 0) {</b>
+<b class="fc"><i class="no-highlight">113</i>&nbsp;                form = form.fill(answeredSurveysPerUser.get(sanitizedOffset));</b>
+<i class="no-highlight">114</i>&nbsp;            }
+<i class="no-highlight">115</i>&nbsp;
+<b class="fc"><i class="no-highlight">116</i>&nbsp;            return ok(render(views.html.admin.surveys.render(form, false, false, sanitizedOffset + 1, totalAnswers)));</b>
+<i class="no-highlight">117</i>&nbsp;        }
+<i class="no-highlight">118</i>&nbsp;    }
+<i class="no-highlight">119</i>&nbsp;
+<i class="no-highlight">120</i>&nbsp;    @SubjectPresent(handlerKey = &quot;FormClient&quot;, forceBeforeAuthCheck = true)
+<i class="no-highlight">121</i>&nbsp;    public Result getSurveyResults(Long surveyId) {
+<b class="fc"><i class="no-highlight">122</i>&nbsp;        ImmutableListMultimap&lt;NetworkUser, FieldAnswer&gt; answersForSurvey = fieldAnswerDAO.findForSurvey(surveyId);</b>
+<b class="fc"><i class="no-highlight">123</i>&nbsp;        Survey survey = surveyDAO.get(surveyId);</b>
+<b class="fc"><i class="no-highlight">124</i>&nbsp;        List&lt;Survey&gt; surveys = answersForSurvey</b>
+<b class="fc"><i class="no-highlight">125</i>&nbsp;                .asMap()</b>
+<b class="fc"><i class="no-highlight">126</i>&nbsp;                .values()</b>
+<b class="fc"><i class="no-highlight">127</i>&nbsp;                .stream()</b>
+<b class="fc"><i class="no-highlight">128</i>&nbsp;                .map(userAnswers -&gt; fillSurveyFieldsWithAnswers(survey, userAnswers))</b>
+<b class="fc"><i class="no-highlight">129</i>&nbsp;                .collect(toList());</b>
+<i class="no-highlight">130</i>&nbsp;
+<b class="fc"><i class="no-highlight">131</i>&nbsp;        Stream&lt;Field&gt; fieldStream = surveys.stream().flatMap(s -&gt; s.getFields().stream().flatMap(f -&gt; {</b>
+<b class="fc"><i class="no-highlight">132</i>&nbsp;            if (FieldConfig.FieldConfigTypes.Checkbox.equals(f.getType())) {</b>
+<b class="fc"><i class="no-highlight">133</i>&nbsp;                return Arrays.stream(f.getConfig().getValue().split(&quot;,&quot;)).map(a -&gt; {</b>
+<b class="fc"><i class="no-highlight">134</i>&nbsp;                    Field copy = f.copy();</b>
+<b class="fc"><i class="no-highlight">135</i>&nbsp;                    copy.getConfig().setValue(a.trim());</b>
+<b class="fc"><i class="no-highlight">136</i>&nbsp;                    return copy;</b>
+<i class="no-highlight">137</i>&nbsp;                });
+<i class="no-highlight">138</i>&nbsp;            } else {
+<b class="fc"><i class="no-highlight">139</i>&nbsp;                return Stream.of(f);</b>
+<i class="no-highlight">140</i>&nbsp;            }
+<i class="no-highlight">141</i>&nbsp;        }));
+<i class="no-highlight">142</i>&nbsp;
+<b class="fc"><i class="no-highlight">143</i>&nbsp;        List&lt;SummarizedAnswers&gt; summarizedAnswers = fieldStream</b>
+<b class="fc"><i class="no-highlight">144</i>&nbsp;                .map(field -&gt; {</b>
+<b class="fc"><i class="no-highlight">145</i>&nbsp;                    FieldConfig config = field.getConfig();</b>
+<b class="fc"><i class="no-highlight">146</i>&nbsp;                    String question = config.getLabel();</b>
+<b class="fc"><i class="no-highlight">147</i>&nbsp;                    String type = field.getType();</b>
+<b class="fc"><i class="no-highlight">148</i>&nbsp;                    String answer = config.getValue();</b>
+<b class="fc"><i class="no-highlight">149</i>&nbsp;                    Integer order = config.getOrder();</b>
+<b class="fc"><i class="no-highlight">150</i>&nbsp;                    Integer maximum = config.getMaximum();</b>
+<b class="fc"><i class="no-highlight">151</i>&nbsp;                    List&lt;String&gt; possibleAnswers = config</b>
+<b class="fc"><i class="no-highlight">152</i>&nbsp;                            .hasOptions() ? config.getOtherOptions()</b>
+<b class="fc"><i class="no-highlight">153</i>&nbsp;                                                  .stream()</b>
+<b class="fc"><i class="no-highlight">154</i>&nbsp;                                                  .map(Option::getKey)</b>
+<b class="fc"><i class="no-highlight">155</i>&nbsp;                                                  .collect(</b>
+<b class="fc"><i class="no-highlight">156</i>&nbsp;                                                          toList()) : new ArrayList&lt;&gt;();</b>
+<b class="fc"><i class="no-highlight">157</i>&nbsp;                    return new QuestionAnswer(question,</b>
+<i class="no-highlight">158</i>&nbsp;                                              type,
+<i class="no-highlight">159</i>&nbsp;                                              answer,
+<b class="fc"><i class="no-highlight">160</i>&nbsp;                                              order,</b>
+<i class="no-highlight">161</i>&nbsp;                                              possibleAnswers,
+<i class="no-highlight">162</i>&nbsp;                                              maximum);
+<i class="no-highlight">163</i>&nbsp;                })
+<b class="fc"><i class="no-highlight">164</i>&nbsp;                .collect(toImmutableListMultimap(x -&gt; x.question,</b>
+<b class="fc"><i class="no-highlight">165</i>&nbsp;                                                 Function.identity()))</b>
+<b class="fc"><i class="no-highlight">166</i>&nbsp;                .asMap()</b>
+<b class="fc"><i class="no-highlight">167</i>&nbsp;                .entrySet()</b>
+<b class="fc"><i class="no-highlight">168</i>&nbsp;                .stream()</b>
+<b class="fc"><i class="no-highlight">169</i>&nbsp;                .map(entry -&gt; {</b>
+<b class="fc"><i class="no-highlight">170</i>&nbsp;                    String question = entry.getKey();</b>
+<b class="fc"><i class="no-highlight">171</i>&nbsp;                    Collection&lt;QuestionAnswer&gt; answers = entry.getValue();</b>
+<b class="fc"><i class="no-highlight">172</i>&nbsp;                    String type = answers.stream()</b>
+<b class="fc"><i class="no-highlight">173</i>&nbsp;                                         .findAny()</b>
+<b class="fc"><i class="no-highlight">174</i>&nbsp;                                         .map(x -&gt; x.type)</b>
+<b class="fc"><i class="no-highlight">175</i>&nbsp;                                         .orElse(&quot;&quot;);</b>
+<b class="fc"><i class="no-highlight">176</i>&nbsp;                    Integer order = answers.stream()</b>
+<b class="fc"><i class="no-highlight">177</i>&nbsp;                                           .findAny()</b>
+<b class="fc"><i class="no-highlight">178</i>&nbsp;                                           .map(x -&gt; x.order)</b>
+<b class="fc"><i class="no-highlight">179</i>&nbsp;                                           .orElse(-1);</b>
+<b class="fc"><i class="no-highlight">180</i>&nbsp;                    Integer maximum = answers.stream()</b>
+<b class="fc"><i class="no-highlight">181</i>&nbsp;                                             .findAny()</b>
+<b class="fc"><i class="no-highlight">182</i>&nbsp;                                             .map(x -&gt; x.maximum)</b>
+<b class="fc"><i class="no-highlight">183</i>&nbsp;                                             .orElse(0);</b>
+<b class="fc"><i class="no-highlight">184</i>&nbsp;                    Map&lt;String, Long&gt; answersOccurrences = answers.stream()</b>
+<b class="fc"><i class="no-highlight">185</i>&nbsp;                                                                  .collect(</b>
+<b class="fc"><i class="no-highlight">186</i>&nbsp;                                                                          Collectors.groupingBy(</b>
+<b class="fc"><i class="no-highlight">187</i>&nbsp;                                                                                  x -&gt; x.answer,</b>
+<b class="fc"><i class="no-highlight">188</i>&nbsp;                                                                                  Collectors.counting()));</b>
+<b class="fc"><i class="no-highlight">189</i>&nbsp;                    if (FieldConfig.FieldConfigTypes.Rating.equals(type)) {</b>
+<b class="nc"><i class="no-highlight">190</i>&nbsp;                        IntStream.range(1, maximum + 1)</b>
+<b class="nc"><i class="no-highlight">191</i>&nbsp;                                 .forEachOrdered(i -&gt; answersOccurrences.putIfAbsent(</b>
+<b class="nc"><i class="no-highlight">192</i>&nbsp;                                         String.valueOf(i),</b>
+<b class="nc"><i class="no-highlight">193</i>&nbsp;                                         0L));</b>
+<i class="no-highlight">194</i>&nbsp;                    } else {
+<b class="fc"><i class="no-highlight">195</i>&nbsp;                        answers.stream()</b>
+<b class="fc"><i class="no-highlight">196</i>&nbsp;                               .flatMap(qa -&gt; qa.possibleAnswers.stream())</b>
+<b class="fc"><i class="no-highlight">197</i>&nbsp;                               .forEachOrdered(a -&gt; answersOccurrences.putIfAbsent(</b>
+<i class="no-highlight">198</i>&nbsp;                                       a,
+<b class="fc"><i class="no-highlight">199</i>&nbsp;                                       0L));</b>
+<i class="no-highlight">200</i>&nbsp;                    }
+<b class="fc"><i class="no-highlight">201</i>&nbsp;                    return new SummarizedAnswers(question,</b>
+<i class="no-highlight">202</i>&nbsp;                                                 type,
+<i class="no-highlight">203</i>&nbsp;                                                 answersOccurrences,
+<i class="no-highlight">204</i>&nbsp;                                                 order);
+<i class="no-highlight">205</i>&nbsp;                })
+<b class="fc"><i class="no-highlight">206</i>&nbsp;                .collect(toList());</b>
+<i class="no-highlight">207</i>&nbsp;
+<b class="fc"><i class="no-highlight">208</i>&nbsp;        List&lt;AnswersJson&gt; answers = buildAnswersJson(summarizedAnswers);</b>
+<i class="no-highlight">209</i>&nbsp;
+<b class="fc"><i class="no-highlight">210</i>&nbsp;        DataJson dataJson = new DataJson(answers);</b>
+<b class="fc"><i class="no-highlight">211</i>&nbsp;        return ok(render(views.html.admin.surveys_results.render(dataJson)));</b>
+<i class="no-highlight">212</i>&nbsp;    }
+<i class="no-highlight">213</i>&nbsp;
+<i class="no-highlight">214</i>&nbsp;    @SubjectPresent(handlerKey = &quot;FormClient&quot;, forceBeforeAuthCheck = true)
+<i class="no-highlight">215</i>&nbsp;    public Result surveys() throws NoProfileFoundException {
+<b class="fc"><i class="no-highlight">216</i>&nbsp;        ArrayList&lt;Field&gt; fields = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i class="no-highlight">217</i>&nbsp;        Field ageField = new Field(null, &quot;textbox&quot;, new FieldConfig(null, &quot;Edad&quot;, 1, true, null, null, null));</b>
+<b class="fc"><i class="no-highlight">218</i>&nbsp;        Field genreField = new Field(null, &quot;radio&quot;, new FieldConfig(null, &quot;Género&quot;, 2, true, null, null, Arrays.asList(new Option(1, &quot;Femenino&quot;), new Option(2, &quot;Masculino&quot;), new Option(3, &quot;Otro&quot;))));</b>
+<b class="fc"><i class="no-highlight">219</i>&nbsp;        fields.add(ageField);</b>
+<b class="fc"><i class="no-highlight">220</i>&nbsp;        fields.add(genreField);</b>
+<b class="fc"><i class="no-highlight">221</i>&nbsp;        Survey survey = new Survey((new Random()).nextLong(), null, null, fields, false);</b>
+<b class="fc"><i class="no-highlight">222</i>&nbsp;        ageField.setSurvey(survey);</b>
+<b class="fc"><i class="no-highlight">223</i>&nbsp;        genreField.setSurvey(survey);</b>
+<i class="no-highlight">224</i>&nbsp;
+<b class="fc"><i class="no-highlight">225</i>&nbsp;        Form&lt;Survey&gt; form = formFactory.form(Survey.class).fill(survey);</b>
+<i class="no-highlight">226</i>&nbsp;
+<b class="fc"><i class="no-highlight">227</i>&nbsp;        return ok(render(views.html.admin.surveys.render(form, true, false, 0, 0)));</b>
+<i class="no-highlight">228</i>&nbsp;    }
+<i class="no-highlight">229</i>&nbsp;
+<i class="no-highlight">230</i>&nbsp;    @SubjectPresent(handlerKey = &quot;FormClient&quot;, forceBeforeAuthCheck = true)
+<i class="no-highlight">231</i>&nbsp;    public Result saveSurvey() {
+<b class="fc"><i class="no-highlight">232</i>&nbsp;        JsonNode bodyJson = request().body().asJson();</b>
+<i class="no-highlight">233</i>&nbsp;
+<b class="fc"><i class="no-highlight">234</i>&nbsp;        final long id = bodyJson.findValue(&quot;id&quot;).asLong();</b>
+<b class="fc"><i class="no-highlight">235</i>&nbsp;        final long portalId = bodyJson.findValue(&quot;portalId&quot;).asLong();</b>
+<b class="fc"><i class="no-highlight">236</i>&nbsp;        final Portal portal = portalDAO.get(portalId);</b>
+<b class="fc"><i class="no-highlight">237</i>&nbsp;        final String title = bodyJson.findValue(&quot;title&quot;).asText();</b>
+<b class="fc"><i class="no-highlight">238</i>&nbsp;        List&lt;Field&gt; fields = new ArrayList&lt;&gt;();</b>
+<i class="no-highlight">239</i>&nbsp;
+<b class="fc"><i class="no-highlight">240</i>&nbsp;        bodyJson.withArray(&quot;fields&quot;)</b>
+<b class="fc"><i class="no-highlight">241</i>&nbsp;                .elements()</b>
+<b class="fc"><i class="no-highlight">242</i>&nbsp;                .forEachRemaining(fieldNode -&gt; createField(fields, fieldNode));</b>
+<i class="no-highlight">243</i>&nbsp;
+<b class="fc"><i class="no-highlight">244</i>&nbsp;        final Survey survey = new Survey(id, portal, title, fields, true);</b>
+<b class="fc"><i class="no-highlight">245</i>&nbsp;        survey.getFields().forEach(field -&gt; field.setSurvey(survey));</b>
+<i class="no-highlight">246</i>&nbsp;
+<i class="no-highlight">247</i>&nbsp;        // TODO guardar survey, crear dao
+<b class="fc"><i class="no-highlight">248</i>&nbsp;        CreateSurveyResponse createSurveyResponse = surveysService.createSurvey(new CreateSurveyRequest(survey,</b>
+<i class="no-highlight">249</i>&nbsp;                                                                                                        portalId));
+<i class="no-highlight">250</i>&nbsp;
+<b class="fc"><i class="no-highlight">251</i>&nbsp;        return ok(createSurveyResponse.isOk() + survey.getTitle());</b>
+<i class="no-highlight">252</i>&nbsp;    }
+<i class="no-highlight">253</i>&nbsp;
+<i class="no-highlight">254</i>&nbsp;    private void createField(List&lt;Field&gt; fields, JsonNode field) {
+<b class="fc"><i class="no-highlight">255</i>&nbsp;        final long fieldId = field.findValue(&quot;id&quot;).asLong();</b>
+<b class="fc"><i class="no-highlight">256</i>&nbsp;        final String fieldType = field.findValue(&quot;type&quot;).asText();</b>
+<b class="fc"><i class="no-highlight">257</i>&nbsp;        final JsonNode fieldConfigValue = field.findValue(&quot;config&quot;);</b>
+<i class="no-highlight">258</i>&nbsp;
+<b class="fc"><i class="no-highlight">259</i>&nbsp;        final String key = fieldConfigValue.findValue(&quot;key&quot;).asText();</b>
+<b class="fc"><i class="no-highlight">260</i>&nbsp;        final String label = fieldConfigValue.findValue(&quot;label&quot;).asText();</b>
+<b class="fc"><i class="no-highlight">261</i>&nbsp;        final int order = fieldConfigValue.findValue(&quot;order&quot;).asInt();</b>
+<i class="no-highlight">262</i>&nbsp;        FieldConfig fieldConfig;
+<i class="no-highlight">263</i>&nbsp;
+<b class="fc"><i class="no-highlight">264</i>&nbsp;        switch (fieldType) {</b>
+<i class="no-highlight">265</i>&nbsp;            case FieldConfig.FieldConfigTypes.Textbox:
+<b class="fc"><i class="no-highlight">266</i>&nbsp;                fieldConfig = createTextboxConfig(fieldConfigValue, key, label, order);</b>
+<b class="fc"><i class="no-highlight">267</i>&nbsp;                break;</b>
+<i class="no-highlight">268</i>&nbsp;            case FieldConfig.FieldConfigTypes.Rating:
+<b class="nc"><i class="no-highlight">269</i>&nbsp;                fieldConfig = createRatingFieldConfig(fieldConfigValue, key, label, order);</b>
+<b class="nc"><i class="no-highlight">270</i>&nbsp;                break;</b>
+<i class="no-highlight">271</i>&nbsp;            case FieldConfig.FieldConfigTypes.Radio:
+<i class="no-highlight">272</i>&nbsp;            case FieldConfig.FieldConfigTypes.Checkbox:
+<b class="nc"><i class="no-highlight">273</i>&nbsp;                fieldConfig = createRadioFieldConfig(fieldConfigValue, key, label, order);</b>
+<b class="nc"><i class="no-highlight">274</i>&nbsp;                break;</b>
+<i class="no-highlight">275</i>&nbsp;            default:
+<b class="nc"><i class="no-highlight">276</i>&nbsp;                throw new RuntimeException(&quot;Error parsing received survey, unknown fieldType: &quot; + fieldType);</b>
+<i class="no-highlight">277</i>&nbsp;        }
+<i class="no-highlight">278</i>&nbsp;
+<b class="fc"><i class="no-highlight">279</i>&nbsp;        fields.add(new Field(fieldId, fieldType, fieldConfig));</b>
+<i class="no-highlight">280</i>&nbsp;    }
+<i class="no-highlight">281</i>&nbsp;
+<i class="no-highlight">282</i>&nbsp;    private FieldConfig createTextboxConfig(JsonNode fieldConfigValue, String key, String label, int order) {
+<i class="no-highlight">283</i>&nbsp;        FieldConfig fieldConfig;
+<b class="fc"><i class="no-highlight">284</i>&nbsp;        boolean required = Optional.ofNullable(fieldConfigValue.findValue(&quot;required&quot;)).map(JsonNode::asBoolean).orElse(</b>
+<b class="fc"><i class="no-highlight">285</i>&nbsp;                false);</b>
+<b class="fc"><i class="no-highlight">286</i>&nbsp;        String value = Optional.ofNullable(fieldConfigValue.findValue(&quot;value&quot;)).map(JsonNode::asText).orElse(null);</b>
+<b class="fc"><i class="no-highlight">287</i>&nbsp;        fieldConfig = new TextboxFieldConfig(key, label, required, order, value);</b>
+<b class="fc"><i class="no-highlight">288</i>&nbsp;        return fieldConfig;</b>
+<i class="no-highlight">289</i>&nbsp;    }
+<i class="no-highlight">290</i>&nbsp;
+<i class="no-highlight">291</i>&nbsp;    private FieldConfig createRatingFieldConfig(JsonNode fieldConfigValue, String key, String label, int order) {
+<i class="no-highlight">292</i>&nbsp;        FieldConfig fieldConfig;
+<b class="nc"><i class="no-highlight">293</i>&nbsp;        int maximum = fieldConfigValue.findValue(&quot;maximum&quot;).asInt();</b>
+<b class="nc"><i class="no-highlight">294</i>&nbsp;        fieldConfig = new RatingFieldConfig(key, label, order, maximum);</b>
+<b class="nc"><i class="no-highlight">295</i>&nbsp;        return fieldConfig;</b>
+<i class="no-highlight">296</i>&nbsp;    }
+<i class="no-highlight">297</i>&nbsp;
+<i class="no-highlight">298</i>&nbsp;    private FieldConfig createRadioFieldConfig(JsonNode fieldConfigValue, String key, String label, int order) {
+<i class="no-highlight">299</i>&nbsp;        FieldConfig fieldConfig;
+<b class="nc"><i class="no-highlight">300</i>&nbsp;        final List&lt;Option&gt; options = new ArrayList&lt;&gt;();</b>
+<b class="nc"><i class="no-highlight">301</i>&nbsp;        fieldConfigValue.withArray(&quot;options&quot;)</b>
+<b class="nc"><i class="no-highlight">302</i>&nbsp;                        .elements()</b>
+<b class="nc"><i class="no-highlight">303</i>&nbsp;                        .forEachRemaining(optionsNode -&gt; createOption(options, optionsNode));</b>
+<b class="nc"><i class="no-highlight">304</i>&nbsp;        fieldConfig = new RadioFieldConfig(key, label, order, options);</b>
+<b class="nc"><i class="no-highlight">305</i>&nbsp;        return fieldConfig;</b>
+<i class="no-highlight">306</i>&nbsp;    }
+<i class="no-highlight">307</i>&nbsp;
+<i class="no-highlight">308</i>&nbsp;    private void createOption(List&lt;Option&gt; options, JsonNode optionsNode) {
+<b class="nc"><i class="no-highlight">309</i>&nbsp;        Integer optionIndex = optionsNode.findValue(&quot;index&quot;).asInt();</b>
+<b class="nc"><i class="no-highlight">310</i>&nbsp;        String optionKey = optionsNode.findValue(&quot;key&quot;).asText();</b>
+<b class="nc"><i class="no-highlight">311</i>&nbsp;        options.add(new Option(optionIndex, optionKey));</b>
+<i class="no-highlight">312</i>&nbsp;    }
+<i class="no-highlight">313</i>&nbsp;
+<i class="no-highlight">314</i>&nbsp;    private List&lt;AnswersJson&gt; buildAnswersJson(List&lt;SummarizedAnswers&gt; summarizedAnswers) {
+<b class="fc"><i class="no-highlight">315</i>&nbsp;        return summarizedAnswers.stream().map(x -&gt; {</b>
+<b class="fc"><i class="no-highlight">316</i>&nbsp;            List&lt;String&gt; labels = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i class="no-highlight">317</i>&nbsp;            List&lt;Long&gt; values = new ArrayList&lt;&gt;();</b>
+<i class="no-highlight">318</i>&nbsp;
+<b class="fc"><i class="no-highlight">319</i>&nbsp;            if (FieldConfig.FieldConfigTypes.Rating.equals(x.type)) {</b>
+<b class="nc"><i class="no-highlight">320</i>&nbsp;                x.answers.entrySet()</b>
+<b class="nc"><i class="no-highlight">321</i>&nbsp;                         .stream()</b>
+<b class="nc"><i class="no-highlight">322</i>&nbsp;                         .sorted(Comparator.comparingInt(e -&gt; Integer.parseInt(e.getKey())))</b>
+<b class="nc"><i class="no-highlight">323</i>&nbsp;                         .forEachOrdered(entry -&gt; {</b>
+<b class="nc"><i class="no-highlight">324</i>&nbsp;                             labels.add(entry.getKey());</b>
+<b class="nc"><i class="no-highlight">325</i>&nbsp;                             values.add(entry.getValue());</b>
+<i class="no-highlight">326</i>&nbsp;                         });
+<i class="no-highlight">327</i>&nbsp;            } else {
+<b class="fc"><i class="no-highlight">328</i>&nbsp;                x.answers.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEachOrdered(entry -&gt; {</b>
+<b class="fc"><i class="no-highlight">329</i>&nbsp;                    labels.add(entry.getKey());</b>
+<b class="fc"><i class="no-highlight">330</i>&nbsp;                    values.add(entry.getValue());</b>
+<i class="no-highlight">331</i>&nbsp;                });
+<i class="no-highlight">332</i>&nbsp;            }
+<i class="no-highlight">333</i>&nbsp;
+<b class="fc"><i class="no-highlight">334</i>&nbsp;            return new AnswersJson(x.question, x.id, x.type, x.order, labels, values);</b>
+<b class="fc"><i class="no-highlight">335</i>&nbsp;        }).collect(toList());</b>
+<i class="no-highlight">336</i>&nbsp;    }
+<i class="no-highlight">337</i>&nbsp;
+<i class="no-highlight">338</i>&nbsp;    public static class DataJson {
+<i class="no-highlight">339</i>&nbsp;        public List&lt;AnswersJson&gt; data;
+<i class="no-highlight">340</i>&nbsp;
+<b class="nc"><i class="no-highlight">341</i>&nbsp;        public DataJson() {</b>
+<i class="no-highlight">342</i>&nbsp;        }
+<i class="no-highlight">343</i>&nbsp;
+<i class="no-highlight">344</i>&nbsp;        public String toJsonString() {
+<b class="fc"><i class="no-highlight">345</i>&nbsp;            return Json.toJson(this).toString();</b>
+<i class="no-highlight">346</i>&nbsp;        }
+<i class="no-highlight">347</i>&nbsp;
+<b class="fc"><i class="no-highlight">348</i>&nbsp;        public DataJson(List&lt;AnswersJson&gt; data) {</b>
+<b class="fc"><i class="no-highlight">349</i>&nbsp;            this.data = data;</b>
+<i class="no-highlight">350</i>&nbsp;        }
+<i class="no-highlight">351</i>&nbsp;
+<i class="no-highlight">352</i>&nbsp;        public List&lt;AnswersJson&gt; getData() {
+<b class="fc"><i class="no-highlight">353</i>&nbsp;            return data;</b>
+<i class="no-highlight">354</i>&nbsp;        }
+<i class="no-highlight">355</i>&nbsp;    }
+<i class="no-highlight">356</i>&nbsp;
+<i class="no-highlight">357</i>&nbsp;    public static class AnswersJson {
+<i class="no-highlight">358</i>&nbsp;        public final String question;
+<i class="no-highlight">359</i>&nbsp;        public final String id;
+<i class="no-highlight">360</i>&nbsp;        public final String type;
+<i class="no-highlight">361</i>&nbsp;        public final Integer order;
+<i class="no-highlight">362</i>&nbsp;        public final List&lt;String&gt; labels;
+<i class="no-highlight">363</i>&nbsp;        public final List&lt;Long&gt; values;
+<i class="no-highlight">364</i>&nbsp;
+<b class="fc"><i class="no-highlight">365</i>&nbsp;        public AnswersJson(String question, String id, String type, Integer order, List&lt;String&gt; labels, List&lt;Long&gt; values) {</b>
+<b class="fc"><i class="no-highlight">366</i>&nbsp;            this.question = question;</b>
+<b class="fc"><i class="no-highlight">367</i>&nbsp;            this.id = id;</b>
+<b class="fc"><i class="no-highlight">368</i>&nbsp;            this.type = type;</b>
+<b class="fc"><i class="no-highlight">369</i>&nbsp;            this.order = order;</b>
+<b class="fc"><i class="no-highlight">370</i>&nbsp;            this.labels = labels;</b>
+<b class="fc"><i class="no-highlight">371</i>&nbsp;            this.values = values;</b>
+<i class="no-highlight">372</i>&nbsp;        }
+<i class="no-highlight">373</i>&nbsp;
+<i class="no-highlight">374</i>&nbsp;        public String average() {
+<b class="nc"><i class="no-highlight">375</i>&nbsp;            double average = values.stream().filter(n -&gt; n &gt; 0L).mapToInt(Long::intValue).average().orElse(0d);</b>
+<b class="nc"><i class="no-highlight">376</i>&nbsp;            return String.format(&quot;%,.2f&quot;, average);</b>
+<i class="no-highlight">377</i>&nbsp;        }
+<i class="no-highlight">378</i>&nbsp;
+<i class="no-highlight">379</i>&nbsp;        public String getQuestion() {
+<b class="fc"><i class="no-highlight">380</i>&nbsp;            return question;</b>
+<i class="no-highlight">381</i>&nbsp;        }
+<i class="no-highlight">382</i>&nbsp;
+<i class="no-highlight">383</i>&nbsp;        public String getId() {
+<b class="fc"><i class="no-highlight">384</i>&nbsp;            return id;</b>
+<i class="no-highlight">385</i>&nbsp;        }
+<i class="no-highlight">386</i>&nbsp;
+<i class="no-highlight">387</i>&nbsp;        public String getType() {
+<b class="fc"><i class="no-highlight">388</i>&nbsp;            return type;</b>
+<i class="no-highlight">389</i>&nbsp;        }
+<i class="no-highlight">390</i>&nbsp;
+<i class="no-highlight">391</i>&nbsp;        public Integer getOrder() {
+<b class="fc"><i class="no-highlight">392</i>&nbsp;            return order;</b>
+<i class="no-highlight">393</i>&nbsp;        }
+<i class="no-highlight">394</i>&nbsp;
+<i class="no-highlight">395</i>&nbsp;        public List&lt;String&gt; getLabels() {
+<b class="fc"><i class="no-highlight">396</i>&nbsp;            return labels;</b>
+<i class="no-highlight">397</i>&nbsp;        }
+<i class="no-highlight">398</i>&nbsp;
+<i class="no-highlight">399</i>&nbsp;        public List&lt;Long&gt; getValues() {
+<b class="fc"><i class="no-highlight">400</i>&nbsp;            return values;</b>
+<i class="no-highlight">401</i>&nbsp;        }
+<i class="no-highlight">402</i>&nbsp;    }
+<i class="no-highlight">403</i>&nbsp;
+<i class="no-highlight">404</i>&nbsp;    public static class SummarizedAnswers {
+<i class="no-highlight">405</i>&nbsp;        public final String question;
+<i class="no-highlight">406</i>&nbsp;        public final String type;
+<i class="no-highlight">407</i>&nbsp;        public final Map&lt;String, Long&gt; answers;
+<i class="no-highlight">408</i>&nbsp;        public final Integer order;
+<i class="no-highlight">409</i>&nbsp;        public final String id;
+<i class="no-highlight">410</i>&nbsp;
+<b class="fc"><i class="no-highlight">411</i>&nbsp;        public SummarizedAnswers(String question, String type, Map&lt;String, Long&gt; answers, Integer order) {</b>
+<b class="fc"><i class="no-highlight">412</i>&nbsp;            this.question = question;</b>
+<b class="fc"><i class="no-highlight">413</i>&nbsp;            this.type = type;</b>
+<b class="fc"><i class="no-highlight">414</i>&nbsp;            this.answers = answers;</b>
+<b class="fc"><i class="no-highlight">415</i>&nbsp;            this.order = order;</b>
+<b class="fc"><i class="no-highlight">416</i>&nbsp;            this.id = &quot;chart_&quot; + order;</b>
+<i class="no-highlight">417</i>&nbsp;        }
+<i class="no-highlight">418</i>&nbsp;    }
+<i class="no-highlight">419</i>&nbsp;
+<i class="no-highlight">420</i>&nbsp;    public static class QuestionAndType {
+<i class="no-highlight">421</i>&nbsp;        public final String question;
+<i class="no-highlight">422</i>&nbsp;        public final String type;
+<i class="no-highlight">423</i>&nbsp;
+<b class="nc"><i class="no-highlight">424</i>&nbsp;        public QuestionAndType(String question, String type) {</b>
+<b class="nc"><i class="no-highlight">425</i>&nbsp;            this.question = question;</b>
+<b class="nc"><i class="no-highlight">426</i>&nbsp;            this.type = type;</b>
+<i class="no-highlight">427</i>&nbsp;        }
+<i class="no-highlight">428</i>&nbsp;    }
+<i class="no-highlight">429</i>&nbsp;
+<i class="no-highlight">430</i>&nbsp;    public static class QuestionAnswer {
+<i class="no-highlight">431</i>&nbsp;        public final String question;
+<i class="no-highlight">432</i>&nbsp;        public final String type;
+<i class="no-highlight">433</i>&nbsp;        public final String answer;
+<i class="no-highlight">434</i>&nbsp;        public final int order;
+<i class="no-highlight">435</i>&nbsp;        public final List&lt;String&gt; possibleAnswers;
+<i class="no-highlight">436</i>&nbsp;        public final Integer maximum;
+<i class="no-highlight">437</i>&nbsp;
+<b class="fc"><i class="no-highlight">438</i>&nbsp;        public QuestionAnswer(String question, String type, String answer, int order, List&lt;String&gt; possibleAnswers, Integer maximum) {</b>
+<b class="fc"><i class="no-highlight">439</i>&nbsp;            this.question = question;</b>
+<b class="fc"><i class="no-highlight">440</i>&nbsp;            this.type = type;</b>
+<b class="fc"><i class="no-highlight">441</i>&nbsp;            this.answer = answer;</b>
+<b class="fc"><i class="no-highlight">442</i>&nbsp;            this.order = order;</b>
+<b class="fc"><i class="no-highlight">443</i>&nbsp;            this.possibleAnswers = possibleAnswers;</b>
+<b class="fc"><i class="no-highlight">444</i>&nbsp;            this.maximum = maximum;</b>
+<i class="no-highlight">445</i>&nbsp;        }
+<i class="no-highlight">446</i>&nbsp;    }
+<i class="no-highlight">447</i>&nbsp;
+<i class="no-highlight">448</i>&nbsp;    @SuppressWarnings(&quot;UnstableApiUsage&quot;)
+<i class="no-highlight">449</i>&nbsp;    private Survey fillSurveyFieldsWithAnswers(Survey survey, java.util.Collection&lt;FieldAnswer&gt; userAnswers) {
+<b class="fc"><i class="no-highlight">450</i>&nbsp;        Survey answeredSurvey = survey.copy();</b>
+<b class="fc"><i class="no-highlight">451</i>&nbsp;        Stream&lt;Field&gt; fields = answeredSurvey.getFields()</b>
+<b class="fc"><i class="no-highlight">452</i>&nbsp;                                             .stream()</b>
+<b class="fc"><i class="no-highlight">453</i>&nbsp;                                             .sorted(Comparator.comparing(field -&gt; field.getConfig().getOrder()));</b>
+<b class="fc"><i class="no-highlight">454</i>&nbsp;        Stream&lt;FieldAnswer&gt; answers = userAnswers.stream().sorted(Comparator.comparing(answer -&gt; answer.getField()</b>
+<b class="fc"><i class="no-highlight">455</i>&nbsp;                                                                                                       .getConfig()</b>
+<b class="fc"><i class="no-highlight">456</i>&nbsp;                                                                                                       .getOrder()));</b>
+<b class="fc"><i class="no-highlight">457</i>&nbsp;        forEachPair(fields, answers, (field, answer) -&gt; answerField(answeredSurvey, field, answer));</b>
+<b class="fc"><i class="no-highlight">458</i>&nbsp;        return answeredSurvey;</b>
+<i class="no-highlight">459</i>&nbsp;    }
+<i class="no-highlight">460</i>&nbsp;
+<i class="no-highlight">461</i>&nbsp;    private void answerField(Survey answeredSurvey, models.Field field, FieldAnswer answer) {
+<b class="fc"><i class="no-highlight">462</i>&nbsp;        field.getConfig().setValue(answer.getAnswer());</b>
+<i class="no-highlight">463</i>&nbsp;    }
+<i class="no-highlight">464</i>&nbsp;
+<i class="no-highlight">465</i>&nbsp;    // TODO quitar, es de prueba
+<i class="no-highlight">466</i>&nbsp;    private String mapToString(ImmutableListMultimap&lt;NetworkUser, FieldAnswer&gt; answersForSurvey) {
+<b class="fc"><i class="no-highlight">467</i>&nbsp;        StringBuilder rr = new StringBuilder();</b>
+<b class="fc"><i class="no-highlight">468</i>&nbsp;        for (NetworkUser networkUser : answersForSurvey.keySet()) {</b>
+<b class="fc"><i class="no-highlight">469</i>&nbsp;            StringBuilder r = new StringBuilder(&quot;user: &quot; + networkUser.getId() + &quot;\n&quot;);</b>
+<b class="fc"><i class="no-highlight">470</i>&nbsp;            for (FieldAnswer fieldAnswer : answersForSurvey.get(networkUser)) {</b>
+<b class="fc"><i class="no-highlight">471</i>&nbsp;                r.append(&quot;  &quot;);</b>
+<b class="fc"><i class="no-highlight">472</i>&nbsp;                r.append(fieldAnswer.toLogString());</b>
+<b class="fc"><i class="no-highlight">473</i>&nbsp;                r.append(&quot;\n&quot;);</b>
+<b class="fc"><i class="no-highlight">474</i>&nbsp;            }</b>
+<b class="fc"><i class="no-highlight">475</i>&nbsp;            rr.append(r.toString());</b>
+<b class="fc"><i class="no-highlight">476</i>&nbsp;        }</b>
+<b class="fc"><i class="no-highlight">477</i>&nbsp;        return rr.toString();</b>
+<i class="no-highlight">478</i>&nbsp;    }
+<i class="no-highlight">479</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -237,7 +683,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-08-28 18:36</div>
+    <div style="float:right;">generated on 2022-08-28 18:57</div>
 </div>
 </body>
 </html>

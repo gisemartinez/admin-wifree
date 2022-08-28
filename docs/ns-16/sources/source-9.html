@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > SaveSurveyAnswersFunction</title>
+  <title>Coverage Report > menu_site_title</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -17,10 +17,10 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">services.core.functions</a>
+    <a href="../index.html">views.html.parts</a>
 </div>
 
-<h1>Coverage Summary for Class: SaveSurveyAnswersFunction (services.core.functions)</h1>
+<h1>Coverage Summary for Class: menu_site_title (views.html.parts)</h1>
 
 <table class="coverageStats">
 
@@ -35,44 +35,41 @@ Current scope:     <a href="../../index.html">all classes</a>
   Line, %
 </th>
 </tr>
-<tr>
-  <td class="name">SaveSurveyAnswersFunction</td>
-<td class="coverageStat">
-  <span class="percent">
-    71.4%
-  </span>
-  <span class="absValue">
-    (5/7)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    80.8%
-  </span>
-  <span class="absValue">
-    (21/26)
-  </span>
-</td>
-</tr>
   <tr>
-    <td class="name">SaveSurveyAnswersFunction$$FastClassByGuice$$304b5f44</td>
+    <td class="name">menu_site_title$</td>
+<td class="coverageStat">
+  <span class="percent">
+    40%
+  </span>
+  <span class="absValue">
+    (2/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    62.5%
+  </span>
+  <span class="absValue">
+    (5/8)
+  </span>
+</td>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    71.4%
+    40%
   </span>
   <span class="absValue">
-    (5/7)
+    (2/5)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    80.8%
+    62.5%
   </span>
   <span class="absValue">
-    (21/26)
+    (5/8)
   </span>
 </td>
 </tr>
@@ -83,95 +80,69 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package services.core.functions;
-<i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import daos.FieldAnswerDAO;
-<i class="no-highlight">4</i>&nbsp;import daos.FieldDAO;
-<i class="no-highlight">5</i>&nbsp;import daos.NetworkUserDAO;
-<i class="no-highlight">6</i>&nbsp;import models.Field;
-<i class="no-highlight">7</i>&nbsp;import models.FieldAnswer;
-<i class="no-highlight">8</i>&nbsp;import models.NetworkUser;
-<i class="no-highlight">9</i>&nbsp;import models.Portal;
-<i class="no-highlight">10</i>&nbsp;import models.types.Gender;
-<i class="no-highlight">11</i>&nbsp;import operations.requests.SaveSurveyAnswersRequest;
-<i class="no-highlight">12</i>&nbsp;import operations.responses.SaveSurveyAnswersResponse;
-<i class="no-highlight">13</i>&nbsp;import play.Logger;
-<i class="no-highlight">14</i>&nbsp;import services.core.ServiceType;
-<i class="no-highlight">15</i>&nbsp;import services.core.WiFreeFunction;
-<i class="no-highlight">16</i>&nbsp;
-<i class="no-highlight">17</i>&nbsp;import javax.inject.Inject;
-<i class="no-highlight">18</i>&nbsp;import java.time.Instant;
-<i class="no-highlight">19</i>&nbsp;import java.util.List;
-<i class="no-highlight">20</i>&nbsp;import java.util.function.Function;
-<i class="no-highlight">21</i>&nbsp;import java.util.stream.Collectors;
-<i class="no-highlight">22</i>&nbsp;
-<b class="fc"><i class="no-highlight">23</i>&nbsp;public class SaveSurveyAnswersFunction extends WiFreeFunction&lt;SaveSurveyAnswersRequest, SaveSurveyAnswersResponse&gt; {</b>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;
+<i class="no-highlight">2</i>&nbsp;package views.html.parts
+<i class="no-highlight">3</i>&nbsp;
+<i class="no-highlight">4</i>&nbsp;import _root_.play.twirl.api.TwirlFeatureImports._
+<i class="no-highlight">5</i>&nbsp;import _root_.play.twirl.api.TwirlHelperImports._
+<i class="no-highlight">6</i>&nbsp;import _root_.play.twirl.api.Html
+<i class="no-highlight">7</i>&nbsp;import _root_.play.twirl.api.JavaScript
+<i class="no-highlight">8</i>&nbsp;import _root_.play.twirl.api.Txt
+<i class="no-highlight">9</i>&nbsp;import _root_.play.twirl.api.Xml
+<i class="no-highlight">10</i>&nbsp;import models._
+<i class="no-highlight">11</i>&nbsp;import controllers._
+<i class="no-highlight">12</i>&nbsp;import play.api.i18n._
+<i class="no-highlight">13</i>&nbsp;import views.html._
+<i class="no-highlight">14</i>&nbsp;import play.api.templates.PlayMagic._
+<i class="no-highlight">15</i>&nbsp;import java.lang._
+<i class="no-highlight">16</i>&nbsp;import java.util._
+<i class="no-highlight">17</i>&nbsp;import scala.collection.JavaConverters._
+<i class="no-highlight">18</i>&nbsp;import play.core.j.PlayMagicForJava._
+<i class="no-highlight">19</i>&nbsp;import play.mvc._
+<i class="no-highlight">20</i>&nbsp;import play.api.data.Field
+<i class="no-highlight">21</i>&nbsp;import play.mvc.Http.Context.Implicit._
+<i class="no-highlight">22</i>&nbsp;import play.data._
+<i class="no-highlight">23</i>&nbsp;import play.core.j.PlayFormsMagicForJava._
 <i class="no-highlight">24</i>&nbsp;
-<b class="fc"><i class="no-highlight">25</i>&nbsp;    protected final Logger.ALogger logger = Logger.of(this.getClass());</b>
+<b class="fc"><i class="no-highlight">25</i>&nbsp;object menu_site_title extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template0[play.twirl.api.HtmlFormat.Appendable] {</b>
 <i class="no-highlight">26</i>&nbsp;
-<i class="no-highlight">27</i>&nbsp;    @Inject
-<i class="no-highlight">28</i>&nbsp;    private NetworkUserDAO networkUserDAO;
-<i class="no-highlight">29</i>&nbsp;
-<i class="no-highlight">30</i>&nbsp;    @Inject
-<i class="no-highlight">31</i>&nbsp;    private FieldDAO fieldDAO;
+<i class="no-highlight">27</i>&nbsp;  /**/
+<i class="no-highlight">28</i>&nbsp;  def apply/*1.2*/():play.twirl.api.HtmlFormat.Appendable = {
+<b class="fc"><i class="no-highlight">29</i>&nbsp;    _display_ {</b>
+<i class="no-highlight">30</i>&nbsp;      {
+<i class="no-highlight">31</i>&nbsp;
 <i class="no-highlight">32</i>&nbsp;
-<i class="no-highlight">33</i>&nbsp;    @Inject
-<i class="no-highlight">34</i>&nbsp;    private FieldAnswerDAO fieldAnswerDAO;
-<i class="no-highlight">35</i>&nbsp;
-<i class="no-highlight">36</i>&nbsp;    @Override
-<i class="no-highlight">37</i>&nbsp;    public Function&lt;SaveSurveyAnswersRequest, SaveSurveyAnswersResponse&gt; function() {
-<b class="fc"><i class="no-highlight">38</i>&nbsp;        function = request -&gt; {</b>
-<i class="no-highlight">39</i>&nbsp;            try {
-<b class="fc"><i class="no-highlight">40</i>&nbsp;                long userId = request.userId();</b>
-<i class="no-highlight">41</i>&nbsp;
-<b class="fc"><i class="no-highlight">42</i>&nbsp;                NetworkUser networkUser = networkUserDAO.get(userId);</b>
-<i class="no-highlight">43</i>&nbsp;
-<b class="fc"><i class="no-highlight">44</i>&nbsp;                if (networkUser == null) {</b>
-<b class="fc"><i class="no-highlight">45</i>&nbsp;                    Portal portal = fieldDAO.findPortal(request.fieldsAnswers().get(0).field);</b>
-<b class="fc"><i class="no-highlight">46</i>&nbsp;                    networkUser = new NetworkUser(portal, &quot;Usuario &quot; + userId, &quot;usuario_&quot; + userId + &quot;@mail.com&quot;, &quot;&quot;, Instant.now(),</b>
-<i class="no-highlight">47</i>&nbsp;                            true, &quot;&quot;, Gender.Undefined, null, null, null, 0);
-<b class="fc"><i class="no-highlight">48</i>&nbsp;                    networkUser.setId(userId);</b>
-<b class="fc"><i class="no-highlight">49</i>&nbsp;                    networkUserDAO.save(networkUser);</b>
-<i class="no-highlight">50</i>&nbsp;                }
+<b class="fc"><i class="no-highlight">33</i>&nbsp;Seq[Any](format.raw/*2.1*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">34</i>&nbsp;&quot;&quot;&quot;),format.raw/*3.1*/(&quot;&quot;&quot;&lt;!-- menu site title --&gt;</b>
+<i class="no-highlight">35</i>&nbsp;&lt;div class=&quot;navbar nav_title&quot; style=&quot;border: 0;&quot;&gt;
+<b class="fc"><i class="no-highlight">36</i>&nbsp;    &lt;a href=&quot;/dashboard&quot; class=&quot;site_title&quot;&gt;&lt;img src=&quot;&quot;&quot;&quot;),_display_(/*5.56*/routes/*5.62*/.Assets.versioned(&quot;img/wifree-logo.png&quot;)),format.raw/*5.102*/(&quot;&quot;&quot;&quot; height=&quot;32px&quot;&gt;</b>
+<i class="no-highlight">37</i>&nbsp;        &lt;span&gt;WiFree&lt;/span&gt;
+<i class="no-highlight">38</i>&nbsp;    &lt;/a&gt;
+<i class="no-highlight">39</i>&nbsp;&lt;/div&gt;
+<i class="no-highlight">40</i>&nbsp;&lt;div class=&quot;clearfix&quot;&gt;&lt;/div&gt;
+<i class="no-highlight">41</i>&nbsp;&lt;!-- /menu site title --&gt;&quot;&quot;&quot;))
+<i class="no-highlight">42</i>&nbsp;      }
+<i class="no-highlight">43</i>&nbsp;    }
+<i class="no-highlight">44</i>&nbsp;  }
+<i class="no-highlight">45</i>&nbsp;
+<b class="nc"><i class="no-highlight">46</i>&nbsp;  def render(): play.twirl.api.HtmlFormat.Appendable = apply()</b>
+<i class="no-highlight">47</i>&nbsp;
+<b class="nc"><i class="no-highlight">48</i>&nbsp;  def f:(() =&gt; play.twirl.api.HtmlFormat.Appendable) = () =&gt; apply()</b>
+<i class="no-highlight">49</i>&nbsp;
+<b class="nc"><i class="no-highlight">50</i>&nbsp;  def ref: this.type = this</b>
 <i class="no-highlight">51</i>&nbsp;
-<b class="fc"><i class="no-highlight">52</i>&nbsp;                NetworkUser finalNetworkUser = networkUser;</b>
-<b class="fc"><i class="no-highlight">53</i>&nbsp;                List&lt;FieldAnswer&gt; surveyAnswers = request.fieldsAnswers().stream()</b>
-<b class="fc"><i class="no-highlight">54</i>&nbsp;                        .map(fieldAnswer -&gt; toModel(finalNetworkUser, fieldAnswer))</b>
-<b class="fc"><i class="no-highlight">55</i>&nbsp;                        .collect(Collectors.toList());</b>
-<i class="no-highlight">56</i>&nbsp;
-<b class="fc"><i class="no-highlight">57</i>&nbsp;                fieldAnswerDAO.saveAll(surveyAnswers);</b>
-<i class="no-highlight">58</i>&nbsp;
-<b class="fc"><i class="no-highlight">59</i>&nbsp;                Long surveyId = surveyAnswers.stream().map(x -&gt; x.getField().getSurvey().getId()).distinct().findAny().orElse(0L);</b>
-<i class="no-highlight">60</i>&nbsp;
-<b class="fc"><i class="no-highlight">61</i>&nbsp;                return new SaveSurveyAnswersResponse(true, surveyId, userId);</b>
-<b class="nc"><i class="no-highlight">62</i>&nbsp;            } catch (Exception e) {</b>
-<b class="nc"><i class="no-highlight">63</i>&nbsp;                logger.error(&quot;Error saving survey answers. Request: &quot; + request.toString(), e);</b>
-<b class="nc"><i class="no-highlight">64</i>&nbsp;                return new SaveSurveyAnswersResponse(false, 0, 0);</b>
-<i class="no-highlight">65</i>&nbsp;            }
-<i class="no-highlight">66</i>&nbsp;        };
-<b class="fc"><i class="no-highlight">67</i>&nbsp;        return function;</b>
-<i class="no-highlight">68</i>&nbsp;    }
-<i class="no-highlight">69</i>&nbsp;
-<i class="no-highlight">70</i>&nbsp;    private FieldAnswer toModel(NetworkUser networkUser, controllers.api.dto.FieldAnswerDTO fieldAnswer) {
-<b class="fc"><i class="no-highlight">71</i>&nbsp;        Field field = fieldDAO.get(fieldAnswer.field);</b>
-<b class="fc"><i class="no-highlight">72</i>&nbsp;        return new FieldAnswer(field, networkUser, fieldAnswer.answer);</b>
-<i class="no-highlight">73</i>&nbsp;    }
-<i class="no-highlight">74</i>&nbsp;
-<i class="no-highlight">75</i>&nbsp;    @Override
-<i class="no-highlight">76</i>&nbsp;    public Class&lt;SaveSurveyAnswersRequest&gt; rqClass() {
-<b class="fc"><i class="no-highlight">77</i>&nbsp;        return SaveSurveyAnswersRequest.class;</b>
-<i class="no-highlight">78</i>&nbsp;    }
-<i class="no-highlight">79</i>&nbsp;
-<i class="no-highlight">80</i>&nbsp;    @Override
-<i class="no-highlight">81</i>&nbsp;    public Class&lt;SaveSurveyAnswersResponse&gt; rsClass() {
-<b class="nc"><i class="no-highlight">82</i>&nbsp;        return SaveSurveyAnswersResponse.class;</b>
-<i class="no-highlight">83</i>&nbsp;    }
-<i class="no-highlight">84</i>&nbsp;
-<i class="no-highlight">85</i>&nbsp;    @Override
-<i class="no-highlight">86</i>&nbsp;    public ServiceType serviceType() {
-<b class="nc"><i class="no-highlight">87</i>&nbsp;        return ServiceType.TESTING_SERVICE;</b>
-<i class="no-highlight">88</i>&nbsp;    }
-<i class="no-highlight">89</i>&nbsp;}
+<i class="no-highlight">52</i>&nbsp;}
+<i class="no-highlight">53</i>&nbsp;
+<i class="no-highlight">54</i>&nbsp;
+<i class="no-highlight">55</i>&nbsp;              /*
+<i class="no-highlight">56</i>&nbsp;                  -- GENERATED --
+<i class="no-highlight">57</i>&nbsp;                  SOURCE: app/views/parts/menu_site_title.scala.html
+<i class="no-highlight">58</i>&nbsp;                  HASH: 64a6d58aec34a90805825b852eb3b07a4ae09caf
+<i class="no-highlight">59</i>&nbsp;                  MATRIX: 957-&gt;1|1053-&gt;4|1080-&gt;5|1236-&gt;135|1250-&gt;141|1311-&gt;181
+<i class="no-highlight">60</i>&nbsp;                  LINES: 28-&gt;1|33-&gt;2|34-&gt;3|36-&gt;5|36-&gt;5|36-&gt;5
+<i class="no-highlight">61</i>&nbsp;                  -- GENERATED --
+<i class="no-highlight">62</i>&nbsp;              */
+<i class="no-highlight">63</i>&nbsp;          
 </div>
 </pre>
 </div>
@@ -198,7 +169,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-08-28 11:51</div>
+    <div style="float:right;">generated on 2022-08-28 18:56</div>
 </div>
 </body>
 </html>

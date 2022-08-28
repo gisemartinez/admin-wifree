@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > survey_no_answers</title>
+  <title>Coverage Report > worldmap</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -17,10 +17,10 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">views.html.admin</a>
+    <a href="../index.html">views.html.parts.js</a>
 </div>
 
-<h1>Coverage Summary for Class: survey_no_answers (views.html.admin)</h1>
+<h1>Coverage Summary for Class: worldmap (views.html.parts.js)</h1>
 
 <table class="coverageStats">
 
@@ -36,7 +36,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
   <tr>
-    <td class="name">survey_no_answers$</td>
+    <td class="name">worldmap$</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -81,7 +81,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <pre>
 <div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;
-<i class="no-highlight">2</i>&nbsp;package views.html.admin
+<i class="no-highlight">2</i>&nbsp;package views.html.parts.js
 <i class="no-highlight">3</i>&nbsp;
 <i class="no-highlight">4</i>&nbsp;import _root_.play.twirl.api.TwirlFeatureImports._
 <i class="no-highlight">5</i>&nbsp;import _root_.play.twirl.api.TwirlHelperImports._
@@ -104,7 +104,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">22</i>&nbsp;import play.data._
 <i class="no-highlight">23</i>&nbsp;import play.core.j.PlayFormsMagicForJava._
 <i class="no-highlight">24</i>&nbsp;
-<b class="nc"><i class="no-highlight">25</i>&nbsp;object survey_no_answers extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template0[play.twirl.api.HtmlFormat.Appendable] {</b>
+<b class="nc"><i class="no-highlight">25</i>&nbsp;object worldmap extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template0[play.twirl.api.HtmlFormat.Appendable] {</b>
 <i class="no-highlight">26</i>&nbsp;
 <i class="no-highlight">27</i>&nbsp;  /**/
 <i class="no-highlight">28</i>&nbsp;  def apply/*1.2*/():play.twirl.api.HtmlFormat.Appendable = {
@@ -113,38 +113,33 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">31</i>&nbsp;
 <i class="no-highlight">32</i>&nbsp;
 <b class="nc"><i class="no-highlight">33</i>&nbsp;Seq[Any](format.raw/*2.1*/(&quot;&quot;&quot;</b>
-<b class="nc"><i class="no-highlight">34</i>&nbsp;&quot;&quot;&quot;),format.raw/*3.1*/(&quot;&quot;&quot;&lt;!-- Page content --&gt;</b>
-<i class="no-highlight">35</i>&nbsp;&lt;div class=&quot;right_col&quot; role=&quot;main&quot;&gt;
-<i class="no-highlight">36</i>&nbsp;    &lt;div class=&quot;row&quot;&gt;
-<i class="no-highlight">37</i>&nbsp;        &lt;div class=&quot;col-md-12 col-sm-6 col-xs-12&quot;&gt;
-<b class="nc"><i class="no-highlight">38</i>&nbsp;            &quot;&quot;&quot;),format.raw/*7.34*/(&quot;&quot;&quot;</b>
-<b class="nc"><i class="no-highlight">39</i>&nbsp;            &quot;&quot;&quot;),format.raw/*8.13*/(&quot;&quot;&quot;&lt;h1&gt;No se han registrado respuestas aún&lt;/h1&gt;</b>
-<b class="nc"><i class="no-highlight">40</i>&nbsp;            &quot;&quot;&quot;),format.raw/*9.32*/(&quot;&quot;&quot;</b>
-<b class="nc"><i class="no-highlight">41</i>&nbsp;        &quot;&quot;&quot;),format.raw/*10.9*/(&quot;&quot;&quot;&lt;/div&gt;</b>
-<i class="no-highlight">42</i>&nbsp;    &lt;/div&gt;
-<i class="no-highlight">43</i>&nbsp;&lt;/div&gt;&quot;&quot;&quot;))
-<i class="no-highlight">44</i>&nbsp;      }
-<i class="no-highlight">45</i>&nbsp;    }
-<i class="no-highlight">46</i>&nbsp;  }
-<i class="no-highlight">47</i>&nbsp;
-<b class="nc"><i class="no-highlight">48</i>&nbsp;  def render(): play.twirl.api.HtmlFormat.Appendable = apply()</b>
-<i class="no-highlight">49</i>&nbsp;
-<b class="nc"><i class="no-highlight">50</i>&nbsp;  def f:(() =&gt; play.twirl.api.HtmlFormat.Appendable) = () =&gt; apply()</b>
+<b class="nc"><i class="no-highlight">34</i>&nbsp;&quot;&quot;&quot;),format.raw/*3.1*/(&quot;&quot;&quot;&lt;!-- worldmap --&gt;</b>
+<b class="nc"><i class="no-highlight">35</i>&nbsp;&lt;script type=&quot;text/javascript&quot; src=&quot;&quot;&quot;&quot;),_display_(/*4.38*/routes/*4.44*/.Assets.versioned(&quot;js/maps/jquery-jvectormap-2.0.3.min.js&quot;)),format.raw/*4.103*/(&quot;&quot;&quot;&quot;&gt;&lt;/script&gt;</b>
+<b class="nc"><i class="no-highlight">36</i>&nbsp;&lt;script type=&quot;text/javascript&quot; src=&quot;&quot;&quot;&quot;),_display_(/*5.38*/routes/*5.44*/.Assets.versioned(&quot;js/maps/gdp-data.js&quot;)),format.raw/*5.84*/(&quot;&quot;&quot;&quot;&gt;&lt;/script&gt;</b>
+<b class="nc"><i class="no-highlight">37</i>&nbsp;&lt;script type=&quot;text/javascript&quot; src=&quot;&quot;&quot;&quot;),_display_(/*6.38*/routes/*6.44*/.Assets.versioned(&quot;js/maps/jquery-jvectormap-world-mill-en.js&quot;)),format.raw/*6.107*/(&quot;&quot;&quot;&quot;&gt;&lt;/script&gt;</b>
+<b class="nc"><i class="no-highlight">38</i>&nbsp;&lt;script type=&quot;text/javascript&quot; src=&quot;&quot;&quot;&quot;),_display_(/*7.38*/routes/*7.44*/.Assets.versioned(&quot;js/maps/jquery-jvectormap-us-aea-en.js&quot;)),format.raw/*7.103*/(&quot;&quot;&quot;&quot;&gt;&lt;/script&gt;&quot;&quot;&quot;))</b>
+<i class="no-highlight">39</i>&nbsp;      }
+<i class="no-highlight">40</i>&nbsp;    }
+<i class="no-highlight">41</i>&nbsp;  }
+<i class="no-highlight">42</i>&nbsp;
+<b class="nc"><i class="no-highlight">43</i>&nbsp;  def render(): play.twirl.api.HtmlFormat.Appendable = apply()</b>
+<i class="no-highlight">44</i>&nbsp;
+<b class="nc"><i class="no-highlight">45</i>&nbsp;  def f:(() =&gt; play.twirl.api.HtmlFormat.Appendable) = () =&gt; apply()</b>
+<i class="no-highlight">46</i>&nbsp;
+<b class="nc"><i class="no-highlight">47</i>&nbsp;  def ref: this.type = this</b>
+<i class="no-highlight">48</i>&nbsp;
+<i class="no-highlight">49</i>&nbsp;}
+<i class="no-highlight">50</i>&nbsp;
 <i class="no-highlight">51</i>&nbsp;
-<b class="nc"><i class="no-highlight">52</i>&nbsp;  def ref: this.type = this</b>
-<i class="no-highlight">53</i>&nbsp;
-<i class="no-highlight">54</i>&nbsp;}
-<i class="no-highlight">55</i>&nbsp;
-<i class="no-highlight">56</i>&nbsp;
-<i class="no-highlight">57</i>&nbsp;              /*
+<i class="no-highlight">52</i>&nbsp;              /*
+<i class="no-highlight">53</i>&nbsp;                  -- GENERATED --
+<i class="no-highlight">54</i>&nbsp;                  SOURCE: app/views/parts/js/worldmap.scala.html
+<i class="no-highlight">55</i>&nbsp;                  HASH: 776eeff727788fa7ad30f4e6abf804565b27c41c
+<i class="no-highlight">56</i>&nbsp;                  MATRIX: 953-&gt;1|1049-&gt;4|1076-&gt;5|1157-&gt;60|1171-&gt;66|1251-&gt;125|1326-&gt;174|1340-&gt;180|1400-&gt;220|1475-&gt;269|1489-&gt;275|1573-&gt;338|1648-&gt;387|1662-&gt;393|1742-&gt;452
+<i class="no-highlight">57</i>&nbsp;                  LINES: 28-&gt;1|33-&gt;2|34-&gt;3|35-&gt;4|35-&gt;4|35-&gt;4|36-&gt;5|36-&gt;5|36-&gt;5|37-&gt;6|37-&gt;6|37-&gt;6|38-&gt;7|38-&gt;7|38-&gt;7
 <i class="no-highlight">58</i>&nbsp;                  -- GENERATED --
-<i class="no-highlight">59</i>&nbsp;                  SOURCE: app/views/admin/survey_no_answers.scala.html
-<i class="no-highlight">60</i>&nbsp;                  HASH: 23ef9c7b26a5c67df367d5fa3643d1e13a73cf9f
-<i class="no-highlight">61</i>&nbsp;                  MATRIX: 959-&gt;1|1055-&gt;4|1082-&gt;5|1252-&gt;169|1292-&gt;182|1376-&gt;258|1412-&gt;267
-<i class="no-highlight">62</i>&nbsp;                  LINES: 28-&gt;1|33-&gt;2|34-&gt;3|38-&gt;7|39-&gt;8|40-&gt;9|41-&gt;10
-<i class="no-highlight">63</i>&nbsp;                  -- GENERATED --
-<i class="no-highlight">64</i>&nbsp;              */
-<i class="no-highlight">65</i>&nbsp;          
+<i class="no-highlight">59</i>&nbsp;              */
+<i class="no-highlight">60</i>&nbsp;          
 </div>
 </pre>
 </div>
@@ -171,7 +166,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-08-28 18:36</div>
+    <div style="float:right;">generated on 2022-08-28 18:56</div>
 </div>
 </body>
 </html>

@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > TestingService</title>
+  <title>Coverage Report > ObjectHelper</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -17,10 +17,10 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">services</a>
+    <a href="../index.html">utils</a>
 </div>
 
-<h1>Coverage Summary for Class: TestingService (services)</h1>
+<h1>Coverage Summary for Class: ObjectHelper (utils)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -39,7 +39,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">TestingService</td>
+  <td class="name">ObjectHelper</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -61,7 +61,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/7)
+    (0/5)
   </span>
 </td>
 </tr>
@@ -73,31 +73,22 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package services;
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package utils;
 <i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import operations.requests.PortalNetworkConfigurationRequest;
-<i class="no-highlight">4</i>&nbsp;import operations.responses.PortalNetworkConfigurationResponse;
-<i class="no-highlight">5</i>&nbsp;
-<i class="no-highlight">6</i>&nbsp;public class TestingService extends WiFreeService {
-<i class="no-highlight">7</i>&nbsp;	
-<i class="no-highlight">8</i>&nbsp;//	private static TESTING_SERVICE instance;
-<i class="no-highlight">9</i>&nbsp;	
-<b class="nc"><i class="no-highlight">10</i>&nbsp;	private TestingService() {</b>
-<i class="no-highlight">11</i>&nbsp;	}
-<i class="no-highlight">12</i>&nbsp;	
-<i class="no-highlight">13</i>&nbsp;	public static synchronized WiFreeService instance() {
-<b class="nc"><i class="no-highlight">14</i>&nbsp;		if (instance == null)</b>
-<b class="nc"><i class="no-highlight">15</i>&nbsp;			instance = new TestingService();</b>
-<b class="nc"><i class="no-highlight">16</i>&nbsp;		return instance;</b>
-<i class="no-highlight">17</i>&nbsp;	}
-<i class="no-highlight">18</i>&nbsp;	
-<i class="no-highlight">19</i>&nbsp;	public void asad() {
-<b class="nc"><i class="no-highlight">20</i>&nbsp;		PortalNetworkConfigurationRequest rq = new PortalNetworkConfigurationRequest(&quot;John&quot;);</b>
-<b class="nc"><i class="no-highlight">21</i>&nbsp;		final PortalNetworkConfigurationResponse rs = (PortalNetworkConfigurationResponse) process(rq);</b>
-<b class="nc"><i class="no-highlight">22</i>&nbsp;		System.out.println(rs);</b>
-<i class="no-highlight">23</i>&nbsp;	}
-<i class="no-highlight">24</i>&nbsp;	
-<i class="no-highlight">25</i>&nbsp;}
+<b class="nc"><i class="no-highlight">3</i>&nbsp;public class ObjectHelper {</b>
+<i class="no-highlight">4</i>&nbsp;
+<i class="no-highlight">5</i>&nbsp;	public static boolean areNull(Object... objects) {
+<b class="nc"><i class="no-highlight">6</i>&nbsp;		for (Object o: objects) {</b>
+<b class="nc"><i class="no-highlight">7</i>&nbsp;			if (o == null) return true;</b>
+<i class="no-highlight">8</i>&nbsp;		}
+<b class="nc"><i class="no-highlight">9</i>&nbsp;		return false;</b>
+<i class="no-highlight">10</i>&nbsp;	}
+<i class="no-highlight">11</i>&nbsp;
+<i class="no-highlight">12</i>&nbsp;	public static boolean areNotNull(Object... objects) {
+<b class="nc"><i class="no-highlight">13</i>&nbsp;		return !areNull(objects);</b>
+<i class="no-highlight">14</i>&nbsp;	}
+<i class="no-highlight">15</i>&nbsp;
+<i class="no-highlight">16</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -124,7 +115,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-08-28 18:36</div>
+    <div style="float:right;">generated on 2022-08-28 18:56</div>
 </div>
 </body>
 </html>

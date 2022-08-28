@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > error401</title>
+  <title>Coverage Report > body</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -17,10 +17,10 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">views.html</a>
+    <a href="../index.html">views.html.parts</a>
 </div>
 
-<h1>Coverage Summary for Class: error401 (views.html)</h1>
+<h1>Coverage Summary for Class: body (views.html.parts)</h1>
 
 <table class="coverageStats">
 
@@ -36,7 +36,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
   <tr>
-    <td class="name">error401$</td>
+    <td class="name">body$</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -50,7 +50,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/6)
+    (0/13)
   </span>
 </td>
   </tr>
@@ -69,7 +69,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/6)
+    (0/13)
   </span>
 </td>
 </tr>
@@ -81,7 +81,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <pre>
 <div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;
-<i class="no-highlight">2</i>&nbsp;package views.html
+<i class="no-highlight">2</i>&nbsp;package views.html.parts
 <i class="no-highlight">3</i>&nbsp;
 <i class="no-highlight">4</i>&nbsp;import _root_.play.twirl.api.TwirlFeatureImports._
 <i class="no-highlight">5</i>&nbsp;import _root_.play.twirl.api.TwirlHelperImports._
@@ -104,43 +104,54 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">22</i>&nbsp;import play.data._
 <i class="no-highlight">23</i>&nbsp;import play.core.j.PlayFormsMagicForJava._
 <i class="no-highlight">24</i>&nbsp;
-<b class="nc"><i class="no-highlight">25</i>&nbsp;object error401 extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template0[play.twirl.api.HtmlFormat.Appendable] {</b>
+<b class="nc"><i class="no-highlight">25</i>&nbsp;object body extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template2[String,Html,play.twirl.api.HtmlFormat.Appendable] {</b>
 <i class="no-highlight">26</i>&nbsp;
 <i class="no-highlight">27</i>&nbsp;  /**/
-<i class="no-highlight">28</i>&nbsp;  def apply():play.twirl.api.HtmlFormat.Appendable = {
+<i class="no-highlight">28</i>&nbsp;  def apply/*1.2*/(title: String)(content: Html):play.twirl.api.HtmlFormat.Appendable = {
 <b class="nc"><i class="no-highlight">29</i>&nbsp;    _display_ {</b>
 <i class="no-highlight">30</i>&nbsp;      {
 <i class="no-highlight">31</i>&nbsp;
 <i class="no-highlight">32</i>&nbsp;
-<b class="nc"><i class="no-highlight">33</i>&nbsp;Seq[Any](format.raw/*1.1*/(&quot;&quot;&quot;&lt;html&gt;</b>
-<i class="no-highlight">34</i>&nbsp;&lt;body&gt;
-<i class="no-highlight">35</i>&nbsp;&lt;h1&gt;unauthorized&lt;/h1&gt;
-<i class="no-highlight">36</i>&nbsp;&lt;br /&gt;
-<i class="no-highlight">37</i>&nbsp;&lt;a href=&quot;/&quot;&gt;Home&lt;/a&gt;
-<i class="no-highlight">38</i>&nbsp;&lt;/body&gt;
-<i class="no-highlight">39</i>&nbsp;&lt;/html&gt;&quot;&quot;&quot;))
-<i class="no-highlight">40</i>&nbsp;      }
-<i class="no-highlight">41</i>&nbsp;    }
-<i class="no-highlight">42</i>&nbsp;  }
-<i class="no-highlight">43</i>&nbsp;
-<b class="nc"><i class="no-highlight">44</i>&nbsp;  def render(): play.twirl.api.HtmlFormat.Appendable = apply()</b>
-<i class="no-highlight">45</i>&nbsp;
-<b class="nc"><i class="no-highlight">46</i>&nbsp;  def f:(() =&gt; play.twirl.api.HtmlFormat.Appendable) = () =&gt; apply()</b>
-<i class="no-highlight">47</i>&nbsp;
-<b class="nc"><i class="no-highlight">48</i>&nbsp;  def ref: this.type = this</b>
-<i class="no-highlight">49</i>&nbsp;
-<i class="no-highlight">50</i>&nbsp;}
-<i class="no-highlight">51</i>&nbsp;
-<i class="no-highlight">52</i>&nbsp;
-<i class="no-highlight">53</i>&nbsp;              /*
-<i class="no-highlight">54</i>&nbsp;                  -- GENERATED --
-<i class="no-highlight">55</i>&nbsp;                  SOURCE: app/views/error401.scala.html
-<i class="no-highlight">56</i>&nbsp;                  HASH: d6b61df4d96f93238605c56667b804c10a819255
-<i class="no-highlight">57</i>&nbsp;                  MATRIX: 1033-&gt;0
-<i class="no-highlight">58</i>&nbsp;                  LINES: 33-&gt;1
-<i class="no-highlight">59</i>&nbsp;                  -- GENERATED --
-<i class="no-highlight">60</i>&nbsp;              */
-<i class="no-highlight">61</i>&nbsp;          
+<b class="nc"><i class="no-highlight">33</i>&nbsp;Seq[Any](format.raw/*2.1*/(&quot;&quot;&quot;&lt;!DOCTYPE html&gt;</b>
+<i class="no-highlight">34</i>&nbsp;&lt;html lang=&quot;es&quot;&gt;
+<i class="no-highlight">35</i>&nbsp;	&lt;head&gt;
+<b class="nc"><i class="no-highlight">36</i>&nbsp;		&lt;title&gt;&quot;&quot;&quot;),_display_(/*5.11*/title),format.raw/*5.16*/(&quot;&quot;&quot;&lt;/title&gt;</b>
+<b class="nc"><i class="no-highlight">37</i>&nbsp;		&lt;link rel=&quot;stylesheet&quot; media=&quot;screen&quot; href=&quot;&quot;&quot;&quot;),_display_(/*6.48*/routes/*6.54*/.Assets.versioned(&quot;css/main.css&quot;)),format.raw/*6.87*/(&quot;&quot;&quot;&quot;&gt;</b>
+<b class="nc"><i class="no-highlight">38</i>&nbsp;		&lt;link rel=&quot;shortcut icon&quot; type=&quot;image/png&quot; href=&quot;&quot;&quot;&quot;),_display_(/*7.53*/routes/*7.59*/.Assets.versioned(&quot;img/favicon.png&quot;)),format.raw/*7.95*/(&quot;&quot;&quot;&quot;&gt;</b>
+<i class="no-highlight">39</i>&nbsp;
+<b class="nc"><i class="no-highlight">40</i>&nbsp;		&quot;&quot;&quot;),_display_(/*9.4*/parts/*9.9*/.cssfiles()),format.raw/*9.20*/(&quot;&quot;&quot;</b>
+<b class="nc"><i class="no-highlight">41</i>&nbsp;	&quot;&quot;&quot;),format.raw/*10.2*/(&quot;&quot;&quot;&lt;/head&gt;</b>
+<i class="no-highlight">42</i>&nbsp;	&lt;body class=&quot;nav-md&quot;&gt;
+<i class="no-highlight">43</i>&nbsp;		&lt;div class=&quot;container body&quot;&gt;
+<i class="no-highlight">44</i>&nbsp;			&lt;div class=&quot;main_container&quot;&gt;
+<b class="nc"><i class="no-highlight">45</i>&nbsp;				&quot;&quot;&quot;),_display_(/*14.6*/content),format.raw/*14.13*/(&quot;&quot;&quot;</b>
+<b class="nc"><i class="no-highlight">46</i>&nbsp;			&quot;&quot;&quot;),format.raw/*15.4*/(&quot;&quot;&quot;&lt;/div&gt;</b>
+<i class="no-highlight">47</i>&nbsp;		&lt;/div&gt;
+<i class="no-highlight">48</i>&nbsp;	&lt;/body&gt;
+<i class="no-highlight">49</i>&nbsp;&lt;/html&gt;
+<i class="no-highlight">50</i>&nbsp;&quot;&quot;&quot;))
+<i class="no-highlight">51</i>&nbsp;      }
+<i class="no-highlight">52</i>&nbsp;    }
+<i class="no-highlight">53</i>&nbsp;  }
+<i class="no-highlight">54</i>&nbsp;
+<b class="nc"><i class="no-highlight">55</i>&nbsp;  def render(title:String,content:Html): play.twirl.api.HtmlFormat.Appendable = apply(title)(content)</b>
+<i class="no-highlight">56</i>&nbsp;
+<b class="nc"><i class="no-highlight">57</i>&nbsp;  def f:((String) =&gt; (Html) =&gt; play.twirl.api.HtmlFormat.Appendable) = (title) =&gt; (content) =&gt; apply(title)(content)</b>
+<i class="no-highlight">58</i>&nbsp;
+<b class="nc"><i class="no-highlight">59</i>&nbsp;  def ref: this.type = this</b>
+<i class="no-highlight">60</i>&nbsp;
+<i class="no-highlight">61</i>&nbsp;}
+<i class="no-highlight">62</i>&nbsp;
+<i class="no-highlight">63</i>&nbsp;
+<i class="no-highlight">64</i>&nbsp;              /*
+<i class="no-highlight">65</i>&nbsp;                  -- GENERATED --
+<i class="no-highlight">66</i>&nbsp;                  SOURCE: app/views/parts/body.scala.html
+<i class="no-highlight">67</i>&nbsp;                  HASH: 1ffe8a731c7bf6e917fac456bbd9930a47c834a4
+<i class="no-highlight">68</i>&nbsp;                  MATRIX: 958-&gt;1|1082-&gt;32|1159-&gt;83|1184-&gt;88|1266-&gt;144|1280-&gt;150|1333-&gt;183|1414-&gt;238|1428-&gt;244|1484-&gt;280|1516-&gt;287|1528-&gt;292|1559-&gt;303|1588-&gt;305|1713-&gt;404|1741-&gt;411|1772-&gt;415
+<i class="no-highlight">69</i>&nbsp;                  LINES: 28-&gt;1|33-&gt;2|36-&gt;5|36-&gt;5|37-&gt;6|37-&gt;6|37-&gt;6|38-&gt;7|38-&gt;7|38-&gt;7|40-&gt;9|40-&gt;9|40-&gt;9|41-&gt;10|45-&gt;14|45-&gt;14|46-&gt;15
+<i class="no-highlight">70</i>&nbsp;                  -- GENERATED --
+<i class="no-highlight">71</i>&nbsp;              */
+<i class="no-highlight">72</i>&nbsp;          
 </div>
 </pre>
 </div>
@@ -167,7 +178,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-08-28 18:36</div>
+    <div style="float:right;">generated on 2022-08-28 18:56</div>
 </div>
 </body>
 </html>

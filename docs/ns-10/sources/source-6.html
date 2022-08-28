@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > GetDashboardDataRequest</title>
+  <title>Coverage Report > GetDashboardDataFunction</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -17,15 +17,18 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">operations.requests</a>
+    <a href="../index.html">services.core.functions</a>
 </div>
 
-<h1>Coverage Summary for Class: GetDashboardDataRequest (operations.requests)</h1>
+<h1>Coverage Summary for Class: GetDashboardDataFunction (services.core.functions)</h1>
 
 <table class="coverageStats">
-
 <tr>
   <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -36,62 +39,33 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">GetDashboardDataRequest</td>
+  <td class="name">GetDashboardDataFunction</td>
 <td class="coverageStat">
   <span class="percent">
-    50%
+    100%
   </span>
   <span class="absValue">
-    (1/2)
+    (1/1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    50%
+    88.2%
   </span>
   <span class="absValue">
-    (1/2)
-  </span>
-</td>
-</tr>
-  <tr>
-    <td class="name">GetDashboardDataRequest$</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/1)
+    (15/17)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    97.3%
   </span>
   <span class="absValue">
-    (0/1)
-  </span>
-</td>
-  </tr>
-<tr>
-  <td class="name"><strong>Total</strong></td>
-<td class="coverageStat">
-  <span class="percent">
-    33.3%
-  </span>
-  <span class="absValue">
-    (1/3)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    33.3%
-  </span>
-  <span class="absValue">
-    (1/3)
+    (71/73)
   </span>
 </td>
 </tr>
+
 </table>
 
 <br/>
@@ -99,15 +73,187 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package operations.requests
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package services.core.functions;
 <i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import java.time.Instant
-<i class="no-highlight">4</i>&nbsp;
-<i class="no-highlight">5</i>&nbsp;import operations.core.{RequestType, WiFreeRequest}
-<i class="no-highlight">6</i>&nbsp;
-<b class="pc"><i class="no-highlight">7</i>&nbsp;case class GetDashboardDataRequest(portalId: Long, now: Instant) extends WiFreeRequest {</b>
-<b class="nc"><i class="no-highlight">8</i>&nbsp;  override def requestType: RequestType = RequestType.GET_DASHBOARD_DATA_REQUEST</b>
-<i class="no-highlight">9</i>&nbsp;}
+<i class="no-highlight">3</i>&nbsp;import daos.NetworkUserConnectionLogDAO;
+<i class="no-highlight">4</i>&nbsp;import models.BaseModel;
+<i class="no-highlight">5</i>&nbsp;import models.NetworkUser;
+<i class="no-highlight">6</i>&nbsp;import models.NetworkUserConnectionLog;
+<i class="no-highlight">7</i>&nbsp;import models.types.Gender;
+<i class="no-highlight">8</i>&nbsp;import operations.requests.GetDashboardDataRequest;
+<i class="no-highlight">9</i>&nbsp;import operations.responses.DatasetFilter;
+<i class="no-highlight">10</i>&nbsp;import operations.responses.GetDashboardDataResponse;
+<i class="no-highlight">11</i>&nbsp;import scala.Tuple2;
+<i class="no-highlight">12</i>&nbsp;import services.core.AgeRange;
+<i class="no-highlight">13</i>&nbsp;import services.core.CanGroupLogs;
+<i class="no-highlight">14</i>&nbsp;import services.core.ServiceType;
+<i class="no-highlight">15</i>&nbsp;import services.core.WiFreeFunction;
+<i class="no-highlight">16</i>&nbsp;import utils.DateHelper;
+<i class="no-highlight">17</i>&nbsp;
+<i class="no-highlight">18</i>&nbsp;import java.time.Instant;
+<i class="no-highlight">19</i>&nbsp;import java.util.Comparator;
+<i class="no-highlight">20</i>&nbsp;import java.util.List;
+<i class="no-highlight">21</i>&nbsp;import java.util.Map;
+<i class="no-highlight">22</i>&nbsp;import java.util.Set;
+<i class="no-highlight">23</i>&nbsp;import java.util.function.Function;
+<i class="no-highlight">24</i>&nbsp;import java.util.function.Supplier;
+<i class="no-highlight">25</i>&nbsp;import java.util.stream.Collectors;
+<i class="no-highlight">26</i>&nbsp;import java.util.stream.Stream;
+<i class="no-highlight">27</i>&nbsp;
+<i class="no-highlight">28</i>&nbsp;import static services.core.AnyRange.toRange;
+<i class="no-highlight">29</i>&nbsp;import static utils.DateHelper.between;
+<i class="no-highlight">30</i>&nbsp;
+<i class="no-highlight">31</i>&nbsp;@SuppressWarnings(&quot;unused&quot;)
+<b class="fc"><i class="no-highlight">32</i>&nbsp;public class GetDashboardDataFunction</b>
+<i class="no-highlight">33</i>&nbsp;        extends WiFreeFunction&lt;GetDashboardDataRequest, GetDashboardDataResponse&gt;
+<i class="no-highlight">34</i>&nbsp;        implements CanGroupLogs {
+<i class="no-highlight">35</i>&nbsp;
+<i class="no-highlight">36</i>&nbsp;    @Override
+<i class="no-highlight">37</i>&nbsp;    public Function&lt;GetDashboardDataRequest, GetDashboardDataResponse&gt; function() {
+<b class="fc"><i class="no-highlight">38</i>&nbsp;        function = request -&gt; {</b>
+<b class="fc"><i class="no-highlight">39</i>&nbsp;            NetworkUserConnectionLogDAO connectionLogDAO = new NetworkUserConnectionLogDAO();</b>
+<b class="fc"><i class="no-highlight">40</i>&nbsp;            long portalId = request.portalId();</b>
+<b class="fc"><i class="no-highlight">41</i>&nbsp;            Instant now = request.now();</b>
+<i class="no-highlight">42</i>&nbsp;
+<b class="fc"><i class="no-highlight">43</i>&nbsp;            DatasetFilter lastWeekFilter = DatasetFilter.usersConnectedLastWeekFilter(portalId);</b>
+<b class="fc"><i class="no-highlight">44</i>&nbsp;            DatasetFilter beforeLastWeekFilter = DatasetFilter.usersConnectedBeforeLastWeekFilter(portalId);</b>
+<b class="fc"><i class="no-highlight">45</i>&nbsp;            List&lt;NetworkUserConnectionLog&gt; logsLastWeek = connectionLogDAO.findForFilter(lastWeekFilter, now);</b>
+<b class="fc"><i class="no-highlight">46</i>&nbsp;            List&lt;NetworkUserConnectionLog&gt; logsBeforeLastWeek = connectionLogDAO.findForFilter(beforeLastWeekFilter, now);</b>
+<b class="fc"><i class="no-highlight">47</i>&nbsp;            Supplier&lt;Stream&lt;NetworkUser&gt;&gt; usersConnectedLastWeekSupplier = usersConnectedLastWeekSupplier(logsLastWeek);</b>
+<i class="no-highlight">48</i>&nbsp;
+<b class="fc"><i class="no-highlight">49</i>&nbsp;            Long amountOfUsersConnectedLastWeek = amountOfUsersConnectedLastWeek(usersConnectedLastWeekSupplier);</b>
+<i class="no-highlight">50</i>&nbsp;
+<b class="fc"><i class="no-highlight">51</i>&nbsp;            Map&lt;Tuple2&lt;Integer, Integer&gt;, Long&gt; usersByAgeRangeLastWeek = usersByAgeRangeLastWeek(logsLastWeek);</b>
+<i class="no-highlight">52</i>&nbsp;
+<b class="fc"><i class="no-highlight">53</i>&nbsp;            long amountOfNewUsersLastWeek = amountOfNewUsersLastWeek(logsBeforeLastWeek, usersConnectedLastWeekSupplier);</b>
+<i class="no-highlight">54</i>&nbsp;
+<b class="fc"><i class="no-highlight">55</i>&nbsp;            Map&lt;Gender, Long&gt; usersByGenderLastWeek = usersByGenderLastWeek(logsLastWeek);</b>
+<i class="no-highlight">56</i>&nbsp;
+<b class="fc"><i class="no-highlight">57</i>&nbsp;            String busiestDayLastWeek = busiestDayLastWeek(logsLastWeek);</b>
+<i class="no-highlight">58</i>&nbsp;
+<b class="fc"><i class="no-highlight">59</i>&nbsp;            String busiestTimeLastWeek = busiestTimeLastWeek(logsLastWeek);</b>
+<i class="no-highlight">60</i>&nbsp;
+<b class="fc"><i class="no-highlight">61</i>&nbsp;            double usersLoyalty = usersLoyalty(logsLastWeek, logsBeforeLastWeek);</b>
+<i class="no-highlight">62</i>&nbsp;
+<b class="fc"><i class="no-highlight">63</i>&nbsp;            long usersOnline = usersOnline(logsLastWeek, now);</b>
+<i class="no-highlight">64</i>&nbsp;
+<b class="fc"><i class="no-highlight">65</i>&nbsp;            return new GetDashboardDataResponse(</b>
+<b class="fc"><i class="no-highlight">66</i>&nbsp;                    amountOfUsersConnectedLastWeek,</b>
+<i class="no-highlight">67</i>&nbsp;                    usersByAgeRangeLastWeek,
+<i class="no-highlight">68</i>&nbsp;                    amountOfNewUsersLastWeek,
+<i class="no-highlight">69</i>&nbsp;                    usersByGenderLastWeek,
+<i class="no-highlight">70</i>&nbsp;                    busiestDayLastWeek,
+<i class="no-highlight">71</i>&nbsp;                    busiestTimeLastWeek,
+<i class="no-highlight">72</i>&nbsp;                    usersLoyalty,
+<i class="no-highlight">73</i>&nbsp;                    usersOnline
+<i class="no-highlight">74</i>&nbsp;            );
+<i class="no-highlight">75</i>&nbsp;        };
+<b class="fc"><i class="no-highlight">76</i>&nbsp;        return function;</b>
+<i class="no-highlight">77</i>&nbsp;    }
+<i class="no-highlight">78</i>&nbsp;
+<i class="no-highlight">79</i>&nbsp;    private double usersLoyalty(List&lt;NetworkUserConnectionLog&gt; logsLastWeek, List&lt;NetworkUserConnectionLog&gt; logsBeforeLastWeek) {
+<b class="fc"><i class="no-highlight">80</i>&nbsp;        Set&lt;NetworkUser&gt; usersLastWeek = logsLastWeek.stream()</b>
+<b class="fc"><i class="no-highlight">81</i>&nbsp;                .map(NetworkUserConnectionLog::getNetworkUser)</b>
+<b class="fc"><i class="no-highlight">82</i>&nbsp;                .collect(Collectors.toSet());</b>
+<b class="fc"><i class="no-highlight">83</i>&nbsp;        Set&lt;NetworkUser&gt; usersBeforeLastWeek = logsBeforeLastWeek.stream()</b>
+<b class="fc"><i class="no-highlight">84</i>&nbsp;                .map(NetworkUserConnectionLog::getNetworkUser)</b>
+<b class="fc"><i class="no-highlight">85</i>&nbsp;                .collect(Collectors.toSet());</b>
+<b class="fc"><i class="no-highlight">86</i>&nbsp;        double amountOfAlreadyRegisteredUsersThatReturnedThisLastWeek = usersLastWeek.stream()</b>
+<b class="fc"><i class="no-highlight">87</i>&nbsp;                .filter(usersBeforeLastWeek::contains)</b>
+<b class="fc"><i class="no-highlight">88</i>&nbsp;                .count();</b>
+<b class="fc"><i class="no-highlight">89</i>&nbsp;        double amountOfUsersConnectedBeforeLastWeek = usersBeforeLastWeek.size();</b>
+<b class="fc"><i class="no-highlight">90</i>&nbsp;        return amountOfAlreadyRegisteredUsersThatReturnedThisLastWeek/amountOfUsersConnectedBeforeLastWeek;</b>
+<i class="no-highlight">91</i>&nbsp;    }
+<i class="no-highlight">92</i>&nbsp;
+<i class="no-highlight">93</i>&nbsp;    private String busiestTimeLastWeek(List&lt;NetworkUserConnectionLog&gt; logsLastWeek) {
+<b class="fc"><i class="no-highlight">94</i>&nbsp;        Map&lt;Integer, Long&gt; visitsPerHourLastWeek = groupCounting(logsLastWeek,</b>
+<i class="no-highlight">95</i>&nbsp;                NetworkUserConnectionLog::getConnectionStartDate,
+<i class="no-highlight">96</i>&nbsp;                DateHelper::hourBeginning);
+<b class="fc"><i class="no-highlight">97</i>&nbsp;        int hour = visitsPerHourLastWeek.entrySet()</b>
+<b class="fc"><i class="no-highlight">98</i>&nbsp;                .stream()</b>
+<b class="fc"><i class="no-highlight">99</i>&nbsp;                .max(Comparator.comparing(Map.Entry::getValue))</b>
+<b class="fc"><i class="no-highlight">100</i>&nbsp;                .get()</b>
+<b class="fc"><i class="no-highlight">101</i>&nbsp;                .getKey();</b>
+<b class="fc"><i class="no-highlight">102</i>&nbsp;        return String.format(&quot;%02d:00&quot;, hour);</b>
+<i class="no-highlight">103</i>&nbsp;    }
+<i class="no-highlight">104</i>&nbsp;
+<i class="no-highlight">105</i>&nbsp;    private String busiestDayLastWeek(List&lt;NetworkUserConnectionLog&gt; logsLastWeek) {
+<b class="fc"><i class="no-highlight">106</i>&nbsp;        Map&lt;Instant, Long&gt; visitsByDayLastWeek = groupCounting(</b>
+<i class="no-highlight">107</i>&nbsp;                logsLastWeek,
+<i class="no-highlight">108</i>&nbsp;                NetworkUserConnectionLog::getConnectionStartDate,
+<i class="no-highlight">109</i>&nbsp;                DateHelper::dayBeginning
+<i class="no-highlight">110</i>&nbsp;        );
+<b class="fc"><i class="no-highlight">111</i>&nbsp;        return visitsByDayLastWeek.entrySet()</b>
+<b class="fc"><i class="no-highlight">112</i>&nbsp;                .stream()</b>
+<b class="fc"><i class="no-highlight">113</i>&nbsp;                .max(Comparator.comparing(Map.Entry::getValue))</b>
+<b class="fc"><i class="no-highlight">114</i>&nbsp;                .get()</b>
+<b class="fc"><i class="no-highlight">115</i>&nbsp;                .getKey()</b>
+<b class="fc"><i class="no-highlight">116</i>&nbsp;                .toString()</b>
+<b class="fc"><i class="no-highlight">117</i>&nbsp;                .split(&quot;T&quot;)[0];</b>
+<i class="no-highlight">118</i>&nbsp;    }
+<i class="no-highlight">119</i>&nbsp;
+<i class="no-highlight">120</i>&nbsp;    private Map&lt;Gender, Long&gt; usersByGenderLastWeek(List&lt;NetworkUserConnectionLog&gt; logsThisWeek) {
+<b class="fc"><i class="no-highlight">121</i>&nbsp;        return groupDistinctCounting(logsThisWeek,</b>
+<i class="no-highlight">122</i>&nbsp;                NetworkUserConnectionLog::getNetworkUser,
+<i class="no-highlight">123</i>&nbsp;                NetworkUser::getGender);
+<i class="no-highlight">124</i>&nbsp;    }
+<i class="no-highlight">125</i>&nbsp;
+<i class="no-highlight">126</i>&nbsp;    private long amountOfNewUsersLastWeek(List&lt;NetworkUserConnectionLog&gt; logsBeforeThisWeek, Supplier&lt;Stream&lt;NetworkUser&gt;&gt; usersConnectedThisWeekSupplier) {
+<b class="fc"><i class="no-highlight">127</i>&nbsp;        Stream&lt;NetworkUser&gt; usersConnectedBeforeThisWeek = logsBeforeThisWeek.stream()</b>
+<b class="fc"><i class="no-highlight">128</i>&nbsp;                .map(NetworkUserConnectionLog::getNetworkUser)</b>
+<b class="fc"><i class="no-highlight">129</i>&nbsp;                .distinct();</b>
+<b class="fc"><i class="no-highlight">130</i>&nbsp;        Set&lt;Long&gt; usersConnectedBeforeThisWeekIds = usersConnectedBeforeThisWeek</b>
+<b class="fc"><i class="no-highlight">131</i>&nbsp;                .map(BaseModel::getId)</b>
+<b class="fc"><i class="no-highlight">132</i>&nbsp;                .collect(Collectors.toSet());</b>
+<b class="fc"><i class="no-highlight">133</i>&nbsp;        Stream&lt;NetworkUser&gt; newUsersThisWeek = usersConnectedThisWeekSupplier.get()</b>
+<b class="fc"><i class="no-highlight">134</i>&nbsp;                .filter(u -&gt; !usersConnectedBeforeThisWeekIds.contains(u.getId()));</b>
+<b class="fc"><i class="no-highlight">135</i>&nbsp;        return newUsersThisWeek.count();</b>
+<i class="no-highlight">136</i>&nbsp;    }
+<i class="no-highlight">137</i>&nbsp;
+<i class="no-highlight">138</i>&nbsp;    private Map&lt;Tuple2&lt;Integer, Integer&gt;, Long&gt; usersByAgeRangeLastWeek(List&lt;NetworkUserConnectionLog&gt; logsLastWeek) {
+<b class="fc"><i class="no-highlight">139</i>&nbsp;        return groupDistinctCounting(</b>
+<i class="no-highlight">140</i>&nbsp;                logsLastWeek,
+<i class="no-highlight">141</i>&nbsp;                NetworkUserConnectionLog::getNetworkUser,
+<b class="fc"><i class="no-highlight">142</i>&nbsp;                user -&gt; toRange(AgeRange.values, user.getAge())</b>
+<i class="no-highlight">143</i>&nbsp;        );
+<i class="no-highlight">144</i>&nbsp;    }
+<i class="no-highlight">145</i>&nbsp;
+<i class="no-highlight">146</i>&nbsp;    private Long amountOfUsersConnectedLastWeek(Supplier&lt;Stream&lt;NetworkUser&gt;&gt; usersConnectedThisWeekSupplier) {
+<b class="fc"><i class="no-highlight">147</i>&nbsp;        Stream&lt;NetworkUser&gt; usersConnectedThisWeek = usersConnectedThisWeekSupplier.get();</b>
+<b class="fc"><i class="no-highlight">148</i>&nbsp;        return usersConnectedThisWeek.count();</b>
+<i class="no-highlight">149</i>&nbsp;    }
+<i class="no-highlight">150</i>&nbsp;
+<i class="no-highlight">151</i>&nbsp;    private Supplier&lt;Stream&lt;NetworkUser&gt;&gt; usersConnectedLastWeekSupplier(List&lt;NetworkUserConnectionLog&gt; logsThisWeek) {
+<b class="fc"><i class="no-highlight">152</i>&nbsp;        return () -&gt; logsThisWeek.stream()</b>
+<b class="fc"><i class="no-highlight">153</i>&nbsp;                        .map(NetworkUserConnectionLog::getNetworkUser)</b>
+<b class="fc"><i class="no-highlight">154</i>&nbsp;                        .distinct();</b>
+<i class="no-highlight">155</i>&nbsp;    }
+<i class="no-highlight">156</i>&nbsp;
+<i class="no-highlight">157</i>&nbsp;    private long usersOnline(List&lt;NetworkUserConnectionLog&gt; logsLastWeek, Instant now) {
+<b class="fc"><i class="no-highlight">158</i>&nbsp;        long fiveMinutes = 60 * 5;</b>
+<b class="fc"><i class="no-highlight">159</i>&nbsp;        return logsLastWeek.stream()</b>
+<b class="fc"><i class="no-highlight">160</i>&nbsp;                .filter(l -&gt; between(now, l.getConnectionStartDate()) &lt;= fiveMinutes)</b>
+<b class="fc"><i class="no-highlight">161</i>&nbsp;                .map(NetworkUserConnectionLog::getNetworkUser)</b>
+<b class="fc"><i class="no-highlight">162</i>&nbsp;                .distinct()</b>
+<b class="fc"><i class="no-highlight">163</i>&nbsp;                .count();</b>
+<i class="no-highlight">164</i>&nbsp;    }
+<i class="no-highlight">165</i>&nbsp;
+<i class="no-highlight">166</i>&nbsp;    @Override
+<i class="no-highlight">167</i>&nbsp;    public Class&lt;GetDashboardDataRequest&gt; rqClass() {
+<b class="fc"><i class="no-highlight">168</i>&nbsp;        return GetDashboardDataRequest.class;</b>
+<i class="no-highlight">169</i>&nbsp;    }
+<i class="no-highlight">170</i>&nbsp;
+<i class="no-highlight">171</i>&nbsp;    @Override
+<i class="no-highlight">172</i>&nbsp;    public Class&lt;GetDashboardDataResponse&gt; rsClass() {
+<b class="nc"><i class="no-highlight">173</i>&nbsp;        return GetDashboardDataResponse.class;</b>
+<i class="no-highlight">174</i>&nbsp;    }
+<i class="no-highlight">175</i>&nbsp;
+<i class="no-highlight">176</i>&nbsp;    @Override
+<i class="no-highlight">177</i>&nbsp;    public ServiceType serviceType() {
+<b class="nc"><i class="no-highlight">178</i>&nbsp;        return ServiceType.TESTING_SERVICE;</b>
+<i class="no-highlight">179</i>&nbsp;    }
+<i class="no-highlight">180</i>&nbsp;
+<i class="no-highlight">181</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -134,7 +280,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-08-28 18:30</div>
+    <div style="float:right;">generated on 2022-08-28 18:56</div>
 </div>
 </body>
 </html>

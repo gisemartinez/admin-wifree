@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > MockupInitDataHelper</title>
+  <title>Coverage Report > connections</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -17,10 +17,10 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">utils</a>
+    <a href="../index.html">views.html.admin</a>
 </div>
 
-<h1>Coverage Summary for Class: MockupInitDataHelper (utils)</h1>
+<h1>Coverage Summary for Class: connections (views.html.admin)</h1>
 
 <table class="coverageStats">
 
@@ -36,21 +36,21 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
   <tr>
-    <td class="name">MockupInitDataHelper$</td>
+    <td class="name">connections$</td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    57.1%
   </span>
   <span class="absValue">
-    (0/13)
+    (4/7)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    94.4%
   </span>
   <span class="absValue">
-    (0/43)
+    (101/107)
   </span>
 </td>
   </tr>
@@ -58,18 +58,18 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    57.1%
   </span>
   <span class="absValue">
-    (0/13)
+    (4/7)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    94.4%
   </span>
   <span class="absValue">
-    (0/43)
+    (101/107)
   </span>
 </td>
 </tr>
@@ -80,87 +80,252 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package utils
-<i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import java.time.{Duration, Instant}
-<i class="no-highlight">4</i>&nbsp;import java.util
-<i class="no-highlight">5</i>&nbsp;import java.util.concurrent.ThreadLocalRandom
-<i class="no-highlight">6</i>&nbsp;
-<i class="no-highlight">7</i>&nbsp;import daos.{NetworkUserConnectionLogDAO, NetworkUserDAO, PortalDAO}
-<i class="no-highlight">8</i>&nbsp;import models._
-<i class="no-highlight">9</i>&nbsp;import models.types.Gender
-<i class="no-highlight">10</i>&nbsp;
-<i class="no-highlight">11</i>&nbsp;import scala.util.Random
-<i class="no-highlight">12</i>&nbsp;
-<i class="no-highlight">13</i>&nbsp;object MockupInitDataHelper {
-<i class="no-highlight">14</i>&nbsp;
-<b class="nc"><i class="no-highlight">15</i>&nbsp;  private val randomizer = new Random()</b>
-<b class="nc"><i class="no-highlight">16</i>&nbsp;  private val end: Instant = DateHelper.now()</b>
-<b class="nc"><i class="no-highlight">17</i>&nbsp;  private val start: Instant = DateHelper.oneYearAgo(end)</b>
-<b class="nc"><i class="no-highlight">18</i>&nbsp;  private val recentStart: Instant = DateHelper.oneDayAgo(end)</b>
-<b class="nc"><i class="no-highlight">19</i>&nbsp;  private val veryRecentStart: Instant = DateHelper.sixtyMinutesAgo(end)</b>
-<i class="no-highlight">20</i>&nbsp;
-<i class="no-highlight">21</i>&nbsp;  def run(pid: Long): Unit = {
-<b class="nc"><i class="no-highlight">22</i>&nbsp;    val portalDao = new PortalDAO()</b>
-<b class="nc"><i class="no-highlight">23</i>&nbsp;    val networkUserDao = new NetworkUserDAO()</b>
-<b class="nc"><i class="no-highlight">24</i>&nbsp;    val logDao = new NetworkUserConnectionLogDAO()</b>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;
+<i class="no-highlight">2</i>&nbsp;package views.html.admin
+<i class="no-highlight">3</i>&nbsp;
+<i class="no-highlight">4</i>&nbsp;import _root_.play.twirl.api.TwirlFeatureImports._
+<i class="no-highlight">5</i>&nbsp;import _root_.play.twirl.api.TwirlHelperImports._
+<i class="no-highlight">6</i>&nbsp;import _root_.play.twirl.api.Html
+<i class="no-highlight">7</i>&nbsp;import _root_.play.twirl.api.JavaScript
+<i class="no-highlight">8</i>&nbsp;import _root_.play.twirl.api.Txt
+<i class="no-highlight">9</i>&nbsp;import _root_.play.twirl.api.Xml
+<i class="no-highlight">10</i>&nbsp;import models._
+<i class="no-highlight">11</i>&nbsp;import controllers._
+<i class="no-highlight">12</i>&nbsp;import play.api.i18n._
+<i class="no-highlight">13</i>&nbsp;import views.html._
+<i class="no-highlight">14</i>&nbsp;import play.api.templates.PlayMagic._
+<i class="no-highlight">15</i>&nbsp;import java.lang._
+<i class="no-highlight">16</i>&nbsp;import java.util._
+<i class="no-highlight">17</i>&nbsp;import scala.collection.JavaConverters._
+<i class="no-highlight">18</i>&nbsp;import play.core.j.PlayMagicForJava._
+<i class="no-highlight">19</i>&nbsp;import play.mvc._
+<i class="no-highlight">20</i>&nbsp;import play.api.data.Field
+<i class="no-highlight">21</i>&nbsp;import play.mvc.Http.Context.Implicit._
+<i class="no-highlight">22</i>&nbsp;import play.data._
+<i class="no-highlight">23</i>&nbsp;import play.core.j.PlayFormsMagicForJava._
+<i class="no-highlight">24</i>&nbsp;/*1.2*/import views.dto.ConnectedUser
 <i class="no-highlight">25</i>&nbsp;
-<b class="nc"><i class="no-highlight">26</i>&nbsp;    val portal = portalDao.get(pid)</b>
+<b class="fc"><i class="no-highlight">26</i>&nbsp;object connections extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template2[Form[PortalNetworkConfiguration],List[ConnectedUser],play.twirl.api.HtmlFormat.Appendable] {</b>
 <i class="no-highlight">27</i>&nbsp;
-<b class="nc"><i class="no-highlight">28</i>&nbsp;    (1 to 300).foreach { uid =&gt;</b>
-<b class="nc"><i class="no-highlight">29</i>&nbsp;      val userName = s&quot;Usuario Prueba $pid $uid&quot;</b>
-<b class="nc"><i class="no-highlight">30</i>&nbsp;      val userEmail = s&quot;usuarioprueba_${pid}_${uid}@mail.com&quot;</b>
-<b class="nc"><i class="no-highlight">31</i>&nbsp;      val userOnline = random(Seq(true, false))</b>
-<b class="nc"><i class="no-highlight">32</i>&nbsp;      val userGender = random(Seq(Gender.Male, Gender.Female, Gender.Other))</b>
-<b class="nc"><i class="no-highlight">33</i>&nbsp;      val userAge = random(13 to 90)</b>
+<i class="no-highlight">28</i>&nbsp;  /**/
+<i class="no-highlight">29</i>&nbsp;  def apply/*3.2*/(networkConfigurationForm: Form[PortalNetworkConfiguration],
+<i class="no-highlight">30</i>&nbsp;connectedUsers: List[ConnectedUser]):play.twirl.api.HtmlFormat.Appendable = {
+<b class="fc"><i class="no-highlight">31</i>&nbsp;    _display_ {</b>
+<i class="no-highlight">32</i>&nbsp;      {
+<i class="no-highlight">33</i>&nbsp;
 <i class="no-highlight">34</i>&nbsp;
-<b class="nc"><i class="no-highlight">35</i>&nbsp;      val macAddresses = new util.HashSet[NetworkUserMACAddress]()</b>
-<b class="nc"><i class="no-highlight">36</i>&nbsp;      val socialNetworkAccounts = new util.HashSet[NetworkUserSocialNetworkAccount]()</b>
-<b class="nc"><i class="no-highlight">37</i>&nbsp;      val networkUser = new NetworkUser(portal, userName, userEmail, &quot;&quot;, null, userOnline, &quot;password&quot;, userGender, null, macAddresses, socialNetworkAccounts, userAge)</b>
-<b class="nc"><i class="no-highlight">38</i>&nbsp;      networkUserDao.save(networkUser)</b>
-<i class="no-highlight">39</i>&nbsp;
-<b class="nc"><i class="no-highlight">40</i>&nbsp;      (1 to random(1 to 30)).foreach { _ =&gt;</b>
-<b class="nc"><i class="no-highlight">41</i>&nbsp;        val plusEndMinutes = random(2 to 65)</b>
-<b class="nc"><i class="no-highlight">42</i>&nbsp;        val startConnection = randomDate()</b>
-<b class="nc"><i class="no-highlight">43</i>&nbsp;        val endConnection = startConnection.plus(Duration.ofMinutes(plusEndMinutes))</b>
-<b class="nc"><i class="no-highlight">44</i>&nbsp;        val mac = randomMAC()</b>
-<i class="no-highlight">45</i>&nbsp;
-<b class="nc"><i class="no-highlight">46</i>&nbsp;        val log = new NetworkUserConnectionLog(portal, networkUser, startConnection, endConnection, mac)</b>
-<b class="nc"><i class="no-highlight">47</i>&nbsp;        logDao.save(log)</b>
-<i class="no-highlight">48</i>&nbsp;      }
-<i class="no-highlight">49</i>&nbsp;    }
-<i class="no-highlight">50</i>&nbsp;
-<i class="no-highlight">51</i>&nbsp;  }
-<i class="no-highlight">52</i>&nbsp;
-<b class="nc"><i class="no-highlight">53</i>&nbsp;  private def random[A](seq: Seq[A]): A = seq(randomizer.nextInt(seq.length))</b>
-<i class="no-highlight">54</i>&nbsp;
-<i class="no-highlight">55</i>&nbsp;  private def randomDate(): Instant = {
-<b class="nc"><i class="no-highlight">56</i>&nbsp;    val selectedStart = ThreadLocalRandom.current().nextInt(1, 26) match {</b>
-<b class="nc"><i class="no-highlight">57</i>&nbsp;      case 1 =&gt; veryRecentStart</b>
-<b class="nc"><i class="no-highlight">58</i>&nbsp;      case _ =&gt; start</b>
-<i class="no-highlight">59</i>&nbsp;    }
-<i class="no-highlight">60</i>&nbsp;
-<b class="nc"><i class="no-highlight">61</i>&nbsp;    val startSeconds = selectedStart.getEpochSecond</b>
-<b class="nc"><i class="no-highlight">62</i>&nbsp;    val endSeconds = end.getEpochSecond</b>
-<b class="nc"><i class="no-highlight">63</i>&nbsp;    val rnd = ThreadLocalRandom.current().nextLong(startSeconds, endSeconds)</b>
-<b class="nc"><i class="no-highlight">64</i>&nbsp;    val randomStart = Instant.ofEpochSecond(rnd)</b>
-<i class="no-highlight">65</i>&nbsp;
-<b class="nc"><i class="no-highlight">66</i>&nbsp;    ThreadLocalRandom.current().nextInt(1, 30) match {</b>
-<b class="nc"><i class="no-highlight">67</i>&nbsp;      case n if (1 to 8).contains(n)  =&gt; DateHelper.toInstant(DateHelper.toLocalDateTime(randomDate()).withHour(17))</b>
-<b class="nc"><i class="no-highlight">68</i>&nbsp;      case _ =&gt; randomStart</b>
-<i class="no-highlight">69</i>&nbsp;    }
-<i class="no-highlight">70</i>&nbsp;  }
-<i class="no-highlight">71</i>&nbsp;
-<i class="no-highlight">72</i>&nbsp;  private def randomMAC(): String = {
-<b class="nc"><i class="no-highlight">73</i>&nbsp;    var mac: String = &quot;&quot;</b>
-<b class="nc"><i class="no-highlight">74</i>&nbsp;    (1 to 6).foreach { _ =&gt;</b>
-<b class="nc"><i class="no-highlight">75</i>&nbsp;      val n: java.lang.Integer = randomizer.nextInt(255)</b>
-<b class="nc"><i class="no-highlight">76</i>&nbsp;      mac = mac + String.format(&quot;%02x&quot;, n)</b>
-<i class="no-highlight">77</i>&nbsp;    }
-<b class="nc"><i class="no-highlight">78</i>&nbsp;    mac.toUpperCase()</b>
-<i class="no-highlight">79</i>&nbsp;  }
-<i class="no-highlight">80</i>&nbsp;
-<b class="nc"><i class="no-highlight">81</i>&nbsp;}</b>
+<b class="fc"><i class="no-highlight">35</i>&nbsp;Seq[Any](format.raw/*5.1*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">36</i>&nbsp;&quot;&quot;&quot;),format.raw/*6.1*/(&quot;&quot;&quot;&lt;!-- page content --&gt;</b>
+<i class="no-highlight">37</i>&nbsp;
+<b class="fc"><i class="no-highlight">38</i>&nbsp;&lt;link href=&quot;&quot;&quot;&quot;),_display_(/*8.14*/routes/*8.20*/.Assets.versioned(&quot;js/datatables/jquery.dataTables.min.css&quot;)),format.raw/*8.80*/(&quot;&quot;&quot;&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;</b>
+<b class="fc"><i class="no-highlight">39</i>&nbsp;&lt;link href=&quot;&quot;&quot;&quot;),_display_(/*9.14*/routes/*9.20*/.Assets.versioned(&quot;js/datatables/buttons.bootstrap.min.css&quot;)),format.raw/*9.80*/(&quot;&quot;&quot;&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;</b>
+<b class="fc"><i class="no-highlight">40</i>&nbsp;&lt;link href=&quot;&quot;&quot;&quot;),_display_(/*10.14*/routes/*10.20*/.Assets.versioned(&quot;js/datatables/fixedHeader.bootstrap.min.css&quot;)),format.raw/*10.84*/(&quot;&quot;&quot;&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;</b>
+<b class="fc"><i class="no-highlight">41</i>&nbsp;&lt;link href=&quot;&quot;&quot;&quot;),_display_(/*11.14*/routes/*11.20*/.Assets.versioned(&quot;js/datatables/responsive.bootstrap.min.css&quot;)),format.raw/*11.83*/(&quot;&quot;&quot;&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;</b>
+<b class="fc"><i class="no-highlight">42</i>&nbsp;&lt;link href=&quot;&quot;&quot;&quot;),_display_(/*12.14*/routes/*12.20*/.Assets.versioned(&quot;js/datatables/scroller.bootstrap.min.css&quot;)),format.raw/*12.81*/(&quot;&quot;&quot;&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;</b>
+<i class="no-highlight">43</i>&nbsp;
+<i class="no-highlight">44</i>&nbsp;&lt;div class=&quot;right_col&quot; role=&quot;main&quot;&gt;
+<i class="no-highlight">45</i>&nbsp;	&lt;div class=&quot;row&quot;&gt;
+<i class="no-highlight">46</i>&nbsp;		&lt;div class=&quot;col-md-12 col-sm-12 col-xs-12&quot;&gt;
+<i class="no-highlight">47</i>&nbsp;			&lt;div class=&quot;x_panel&quot;&gt;
+<i class="no-highlight">48</i>&nbsp;				&lt;div class=&quot;x_title&quot;&gt;
+<b class="fc"><i class="no-highlight">49</i>&nbsp;					&lt;h2&gt;&quot;&quot;&quot;),_display_(/*19.11*/Messages(&quot;connections.title.timeout-settings&quot;)),format.raw/*19.57*/(&quot;&quot;&quot;&lt;/h2&gt;</b>
+<i class="no-highlight">50</i>&nbsp;					&lt;div class=&quot;clearfix&quot;&gt;&lt;/div&gt;
+<i class="no-highlight">51</i>&nbsp;				&lt;/div&gt;
+<i class="no-highlight">52</i>&nbsp;				&lt;div class=&quot;x-content&quot;&gt;
+<b class="fc"><i class="no-highlight">53</i>&nbsp;					&quot;&quot;&quot;),_display_(/*23.7*/helper/*23.13*/.form(controllers.admin.routes.ConnectionsController.setConnectionTimeout(), &#39;id -&gt; &quot;connectionTimeoutForm&quot;, Symbol(&quot;data-parsley-validate&quot;) -&gt; &quot;true&quot;, &#39;class -&gt; &quot;form-horizontal form-label-left&quot;)/*23.209*/ {_display_(Seq[Any](format.raw/*23.211*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">54</i>&nbsp;					&quot;&quot;&quot;),format.raw/*24.6*/(&quot;&quot;&quot;&lt;div class=&quot;form-group row&quot;&gt;</b>
+<i class="no-highlight">55</i>&nbsp;						&lt;div class=&quot;col-md-3 col-sm-3 col-xs-6&quot;&gt;
+<b class="fc"><i class="no-highlight">56</i>&nbsp;							&quot;&quot;&quot;),_display_(/*26.9*/helper/*26.15*/.inputText(networkConfigurationForm(&quot;connectionTimeout&quot;), &#39;_label -&gt; Messages(&quot;connections.label.max-timeout&quot;), &#39;type -&gt; &quot;number&quot;, &#39;required -&gt; &quot;required&quot;, &#39;class -&gt; &quot;form-control col-md-7 col-xs-12&quot;, &#39;min -&gt; &quot;1&quot;)),format.raw/*26.228*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">57</i>&nbsp;						&quot;&quot;&quot;),format.raw/*27.7*/(&quot;&quot;&quot;&lt;/div&gt;</b>
+<i class="no-highlight">58</i>&nbsp;					&lt;/div&gt;
+<i class="no-highlight">59</i>&nbsp;					&lt;div class=&quot;form-group&quot;&gt;
+<i class="no-highlight">60</i>&nbsp;						&lt;div class=&quot;col-md-6 col-sm-6 col-xs-12 col-md-offset-3&quot;&gt;
+<b class="fc"><i class="no-highlight">61</i>&nbsp;							&lt;button type=&quot;submit&quot; class=&quot;btn btn-success&quot;&gt;&quot;&quot;&quot;),_display_(/*31.55*/Messages(&quot;submit&quot;)),format.raw/*31.73*/(&quot;&quot;&quot;&lt;/button&gt;</b>
+<i class="no-highlight">62</i>&nbsp;						&lt;/div&gt;
+<i class="no-highlight">63</i>&nbsp;					&lt;/div&gt;
+<b class="fc"><i class="no-highlight">64</i>&nbsp;					&quot;&quot;&quot;)))}),format.raw/*34.7*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">65</i>&nbsp;				&quot;&quot;&quot;),format.raw/*35.5*/(&quot;&quot;&quot;&lt;/div&gt;</b>
+<i class="no-highlight">66</i>&nbsp;			&lt;/div&gt;
+<i class="no-highlight">67</i>&nbsp;		&lt;/div&gt;
+<i class="no-highlight">68</i>&nbsp;	&lt;/div&gt;
+<i class="no-highlight">69</i>&nbsp;
+<i class="no-highlight">70</i>&nbsp;	&lt;div class=&quot;row&quot;&gt;
+<i class="no-highlight">71</i>&nbsp;		&lt;div class=&quot;col-md-12 col-sm-12 col-xs-12&quot;&gt;
+<i class="no-highlight">72</i>&nbsp;			&lt;div class=&quot;x_panel&quot;&gt;
+<i class="no-highlight">73</i>&nbsp;				&lt;div class=&quot;x_title&quot;&gt;
+<b class="fc"><i class="no-highlight">74</i>&nbsp;					&lt;h2&gt;&quot;&quot;&quot;),_display_(/*44.11*/Messages(&quot;connections.title.connected-users&quot;)),format.raw/*44.56*/(&quot;&quot;&quot;&lt;/h2&gt;</b>
+<i class="no-highlight">75</i>&nbsp;					&lt;!-- TODO: insert toolboox --&gt;
+<i class="no-highlight">76</i>&nbsp;					&lt;div class=&quot;clearfix&quot;&gt;&lt;/div&gt;
+<i class="no-highlight">77</i>&nbsp;				&lt;/div&gt;
+<i class="no-highlight">78</i>&nbsp;				&lt;div class=&quot;x_content&quot;&gt;
+<i class="no-highlight">79</i>&nbsp;					&lt;table id=&quot;usertable&quot; class=&quot;table table-striped table-bordered&quot;&gt;
+<i class="no-highlight">80</i>&nbsp;						&lt;thead&gt;
+<i class="no-highlight">81</i>&nbsp;						&lt;tr&gt;
+<i class="no-highlight">82</i>&nbsp;							&lt;th&gt;
+<i class="no-highlight">83</i>&nbsp;								&lt;input type=&quot;checkbox&quot; id=&quot;check-all&quot; class=&quot;flat&quot;&gt;
+<i class="no-highlight">84</i>&nbsp;							&lt;/th&gt;
+<b class="fc"><i class="no-highlight">85</i>&nbsp;							&lt;th&gt;&quot;&quot;&quot;),_display_(/*55.13*/Messages(&quot;connections.users-table.header.user-name&quot;)),format.raw/*55.65*/(&quot;&quot;&quot;&lt;/th&gt;</b>
+<b class="fc"><i class="no-highlight">86</i>&nbsp;							&lt;th&gt;&quot;&quot;&quot;),_display_(/*56.13*/Messages(&quot;connections.users-table.header.connection-start&quot;)),format.raw/*56.72*/(&quot;&quot;&quot;&lt;/th&gt;</b>
+<b class="fc"><i class="no-highlight">87</i>&nbsp;							&lt;th&gt;&quot;&quot;&quot;),_display_(/*57.13*/Messages(&quot;connections.users-table.header.user-device&quot;)),format.raw/*57.67*/(&quot;&quot;&quot;&lt;/th&gt;</b>
+<i class="no-highlight">88</i>&nbsp;						&lt;/tr&gt;
+<i class="no-highlight">89</i>&nbsp;						&lt;/thead&gt;
+<i class="no-highlight">90</i>&nbsp;						&lt;tbody&gt;
+<b class="fc"><i class="no-highlight">91</i>&nbsp;						&quot;&quot;&quot;),_display_(/*61.8*/connectedUsers/*61.22*/.map/*61.26*/ { user =&gt;_display_(Seq[Any](format.raw/*61.36*/(&quot;&quot;&quot;</b>
+<b class="nc"><i class="no-highlight">92</i>&nbsp;						&quot;&quot;&quot;),format.raw/*62.7*/(&quot;&quot;&quot;&lt;tr&gt;</b>
+<i class="no-highlight">93</i>&nbsp;							&lt;td class=&quot;a-center&quot;&gt;
+<i class="no-highlight">94</i>&nbsp;								&lt;input type=&quot;checkbox&quot; class=&quot;flat&quot; name=&quot;table_records&quot;&gt;
+<i class="no-highlight">95</i>&nbsp;							&lt;/td&gt;
+<b class="nc"><i class="no-highlight">96</i>&nbsp;							&lt;td&gt;&quot;&quot;&quot;),_display_(/*66.13*/user/*66.17*/.username),format.raw/*66.26*/(&quot;&quot;&quot;&lt;/td&gt;</b>
+<b class="nc"><i class="no-highlight">97</i>&nbsp;							&lt;td&gt;&quot;&quot;&quot;),_display_(/*67.13*/user/*67.17*/.connectionStart),format.raw/*67.33*/(&quot;&quot;&quot;&lt;/td&gt;</b>
+<b class="nc"><i class="no-highlight">98</i>&nbsp;							&lt;td&gt;&quot;&quot;&quot;),_display_(/*68.13*/user/*68.17*/.device),format.raw/*68.24*/(&quot;&quot;&quot;&lt;/td&gt;</b>
+<i class="no-highlight">99</i>&nbsp;						&lt;/tr&gt;
+<b class="fc"><i class="no-highlight">100</i>&nbsp;						&quot;&quot;&quot;)))}),format.raw/*70.8*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">101</i>&nbsp;						&quot;&quot;&quot;),format.raw/*71.7*/(&quot;&quot;&quot;&lt;/tbody&gt;</b>
+<i class="no-highlight">102</i>&nbsp;					&lt;/table&gt;
+<i class="no-highlight">103</i>&nbsp;				&lt;/div&gt;
+<i class="no-highlight">104</i>&nbsp;			&lt;/div&gt;
+<i class="no-highlight">105</i>&nbsp;		&lt;/div&gt;
+<i class="no-highlight">106</i>&nbsp;	&lt;/div&gt;
+<i class="no-highlight">107</i>&nbsp;&lt;/div&gt;
+<i class="no-highlight">108</i>&nbsp;&lt;!-- /page content --&gt;
+<i class="no-highlight">109</i>&nbsp;
+<i class="no-highlight">110</i>&nbsp;&lt;script&gt;
+<i class="no-highlight">111</i>&nbsp;    NProgress.done();
+<i class="no-highlight">112</i>&nbsp;&lt;/script&gt;
+<b class="fc"><i class="no-highlight">113</i>&nbsp;&quot;&quot;&quot;),_display_(/*83.2*/parts/*83.7*/.js.datatablejs()),format.raw/*83.24*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">114</i>&nbsp;&quot;&quot;&quot;),format.raw/*84.1*/(&quot;&quot;&quot;&lt;script&gt;</b>
+<b class="fc"><i class="no-highlight">115</i>&nbsp;		var handleDataTableButtons = function() &quot;&quot;&quot;),format.raw/*85.43*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*85.44*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">116</i>&nbsp;			&quot;&quot;&quot;),format.raw/*86.4*/(&quot;&quot;&quot;&quot;use strict&quot;;</b>
+<b class="fc"><i class="no-highlight">117</i>&nbsp;			0 !== $(&quot;#usertable&quot;).length &amp;&amp; $(&quot;#usertable&quot;).DataTable(&quot;&quot;&quot;),format.raw/*87.62*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*87.63*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">118</i>&nbsp;				&quot;&quot;&quot;),format.raw/*88.5*/(&quot;&quot;&quot;dom: &quot;Bfrtip&quot;,</b>
+<b class="fc"><i class="no-highlight">119</i>&nbsp;				buttons: [&quot;&quot;&quot;),format.raw/*89.15*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*89.16*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">120</i>&nbsp;					&quot;&quot;&quot;),format.raw/*90.6*/(&quot;&quot;&quot;extend: &quot;copy&quot;,</b>
+<i class="no-highlight">121</i>&nbsp;					className: &quot;btn-sm&quot;
+<b class="fc"><i class="no-highlight">122</i>&nbsp;				&quot;&quot;&quot;),format.raw/*92.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*92.6*/(&quot;&quot;&quot;, &quot;&quot;&quot;),format.raw/*92.8*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*92.9*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">123</i>&nbsp;					&quot;&quot;&quot;),format.raw/*93.6*/(&quot;&quot;&quot;extend: &quot;csv&quot;,</b>
+<i class="no-highlight">124</i>&nbsp;					className: &quot;btn-sm&quot;
+<b class="fc"><i class="no-highlight">125</i>&nbsp;				&quot;&quot;&quot;),format.raw/*95.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*95.6*/(&quot;&quot;&quot;, &quot;&quot;&quot;),format.raw/*95.8*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*95.9*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">126</i>&nbsp;					&quot;&quot;&quot;),format.raw/*96.6*/(&quot;&quot;&quot;extend: &quot;excel&quot;,</b>
+<i class="no-highlight">127</i>&nbsp;					className: &quot;btn-sm&quot;
+<b class="fc"><i class="no-highlight">128</i>&nbsp;				&quot;&quot;&quot;),format.raw/*98.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*98.6*/(&quot;&quot;&quot;, &quot;&quot;&quot;),format.raw/*98.8*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*98.9*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">129</i>&nbsp;					&quot;&quot;&quot;),format.raw/*99.6*/(&quot;&quot;&quot;extend: &quot;pdf&quot;,</b>
+<i class="no-highlight">130</i>&nbsp;					className: &quot;btn-sm&quot;
+<b class="fc"><i class="no-highlight">131</i>&nbsp;				&quot;&quot;&quot;),format.raw/*101.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*101.6*/(&quot;&quot;&quot;, &quot;&quot;&quot;),format.raw/*101.8*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*101.9*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">132</i>&nbsp;					&quot;&quot;&quot;),format.raw/*102.6*/(&quot;&quot;&quot;extend: &quot;print&quot;,</b>
+<i class="no-highlight">133</i>&nbsp;					className: &quot;btn-sm&quot;
+<b class="fc"><i class="no-highlight">134</i>&nbsp;				&quot;&quot;&quot;),format.raw/*104.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*104.6*/(&quot;&quot;&quot;],</b>
+<i class="no-highlight">135</i>&nbsp;				responsive: !0,
+<b class="fc"><i class="no-highlight">136</i>&nbsp;				language: &quot;&quot;&quot;),format.raw/*106.15*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*106.16*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">137</i>&nbsp;					&quot;&quot;&quot;),format.raw/*107.6*/(&quot;&quot;&quot;search: &quot;Buscar&quot;,</b>
+<i class="no-highlight">138</i>&nbsp;					emptyTable: &quot;Sin datos aún&quot;,
+<i class="no-highlight">139</i>&nbsp;					info: &quot;Mostrando _START_ a _END_ de _TOTAL_ entradas&quot;,
+<i class="no-highlight">140</i>&nbsp;					infoEmpty: &quot;Mostrando 0 entradas de 0 en total&quot;,
+<b class="fc"><i class="no-highlight">141</i>&nbsp;					paginate: &quot;&quot;&quot;),format.raw/*111.16*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*111.17*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">142</i>&nbsp;						&quot;&quot;&quot;),format.raw/*112.7*/(&quot;&quot;&quot;first:      &quot;Primero&quot;,</b>
+<i class="no-highlight">143</i>&nbsp;						previous:   &quot;Anterior&quot;,
+<i class="no-highlight">144</i>&nbsp;						next:       &quot;Siguiente&quot;,
+<i class="no-highlight">145</i>&nbsp;						last:       &quot;Último&quot;
+<b class="fc"><i class="no-highlight">146</i>&nbsp;					&quot;&quot;&quot;),format.raw/*116.6*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*116.7*/(&quot;&quot;&quot;,</b>
+<b class="fc"><i class="no-highlight">147</i>&nbsp;				&quot;&quot;&quot;),format.raw/*117.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*117.6*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">148</i>&nbsp;			&quot;&quot;&quot;),format.raw/*118.4*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*118.5*/(&quot;&quot;&quot;)</b>
+<b class="fc"><i class="no-highlight">149</i>&nbsp;		&quot;&quot;&quot;),format.raw/*119.3*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*119.4*/(&quot;&quot;&quot;,</b>
+<b class="fc"><i class="no-highlight">150</i>&nbsp;		TableManageButtons = function() &quot;&quot;&quot;),format.raw/*120.35*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*120.36*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">151</i>&nbsp;			&quot;&quot;&quot;),format.raw/*121.4*/(&quot;&quot;&quot;&quot;use strict&quot;;</b>
+<b class="fc"><i class="no-highlight">152</i>&nbsp;			return &quot;&quot;&quot;),format.raw/*122.11*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*122.12*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">153</i>&nbsp;				&quot;&quot;&quot;),format.raw/*123.5*/(&quot;&quot;&quot;init: function() &quot;&quot;&quot;),format.raw/*123.22*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*123.23*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">154</i>&nbsp;					&quot;&quot;&quot;),format.raw/*124.6*/(&quot;&quot;&quot;handleDataTableButtons()</b>
+<b class="fc"><i class="no-highlight">155</i>&nbsp;				&quot;&quot;&quot;),format.raw/*125.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*125.6*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">156</i>&nbsp;			&quot;&quot;&quot;),format.raw/*126.4*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*126.5*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">157</i>&nbsp;		&quot;&quot;&quot;),format.raw/*127.3*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*127.4*/(&quot;&quot;&quot;();</b>
+<i class="no-highlight">158</i>&nbsp;	&lt;/script&gt;
+<i class="no-highlight">159</i>&nbsp;&lt;script type=&quot;text/javascript&quot;&gt;
+<b class="fc"><i class="no-highlight">160</i>&nbsp;			$(document).ready(function() &quot;&quot;&quot;),format.raw/*130.33*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*130.34*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">161</i>&nbsp;				&quot;&quot;&quot;),format.raw/*131.5*/(&quot;&quot;&quot;$(&#39;#usertable&#39;).dataTable();</b>
+<i class="no-highlight">162</i>&nbsp;				$(&#39;#usertable&#39;).DataTable();
+<b class="fc"><i class="no-highlight">163</i>&nbsp;				$(&#39;#datatable-scroller&#39;).DataTable(&quot;&quot;&quot;),format.raw/*133.40*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*133.41*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">164</i>&nbsp;					&quot;&quot;&quot;),format.raw/*134.6*/(&quot;&quot;&quot;ajax: &quot;&quot;&quot;&quot;),_display_(/*134.14*/routes/*134.20*/.Assets.versioned(&quot;js/datatables/json/scroller-demo.json&quot;)),format.raw/*134.78*/(&quot;&quot;&quot;&quot;,</b>
+<i class="no-highlight">165</i>&nbsp;					deferRender: true,
+<i class="no-highlight">166</i>&nbsp;					scrollY: 380,
+<i class="no-highlight">167</i>&nbsp;					scrollCollapse: true,
+<i class="no-highlight">168</i>&nbsp;					scroller: true,
+<i class="no-highlight">169</i>&nbsp;					keys: true
+<b class="fc"><i class="no-highlight">170</i>&nbsp;				&quot;&quot;&quot;),format.raw/*140.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*140.6*/(&quot;&quot;&quot;);</b>
+<b class="fc"><i class="no-highlight">171</i>&nbsp;				var table = $(&#39;#datatable-fixed-header&#39;).DataTable(&quot;&quot;&quot;),format.raw/*141.56*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*141.57*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">172</i>&nbsp;					&quot;&quot;&quot;),format.raw/*142.6*/(&quot;&quot;&quot;fixedHeader: true</b>
+<b class="fc"><i class="no-highlight">173</i>&nbsp;				&quot;&quot;&quot;),format.raw/*143.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*143.6*/(&quot;&quot;&quot;);</b>
+<b class="fc"><i class="no-highlight">174</i>&nbsp;			&quot;&quot;&quot;),format.raw/*144.4*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*144.5*/(&quot;&quot;&quot;);</b>
+<i class="no-highlight">175</i>&nbsp;			TableManageButtons.init();
+<i class="no-highlight">176</i>&nbsp;	&lt;/script&gt;
+<i class="no-highlight">177</i>&nbsp;
+<i class="no-highlight">178</i>&nbsp;&lt;!-- form validation --&gt;
+<i class="no-highlight">179</i>&nbsp;&lt;script type=&quot;text/javascript&quot;&gt;
+<b class="fc"><i class="no-highlight">180</i>&nbsp;			$(document).ready(function() &quot;&quot;&quot;),format.raw/*150.33*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*150.34*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">181</i>&nbsp;				&quot;&quot;&quot;),format.raw/*151.5*/(&quot;&quot;&quot;$.listen(&#39;parsley:field:validate&#39;, function() &quot;&quot;&quot;),format.raw/*151.51*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*151.52*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">182</i>&nbsp;					&quot;&quot;&quot;),format.raw/*152.6*/(&quot;&quot;&quot;validateFront();</b>
+<b class="fc"><i class="no-highlight">183</i>&nbsp;				&quot;&quot;&quot;),format.raw/*153.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*153.6*/(&quot;&quot;&quot;);</b>
+<b class="fc"><i class="no-highlight">184</i>&nbsp;				$(&#39;#connectionTimeoutForm .btn&#39;).on(&#39;click&#39;, function() &quot;&quot;&quot;),format.raw/*154.61*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*154.62*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">185</i>&nbsp;					&quot;&quot;&quot;),format.raw/*155.6*/(&quot;&quot;&quot;$(&#39;#connectionTimeoutForm&#39;).parsley().validate();</b>
+<i class="no-highlight">186</i>&nbsp;					validateFront();
+<b class="fc"><i class="no-highlight">187</i>&nbsp;				&quot;&quot;&quot;),format.raw/*157.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*157.6*/(&quot;&quot;&quot;);</b>
+<b class="fc"><i class="no-highlight">188</i>&nbsp;				var validateFront = function() &quot;&quot;&quot;),format.raw/*158.36*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*158.37*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">189</i>&nbsp;					&quot;&quot;&quot;),format.raw/*159.6*/(&quot;&quot;&quot;if (true === $(&#39;#connectionTimeoutForm&#39;).parsley().isValid()) &quot;&quot;&quot;),format.raw/*159.68*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*159.69*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">190</i>&nbsp;						&quot;&quot;&quot;),format.raw/*160.7*/(&quot;&quot;&quot;$(&#39;.bs-callout-info&#39;).removeClass(&#39;hidden&#39;);</b>
+<i class="no-highlight">191</i>&nbsp;						$(&#39;.bs-callout-warning&#39;).addClass(&#39;hidden&#39;);
+<b class="fc"><i class="no-highlight">192</i>&nbsp;					&quot;&quot;&quot;),format.raw/*162.6*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*162.7*/(&quot;&quot;&quot; &quot;&quot;&quot;),format.raw/*162.8*/(&quot;&quot;&quot;else &quot;&quot;&quot;),format.raw/*162.13*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*162.14*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">193</i>&nbsp;						&quot;&quot;&quot;),format.raw/*163.7*/(&quot;&quot;&quot;$(&#39;.bs-callout-info&#39;).addClass(&#39;hidden&#39;);</b>
+<i class="no-highlight">194</i>&nbsp;						$(&#39;.bs-callout-warning&#39;).removeClass(&#39;hidden&#39;);
+<b class="fc"><i class="no-highlight">195</i>&nbsp;					&quot;&quot;&quot;),format.raw/*165.6*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*165.7*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">196</i>&nbsp;				&quot;&quot;&quot;),format.raw/*166.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*166.6*/(&quot;&quot;&quot;;</b>
+<b class="fc"><i class="no-highlight">197</i>&nbsp;			&quot;&quot;&quot;),format.raw/*167.4*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*167.5*/(&quot;&quot;&quot;);</b>
+<i class="no-highlight">198</i>&nbsp;
+<b class="fc"><i class="no-highlight">199</i>&nbsp;			$(document).ready(function() &quot;&quot;&quot;),format.raw/*169.33*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*169.34*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">200</i>&nbsp;				&quot;&quot;&quot;),format.raw/*170.5*/(&quot;&quot;&quot;$.listen(&#39;parsley:field:validate&#39;, function() &quot;&quot;&quot;),format.raw/*170.51*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*170.52*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">201</i>&nbsp;					&quot;&quot;&quot;),format.raw/*171.6*/(&quot;&quot;&quot;validateFront();</b>
+<b class="fc"><i class="no-highlight">202</i>&nbsp;				&quot;&quot;&quot;),format.raw/*172.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*172.6*/(&quot;&quot;&quot;);</b>
+<b class="fc"><i class="no-highlight">203</i>&nbsp;				$(&#39;#demo-form2 .btn&#39;).on(&#39;click&#39;, function() &quot;&quot;&quot;),format.raw/*173.50*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*173.51*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">204</i>&nbsp;					&quot;&quot;&quot;),format.raw/*174.6*/(&quot;&quot;&quot;$(&#39;#demo-form2&#39;).parsley().validate();</b>
+<i class="no-highlight">205</i>&nbsp;					validateFront();
+<b class="fc"><i class="no-highlight">206</i>&nbsp;				&quot;&quot;&quot;),format.raw/*176.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*176.6*/(&quot;&quot;&quot;);</b>
+<b class="fc"><i class="no-highlight">207</i>&nbsp;				var validateFront = function() &quot;&quot;&quot;),format.raw/*177.36*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*177.37*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">208</i>&nbsp;					&quot;&quot;&quot;),format.raw/*178.6*/(&quot;&quot;&quot;if (true === $(&#39;#demo-form2&#39;).parsley().isValid()) &quot;&quot;&quot;),format.raw/*178.57*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*178.58*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">209</i>&nbsp;						&quot;&quot;&quot;),format.raw/*179.7*/(&quot;&quot;&quot;$(&#39;.bs-callout-info&#39;).removeClass(&#39;hidden&#39;);</b>
+<i class="no-highlight">210</i>&nbsp;						$(&#39;.bs-callout-warning&#39;).addClass(&#39;hidden&#39;);
+<b class="fc"><i class="no-highlight">211</i>&nbsp;					&quot;&quot;&quot;),format.raw/*181.6*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*181.7*/(&quot;&quot;&quot; &quot;&quot;&quot;),format.raw/*181.8*/(&quot;&quot;&quot;else &quot;&quot;&quot;),format.raw/*181.13*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*181.14*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">212</i>&nbsp;						&quot;&quot;&quot;),format.raw/*182.7*/(&quot;&quot;&quot;$(&#39;.bs-callout-info&#39;).addClass(&#39;hidden&#39;);</b>
+<i class="no-highlight">213</i>&nbsp;						$(&#39;.bs-callout-warning&#39;).removeClass(&#39;hidden&#39;);
+<b class="fc"><i class="no-highlight">214</i>&nbsp;					&quot;&quot;&quot;),format.raw/*184.6*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*184.7*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">215</i>&nbsp;				&quot;&quot;&quot;),format.raw/*185.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*185.6*/(&quot;&quot;&quot;;</b>
+<b class="fc"><i class="no-highlight">216</i>&nbsp;			&quot;&quot;&quot;),format.raw/*186.4*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*186.5*/(&quot;&quot;&quot;);</b>
+<b class="fc"><i class="no-highlight">217</i>&nbsp;			try &quot;&quot;&quot;),format.raw/*187.8*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*187.9*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">218</i>&nbsp;				&quot;&quot;&quot;),format.raw/*188.5*/(&quot;&quot;&quot;hljs.initHighlightingOnLoad();</b>
+<b class="fc"><i class="no-highlight">219</i>&nbsp;			&quot;&quot;&quot;),format.raw/*189.4*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*189.5*/(&quot;&quot;&quot; &quot;&quot;&quot;),format.raw/*189.6*/(&quot;&quot;&quot;catch (err) &quot;&quot;&quot;),format.raw/*189.18*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*189.19*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*189.20*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">220</i>&nbsp;	&quot;&quot;&quot;),format.raw/*190.2*/(&quot;&quot;&quot;&lt;/script&gt;</b>
+<i class="no-highlight">221</i>&nbsp;&lt;!-- /form validation --&gt;
+<i class="no-highlight">222</i>&nbsp;
+<i class="no-highlight">223</i>&nbsp;
+<i class="no-highlight">224</i>&nbsp;&quot;&quot;&quot;))
+<i class="no-highlight">225</i>&nbsp;      }
+<i class="no-highlight">226</i>&nbsp;    }
+<i class="no-highlight">227</i>&nbsp;  }
+<i class="no-highlight">228</i>&nbsp;
+<b class="fc"><i class="no-highlight">229</i>&nbsp;  def render(networkConfigurationForm:Form[PortalNetworkConfiguration],connectedUsers:List[ConnectedUser]): play.twirl.api.HtmlFormat.Appendable = apply(networkConfigurationForm,connectedUsers)</b>
+<i class="no-highlight">230</i>&nbsp;
+<b class="nc"><i class="no-highlight">231</i>&nbsp;  def f:((Form[PortalNetworkConfiguration],List[ConnectedUser]) =&gt; play.twirl.api.HtmlFormat.Appendable) = (networkConfigurationForm,connectedUsers) =&gt; apply(networkConfigurationForm,connectedUsers)</b>
+<i class="no-highlight">232</i>&nbsp;
+<b class="nc"><i class="no-highlight">233</i>&nbsp;  def ref: this.type = this</b>
+<i class="no-highlight">234</i>&nbsp;
+<i class="no-highlight">235</i>&nbsp;}
+<i class="no-highlight">236</i>&nbsp;
+<i class="no-highlight">237</i>&nbsp;
+<i class="no-highlight">238</i>&nbsp;              /*
+<i class="no-highlight">239</i>&nbsp;                  -- GENERATED --
+<i class="no-highlight">240</i>&nbsp;                  SOURCE: app/views/admin/connections.scala.html
+<i class="no-highlight">241</i>&nbsp;                  HASH: 4595410112d459afee5d5b98a107d5abfbed0682
+<i class="no-highlight">242</i>&nbsp;                  MATRIX: 657-&gt;1|1044-&gt;34|1235-&gt;132|1262-&gt;133|1324-&gt;169|1338-&gt;175|1418-&gt;235|1495-&gt;286|1509-&gt;292|1589-&gt;352|1667-&gt;403|1682-&gt;409|1767-&gt;473|1845-&gt;524|1860-&gt;530|1944-&gt;593|2022-&gt;644|2037-&gt;650|2119-&gt;711|2347-&gt;912|2414-&gt;958|2525-&gt;1043|2540-&gt;1049|2746-&gt;1245|2787-&gt;1247|2820-&gt;1253|2930-&gt;1337|2945-&gt;1343|3180-&gt;1556|3214-&gt;1563|3408-&gt;1730|3447-&gt;1748|3518-&gt;1789|3550-&gt;1794|3738-&gt;1955|3804-&gt;2000|4139-&gt;2308|4212-&gt;2360|4257-&gt;2378|4337-&gt;2437|4382-&gt;2455|4457-&gt;2509|4537-&gt;2563|4560-&gt;2577|4573-&gt;2581|4621-&gt;2591|4655-&gt;2598|4807-&gt;2723|4820-&gt;2727|4850-&gt;2736|4895-&gt;2754|4908-&gt;2758|4945-&gt;2774|4990-&gt;2792|5003-&gt;2796|5031-&gt;2803|5086-&gt;2828|5120-&gt;2835|5280-&gt;2969|5293-&gt;2974|5331-&gt;2991|5359-&gt;2992|5438-&gt;3043|5467-&gt;3044|5498-&gt;3048|5601-&gt;3123|5630-&gt;3124|5662-&gt;3129|5719-&gt;3158|5748-&gt;3159|5781-&gt;3165|5853-&gt;3210|5881-&gt;3211|5910-&gt;3213|5938-&gt;3214|5971-&gt;3220|6042-&gt;3264|6070-&gt;3265|6099-&gt;3267|6127-&gt;3268|6160-&gt;3274|6233-&gt;3320|6261-&gt;3321|6290-&gt;3323|6318-&gt;3324|6351-&gt;3330|6423-&gt;3374|6452-&gt;3375|6482-&gt;3377|6511-&gt;3378|6545-&gt;3384|6619-&gt;3430|6648-&gt;3431|6714-&gt;3468|6744-&gt;3469|6778-&gt;3475|6988-&gt;3656|7018-&gt;3657|7053-&gt;3664|7197-&gt;3780|7226-&gt;3781|7260-&gt;3787|7289-&gt;3788|7321-&gt;3792|7350-&gt;3793|7382-&gt;3797|7411-&gt;3798|7476-&gt;3834|7506-&gt;3835|7538-&gt;3839|7591-&gt;3863|7621-&gt;3864|7654-&gt;3869|7700-&gt;3886|7730-&gt;3887|7764-&gt;3893|7821-&gt;3922|7850-&gt;3923|7882-&gt;3927|7911-&gt;3928|7942-&gt;3931|7971-&gt;3932|8079-&gt;4011|8109-&gt;4012|8142-&gt;4017|8272-&gt;4118|8302-&gt;4119|8336-&gt;4125|8372-&gt;4133|8388-&gt;4139|8468-&gt;4197|8610-&gt;4311|8639-&gt;4312|8726-&gt;4370|8756-&gt;4371|8790-&gt;4377|8840-&gt;4399|8869-&gt;4400|8903-&gt;4406|8932-&gt;4407|9095-&gt;4541|9125-&gt;4542|9158-&gt;4547|9233-&gt;4593|9263-&gt;4594|9297-&gt;4600|9346-&gt;4621|9375-&gt;4622|9467-&gt;4685|9497-&gt;4686|9531-&gt;4692|9635-&gt;4768|9664-&gt;4769|9731-&gt;4807|9761-&gt;4808|9795-&gt;4814|9886-&gt;4876|9916-&gt;4877|9951-&gt;4884|10080-&gt;4985|10109-&gt;4986|10138-&gt;4987|10172-&gt;4992|10202-&gt;4993|10237-&gt;5000|10366-&gt;5101|10395-&gt;5102|10428-&gt;5107|10457-&gt;5108|10490-&gt;5113|10519-&gt;5114|10584-&gt;5150|10614-&gt;5151|10647-&gt;5156|10722-&gt;5202|10752-&gt;5203|10786-&gt;5209|10835-&gt;5230|10864-&gt;5231|10945-&gt;5283|10975-&gt;5284|11009-&gt;5290|11102-&gt;5355|11131-&gt;5356|11198-&gt;5394|11228-&gt;5395|11262-&gt;5401|11342-&gt;5452|11372-&gt;5453|11407-&gt;5460|11536-&gt;5561|11565-&gt;5562|11594-&gt;5563|11628-&gt;5568|11658-&gt;5569|11693-&gt;5576|11822-&gt;5677|11851-&gt;5678|11884-&gt;5683|11913-&gt;5684|11946-&gt;5689|11975-&gt;5690|12013-&gt;5700|12042-&gt;5701|12075-&gt;5706|12137-&gt;5740|12166-&gt;5741|12195-&gt;5742|12236-&gt;5754|12266-&gt;5755|12296-&gt;5756|12326-&gt;5758
+<i class="no-highlight">243</i>&nbsp;                  LINES: 24-&gt;1|29-&gt;3|35-&gt;5|36-&gt;6|38-&gt;8|38-&gt;8|38-&gt;8|39-&gt;9|39-&gt;9|39-&gt;9|40-&gt;10|40-&gt;10|40-&gt;10|41-&gt;11|41-&gt;11|41-&gt;11|42-&gt;12|42-&gt;12|42-&gt;12|49-&gt;19|49-&gt;19|53-&gt;23|53-&gt;23|53-&gt;23|53-&gt;23|54-&gt;24|56-&gt;26|56-&gt;26|56-&gt;26|57-&gt;27|61-&gt;31|61-&gt;31|64-&gt;34|65-&gt;35|74-&gt;44|74-&gt;44|85-&gt;55|85-&gt;55|86-&gt;56|86-&gt;56|87-&gt;57|87-&gt;57|91-&gt;61|91-&gt;61|91-&gt;61|91-&gt;61|92-&gt;62|96-&gt;66|96-&gt;66|96-&gt;66|97-&gt;67|97-&gt;67|97-&gt;67|98-&gt;68|98-&gt;68|98-&gt;68|100-&gt;70|101-&gt;71|113-&gt;83|113-&gt;83|113-&gt;83|114-&gt;84|115-&gt;85|115-&gt;85|116-&gt;86|117-&gt;87|117-&gt;87|118-&gt;88|119-&gt;89|119-&gt;89|120-&gt;90|122-&gt;92|122-&gt;92|122-&gt;92|122-&gt;92|123-&gt;93|125-&gt;95|125-&gt;95|125-&gt;95|125-&gt;95|126-&gt;96|128-&gt;98|128-&gt;98|128-&gt;98|128-&gt;98|129-&gt;99|131-&gt;101|131-&gt;101|131-&gt;101|131-&gt;101|132-&gt;102|134-&gt;104|134-&gt;104|136-&gt;106|136-&gt;106|137-&gt;107|141-&gt;111|141-&gt;111|142-&gt;112|146-&gt;116|146-&gt;116|147-&gt;117|147-&gt;117|148-&gt;118|148-&gt;118|149-&gt;119|149-&gt;119|150-&gt;120|150-&gt;120|151-&gt;121|152-&gt;122|152-&gt;122|153-&gt;123|153-&gt;123|153-&gt;123|154-&gt;124|155-&gt;125|155-&gt;125|156-&gt;126|156-&gt;126|157-&gt;127|157-&gt;127|160-&gt;130|160-&gt;130|161-&gt;131|163-&gt;133|163-&gt;133|164-&gt;134|164-&gt;134|164-&gt;134|164-&gt;134|170-&gt;140|170-&gt;140|171-&gt;141|171-&gt;141|172-&gt;142|173-&gt;143|173-&gt;143|174-&gt;144|174-&gt;144|180-&gt;150|180-&gt;150|181-&gt;151|181-&gt;151|181-&gt;151|182-&gt;152|183-&gt;153|183-&gt;153|184-&gt;154|184-&gt;154|185-&gt;155|187-&gt;157|187-&gt;157|188-&gt;158|188-&gt;158|189-&gt;159|189-&gt;159|189-&gt;159|190-&gt;160|192-&gt;162|192-&gt;162|192-&gt;162|192-&gt;162|192-&gt;162|193-&gt;163|195-&gt;165|195-&gt;165|196-&gt;166|196-&gt;166|197-&gt;167|197-&gt;167|199-&gt;169|199-&gt;169|200-&gt;170|200-&gt;170|200-&gt;170|201-&gt;171|202-&gt;172|202-&gt;172|203-&gt;173|203-&gt;173|204-&gt;174|206-&gt;176|206-&gt;176|207-&gt;177|207-&gt;177|208-&gt;178|208-&gt;178|208-&gt;178|209-&gt;179|211-&gt;181|211-&gt;181|211-&gt;181|211-&gt;181|211-&gt;181|212-&gt;182|214-&gt;184|214-&gt;184|215-&gt;185|215-&gt;185|216-&gt;186|216-&gt;186|217-&gt;187|217-&gt;187|218-&gt;188|219-&gt;189|219-&gt;189|219-&gt;189|219-&gt;189|219-&gt;189|219-&gt;189|220-&gt;190
+<i class="no-highlight">244</i>&nbsp;                  -- GENERATED --
+<i class="no-highlight">245</i>&nbsp;              */
+<i class="no-highlight">246</i>&nbsp;          
 </div>
 </pre>
 </div>
@@ -187,7 +352,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-08-28 18:36</div>
+    <div style="float:right;">generated on 2022-08-28 18:56</div>
 </div>
 </body>
 </html>

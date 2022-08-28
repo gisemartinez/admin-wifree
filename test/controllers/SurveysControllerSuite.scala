@@ -1,17 +1,13 @@
 package controllers
 
-import controllers.admin.{
-  FieldConfigForm,
-  FieldForm,
-  OptionForm,
-  SurveyForm,
-  SurveyFormHelper
-}
+import controllers.admin.SurveyFormHelper
 import daos.SurveyDAO
 import io.ebean.Expr
 import models._
 import org.junit.Assert.{assertEquals, assertTrue}
 import org.junit.Test
+import play.api.data.Form
+import play.api.data.Forms.{boolean, list, mapping, number, text}
 import play.api.libs.json.{JsValue, Json}
 import play.mvc.Http.Status.{BAD_REQUEST, OK, SEE_OTHER}
 import play.test.Helpers
@@ -22,6 +18,7 @@ import java.util.Calendar
 import scala.collection.JavaConverters._;
 
 class SurveysControllerSuite extends WiFreeSuite with SuiteHelper {
+  import SurveysControllerSuite._
   @Test def listAFewSurveys(): Unit = {
     val (admin, portal) = adminWithPortal()
 
@@ -193,7 +190,7 @@ class SurveysControllerSuite extends WiFreeSuite with SuiteHelper {
           )
         )
       )
-    val surveyToMap = SurveyFormHelper.form.fill(surveyForm).data
+    val surveyToMap = form.fill(surveyForm).data
 
     val saveRequestBuilder =
       Helpers.fakeRequest
@@ -221,7 +218,7 @@ class SurveysControllerSuite extends WiFreeSuite with SuiteHelper {
         true,
         List.empty[FieldForm]
       )
-    val surveyToMap = SurveyFormHelper.form.fill(surveyForm).data
+    val surveyToMap = SurveysControllerSuite.form.fill(surveyForm).data
 
     val saveRequestBuilder =
       Helpers.fakeRequest
@@ -372,4 +369,60 @@ class SurveysControllerSuite extends WiFreeSuite with SuiteHelper {
       )
     )
   }
+}
+
+object SurveysControllerSuite {
+  val form: Form[SurveyForm] = Form(
+    mapping(
+      "title" -> text,
+      "enabled" -> boolean,
+      "fields" -> list(fieldMapping)
+    )(SurveyForm.apply)(SurveyForm.unapply)
+  )
+
+  private def fieldMapping = {
+    mapping(
+      "config" -> fieldConfigMapping,
+      "type" -> text
+    )(FieldForm.apply)(FieldForm.unapply)
+  }
+
+  private def fieldConfigMapping = {
+    mapping(
+      "key" -> text,
+      "label" -> text,
+      "order" -> number,
+      "required" -> boolean,
+      "value" -> text,
+      "maximum" -> number,
+      "options" -> list(optionMapping)
+    )(FieldConfigForm.apply)(FieldConfigForm.unapply)
+  }
+
+  private def optionMapping = mapping(
+    "key" -> text
+  )(OptionForm.apply)(OptionForm.unapply)
+
+  final case class SurveyForm(
+      title: String,
+      enabled: Boolean,
+      fields: List[FieldForm]
+  )
+
+  final case class FieldForm(
+      config: FieldConfigForm,
+      fieldType: String
+  )
+
+  final case class FieldConfigForm(
+      key: String,
+      label: String,
+      order: Int, // FieldConfig
+      required: Boolean,
+      value: String, // Textfield
+      maximum: Int, // Rating
+      options: List[OptionForm]
+  ) // Radio
+
+  final case class OptionForm(key: String)
 }

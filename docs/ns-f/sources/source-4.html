@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > DatasetFilter</title>
+  <title>Coverage Report > Functions</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -17,15 +17,18 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">operations.responses</a>
+    <a href="../index.html">services.core</a>
 </div>
 
-<h1>Coverage Summary for Class: DatasetFilter (operations.responses)</h1>
+<h1>Coverage Summary for Class: Functions (services.core)</h1>
 
 <table class="coverageStats">
-
 <tr>
   <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -36,62 +39,33 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">DatasetFilter</td>
+  <td class="name">Functions</td>
 <td class="coverageStat">
   <span class="percent">
-    86.7%
+    100%
   </span>
   <span class="absValue">
-    (13/15)
+    (1/1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    71.4%
+    80%
   </span>
   <span class="absValue">
-    (30/42)
-  </span>
-</td>
-</tr>
-  <tr>
-    <td class="name">DatasetFilter$</td>
-<td class="coverageStat">
-  <span class="percent">
-    88.9%
-  </span>
-  <span class="absValue">
-    (8/9)
+    (4/5)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    95%
+    47.6%
   </span>
   <span class="absValue">
-    (19/20)
-  </span>
-</td>
-  </tr>
-<tr>
-  <td class="name"><strong>Total</strong></td>
-<td class="coverageStat">
-  <span class="percent">
-    87.5%
-  </span>
-  <span class="absValue">
-    (21/24)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    79%
-  </span>
-  <span class="absValue">
-    (49/62)
+    (10/21)
   </span>
 </td>
 </tr>
+
 </table>
 
 <br/>
@@ -99,140 +73,55 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package operations.responses
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package services.core;
 <i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import io.ebean.{Ebean, Expr, Expression, SqlQuery}
-<i class="no-highlight">4</i>&nbsp;import models.types.{DayOfTheWeek, Gender, RelativeTimePeriod, TimePeriodType}
-<i class="no-highlight">5</i>&nbsp;import operations.core.{ResponseType, WiFreeResponse}
-<i class="no-highlight">6</i>&nbsp;import utils.DateHelper
-<i class="no-highlight">7</i>&nbsp;
-<i class="no-highlight">8</i>&nbsp;import java.util.function.{Function =&gt; JFunction}
-<i class="no-highlight">9</i>&nbsp;import java.util.function.BiFunction
-<i class="no-highlight">10</i>&nbsp;import java.lang.{Long =&gt; JLong}
-<i class="no-highlight">11</i>&nbsp;import java.time.Instant
-<i class="no-highlight">12</i>&nbsp;import models.types.RelativeTimePeriod.{BEFORE_LAST_WEEK, LAST_FIFTEEN_MINUTES, LAST_WEEK, LAST_YEAR}
-<i class="no-highlight">13</i>&nbsp;import models.types.TimePeriodType.{ABSOLUTE, NONE, RELATIVE}
-<i class="no-highlight">14</i>&nbsp;
-<i class="no-highlight">15</i>&nbsp;import scala.collection.JavaConverters._
-<i class="no-highlight">16</i>&nbsp;import utils.ScalaHelper._
-<i class="no-highlight">17</i>&nbsp;
-<i class="no-highlight">18</i>&nbsp;import scala.collection.JavaConverters
-<i class="no-highlight">19</i>&nbsp;
-<i class="no-highlight">20</i>&nbsp;case class GetAnalyticsHomeDatasetsResponse(datasetFilters: Seq[DatasetFilter]) extends WiFreeResponse {
-<i class="no-highlight">21</i>&nbsp;
-<i class="no-highlight">22</i>&nbsp;	override val success: Boolean = ???
-<i class="no-highlight">23</i>&nbsp;	override val errors: List[String] = ???
-<i class="no-highlight">24</i>&nbsp;
-<i class="no-highlight">25</i>&nbsp;	override def responseType: ResponseType = ResponseType.GET_ANALYTICS_HOME_DATASETS_RESPONSE
-<i class="no-highlight">26</i>&nbsp;
-<i class="no-highlight">27</i>&nbsp;	override def isOk(): Boolean = ???
-<i class="no-highlight">28</i>&nbsp;
-<i class="no-highlight">29</i>&nbsp;}
-<i class="no-highlight">30</i>&nbsp;
-<b class="pc"><i class="no-highlight">31</i>&nbsp;case class DatasetFilter(portalId: Long,</b>
-<b class="fc"><i class="no-highlight">32</i>&nbsp;												 name: String,</b>
-<b class="fc"><i class="no-highlight">33</i>&nbsp;												 description: String,</b>
-<b class="fc"><i class="no-highlight">34</i>&nbsp;												 timePeriod: String,</b>
-<b class="fc"><i class="no-highlight">35</i>&nbsp;												 timePeriodType: TimePeriodType,</b>
-<b class="fc"><i class="no-highlight">36</i>&nbsp;												 gender: Option[Gender],</b>
-<b class="fc"><i class="no-highlight">37</i>&nbsp;												 age: Option[MinMax[Int]],</b>
-<b class="fc"><i class="no-highlight">38</i>&nbsp;												 visitsAmount: Option[MinMax[Int]],</b>
-<b class="fc"><i class="no-highlight">39</i>&nbsp;												 visitorAddress: Option[String],</b>
-<b class="fc"><i class="no-highlight">40</i>&nbsp;												 daysOfTheWeek: Option[Seq[DayOfTheWeek]],</b>
-<b class="fc"><i class="no-highlight">41</i>&nbsp;												 hours: Option[(String, String)]</b>
-<i class="no-highlight">42</i>&nbsp;												) {
-<i class="no-highlight">43</i>&nbsp;	
-<b class="fc"><i class="no-highlight">44</i>&nbsp;	def timePeriodExpression: Option[BiFunction[String, Instant, Expression]] = timePeriodType match {</b>
-<b class="fc"><i class="no-highlight">45</i>&nbsp;		case ABSOLUTE =&gt; val (startDate, endDate) = DateHelper.strings2Dates(timePeriod)</b>
-<b class="nc"><i class="no-highlight">46</i>&nbsp;			Option((propertyName: String, _: Instant) =&gt; Expr.between(propertyName, startDate, endDate))</b>
-<b class="fc"><i class="no-highlight">47</i>&nbsp;		case RELATIVE =&gt; Option(RelativeTimePeriod.valueOf(timePeriod).getExpression)</b>
-<b class="nc"><i class="no-highlight">48</i>&nbsp;		case NONE =&gt; None</b>
-<b class="nc"><i class="no-highlight">49</i>&nbsp;		case u =&gt; throw new Exception(s&quot;Unknown timePeriodType: $u&quot;)</b>
-<i class="no-highlight">50</i>&nbsp;	}
-<i class="no-highlight">51</i>&nbsp;	
-<i class="no-highlight">52</i>&nbsp;	def expressions: BuiltExpressions = {
-<b class="fc"><i class="no-highlight">53</i>&nbsp;		val portalExpression = Option(Expr.eq(&quot;portal.id&quot;, portalId))</b>
-<b class="fc"><i class="no-highlight">54</i>&nbsp;		val genderExpression = gender.map(g =&gt; Expr.eq(&quot;networkUser.gender&quot;, g.toString))</b>
-<b class="fc"><i class="no-highlight">55</i>&nbsp;		val ageExpression = age.map(a =&gt; a.expr(&quot;networkUser.age&quot;))</b>
-<b class="fc"><i class="no-highlight">56</i>&nbsp;		val visitsAmountQuery = VisitsAmountQuery(visitsAmount.map { mm =&gt;</b>
-<i class="no-highlight">57</i>&nbsp;			Ebean.createSqlQuery(&quot;SELECT network_user_id&quot;
-<i class="no-highlight">58</i>&nbsp;					+ &quot;FROM (SELECT network_user_id, count(1) AS n FROM network_user_connection_log GROUP BY network_user_id) AS x&quot;
-<b class="nc"><i class="no-highlight">59</i>&nbsp;					+ &quot;WHERE x.n &gt;= :min AND x.n &lt;= :max&quot;)</b>
-<b class="nc"><i class="no-highlight">60</i>&nbsp;					.setParameter(&quot;min&quot;, mm.min)</b>
-<b class="nc"><i class="no-highlight">61</i>&nbsp;					.setParameter(&quot;max&quot;, mm.max)</b>
-<i class="no-highlight">62</i>&nbsp;		})
-<b class="fc"><i class="no-highlight">63</i>&nbsp;		val visitorAddressExpression = visitorAddress.map { va =&gt;</b>
-<b class="nc"><i class="no-highlight">64</i>&nbsp;			val s = s&quot;%$va%&quot;</b>
-<i class="no-highlight">65</i>&nbsp;			Expr.or(
-<b class="nc"><i class="no-highlight">66</i>&nbsp;				Expr.ilike(&quot;address.street&quot;, s),</b>
-<i class="no-highlight">67</i>&nbsp;				Expr.or(
-<b class="nc"><i class="no-highlight">68</i>&nbsp;					Expr.ilike(&quot;address.other&quot;, s),</b>
-<i class="no-highlight">69</i>&nbsp;					Expr.or(
-<b class="nc"><i class="no-highlight">70</i>&nbsp;						Expr.ilike(&quot;address.city&quot;, s),</b>
-<i class="no-highlight">71</i>&nbsp;						Expr.or(
-<b class="nc"><i class="no-highlight">72</i>&nbsp;							Expr.ilike(&quot;address.state&quot;, s),</b>
-<b class="nc"><i class="no-highlight">73</i>&nbsp;							Expr.ilike(&quot;address.country&quot;, s)</b>
-<i class="no-highlight">74</i>&nbsp;						)
-<i class="no-highlight">75</i>&nbsp;					)
-<i class="no-highlight">76</i>&nbsp;				)
-<i class="no-highlight">77</i>&nbsp;			)
-<i class="no-highlight">78</i>&nbsp;		}
-<b class="fc"><i class="no-highlight">79</i>&nbsp;		val daysOfTheWeekExpression = daysOfTheWeek.map(ds =&gt; Expr.raw(s&quot;dow(connection_start_date) in (?)&quot;, ds.map(_.ordinal()).mkString(&quot;, &quot;)))</b>
-<b class="fc"><i class="no-highlight">80</i>&nbsp;		val hoursExpression = hours.map { case (hMin, hMax) =&gt; Expr.raw(&quot;connection_start_date::time between ? AND ?&quot;, Array[Object](hMin, hMax)) }</b>
-<b class="fc"><i class="no-highlight">81</i>&nbsp;		val parameterlessExpressions = Seq(</b>
-<b class="fc"><i class="no-highlight">82</i>&nbsp;			portalExpression,</b>
-<b class="fc"><i class="no-highlight">83</i>&nbsp;			genderExpression,</b>
-<b class="fc"><i class="no-highlight">84</i>&nbsp;			ageExpression,</b>
-<b class="fc"><i class="no-highlight">85</i>&nbsp;			visitorAddressExpression,</b>
-<b class="fc"><i class="no-highlight">86</i>&nbsp;			daysOfTheWeekExpression,</b>
-<b class="fc"><i class="no-highlight">87</i>&nbsp;			hoursExpression</b>
-<b class="fc"><i class="no-highlight">88</i>&nbsp;		).flatten</b>
-<b class="fc"><i class="no-highlight">89</i>&nbsp;		BuiltExpressions(timePeriodExpression, visitsAmountQuery, parameterlessExpressions)</b>
-<i class="no-highlight">90</i>&nbsp;	}
-<i class="no-highlight">91</i>&nbsp;}
-<i class="no-highlight">92</i>&nbsp;
-<b class="fc"><i class="no-highlight">93</i>&nbsp;object DatasetFilter {</b>
-<i class="no-highlight">94</i>&nbsp;
-<b class="fc"><i class="no-highlight">95</i>&nbsp;	def usersConnectedLastWeekFilter(portalId: Long): DatasetFilter = relativeTimePeriodFilter(portalId, LAST_WEEK)</b>
-<i class="no-highlight">96</i>&nbsp;
-<b class="fc"><i class="no-highlight">97</i>&nbsp;	def usersConnectedBeforeLastWeekFilter(portalId: Long): DatasetFilter = relativeTimePeriodFilter(portalId, BEFORE_LAST_WEEK)</b>
-<i class="no-highlight">98</i>&nbsp;
-<b class="fc"><i class="no-highlight">99</i>&nbsp;	def usersConnectedLastYearFilter(portalId: Long): DatasetFilter = relativeTimePeriodFilter(portalId, LAST_YEAR)</b>
-<i class="no-highlight">100</i>&nbsp;
-<b class="fc"><i class="no-highlight">101</i>&nbsp;	def genderUsersConnectedLastYearFilter(portalId: Long, gender: Gender): DatasetFilter = relativeTimePeriodFilter(portalId, LAST_YEAR, Option(gender))</b>
-<i class="no-highlight">102</i>&nbsp;
-<b class="fc"><i class="no-highlight">103</i>&nbsp;	def usersConnectedLastSixtyMinutesFilter(portalId: Long): DatasetFilter = relativeTimePeriodFilter(portalId, LAST_FIFTEEN_MINUTES)</b>
-<i class="no-highlight">104</i>&nbsp;
-<b class="fc"><i class="no-highlight">105</i>&nbsp;	private def relativeTimePeriodFilter(portalId: Long, relativeTimePeriod: RelativeTimePeriod, gender: Option[Gender] = None) = DatasetFilter(</b>
-<b class="fc"><i class="no-highlight">106</i>&nbsp;		portalId = portalId,</b>
-<b class="fc"><i class="no-highlight">107</i>&nbsp;		name = &quot;&quot;,</b>
-<b class="fc"><i class="no-highlight">108</i>&nbsp;		description = &quot;&quot;,</b>
-<b class="fc"><i class="no-highlight">109</i>&nbsp;		timePeriod = relativeTimePeriod.toString,</b>
-<b class="fc"><i class="no-highlight">110</i>&nbsp;		timePeriodType = TimePeriodType.RELATIVE,</b>
-<b class="fc"><i class="no-highlight">111</i>&nbsp;		gender = gender,</b>
-<b class="fc"><i class="no-highlight">112</i>&nbsp;		age = None,</b>
-<b class="fc"><i class="no-highlight">113</i>&nbsp;		visitsAmount = None,</b>
-<b class="fc"><i class="no-highlight">114</i>&nbsp;		visitorAddress = None,</b>
-<b class="fc"><i class="no-highlight">115</i>&nbsp;		daysOfTheWeek = None,</b>
-<b class="fc"><i class="no-highlight">116</i>&nbsp;		hours = None</b>
-<i class="no-highlight">117</i>&nbsp;	)
-<i class="no-highlight">118</i>&nbsp;
-<i class="no-highlight">119</i>&nbsp;}
-<i class="no-highlight">120</i>&nbsp;
-<b class="fc"><i class="no-highlight">121</i>&nbsp;case class MinMax[T](min: T, max: T) {</b>
-<i class="no-highlight">122</i>&nbsp;	def expr: String =&gt; Expression = (propertyName: String) =&gt; Expr.between(propertyName, min, max)
-<i class="no-highlight">123</i>&nbsp;}
-<i class="no-highlight">124</i>&nbsp;
-<i class="no-highlight">125</i>&nbsp;case class BuiltExpressions(timePeriodExpression: Option[BiFunction[String, Instant, Expression]],
-<i class="no-highlight">126</i>&nbsp;														visitsAmountQuery: VisitsAmountQuery,
-<i class="no-highlight">127</i>&nbsp;														parameterlessExpressions: Seq[Expression])
-<i class="no-highlight">128</i>&nbsp;
-<i class="no-highlight">129</i>&nbsp;case class VisitsAmountQuery(maybeSqlQuery: Option[SqlQuery]) {
-<i class="no-highlight">130</i>&nbsp;	private def build: Option[List[JLong]] = maybeSqlQuery.map { sqlQuery =&gt;
-<i class="no-highlight">131</i>&nbsp;		sqlQuery.findList().asScala.map(row =&gt; row.getLong(&quot;network_user_id&quot;)).toList
-<i class="no-highlight">132</i>&nbsp;	}
-<i class="no-highlight">133</i>&nbsp;	def expression: Option[Expression] = build.map(ids =&gt; Expr.in(&quot;networkUser.id&quot;, JavaConverters.asJavaCollection(ids)))
-<i class="no-highlight">134</i>&nbsp;}
+<i class="no-highlight">3</i>&nbsp;import core.PackageClassesFinder;
+<i class="no-highlight">4</i>&nbsp;import operations.core.WiFreeRequest;
+<i class="no-highlight">5</i>&nbsp;
+<i class="no-highlight">6</i>&nbsp;import java.util.Arrays;
+<i class="no-highlight">7</i>&nbsp;import java.util.HashMap;
+<i class="no-highlight">8</i>&nbsp;import java.util.List;
+<i class="no-highlight">9</i>&nbsp;import java.util.Map;
+<i class="no-highlight">10</i>&nbsp;
+<b class="nc"><i class="no-highlight">11</i>&nbsp;public class Functions {</b>
+<i class="no-highlight">12</i>&nbsp;	
+<b class="fc"><i class="no-highlight">13</i>&nbsp;	private static Map&lt;Class&lt;? extends WiFreeRequest&gt;, WiFreeFunction&gt; allFunctions = new HashMap&lt;&gt;();</b>
+<i class="no-highlight">14</i>&nbsp;	
+<i class="no-highlight">15</i>&nbsp;	static {
+<i class="no-highlight">16</i>&nbsp;		try {
+<b class="fc"><i class="no-highlight">17</i>&nbsp;			initialize();</b>
+<b class="nc"><i class="no-highlight">18</i>&nbsp;		} catch (IllegalAccessException e) {</b>
+<b class="nc"><i class="no-highlight">19</i>&nbsp;			e.printStackTrace();				// TODO print properly</b>
+<b class="nc"><i class="no-highlight">20</i>&nbsp;		} catch (InstantiationException e) {</b>
+<b class="nc"><i class="no-highlight">21</i>&nbsp;			e.printStackTrace();				// TODO print properly</b>
+<b class="fc"><i class="no-highlight">22</i>&nbsp;		}</b>
+<i class="no-highlight">23</i>&nbsp;	}
+<i class="no-highlight">24</i>&nbsp;	
+<i class="no-highlight">25</i>&nbsp;	public static &lt;RQ extends WiFreeRequest&gt; WiFreeFunction of(RQ request) {
+<b class="fc"><i class="no-highlight">26</i>&nbsp;		if (allFunctions.isEmpty()) {</b>
+<i class="no-highlight">27</i>&nbsp;			try {
+<b class="nc"><i class="no-highlight">28</i>&nbsp;				initialize();</b>
+<b class="nc"><i class="no-highlight">29</i>&nbsp;			} catch (IllegalAccessException e) {</b>
+<b class="nc"><i class="no-highlight">30</i>&nbsp;				e.printStackTrace();</b>
+<b class="nc"><i class="no-highlight">31</i>&nbsp;			} catch (InstantiationException e) {</b>
+<b class="nc"><i class="no-highlight">32</i>&nbsp;				e.printStackTrace();</b>
+<b class="nc"><i class="no-highlight">33</i>&nbsp;			}</b>
+<i class="no-highlight">34</i>&nbsp;		}
+<b class="fc"><i class="no-highlight">35</i>&nbsp;		return allFunctions.get(request.getClass());</b>
+<i class="no-highlight">36</i>&nbsp;	}
+<i class="no-highlight">37</i>&nbsp;	
+<i class="no-highlight">38</i>&nbsp;	private static void initialize() throws IllegalAccessException, InstantiationException {
+<b class="fc"><i class="no-highlight">39</i>&nbsp;		final List&lt;Class&lt;? extends WiFreeFunction&gt;&gt; functionsClasses = PackageClassesFinder.getFunctionsClasses();</b>
+<b class="fc"><i class="no-highlight">40</i>&nbsp;		for (Class&lt;? extends WiFreeFunction&gt; functionClass : functionsClasses) {</b>
+<b class="fc"><i class="no-highlight">41</i>&nbsp;			put(functionClass.newInstance());</b>
+<b class="fc"><i class="no-highlight">42</i>&nbsp;		}</b>
+<i class="no-highlight">43</i>&nbsp;	}
+<i class="no-highlight">44</i>&nbsp;
+<i class="no-highlight">45</i>&nbsp;	private static &lt;F extends WiFreeFunction&gt; void put(F... serviceFunctions) {
+<b class="fc"><i class="no-highlight">46</i>&nbsp;		Arrays.stream(serviceFunctions).forEach(function -&gt; allFunctions.put(function.rqClass(), function));</b>
+<i class="no-highlight">47</i>&nbsp;	}
+<i class="no-highlight">48</i>&nbsp;	
+<i class="no-highlight">49</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -259,7 +148,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-08-28 18:36</div>
+    <div style="float:right;">generated on 2022-08-28 18:56</div>
 </div>
 </body>
 </html>

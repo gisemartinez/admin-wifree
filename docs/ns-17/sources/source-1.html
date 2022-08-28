@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > all_surveys</title>
+  <title>Coverage Report > bootstrap_progress</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -17,10 +17,10 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">views.html.admin</a>
+    <a href="../index.html">views.html.parts.js</a>
 </div>
 
-<h1>Coverage Summary for Class: all_surveys (views.html.admin)</h1>
+<h1>Coverage Summary for Class: bootstrap_progress (views.html.parts.js)</h1>
 
 <table class="coverageStats">
 
@@ -36,21 +36,21 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
   <tr>
-    <td class="name">all_surveys$</td>
+    <td class="name">bootstrap_progress$</td>
 <td class="coverageStat">
   <span class="percent">
-    71.4%
+    40%
   </span>
   <span class="absValue">
-    (5/7)
+    (2/5)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    90.9%
+    66.7%
   </span>
   <span class="absValue">
-    (20/22)
+    (6/9)
   </span>
 </td>
   </tr>
@@ -58,18 +58,18 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    71.4%
+    40%
   </span>
   <span class="absValue">
-    (5/7)
+    (2/5)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    90.9%
+    66.7%
   </span>
   <span class="absValue">
-    (20/22)
+    (6/9)
   </span>
 </td>
 </tr>
@@ -81,7 +81,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <pre>
 <div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;
-<i class="no-highlight">2</i>&nbsp;package views.html.admin
+<i class="no-highlight">2</i>&nbsp;package views.html.parts.js
 <i class="no-highlight">3</i>&nbsp;
 <i class="no-highlight">4</i>&nbsp;import _root_.play.twirl.api.TwirlFeatureImports._
 <i class="no-highlight">5</i>&nbsp;import _root_.play.twirl.api.TwirlHelperImports._
@@ -103,92 +103,41 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">21</i>&nbsp;import play.mvc.Http.Context.Implicit._
 <i class="no-highlight">22</i>&nbsp;import play.data._
 <i class="no-highlight">23</i>&nbsp;import play.core.j.PlayFormsMagicForJava._
-<i class="no-highlight">24</i>&nbsp;/*1.2*/import java.util.{List =&gt; JList}
-<i class="no-highlight">25</i>&nbsp;/*2.2*/import views.dto.SurveySummary
+<i class="no-highlight">24</i>&nbsp;
+<b class="fc"><i class="no-highlight">25</i>&nbsp;object bootstrap_progress extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template0[play.twirl.api.HtmlFormat.Appendable] {</b>
 <i class="no-highlight">26</i>&nbsp;
-<b class="fc"><i class="no-highlight">27</i>&nbsp;object all_surveys extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template1[JList[SurveySummary],play.twirl.api.HtmlFormat.Appendable] {</b>
-<i class="no-highlight">28</i>&nbsp;
-<i class="no-highlight">29</i>&nbsp;  /**/
-<i class="no-highlight">30</i>&nbsp;  def apply/*4.2*/(summaries: JList[SurveySummary]):play.twirl.api.HtmlFormat.Appendable = {
-<b class="fc"><i class="no-highlight">31</i>&nbsp;    _display_ {</b>
-<i class="no-highlight">32</i>&nbsp;      {
-<i class="no-highlight">33</i>&nbsp;
-<i class="no-highlight">34</i>&nbsp;
-<b class="fc"><i class="no-highlight">35</i>&nbsp;Seq[Any](format.raw/*5.1*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">36</i>&nbsp;        &quot;&quot;&quot;),format.raw/*6.9*/(&quot;&quot;&quot;&lt;!-- Page content --&gt;</b>
-<i class="no-highlight">37</i>&nbsp;&lt;div class=&quot;right_col&quot; role=&quot;main&quot;&gt;
-<i class="no-highlight">38</i>&nbsp;    &lt;div class=&quot;row&quot;&gt;
-<i class="no-highlight">39</i>&nbsp;        &lt;div class=&quot;col-md-12 col-sm-12 col-xs-12&quot;&gt;
-<i class="no-highlight">40</i>&nbsp;            &lt;div class=&quot;x_panel&quot;&gt;
-<i class="no-highlight">41</i>&nbsp;                &lt;div class=&quot;x_title&quot;&gt;
-<i class="no-highlight">42</i>&nbsp;                    &lt;h2&gt;Encuestas&lt;/h2&gt;
-<i class="no-highlight">43</i>&nbsp;                    &lt;div class=&quot;clearfix&quot;&gt;&lt;/div&gt;
-<i class="no-highlight">44</i>&nbsp;                &lt;/div&gt;
-<i class="no-highlight">45</i>&nbsp;                &lt;div class=&quot;x_content&quot;&gt;
-<i class="no-highlight">46</i>&nbsp;                    &lt;table id=&quot;surveystable&quot; class=&quot;table table-striped table-bordered table-hover&quot;&gt;
-<i class="no-highlight">47</i>&nbsp;                        &lt;thead&gt;
-<i class="no-highlight">48</i>&nbsp;                            &lt;tr&gt;
-<i class="no-highlight">49</i>&nbsp;                                &lt;th&gt;#&lt;/th&gt;
-<i class="no-highlight">50</i>&nbsp;                                &lt;th&gt;Titulo&lt;/th&gt;
-<i class="no-highlight">51</i>&nbsp;                                &lt;th&gt;Fecha de creación&lt;/th&gt;
-<i class="no-highlight">52</i>&nbsp;                                &lt;th&gt;&lt;/th&gt;
-<i class="no-highlight">53</i>&nbsp;                                &lt;th&gt;&lt;/th&gt;
-<i class="no-highlight">54</i>&nbsp;                                &lt;th&gt;&lt;/th&gt;
-<i class="no-highlight">55</i>&nbsp;                                &lt;th&gt;&lt;/th&gt;
-<i class="no-highlight">56</i>&nbsp;                            &lt;/tr&gt;
-<i class="no-highlight">57</i>&nbsp;                        &lt;/thead&gt;
-<i class="no-highlight">58</i>&nbsp;                        &lt;tbody&gt;
-<b class="fc"><i class="no-highlight">59</i>&nbsp;                        &quot;&quot;&quot;),_display_(/*29.26*/summaries/*29.35*/.map/*29.39*/ { summary =&gt;_display_(Seq[Any](format.raw/*29.52*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">60</i>&nbsp;                            &quot;&quot;&quot;),format.raw/*30.29*/(&quot;&quot;&quot;&lt;tr&gt;</b>
-<b class="fc"><i class="no-highlight">61</i>&nbsp;                                &lt;td class=&quot;a-center&quot;&gt;&quot;&quot;&quot;),_display_(/*31.55*/summary/*31.62*/.id),format.raw/*31.65*/(&quot;&quot;&quot;&lt;/td&gt;</b>
-<b class="fc"><i class="no-highlight">62</i>&nbsp;                                &lt;td&gt;&quot;&quot;&quot;),_display_(/*32.38*/summary/*32.45*/.title),format.raw/*32.51*/(&quot;&quot;&quot;&lt;/td&gt;</b>
-<b class="fc"><i class="no-highlight">63</i>&nbsp;                                &lt;td&gt;&quot;&quot;&quot;),_display_(/*33.38*/{summary.creation.toString.substring(0, summary.creation.toString.length - 4)}),format.raw/*33.116*/(&quot;&quot;&quot;&lt;/td&gt;</b>
-<i class="no-highlight">64</i>&nbsp;                                &lt;td class=&quot;text-center&quot;&gt;
-<b class="fc"><i class="no-highlight">65</i>&nbsp;                                    &lt;a class=&quot;btn btn-primary fa fa-edit&quot; href=&quot;&quot;&quot;&quot;),_display_(/*35.82*/controllers/*35.93*/.admin.routes.SurveysController.survey(summary.id)),format.raw/*35.143*/(&quot;&quot;&quot;&quot; role=&quot;button&quot;&gt;&lt;/a&gt;</b>
-<b class="fc"><i class="no-highlight">66</i>&nbsp;                                    &quot;&quot;&quot;),_display_(/*36.38*/helper/*36.44*/.form(controllers.admin.routes.SurveysController.deleteSurvey(summary.id))/*36.118*/{_display_(Seq[Any](format.raw/*36.119*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">67</i>&nbsp;                                        &quot;&quot;&quot;),format.raw/*37.41*/(&quot;&quot;&quot;&lt;button type=&quot;submit&quot; class=&quot;btn btn-danger&quot;&gt;&lt;i class=&quot;fa fa-trash&quot; title=&quot;Eliminar encuesta&quot;&gt;&lt;/i&gt;&lt;/button&gt;</b>
-<b class="fc"><i class="no-highlight">68</i>&nbsp;                                    &quot;&quot;&quot;)))}),format.raw/*38.38*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">69</i>&nbsp;                                &quot;&quot;&quot;),format.raw/*39.33*/(&quot;&quot;&quot;&lt;/td&gt;</b>
-<i class="no-highlight">70</i>&nbsp;                                &lt;td class=&quot;text-center&quot;&gt;
-<b class="fc"><i class="no-highlight">71</i>&nbsp;                                    &lt;a class=&quot;btn btn-info&quot; href=&quot;&quot;&quot;&quot;),_display_(/*41.68*/controllers/*41.79*/.admin.routes.SurveysController.getSurveyResults(summary.id)),format.raw/*41.139*/(&quot;&quot;&quot;&quot; role=&quot;button&quot;&gt;Ver Resumen&lt;/a&gt;</b>
-<i class="no-highlight">72</i>&nbsp;                                &lt;/td&gt;
-<i class="no-highlight">73</i>&nbsp;                                &lt;td class=&quot;text-center&quot;&gt;
-<b class="fc"><i class="no-highlight">74</i>&nbsp;                                    &lt;a class=&quot;btn btn-info&quot; href=&quot;&quot;&quot;&quot;),_display_(/*44.68*/controllers/*44.79*/.admin.routes.SurveysController.answeredSurvey(summary.id,0)),format.raw/*44.139*/(&quot;&quot;&quot;&quot; role=&quot;button&quot;&gt;Ver Respuestas&lt;/a&gt;</b>
-<i class="no-highlight">75</i>&nbsp;                                &lt;/td&gt;
-<i class="no-highlight">76</i>&nbsp;                                &lt;td class=&quot;text-center&quot;&gt;
-<b class="fc"><i class="no-highlight">77</i>&nbsp;                                    &lt;a class=&quot;btn btn-success&quot; href=&quot;&quot;&quot;&quot;),_display_(/*47.71*/controllers/*47.82*/.api.routes.SurveyAnswersController.answersCSV(summary.id)),format.raw/*47.140*/(&quot;&quot;&quot;&quot; role=&quot;button&quot;&gt;Descargar Respuestas&lt;/a&gt;</b>
-<i class="no-highlight">78</i>&nbsp;                                &lt;/td&gt;
-<i class="no-highlight">79</i>&nbsp;                            &lt;/tr&gt;
-<b class="fc"><i class="no-highlight">80</i>&nbsp;                        &quot;&quot;&quot;)))}),format.raw/*50.26*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">81</i>&nbsp;                        &quot;&quot;&quot;),format.raw/*51.25*/(&quot;&quot;&quot;&lt;/tbody&gt;</b>
-<i class="no-highlight">82</i>&nbsp;                    &lt;/table&gt;
-<i class="no-highlight">83</i>&nbsp;                &lt;/div&gt;
-<i class="no-highlight">84</i>&nbsp;            &lt;/div&gt;
-<i class="no-highlight">85</i>&nbsp;        &lt;/div&gt;
-<i class="no-highlight">86</i>&nbsp;    &lt;/div&gt;
-<i class="no-highlight">87</i>&nbsp;&lt;/div&gt;&quot;&quot;&quot;))
-<i class="no-highlight">88</i>&nbsp;      }
-<i class="no-highlight">89</i>&nbsp;    }
-<i class="no-highlight">90</i>&nbsp;  }
-<i class="no-highlight">91</i>&nbsp;
-<b class="fc"><i class="no-highlight">92</i>&nbsp;  def render(summaries:JList[SurveySummary]): play.twirl.api.HtmlFormat.Appendable = apply(summaries)</b>
-<i class="no-highlight">93</i>&nbsp;
-<b class="nc"><i class="no-highlight">94</i>&nbsp;  def f:((JList[SurveySummary]) =&gt; play.twirl.api.HtmlFormat.Appendable) = (summaries) =&gt; apply(summaries)</b>
-<i class="no-highlight">95</i>&nbsp;
-<b class="nc"><i class="no-highlight">96</i>&nbsp;  def ref: this.type = this</b>
-<i class="no-highlight">97</i>&nbsp;
-<i class="no-highlight">98</i>&nbsp;}
-<i class="no-highlight">99</i>&nbsp;
-<i class="no-highlight">100</i>&nbsp;
-<i class="no-highlight">101</i>&nbsp;              /*
-<i class="no-highlight">102</i>&nbsp;                  -- GENERATED --
-<i class="no-highlight">103</i>&nbsp;                  SOURCE: app/views/admin/all_surveys.scala.html
-<i class="no-highlight">104</i>&nbsp;                  HASH: 49a1b9ee6c6627f0ea8bc21d68af7a4a1c1e7c7a
-<i class="no-highlight">105</i>&nbsp;                  MATRIX: 657-&gt;1|697-&gt;35|1052-&gt;68|1179-&gt;102|1214-&gt;111|2204-&gt;1074|2222-&gt;1083|2235-&gt;1087|2286-&gt;1100|2343-&gt;1129|2429-&gt;1188|2445-&gt;1195|2469-&gt;1198|2539-&gt;1241|2555-&gt;1248|2582-&gt;1254|2652-&gt;1297|2752-&gt;1375|2923-&gt;1519|2943-&gt;1530|3015-&gt;1580|3100-&gt;1638|3115-&gt;1644|3199-&gt;1718|3239-&gt;1719|3308-&gt;1760|3484-&gt;1905|3545-&gt;1938|3702-&gt;2068|3722-&gt;2079|3804-&gt;2139|4025-&gt;2333|4045-&gt;2344|4127-&gt;2404|4354-&gt;2604|4374-&gt;2615|4454-&gt;2673|4623-&gt;2811|4676-&gt;2836
-<i class="no-highlight">106</i>&nbsp;                  LINES: 24-&gt;1|25-&gt;2|30-&gt;4|35-&gt;5|36-&gt;6|59-&gt;29|59-&gt;29|59-&gt;29|59-&gt;29|60-&gt;30|61-&gt;31|61-&gt;31|61-&gt;31|62-&gt;32|62-&gt;32|62-&gt;32|63-&gt;33|63-&gt;33|65-&gt;35|65-&gt;35|65-&gt;35|66-&gt;36|66-&gt;36|66-&gt;36|66-&gt;36|67-&gt;37|68-&gt;38|69-&gt;39|71-&gt;41|71-&gt;41|71-&gt;41|74-&gt;44|74-&gt;44|74-&gt;44|77-&gt;47|77-&gt;47|77-&gt;47|80-&gt;50|81-&gt;51
-<i class="no-highlight">107</i>&nbsp;                  -- GENERATED --
-<i class="no-highlight">108</i>&nbsp;              */
-<i class="no-highlight">109</i>&nbsp;          
+<i class="no-highlight">27</i>&nbsp;  /**/
+<i class="no-highlight">28</i>&nbsp;  def apply/*1.2*/():play.twirl.api.HtmlFormat.Appendable = {
+<b class="fc"><i class="no-highlight">29</i>&nbsp;    _display_ {</b>
+<i class="no-highlight">30</i>&nbsp;      {
+<i class="no-highlight">31</i>&nbsp;
+<i class="no-highlight">32</i>&nbsp;
+<b class="fc"><i class="no-highlight">33</i>&nbsp;Seq[Any](format.raw/*2.1*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">34</i>&nbsp;&quot;&quot;&quot;),format.raw/*3.1*/(&quot;&quot;&quot;&lt;!-- bootstrap progress js --&gt;</b>
+<b class="fc"><i class="no-highlight">35</i>&nbsp;&lt;script src=&quot;&quot;&quot;&quot;),_display_(/*4.15*/routes/*4.21*/.Assets.versioned(&quot;js/progressbar/bootstrap-progressbar.min.js&quot;)),format.raw/*4.85*/(&quot;&quot;&quot;&quot;&gt;&lt;/script&gt;</b>
+<b class="fc"><i class="no-highlight">36</i>&nbsp;&lt;script src=&quot;&quot;&quot;&quot;),_display_(/*5.15*/routes/*5.21*/.Assets.versioned(&quot;js/nicescroll/jquery.nicescroll.min.js&quot;)),format.raw/*5.80*/(&quot;&quot;&quot;&quot;&gt;&lt;/script&gt;&quot;&quot;&quot;))</b>
+<i class="no-highlight">37</i>&nbsp;      }
+<i class="no-highlight">38</i>&nbsp;    }
+<i class="no-highlight">39</i>&nbsp;  }
+<i class="no-highlight">40</i>&nbsp;
+<b class="nc"><i class="no-highlight">41</i>&nbsp;  def render(): play.twirl.api.HtmlFormat.Appendable = apply()</b>
+<i class="no-highlight">42</i>&nbsp;
+<b class="nc"><i class="no-highlight">43</i>&nbsp;  def f:(() =&gt; play.twirl.api.HtmlFormat.Appendable) = () =&gt; apply()</b>
+<i class="no-highlight">44</i>&nbsp;
+<b class="nc"><i class="no-highlight">45</i>&nbsp;  def ref: this.type = this</b>
+<i class="no-highlight">46</i>&nbsp;
+<i class="no-highlight">47</i>&nbsp;}
+<i class="no-highlight">48</i>&nbsp;
+<i class="no-highlight">49</i>&nbsp;
+<i class="no-highlight">50</i>&nbsp;              /*
+<i class="no-highlight">51</i>&nbsp;                  -- GENERATED --
+<i class="no-highlight">52</i>&nbsp;                  SOURCE: app/views/parts/js/bootstrap_progress.scala.html
+<i class="no-highlight">53</i>&nbsp;                  HASH: 7ab1a55ef7c2a7fa87503e02a1ed05394baff354
+<i class="no-highlight">54</i>&nbsp;                  MATRIX: 963-&gt;1|1059-&gt;4|1086-&gt;5|1157-&gt;50|1171-&gt;56|1255-&gt;120|1307-&gt;146|1321-&gt;152|1400-&gt;211
+<i class="no-highlight">55</i>&nbsp;                  LINES: 28-&gt;1|33-&gt;2|34-&gt;3|35-&gt;4|35-&gt;4|35-&gt;4|36-&gt;5|36-&gt;5|36-&gt;5
+<i class="no-highlight">56</i>&nbsp;                  -- GENERATED --
+<i class="no-highlight">57</i>&nbsp;              */
+<i class="no-highlight">58</i>&nbsp;          
 </div>
 </pre>
 </div>
@@ -215,7 +164,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-08-28 18:36</div>
+    <div style="float:right;">generated on 2022-08-28 18:56</div>
 </div>
 </body>
 </html>

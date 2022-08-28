@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > connectionsPart</title>
+  <title>Coverage Report > echart</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -17,10 +17,10 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">views.html.admin</a>
+    <a href="../index.html">views.html.parts.js</a>
 </div>
 
-<h1>Coverage Summary for Class: connectionsPart (views.html.admin)</h1>
+<h1>Coverage Summary for Class: echart (views.html.parts.js)</h1>
 
 <table class="coverageStats">
 
@@ -36,21 +36,21 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
   <tr>
-    <td class="name">connectionsPart$</td>
+    <td class="name">echart$</td>
 <td class="coverageStat">
   <span class="percent">
-    33.3%
+    40%
   </span>
   <span class="absValue">
-    (2/6)
+    (2/5)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    65%
+    78.6%
   </span>
   <span class="absValue">
-    (13/20)
+    (11/14)
   </span>
 </td>
   </tr>
@@ -58,18 +58,18 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    33.3%
+    40%
   </span>
   <span class="absValue">
-    (2/6)
+    (2/5)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    65%
+    78.6%
   </span>
   <span class="absValue">
-    (13/20)
+    (11/14)
   </span>
 </td>
 </tr>
@@ -81,7 +81,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <pre>
 <div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;
-<i class="no-highlight">2</i>&nbsp;package views.html.admin
+<i class="no-highlight">2</i>&nbsp;package views.html.parts.js
 <i class="no-highlight">3</i>&nbsp;
 <i class="no-highlight">4</i>&nbsp;import _root_.play.twirl.api.TwirlFeatureImports._
 <i class="no-highlight">5</i>&nbsp;import _root_.play.twirl.api.TwirlHelperImports._
@@ -103,86 +103,50 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">21</i>&nbsp;import play.mvc.Http.Context.Implicit._
 <i class="no-highlight">22</i>&nbsp;import play.data._
 <i class="no-highlight">23</i>&nbsp;import play.core.j.PlayFormsMagicForJava._
-<i class="no-highlight">24</i>&nbsp;/*1.2*/import views.dto.ConnectedUser
-<i class="no-highlight">25</i>&nbsp;
-<b class="fc"><i class="no-highlight">26</i>&nbsp;object connectionsPart extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template2[Form[PortalNetworkConfiguration],List[ConnectedUser],play.twirl.api.HtmlFormat.Appendable] {</b>
-<i class="no-highlight">27</i>&nbsp;
-<i class="no-highlight">28</i>&nbsp;  /**/
-<i class="no-highlight">29</i>&nbsp;  def apply/*3.2*/(networkConfigurationForm: Form[PortalNetworkConfiguration],
-<i class="no-highlight">30</i>&nbsp;connectedUsers: List[ConnectedUser]):play.twirl.api.HtmlFormat.Appendable = {
-<b class="fc"><i class="no-highlight">31</i>&nbsp;    _display_ {</b>
-<i class="no-highlight">32</i>&nbsp;      {
-<i class="no-highlight">33</i>&nbsp;
-<i class="no-highlight">34</i>&nbsp;
-<b class="fc"><i class="no-highlight">35</i>&nbsp;Seq[Any](format.raw/*5.1*/(&quot;&quot;&quot;</b>
+<i class="no-highlight">24</i>&nbsp;
+<b class="fc"><i class="no-highlight">25</i>&nbsp;object echart extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template0[play.twirl.api.HtmlFormat.Appendable] {</b>
+<i class="no-highlight">26</i>&nbsp;
+<i class="no-highlight">27</i>&nbsp;  /**/
+<i class="no-highlight">28</i>&nbsp;  def apply/*1.2*/():play.twirl.api.HtmlFormat.Appendable = {
+<b class="fc"><i class="no-highlight">29</i>&nbsp;    _display_ {</b>
+<i class="no-highlight">30</i>&nbsp;      {
+<i class="no-highlight">31</i>&nbsp;
+<i class="no-highlight">32</i>&nbsp;
+<b class="fc"><i class="no-highlight">33</i>&nbsp;Seq[Any](format.raw/*2.1*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">34</i>&nbsp;&quot;&quot;&quot;),format.raw/*3.1*/(&quot;&quot;&quot;&lt;!-- Bootstrap --&gt;</b>
+<b class="fc"><i class="no-highlight">35</i>&nbsp;&lt;script src=&quot;&quot;&quot;&quot;),_display_(/*4.15*/routes/*4.21*/.Assets.versioned(&quot;js/bootstrap.min.js&quot;)),format.raw/*4.61*/(&quot;&quot;&quot;&quot;&gt;&lt;/script&gt;</b>
 <i class="no-highlight">36</i>&nbsp;
-<b class="fc"><i class="no-highlight">37</i>&nbsp;&quot;&quot;&quot;),format.raw/*7.1*/(&quot;&quot;&quot;&lt;!-- page content --&gt;</b>
-<i class="no-highlight">38</i>&nbsp;&lt;div class=&quot;col&quot; role=&quot;main&quot;&gt;
-<i class="no-highlight">39</i>&nbsp;    &lt;div class=&quot;row&quot;&gt;
-<i class="no-highlight">40</i>&nbsp;        &lt;div class=&quot;col-md-12 col-sm-12 col-xs-12&quot;&gt;
-<i class="no-highlight">41</i>&nbsp;            &lt;div class=&quot;x_panel&quot;&gt;
-<i class="no-highlight">42</i>&nbsp;                &lt;div class=&quot;x_title&quot;&gt;
-<b class="fc"><i class="no-highlight">43</i>&nbsp;                    &lt;h2&gt;&quot;&quot;&quot;),_display_(/*13.26*/Messages(&quot;connections.title.connected-users&quot;)),format.raw/*13.71*/(&quot;&quot;&quot;&lt;/h2&gt;</b>
-<i class="no-highlight">44</i>&nbsp;                    &lt;!-- TODO: insert toolboox --&gt;
-<i class="no-highlight">45</i>&nbsp;                    &lt;div class=&quot;clearfix&quot;&gt;&lt;/div&gt;
-<i class="no-highlight">46</i>&nbsp;                &lt;/div&gt;
-<i class="no-highlight">47</i>&nbsp;                &lt;div class=&quot;x_content&quot;&gt;
-<i class="no-highlight">48</i>&nbsp;                    &lt;table id=&quot;usertable&quot; class=&quot;table table-striped table-bordered&quot;&gt;
-<i class="no-highlight">49</i>&nbsp;                        &lt;thead&gt;
-<i class="no-highlight">50</i>&nbsp;                        &lt;tr&gt;
-<i class="no-highlight">51</i>&nbsp;                            &lt;th&gt;
-<i class="no-highlight">52</i>&nbsp;                                &lt;input type=&quot;checkbox&quot; id=&quot;check-all&quot; class=&quot;flat&quot;&gt;
-<i class="no-highlight">53</i>&nbsp;                            &lt;/th&gt;
-<b class="fc"><i class="no-highlight">54</i>&nbsp;                            &lt;th&gt;&quot;&quot;&quot;),_display_(/*24.34*/Messages(&quot;connections.users-table.header.user-name&quot;)),format.raw/*24.86*/(&quot;&quot;&quot;&lt;/th&gt;</b>
-<b class="fc"><i class="no-highlight">55</i>&nbsp;                            &lt;th&gt;&quot;&quot;&quot;),_display_(/*25.34*/Messages(&quot;connections.users-table.header.connection-start&quot;)),format.raw/*25.93*/(&quot;&quot;&quot;&lt;/th&gt;</b>
-<b class="fc"><i class="no-highlight">56</i>&nbsp;                            &lt;th&gt;&quot;&quot;&quot;),_display_(/*26.34*/Messages(&quot;connections.users-table.header.user-device&quot;)),format.raw/*26.88*/(&quot;&quot;&quot;&lt;/th&gt;</b>
-<i class="no-highlight">57</i>&nbsp;                        &lt;/tr&gt;
-<i class="no-highlight">58</i>&nbsp;                        &lt;/thead&gt;
-<i class="no-highlight">59</i>&nbsp;                        &lt;tbody&gt;
-<b class="fc"><i class="no-highlight">60</i>&nbsp;                        &quot;&quot;&quot;),_display_(/*30.26*/connectedUsers/*30.40*/.map/*30.44*/ { user =&gt;_display_(Seq[Any](format.raw/*30.54*/(&quot;&quot;&quot;</b>
-<b class="nc"><i class="no-highlight">61</i>&nbsp;                        &quot;&quot;&quot;),format.raw/*31.25*/(&quot;&quot;&quot;&lt;tr&gt;</b>
-<i class="no-highlight">62</i>&nbsp;                            &lt;td class=&quot;a-center&quot;&gt;
-<i class="no-highlight">63</i>&nbsp;                                &lt;input type=&quot;checkbox&quot; class=&quot;flat&quot; name=&quot;table_records&quot;&gt;
-<i class="no-highlight">64</i>&nbsp;                            &lt;/td&gt;
-<b class="nc"><i class="no-highlight">65</i>&nbsp;                            &lt;td&gt;&quot;&quot;&quot;),_display_(/*35.34*/user/*35.38*/.username),format.raw/*35.47*/(&quot;&quot;&quot;&lt;/td&gt;</b>
-<b class="nc"><i class="no-highlight">66</i>&nbsp;                            &lt;td&gt;&quot;&quot;&quot;),_display_(/*36.34*/user/*36.38*/.connectionStart),format.raw/*36.54*/(&quot;&quot;&quot;&lt;/td&gt;</b>
-<b class="nc"><i class="no-highlight">67</i>&nbsp;                            &lt;td&gt;&quot;&quot;&quot;),_display_(/*37.34*/user/*37.38*/.device),format.raw/*37.45*/(&quot;&quot;&quot;&lt;/td&gt;</b>
-<i class="no-highlight">68</i>&nbsp;                        &lt;/tr&gt;
-<b class="fc"><i class="no-highlight">69</i>&nbsp;                        &quot;&quot;&quot;)))}),format.raw/*39.26*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">70</i>&nbsp;                        &quot;&quot;&quot;),format.raw/*40.25*/(&quot;&quot;&quot;&lt;/tbody&gt;</b>
-<i class="no-highlight">71</i>&nbsp;                    &lt;/table&gt;
-<i class="no-highlight">72</i>&nbsp;                &lt;/div&gt;
-<i class="no-highlight">73</i>&nbsp;            &lt;/div&gt;
-<i class="no-highlight">74</i>&nbsp;        &lt;/div&gt;
-<i class="no-highlight">75</i>&nbsp;    &lt;/div&gt;
-<i class="no-highlight">76</i>&nbsp;
-<b class="fc"><i class="no-highlight">77</i>&nbsp;    &quot;&quot;&quot;),_display_(/*47.6*/parts/*47.11*/.footer_content()),format.raw/*47.28*/(&quot;&quot;&quot;</b>
-<i class="no-highlight">78</i>&nbsp;
-<b class="fc"><i class="no-highlight">79</i>&nbsp;&quot;&quot;&quot;),format.raw/*49.1*/(&quot;&quot;&quot;&lt;/div&gt;</b>
-<i class="no-highlight">80</i>&nbsp;&lt;!-- /page content --&gt;
-<i class="no-highlight">81</i>&nbsp;&quot;&quot;&quot;))
-<i class="no-highlight">82</i>&nbsp;      }
-<i class="no-highlight">83</i>&nbsp;    }
-<i class="no-highlight">84</i>&nbsp;  }
-<i class="no-highlight">85</i>&nbsp;
-<b class="nc"><i class="no-highlight">86</i>&nbsp;  def render(networkConfigurationForm:Form[PortalNetworkConfiguration],connectedUsers:List[ConnectedUser]): play.twirl.api.HtmlFormat.Appendable = apply(networkConfigurationForm,connectedUsers)</b>
-<i class="no-highlight">87</i>&nbsp;
-<b class="nc"><i class="no-highlight">88</i>&nbsp;  def f:((Form[PortalNetworkConfiguration],List[ConnectedUser]) =&gt; play.twirl.api.HtmlFormat.Appendable) = (networkConfigurationForm,connectedUsers) =&gt; apply(networkConfigurationForm,connectedUsers)</b>
-<i class="no-highlight">89</i>&nbsp;
-<b class="nc"><i class="no-highlight">90</i>&nbsp;  def ref: this.type = this</b>
-<i class="no-highlight">91</i>&nbsp;
-<i class="no-highlight">92</i>&nbsp;}
-<i class="no-highlight">93</i>&nbsp;
-<i class="no-highlight">94</i>&nbsp;
-<i class="no-highlight">95</i>&nbsp;              /*
-<i class="no-highlight">96</i>&nbsp;                  -- GENERATED --
-<i class="no-highlight">97</i>&nbsp;                  SOURCE: app/views/admin/connectionsPart.scala.html
-<i class="no-highlight">98</i>&nbsp;                  HASH: 33cf98ff5eac62b6ce367bd9625a18ab4eab2f42
-<i class="no-highlight">99</i>&nbsp;                  MATRIX: 657-&gt;1|1048-&gt;34|1239-&gt;132|1267-&gt;134|1517-&gt;357|1583-&gt;402|2110-&gt;902|2183-&gt;954|2249-&gt;993|2329-&gt;1052|2395-&gt;1091|2470-&gt;1145|2623-&gt;1271|2646-&gt;1285|2659-&gt;1289|2707-&gt;1299|2760-&gt;1324|2999-&gt;1536|3012-&gt;1540|3042-&gt;1549|3108-&gt;1588|3121-&gt;1592|3158-&gt;1608|3224-&gt;1647|3237-&gt;1651|3265-&gt;1658|3357-&gt;1719|3410-&gt;1744|3548-&gt;1856|3562-&gt;1861|3600-&gt;1878|3629-&gt;1880
-<i class="no-highlight">100</i>&nbsp;                  LINES: 24-&gt;1|29-&gt;3|35-&gt;5|37-&gt;7|43-&gt;13|43-&gt;13|54-&gt;24|54-&gt;24|55-&gt;25|55-&gt;25|56-&gt;26|56-&gt;26|60-&gt;30|60-&gt;30|60-&gt;30|60-&gt;30|61-&gt;31|65-&gt;35|65-&gt;35|65-&gt;35|66-&gt;36|66-&gt;36|66-&gt;36|67-&gt;37|67-&gt;37|67-&gt;37|69-&gt;39|70-&gt;40|77-&gt;47|77-&gt;47|77-&gt;47|79-&gt;49
-<i class="no-highlight">101</i>&nbsp;                  -- GENERATED --
-<i class="no-highlight">102</i>&nbsp;              */
-<i class="no-highlight">103</i>&nbsp;          
+<b class="fc"><i class="no-highlight">37</i>&nbsp;&lt;script src=&quot;&quot;&quot;&quot;),_display_(/*6.15*/routes/*6.21*/.Assets.versioned(&quot;js/wifree.js&quot;)),format.raw/*6.54*/(&quot;&quot;&quot;&quot;&gt;&lt;/script&gt;</b>
+<i class="no-highlight">38</i>&nbsp;
+<b class="fc"><i class="no-highlight">39</i>&nbsp;&lt;script src=&quot;&quot;&quot;&quot;),_display_(/*8.15*/routes/*8.21*/.Assets.versioned(&quot;js/nprogress.js&quot;)),format.raw/*8.57*/(&quot;&quot;&quot;&quot;&gt;&lt;/script&gt;</b>
+<i class="no-highlight">40</i>&nbsp;
+<b class="fc"><i class="no-highlight">41</i>&nbsp;&lt;script src=&quot;&quot;&quot;&quot;),_display_(/*10.15*/routes/*10.21*/.Assets.versioned(&quot;js/pace/pace.min.js&quot;)),format.raw/*10.61*/(&quot;&quot;&quot;&quot;&gt;&lt;/script&gt;</b>
+<b class="fc"><i class="no-highlight">42</i>&nbsp;&lt;script src=&quot;&quot;&quot;&quot;),_display_(/*11.15*/routes/*11.21*/.Assets.versioned(&quot;js/zrender/zrender.min.js&quot;)),format.raw/*11.67*/(&quot;&quot;&quot;&quot;&gt;&lt;/script&gt;</b>
+<b class="fc"><i class="no-highlight">43</i>&nbsp;&lt;script src=&quot;&quot;&quot;&quot;),_display_(/*12.15*/routes/*12.21*/.Assets.versioned(&quot;js/echart/green.js&quot;)),format.raw/*12.60*/(&quot;&quot;&quot;&quot;&gt;&lt;/script&gt;</b>
+<b class="fc"><i class="no-highlight">44</i>&nbsp;&lt;script src=&quot;&quot;&quot;&quot;),_display_(/*13.15*/routes/*13.21*/.Assets.versioned(&quot;js/echart/echarts.min.js&quot;)),format.raw/*13.66*/(&quot;&quot;&quot;&quot;&gt;&lt;/script&gt;</b>
+<i class="no-highlight">45</i>&nbsp;&quot;&quot;&quot;))
+<i class="no-highlight">46</i>&nbsp;      }
+<i class="no-highlight">47</i>&nbsp;    }
+<i class="no-highlight">48</i>&nbsp;  }
+<i class="no-highlight">49</i>&nbsp;
+<b class="nc"><i class="no-highlight">50</i>&nbsp;  def render(): play.twirl.api.HtmlFormat.Appendable = apply()</b>
+<i class="no-highlight">51</i>&nbsp;
+<b class="nc"><i class="no-highlight">52</i>&nbsp;  def f:(() =&gt; play.twirl.api.HtmlFormat.Appendable) = () =&gt; apply()</b>
+<i class="no-highlight">53</i>&nbsp;
+<b class="nc"><i class="no-highlight">54</i>&nbsp;  def ref: this.type = this</b>
+<i class="no-highlight">55</i>&nbsp;
+<i class="no-highlight">56</i>&nbsp;}
+<i class="no-highlight">57</i>&nbsp;
+<i class="no-highlight">58</i>&nbsp;
+<i class="no-highlight">59</i>&nbsp;              /*
+<i class="no-highlight">60</i>&nbsp;                  -- GENERATED --
+<i class="no-highlight">61</i>&nbsp;                  SOURCE: app/views/parts/js/echart.scala.html
+<i class="no-highlight">62</i>&nbsp;                  HASH: 8e847a9f51c3c7d426a78ef6d16a02d03fa31581
+<i class="no-highlight">63</i>&nbsp;                  MATRIX: 951-&gt;1|1047-&gt;4|1074-&gt;5|1133-&gt;38|1147-&gt;44|1207-&gt;84|1260-&gt;111|1274-&gt;117|1327-&gt;150|1380-&gt;177|1394-&gt;183|1450-&gt;219|1504-&gt;246|1519-&gt;252|1580-&gt;292|1633-&gt;318|1648-&gt;324|1715-&gt;370|1768-&gt;396|1783-&gt;402|1843-&gt;441|1896-&gt;467|1911-&gt;473|1977-&gt;518
+<i class="no-highlight">64</i>&nbsp;                  LINES: 28-&gt;1|33-&gt;2|34-&gt;3|35-&gt;4|35-&gt;4|35-&gt;4|37-&gt;6|37-&gt;6|37-&gt;6|39-&gt;8|39-&gt;8|39-&gt;8|41-&gt;10|41-&gt;10|41-&gt;10|42-&gt;11|42-&gt;11|42-&gt;11|43-&gt;12|43-&gt;12|43-&gt;12|44-&gt;13|44-&gt;13|44-&gt;13
+<i class="no-highlight">65</i>&nbsp;                  -- GENERATED --
+<i class="no-highlight">66</i>&nbsp;              */
+<i class="no-highlight">67</i>&nbsp;          
 </div>
 </pre>
 </div>
@@ -209,7 +173,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-08-28 18:36</div>
+    <div style="float:right;">generated on 2022-08-28 18:56</div>
 </div>
 </body>
 </html>

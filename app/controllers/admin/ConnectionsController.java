@@ -1,7 +1,6 @@
 package controllers.admin;
 
 import controllers.WiFreeController;
-import core.constants.ConnectionsConstants;
 import models.PortalNetworkConfiguration;
 import play.data.Form;
 import play.mvc.Result;
@@ -9,7 +8,7 @@ import services.ConnectionsService;
 
 import javax.inject.Inject;
 
-public class ConnectionsController extends WiFreeController implements ConnectionsConstants {
+public class ConnectionsController extends WiFreeController{
 
 	@Inject
 	private ConnectionsService connectionsService;
@@ -20,5 +19,4 @@ public class ConnectionsController extends WiFreeController implements Connectio
 		connectionsService.saveNetworkConfiguration(portalNetworkConfiguration.getConnectionTimeout(), portalId());
 		return redirect(controllers.routes.AdminAppController.connections()); // with something
 	}
-
 }

@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > login_options</title>
+  <title>Coverage Report > pace</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -17,10 +17,10 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">views.html.admin</a>
+    <a href="../index.html">views.html.parts.js</a>
 </div>
 
-<h1>Coverage Summary for Class: login_options (views.html.admin)</h1>
+<h1>Coverage Summary for Class: pace (views.html.parts.js)</h1>
 
 <table class="coverageStats">
 
@@ -36,21 +36,21 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
   <tr>
-    <td class="name">login_options$</td>
+    <td class="name">pace$</td>
 <td class="coverageStat">
   <span class="percent">
-    66.7%
+    0%
   </span>
   <span class="absValue">
-    (4/6)
+    (0/5)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    93.3%
+    0%
   </span>
   <span class="absValue">
-    (28/30)
+    (0/8)
   </span>
 </td>
   </tr>
@@ -58,18 +58,18 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    66.7%
+    0%
   </span>
   <span class="absValue">
-    (4/6)
+    (0/5)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    93.3%
+    0%
   </span>
   <span class="absValue">
-    (28/30)
+    (0/8)
   </span>
 </td>
 </tr>
@@ -81,7 +81,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <pre>
 <div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;
-<i class="no-highlight">2</i>&nbsp;package views.html.admin
+<i class="no-highlight">2</i>&nbsp;package views.html.parts.js
 <i class="no-highlight">3</i>&nbsp;
 <i class="no-highlight">4</i>&nbsp;import _root_.play.twirl.api.TwirlFeatureImports._
 <i class="no-highlight">5</i>&nbsp;import _root_.play.twirl.api.TwirlHelperImports._
@@ -103,91 +103,40 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">21</i>&nbsp;import play.mvc.Http.Context.Implicit._
 <i class="no-highlight">22</i>&nbsp;import play.data._
 <i class="no-highlight">23</i>&nbsp;import play.core.j.PlayFormsMagicForJava._
-<i class="no-highlight">24</i>&nbsp;/*1.2*/import views.dto.SocialKeysView
-<i class="no-highlight">25</i>&nbsp;/*3.2*/import models.types.LoginMethodType
+<i class="no-highlight">24</i>&nbsp;
+<b class="nc"><i class="no-highlight">25</i>&nbsp;object pace extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template0[play.twirl.api.HtmlFormat.Appendable] {</b>
 <i class="no-highlight">26</i>&nbsp;
-<b class="fc"><i class="no-highlight">27</i>&nbsp;object login_options extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template2[Form[SocialKeysView],Form[Portal],play.twirl.api.HtmlFormat.Appendable] {</b>
-<i class="no-highlight">28</i>&nbsp;
-<i class="no-highlight">29</i>&nbsp;  /**/
-<i class="no-highlight">30</i>&nbsp;  def apply/*4.2*/(socialKeysForm: Form[SocialKeysView], portalForm: Form[Portal]):play.twirl.api.HtmlFormat.Appendable = {
-<b class="fc"><i class="no-highlight">31</i>&nbsp;    _display_ {</b>
-<i class="no-highlight">32</i>&nbsp;      {
-<i class="no-highlight">33</i>&nbsp;
-<i class="no-highlight">34</i>&nbsp;
-<b class="fc"><i class="no-highlight">35</i>&nbsp;Seq[Any](format.raw/*5.1*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">36</i>&nbsp;&quot;&quot;&quot;),format.raw/*6.1*/(&quot;&quot;&quot;&lt;!-- Page content --&gt;</b>
-<i class="no-highlight">37</i>&nbsp;&lt;div class=&quot;right_col&quot; role=&quot;main&quot;&gt;
-<i class="no-highlight">38</i>&nbsp;    &lt;div class=&quot;row&quot;&gt;
-<i class="no-highlight">39</i>&nbsp;        &lt;div class=&quot;col-md-12 col-sm-6 col-xs-12&quot;&gt;
-<b class="fc"><i class="no-highlight">40</i>&nbsp;            &quot;&quot;&quot;),format.raw/*10.38*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">41</i>&nbsp;            &quot;&quot;&quot;),format.raw/*11.13*/(&quot;&quot;&quot;&lt;div&gt;</b>
-<i class="no-highlight">42</i>&nbsp;                &lt;h1&gt;Configuración de Redes Sociales&lt;/h1&gt;
-<i class="no-highlight">43</i>&nbsp;                &lt;div class=&quot;x-content&quot;&gt;
-<b class="fc"><i class="no-highlight">44</i>&nbsp;                    &quot;&quot;&quot;),_display_(/*14.22*/helper/*14.28*/.form(controllers.admin.routes.SocialLoginKeysController.saveSocialKeys())/*14.102*/ {_display_(Seq[Any](format.raw/*14.104*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">45</i>&nbsp;                        &quot;&quot;&quot;),format.raw/*15.25*/(&quot;&quot;&quot;&lt;h2&gt;Login Social&lt;/h2&gt;</b>
-<i class="no-highlight">46</i>&nbsp;                    &lt;div class=&quot;form-group row&quot;&gt;
-<b class="fc"><i class="no-highlight">47</i>&nbsp;                        &quot;&quot;&quot;),_display_(/*17.26*/parts/*17.31*/.social_keys(socialKeysForm(&quot;google&quot;), &quot;Google&quot;)),format.raw/*17.79*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">48</i>&nbsp;                    &quot;&quot;&quot;),format.raw/*18.21*/(&quot;&quot;&quot;&lt;/div&gt;</b>
-<i class="no-highlight">49</i>&nbsp;                    &lt;div class=&quot;form-group row&quot;&gt;
-<b class="fc"><i class="no-highlight">50</i>&nbsp;                        &quot;&quot;&quot;),_display_(/*20.26*/parts/*20.31*/.social_keys(socialKeysForm(&quot;facebook&quot;), &quot;Facebook&quot;)),format.raw/*20.83*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">51</i>&nbsp;                    &quot;&quot;&quot;),format.raw/*21.21*/(&quot;&quot;&quot;&lt;/div&gt;</b>
-<i class="no-highlight">52</i>&nbsp;                        &lt;div class=&quot;form-group&quot;&gt;
-<i class="no-highlight">53</i>&nbsp;                            &lt;div class=&quot;col-md-12 col-sm-6 col-xs-12 col-md-offset-10&quot;&gt;
-<b class="fc"><i class="no-highlight">54</i>&nbsp;                                &lt;button type=&quot;submit&quot; class=&quot;btn btn-success&quot;&gt;&quot;&quot;&quot;),_display_(/*24.80*/Messages(&quot;submit&quot;)),format.raw/*24.98*/(&quot;&quot;&quot;&lt;/button&gt;</b>
-<i class="no-highlight">55</i>&nbsp;                            &lt;/div&gt;
-<i class="no-highlight">56</i>&nbsp;                        &lt;/div&gt;
-<b class="fc"><i class="no-highlight">57</i>&nbsp;                    &quot;&quot;&quot;)))}),format.raw/*27.22*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">58</i>&nbsp;                &quot;&quot;&quot;),format.raw/*28.17*/(&quot;&quot;&quot;&lt;/div&gt;</b>
-<i class="no-highlight">59</i>&nbsp;            &lt;/div&gt;
-<b class="fc"><i class="no-highlight">60</i>&nbsp;            &quot;&quot;&quot;),format.raw/*30.36*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">61</i>&nbsp;        &quot;&quot;&quot;),format.raw/*31.9*/(&quot;&quot;&quot;&lt;/div&gt;</b>
-<i class="no-highlight">62</i>&nbsp;    &lt;/div&gt;
-<i class="no-highlight">63</i>&nbsp;&lt;/div&gt;
-<i class="no-highlight">64</i>&nbsp;&lt;!-- Page content --&gt;
-<i class="no-highlight">65</i>&nbsp;&lt;style&gt;
-<b class="fc"><i class="no-highlight">66</i>&nbsp;    .wifree-checkbox dl &quot;&quot;&quot;),format.raw/*36.25*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*36.26*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">67</i>&nbsp;        &quot;&quot;&quot;),format.raw/*37.9*/(&quot;&quot;&quot;width: 100%;</b>
-<i class="no-highlight">68</i>&nbsp;        overflow: hidden;
-<i class="no-highlight">69</i>&nbsp;        padding: 2px;
-<i class="no-highlight">70</i>&nbsp;        margin: 0
-<b class="fc"><i class="no-highlight">71</i>&nbsp;    &quot;&quot;&quot;),format.raw/*41.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*41.6*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">72</i>&nbsp;    &quot;&quot;&quot;),format.raw/*42.5*/(&quot;&quot;&quot;.wifree-checkbox dt &quot;&quot;&quot;),format.raw/*42.25*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*42.26*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">73</i>&nbsp;        &quot;&quot;&quot;),format.raw/*43.9*/(&quot;&quot;&quot;float: left;</b>
-<i class="no-highlight">74</i>&nbsp;        width: 25%;
-<i class="no-highlight">75</i>&nbsp;        /* adjust the width; make sure the total of both is 100% */
-<i class="no-highlight">76</i>&nbsp;        padding: 4px;
-<i class="no-highlight">77</i>&nbsp;        margin: 0
-<b class="fc"><i class="no-highlight">78</i>&nbsp;    &quot;&quot;&quot;),format.raw/*48.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*48.6*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">79</i>&nbsp;    &quot;&quot;&quot;),format.raw/*49.5*/(&quot;&quot;&quot;.wifree-checkbox dd &quot;&quot;&quot;),format.raw/*49.25*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*49.26*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">80</i>&nbsp;        &quot;&quot;&quot;),format.raw/*50.9*/(&quot;&quot;&quot;float: left;</b>
-<i class="no-highlight">81</i>&nbsp;        width: 75%;
-<i class="no-highlight">82</i>&nbsp;        /* adjust the width; make sure the total of both is 100% */
-<i class="no-highlight">83</i>&nbsp;        padding: 4px;
-<i class="no-highlight">84</i>&nbsp;        margin: 0
-<b class="fc"><i class="no-highlight">85</i>&nbsp;    &quot;&quot;&quot;),format.raw/*55.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*55.6*/(&quot;&quot;&quot;</b>
-<b class="fc"><i class="no-highlight">86</i>&nbsp;&quot;&quot;&quot;),format.raw/*56.1*/(&quot;&quot;&quot;&lt;/style&gt;&quot;&quot;&quot;))</b>
-<i class="no-highlight">87</i>&nbsp;      }
-<i class="no-highlight">88</i>&nbsp;    }
-<i class="no-highlight">89</i>&nbsp;  }
-<i class="no-highlight">90</i>&nbsp;
-<b class="fc"><i class="no-highlight">91</i>&nbsp;  def render(socialKeysForm:Form[SocialKeysView],portalForm:Form[Portal]): play.twirl.api.HtmlFormat.Appendable = apply(socialKeysForm,portalForm)</b>
-<i class="no-highlight">92</i>&nbsp;
-<b class="nc"><i class="no-highlight">93</i>&nbsp;  def f:((Form[SocialKeysView],Form[Portal]) =&gt; play.twirl.api.HtmlFormat.Appendable) = (socialKeysForm,portalForm) =&gt; apply(socialKeysForm,portalForm)</b>
-<i class="no-highlight">94</i>&nbsp;
-<b class="nc"><i class="no-highlight">95</i>&nbsp;  def ref: this.type = this</b>
-<i class="no-highlight">96</i>&nbsp;
-<i class="no-highlight">97</i>&nbsp;}
-<i class="no-highlight">98</i>&nbsp;
-<i class="no-highlight">99</i>&nbsp;
-<i class="no-highlight">100</i>&nbsp;              /*
-<i class="no-highlight">101</i>&nbsp;                  -- GENERATED --
-<i class="no-highlight">102</i>&nbsp;                  SOURCE: app/views/admin/login_options.scala.html
-<i class="no-highlight">103</i>&nbsp;                  HASH: fc155a716ca54f4dc20161d76b09b961c8414ace
-<i class="no-highlight">104</i>&nbsp;                  MATRIX: 657-&gt;1|696-&gt;35|1071-&gt;72|1229-&gt;137|1256-&gt;138|1427-&gt;306|1468-&gt;319|1619-&gt;443|1634-&gt;449|1718-&gt;523|1759-&gt;525|1812-&gt;550|1935-&gt;646|1949-&gt;651|2018-&gt;699|2067-&gt;720|2175-&gt;801|2189-&gt;806|2262-&gt;858|2311-&gt;879|2561-&gt;1102|2600-&gt;1120|2728-&gt;1217|2773-&gt;1234|2839-&gt;1295|2875-&gt;1304|2982-&gt;1383|3011-&gt;1384|3047-&gt;1393|3157-&gt;1476|3185-&gt;1477|3217-&gt;1482|3265-&gt;1502|3294-&gt;1503|3330-&gt;1512|3502-&gt;1657|3530-&gt;1658|3562-&gt;1663|3610-&gt;1683|3639-&gt;1684|3675-&gt;1693|3847-&gt;1838|3875-&gt;1839|3903-&gt;1840
-<i class="no-highlight">105</i>&nbsp;                  LINES: 24-&gt;1|25-&gt;3|30-&gt;4|35-&gt;5|36-&gt;6|40-&gt;10|41-&gt;11|44-&gt;14|44-&gt;14|44-&gt;14|44-&gt;14|45-&gt;15|47-&gt;17|47-&gt;17|47-&gt;17|48-&gt;18|50-&gt;20|50-&gt;20|50-&gt;20|51-&gt;21|54-&gt;24|54-&gt;24|57-&gt;27|58-&gt;28|60-&gt;30|61-&gt;31|66-&gt;36|66-&gt;36|67-&gt;37|71-&gt;41|71-&gt;41|72-&gt;42|72-&gt;42|72-&gt;42|73-&gt;43|78-&gt;48|78-&gt;48|79-&gt;49|79-&gt;49|79-&gt;49|80-&gt;50|85-&gt;55|85-&gt;55|86-&gt;56
-<i class="no-highlight">106</i>&nbsp;                  -- GENERATED --
-<i class="no-highlight">107</i>&nbsp;              */
-<i class="no-highlight">108</i>&nbsp;          
+<i class="no-highlight">27</i>&nbsp;  /**/
+<i class="no-highlight">28</i>&nbsp;  def apply/*1.2*/():play.twirl.api.HtmlFormat.Appendable = {
+<b class="nc"><i class="no-highlight">29</i>&nbsp;    _display_ {</b>
+<i class="no-highlight">30</i>&nbsp;      {
+<i class="no-highlight">31</i>&nbsp;
+<i class="no-highlight">32</i>&nbsp;
+<b class="nc"><i class="no-highlight">33</i>&nbsp;Seq[Any](format.raw/*2.1*/(&quot;&quot;&quot;</b>
+<b class="nc"><i class="no-highlight">34</i>&nbsp;&quot;&quot;&quot;),format.raw/*3.1*/(&quot;&quot;&quot;&lt;!-- pace --&gt;</b>
+<b class="nc"><i class="no-highlight">35</i>&nbsp;&lt;script src=&quot;&quot;&quot;&quot;),_display_(/*4.15*/routes/*4.21*/.Assets.versioned(&quot;js/pace/pace.min.js&quot;)),format.raw/*4.61*/(&quot;&quot;&quot;&quot;&gt;&lt;/script&gt;&quot;&quot;&quot;))</b>
+<i class="no-highlight">36</i>&nbsp;      }
+<i class="no-highlight">37</i>&nbsp;    }
+<i class="no-highlight">38</i>&nbsp;  }
+<i class="no-highlight">39</i>&nbsp;
+<b class="nc"><i class="no-highlight">40</i>&nbsp;  def render(): play.twirl.api.HtmlFormat.Appendable = apply()</b>
+<i class="no-highlight">41</i>&nbsp;
+<b class="nc"><i class="no-highlight">42</i>&nbsp;  def f:(() =&gt; play.twirl.api.HtmlFormat.Appendable) = () =&gt; apply()</b>
+<i class="no-highlight">43</i>&nbsp;
+<b class="nc"><i class="no-highlight">44</i>&nbsp;  def ref: this.type = this</b>
+<i class="no-highlight">45</i>&nbsp;
+<i class="no-highlight">46</i>&nbsp;}
+<i class="no-highlight">47</i>&nbsp;
+<i class="no-highlight">48</i>&nbsp;
+<i class="no-highlight">49</i>&nbsp;              /*
+<i class="no-highlight">50</i>&nbsp;                  -- GENERATED --
+<i class="no-highlight">51</i>&nbsp;                  SOURCE: app/views/parts/js/pace.scala.html
+<i class="no-highlight">52</i>&nbsp;                  HASH: a5de628e6f3c370db8a2dc454422b913d3e3d454
+<i class="no-highlight">53</i>&nbsp;                  MATRIX: 949-&gt;1|1045-&gt;4|1072-&gt;5|1126-&gt;33|1140-&gt;39|1200-&gt;79
+<i class="no-highlight">54</i>&nbsp;                  LINES: 28-&gt;1|33-&gt;2|34-&gt;3|35-&gt;4|35-&gt;4|35-&gt;4
+<i class="no-highlight">55</i>&nbsp;                  -- GENERATED --
+<i class="no-highlight">56</i>&nbsp;              */
+<i class="no-highlight">57</i>&nbsp;          
 </div>
 </pre>
 </div>
@@ -214,7 +163,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-08-28 18:36</div>
+    <div style="float:right;">generated on 2022-08-28 18:56</div>
 </div>
 </body>
 </html>

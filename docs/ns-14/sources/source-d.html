@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > VisitsAmountQuery</title>
+  <title>Coverage Report > surveys</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -17,10 +17,10 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">operations.responses</a>
+    <a href="../index.html">views.html.admin</a>
 </div>
 
-<h1>Coverage Summary for Class: VisitsAmountQuery (operations.responses)</h1>
+<h1>Coverage Summary for Class: surveys (views.html.admin)</h1>
 
 <table class="coverageStats">
 
@@ -35,41 +35,22 @@ Current scope:     <a href="../../index.html">all classes</a>
   Line, %
 </th>
 </tr>
-<tr>
-  <td class="name">VisitsAmountQuery</td>
-<td class="coverageStat">
-  <span class="percent">
-    75%
-  </span>
-  <span class="absValue">
-    (3/4)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    75%
-  </span>
-  <span class="absValue">
-    (3/4)
-  </span>
-</td>
-</tr>
   <tr>
-    <td class="name">VisitsAmountQuery$</td>
+    <td class="name">surveys$</td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    50%
   </span>
   <span class="absValue">
-    (0/1)
+    (10/20)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    86.9%
   </span>
   <span class="absValue">
-    (0/1)
+    (233/268)
   </span>
 </td>
   </tr>
@@ -77,18 +58,18 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    60%
+    50%
   </span>
   <span class="absValue">
-    (3/5)
+    (10/20)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    60%
+    86.9%
   </span>
   <span class="absValue">
-    (3/5)
+    (233/268)
   </span>
 </td>
 </tr>
@@ -99,140 +80,424 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package operations.responses
-<i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import io.ebean.{Ebean, Expr, Expression, SqlQuery}
-<i class="no-highlight">4</i>&nbsp;import models.types.{DayOfTheWeek, Gender, RelativeTimePeriod, TimePeriodType}
-<i class="no-highlight">5</i>&nbsp;import operations.core.{ResponseType, WiFreeResponse}
-<i class="no-highlight">6</i>&nbsp;import utils.DateHelper
-<i class="no-highlight">7</i>&nbsp;
-<i class="no-highlight">8</i>&nbsp;import java.util.function.{Function =&gt; JFunction}
-<i class="no-highlight">9</i>&nbsp;import java.util.function.BiFunction
-<i class="no-highlight">10</i>&nbsp;import java.lang.{Long =&gt; JLong}
-<i class="no-highlight">11</i>&nbsp;import java.time.Instant
-<i class="no-highlight">12</i>&nbsp;import models.types.RelativeTimePeriod.{BEFORE_LAST_WEEK, LAST_FIFTEEN_MINUTES, LAST_WEEK, LAST_YEAR}
-<i class="no-highlight">13</i>&nbsp;import models.types.TimePeriodType.{ABSOLUTE, NONE, RELATIVE}
-<i class="no-highlight">14</i>&nbsp;
-<i class="no-highlight">15</i>&nbsp;import scala.collection.JavaConverters._
-<i class="no-highlight">16</i>&nbsp;import utils.ScalaHelper._
-<i class="no-highlight">17</i>&nbsp;
-<i class="no-highlight">18</i>&nbsp;import scala.collection.JavaConverters
-<i class="no-highlight">19</i>&nbsp;
-<i class="no-highlight">20</i>&nbsp;case class GetAnalyticsHomeDatasetsResponse(datasetFilters: Seq[DatasetFilter]) extends WiFreeResponse {
-<i class="no-highlight">21</i>&nbsp;
-<i class="no-highlight">22</i>&nbsp;	override val success: Boolean = ???
-<i class="no-highlight">23</i>&nbsp;	override val errors: List[String] = ???
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;
+<i class="no-highlight">2</i>&nbsp;package views.html.admin
+<i class="no-highlight">3</i>&nbsp;
+<i class="no-highlight">4</i>&nbsp;import _root_.play.twirl.api.TwirlFeatureImports._
+<i class="no-highlight">5</i>&nbsp;import _root_.play.twirl.api.TwirlHelperImports._
+<i class="no-highlight">6</i>&nbsp;import _root_.play.twirl.api.Html
+<i class="no-highlight">7</i>&nbsp;import _root_.play.twirl.api.JavaScript
+<i class="no-highlight">8</i>&nbsp;import _root_.play.twirl.api.Txt
+<i class="no-highlight">9</i>&nbsp;import _root_.play.twirl.api.Xml
+<i class="no-highlight">10</i>&nbsp;import models._
+<i class="no-highlight">11</i>&nbsp;import controllers._
+<i class="no-highlight">12</i>&nbsp;import play.api.i18n._
+<i class="no-highlight">13</i>&nbsp;import views.html._
+<i class="no-highlight">14</i>&nbsp;import play.api.templates.PlayMagic._
+<i class="no-highlight">15</i>&nbsp;import java.lang._
+<i class="no-highlight">16</i>&nbsp;import java.util._
+<i class="no-highlight">17</i>&nbsp;import scala.collection.JavaConverters._
+<i class="no-highlight">18</i>&nbsp;import play.core.j.PlayMagicForJava._
+<i class="no-highlight">19</i>&nbsp;import play.mvc._
+<i class="no-highlight">20</i>&nbsp;import play.api.data.Field
+<i class="no-highlight">21</i>&nbsp;import play.mvc.Http.Context.Implicit._
+<i class="no-highlight">22</i>&nbsp;import play.data._
+<i class="no-highlight">23</i>&nbsp;import play.core.j.PlayFormsMagicForJava._
 <i class="no-highlight">24</i>&nbsp;
-<i class="no-highlight">25</i>&nbsp;	override def responseType: ResponseType = ResponseType.GET_ANALYTICS_HOME_DATASETS_RESPONSE
+<b class="fc"><i class="no-highlight">25</i>&nbsp;object surveys extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template5[Form[Survey],Boolean,Boolean,Int,Int,play.twirl.api.HtmlFormat.Appendable] {</b>
 <i class="no-highlight">26</i>&nbsp;
-<i class="no-highlight">27</i>&nbsp;	override def isOk(): Boolean = ???
-<i class="no-highlight">28</i>&nbsp;
-<i class="no-highlight">29</i>&nbsp;}
-<i class="no-highlight">30</i>&nbsp;
-<i class="no-highlight">31</i>&nbsp;case class DatasetFilter(portalId: Long,
-<i class="no-highlight">32</i>&nbsp;												 name: String,
-<i class="no-highlight">33</i>&nbsp;												 description: String,
-<i class="no-highlight">34</i>&nbsp;												 timePeriod: String,
-<i class="no-highlight">35</i>&nbsp;												 timePeriodType: TimePeriodType,
-<i class="no-highlight">36</i>&nbsp;												 gender: Option[Gender],
-<i class="no-highlight">37</i>&nbsp;												 age: Option[MinMax[Int]],
-<i class="no-highlight">38</i>&nbsp;												 visitsAmount: Option[MinMax[Int]],
-<i class="no-highlight">39</i>&nbsp;												 visitorAddress: Option[String],
-<i class="no-highlight">40</i>&nbsp;												 daysOfTheWeek: Option[Seq[DayOfTheWeek]],
-<i class="no-highlight">41</i>&nbsp;												 hours: Option[(String, String)]
-<i class="no-highlight">42</i>&nbsp;												) {
-<i class="no-highlight">43</i>&nbsp;	
-<i class="no-highlight">44</i>&nbsp;	def timePeriodExpression: Option[BiFunction[String, Instant, Expression]] = timePeriodType match {
-<i class="no-highlight">45</i>&nbsp;		case ABSOLUTE =&gt; val (startDate, endDate) = DateHelper.strings2Dates(timePeriod)
-<i class="no-highlight">46</i>&nbsp;			Option((propertyName: String, _: Instant) =&gt; Expr.between(propertyName, startDate, endDate))
-<i class="no-highlight">47</i>&nbsp;		case RELATIVE =&gt; Option(RelativeTimePeriod.valueOf(timePeriod).getExpression)
-<i class="no-highlight">48</i>&nbsp;		case NONE =&gt; None
-<i class="no-highlight">49</i>&nbsp;		case u =&gt; throw new Exception(s&quot;Unknown timePeriodType: $u&quot;)
-<i class="no-highlight">50</i>&nbsp;	}
-<i class="no-highlight">51</i>&nbsp;	
-<i class="no-highlight">52</i>&nbsp;	def expressions: BuiltExpressions = {
-<i class="no-highlight">53</i>&nbsp;		val portalExpression = Option(Expr.eq(&quot;portal.id&quot;, portalId))
-<i class="no-highlight">54</i>&nbsp;		val genderExpression = gender.map(g =&gt; Expr.eq(&quot;networkUser.gender&quot;, g.toString))
-<i class="no-highlight">55</i>&nbsp;		val ageExpression = age.map(a =&gt; a.expr(&quot;networkUser.age&quot;))
-<i class="no-highlight">56</i>&nbsp;		val visitsAmountQuery = VisitsAmountQuery(visitsAmount.map { mm =&gt;
-<i class="no-highlight">57</i>&nbsp;			Ebean.createSqlQuery(&quot;SELECT network_user_id&quot;
-<i class="no-highlight">58</i>&nbsp;					+ &quot;FROM (SELECT network_user_id, count(1) AS n FROM network_user_connection_log GROUP BY network_user_id) AS x&quot;
-<i class="no-highlight">59</i>&nbsp;					+ &quot;WHERE x.n &gt;= :min AND x.n &lt;= :max&quot;)
-<i class="no-highlight">60</i>&nbsp;					.setParameter(&quot;min&quot;, mm.min)
-<i class="no-highlight">61</i>&nbsp;					.setParameter(&quot;max&quot;, mm.max)
-<i class="no-highlight">62</i>&nbsp;		})
-<i class="no-highlight">63</i>&nbsp;		val visitorAddressExpression = visitorAddress.map { va =&gt;
-<i class="no-highlight">64</i>&nbsp;			val s = s&quot;%$va%&quot;
-<i class="no-highlight">65</i>&nbsp;			Expr.or(
-<i class="no-highlight">66</i>&nbsp;				Expr.ilike(&quot;address.street&quot;, s),
-<i class="no-highlight">67</i>&nbsp;				Expr.or(
-<i class="no-highlight">68</i>&nbsp;					Expr.ilike(&quot;address.other&quot;, s),
-<i class="no-highlight">69</i>&nbsp;					Expr.or(
-<i class="no-highlight">70</i>&nbsp;						Expr.ilike(&quot;address.city&quot;, s),
-<i class="no-highlight">71</i>&nbsp;						Expr.or(
-<i class="no-highlight">72</i>&nbsp;							Expr.ilike(&quot;address.state&quot;, s),
-<i class="no-highlight">73</i>&nbsp;							Expr.ilike(&quot;address.country&quot;, s)
-<i class="no-highlight">74</i>&nbsp;						)
-<i class="no-highlight">75</i>&nbsp;					)
-<i class="no-highlight">76</i>&nbsp;				)
-<i class="no-highlight">77</i>&nbsp;			)
-<i class="no-highlight">78</i>&nbsp;		}
-<i class="no-highlight">79</i>&nbsp;		val daysOfTheWeekExpression = daysOfTheWeek.map(ds =&gt; Expr.raw(s&quot;dow(connection_start_date) in (?)&quot;, ds.map(_.ordinal()).mkString(&quot;, &quot;)))
-<i class="no-highlight">80</i>&nbsp;		val hoursExpression = hours.map { case (hMin, hMax) =&gt; Expr.raw(&quot;connection_start_date::time between ? AND ?&quot;, Array[Object](hMin, hMax)) }
-<i class="no-highlight">81</i>&nbsp;		val parameterlessExpressions = Seq(
-<i class="no-highlight">82</i>&nbsp;			portalExpression,
-<i class="no-highlight">83</i>&nbsp;			genderExpression,
-<i class="no-highlight">84</i>&nbsp;			ageExpression,
-<i class="no-highlight">85</i>&nbsp;			visitorAddressExpression,
-<i class="no-highlight">86</i>&nbsp;			daysOfTheWeekExpression,
-<i class="no-highlight">87</i>&nbsp;			hoursExpression
-<i class="no-highlight">88</i>&nbsp;		).flatten
-<i class="no-highlight">89</i>&nbsp;		BuiltExpressions(timePeriodExpression, visitsAmountQuery, parameterlessExpressions)
-<i class="no-highlight">90</i>&nbsp;	}
-<i class="no-highlight">91</i>&nbsp;}
-<i class="no-highlight">92</i>&nbsp;
-<i class="no-highlight">93</i>&nbsp;object DatasetFilter {
-<i class="no-highlight">94</i>&nbsp;
-<i class="no-highlight">95</i>&nbsp;	def usersConnectedLastWeekFilter(portalId: Long): DatasetFilter = relativeTimePeriodFilter(portalId, LAST_WEEK)
-<i class="no-highlight">96</i>&nbsp;
-<i class="no-highlight">97</i>&nbsp;	def usersConnectedBeforeLastWeekFilter(portalId: Long): DatasetFilter = relativeTimePeriodFilter(portalId, BEFORE_LAST_WEEK)
-<i class="no-highlight">98</i>&nbsp;
-<i class="no-highlight">99</i>&nbsp;	def usersConnectedLastYearFilter(portalId: Long): DatasetFilter = relativeTimePeriodFilter(portalId, LAST_YEAR)
-<i class="no-highlight">100</i>&nbsp;
-<i class="no-highlight">101</i>&nbsp;	def genderUsersConnectedLastYearFilter(portalId: Long, gender: Gender): DatasetFilter = relativeTimePeriodFilter(portalId, LAST_YEAR, Option(gender))
-<i class="no-highlight">102</i>&nbsp;
-<i class="no-highlight">103</i>&nbsp;	def usersConnectedLastSixtyMinutesFilter(portalId: Long): DatasetFilter = relativeTimePeriodFilter(portalId, LAST_FIFTEEN_MINUTES)
-<i class="no-highlight">104</i>&nbsp;
-<i class="no-highlight">105</i>&nbsp;	private def relativeTimePeriodFilter(portalId: Long, relativeTimePeriod: RelativeTimePeriod, gender: Option[Gender] = None) = DatasetFilter(
-<i class="no-highlight">106</i>&nbsp;		portalId = portalId,
-<i class="no-highlight">107</i>&nbsp;		name = &quot;&quot;,
-<i class="no-highlight">108</i>&nbsp;		description = &quot;&quot;,
-<i class="no-highlight">109</i>&nbsp;		timePeriod = relativeTimePeriod.toString,
-<i class="no-highlight">110</i>&nbsp;		timePeriodType = TimePeriodType.RELATIVE,
-<i class="no-highlight">111</i>&nbsp;		gender = gender,
-<i class="no-highlight">112</i>&nbsp;		age = None,
-<i class="no-highlight">113</i>&nbsp;		visitsAmount = None,
-<i class="no-highlight">114</i>&nbsp;		visitorAddress = None,
-<i class="no-highlight">115</i>&nbsp;		daysOfTheWeek = None,
-<i class="no-highlight">116</i>&nbsp;		hours = None
-<i class="no-highlight">117</i>&nbsp;	)
-<i class="no-highlight">118</i>&nbsp;
-<i class="no-highlight">119</i>&nbsp;}
-<i class="no-highlight">120</i>&nbsp;
-<i class="no-highlight">121</i>&nbsp;case class MinMax[T](min: T, max: T) {
-<i class="no-highlight">122</i>&nbsp;	def expr: String =&gt; Expression = (propertyName: String) =&gt; Expr.between(propertyName, min, max)
-<i class="no-highlight">123</i>&nbsp;}
-<i class="no-highlight">124</i>&nbsp;
-<i class="no-highlight">125</i>&nbsp;case class BuiltExpressions(timePeriodExpression: Option[BiFunction[String, Instant, Expression]],
-<i class="no-highlight">126</i>&nbsp;														visitsAmountQuery: VisitsAmountQuery,
-<i class="no-highlight">127</i>&nbsp;														parameterlessExpressions: Seq[Expression])
-<i class="no-highlight">128</i>&nbsp;
-<b class="pc"><i class="no-highlight">129</i>&nbsp;case class VisitsAmountQuery(maybeSqlQuery: Option[SqlQuery]) {</b>
-<b class="fc"><i class="no-highlight">130</i>&nbsp;	private def build: Option[List[JLong]] = maybeSqlQuery.map { sqlQuery =&gt;</b>
-<b class="nc"><i class="no-highlight">131</i>&nbsp;		sqlQuery.findList().asScala.map(row =&gt; row.getLong(&quot;network_user_id&quot;)).toList</b>
-<i class="no-highlight">132</i>&nbsp;	}
-<b class="fc"><i class="no-highlight">133</i>&nbsp;	def expression: Option[Expression] = build.map(ids =&gt; Expr.in(&quot;networkUser.id&quot;, JavaConverters.asJavaCollection(ids)))</b>
-<i class="no-highlight">134</i>&nbsp;}
+<i class="no-highlight">27</i>&nbsp;  /**/
+<b class="nc"><i class="no-highlight">28</i>&nbsp;  def apply/*1.2*/(surveyForm: Form[Survey], isEditing: Boolean, isCreating: Boolean, currentAnswer: Int = 0, totalAnswers: Int = 0):play.twirl.api.HtmlFormat.Appendable = {</b>
+<b class="fc"><i class="no-highlight">29</i>&nbsp;    _display_ {</b>
+<i class="no-highlight">30</i>&nbsp;      {
+<i class="no-highlight">31</i>&nbsp;
+<i class="no-highlight">32</i>&nbsp;
+<b class="fc"><i class="no-highlight">33</i>&nbsp;Seq[Any](format.raw/*2.1*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">34</i>&nbsp;&quot;&quot;&quot;),_display_(/*3.2*/parts/*3.7*/.js.surveys_js(isEditing)),format.raw/*3.32*/(&quot;&quot;&quot;</b>
+<i class="no-highlight">35</i>&nbsp;
+<b class="fc"><i class="no-highlight">36</i>&nbsp;&quot;&quot;&quot;),format.raw/*5.1*/(&quot;&quot;&quot;&lt;style&gt;</b>
+<b class="fc"><i class="no-highlight">37</i>&nbsp;    .wifree-checkbox dl &quot;&quot;&quot;),format.raw/*6.25*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*6.26*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">38</i>&nbsp;        &quot;&quot;&quot;),format.raw/*7.9*/(&quot;&quot;&quot;width: 100%;</b>
+<i class="no-highlight">39</i>&nbsp;        overflow: hidden;
+<i class="no-highlight">40</i>&nbsp;        padding: 2px;
+<i class="no-highlight">41</i>&nbsp;        margin: 0
+<b class="fc"><i class="no-highlight">42</i>&nbsp;        &quot;&quot;&quot;),format.raw/*11.9*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*11.10*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">43</i>&nbsp;    &quot;&quot;&quot;),format.raw/*12.5*/(&quot;&quot;&quot;.wifree-checkbox dt &quot;&quot;&quot;),format.raw/*12.25*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*12.26*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">44</i>&nbsp;        &quot;&quot;&quot;),format.raw/*13.9*/(&quot;&quot;&quot;float: left;</b>
+<i class="no-highlight">45</i>&nbsp;        width: 25%;
+<i class="no-highlight">46</i>&nbsp;        /* adjust the width; make sure the total of both is 100% */
+<i class="no-highlight">47</i>&nbsp;        padding: 4px;
+<i class="no-highlight">48</i>&nbsp;        margin: 0
+<b class="fc"><i class="no-highlight">49</i>&nbsp;    &quot;&quot;&quot;),format.raw/*18.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*18.6*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">50</i>&nbsp;    &quot;&quot;&quot;),format.raw/*19.5*/(&quot;&quot;&quot;.wifree-checkbox dd &quot;&quot;&quot;),format.raw/*19.25*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*19.26*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">51</i>&nbsp;        &quot;&quot;&quot;),format.raw/*20.9*/(&quot;&quot;&quot;float: left;</b>
+<i class="no-highlight">52</i>&nbsp;        width: 75%;
+<i class="no-highlight">53</i>&nbsp;        /* adjust the width; make sure the total of both is 100% */
+<i class="no-highlight">54</i>&nbsp;        padding: 4px;
+<i class="no-highlight">55</i>&nbsp;        margin: 0
+<b class="fc"><i class="no-highlight">56</i>&nbsp;    &quot;&quot;&quot;),format.raw/*25.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*25.6*/(&quot;&quot;&quot;</b>
+<i class="no-highlight">57</i>&nbsp;    
+<b class="fc"><i class="no-highlight">58</i>&nbsp;    &quot;&quot;&quot;),format.raw/*27.5*/(&quot;&quot;&quot;.survey-header &quot;&quot;&quot;),format.raw/*27.20*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*27.21*/(&quot;&quot;&quot;</b>
+<i class="no-highlight">59</i>&nbsp;        
+<b class="fc"><i class="no-highlight">60</i>&nbsp;    &quot;&quot;&quot;),format.raw/*29.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*29.6*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">61</i>&nbsp;    &quot;&quot;&quot;),format.raw/*30.5*/(&quot;&quot;&quot;.question-form-header &quot;&quot;&quot;),format.raw/*30.27*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*30.28*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">62</i>&nbsp;        &quot;&quot;&quot;),format.raw/*31.9*/(&quot;&quot;&quot;display: flex;</b>
+<i class="no-highlight">63</i>&nbsp;        gap: 5%;
+<b class="fc"><i class="no-highlight">64</i>&nbsp;    &quot;&quot;&quot;),format.raw/*33.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*33.6*/(&quot;&quot;&quot;</b>
+<i class="no-highlight">65</i>&nbsp;    
+<b class="fc"><i class="no-highlight">66</i>&nbsp;    &quot;&quot;&quot;),format.raw/*35.5*/(&quot;&quot;&quot;.question-buttons &gt; div &quot;&quot;&quot;),format.raw/*35.29*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*35.30*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">67</i>&nbsp;        &quot;&quot;&quot;),format.raw/*36.9*/(&quot;&quot;&quot;display: flex;</b>
+<i class="no-highlight">68</i>&nbsp;        gap: 5%;
+<i class="no-highlight">69</i>&nbsp;        justify-content: space-between;
+<i class="no-highlight">70</i>&nbsp;        padding-bottom: 2%;
+<b class="fc"><i class="no-highlight">71</i>&nbsp;    &quot;&quot;&quot;),format.raw/*40.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*40.6*/(&quot;&quot;&quot;</b>
+<i class="no-highlight">72</i>&nbsp;    
+<b class="fc"><i class="no-highlight">73</i>&nbsp;    &quot;&quot;&quot;),format.raw/*42.5*/(&quot;&quot;&quot;.question-form-content &quot;&quot;&quot;),format.raw/*42.28*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*42.29*/(&quot;&quot;&quot;</b>
+<i class="no-highlight">74</i>&nbsp;        
+<b class="fc"><i class="no-highlight">75</i>&nbsp;    &quot;&quot;&quot;),format.raw/*44.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*44.6*/(&quot;&quot;&quot;</b>
+<i class="no-highlight">76</i>&nbsp;    
+<b class="fc"><i class="no-highlight">77</i>&nbsp;    &quot;&quot;&quot;),format.raw/*46.5*/(&quot;&quot;&quot;.sticky &quot;&quot;&quot;),format.raw/*46.13*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*46.14*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">78</i>&nbsp;      &quot;&quot;&quot;),format.raw/*47.7*/(&quot;&quot;&quot;position: fixed;</b>
+<i class="no-highlight">79</i>&nbsp;      top: 0;
+<i class="no-highlight">80</i>&nbsp;      width: 100%
+<b class="fc"><i class="no-highlight">81</i>&nbsp;    &quot;&quot;&quot;),format.raw/*50.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*50.6*/(&quot;&quot;&quot;</b>
+<i class="no-highlight">82</i>&nbsp;
+<b class="fc"><i class="no-highlight">83</i>&nbsp;    &quot;&quot;&quot;),format.raw/*52.5*/(&quot;&quot;&quot;.sticky + .question-form-content &quot;&quot;&quot;),format.raw/*52.38*/(&quot;&quot;&quot;{&quot;&quot;&quot;),format.raw/*52.39*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">84</i>&nbsp;      &quot;&quot;&quot;),format.raw/*53.7*/(&quot;&quot;&quot;padding-top: 15%;</b>
+<b class="fc"><i class="no-highlight">85</i>&nbsp;    &quot;&quot;&quot;),format.raw/*54.5*/(&quot;&quot;&quot;}&quot;&quot;&quot;),format.raw/*54.6*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">86</i>&nbsp;&quot;&quot;&quot;),format.raw/*55.1*/(&quot;&quot;&quot;&lt;/style&gt;</b>
+<i class="no-highlight">87</i>&nbsp;
+<i class="no-highlight">88</i>&nbsp;&lt;!-- Page content --&gt;
+<i class="no-highlight">89</i>&nbsp;&lt;div class=&quot;right_col&quot; role=&quot;main&quot;&gt;
+<i class="no-highlight">90</i>&nbsp;    &lt;div class=&quot;row&quot;&gt;
+<i class="no-highlight">91</i>&nbsp;        &lt;div class=&quot;col-md-12 col-sm-6 col-xs-12&quot;&gt;
+<b class="fc"><i class="no-highlight">92</i>&nbsp;            &quot;&quot;&quot;),format.raw/*61.34*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">93</i>&nbsp;            &quot;&quot;&quot;),_display_(/*62.14*/if(isCreating || isEditing)/*62.41*/ {_display_(Seq[Any](format.raw/*62.43*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">94</i>&nbsp;                &quot;&quot;&quot;),format.raw/*63.17*/(&quot;&quot;&quot;&lt;h1&gt;Formulario de Encuesta&lt;/h1&gt;</b>
+<b class="fc"><i class="no-highlight">95</i>&nbsp;            &quot;&quot;&quot;)))}/*64.15*/else/*64.20*/{_display_(Seq[Any](format.raw/*64.21*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">96</i>&nbsp;                &quot;&quot;&quot;),format.raw/*65.17*/(&quot;&quot;&quot;&lt;h1&gt;Resultados de Encuesta&lt;/h1&gt;</b>
+<b class="fc"><i class="no-highlight">97</i>&nbsp;            &quot;&quot;&quot;)))}),format.raw/*66.14*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">98</i>&nbsp;            &quot;&quot;&quot;),format.raw/*67.32*/(&quot;&quot;&quot;</b>
+<i class="no-highlight">99</i>&nbsp;            
+<b class="fc"><i class="no-highlight">100</i>&nbsp;            &quot;&quot;&quot;),format.raw/*69.47*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">101</i>&nbsp;            &quot;&quot;&quot;),_display_(/*70.14*/if(!isEditing &amp;&amp; !isCreating)/*70.43*/ {_display_(Seq[Any](format.raw/*70.45*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">102</i>&nbsp;                &quot;&quot;&quot;),format.raw/*71.17*/(&quot;&quot;&quot;&lt;div&gt;</b>
+<b class="fc"><i class="no-highlight">103</i>&nbsp;                    &quot;&quot;&quot;),_display_(/*72.22*/if(currentAnswer&gt;1)/*72.41*/{_display_(Seq[Any](format.raw/*72.42*/(&quot;&quot;&quot;</b>
+<b class="nc"><i class="no-highlight">104</i>&nbsp;                        &quot;&quot;&quot;),format.raw/*73.25*/(&quot;&quot;&quot;&lt;button type=&quot;button&quot; class=&quot;btn btn-link&quot; onclick=&quot;previous()&quot; style=&quot;font-weight: bold;&quot;&gt;Anterior</b>
+<i class="no-highlight">105</i>&nbsp;                        &lt;/button&gt;
+<b class="fc"><i class="no-highlight">106</i>&nbsp;                    &quot;&quot;&quot;)))}/*75.23*/else/*75.28*/{_display_(Seq[Any](format.raw/*75.29*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">107</i>&nbsp;                        &quot;&quot;&quot;),format.raw/*76.25*/(&quot;&quot;&quot;&lt;button type=&quot;button&quot; class=&quot;btn btn-link&quot; disabled&gt;Anterior&lt;/button&gt;</b>
+<b class="fc"><i class="no-highlight">108</i>&nbsp;                    &quot;&quot;&quot;)))}),format.raw/*77.22*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">109</i>&nbsp;                    &quot;&quot;&quot;),format.raw/*78.21*/(&quot;&quot;&quot;&lt;span&gt; Respuesta </b>
+<b class="fc"><i class="no-highlight">110</i>&nbsp;                        &lt;input id=&quot;answerNumber&quot; type=&quot;number&quot; size=&quot;1&quot; value=&quot;&quot;&quot;&quot;),_display_(/*79.81*/currentAnswer),format.raw/*79.94*/(&quot;&quot;&quot;&quot; min=&quot;1&quot; max=&quot;&quot;&quot;&quot;),_display_(/*79.110*/totalAnswers),format.raw/*79.122*/(&quot;&quot;&quot;&quot;</b>
+<i class="no-highlight">111</i>&nbsp;                               style=&quot;font-weight: bold;&quot;&gt;
+<b class="fc"><i class="no-highlight">112</i>&nbsp;                        de &lt;span id=&quot;totalAnswers&quot;&gt;&quot;&quot;&quot;),_display_(/*81.53*/totalAnswers),format.raw/*81.65*/(&quot;&quot;&quot;&lt;/span&gt;</b>
+<i class="no-highlight">113</i>&nbsp;                    &lt;/span&gt;
+<b class="fc"><i class="no-highlight">114</i>&nbsp;                    &quot;&quot;&quot;),_display_(/*83.22*/if(currentAnswer &lt; totalAnswers)/*83.54*/{_display_(Seq[Any](format.raw/*83.55*/(&quot;&quot;&quot;</b>
+<b class="nc"><i class="no-highlight">115</i>&nbsp;                        &quot;&quot;&quot;),format.raw/*84.25*/(&quot;&quot;&quot;&lt;button type=&quot;button&quot; class=&quot;btn btn-link&quot; onclick=&quot;next()&quot; style=&quot;font-weight: bold;&quot;&gt;Siguiente</b>
+<i class="no-highlight">116</i>&nbsp;                        &lt;/button&gt;
+<b class="fc"><i class="no-highlight">117</i>&nbsp;                    &quot;&quot;&quot;)))}/*86.23*/else/*86.28*/{_display_(Seq[Any](format.raw/*86.29*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">118</i>&nbsp;                        &quot;&quot;&quot;),format.raw/*87.25*/(&quot;&quot;&quot;&lt;button type=&quot;button&quot; class=&quot;btn btn-link&quot; disabled&gt;Siguiente&lt;/button&gt;</b>
+<b class="fc"><i class="no-highlight">119</i>&nbsp;                    &quot;&quot;&quot;)))}),format.raw/*88.22*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">120</i>&nbsp;                &quot;&quot;&quot;),format.raw/*89.17*/(&quot;&quot;&quot;&lt;/div&gt;</b>
+<b class="fc"><i class="no-highlight">121</i>&nbsp;            &quot;&quot;&quot;)))}),format.raw/*90.14*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">122</i>&nbsp;            &quot;&quot;&quot;),format.raw/*91.13*/(&quot;&quot;&quot;&lt;div class=&quot;ln_solid&quot;&gt;&lt;/div&gt;</b>
+<i class="no-highlight">123</i>&nbsp;
+<b class="fc"><i class="no-highlight">124</i>&nbsp;            &quot;&quot;&quot;),format.raw/*93.45*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">125</i>&nbsp;            &quot;&quot;&quot;),format.raw/*94.33*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">126</i>&nbsp;            &quot;&quot;&quot;),format.raw/*95.13*/(&quot;&quot;&quot;&lt;div class=&quot;survey-body&quot;&gt;</b>
+<b class="fc"><i class="no-highlight">127</i>&nbsp;                &quot;&quot;&quot;),_display_(/*96.18*/helper/*96.24*/.form(</b>
+<b class="fc"><i class="no-highlight">128</i>&nbsp;                    controllers.admin.routes.SurveysController.createSurvey(), </b>
+<b class="fc"><i class="no-highlight">129</i>&nbsp;                    &#39;id -&gt; &quot;surveyForm&quot;,</b>
+<b class="fc"><i class="no-highlight">130</i>&nbsp;                    Symbol(&quot;data-parsley-validate&quot;) -&gt; &quot;true&quot;,</b>
+<b class="fc"><i class="no-highlight">131</i>&nbsp;                    Symbol(&quot;novalidate&quot;)-&gt; &quot;novalidate&quot;,</b>
+<b class="fc"><i class="no-highlight">132</i>&nbsp;                    &#39;class -&gt; &quot;form-horizontal form-label-left needs-validation&quot;</b>
+<b class="fc"><i class="no-highlight">133</i>&nbsp;                )/*102.18*/{_display_(Seq[Any](format.raw/*102.19*/(&quot;&quot;&quot; </b>
+<b class="fc"><i class="no-highlight">134</i>&nbsp;                    &quot;&quot;&quot;),format.raw/*103.63*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">135</i>&nbsp;                    &quot;&quot;&quot;),format.raw/*104.21*/(&quot;&quot;&quot;&lt;div class=&quot;form-group row survey-header&quot; id=&quot;survey-header&quot;&gt;</b>
+<i class="no-highlight">136</i>&nbsp;                        &lt;div class=&quot;col-md-6 col-sm-6 col-xs-12&quot;&gt;
+<i class="no-highlight">137</i>&nbsp;                            &lt;h2&gt;
+<b class="fc"><i class="no-highlight">138</i>&nbsp;                                &quot;&quot;&quot;),_display_(/*107.34*/helper/*107.40*/.input(surveyForm(&quot;title&quot;), </b>
+<b class="fc"><i class="no-highlight">139</i>&nbsp;                                &#39;_label -&gt; Messages(&quot;surveys.label.title&quot;),</b>
+<b class="fc"><i class="no-highlight">140</i>&nbsp;                                &#39;class -&gt; &quot;form-control col-md-7 col-xs-12&quot;</b>
+<b class="fc"><i class="no-highlight">141</i>&nbsp;                                )/*110.34*/ { (id, name, value, args) =&gt;_display_(Seq[Any](format.raw/*110.63*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">142</i>&nbsp;                                &quot;&quot;&quot;),format.raw/*111.33*/(&quot;&quot;&quot;&lt;input type=&quot;text&quot; name=&quot;&quot;&quot;&quot;),_display_(/*111.59*/name),format.raw/*111.63*/(&quot;&quot;&quot;&quot; id=&quot;&quot;&quot;&quot;),_display_(/*111.70*/id),format.raw/*111.72*/(&quot;&quot;&quot;&quot; &quot;&quot;&quot;),_display_(/*111.75*/toHtmlArgs(args)),format.raw/*111.91*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">143</i>&nbsp;                                       &quot;&quot;&quot;),format.raw/*112.40*/(&quot;&quot;&quot;aria-describedby=&quot;inputGroupPrepend&quot; placeholder=&quot;Ingrese un título que invite al visitante a responder la encuesta&quot; value=&quot;&quot;&quot;&quot;),_display_(/*112.165*/value),format.raw/*112.170*/(&quot;&quot;&quot;&quot; required/&gt;</b>
+<i class="no-highlight">144</i>&nbsp;                                &lt;div id=&quot;empty-name&quot; class=&quot;invalid-feedback&quot;&gt;
+<i class="no-highlight">145</i>&nbsp;                                    Debe ingresar un título para crear la encuesta
+<i class="no-highlight">146</i>&nbsp;                                &lt;/div&gt;
+<b class="fc"><i class="no-highlight">147</i>&nbsp;                                &quot;&quot;&quot;)))}),format.raw/*116.34*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">148</i>&nbsp;                            &quot;&quot;&quot;),format.raw/*117.29*/(&quot;&quot;&quot;&lt;/h2&gt;</b>
+<b class="fc"><i class="no-highlight">149</i>&nbsp;                            &quot;&quot;&quot;),_display_(/*118.30*/if(isEditing || isCreating)/*118.57*/ {_display_(Seq[Any](format.raw/*118.59*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">150</i>&nbsp;                                &quot;&quot;&quot;),format.raw/*119.33*/(&quot;&quot;&quot;&lt;div class=&quot;wifree-checkbox&quot;&gt;</b>
+<b class="fc"><i class="no-highlight">151</i>&nbsp;                                &quot;&quot;&quot;),_display_(/*120.34*/helper/*120.40*/.checkbox(surveyForm(&quot;enabled&quot;), </b>
+<b class="fc"><i class="no-highlight">152</i>&nbsp;                                    &#39;_label -&gt; &quot;¿Activada?&quot;, </b>
+<b class="fc"><i class="no-highlight">153</i>&nbsp;                                    &#39;class -&gt; &quot;form-control form-check-input col-md-7 col-xs-12&quot;, </b>
+<b class="fc"><i class="no-highlight">154</i>&nbsp;                                    &#39;style -&gt; &quot;height: 20px; width: 5%;&quot;)),format.raw/*123.74*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">155</i>&nbsp;                                &quot;&quot;&quot;),format.raw/*124.33*/(&quot;&quot;&quot;&lt;/div&gt;</b>
+<b class="fc"><i class="no-highlight">156</i>&nbsp;                            &quot;&quot;&quot;)))}),format.raw/*125.30*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">157</i>&nbsp;                            &quot;&quot;&quot;),format.raw/*126.59*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">158</i>&nbsp;                            &quot;&quot;&quot;),_display_(/*127.30*/if(isEditing || isCreating)/*127.57*/ {_display_(Seq[Any](format.raw/*127.59*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">159</i>&nbsp;                            &quot;&quot;&quot;),format.raw/*128.29*/(&quot;&quot;&quot;&lt;div class=&quot;question-buttons&quot;&gt;</b>
+<i class="no-highlight">160</i>&nbsp;                                &lt;div&gt;
+<i class="no-highlight">161</i>&nbsp;                                    &lt;button type=&quot;button&quot; id=&quot;newInputButton&quot; class=&quot;btn btn-primary&quot;
+<i class="no-highlight">162</i>&nbsp;                                            style=&quot;display: none&quot;&gt;New Input
+<i class="no-highlight">163</i>&nbsp;                                    &lt;/button&gt;
+<i class="no-highlight">164</i>&nbsp;                                &lt;/div&gt;
+<i class="no-highlight">165</i>&nbsp;                                &lt;div&gt;
+<b class="fc"><i class="no-highlight">166</i>&nbsp;                                    &lt;div&gt;&quot;&quot;&quot;),_display_(/*135.43*/Messages(&quot;surveys.new-field.text&quot;)),format.raw/*135.77*/(&quot;&quot;&quot;&lt;/div&gt;</b>
+<b class="fc"><i class="no-highlight">167</i>&nbsp;                                    &lt;button type=&quot;button&quot; id=&quot;newTextInputButton&quot; class=&quot;btn btn-info fa fa-plus&quot; title=&quot;&quot;&quot;&quot;),_display_(/*136.123*/Messages(&quot;surveys.new-field.text&quot;)),format.raw/*136.157*/(&quot;&quot;&quot;&quot;&gt;</b>
+<i class="no-highlight">168</i>&nbsp;                                    &lt;/button&gt;
+<i class="no-highlight">169</i>&nbsp;                                &lt;/div&gt;
+<i class="no-highlight">170</i>&nbsp;                                &lt;div&gt;
+<b class="fc"><i class="no-highlight">171</i>&nbsp;                                    &lt;div&gt;&quot;&quot;&quot;),_display_(/*140.43*/Messages(&quot;surveys.new-field.rating&quot;)),format.raw/*140.79*/(&quot;&quot;&quot;&lt;/div&gt;</b>
+<b class="fc"><i class="no-highlight">172</i>&nbsp;                                    &lt;button type=&quot;button&quot; id=&quot;newRatingInputButton&quot; class=&quot;btn btn-info fa fa-plus&quot; title=&quot;&quot;&quot;&quot;),_display_(/*141.125*/Messages(&quot;surveys.new-field.rating&quot;)),format.raw/*141.161*/(&quot;&quot;&quot;&quot;&gt;</b>
+<i class="no-highlight">173</i>&nbsp;                                    &lt;/button&gt;
+<i class="no-highlight">174</i>&nbsp;                                &lt;/div&gt;
+<i class="no-highlight">175</i>&nbsp;                                &lt;div&gt;
+<b class="fc"><i class="no-highlight">176</i>&nbsp;                                    &lt;div&gt;&quot;&quot;&quot;),_display_(/*145.43*/Messages(&quot;surveys.new-field.radio&quot;)),format.raw/*145.78*/(&quot;&quot;&quot;&lt;/div&gt;</b>
+<b class="fc"><i class="no-highlight">177</i>&nbsp;                                    &lt;button type=&quot;button&quot; id=&quot;newRadioInputButton&quot; class=&quot;btn btn-info fa fa-plus&quot; title=&quot;&quot;&quot;&quot;),_display_(/*146.124*/Messages(&quot;surveys.new-field.radio&quot;)),format.raw/*146.159*/(&quot;&quot;&quot;&quot;&gt;</b>
+<i class="no-highlight">178</i>&nbsp;                                    &lt;/button&gt;
+<i class="no-highlight">179</i>&nbsp;                                &lt;/div&gt;
+<i class="no-highlight">180</i>&nbsp;                                &lt;div&gt;
+<b class="fc"><i class="no-highlight">181</i>&nbsp;                                    &lt;div&gt;&quot;&quot;&quot;),_display_(/*150.43*/Messages(&quot;surveys.new-field.checkbox&quot;)),format.raw/*150.81*/(&quot;&quot;&quot;&lt;/div&gt;</b>
+<b class="fc"><i class="no-highlight">182</i>&nbsp;                                    &lt;button type=&quot;button&quot; id=&quot;newCheckboxInputButton&quot; class=&quot;btn btn-info fa fa-plus&quot; title=&quot;&quot;&quot;&quot;),_display_(/*151.127*/Messages(&quot;surveys.new-field.checkbox&quot;)),format.raw/*151.165*/(&quot;&quot;&quot;&quot;&gt;</b>
+<i class="no-highlight">183</i>&nbsp;                                    &lt;/button&gt;
+<i class="no-highlight">184</i>&nbsp;                                &lt;/div&gt;
+<i class="no-highlight">185</i>&nbsp;                            &lt;/div&gt;
+<b class="fc"><i class="no-highlight">186</i>&nbsp;                            &quot;&quot;&quot;)))}),format.raw/*155.30*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">187</i>&nbsp;                        &quot;&quot;&quot;),format.raw/*156.25*/(&quot;&quot;&quot;&lt;/div&gt;</b>
+<i class="no-highlight">188</i>&nbsp;                        
+<i class="no-highlight">189</i>&nbsp;                    &lt;/div&gt;
+<b class="fc"><i class="no-highlight">190</i>&nbsp;                    &quot;&quot;&quot;),format.raw/*159.61*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">191</i>&nbsp;                    &quot;&quot;&quot;),format.raw/*160.21*/(&quot;&quot;&quot;&lt;div class=&quot;ln_solid&quot;&gt;&lt;/div&gt;</b>
+<i class="no-highlight">192</i>&nbsp;
+<i class="no-highlight">193</i>&nbsp;                    &lt;div style=&quot;display: none&quot;&gt;
+<b class="fc"><i class="no-highlight">194</i>&nbsp;                            &quot;&quot;&quot;),_display_(/*163.30*/helper/*163.36*/.inputText(surveyForm(&quot;id&quot;))),format.raw/*163.64*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">195</i>&nbsp;                        &quot;&quot;&quot;),format.raw/*164.25*/(&quot;&quot;&quot;&lt;/div&gt;</b>
+<b class="fc"><i class="no-highlight">196</i>&nbsp;                        &quot;&quot;&quot;),_display_(/*165.26*/if(!surveyForm(&quot;fields&quot;).indexes().isEmpty)/*165.69*/ {_display_(Seq[Any](format.raw/*165.71*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">197</i>&nbsp;                             &quot;&quot;&quot;),format.raw/*166.30*/(&quot;&quot;&quot;&lt;div&gt;</b>
+<b class="fc"><i class="no-highlight">198</i>&nbsp;                                &quot;&quot;&quot;),_display_(/*167.34*/helper/*167.40*/.repeat(surveyForm(&quot;fields&quot;))/*167.69*/ { field =&gt;_display_(Seq[Any](format.raw/*167.80*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">199</i>&nbsp;                                    &quot;&quot;&quot;),format.raw/*168.37*/(&quot;&quot;&quot;&lt;div style=&quot;display: none&quot;&gt;</b>
+<b class="fc"><i class="no-highlight">200</i>&nbsp;                                        &quot;&quot;&quot;),_display_(/*169.42*/helper/*169.48*/.inputText(field(&quot;id&quot;))),format.raw/*169.71*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">201</i>&nbsp;                                    &quot;&quot;&quot;),format.raw/*170.37*/(&quot;&quot;&quot;&lt;/div&gt;</b>
+<i class="no-highlight">202</i>&nbsp;        
+<b class="fc"><i class="no-highlight">203</i>&nbsp;                                    &quot;&quot;&quot;),_display_(/*172.38*/if(!isCreating)/*172.53*/ {_display_(Seq[Any](format.raw/*172.55*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">204</i>&nbsp;                                        &quot;&quot;&quot;),format.raw/*173.41*/(&quot;&quot;&quot;&lt;div class=&quot;form-group row survey-fields-set&quot;&gt;</b>
+<i class="no-highlight">205</i>&nbsp;                                            &lt;div class=&quot;row&quot;&gt;
+<i class="no-highlight">206</i>&nbsp;                                                &lt;div class=&quot;col-md-6 col-sm-6 col-xs-12 question-form-header&quot;&gt;
+<b class="fc"><i class="no-highlight">207</i>&nbsp;                                                        &quot;&quot;&quot;),_display_(/*176.58*/if(isCreating)/*176.72*/ {_display_(Seq[Any](format.raw/*176.74*/(&quot;&quot;&quot;</b>
+<b class="nc"><i class="no-highlight">208</i>&nbsp;                                                        &quot;&quot;&quot;),format.raw/*177.57*/(&quot;&quot;&quot;&lt;h3&gt;Pregunta &quot;&quot;&quot;),_display_(/*177.71*/{field.label.last}),format.raw/*177.89*/(&quot;&quot;&quot;&lt;/h3&gt;</b>
+<b class="fc"><i class="no-highlight">209</i>&nbsp;                                                        &quot;&quot;&quot;)))}/*178.59*/else/*178.64*/{_display_(Seq[Any](format.raw/*178.65*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">210</i>&nbsp;                                                        &quot;&quot;&quot;),format.raw/*179.57*/(&quot;&quot;&quot;&lt;h3&gt;Pregunta &quot;&quot;&quot;),_display_(/*179.71*/{field.label.last.toString.toInt + 1}),format.raw/*179.108*/(&quot;&quot;&quot;&lt;/h3&gt;</b>
+<b class="fc"><i class="no-highlight">211</i>&nbsp;                                                        &quot;&quot;&quot;)))}),format.raw/*180.58*/(&quot;&quot;&quot;</b>
+<i class="no-highlight">212</i>&nbsp;    
+<b class="fc"><i class="no-highlight">213</i>&nbsp;                                                        &quot;&quot;&quot;),_display_(/*182.58*/if(isEditing || isCreating)/*182.85*/ {_display_(Seq[Any](format.raw/*182.87*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">214</i>&nbsp;                                                        &quot;&quot;&quot;),format.raw/*183.57*/(&quot;&quot;&quot;&lt;button type=&quot;button&quot; class=&quot;btn delete-button&quot;</b>
+<i class="no-highlight">215</i>&nbsp;                                                                onclick=&quot;deleteSection(this)&quot;&gt;
+<i class="no-highlight">216</i>&nbsp;                                                            &lt;i class=&quot;fa fa-trash&quot; title=&quot;Borrar campo&quot;&gt;&lt;/i&gt;
+<i class="no-highlight">217</i>&nbsp;                                                        &lt;/button&gt;
+<b class="fc"><i class="no-highlight">218</i>&nbsp;                                                        &quot;&quot;&quot;)))}),format.raw/*187.58*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">219</i>&nbsp;                                                    &quot;&quot;&quot;),format.raw/*188.53*/(&quot;&quot;&quot;&lt;/div&gt;</b>
+<i class="no-highlight">220</i>&nbsp;                                            &lt;/div&gt;
+<i class="no-highlight">221</i>&nbsp;                                            &lt;div class=&quot;row&quot;&gt;
+<i class="no-highlight">222</i>&nbsp;                                                &lt;div class=&quot;col-md-6 col-sm-6 col-xs-12 question-form-content&quot;&gt;
+<b class="fc"><i class="no-highlight">223</i>&nbsp;                                                    &quot;&quot;&quot;),format.raw/*192.67*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">224</i>&nbsp;                                                    &quot;&quot;&quot;),format.raw/*193.53*/(&quot;&quot;&quot;&lt;div hidden&gt;</b>
+<b class="fc"><i class="no-highlight">225</i>&nbsp;                                                        &quot;&quot;&quot;),_display_(/*194.58*/helper/*194.64*/.inputText(field(&quot;type&quot;),</b>
+<b class="fc"><i class="no-highlight">226</i>&nbsp;                                                        &#39;class -&gt; &quot;form-control col-md-7 col-xs-12 field-type&quot;)),format.raw/*195.112*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">227</i>&nbsp;                                                    &quot;&quot;&quot;),format.raw/*196.53*/(&quot;&quot;&quot;&lt;/div&gt;</b>
+<i class="no-highlight">228</i>&nbsp;    
+<b class="fc"><i class="no-highlight">229</i>&nbsp;                                                    &quot;&quot;&quot;),format.raw/*198.72*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">230</i>&nbsp;                                                    &quot;&quot;&quot;),format.raw/*199.53*/(&quot;&quot;&quot;&lt;div hidden&gt;</b>
+<b class="fc"><i class="no-highlight">231</i>&nbsp;                                                        &quot;&quot;&quot;),_display_(/*200.58*/if(isCreating)/*200.72*/ {_display_(Seq[Any](format.raw/*200.74*/(&quot;&quot;&quot;</b>
+<b class="nc"><i class="no-highlight">232</i>&nbsp;                                                        &quot;&quot;&quot;),_display_(/*201.58*/defining(&quot;key_&quot; + field.label.last)/*201.93*/ { keyValue =&gt;_display_(Seq[Any](format.raw/*201.107*/(&quot;&quot;&quot;</b>
+<b class="nc"><i class="no-highlight">233</i>&nbsp;                                                        &quot;&quot;&quot;),format.raw/*202.57*/(&quot;&quot;&quot;&lt;input type=&quot;text&quot; id=&quot;&quot;&quot;&quot;),_display_(/*202.81*/{field(&quot; config&quot;)(&quot;key&quot;).id}),format.raw/*202.109*/(&quot;&quot;&quot;&quot; name=&quot;&quot;&quot;&quot;),_display_(/*202.118*/{field(&quot;config&quot;)(&quot;key&quot;).name}),format.raw/*202.147*/(&quot;&quot;&quot;&quot; value=&quot;&quot;&quot;&quot;),_display_(/*202.157*/keyValue),format.raw/*202.165*/(&quot;&quot;&quot;&quot;&gt;</b>
+<b class="nc"><i class="no-highlight">234</i>&nbsp;                                                        &quot;&quot;&quot;)))}),format.raw/*203.58*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">235</i>&nbsp;                                                        &quot;&quot;&quot;)))}/*204.59*/else/*204.64*/{_display_(Seq[Any](format.raw/*204.65*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">236</i>&nbsp;                                                        &quot;&quot;&quot;),_display_(/*205.58*/helper/*205.64*/.inputText(field(&quot;config&quot;)(&quot;key&quot;),</b>
+<b class="fc"><i class="no-highlight">237</i>&nbsp;                                                        &#39;class -&gt; &quot;form-control col-md-7 col-xs-12&quot;)),format.raw/*206.101*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">238</i>&nbsp;                                                        &quot;&quot;&quot;)))}),format.raw/*207.58*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">239</i>&nbsp;                                                    &quot;&quot;&quot;),format.raw/*208.53*/(&quot;&quot;&quot;&lt;/div&gt;</b>
+<b class="fc"><i class="no-highlight">240</i>&nbsp;                                                    &quot;&quot;&quot;),format.raw/*209.70*/(&quot;&quot;&quot;</b>
+<i class="no-highlight">241</i>&nbsp;    
+<b class="fc"><i class="no-highlight">242</i>&nbsp;                                                    &quot;&quot;&quot;),format.raw/*211.68*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">243</i>&nbsp;                                                    &quot;&quot;&quot;),_display_(/*212.54*/helper/*212.60*/.inputText(field(&quot;config&quot;)(&quot;label&quot;),</b>
+<b class="fc"><i class="no-highlight">244</i>&nbsp;                                                    &#39;_label -&gt; Messages(&quot;surveys.label.label&quot;),</b>
+<b class="fc"><i class="no-highlight">245</i>&nbsp;                                                    &#39;class -&gt; &quot;form-control col-md-7 col-xs-12&quot;)),format.raw/*214.97*/(&quot;&quot;&quot;</b>
+<i class="no-highlight">246</i>&nbsp;    
+<b class="fc"><i class="no-highlight">247</i>&nbsp;                                                    &quot;&quot;&quot;),format.raw/*216.68*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">248</i>&nbsp;                                                    &quot;&quot;&quot;),format.raw/*217.53*/(&quot;&quot;&quot;&lt;div hidden&gt;</b>
+<b class="fc"><i class="no-highlight">249</i>&nbsp;                                                        &quot;&quot;&quot;),_display_(/*218.58*/if(isCreating)/*218.72*/ {_display_(Seq[Any](format.raw/*218.74*/(&quot;&quot;&quot;</b>
+<b class="nc"><i class="no-highlight">250</i>&nbsp;                                                        &quot;&quot;&quot;),format.raw/*219.57*/(&quot;&quot;&quot;&lt;input type=&quot;number&quot; id=&quot;&quot;&quot;&quot;),_display_(/*219.83*/{field(&quot; config&quot;)(&quot;order&quot;).id}),format.raw/*219.113*/(&quot;&quot;&quot;&quot; name=&quot;&quot;&quot;&quot;),_display_(/*219.122*/{field(&quot;config&quot;)(&quot;order&quot;).name}),format.raw/*219.153*/(&quot;&quot;&quot;&quot; value=&quot;&quot;&quot;&quot;),_display_(/*219.163*/{field.label.last.toString.toInt + 1}),format.raw/*219.200*/(&quot;&quot;&quot;&quot;&gt;</b>
+<b class="fc"><i class="no-highlight">251</i>&nbsp;                                                        &quot;&quot;&quot;)))}/*220.59*/else/*220.64*/{_display_(Seq[Any](format.raw/*220.65*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">252</i>&nbsp;                                                        &quot;&quot;&quot;),_display_(/*221.58*/helper/*221.64*/.inputText(field(&quot;config&quot;)(&quot;order&quot;),</b>
+<b class="fc"><i class="no-highlight">253</i>&nbsp;                                                        &#39;_label -&gt;</b>
+<b class="fc"><i class="no-highlight">254</i>&nbsp;                                                        Messages(&quot;surveys.label.order&quot;), &#39;type -&gt; &quot;number&quot;, &#39;class -&gt; &quot;form-control col-md-7 col-xs-12&quot;, &#39;min -&gt; &quot;0&quot;)),format.raw/*223.166*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">255</i>&nbsp;                                                        &quot;&quot;&quot;)))}),format.raw/*224.58*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">256</i>&nbsp;                                                    &quot;&quot;&quot;),format.raw/*225.53*/(&quot;&quot;&quot;&lt;/div&gt;</b>
+<i class="no-highlight">257</i>&nbsp;    
+<b class="fc"><i class="no-highlight">258</i>&nbsp;                                                    &quot;&quot;&quot;),format.raw/*227.77*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">259</i>&nbsp;                                                    &quot;&quot;&quot;),format.raw/*228.53*/(&quot;&quot;&quot;&lt;div class=&quot;wifree-checkbox&quot;&gt;</b>
+<b class="fc"><i class="no-highlight">260</i>&nbsp;                                                        &quot;&quot;&quot;),_display_(/*229.58*/helper/*229.64*/.checkbox(field(&quot;config&quot;)(&quot;required&quot;),</b>
+<b class="fc"><i class="no-highlight">261</i>&nbsp;                                                        &#39;_label -&gt; Messages(&quot;surveys.label.required&quot;),</b>
+<b class="fc"><i class="no-highlight">262</i>&nbsp;                                                        &#39;class -&gt; &quot;form-control form-check-input col-md-3 col-xs-3&quot;,</b>
+<b class="fc"><i class="no-highlight">263</i>&nbsp;                                                        &#39;style -&gt; &quot;height: 20px; width: 5%;&quot;)),format.raw/*232.94*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">264</i>&nbsp;                                                    &quot;&quot;&quot;),format.raw/*233.53*/(&quot;&quot;&quot;&lt;/div&gt;</b>
+<b class="fc"><i class="no-highlight">265</i>&nbsp;                                                    &quot;&quot;&quot;),format.raw/*234.75*/(&quot;&quot;&quot;</b>
+<i class="no-highlight">266</i>&nbsp;    
+<b class="fc"><i class="no-highlight">267</i>&nbsp;                                                    &quot;&quot;&quot;),format.raw/*236.74*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">268</i>&nbsp;                                                    &quot;&quot;&quot;),_display_(/*237.54*/if(isEditing || isCreating)/*237.81*/ {_display_(Seq[Any](format.raw/*237.83*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">269</i>&nbsp;                                                    &quot;&quot;&quot;)))}/*238.55*/else/*238.60*/{_display_(Seq[Any](format.raw/*238.61*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">270</i>&nbsp;                                                        &quot;&quot;&quot;),_display_(/*239.58*/defining(field(&quot;type&quot;).value.get)/*239.91*/ { fieldType =&gt;_display_(Seq[Any](format.raw/*239.106*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">271</i>&nbsp;                                                            &quot;&quot;&quot;),_display_(/*240.62*/if(fieldType == &quot;checkbox&quot; || fieldType == &quot;radio&quot; || fieldType == &quot;rating&quot;)/*240.138*/ {_display_(Seq[Any](format.raw/*240.140*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">272</i>&nbsp;                                                                &quot;&quot;&quot;),format.raw/*241.65*/(&quot;&quot;&quot;&lt;div hidden&gt;</b>
+<b class="fc"><i class="no-highlight">273</i>&nbsp;                                                                    &quot;&quot;&quot;),_display_(/*242.70*/helper/*242.76*/.inputText(field(&quot;config&quot;)(&quot;value&quot;),</b>
+<b class="fc"><i class="no-highlight">274</i>&nbsp;                                                                    &#39;_label -&gt; Messages(&quot;surveys.label.value&quot;),</b>
+<b class="fc"><i class="no-highlight">275</i>&nbsp;                                                                    &#39;class -&gt; &quot;form-control col-md-7 col-xs-12 question-text&quot;)),format.raw/*244.127*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">276</i>&nbsp;                                                                &quot;&quot;&quot;),format.raw/*245.65*/(&quot;&quot;&quot;&lt;/div&gt;</b>
+<b class="fc"><i class="no-highlight">277</i>&nbsp;                                                            &quot;&quot;&quot;)))}/*246.63*/else/*246.68*/{_display_(Seq[Any](format.raw/*246.69*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">278</i>&nbsp;                                                                &quot;&quot;&quot;),format.raw/*247.65*/(&quot;&quot;&quot;&lt;div&gt;</b>
+<b class="fc"><i class="no-highlight">279</i>&nbsp;                                                                    &quot;&quot;&quot;),_display_(/*248.70*/helper/*248.76*/.inputText(field(&quot;config&quot;)(&quot;value&quot;),</b>
+<b class="fc"><i class="no-highlight">280</i>&nbsp;                                                                    &#39;_label -&gt; Messages(&quot;surveys.label.value&quot;),</b>
+<b class="fc"><i class="no-highlight">281</i>&nbsp;                                                                    &#39;class -&gt; &quot;form-control col-md-7 col-xs-12 question-text&quot;)),format.raw/*250.127*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">282</i>&nbsp;                                                                &quot;&quot;&quot;),format.raw/*251.65*/(&quot;&quot;&quot;&lt;/div&gt;</b>
+<b class="fc"><i class="no-highlight">283</i>&nbsp;                                                            &quot;&quot;&quot;)))}),format.raw/*252.62*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">284</i>&nbsp;                                                        &quot;&quot;&quot;)))}),format.raw/*253.58*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">285</i>&nbsp;                                                    &quot;&quot;&quot;)))}),format.raw/*254.54*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">286</i>&nbsp;                                                    &quot;&quot;&quot;),format.raw/*255.72*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">287</i>&nbsp;                                                    &quot;&quot;&quot;),_display_(/*256.54*/if(isCreating || !field(&quot;type&quot;).value.isEmpty)/*256.100*/ {_display_(Seq[Any](format.raw/*256.102*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">288</i>&nbsp;                                                        &quot;&quot;&quot;),format.raw/*257.80*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">289</i>&nbsp;                                                        &quot;&quot;&quot;),_display_(/*258.58*/if(isCreating ||  field(&quot;type&quot;).value.get == &quot;rating&quot;)/*258.112*/{_display_(Seq[Any](format.raw/*258.113*/(&quot;&quot;&quot;</b>
+<b class="nc"><i class="no-highlight">290</i>&nbsp;                                                            &quot;&quot;&quot;),format.raw/*259.61*/(&quot;&quot;&quot;&lt;div&gt;</b>
+<b class="nc"><i class="no-highlight">291</i>&nbsp;                                                                &quot;&quot;&quot;),_display_(/*260.66*/if(!isEditing &amp;&amp; !isCreating &amp;&amp; field(&quot;type&quot;).value.get == &quot;rating&quot;)/*260.134*/ {_display_(Seq[Any](format.raw/*260.136*/(&quot;&quot;&quot;</b>
+<b class="nc"><i class="no-highlight">292</i>&nbsp;                                                                    &quot;&quot;&quot;),format.raw/*261.69*/(&quot;&quot;&quot;&lt;label&gt;Respuesta&lt;/label&gt;</b>
+<i class="no-highlight">293</i>&nbsp;                                                                    &lt;div class=&quot;lead&quot;&gt;
+<b class="nc"><i class="no-highlight">294</i>&nbsp;                                                                        &quot;&quot;&quot;),_display_(/*263.74*/defining(field(&quot;config&quot;)(&quot;maximum&quot;).value.get.toInt)/*263.126*/ { max =&gt;_display_(Seq[Any](format.raw/*263.135*/(&quot;&quot;&quot;</b>
+<b class="nc"><i class="no-highlight">295</i>&nbsp;                                                                            &quot;&quot;&quot;),_display_(/*264.78*/defining(field(&quot;config&quot;)(&quot;value&quot;).value.get.toInt)/*264.128*/ { v =&gt;_display_(Seq[Any](format.raw/*264.135*/(&quot;&quot;&quot;</b>
+<b class="nc"><i class="no-highlight">296</i>&nbsp;                                                                                &quot;&quot;&quot;),_display_(/*265.82*/defining(1 to v)/*265.98*/ { range =&gt;_display_(Seq[Any](format.raw/*265.109*/(&quot;&quot;&quot;</b>
+<b class="nc"><i class="no-highlight">297</i>&nbsp;                                                                                    &quot;&quot;&quot;),_display_(/*266.86*/range/*266.91*/.map/*266.95*/ { n =&gt;_display_(Seq[Any](format.raw/*266.102*/(&quot;&quot;&quot;</b>
+<b class="nc"><i class="no-highlight">298</i>&nbsp;                                                                                        &quot;&quot;&quot;),format.raw/*267.89*/(&quot;&quot;&quot;&lt;span class=&quot;glyphicon .glyphicon-star-empty glyphicon-star&quot;&gt;&lt;/span&gt;</b>
+<b class="nc"><i class="no-highlight">299</i>&nbsp;                                                                                    &quot;&quot;&quot;)))}),format.raw/*268.86*/(&quot;&quot;&quot;</b>
+<b class="nc"><i class="no-highlight">300</i>&nbsp;                                                                                &quot;&quot;&quot;)))}),format.raw/*269.82*/(&quot;&quot;&quot;</b>
+<b class="nc"><i class="no-highlight">301</i>&nbsp;                                                                                &quot;&quot;&quot;),_display_(/*270.82*/defining(v+1 to max)/*270.102*/ { range =&gt;_display_(Seq[Any](format.raw/*270.113*/(&quot;&quot;&quot;</b>
+<b class="nc"><i class="no-highlight">302</i>&nbsp;                                                                                    &quot;&quot;&quot;),_display_(/*271.86*/range/*271.91*/.map/*271.95*/ { n =&gt;_display_(Seq[Any](format.raw/*271.102*/(&quot;&quot;&quot;</b>
+<b class="nc"><i class="no-highlight">303</i>&nbsp;                                                                                        &quot;&quot;&quot;),format.raw/*272.89*/(&quot;&quot;&quot;&lt;span class=&quot;glyphicon .glyphicon-star-empty glyphicon-star-empty&quot;&gt;&lt;/span&gt;</b>
+<b class="nc"><i class="no-highlight">304</i>&nbsp;                                                                                    &quot;&quot;&quot;)))}),format.raw/*273.86*/(&quot;&quot;&quot;</b>
+<b class="nc"><i class="no-highlight">305</i>&nbsp;                                                                                &quot;&quot;&quot;)))}),format.raw/*274.82*/(&quot;&quot;&quot;</b>
+<b class="nc"><i class="no-highlight">306</i>&nbsp;                                                                            &quot;&quot;&quot;)))}),format.raw/*275.78*/(&quot;&quot;&quot;</b>
+<b class="nc"><i class="no-highlight">307</i>&nbsp;                                                                        &quot;&quot;&quot;)))}),format.raw/*276.74*/(&quot;&quot;&quot;</b>
+<b class="nc"><i class="no-highlight">308</i>&nbsp;                                                                    &quot;&quot;&quot;),format.raw/*277.69*/(&quot;&quot;&quot;&lt;/div&gt;</b>
+<b class="nc"><i class="no-highlight">309</i>&nbsp;                                                                &quot;&quot;&quot;)))}/*278.67*/else/*278.72*/{_display_(Seq[Any](format.raw/*278.73*/(&quot;&quot;&quot;</b>
+<b class="nc"><i class="no-highlight">310</i>&nbsp;                                                                    &quot;&quot;&quot;),_display_(/*279.70*/helper/*279.76*/.inputText(field(&quot;config&quot;)(&quot;maximum&quot;),</b>
+<b class="nc"><i class="no-highlight">311</i>&nbsp;                                                                    &#39;_label -&gt; Messages(&quot;surveys.label.maximum&quot;),</b>
+<b class="nc"><i class="no-highlight">312</i>&nbsp;                                                                    &#39;class -&gt; &quot;form-control col-md-7 col-xs-12 question-rating&quot;,</b>
+<b class="nc"><i class="no-highlight">313</i>&nbsp;                                                                    &#39;type -&gt; &quot;number&quot;, &#39;min -&gt; &quot;2&quot;)),format.raw/*282.100*/(&quot;&quot;&quot;</b>
+<b class="nc"><i class="no-highlight">314</i>&nbsp;                                                                &quot;&quot;&quot;)))}),format.raw/*283.66*/(&quot;&quot;&quot;</b>
+<b class="nc"><i class="no-highlight">315</i>&nbsp;                                                            &quot;&quot;&quot;),format.raw/*284.61*/(&quot;&quot;&quot;&lt;/div&gt;</b>
+<b class="fc"><i class="no-highlight">316</i>&nbsp;                                                        &quot;&quot;&quot;)))}),format.raw/*285.58*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">317</i>&nbsp;                                                        &quot;&quot;&quot;),format.raw/*286.78*/(&quot;&quot;&quot;</b>
+<i class="no-highlight">318</i>&nbsp;        
+<b class="fc"><i class="no-highlight">319</i>&nbsp;                                                        &quot;&quot;&quot;),_display_(/*288.58*/if(isCreating || field(&quot;type&quot;).value.get == &quot;checkbox&quot; || field(&quot;type&quot;).value.get == &quot;radio&quot;)/*288.151*/ {_display_(Seq[Any](format.raw/*288.153*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">320</i>&nbsp;                                                            &quot;&quot;&quot;),format.raw/*289.61*/(&quot;&quot;&quot;&lt;div class=&quot;rating-options&quot;&gt;</b>
+<i class="no-highlight">321</i>&nbsp;                                                            &lt;div&gt;
+<b class="fc"><i class="no-highlight">322</i>&nbsp;                                                                &quot;&quot;&quot;),_display_(/*291.66*/if(!isEditing &amp;&amp; !isCreating &amp;&amp; field(&quot;type&quot;).value.fold(false)(x =&gt; x == &quot;checkbox&quot; || x == &quot;radio&quot;))/*291.168*/ {_display_(Seq[Any](format.raw/*291.170*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">323</i>&nbsp;                                                                &quot;&quot;&quot;),format.raw/*292.65*/(&quot;&quot;&quot;&lt;label&gt;Respuesta&lt;/label&gt;</b>
+<b class="fc"><i class="no-highlight">324</i>&nbsp;                                                                &quot;&quot;&quot;)))}),format.raw/*293.66*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">325</i>&nbsp;                                                                &quot;&quot;&quot;),_display_(/*294.66*/helper/*294.72*/.repeat(field(&quot;config&quot;)(&quot;otherOptions&quot;), min = 1)/*294.121*/ { optionsField =&gt;_display_(Seq[Any](format.raw/*294.139*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">326</i>&nbsp;                                                                    &quot;&quot;&quot;),format.raw/*295.69*/(&quot;&quot;&quot;&lt;div class=&quot;rating-option wifree-checkbox&quot;&gt;</b>
+<b class="fc"><i class="no-highlight">327</i>&nbsp;                                                                        &quot;&quot;&quot;),_display_(/*296.74*/if(isEditing || isCreating)/*296.101*/ {_display_(Seq[Any](format.raw/*296.103*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">328</i>&nbsp;                                                                            &quot;&quot;&quot;),format.raw/*297.77*/(&quot;&quot;&quot;&lt;div hidden&gt;</b>
+<b class="fc"><i class="no-highlight">329</i>&nbsp;                                                                                &quot;&quot;&quot;),_display_(/*298.82*/helper/*298.88*/.inputText(optionsField(&quot;index&quot;), &#39;_label -&gt;</b>
+<b class="fc"><i class="no-highlight">330</i>&nbsp;                                                                                Messages(&quot;surveys.label.option.index&quot;), &#39;type -&gt; &quot;number&quot;,</b>
+<b class="fc"><i class="no-highlight">331</i>&nbsp;                                                                                &#39;class -&gt; &quot;form-control col-md-7 col-xs-12 question-radio&quot;)),format.raw/*300.140*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">332</i>&nbsp;                                                                            &quot;&quot;&quot;),format.raw/*301.77*/(&quot;&quot;&quot;&lt;/div&gt;</b>
+<b class="fc"><i class="no-highlight">333</i>&nbsp;                                                                            &quot;&quot;&quot;),_display_(/*302.78*/helper/*302.84*/.inputText(</b>
+<b class="fc"><i class="no-highlight">334</i>&nbsp;                                                                            optionsField(&quot;key&quot;),</b>
+<b class="fc"><i class="no-highlight">335</i>&nbsp;                                                                            &#39;_label -&gt;</b>
+<b class="fc"><i class="no-highlight">336</i>&nbsp;                                                                            Messages(&quot;surveys.label.option.key&quot;),</b>
+<b class="fc"><i class="no-highlight">337</i>&nbsp;                                                                            &#39;class -&gt; &quot;form-control col-md-7 col-xs-12 question-radio&quot;)),format.raw/*306.136*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">338</i>&nbsp;                                                                            &quot;&quot;&quot;)))}/*307.79*/else/*307.84*/{_display_(Seq[Any](format.raw/*307.85*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">339</i>&nbsp;                                                                                &quot;&quot;&quot;),_display_(/*308.82*/if(field(&quot;type&quot;).value.fold(false)(x =&gt; x == &quot;checkbox&quot; || x == &quot;radio&quot;))/*308.155*/ {_display_(Seq[Any](format.raw/*308.157*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">340</i>&nbsp;                                                                                &quot;&quot;&quot;),format.raw/*309.81*/(&quot;&quot;&quot;&lt;div class=&quot;input-group&quot;&gt;</b>
+<i class="no-highlight">341</i>&nbsp;                                                                                                &lt;span class=&quot;input-group-addon&quot;&gt;
+<b class="fc"><i class="no-highlight">342</i>&nbsp;                                                                                                    &quot;&quot;&quot;),_display_(/*311.102*/if(field(&quot;config&quot;)(&quot;value&quot;).value.get.contains(optionsField(&quot;key&quot;).value.get))/*311.180*/ {_display_(Seq[Any](format.raw/*311.182*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">343</i>&nbsp;                                                                                                        &quot;&quot;&quot;),format.raw/*312.105*/(&quot;&quot;&quot;&lt;input type=&quot;checkbox&quot; checked&gt;</b>
+<b class="fc"><i class="no-highlight">344</i>&nbsp;                                                                                                    &quot;&quot;&quot;)))}/*313.103*/else/*313.108*/{_display_(Seq[Any](format.raw/*313.109*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">345</i>&nbsp;                                                                                                        &quot;&quot;&quot;),format.raw/*314.105*/(&quot;&quot;&quot;&lt;input type=&quot;checkbox&quot;&gt;</b>
+<b class="fc"><i class="no-highlight">346</i>&nbsp;                                                                                                    &quot;&quot;&quot;)))}),format.raw/*315.102*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">347</i>&nbsp;                                                                                                &quot;&quot;&quot;),format.raw/*316.97*/(&quot;&quot;&quot;&lt;/span&gt;</b>
+<b class="fc"><i class="no-highlight">348</i>&nbsp;                                                                                    &lt;input type=&quot;text&quot; value=&quot;&quot;&quot;&quot;),_display_(/*317.112*/optionsField(&quot;key&quot;)/*317.131*/.value),format.raw/*317.137*/(&quot;&quot;&quot;&quot; class=&quot;form-control col-md-7 col-xs-12 question-radio&quot;&gt;</b>
+<i class="no-highlight">349</i>&nbsp;                                                                                &lt;/div&gt;
+<b class="fc"><i class="no-highlight">350</i>&nbsp;                                                                                &quot;&quot;&quot;)))}),format.raw/*319.82*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">351</i>&nbsp;                                                                            &quot;&quot;&quot;)))}),format.raw/*320.78*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">352</i>&nbsp;                                                                    &quot;&quot;&quot;),format.raw/*321.69*/(&quot;&quot;&quot;&lt;/div&gt;</b>
+<b class="fc"><i class="no-highlight">353</i>&nbsp;                                                                &quot;&quot;&quot;)))}),format.raw/*322.66*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">354</i>&nbsp;                                                                &quot;&quot;&quot;),_display_(/*323.66*/if(isEditing || isCreating)/*323.93*/ {_display_(Seq[Any](format.raw/*323.95*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">355</i>&nbsp;                                                                    &quot;&quot;&quot;),format.raw/*324.69*/(&quot;&quot;&quot;&lt;div class=&quot;rating-option wifree-checkbox&quot;&gt;</b>
+<i class="no-highlight">356</i>&nbsp;                                                                        &lt;dl&gt;
+<b class="fc"><i class="no-highlight">357</i>&nbsp;                                                                            &lt;dt&gt;&quot;&quot;&quot;),_display_(/*326.82*/Messages(&quot;surveys.add-option&quot;)),format.raw/*326.112*/(&quot;&quot;&quot;&lt;/dt&gt;</b>
+<i class="no-highlight">358</i>&nbsp;                                                                            &lt;dd&gt;
+<i class="no-highlight">359</i>&nbsp;                                                                                &lt;button type=&quot;button&quot; class=&quot;btn btn-info&quot;
+<i class="no-highlight">360</i>&nbsp;                                                                                        onclick=&quot;addRatingOption(this)&quot;&gt;
+<b class="fc"><i class="no-highlight">361</i>&nbsp;                                                                                    &lt;i class=&quot;fa fa-plus&quot; title=&quot;&quot;&quot;&quot;),_display_(/*330.115*/Messages(&quot;surveys.add-option&quot;)),format.raw/*330.145*/(&quot;&quot;&quot;&quot;&gt;&lt;/i&gt;</b>
+<i class="no-highlight">362</i>&nbsp;                                                                                &lt;/button&gt;
+<i class="no-highlight">363</i>&nbsp;                                                                            &lt;/dd&gt;
+<i class="no-highlight">364</i>&nbsp;                                                                        &lt;/dl&gt;
+<i class="no-highlight">365</i>&nbsp;                                                                    &lt;/div&gt;
+<b class="fc"><i class="no-highlight">366</i>&nbsp;                                                                &quot;&quot;&quot;)))}),format.raw/*335.66*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">367</i>&nbsp;                                                            &quot;&quot;&quot;),format.raw/*336.61*/(&quot;&quot;&quot;&lt;/div&gt;</b>
+<i class="no-highlight">368</i>&nbsp;                                                        &lt;/div&gt;
+<b class="fc"><i class="no-highlight">369</i>&nbsp;                                                        &quot;&quot;&quot;)))}),format.raw/*338.58*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">370</i>&nbsp;                                                    &quot;&quot;&quot;)))}),format.raw/*339.54*/(&quot;&quot;&quot;</b>
+<i class="no-highlight">371</i>&nbsp;    
+<b class="fc"><i class="no-highlight">372</i>&nbsp;                                                &quot;&quot;&quot;),format.raw/*341.49*/(&quot;&quot;&quot;&lt;/div&gt;</b>
+<i class="no-highlight">373</i>&nbsp;                                            &lt;/div&gt;
+<i class="no-highlight">374</i>&nbsp;                                        &lt;/div&gt;
+<b class="fc"><i class="no-highlight">375</i>&nbsp;                                    &quot;&quot;&quot;)))}),format.raw/*344.38*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">376</i>&nbsp;                                &quot;&quot;&quot;)))}),format.raw/*345.34*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">377</i>&nbsp;                            &quot;&quot;&quot;),format.raw/*346.29*/(&quot;&quot;&quot;&lt;/div&gt;</b>
+<b class="fc"><i class="no-highlight">378</i>&nbsp;                        &quot;&quot;&quot;)))}),format.raw/*347.26*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">379</i>&nbsp;                        &quot;&quot;&quot;),format.raw/*348.25*/(&quot;&quot;&quot;&lt;div class=&quot;ln_solid&quot;&gt;&lt;/div&gt;</b>
+<b class="fc"><i class="no-highlight">380</i>&nbsp;                        &quot;&quot;&quot;),format.raw/*349.53*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">381</i>&nbsp;                        &quot;&quot;&quot;),_display_(/*350.26*/if(isEditing || isCreating)/*350.53*/{_display_(Seq[Any](format.raw/*350.54*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">382</i>&nbsp;                            &quot;&quot;&quot;),format.raw/*351.29*/(&quot;&quot;&quot;&lt;div class=&quot;form-group&quot;&gt;</b>
+<i class="no-highlight">383</i>&nbsp;                                &lt;div class=&quot;col-md-6 col-sm-6 col-xs-12 col-md-offset-6&quot;&gt;
+<b class="fc"><i class="no-highlight">384</i>&nbsp;                                    &lt;button type=&quot;submit&quot; class=&quot;btn btn-success&quot;&gt;&quot;&quot;&quot;),_display_(/*353.84*/Messages(&quot;submit&quot;)),format.raw/*353.102*/(&quot;&quot;&quot;&lt;/button&gt;</b>
+<i class="no-highlight">385</i>&nbsp;                                &lt;/div&gt;
+<i class="no-highlight">386</i>&nbsp;                            &lt;/div&gt;
+<b class="fc"><i class="no-highlight">387</i>&nbsp;                        &quot;&quot;&quot;)))}),format.raw/*356.26*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">388</i>&nbsp;                    &quot;&quot;&quot;)))}),format.raw/*357.22*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">389</i>&nbsp;            &quot;&quot;&quot;),format.raw/*358.13*/(&quot;&quot;&quot;&lt;/div&gt;</b>
+<b class="fc"><i class="no-highlight">390</i>&nbsp;            &quot;&quot;&quot;),format.raw/*359.31*/(&quot;&quot;&quot;</b>
+<b class="fc"><i class="no-highlight">391</i>&nbsp;        &quot;&quot;&quot;),format.raw/*360.9*/(&quot;&quot;&quot;&lt;/div&gt;</b>
+<i class="no-highlight">392</i>&nbsp;    &lt;/div&gt;
+<i class="no-highlight">393</i>&nbsp;&lt;/div&gt;
+<i class="no-highlight">394</i>&nbsp;
+<b class="fc"><i class="no-highlight">395</i>&nbsp;&lt;script src=&quot;&quot;&quot;&quot;),_display_(/*364.15*/routes/*364.21*/.Assets.versioned(&quot;js/removeDefaultTooltip.js&quot;)),format.raw/*364.68*/(&quot;&quot;&quot;&quot;&gt;</b>
+<i class="no-highlight">396</i>&nbsp;&quot;&quot;&quot;))
+<i class="no-highlight">397</i>&nbsp;      }
+<i class="no-highlight">398</i>&nbsp;    }
+<i class="no-highlight">399</i>&nbsp;  }
+<i class="no-highlight">400</i>&nbsp;
+<b class="fc"><i class="no-highlight">401</i>&nbsp;  def render(surveyForm:Form[Survey],isEditing:Boolean,isCreating:Boolean,currentAnswer:Int,totalAnswers:Int): play.twirl.api.HtmlFormat.Appendable = apply(surveyForm,isEditing,isCreating,currentAnswer,totalAnswers)</b>
+<i class="no-highlight">402</i>&nbsp;
+<b class="nc"><i class="no-highlight">403</i>&nbsp;  def f:((Form[Survey],Boolean,Boolean,Int,Int) =&gt; play.twirl.api.HtmlFormat.Appendable) = (surveyForm,isEditing,isCreating,currentAnswer,totalAnswers) =&gt; apply(surveyForm,isEditing,isCreating,currentAnswer,totalAnswers)</b>
+<i class="no-highlight">404</i>&nbsp;
+<b class="nc"><i class="no-highlight">405</i>&nbsp;  def ref: this.type = this</b>
+<i class="no-highlight">406</i>&nbsp;
+<i class="no-highlight">407</i>&nbsp;}
+<i class="no-highlight">408</i>&nbsp;
+<i class="no-highlight">409</i>&nbsp;
+<i class="no-highlight">410</i>&nbsp;              /*
+<i class="no-highlight">411</i>&nbsp;                  -- GENERATED --
+<i class="no-highlight">412</i>&nbsp;                  SOURCE: app/views/admin/surveys.scala.html
+<i class="no-highlight">413</i>&nbsp;                  HASH: 59d36a4bce67d3879ed1337e5cfae41eed60a050
+<i class="no-highlight">414</i>&nbsp;                  MATRIX: 986-&gt;1|1194-&gt;116|1221-&gt;118|1233-&gt;123|1278-&gt;148|1306-&gt;150|1365-&gt;182|1393-&gt;183|1428-&gt;192|1542-&gt;279|1571-&gt;280|1603-&gt;285|1651-&gt;305|1680-&gt;306|1716-&gt;315|1888-&gt;460|1916-&gt;461|1948-&gt;466|1996-&gt;486|2025-&gt;487|2061-&gt;496|2233-&gt;641|2261-&gt;642|2298-&gt;652|2341-&gt;667|2370-&gt;668|2411-&gt;682|2439-&gt;683|2471-&gt;688|2521-&gt;710|2550-&gt;711|2586-&gt;720|2649-&gt;756|2677-&gt;757|2714-&gt;767|2766-&gt;791|2795-&gt;792|2831-&gt;801|2962-&gt;905|2990-&gt;906|3027-&gt;916|3078-&gt;939|3107-&gt;940|3148-&gt;954|3176-&gt;955|3213-&gt;965|3249-&gt;973|3278-&gt;974|3312-&gt;981|3392-&gt;1034|3420-&gt;1035|3453-&gt;1041|3514-&gt;1074|3543-&gt;1075|3577-&gt;1082|3626-&gt;1104|3654-&gt;1105|3682-&gt;1106|3863-&gt;1280|3904-&gt;1294|3940-&gt;1321|3980-&gt;1323|4025-&gt;1340|4089-&gt;1386|4102-&gt;1391|4141-&gt;1392|4186-&gt;1409|4262-&gt;1454|4303-&gt;1486|4357-&gt;1546|4398-&gt;1560|4436-&gt;1589|4476-&gt;1591|4521-&gt;1608|4575-&gt;1635|4603-&gt;1654|4642-&gt;1655|4695-&gt;1680|4869-&gt;1836|4882-&gt;1841|4921-&gt;1842|4974-&gt;1867|5096-&gt;1958|5145-&gt;1979|5270-&gt;2077|5304-&gt;2090|5348-&gt;2106|5382-&gt;2118|5522-&gt;2231|5555-&gt;2243|5639-&gt;2300|5680-&gt;2332|5719-&gt;2333|5772-&gt;2358|5943-&gt;2511|5956-&gt;2516|5995-&gt;2517|6048-&gt;2542|6171-&gt;2634|6216-&gt;2651|6267-&gt;2671|6308-&gt;2684|6378-&gt;2758|6419-&gt;2791|6460-&gt;2804|6530-&gt;2847|6545-&gt;2853|6901-&gt;3199|6941-&gt;3200|6992-&gt;3264|7042-&gt;3285|7264-&gt;3479|7280-&gt;3485|7504-&gt;3699|7572-&gt;3728|7634-&gt;3761|7688-&gt;3787|7714-&gt;3791|7749-&gt;3798|7773-&gt;3800|7804-&gt;3803|7842-&gt;3819|7911-&gt;3859|8065-&gt;3984|8093-&gt;3989|8372-&gt;4236|8430-&gt;4265|8493-&gt;4300|8530-&gt;4327|8571-&gt;4329|8633-&gt;4362|8724-&gt;4425|8740-&gt;4431|9030-&gt;4699|9092-&gt;4732|9160-&gt;4768|9218-&gt;4827|9276-&gt;4857|9313-&gt;4884|9354-&gt;4886|9412-&gt;4915|9852-&gt;5327|9908-&gt;5361|10066-&gt;5490|10123-&gt;5524|10319-&gt;5692|10377-&gt;5728|10537-&gt;5859|10596-&gt;5895|10792-&gt;6063|10849-&gt;6098|11008-&gt;6228|11066-&gt;6263|11262-&gt;6431|11322-&gt;6469|11484-&gt;6602|11545-&gt;6640|11729-&gt;6792|11783-&gt;6817|11891-&gt;6936|11941-&gt;6957|12076-&gt;7064|12092-&gt;7070|12142-&gt;7098|12196-&gt;7123|12256-&gt;7155|12309-&gt;7198|12350-&gt;7200|12409-&gt;7230|12476-&gt;7269|12492-&gt;7275|12531-&gt;7304|12581-&gt;7315|12647-&gt;7352|12744-&gt;7421|12760-&gt;7427|12805-&gt;7450|12871-&gt;7487|12952-&gt;7540|12977-&gt;7555|13018-&gt;7557|13088-&gt;7598|13393-&gt;7875|13417-&gt;7889|13458-&gt;7891|13544-&gt;7948|13586-&gt;7962|13626-&gt;7980|13709-&gt;8044|13723-&gt;8049|13763-&gt;8050|13849-&gt;8107|13891-&gt;8121|13951-&gt;8158|14046-&gt;8221|14137-&gt;8284|14174-&gt;8311|14215-&gt;8313|14301-&gt;8370|14708-&gt;8745|14790-&gt;8798|15103-&gt;9096|15185-&gt;9149|15283-&gt;9219|15299-&gt;9225|15459-&gt;9362|15541-&gt;9415|15634-&gt;9498|15716-&gt;9551|15814-&gt;9621|15838-&gt;9635|15879-&gt;9637|15965-&gt;9695|16010-&gt;9730|16064-&gt;9744|16150-&gt;9801|16202-&gt;9825|16253-&gt;9853|16291-&gt;9862|16343-&gt;9891|16382-&gt;9901|16413-&gt;9909|16505-&gt;9969|16583-&gt;10028|16597-&gt;10033|16637-&gt;10034|16723-&gt;10092|16739-&gt;10098|16897-&gt;10233|16987-&gt;10291|17069-&gt;10344|17157-&gt;10420|17244-&gt;10493|17326-&gt;10547|17342-&gt;10553|17593-&gt;10782|17680-&gt;10855|17762-&gt;10908|17860-&gt;10978|17884-&gt;10992|17925-&gt;10994|18011-&gt;11051|18065-&gt;11077|18118-&gt;11107|18156-&gt;11116|18210-&gt;11147|18249-&gt;11157|18309-&gt;11194|18389-&gt;11255|18403-&gt;11260|18443-&gt;11261|18529-&gt;11319|18545-&gt;11325|18837-&gt;11594|18927-&gt;11652|19009-&gt;11705|19102-&gt;11793|19184-&gt;11846|19299-&gt;11933|19315-&gt;11939|19689-&gt;12291|19771-&gt;12344|19859-&gt;12425|19946-&gt;12504|20028-&gt;12558|20065-&gt;12585|20106-&gt;12587|20180-&gt;12642|20194-&gt;12647|20234-&gt;12648|20320-&gt;12706|20363-&gt;12739|20418-&gt;12754|20508-&gt;12816|20595-&gt;12892|20637-&gt;12894|20731-&gt;12959|20841-&gt;13041|20857-&gt;13047|21155-&gt;13322|21249-&gt;13387|21337-&gt;13456|21351-&gt;13461|21391-&gt;13462|21485-&gt;13527|21588-&gt;13602|21604-&gt;13608|21902-&gt;13883|21996-&gt;13948|22096-&gt;14016|22186-&gt;14074|22272-&gt;14128|22354-&gt;14200|22436-&gt;14254|22493-&gt;14300|22535-&gt;14302|22621-&gt;14382|22707-&gt;14440|22772-&gt;14494|22813-&gt;14495|22903-&gt;14556|23002-&gt;14627|23081-&gt;14695|23123-&gt;14697|23221-&gt;14766|23434-&gt;14951|23497-&gt;15003|23546-&gt;15012|23652-&gt;15090|23713-&gt;15140|23760-&gt;15147|23870-&gt;15229|23896-&gt;15245|23947-&gt;15256|24061-&gt;15342|24076-&gt;15347|24090-&gt;15351|24137-&gt;15358|24255-&gt;15447|24441-&gt;15601|24555-&gt;15683|24665-&gt;15765|24696-&gt;15785|24747-&gt;15796|24861-&gt;15882|24876-&gt;15887|24890-&gt;15891|24937-&gt;15898|25055-&gt;15987|25247-&gt;16147|25361-&gt;16229|25471-&gt;16307|25577-&gt;16381|25675-&gt;16450|25767-&gt;16523|25781-&gt;16528|25821-&gt;16529|25919-&gt;16599|25935-&gt;16605|26339-&gt;16986|26437-&gt;17052|26527-&gt;17113|26623-&gt;17177|26709-&gt;17255|26804-&gt;17322|26908-&gt;17415|26950-&gt;17417|27040-&gt;17478|27228-&gt;17638|27341-&gt;17740|27383-&gt;17742|27477-&gt;17807|27599-&gt;17897|27693-&gt;17963|27709-&gt;17969|27769-&gt;18018|27827-&gt;18036|27925-&gt;18105|28070-&gt;18222|28108-&gt;18249|28150-&gt;18251|28256-&gt;18328|28378-&gt;18422|28394-&gt;18428|28740-&gt;18751|28846-&gt;18828|28958-&gt;18912|28974-&gt;18918|29442-&gt;19363|29540-&gt;19442|29554-&gt;19447|29594-&gt;19448|29704-&gt;19530|29788-&gt;19603|29830-&gt;19605|29940-&gt;19686|30225-&gt;19942|30314-&gt;20020|30356-&gt;20022|30491-&gt;20127|30645-&gt;20261|30660-&gt;20266|30701-&gt;20267|30836-&gt;20372|30994-&gt;20497|31120-&gt;20594|31268-&gt;20713|31298-&gt;20732|31327-&gt;20738|31585-&gt;20964|31695-&gt;21042|31793-&gt;21111|31897-&gt;21183|31991-&gt;21249|32028-&gt;21276|32069-&gt;21278|32167-&gt;21347|32397-&gt;21549|32450-&gt;21579|32924-&gt;22024|32977-&gt;22054|33406-&gt;22451|33496-&gt;22512|33655-&gt;22639|33741-&gt;22693|33824-&gt;22747|33998-&gt;22889|34064-&gt;22923|34122-&gt;22952|34186-&gt;22984|34240-&gt;23009|34322-&gt;23090|34376-&gt;23116|34413-&gt;23143|34453-&gt;23144|34511-&gt;23173|34737-&gt;23371|34778-&gt;23389|34919-&gt;23498|34973-&gt;23520|35015-&gt;23533|35063-&gt;23570|35100-&gt;23579|35168-&gt;23619|35184-&gt;23625|35253-&gt;23672
+<i class="no-highlight">415</i>&nbsp;                  LINES: 28-&gt;1|33-&gt;2|34-&gt;3|34-&gt;3|34-&gt;3|36-&gt;5|37-&gt;6|37-&gt;6|38-&gt;7|42-&gt;11|42-&gt;11|43-&gt;12|43-&gt;12|43-&gt;12|44-&gt;13|49-&gt;18|49-&gt;18|50-&gt;19|50-&gt;19|50-&gt;19|51-&gt;20|56-&gt;25|56-&gt;25|58-&gt;27|58-&gt;27|58-&gt;27|60-&gt;29|60-&gt;29|61-&gt;30|61-&gt;30|61-&gt;30|62-&gt;31|64-&gt;33|64-&gt;33|66-&gt;35|66-&gt;35|66-&gt;35|67-&gt;36|71-&gt;40|71-&gt;40|73-&gt;42|73-&gt;42|73-&gt;42|75-&gt;44|75-&gt;44|77-&gt;46|77-&gt;46|77-&gt;46|78-&gt;47|81-&gt;50|81-&gt;50|83-&gt;52|83-&gt;52|83-&gt;52|84-&gt;53|85-&gt;54|85-&gt;54|86-&gt;55|92-&gt;61|93-&gt;62|93-&gt;62|93-&gt;62|94-&gt;63|95-&gt;64|95-&gt;64|95-&gt;64|96-&gt;65|97-&gt;66|98-&gt;67|100-&gt;69|101-&gt;70|101-&gt;70|101-&gt;70|102-&gt;71|103-&gt;72|103-&gt;72|103-&gt;72|104-&gt;73|106-&gt;75|106-&gt;75|106-&gt;75|107-&gt;76|108-&gt;77|109-&gt;78|110-&gt;79|110-&gt;79|110-&gt;79|110-&gt;79|112-&gt;81|112-&gt;81|114-&gt;83|114-&gt;83|114-&gt;83|115-&gt;84|117-&gt;86|117-&gt;86|117-&gt;86|118-&gt;87|119-&gt;88|120-&gt;89|121-&gt;90|122-&gt;91|124-&gt;93|125-&gt;94|126-&gt;95|127-&gt;96|127-&gt;96|133-&gt;102|133-&gt;102|134-&gt;103|135-&gt;104|138-&gt;107|138-&gt;107|141-&gt;110|141-&gt;110|142-&gt;111|142-&gt;111|142-&gt;111|142-&gt;111|142-&gt;111|142-&gt;111|142-&gt;111|143-&gt;112|143-&gt;112|143-&gt;112|147-&gt;116|148-&gt;117|149-&gt;118|149-&gt;118|149-&gt;118|150-&gt;119|151-&gt;120|151-&gt;120|154-&gt;123|155-&gt;124|156-&gt;125|157-&gt;126|158-&gt;127|158-&gt;127|158-&gt;127|159-&gt;128|166-&gt;135|166-&gt;135|167-&gt;136|167-&gt;136|171-&gt;140|171-&gt;140|172-&gt;141|172-&gt;141|176-&gt;145|176-&gt;145|177-&gt;146|177-&gt;146|181-&gt;150|181-&gt;150|182-&gt;151|182-&gt;151|186-&gt;155|187-&gt;156|190-&gt;159|191-&gt;160|194-&gt;163|194-&gt;163|194-&gt;163|195-&gt;164|196-&gt;165|196-&gt;165|196-&gt;165|197-&gt;166|198-&gt;167|198-&gt;167|198-&gt;167|198-&gt;167|199-&gt;168|200-&gt;169|200-&gt;169|200-&gt;169|201-&gt;170|203-&gt;172|203-&gt;172|203-&gt;172|204-&gt;173|207-&gt;176|207-&gt;176|207-&gt;176|208-&gt;177|208-&gt;177|208-&gt;177|209-&gt;178|209-&gt;178|209-&gt;178|210-&gt;179|210-&gt;179|210-&gt;179|211-&gt;180|213-&gt;182|213-&gt;182|213-&gt;182|214-&gt;183|218-&gt;187|219-&gt;188|223-&gt;192|224-&gt;193|225-&gt;194|225-&gt;194|226-&gt;195|227-&gt;196|229-&gt;198|230-&gt;199|231-&gt;200|231-&gt;200|231-&gt;200|232-&gt;201|232-&gt;201|232-&gt;201|233-&gt;202|233-&gt;202|233-&gt;202|233-&gt;202|233-&gt;202|233-&gt;202|233-&gt;202|234-&gt;203|235-&gt;204|235-&gt;204|235-&gt;204|236-&gt;205|236-&gt;205|237-&gt;206|238-&gt;207|239-&gt;208|240-&gt;209|242-&gt;211|243-&gt;212|243-&gt;212|245-&gt;214|247-&gt;216|248-&gt;217|249-&gt;218|249-&gt;218|249-&gt;218|250-&gt;219|250-&gt;219|250-&gt;219|250-&gt;219|250-&gt;219|250-&gt;219|250-&gt;219|251-&gt;220|251-&gt;220|251-&gt;220|252-&gt;221|252-&gt;221|254-&gt;223|255-&gt;224|256-&gt;225|258-&gt;227|259-&gt;228|260-&gt;229|260-&gt;229|263-&gt;232|264-&gt;233|265-&gt;234|267-&gt;236|268-&gt;237|268-&gt;237|268-&gt;237|269-&gt;238|269-&gt;238|269-&gt;238|270-&gt;239|270-&gt;239|270-&gt;239|271-&gt;240|271-&gt;240|271-&gt;240|272-&gt;241|273-&gt;242|273-&gt;242|275-&gt;244|276-&gt;245|277-&gt;246|277-&gt;246|277-&gt;246|278-&gt;247|279-&gt;248|279-&gt;248|281-&gt;250|282-&gt;251|283-&gt;252|284-&gt;253|285-&gt;254|286-&gt;255|287-&gt;256|287-&gt;256|287-&gt;256|288-&gt;257|289-&gt;258|289-&gt;258|289-&gt;258|290-&gt;259|291-&gt;260|291-&gt;260|291-&gt;260|292-&gt;261|294-&gt;263|294-&gt;263|294-&gt;263|295-&gt;264|295-&gt;264|295-&gt;264|296-&gt;265|296-&gt;265|296-&gt;265|297-&gt;266|297-&gt;266|297-&gt;266|297-&gt;266|298-&gt;267|299-&gt;268|300-&gt;269|301-&gt;270|301-&gt;270|301-&gt;270|302-&gt;271|302-&gt;271|302-&gt;271|302-&gt;271|303-&gt;272|304-&gt;273|305-&gt;274|306-&gt;275|307-&gt;276|308-&gt;277|309-&gt;278|309-&gt;278|309-&gt;278|310-&gt;279|310-&gt;279|313-&gt;282|314-&gt;283|315-&gt;284|316-&gt;285|317-&gt;286|319-&gt;288|319-&gt;288|319-&gt;288|320-&gt;289|322-&gt;291|322-&gt;291|322-&gt;291|323-&gt;292|324-&gt;293|325-&gt;294|325-&gt;294|325-&gt;294|325-&gt;294|326-&gt;295|327-&gt;296|327-&gt;296|327-&gt;296|328-&gt;297|329-&gt;298|329-&gt;298|331-&gt;300|332-&gt;301|333-&gt;302|333-&gt;302|337-&gt;306|338-&gt;307|338-&gt;307|338-&gt;307|339-&gt;308|339-&gt;308|339-&gt;308|340-&gt;309|342-&gt;311|342-&gt;311|342-&gt;311|343-&gt;312|344-&gt;313|344-&gt;313|344-&gt;313|345-&gt;314|346-&gt;315|347-&gt;316|348-&gt;317|348-&gt;317|348-&gt;317|350-&gt;319|351-&gt;320|352-&gt;321|353-&gt;322|354-&gt;323|354-&gt;323|354-&gt;323|355-&gt;324|357-&gt;326|357-&gt;326|361-&gt;330|361-&gt;330|366-&gt;335|367-&gt;336|369-&gt;338|370-&gt;339|372-&gt;341|375-&gt;344|376-&gt;345|377-&gt;346|378-&gt;347|379-&gt;348|380-&gt;349|381-&gt;350|381-&gt;350|381-&gt;350|382-&gt;351|384-&gt;353|384-&gt;353|387-&gt;356|388-&gt;357|389-&gt;358|390-&gt;359|391-&gt;360|395-&gt;364|395-&gt;364|395-&gt;364
+<i class="no-highlight">416</i>&nbsp;                  -- GENERATED --
+<i class="no-highlight">417</i>&nbsp;              */
+<i class="no-highlight">418</i>&nbsp;          
 </div>
 </pre>
 </div>
@@ -259,7 +524,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-08-27 21:21</div>
+    <div style="float:right;">generated on 2022-08-28 18:56</div>
 </div>
 </body>
 </html>

@@ -42,12 +42,6 @@ public class ConnectionsService {
 		portalDAO.save(portal);
 	}
 
-	public ConnectionsPage connectionsPage(Long portalId) {
-		ArrayList<ConnectedUser> connectedUsers = connectedUsers(portalId);
-		Optional<Integer> connectionTimeout = portalNetworkConfigurationDAO.getConnectionTimeout(portalId);
-		return new ConnectionsPage(connectedUsers, connectionTimeout);
-	}
-
 	public PortalNetworkConfiguration networkConfiguration(Long portalId) {
 		return portalNetworkConfigurationDAO.findForPortal(portalId);
 	}

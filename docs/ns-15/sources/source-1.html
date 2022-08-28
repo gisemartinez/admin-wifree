@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > ConnectedUser</title>
+  <title>Coverage Report > created</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -17,10 +17,10 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">views.dto</a>
+    <a href="../index.html">views.html.console</a>
 </div>
 
-<h1>Coverage Summary for Class: ConnectedUser (views.dto)</h1>
+<h1>Coverage Summary for Class: created (views.html.console)</h1>
 
 <table class="coverageStats">
 
@@ -35,33 +35,14 @@ Current scope:     <a href="../../index.html">all classes</a>
   Line, %
 </th>
 </tr>
-<tr>
-  <td class="name">ConnectedUser</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/1)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/1)
-  </span>
-</td>
-</tr>
   <tr>
-    <td class="name">ConnectedUser$</td>
+    <td class="name">created$</td>
 <td class="coverageStat">
   <span class="percent">
     0%
   </span>
   <span class="absValue">
-    (0/1)
+    (0/5)
   </span>
 </td>
 <td class="coverageStat">
@@ -69,7 +50,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/1)
+    (0/9)
   </span>
 </td>
   </tr>
@@ -80,7 +61,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/2)
+    (0/5)
   </span>
 </td>
 <td class="coverageStat">
@@ -88,7 +69,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/2)
+    (0/9)
   </span>
 </td>
 </tr>
@@ -99,10 +80,66 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package views.dto
-<i class="no-highlight">2</i>&nbsp;
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;
+<i class="no-highlight">2</i>&nbsp;package views.html.console
 <i class="no-highlight">3</i>&nbsp;
-<b class="nc"><i class="no-highlight">4</i>&nbsp;case class ConnectedUser(id: Long, username: String, connectionStart: String, device: String)</b>
+<i class="no-highlight">4</i>&nbsp;import _root_.play.twirl.api.TwirlFeatureImports._
+<i class="no-highlight">5</i>&nbsp;import _root_.play.twirl.api.TwirlHelperImports._
+<i class="no-highlight">6</i>&nbsp;import _root_.play.twirl.api.Html
+<i class="no-highlight">7</i>&nbsp;import _root_.play.twirl.api.JavaScript
+<i class="no-highlight">8</i>&nbsp;import _root_.play.twirl.api.Txt
+<i class="no-highlight">9</i>&nbsp;import _root_.play.twirl.api.Xml
+<i class="no-highlight">10</i>&nbsp;import models._
+<i class="no-highlight">11</i>&nbsp;import controllers._
+<i class="no-highlight">12</i>&nbsp;import play.api.i18n._
+<i class="no-highlight">13</i>&nbsp;import views.html._
+<i class="no-highlight">14</i>&nbsp;import play.api.templates.PlayMagic._
+<i class="no-highlight">15</i>&nbsp;import java.lang._
+<i class="no-highlight">16</i>&nbsp;import java.util._
+<i class="no-highlight">17</i>&nbsp;import scala.collection.JavaConverters._
+<i class="no-highlight">18</i>&nbsp;import play.core.j.PlayMagicForJava._
+<i class="no-highlight">19</i>&nbsp;import play.mvc._
+<i class="no-highlight">20</i>&nbsp;import play.api.data.Field
+<i class="no-highlight">21</i>&nbsp;import play.mvc.Http.Context.Implicit._
+<i class="no-highlight">22</i>&nbsp;import play.data._
+<i class="no-highlight">23</i>&nbsp;import play.core.j.PlayFormsMagicForJava._
+<i class="no-highlight">24</i>&nbsp;
+<b class="nc"><i class="no-highlight">25</i>&nbsp;object created extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template1[String,play.twirl.api.HtmlFormat.Appendable] {</b>
+<i class="no-highlight">26</i>&nbsp;
+<i class="no-highlight">27</i>&nbsp;  /**/
+<i class="no-highlight">28</i>&nbsp;  def apply/*1.2*/(created: String):play.twirl.api.HtmlFormat.Appendable = {
+<b class="nc"><i class="no-highlight">29</i>&nbsp;    _display_ {</b>
+<i class="no-highlight">30</i>&nbsp;      {
+<i class="no-highlight">31</i>&nbsp;
+<i class="no-highlight">32</i>&nbsp;
+<b class="nc"><i class="no-highlight">33</i>&nbsp;Seq[Any](format.raw/*2.1*/(&quot;&quot;&quot;</b>
+<b class="nc"><i class="no-highlight">34</i>&nbsp;&quot;&quot;&quot;),format.raw/*3.1*/(&quot;&quot;&quot;&lt;p&gt;</b>
+<b class="nc"><i class="no-highlight">35</i>&nbsp;    &quot;&quot;&quot;),_display_(/*4.6*/created),format.raw/*4.13*/(&quot;&quot;&quot;</b>
+<b class="nc"><i class="no-highlight">36</i>&nbsp;&quot;&quot;&quot;),format.raw/*5.1*/(&quot;&quot;&quot;&lt;/p&gt;</b>
+<i class="no-highlight">37</i>&nbsp;&lt;a href=&quot;/console&quot;&gt;Consola&lt;/a&gt;
+<i class="no-highlight">38</i>&nbsp;&quot;&quot;&quot;))
+<i class="no-highlight">39</i>&nbsp;      }
+<i class="no-highlight">40</i>&nbsp;    }
+<i class="no-highlight">41</i>&nbsp;  }
+<i class="no-highlight">42</i>&nbsp;
+<b class="nc"><i class="no-highlight">43</i>&nbsp;  def render(created:String): play.twirl.api.HtmlFormat.Appendable = apply(created)</b>
+<i class="no-highlight">44</i>&nbsp;
+<b class="nc"><i class="no-highlight">45</i>&nbsp;  def f:((String) =&gt; play.twirl.api.HtmlFormat.Appendable) = (created) =&gt; apply(created)</b>
+<i class="no-highlight">46</i>&nbsp;
+<b class="nc"><i class="no-highlight">47</i>&nbsp;  def ref: this.type = this</b>
+<i class="no-highlight">48</i>&nbsp;
+<i class="no-highlight">49</i>&nbsp;}
+<i class="no-highlight">50</i>&nbsp;
+<i class="no-highlight">51</i>&nbsp;
+<i class="no-highlight">52</i>&nbsp;              /*
+<i class="no-highlight">53</i>&nbsp;                  -- GENERATED --
+<i class="no-highlight">54</i>&nbsp;                  SOURCE: app/views/console/created.scala.html
+<i class="no-highlight">55</i>&nbsp;                  HASH: 28c9b56613c13dcb2784272e281113e73f249315
+<i class="no-highlight">56</i>&nbsp;                  MATRIX: 958-&gt;1|1069-&gt;19|1096-&gt;20|1130-&gt;29|1157-&gt;36|1184-&gt;37
+<i class="no-highlight">57</i>&nbsp;                  LINES: 28-&gt;1|33-&gt;2|34-&gt;3|35-&gt;4|35-&gt;4|36-&gt;5
+<i class="no-highlight">58</i>&nbsp;                  -- GENERATED --
+<i class="no-highlight">59</i>&nbsp;              */
+<i class="no-highlight">60</i>&nbsp;          
 </div>
 </pre>
 </div>
@@ -129,7 +166,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-08-28 18:36</div>
+    <div style="float:right;">generated on 2022-08-28 18:56</div>
 </div>
 </body>
 </html>

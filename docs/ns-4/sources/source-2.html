@@ -86,27 +86,25 @@ Current scope:     <a href="../../index.html">all classes</a>
 <div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package controllers.admin;
 <i class="no-highlight">2</i>&nbsp;
 <i class="no-highlight">3</i>&nbsp;import controllers.WiFreeController;
-<i class="no-highlight">4</i>&nbsp;import core.constants.ConnectionsConstants;
-<i class="no-highlight">5</i>&nbsp;import models.PortalNetworkConfiguration;
-<i class="no-highlight">6</i>&nbsp;import play.data.Form;
-<i class="no-highlight">7</i>&nbsp;import play.mvc.Result;
-<i class="no-highlight">8</i>&nbsp;import services.ConnectionsService;
-<i class="no-highlight">9</i>&nbsp;
-<i class="no-highlight">10</i>&nbsp;import javax.inject.Inject;
-<i class="no-highlight">11</i>&nbsp;
-<b class="fc"><i class="no-highlight">12</i>&nbsp;public class ConnectionsController extends WiFreeController implements ConnectionsConstants {</b>
-<i class="no-highlight">13</i>&nbsp;
-<i class="no-highlight">14</i>&nbsp;	@Inject
-<i class="no-highlight">15</i>&nbsp;	private ConnectionsService connectionsService;
-<i class="no-highlight">16</i>&nbsp;
-<i class="no-highlight">17</i>&nbsp;	public Result setConnectionTimeout() {
-<b class="nc"><i class="no-highlight">18</i>&nbsp;		final Form&lt;PortalNetworkConfiguration&gt; form = formFactory.form(PortalNetworkConfiguration.class);</b>
-<b class="nc"><i class="no-highlight">19</i>&nbsp;		final PortalNetworkConfiguration portalNetworkConfiguration = form.bindFromRequest().get();</b>
-<b class="nc"><i class="no-highlight">20</i>&nbsp;		connectionsService.saveNetworkConfiguration(portalNetworkConfiguration.getConnectionTimeout(), portalId());</b>
-<b class="nc"><i class="no-highlight">21</i>&nbsp;		return redirect(controllers.routes.AdminAppController.connections()); // with something</b>
-<i class="no-highlight">22</i>&nbsp;	}
-<i class="no-highlight">23</i>&nbsp;
-<i class="no-highlight">24</i>&nbsp;}
+<i class="no-highlight">4</i>&nbsp;import models.PortalNetworkConfiguration;
+<i class="no-highlight">5</i>&nbsp;import play.data.Form;
+<i class="no-highlight">6</i>&nbsp;import play.mvc.Result;
+<i class="no-highlight">7</i>&nbsp;import services.ConnectionsService;
+<i class="no-highlight">8</i>&nbsp;
+<i class="no-highlight">9</i>&nbsp;import javax.inject.Inject;
+<i class="no-highlight">10</i>&nbsp;
+<b class="fc"><i class="no-highlight">11</i>&nbsp;public class ConnectionsController extends WiFreeController{</b>
+<i class="no-highlight">12</i>&nbsp;
+<i class="no-highlight">13</i>&nbsp;	@Inject
+<i class="no-highlight">14</i>&nbsp;	private ConnectionsService connectionsService;
+<i class="no-highlight">15</i>&nbsp;
+<i class="no-highlight">16</i>&nbsp;	public Result setConnectionTimeout() {
+<b class="nc"><i class="no-highlight">17</i>&nbsp;		final Form&lt;PortalNetworkConfiguration&gt; form = formFactory.form(PortalNetworkConfiguration.class);</b>
+<b class="nc"><i class="no-highlight">18</i>&nbsp;		final PortalNetworkConfiguration portalNetworkConfiguration = form.bindFromRequest().get();</b>
+<b class="nc"><i class="no-highlight">19</i>&nbsp;		connectionsService.saveNetworkConfiguration(portalNetworkConfiguration.getConnectionTimeout(), portalId());</b>
+<b class="nc"><i class="no-highlight">20</i>&nbsp;		return redirect(controllers.routes.AdminAppController.connections()); // with something</b>
+<i class="no-highlight">21</i>&nbsp;	}
+<i class="no-highlight">22</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -133,7 +131,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-08-28 18:36</div>
+    <div style="float:right;">generated on 2022-08-28 18:57</div>
 </div>
 </body>
 </html>
