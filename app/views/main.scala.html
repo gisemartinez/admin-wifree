@@ -20,7 +20,12 @@
 	<body class="nav-md">
 	<div class="container body">
 		@flash.map{ case (name, value) =>
-		<div id="error" class="alert alert-danger" role="alert">@name: @value</div>
+			@if(name == "Error"){
+				<div id="error" class="alert alert-danger" role="alert">@name: @value</div>
+			}
+			@if(name == "Success"){
+				<div id="success" class="alert alert-success" role="alert">Los datos se han guardado exitosamente</div>
+			}
 		}
 
 		<div class="main_container">

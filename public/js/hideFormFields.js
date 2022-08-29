@@ -12,5 +12,3 @@ function changeFields(target,fieldToHide){
     }
 }
 
-
-    
