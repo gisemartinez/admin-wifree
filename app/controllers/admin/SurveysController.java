@@ -64,6 +64,7 @@ public class SurveysController extends WiFreeController {
             flash("Error", s.errors().head());
             return badRequest(render(views.html.admin.surveys.render(formFactory.form(Survey.class).fill(s.createdSurvey()).withError("Error", s.errors().head()), true, false, 0, 0)));
         } else {
+            flash("Success", "");
             return redirect(controllers.admin.routes.SurveysController.allSurveys());
         }
     }

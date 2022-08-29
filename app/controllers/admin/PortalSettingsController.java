@@ -66,6 +66,7 @@ public class PortalSettingsController extends WiFreeController {
         // refresh profile portal
         currentProfile.removeAttribute("portal");
         currentProfile.addAttribute("portal", portal);
+        flash("Success", "");
         return redirect(routes.AdminAppController.portalSettings());
     }
 

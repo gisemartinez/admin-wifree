@@ -48,6 +48,7 @@ public class SocialLoginKeysController extends WiFreeController {
             flash("Error", error);
         }
         if (errors.isEmpty()) {
+            flash("Success", "");
             portalAndLoginOptionsService.saveLoginOptions(socialKeys, portalId());
             return redirect(routes.AdminAppController.loginSettings());
         } else {
