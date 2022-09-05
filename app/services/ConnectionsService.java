@@ -8,7 +8,6 @@ import models.Portal;
 import models.PortalNetworkConfiguration;
 import operations.responses.DatasetFilter;
 import views.dto.ConnectedUser;
-import views.dto.ConnectionsPage;
 
 import javax.inject.Inject;
 import java.time.Instant;
@@ -46,7 +45,7 @@ public class ConnectionsService {
 		return portalNetworkConfigurationDAO.findForPortal(portalId);
 	}
 
-	public ArrayList<ConnectedUser> connectedUsers(Long portalId) {
+	public ArrayList connectedUsers(Long portalId) {
 		List<NetworkUserConnectionLog> logsLastFifteenMinutes = connectionLogDAO.findForFilter(DatasetFilter.usersConnectedLastSixtyMinutesFilter(portalId), Instant.now());
 
 		List<ConnectedUser> connectedUsers = logsLastFifteenMinutes.stream()

@@ -473,7 +473,7 @@ public class SurveysController extends WiFreeController {
                 r.append(fieldAnswer.toLogString());
                 r.append("\n");
             }
-            rr.append(r.toString());
+            rr.append(r);
         }
         return rr.toString();
     }

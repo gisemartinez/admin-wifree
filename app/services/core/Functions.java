@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class Functions {
 	
-	private static Map<Class<? extends WiFreeRequest>, WiFreeFunction> allFunctions = new HashMap<>();
+	private static final Map<Class<? extends WiFreeRequest>, WiFreeFunction> allFunctions = new HashMap<>();
 	
 	static {
 		try {

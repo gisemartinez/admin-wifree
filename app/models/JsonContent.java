@@ -10,7 +10,6 @@ import java.io.IOException;
 public class JsonContent implements Content {
 
 	private final JsonNode json;
-	private final String contentType = "application/json";
 
 	public JsonContent(final String content) {
 		super();
@@ -32,6 +31,7 @@ public class JsonContent implements Content {
 
 	@Override
 	public String contentType() {
-		return this.contentType;
+		String contentType = "application/json";
+		return contentType;
 	}
 }

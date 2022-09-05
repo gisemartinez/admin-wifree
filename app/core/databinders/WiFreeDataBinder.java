@@ -11,8 +11,7 @@ public interface WiFreeDataBinder<T extends BaseModel> {
 	default <DAO extends GenericDAO<T>> T parseEntity(String text, Locale locale, DAO dao) {
 		if (StringHelper.isNotEmpty(text)) {
 			final long id = Long.parseLong(text);
-			final T entity = dao.getOrCreate(id);
-			return entity;
+			return dao.getOrCreate(id);
 		} else {
 			return null;
 		}

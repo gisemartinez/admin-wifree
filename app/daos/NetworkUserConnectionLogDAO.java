@@ -26,14 +26,12 @@ public class NetworkUserConnectionLogDAO extends GenericDAO<NetworkUserConnectio
 		for (Expression e : JavaConverters.seqAsJavaList(expressions.parameterlessExpressions())) {
 			whereExpressions.add(e);
 		}
-		
-		final List<NetworkUserConnectionLog> networkUserConnectionLogs = Ebean.createQuery(NetworkUserConnectionLog.class)
+
+		return Ebean.createQuery(NetworkUserConnectionLog.class)
 				.select("*")
 				.where()
 				.addAll(whereExpressions)
 				.findList();
-		
-		return networkUserConnectionLogs;
 	}
 
 	public List<NetworkUserConnectionLog> listForPortal(Long portalId) {

@@ -27,23 +27,44 @@ object MockupInitDataHelper {
 
     (1 to 300).foreach { uid =>
       val userName = s"Usuario Prueba $pid $uid"
-      val userEmail = s"usuarioprueba_${pid}_${uid}@mail.com"
+      val userEmail = s"usuarioprueba_${pid}_$uid@mail.com"
       val userOnline = random(Seq(true, false))
       val userGender = random(Seq(Gender.Male, Gender.Female, Gender.Other))
       val userAge = random(13 to 90)
 
       val macAddresses = new util.HashSet[NetworkUserMACAddress]()
-      val socialNetworkAccounts = new util.HashSet[NetworkUserSocialNetworkAccount]()
-      val networkUser = new NetworkUser(portal, userName, userEmail, "", null, userOnline, "password", userGender, null, macAddresses, socialNetworkAccounts, userAge)
+      val socialNetworkAccounts =
+        new util.HashSet[NetworkUserSocialNetworkAccount]()
+      val networkUser = new NetworkUser(
+        portal,
+        userName,
+        userEmail,
+        "",
+        null,
+        userOnline,
+        "password",
+        userGender,
+        null,
+        macAddresses,
+        socialNetworkAccounts,
+        userAge
+      )
       networkUserDao.save(networkUser)
 
       (1 to random(1 to 30)).foreach { _ =>
         val plusEndMinutes = random(2 to 65)
         val startConnection = randomDate()
-        val endConnection = startConnection.plus(Duration.ofMinutes(plusEndMinutes))
+        val endConnection =
+          startConnection.plus(Duration.ofMinutes(plusEndMinutes))
         val mac = randomMAC()
 
-        val log = new NetworkUserConnectionLog(portal, networkUser, startConnection, endConnection, mac)
+        val log = new NetworkUserConnectionLog(
+          portal,
+          networkUser,
+          startConnection,
+          endConnection,
+          mac
+        )
         logDao.save(log)
       }
     }
@@ -64,7 +85,10 @@ object MockupInitDataHelper {
     val randomStart = Instant.ofEpochSecond(rnd)
 
     ThreadLocalRandom.current().nextInt(1, 30) match {
-      case n if (1 to 8).contains(n)  => DateHelper.toInstant(DateHelper.toLocalDateTime(randomDate()).withHour(17))
+      case n if (1 to 8).contains(n) =>
+        DateHelper.toInstant(
+          DateHelper.toLocalDateTime(randomDate()).withHour(17)
+        )
       case _ => randomStart
     }
   }

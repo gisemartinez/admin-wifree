@@ -50,10 +50,8 @@ public class SocialLoginKeysController extends WiFreeController {
         if (errors.isEmpty()) {
             flash("Success", "");
             portalAndLoginOptionsService.saveLoginOptions(socialKeys, portalId());
-            return redirect(routes.AdminAppController.loginSettings());
-        } else {
-            return redirect(routes.AdminAppController.loginSettings());
         }
+        return redirect(routes.AdminAppController.loginSettings());
     }
 
     private List<String> hasError(PortalLoginConfiguration p, String socialLogin) {

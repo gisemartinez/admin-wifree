@@ -24,14 +24,11 @@ import play.cache.SyncCacheApi;
  */
 public class SecurityModule extends AbstractModule {
 
-	private final Config configuration;
-	
 	private final String baseUrl;
 	
 	private static class WiFreePac4jRoleHandler implements Pac4jRoleHandler { }
 
 	public SecurityModule(final Environment environment, final Config configuration) {
-		this.configuration = configuration;
 		baseUrl = configuration.getString("baseUrl");
 	}
 
@@ -59,9 +56,8 @@ public class SecurityModule extends AbstractModule {
 	
 	@Provides
 	protected FormClient adminFormClient() {
-		final FormClient adminLoginClient = new FormClient(baseUrl + AuthConstants.ADMIN_LOGIN_URL, new WiFreeAdminAuthenticator());
 		//adminLoginClient.setName("AdminClient");
-		return adminLoginClient;
+		return new FormClient(baseUrl + AuthConstants.ADMIN_LOGIN_URL, new WiFreeAdminAuthenticator());
 	}
 	
 	@Provides

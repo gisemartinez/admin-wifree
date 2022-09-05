@@ -16,6 +16,6 @@ object SurveyFormHelper {
       .asJava
   }
 
-  def toSummary(survey: Survey) =
+  def toSummary(survey: Survey): SurveySummary =
     SurveySummary(survey.getId, survey.getTitle, survey.getWhenCreated)
 }

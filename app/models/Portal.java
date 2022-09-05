@@ -47,7 +47,7 @@ public class Portal extends BaseModel {
 	private Set<PortalNetworkConfiguration> networkConfigurations = new HashSet<>();
 
 	@OneToMany(cascade = CascadeType.ALL)
-	private Set<PortalLoginConfiguration> loginConfigurations = new HashSet<>();
+	private final Set<PortalLoginConfiguration> loginConfigurations = new HashSet<>();
 
 	public void setApplications(Set<PortalApp> applications) {
 		this.applications = applications;
@@ -57,7 +57,7 @@ public class Portal extends BaseModel {
 	private Set<PortalApp> applications = new HashSet<>();
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "portal")
-	private Set<AnalyticsQueryFilter> queryFilters = new HashSet<>();
+	private final Set<AnalyticsQueryFilter> queryFilters = new HashSet<>();
 
 
 	public Portal() {
