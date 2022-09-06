@@ -1,10 +1,12 @@
 package controllers.admin;
 
+import ch.qos.logback.core.util.StringCollectionUtil;
 import com.typesafe.config.Config;
 import controllers.WiFreeController;
 import controllers.routes;
 import models.Portal;
 import models.PortalLoginConfiguration;
+import org.apache.commons.lang3.StringUtils;
 import play.data.Form;
 import play.mvc.Http;
 import play.mvc.Result;
@@ -43,13 +45,12 @@ public class SocialLoginKeysController extends WiFreeController {
 
         List<String> errors = hasError(socialKeys.getFacebook(), "Facebook");
         errors.addAll(hasError(socialKeys.getGoogle(), "Google"));
-        
-        for (String error : errors) {
-            flash("Error", error);
-        }
+
         if (errors.isEmpty()) {
-            flash("Success", "");
             portalAndLoginOptionsService.saveLoginOptions(socialKeys, portalId());
+            flash("Success", "");
+        } else {
+            flash("Error", String.join("| ", errors));
         }
         return redirect(routes.AdminAppController.loginSettings());
     }
