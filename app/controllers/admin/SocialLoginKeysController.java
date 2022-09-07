@@ -1,31 +1,17 @@
 package controllers.admin;
 
-import ch.qos.logback.core.util.StringCollectionUtil;
 import com.typesafe.config.Config;
 import controllers.WiFreeController;
 import controllers.routes;
-import models.Portal;
 import models.PortalLoginConfiguration;
-import org.apache.commons.lang3.StringUtils;
 import play.data.Form;
-import play.mvc.Http;
 import play.mvc.Result;
 import services.PortalAndLoginOptionsService;
-import views.dto.PortalOptionsView;
 import views.dto.SocialKeysView;
 
 import javax.inject.Inject;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class SocialLoginKeysController extends WiFreeController {
 
@@ -49,9 +35,11 @@ public class SocialLoginKeysController extends WiFreeController {
         if (errors.isEmpty()) {
             portalAndLoginOptionsService.saveLoginOptions(socialKeys, portalId());
             flash("Success", "");
-        } else {
+        }
+        else {
             flash("Error", String.join("| ", errors));
         }
+
         return redirect(routes.AdminAppController.loginSettings());
     }
 
@@ -59,7 +47,7 @@ public class SocialLoginKeysController extends WiFreeController {
         List<String> errors = new ArrayList<>();
         if (p.isEnabled()) {
             if (p.getKeys().getClientId().isEmpty()) {
-                errors.add("Por favor ingrese el 'clientId' provisto por " +socialLogin);
+                errors.add("Por favor ingrese el 'clientId' provisto por " + socialLogin);
             }
             if (p.getKeys().getSecret().isEmpty()) {
                 errors.add("Por favor ingrese el 'tokenId' provisto por " + socialLogin);

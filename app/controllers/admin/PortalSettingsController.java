@@ -73,9 +73,9 @@ public class PortalSettingsController extends WiFreeController {
     private List<String> getExistingImages(Http.MultipartFormData<File> body) {
         return body.asFormUrlEncoded()
                 .entrySet().stream()
-                .filter(x -> x.getKey().startsWith("image."))
-                .sorted(Map.Entry.comparingByKey())
-                .map(x -> x.getValue()[0])
+                    .filter(x -> x.getKey().startsWith("image."))
+                    .sorted(Map.Entry.comparingByKey())
+                    .map(x -> x.getValue()[0])
                 .collect(Collectors.toList());
     }
 
