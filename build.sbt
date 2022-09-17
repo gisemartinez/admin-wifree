@@ -52,6 +52,12 @@ testOptions in Test := Seq(Tests.Argument(TestFrameworks.JUnit, "-a", "-v"))
 
 routesGenerator := InjectedRoutesGenerator
 
+checkstyleXsltTransformations +=
+  CheckstyleXSLTSettings(
+    baseDirectory.value / "checkstyle-config.xml",
+    target.value / "checkstyle-report.html"
+  )
+
 //fork := true // required for "sbt run" to pick up javaOptions
 
 //javaOptions += "-Dplay.editor=http://localhost:63342/api/file/?file=%s&line=%s"

@@ -19,8 +19,9 @@ public class AdminDAO extends GenericDAO<Admin> {
                 .where()
                 .eq("email", email)
                 .findOne();
-        if (admin == null)
+        if (admin == null) {
             throw new AdminNotFoundException();
+        }
         return admin.getPassword();
     }
 

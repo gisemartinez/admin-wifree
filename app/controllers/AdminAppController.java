@@ -141,9 +141,9 @@ public class AdminAppController extends WiFreeController {
     @SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
     public Result connections() throws NoProfileFoundException {
         PortalNetworkConfiguration portalNetworkConfiguration = connectionsService.networkConfiguration(portalId());
-        Form<PortalNetworkConfiguration> form = portalNetworkConfiguration == null
-                ? formFactory.form(PortalNetworkConfiguration.class)
-                : formFactory.form(PortalNetworkConfiguration.class).fill(portalNetworkConfiguration);
+        Form<PortalNetworkConfiguration> form;
+        if (portalNetworkConfiguration == null) form = formFactory.form(PortalNetworkConfiguration.class);
+        else form = formFactory.form(PortalNetworkConfiguration.class).fill(portalNetworkConfiguration);
         ArrayList<ConnectedUser> connectedUsers = connectionsService.connectedUsers(portalId());
         return ok(render(views.html.admin.connections.render(form, connectedUsers)));
     }
