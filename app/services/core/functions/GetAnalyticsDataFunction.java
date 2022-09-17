@@ -79,12 +79,12 @@ public class GetAnalyticsDataFunction
                 date -> new DayAndRange(DateHelper.dayOfWeek(date), toRange(HourRange.values, DateHelper.hourBeginning(date)))
         );
         return new VisitsByDayByTimeRange(
-            averageVisitsByDayByRange(dayAndRangeVisits, RANGE_0_TO_8),
-            averageVisitsByDayByRange(dayAndRangeVisits, RANGE_8_TO_11),
-            averageVisitsByDayByRange(dayAndRangeVisits, RANGE_11_TO_13),
-            averageVisitsByDayByRange(dayAndRangeVisits, RANGE_13_TO_16),
-            averageVisitsByDayByRange(dayAndRangeVisits, RANGE_16_TO_20),
-            averageVisitsByDayByRange(dayAndRangeVisits, RANGE_20_TO_24)
+                averageVisitsByDayByRange(dayAndRangeVisits, RANGE_0_TO_8),
+                averageVisitsByDayByRange(dayAndRangeVisits, RANGE_8_TO_11),
+                averageVisitsByDayByRange(dayAndRangeVisits, RANGE_11_TO_13),
+                averageVisitsByDayByRange(dayAndRangeVisits, RANGE_13_TO_16),
+                averageVisitsByDayByRange(dayAndRangeVisits, RANGE_16_TO_20),
+                averageVisitsByDayByRange(dayAndRangeVisits, RANGE_20_TO_24)
         );
     }
 
@@ -116,10 +116,10 @@ public class GetAnalyticsDataFunction
         Map<Tuple2<Integer, Integer>, Map<String, List<NetworkUserConnectionLog>>> logsByDatesByTimeRanges = logsByTimeRanges.entrySet()
                 .stream()
                 .collect(Collectors.toMap(
-                        Map.Entry::getKey,
-                        entry -> groupMapping(entry.getValue(),
-                                this::logToYearMonthDay,
-                                l -> l)
+                                Map.Entry::getKey,
+                                entry -> groupMapping(entry.getValue(),
+                                        this::logToYearMonthDay,
+                                        l -> l)
                         )
                 );
         Map<Tuple2<Integer, Integer>, List<VisitsByPeriod>> visitsByDurationLastWeek = logsByDatesByTimeRanges.entrySet()
@@ -139,16 +139,16 @@ public class GetAnalyticsDataFunction
                 .distinct()
                 .collect(Collectors.toList());
 
-       allPeriods.forEach(period -> {
-           for (Map.Entry<Tuple2<Integer, Integer>, List<VisitsByPeriod>> entry : visitsByDurationLastWeek.entrySet()) {
-               List<VisitsByPeriod> values = entry.getValue();
-               if (values.stream().noneMatch(v -> v.period().equals(period))) {
-                   values.add(new VisitsByPeriod(period, 0));
-               }
-               values.sort(Comparator.comparing(VisitsByPeriod::period));
-               entry.setValue(takeLastWeek(values));
-           }
-       });
+        allPeriods.forEach(period -> {
+            for (Map.Entry<Tuple2<Integer, Integer>, List<VisitsByPeriod>> entry : visitsByDurationLastWeek.entrySet()) {
+                List<VisitsByPeriod> values = entry.getValue();
+                if (values.stream().noneMatch(v -> v.period().equals(period))) {
+                    values.add(new VisitsByPeriod(period, 0));
+                }
+                values.sort(Comparator.comparing(VisitsByPeriod::period));
+                entry.setValue(takeLastWeek(values));
+            }
+        });
 
         return visitsByDurationLastWeek;
     }

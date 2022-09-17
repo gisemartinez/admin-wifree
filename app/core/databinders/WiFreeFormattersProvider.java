@@ -12,23 +12,23 @@ import javax.inject.Singleton;
 
 @Singleton
 public class WiFreeFormattersProvider implements Provider<Formatters> {
-	
-	private final MessagesApi messagesApi;
-	
-	@Inject
-	public WiFreeFormattersProvider(MessagesApi messagesApi) {
-		this.messagesApi = messagesApi;
-	}
-	
-	@Override
-	public Formatters get() {
-		Formatters formatters = new Formatters(messagesApi);
-		
-		formatters.register(Portal.class, new PortalDataBinder());
-		formatters.register(Admin.class, new AdminDataBinder());
-		formatters.register(FieldConfig.class, new FieldConfigDataBinder());
-		
-		return formatters;
-	}
-	
+
+    private final MessagesApi messagesApi;
+
+    @Inject
+    public WiFreeFormattersProvider(MessagesApi messagesApi) {
+        this.messagesApi = messagesApi;
+    }
+
+    @Override
+    public Formatters get() {
+        Formatters formatters = new Formatters(messagesApi);
+
+        formatters.register(Portal.class, new PortalDataBinder());
+        formatters.register(Admin.class, new AdminDataBinder());
+        formatters.register(FieldConfig.class, new FieldConfigDataBinder());
+
+        return formatters;
+    }
+
 }

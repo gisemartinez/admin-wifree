@@ -14,32 +14,32 @@ import static scala.collection.JavaConverters.asScalaBuffer;
  */
 public enum PortalApplicationType {
 
-	Carousel("carousel", "Carousel"),
-	Link("link", "Link"),
-	SocialMediaWidget("socialMediaWidget", "Widget"),
-	Image("image", "Imagen"),
-	Text("text", "Texto"),
-	News("news", "noticias"),
-	TemplateOne("template-1", "Tema 1"),
-	TemplateTwo("template-2", "Tema 2");
+    Carousel("carousel", "Carousel"),
+    Link("link", "Link"),
+    SocialMediaWidget("socialMediaWidget", "Widget"),
+    Image("image", "Imagen"),
+    Text("text", "Texto"),
+    News("news", "noticias"),
+    TemplateOne("template-1", "Tema 1"),
+    TemplateTwo("template-2", "Tema 2");
 
-	public final String id;
-	public final String name;
+    public final String id;
+    public final String name;
 
-	PortalApplicationType(String id, String name) {
-		this.id = id;
-		this.name = name;
-	}
+    PortalApplicationType(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
-	public static Seq<Tuple2<String, String>> appTypes() {
-		List<Tuple2<String, String>> collect = Stream.of(TemplateOne, TemplateTwo)
-				.map(PortalApplicationType::toTuple)
-				.collect(Collectors.toList());
-		return asScalaBuffer(collect).toList();
-	}
+    public static Seq<Tuple2<String, String>> appTypes() {
+        List<Tuple2<String, String>> collect = Stream.of(TemplateOne, TemplateTwo)
+                .map(PortalApplicationType::toTuple)
+                .collect(Collectors.toList());
+        return asScalaBuffer(collect).toList();
+    }
 
-	private static Tuple2<String, String> toTuple(PortalApplicationType lm) {
-		return Tuple2.apply(lm.toString(), lm.name);
-	}
+    private static Tuple2<String, String> toTuple(PortalApplicationType lm) {
+        return Tuple2.apply(lm.toString(), lm.name);
+    }
 
 }

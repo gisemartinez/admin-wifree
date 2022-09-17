@@ -17,7 +17,7 @@ public class AgeRange {
     public static final Tuple2<Integer, Integer> RANGE_51_TO_150 = range(51, 150);
 
     public static final List<Tuple2<Integer, Integer>> values = Arrays.asList(
-        RANGE_0_TO_20, RANGE_21_TO_30, RANGE_31_TO_40, RANGE_41_TO_50, RANGE_51_TO_150
+            RANGE_0_TO_20, RANGE_21_TO_30, RANGE_31_TO_40, RANGE_41_TO_50, RANGE_51_TO_150
     );
 
 }

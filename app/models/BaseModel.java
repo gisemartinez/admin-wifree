@@ -16,47 +16,47 @@ import java.sql.Timestamp;
 @MappedSuperclass
 public abstract class BaseModel extends Model implements Serializable, WiFreeEntity {
 
-	@Id
-	protected Long id;
+    @Id
+    protected Long id;
 
-	@WhenCreated
-	protected Timestamp whenCreated;
+    @WhenCreated
+    protected Timestamp whenCreated;
 
-	@WhenModified
-	protected Timestamp whenModified;
+    @WhenModified
+    protected Timestamp whenModified;
 
-	public boolean isNew() {
-		return id == null || id == 0L;
-	}
+    public boolean isNew() {
+        return id == null || id == 0L;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	protected String toLogString(String... attributes) {
-		return StringHelper.toLogString(attributes);
-	}
+    protected String toLogString(String... attributes) {
+        return StringHelper.toLogString(attributes);
+    }
 
-	public abstract String toLogString();
+    public abstract String toLogString();
 
-	public Timestamp getWhenCreated() {
-		return whenCreated;
-	}
+    public Timestamp getWhenCreated() {
+        return whenCreated;
+    }
 
-	public void setWhenCreated(Timestamp whenCreated) {
-		this.whenCreated = whenCreated;
-	}
+    public void setWhenCreated(Timestamp whenCreated) {
+        this.whenCreated = whenCreated;
+    }
 
-	public Timestamp getWhenModified() {
-		return whenModified;
-	}
+    public Timestamp getWhenModified() {
+        return whenModified;
+    }
 
-	public void setWhenModified(Timestamp whenModified) {
-		this.whenModified = whenModified;
-	}
+    public void setWhenModified(Timestamp whenModified) {
+        this.whenModified = whenModified;
+    }
 
 }

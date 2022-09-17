@@ -5,9 +5,9 @@ package models.types;
  */
 public enum SocialNetworkType {
 
-	GooglePlus,
-	Facebook,
-	Twitter,
-	Instagram
+    GooglePlus,
+    Facebook,
+    Twitter,
+    Instagram
 
 }

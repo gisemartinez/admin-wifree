@@ -147,7 +147,7 @@ public class AdminAppController extends WiFreeController {
         ArrayList<ConnectedUser> connectedUsers = connectionsService.connectedUsers(portalId());
         return ok(render(views.html.admin.connections.render(form, connectedUsers)));
     }
-    
+
     @SubjectPresent(handlerKey = "FormClient", forceBeforeAuthCheck = true)
     public Result portalSettings() {
         CommonProfile currentProfile = getCurrentProfile();
@@ -175,7 +175,7 @@ public class AdminAppController extends WiFreeController {
     public Result allCollectedSocialData() {
         return ok(render(views.html.admin.collectedSocialData.render()));
     }
-    
+
 
     private List<VisitsByPeriod> takeLastWeek(List<VisitsByPeriod> list) {
         int size = list.size();

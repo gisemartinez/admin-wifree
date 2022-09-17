@@ -8,7 +8,8 @@ public class FieldDTO extends WiFreeDTO {
     public String type;
     public FieldConfigDTO config;
 
-    public FieldDTO() {}
+    public FieldDTO() {
+    }
 
     public FieldDTO(String id, String type, FieldConfigDTO config) {
         this.id = id;

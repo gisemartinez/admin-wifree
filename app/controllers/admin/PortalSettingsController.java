@@ -30,7 +30,7 @@ public class PortalSettingsController extends WiFreeController {
 
     @Inject
     Config config;
-    
+
     public Result savePortalOptions() {
         final Form<PortalOptionsView> form = formFactory.form(PortalOptionsView.class);
         final PortalOptionsView portalOptions = form.bindFromRequest().get();
@@ -47,9 +47,9 @@ public class PortalSettingsController extends WiFreeController {
         List<File> files = fileParts.isEmpty()
                 ? existingImages.stream().map(File::new).collect(Collectors.toList())
                 : IntStream.range(0, fileParts.size())
-                    .mapToObj(i -> moveFile(portalOptions, fileParts, i))
-                    .collect(Collectors.toList());
-        
+                .mapToObj(i -> moveFile(portalOptions, fileParts, i))
+                .collect(Collectors.toList());
+
         if (files.isEmpty()) {
             flash("Error", "Debe cargar al menos una imagen");
             return ok(render(views.html.admin.portal_options.render(form.fill(portalOptions))));
@@ -59,7 +59,7 @@ public class PortalSettingsController extends WiFreeController {
             flash("Error", "Debe elegir al menos un modo de autenticación");
             return ok(render(views.html.admin.portal_options.render(form.fill(portalOptions))));
         }
-        
+
         CommonProfile currentProfile = getCurrentProfile();
 
         Portal portal = portalAndLoginOptionsService.savePortalOptions(currentProfile, portalOptions, portalOptions.getPortalId(), files);
@@ -73,9 +73,9 @@ public class PortalSettingsController extends WiFreeController {
     private List<String> getExistingImages(Http.MultipartFormData<File> body) {
         return body.asFormUrlEncoded()
                 .entrySet().stream()
-                    .filter(x -> x.getKey().startsWith("image."))
-                    .sorted(Map.Entry.comparingByKey())
-                    .map(x -> x.getValue()[0])
+                .filter(x -> x.getKey().startsWith("image."))
+                .sorted(Map.Entry.comparingByKey())
+                .map(x -> x.getValue()[0])
                 .collect(Collectors.toList());
     }
 
@@ -90,19 +90,19 @@ public class PortalSettingsController extends WiFreeController {
         File file = filePart.getFile();
         String extension = filePart.getContentType().split("/")[1];
         String sharedFolder = config.getString("images.path");
-        
+
         String internalFolder = currentPath + "/public/img/client/";
-        
+
         Path sharedFolderPath = Paths.get(sharedFolder);
         Path internalFolderPath = Paths.get(internalFolder);
-        
+
         String fileName = "image_" + portalOptions.getPortalId() + "_" + i + "." + extension;
 
         try {
-            if (Files.notExists(sharedFolderPath)){
+            if (Files.notExists(sharedFolderPath)) {
                 Files.createDirectory(sharedFolderPath);
             }
-            if (Files.notExists(internalFolderPath)){
+            if (Files.notExists(internalFolderPath)) {
                 Files.createDirectory(internalFolderPath);
             }
             Files.copy(file.toPath(), Paths.get(internalFolder + fileName), StandardCopyOption.REPLACE_EXISTING);

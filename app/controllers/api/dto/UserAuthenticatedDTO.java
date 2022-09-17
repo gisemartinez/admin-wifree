@@ -13,7 +13,8 @@ public class UserAuthenticatedDTO extends WiFreeDTO {
     private String socialNetwork;
     private Integer age;
 
-    public UserAuthenticatedDTO() {}
+    public UserAuthenticatedDTO() {
+    }
 
     public UserAuthenticatedDTO(Long id, Long portalId, String name, String email, Instant connectionTime, String gender, String socialNetwork, Integer age) {
         this.id = id;

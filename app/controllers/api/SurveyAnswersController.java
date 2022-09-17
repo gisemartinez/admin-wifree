@@ -70,12 +70,12 @@ public class SurveyAnswersController extends WiFreeController {
                     } else {
                         return Stream.of(f);
                     }
-                }).map(f -> new String[] {
-                    s.getId().toString(),
-                    s.getTitle(),
+                }).map(f -> new String[]{
+                        s.getId().toString(),
+                        s.getTitle(),
                         f.getConfig().getOrder().toString(),
                         f.getConfig().getLabel(),
-                    f.getConfig().getValue()
+                        f.getConfig().getValue()
                 })
         ).collect(toList());
         ArrayList<String[]> strings = new ArrayList<>();

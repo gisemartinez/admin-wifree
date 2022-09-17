@@ -9,7 +9,8 @@ public class OptionDTO {
     public String key;
     public Integer maximum;
 
-    public OptionDTO() {}
+    public OptionDTO() {
+    }
 
     public OptionDTO(Integer index, String key) {
         this.index = index;

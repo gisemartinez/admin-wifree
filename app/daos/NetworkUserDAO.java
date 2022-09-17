@@ -10,13 +10,13 @@ import javax.annotation.Nullable;
  */
 public class NetworkUserDAO extends GenericDAO<NetworkUser> {
 
-	public NetworkUserDAO() {
-		super(NetworkUser.class);
-	}
+    public NetworkUserDAO() {
+        super(NetworkUser.class);
+    }
 
-	@Nullable
-	public NetworkUser findByEmail(String email) {
-		return find(Expr.eq("email", email));
-	}
-	
+    @Nullable
+    public NetworkUser findByEmail(String email) {
+        return find(Expr.eq("email", email));
+    }
+
 }

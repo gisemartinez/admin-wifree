@@ -7,7 +7,8 @@ public class SocialKeysView {
     private PortalLoginConfiguration google;
     private PortalLoginConfiguration facebook;
 
-    public SocialKeysView() {}
+    public SocialKeysView() {
+    }
 
     public SocialKeysView(PortalLoginConfiguration google, PortalLoginConfiguration facebook) {
         this.google = google;
@@ -15,8 +16,8 @@ public class SocialKeysView {
     }
 
     public static SocialKeysView initialize() {
-        PortalLoginConfiguration google = new PortalLoginConfiguration(null, LoginMethodType.Google, true, true, null, null);
-        PortalLoginConfiguration facebook = new PortalLoginConfiguration(null, LoginMethodType.Facebook, true, true, null, null);
+        PortalLoginConfiguration google = new PortalLoginConfiguration(null, LoginMethodType.Google, true, false, null, null);
+        PortalLoginConfiguration facebook = new PortalLoginConfiguration(null, LoginMethodType.Facebook, true, false, null, null);
         return new SocialKeysView(google, facebook);
     }
 

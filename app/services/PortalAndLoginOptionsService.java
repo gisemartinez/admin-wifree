@@ -102,13 +102,13 @@ public class PortalAndLoginOptionsService {
                     p.setPortal(portal);
                     return p;
                 }).collect(Collectors.toList());
-        
+
         portal.setApplications(portalApps);
-        
+
         portal.setNetworkConfigurations(new HashSet<>(networkConfigurations));
 
         portalDAO.saveOrUpdate(portal);
-        
+
         return portal;
     }
 }

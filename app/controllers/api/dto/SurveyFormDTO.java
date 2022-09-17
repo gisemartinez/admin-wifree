@@ -12,7 +12,8 @@ public class SurveyFormDTO extends WiFreeDTO {
     public String title;
     public List<FieldDTO> fields;
 
-    public SurveyFormDTO() {}
+    public SurveyFormDTO() {
+    }
 
     public SurveyFormDTO(String id, String title, List<FieldDTO> fields) {
         this.id = id;

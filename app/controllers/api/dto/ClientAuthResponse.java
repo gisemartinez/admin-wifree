@@ -6,7 +6,8 @@ public class ClientAuthResponse extends WiFreeDTO {
     public ClientDataDTO clientData;
     public CarouselDataDTO carouselData;
 
-    public ClientAuthResponse() {}
+    public ClientAuthResponse() {
+    }
 
     public ClientAuthResponse(AuthDataDTO authData, ClientDataDTO clientData, CarouselDataDTO carouselData) {
         this.authData = authData;

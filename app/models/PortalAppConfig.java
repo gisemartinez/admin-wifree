@@ -12,7 +12,8 @@ public class PortalAppConfig {
 
     private List<File> images;
 
-    public PortalAppConfig() {}
+    public PortalAppConfig() {
+    }
 
     public PortalAppConfig(String leftColumn, String middleColumn, String rightColumn) {
         this.leftColumn = leftColumn;
@@ -20,9 +21,8 @@ public class PortalAppConfig {
         this.rightColumn = rightColumn;
     }
 
-    public void fixImagesPaths() {
-        images.forEach(img -> {
-        });
+    public PortalAppConfig(List<File> images) {
+        this.images = images;
     }
 
     public static PortalAppConfig templateOne() {
@@ -37,8 +37,9 @@ public class PortalAppConfig {
         return new PortalAppConfig(new ArrayList<>());
     }
 
-    public PortalAppConfig(List<File> images) {
-        this.images = images;
+    public void fixImagesPaths() {
+        images.forEach(img -> {
+        });
     }
 
     public String getLeftColumn() {

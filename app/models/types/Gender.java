@@ -7,10 +7,10 @@ import io.ebean.annotation.EnumValue;
  */
 public enum Gender {
 
-	@EnumValue("Male") Male,
-	@EnumValue("Female") Female,
-	@EnumValue("Other") Other,
-	@EnumValue("Undefined") Undefined,
-	@EnumValue("Error") Error
+    @EnumValue("Male") Male,
+    @EnumValue("Female") Female,
+    @EnumValue("Other") Other,
+    @EnumValue("Undefined") Undefined,
+    @EnumValue("Error") Error
 
 }

@@ -14,7 +14,7 @@ public class AdminMockedData {
         final JsValue jsConnectionsGraphDataThisWeek = Json.parse(connectionsGraphDataThisWeek);
         final String connectionsGraphDataLastWeek = "[{\"name\": \"Direct Access\",\"value\": 335},{\"name\": \"E-mail Marketing\",\"value\": 310},{\"name\": \"Union Ad\",\"value\": 234},{\"name\": \"Video Ads\",\"value\": 135},{\"name\": \"Search Engine\",\"value\": 1548}]";
         final JsValue jsConnectionsGraphDataLastWeek = Json.parse(connectionsGraphDataLastWeek);
-        return new JsValue[] {jsGenderGraphData, jsAgeGraphData, jsConnectionsGraphDataThisWeek, jsConnectionsGraphDataLastWeek};
+        return new JsValue[]{jsGenderGraphData, jsAgeGraphData, jsConnectionsGraphDataThisWeek, jsConnectionsGraphDataLastWeek};
     }
 
     public static JsValue[] analytics() {
@@ -104,6 +104,6 @@ public class AdminMockedData {
         final String json18 = "[{\"name\": \"Lunes\",\"value\": 364},{\"name\": \"Martes\",\"value\": 147},{\"name\": \"Miercoles\",\"value\": 264},{\"name\": \"Jueves\",\"value\": 164},{\"name\": \"Viernes\",\"value\": 361},{\"name\": \"Sabado\",\"value\": 265},{\"name\": \"Domingo\",\"value\": 423}]";
         final JsValue jsValue18 = Json.parse(json18);
 
-        return new JsValue[] {jsValue15, jsValue16, jsValue17, jsValue18};
+        return new JsValue[]{jsValue15, jsValue16, jsValue17, jsValue18};
     }
 }

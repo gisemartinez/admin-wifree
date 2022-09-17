@@ -5,8 +5,8 @@ package models.types;
  */
 public enum AccountType {
 
-	Basic,
-	Pro,
-	Premium
+    Basic,
+    Pro,
+    Premium
 
 }

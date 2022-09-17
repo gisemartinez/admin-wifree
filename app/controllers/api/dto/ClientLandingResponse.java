@@ -6,7 +6,8 @@ public class ClientLandingResponse extends WiFreeDTO {
     public String client_id;
     public String template_id;
 
-    public ClientLandingResponse() {}
+    public ClientLandingResponse() {
+    }
 
     public ClientLandingResponse(LandingChoicesDTO landingChoices, String client_id, String template_id) {
         this.landingChoices = landingChoices;

@@ -35,8 +35,7 @@ public class SocialLoginKeysController extends WiFreeController {
         if (errors.isEmpty()) {
             portalAndLoginOptionsService.saveLoginOptions(socialKeys, portalId());
             flash("Success", "");
-        }
-        else {
+        } else {
             flash("Error", String.join("| ", errors));
         }
 

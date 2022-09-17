@@ -43,7 +43,8 @@ public class FieldConfig {
         this.otherOptions = otherOptions;
     }
 
-    public FieldConfig(){}
+    public FieldConfig() {
+    }
 
     protected FieldConfig(String key, String label, Integer order) {
         this.key = key;

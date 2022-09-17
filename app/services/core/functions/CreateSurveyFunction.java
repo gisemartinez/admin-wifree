@@ -43,8 +43,7 @@ public class CreateSurveyFunction extends WiFreeFunction<CreateSurveyRequest, Cr
             }
             if (surveyExists) {
                 surveyDAO.saveOrUpdate(survey);
-            }
-            else {
+            } else {
                 surveyDAO.save(survey);
             }
             return new CreateSurveyResponse(survey, true, null);

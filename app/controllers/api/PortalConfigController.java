@@ -13,22 +13,22 @@ import play.mvc.Result;
 
 import javax.inject.Inject;
 import java.io.File;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class PortalConfigController extends WiFreeController {
 
     @Inject
+    Config config;
+    @Inject
     private PortalDAO portalDAO;
-
     @Inject
     private SurveyDAO surveyDAO;
-
     @Inject
     private PortalLoginConfigurationDAO portalLoginConfigurationDAO;
-
-    @Inject
-    Config config;
 
     public Result clientLanding(Long portalId) {
         logRequest();

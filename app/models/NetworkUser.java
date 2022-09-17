@@ -16,162 +16,163 @@ import java.util.Set;
 @Entity
 public class NetworkUser extends BaseModel {
 
-	@ManyToOne(optional = false)
-	private Portal portal;
+    @ManyToOne(optional = false)
+    private Portal portal;
 
-	private String name;
+    private String name;
 
-	@Constraints.Email
-	@NotNull
-	private String email;
+    @Constraints.Email
+    @NotNull
+    private String email;
 
-	@Nullable
-	private String lastUsedMACAddress;
+    @Nullable
+    private String lastUsedMACAddress;
 
-	@Nullable
-	private Instant lastConnection;
+    @Nullable
+    private Instant lastConnection;
 
-	private boolean online;
+    private boolean online;
 
-	private String password;
+    private String password;
 
-	private Gender gender;
+    private Gender gender;
 
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "owner")
-	private Address address;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "owner")
+    private Address address;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "networkUser")
-	private Set<NetworkUserMACAddress> macAddresses = new HashSet<>();
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "networkUser")
+    private Set<NetworkUserMACAddress> macAddresses = new HashSet<>();
 
-	@OneToMany(cascade = CascadeType.ALL)
-	private Set<NetworkUserSocialNetworkAccount> socialNetworkAccounts = new HashSet<>();
-	
-	private int age;
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<NetworkUserSocialNetworkAccount> socialNetworkAccounts = new HashSet<>();
 
-
-	public NetworkUser() {}
-	
-	public NetworkUser(Long id) {
-		this.id = id;
-	}
-
-	public NetworkUser(Portal portal, String name, String email, String lastUsedMACAddress, Instant lastConnection,
-					   boolean online, String password, Gender gender, Address address, Set<NetworkUserMACAddress> macAddresses,
-					   Set<NetworkUserSocialNetworkAccount> socialNetworkAccounts, int age) {
-		this.portal = portal;
-		this.name = name;
-		this.email = email;
-		this.lastUsedMACAddress = lastUsedMACAddress;
-		this.lastConnection = lastConnection;
-		this.online = online;
-		this.password = password;
-		this.gender = gender;
-		this.address = address;
-		this.macAddresses = macAddresses;
-		this.socialNetworkAccounts = socialNetworkAccounts;
-		this.age = age;
-	}
+    private int age;
 
 
-	@Override
-	public String toLogString() {
-		return toLogString("id: " + id, "portal: " + portal, "name: " + name, "email: " + email);
-	}
+    public NetworkUser() {
+    }
+
+    public NetworkUser(Long id) {
+        this.id = id;
+    }
+
+    public NetworkUser(Portal portal, String name, String email, String lastUsedMACAddress, Instant lastConnection,
+                       boolean online, String password, Gender gender, Address address, Set<NetworkUserMACAddress> macAddresses,
+                       Set<NetworkUserSocialNetworkAccount> socialNetworkAccounts, int age) {
+        this.portal = portal;
+        this.name = name;
+        this.email = email;
+        this.lastUsedMACAddress = lastUsedMACAddress;
+        this.lastConnection = lastConnection;
+        this.online = online;
+        this.password = password;
+        this.gender = gender;
+        this.address = address;
+        this.macAddresses = macAddresses;
+        this.socialNetworkAccounts = socialNetworkAccounts;
+        this.age = age;
+    }
 
 
-	public Portal getPortal() {
-		return portal;
-	}
+    @Override
+    public String toLogString() {
+        return toLogString("id: " + id, "portal: " + portal, "name: " + name, "email: " + email);
+    }
 
-	public void setPortal(Portal portal) {
-		this.portal = portal;
-	}
 
-	public String getName() {
-		return name;
-	}
+    public Portal getPortal() {
+        return portal;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setPortal(Portal portal) {
+        this.portal = portal;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getLastUsedMACAddress() {
-		return lastUsedMACAddress;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setLastUsedMACAddress(String lastUsedMACAddress) {
-		this.lastUsedMACAddress = lastUsedMACAddress;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public Instant getLastConnection() {
-		return lastConnection;
-	}
+    public String getLastUsedMACAddress() {
+        return lastUsedMACAddress;
+    }
 
-	public void setLastConnection(Instant last_connection) {
-		this.lastConnection = last_connection;
-	}
+    public void setLastUsedMACAddress(String lastUsedMACAddress) {
+        this.lastUsedMACAddress = lastUsedMACAddress;
+    }
 
-	public boolean isOnline() {
-		return online;
-	}
+    public Instant getLastConnection() {
+        return lastConnection;
+    }
 
-	public void setOnline(boolean online) {
-		this.online = online;
-	}
+    public void setLastConnection(Instant last_connection) {
+        this.lastConnection = last_connection;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public boolean isOnline() {
+        return online;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setOnline(boolean online) {
+        this.online = online;
+    }
 
-	public Gender getGender() {
-		return gender;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public void setGender(Gender gender) {
-		this.gender = gender;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public Address getAddress() {
-		return address;
-	}
+    public Gender getGender() {
+        return gender;
+    }
 
-	public void setAddress(Address address) {
-		this.address = address;
-	}
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
 
-	public Set<NetworkUserMACAddress> getMacAddresses() {
-		return macAddresses;
-	}
+    public Address getAddress() {
+        return address;
+    }
 
-	public void setMacAddresses(Set<NetworkUserMACAddress> macAddresses) {
-		this.macAddresses = macAddresses;
-	}
+    public void setAddress(Address address) {
+        this.address = address;
+    }
 
-	public Set<NetworkUserSocialNetworkAccount> getSocialNetworkAccounts() {
-		return socialNetworkAccounts;
-	}
+    public Set<NetworkUserMACAddress> getMacAddresses() {
+        return macAddresses;
+    }
 
-	public void setSocialNetworkAccounts(Set<NetworkUserSocialNetworkAccount> socialNetworkAccounts) {
-		this.socialNetworkAccounts = socialNetworkAccounts;
-	}
-	
-	public int getAge() {
-		return this.age;
-	}
-	
-	public void setAge(int age) {
-		this.age = age;
-	}
+    public void setMacAddresses(Set<NetworkUserMACAddress> macAddresses) {
+        this.macAddresses = macAddresses;
+    }
+
+    public Set<NetworkUserSocialNetworkAccount> getSocialNetworkAccounts() {
+        return socialNetworkAccounts;
+    }
+
+    public void setSocialNetworkAccounts(Set<NetworkUserSocialNetworkAccount> socialNetworkAccounts) {
+        this.socialNetworkAccounts = socialNetworkAccounts;
+    }
+
+    public int getAge() {
+        return this.age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
 }

@@ -7,7 +7,8 @@ public class LoginTypeOptionsDTO extends WiFreeDTO {
     public SurveyFormDTO surveyForm;
     public List<SocialMediaKeysDTO> socialMediaKeys;
 
-    public LoginTypeOptionsDTO() {}
+    public LoginTypeOptionsDTO() {
+    }
 
     public LoginTypeOptionsDTO(SurveyFormDTO surveyForm) {
         this.surveyForm = surveyForm;

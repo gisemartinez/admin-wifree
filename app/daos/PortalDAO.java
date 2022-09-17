@@ -7,7 +7,7 @@ import models.Portal;
  */
 public class PortalDAO extends GenericDAO<Portal> {
 
-	public PortalDAO() {
-		super(Portal.class);
-	}
+    public PortalDAO() {
+        super(Portal.class);
+    }
 }

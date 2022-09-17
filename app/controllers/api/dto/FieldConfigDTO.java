@@ -16,7 +16,8 @@ public class FieldConfigDTO extends WiFreeDTO {
     public Integer maximum;
     public List<OptionDTO> otherOptions;
 
-    public FieldConfigDTO() {}
+    public FieldConfigDTO() {
+    }
 
     public FieldConfigDTO(String key, String label, Integer order, Boolean required, Integer maximum, List<OptionDTO> otherOptions) {
         this.key = key;

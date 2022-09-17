@@ -6,7 +6,8 @@ public class SocialKeys {
     private String clientId;
     private String secret;
 
-    public SocialKeys() {}
+    public SocialKeys() {
+    }
 
     public SocialKeys(String provider, String clientId, String secret) {
         this.provider = provider;

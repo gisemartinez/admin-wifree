@@ -18,12 +18,10 @@ public class DemoHttpActionAdapter extends DefaultHttpActionAdapter {
                     .render()
                     .toString())
                     .as((HttpConstants.HTML_CONTENT_TYPE));
-        }
-        else {
+        } else {
             if (code == HttpConstants.FORBIDDEN) {
                 return forbidden(views.html.error403.render().toString()).as((HttpConstants.HTML_CONTENT_TYPE));
-            }
-            else {
+            } else {
                 return super.adapt(code, context);
             }
         }

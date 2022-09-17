@@ -9,106 +9,107 @@ import javax.persistence.OneToOne;
 @Entity
 public class Address extends BaseModel {
 
-	@OneToOne(optional = false)
-	private NetworkUser owner;
+    @OneToOne(optional = false)
+    private NetworkUser owner;
 
-	private String street;
+    private String street;
 
-	private Integer number;
+    private Integer number;
 
-	private String other;
+    private String other;
 
-	private String city;
+    private String city;
 
-	private String state;
+    private String state;
 
-	private String country;
+    private String country;
 
-	private String zipCode;
-
-
-	public Address() {}
-
-	public Address(NetworkUser owner, String street, Integer number, String other, String city, String state, String country, String zipCode) {
-		this.owner = owner;
-		this.street = street;
-		this.number = number;
-		this.other = other;
-		this.city = city;
-		this.state = state;
-		this.country = country;
-		this.zipCode = zipCode;
-	}
+    private String zipCode;
 
 
-	@Override
-	public String toLogString() {
-		return toLogString("id: " + id, "owner: " + owner, "zipCode: " + zipCode);
-	}
+    public Address() {
+    }
+
+    public Address(NetworkUser owner, String street, Integer number, String other, String city, String state, String country, String zipCode) {
+        this.owner = owner;
+        this.street = street;
+        this.number = number;
+        this.other = other;
+        this.city = city;
+        this.state = state;
+        this.country = country;
+        this.zipCode = zipCode;
+    }
 
 
-	public NetworkUser getOwner() {
-		return owner;
-	}
+    @Override
+    public String toLogString() {
+        return toLogString("id: " + id, "owner: " + owner, "zipCode: " + zipCode);
+    }
 
-	public void setOwner(NetworkUser owner) {
-		this.owner = owner;
-	}
 
-	public String getStreet() {
-		return street;
-	}
+    public NetworkUser getOwner() {
+        return owner;
+    }
 
-	public void setStreet(String street) {
-		this.street = street;
-	}
+    public void setOwner(NetworkUser owner) {
+        this.owner = owner;
+    }
 
-	public Integer getNumber() {
-		return number;
-	}
+    public String getStreet() {
+        return street;
+    }
 
-	public void setNumber(Integer number) {
-		this.number = number;
-	}
+    public void setStreet(String street) {
+        this.street = street;
+    }
 
-	public String getOther() {
-		return other;
-	}
+    public Integer getNumber() {
+        return number;
+    }
 
-	public void setOther(String other) {
-		this.other = other;
-	}
+    public void setNumber(Integer number) {
+        this.number = number;
+    }
 
-	public String getCity() {
-		return city;
-	}
+    public String getOther() {
+        return other;
+    }
 
-	public void setCity(String city) {
-		this.city = city;
-	}
+    public void setOther(String other) {
+        this.other = other;
+    }
 
-	public String getState() {
-		return state;
-	}
+    public String getCity() {
+        return city;
+    }
 
-	public void setState(String state) {
-		this.state = state;
-	}
+    public void setCity(String city) {
+        this.city = city;
+    }
 
-	public String getCountry() {
-		return country;
-	}
+    public String getState() {
+        return state;
+    }
 
-	public void setCountry(String country) {
-		this.country = country;
-	}
+    public void setState(String state) {
+        this.state = state;
+    }
 
-	public String getZipCode() {
-		return zipCode;
-	}
+    public String getCountry() {
+        return country;
+    }
 
-	public void setZipCode(String zipCode) {
-		this.zipCode = zipCode;
-	}
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
 
 }

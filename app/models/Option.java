@@ -8,7 +8,8 @@ public class Option {
     private Integer index;
     private String key;
 
-    public Option() {}
+    public Option() {
+    }
 
     public Option(Integer index, String key) {
         this.index = index;

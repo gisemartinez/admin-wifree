@@ -1,8 +1,6 @@
 package daos;
 
 import models.PortalApp;
-import models.PortalLoginConfiguration;
-import models.types.LoginMethodType;
 import models.types.PortalApplicationType;
 
 import java.util.Map;

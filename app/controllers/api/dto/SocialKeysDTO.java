@@ -8,7 +8,8 @@ public class SocialKeysDTO extends WiFreeDTO {
     public String clientId;
     public String secret;
 
-    public SocialKeysDTO() {}
+    public SocialKeysDTO() {
+    }
 
     public SocialKeysDTO(String provider, String clientId, String secret) {
         this.provider = provider;

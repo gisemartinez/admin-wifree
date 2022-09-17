@@ -87,7 +87,7 @@ public class GetDashboardDataFunction
                 .filter(usersBeforeLastWeek::contains)
                 .count();
         double amountOfUsersConnectedBeforeLastWeek = usersBeforeLastWeek.size();
-        return amountOfAlreadyRegisteredUsersThatReturnedThisLastWeek/amountOfUsersConnectedBeforeLastWeek;
+        return amountOfAlreadyRegisteredUsersThatReturnedThisLastWeek / amountOfUsersConnectedBeforeLastWeek;
     }
 
     private String busiestTimeLastWeek(List<NetworkUserConnectionLog> logsLastWeek) {
@@ -150,8 +150,8 @@ public class GetDashboardDataFunction
 
     private Supplier<Stream<NetworkUser>> usersConnectedLastWeekSupplier(List<NetworkUserConnectionLog> logsThisWeek) {
         return () -> logsThisWeek.stream()
-                        .map(NetworkUserConnectionLog::getNetworkUser)
-                        .distinct();
+                .map(NetworkUserConnectionLog::getNetworkUser)
+                .distinct();
     }
 
     private long usersOnline(List<NetworkUserConnectionLog> logsLastWeek, Instant now) {

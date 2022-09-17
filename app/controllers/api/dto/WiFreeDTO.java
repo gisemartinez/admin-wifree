@@ -9,15 +9,15 @@ abstract class WiFreeDTO {
 
     private static final ObjectMapper mapper = initializeObjectMapper();
 
-    public JsonNode toJson() {
-        Json.setObjectMapper(mapper);
-        return Json.toJson(this);
-    }
-
     private static ObjectMapper initializeObjectMapper() {
         ObjectMapper mapper = new ObjectMapper();
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         return mapper;
+    }
+
+    public JsonNode toJson() {
+        Json.setObjectMapper(mapper);
+        return Json.toJson(this);
     }
 
 }

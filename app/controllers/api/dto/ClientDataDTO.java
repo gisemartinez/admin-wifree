@@ -6,7 +6,8 @@ public class ClientDataDTO extends WiFreeDTO {
     public String name;
     public String description;
 
-    public ClientDataDTO() {}
+    public ClientDataDTO() {
+    }
 
     public ClientDataDTO(String clientId, String name, String description) {
         this.clientId = clientId;

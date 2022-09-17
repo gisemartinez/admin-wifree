@@ -14,34 +14,34 @@ import static scala.collection.JavaConverters.asScalaBuffer;
  */
 public enum LoginMethodType {
 
-	Google("Google", "google"),
-	Facebook("Facebook", "facebook"),
-	Twitter("Twitter", "twitter"),
-	EmailAndPassword("Correo Electronico", "email"),
-	SocialLogin("Autenticación por redes sociales", "socialLogin"),
-	Survey("Autenticación a través de encuesta", "survey");
+    Google("Google", "google"),
+    Facebook("Facebook", "facebook"),
+    Twitter("Twitter", "twitter"),
+    EmailAndPassword("Correo Electronico", "email"),
+    SocialLogin("Autenticación por redes sociales", "socialLogin"),
+    Survey("Autenticación a través de encuesta", "survey");
 
-	public final String name;
-	public final String id;
+    public final String name;
+    public final String id;
 
-	LoginMethodType(String name, String id) {
-		this.name = name;
-		this.id = id;
-	}
+    LoginMethodType(String name, String id) {
+        this.name = name;
+        this.id = id;
+    }
 
-	public static Seq<Tuple2<String, String>> portalLoginTypes() {
-		List<Tuple2<String, String>> collect = Stream.of(SocialLogin, Survey).map(LoginMethodType::toTuple).collect(Collectors.toList());
-		return asScalaBuffer(collect).toList();
-	}
+    public static Seq<Tuple2<String, String>> portalLoginTypes() {
+        List<Tuple2<String, String>> collect = Stream.of(SocialLogin, Survey).map(LoginMethodType::toTuple).collect(Collectors.toList());
+        return asScalaBuffer(collect).toList();
+    }
 
-	public static Seq<Tuple2<String, String>> socialLoginTypes() {
-		List<Tuple2<String, String>> collect = Stream.of(Google, Facebook).map(LoginMethodType::toTuple).collect(Collectors.toList());
-		return asScalaBuffer(collect).toList();
-	}
+    public static Seq<Tuple2<String, String>> socialLoginTypes() {
+        List<Tuple2<String, String>> collect = Stream.of(Google, Facebook).map(LoginMethodType::toTuple).collect(Collectors.toList());
+        return asScalaBuffer(collect).toList();
+    }
 
-	private static Tuple2<String, String> toTuple(LoginMethodType lm) {
-		return Tuple2.apply(lm.toString(), lm.name);
-	}
+    private static Tuple2<String, String> toTuple(LoginMethodType lm) {
+        return Tuple2.apply(lm.toString(), lm.name);
+    }
 
 }
 

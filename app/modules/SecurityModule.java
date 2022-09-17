@@ -24,53 +24,54 @@ import play.cache.SyncCacheApi;
  */
 public class SecurityModule extends AbstractModule {
 
-	private final String baseUrl;
-	
-	private static class WiFreePac4jRoleHandler implements Pac4jRoleHandler { }
+    private final String baseUrl;
 
-	public SecurityModule(final Environment environment, final Config configuration) {
-		baseUrl = configuration.getString("baseUrl");
-	}
+    public SecurityModule(final Environment environment, final Config configuration) {
+        baseUrl = configuration.getString("baseUrl");
+    }
 
-	@Override
-	protected void configure() {
-		bind(HandlerCache.class).to(Pac4jHandlerCache.class);
+    @Override
+    protected void configure() {
+        bind(HandlerCache.class).to(Pac4jHandlerCache.class);
 
-		bind(Pac4jRoleHandler.class).to(WiFreePac4jRoleHandler.class);
-		final PlayCacheSessionStore playCacheSessionStore = new PlayCacheSessionStore(getProvider(SyncCacheApi.class));
-		//bind(PlaySessionStore.class).toInstance(playCacheSessionStore);
-		bind(PlaySessionStore.class).to(PlayCacheSessionStore.class);
-		
-		// callback
-		final CallbackController callbackController = new CallbackController();
-		callbackController.setDefaultUrl("/");
-		callbackController.setMultiProfile(true);
-		bind(CallbackController.class).toInstance(callbackController);
+        bind(Pac4jRoleHandler.class).to(WiFreePac4jRoleHandler.class);
+        final PlayCacheSessionStore playCacheSessionStore = new PlayCacheSessionStore(getProvider(SyncCacheApi.class));
+        //bind(PlaySessionStore.class).toInstance(playCacheSessionStore);
+        bind(PlaySessionStore.class).to(PlayCacheSessionStore.class);
 
-		// logout
-		final LogoutController logoutController = new LogoutController();
-		logoutController.setDefaultUrl(AuthConstants.DEFAULT_LOGOUT_URL);
-		//logoutController.setDestroySession(true);
-		bind(LogoutController.class).toInstance(logoutController);
-	}
-	
-	@Provides
-	protected FormClient adminFormClient() {
-		//adminLoginClient.setName("AdminClient");
-		return new FormClient(baseUrl + AuthConstants.ADMIN_LOGIN_URL, new WiFreeAdminAuthenticator());
-	}
-	
-	@Provides
-	protected org.pac4j.core.config.Config provideConfig(FormClient adminLoginClient) {
-		final Clients clients = new Clients(baseUrl + AuthConstants.CALLBACK_URL, adminLoginClient, new AnonymousClient());
-		
-		final org.pac4j.core.config.Config config = new org.pac4j.core.config.Config(clients);
-		config.addAuthorizer("admin", new RequireAnyRoleAuthorizer<>("ROLE_ADMIN"));
-		config.addAuthorizer("custom", new CustomAuthorizer());
+        // callback
+        final CallbackController callbackController = new CallbackController();
+        callbackController.setDefaultUrl("/");
+        callbackController.setMultiProfile(true);
+        bind(CallbackController.class).toInstance(callbackController);
+
+        // logout
+        final LogoutController logoutController = new LogoutController();
+        logoutController.setDefaultUrl(AuthConstants.DEFAULT_LOGOUT_URL);
+        //logoutController.setDestroySession(true);
+        bind(LogoutController.class).toInstance(logoutController);
+    }
+
+    @Provides
+    protected FormClient adminFormClient() {
+        //adminLoginClient.setName("AdminClient");
+        return new FormClient(baseUrl + AuthConstants.ADMIN_LOGIN_URL, new WiFreeAdminAuthenticator());
+    }
+
+    @Provides
+    protected org.pac4j.core.config.Config provideConfig(FormClient adminLoginClient) {
+        final Clients clients = new Clients(baseUrl + AuthConstants.CALLBACK_URL, adminLoginClient, new AnonymousClient());
+
+        final org.pac4j.core.config.Config config = new org.pac4j.core.config.Config(clients);
+        config.addAuthorizer("admin", new RequireAnyRoleAuthorizer<>("ROLE_ADMIN"));
+        config.addAuthorizer("custom", new CustomAuthorizer());
 //		config.addMatcher("excludedPath", new PathMatcher().excludeRegex("^/facebook/notprotected\\.html$"));
-		config.setHttpActionAdapter(new DemoHttpActionAdapter());
-		
-		return config;
-	}
+        config.setHttpActionAdapter(new DemoHttpActionAdapter());
+
+        return config;
+    }
+
+    private static class WiFreePac4jRoleHandler implements Pac4jRoleHandler {
+    }
 
 }

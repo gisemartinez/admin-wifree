@@ -3,10 +3,12 @@ package models;
 import models.types.AccountType;
 import models.types.PortalApplicationType;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
@@ -18,171 +20,156 @@ import java.util.stream.Collectors;
 @Entity
 public class Portal extends BaseModel {
 
-	@NotNull
-	private String name;
+    @OneToMany(cascade = CascadeType.ALL)
+    private final Set<PortalLoginConfiguration> loginConfigurations = new HashSet<>();
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "portal")
+    private final Set<AnalyticsQueryFilter> queryFilters = new HashSet<>();
+    @NotNull
+    private String name;
+    private String description;
+    @NotNull
+    private AccountType accountType;
+    @OneToOne
+    @NotNull
+    private Admin owner;
+    @OneToMany
+    private Set<Admin> administrators;
+    private String homeURL;
+    private String facebookURL;
+    private String twitterURL;
+    private String googlePlusURL;
+    private String instagramURL;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "portal")
+    private Set<PortalNetworkConfiguration> networkConfigurations = new HashSet<>();
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "portal")
+    private Set<PortalApp> applications = new HashSet<>();
 
-	private String description;
-
-	@NotNull
-	private AccountType accountType;
-
-	@OneToOne
-	@NotNull
-	private Admin owner;
-
-	@OneToMany
-	private Set<Admin> administrators;
-
-	private String homeURL;
-
-	private String facebookURL;
-
-	private String twitterURL;
-
-	private String googlePlusURL;
-
-	private String instagramURL;
-
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "portal")
-	private Set<PortalNetworkConfiguration> networkConfigurations = new HashSet<>();
-
-	@OneToMany(cascade = CascadeType.ALL)
-	private final Set<PortalLoginConfiguration> loginConfigurations = new HashSet<>();
-
-	public void setApplications(Set<PortalApp> applications) {
-		this.applications = applications;
-	}
-
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "portal")
-	private Set<PortalApp> applications = new HashSet<>();
-	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "portal")
-	private final Set<AnalyticsQueryFilter> queryFilters = new HashSet<>();
+    public Portal() {
+    }
 
 
-	public Portal() {
-	}
-	
-	public Portal(Long id) {
-		this.id = id;
-	}
+    public Portal(Long id) {
+        this.id = id;
+    }
 
-	public Portal(String name, String description, AccountType accountType, Admin owner, String homeURL, String facebookURL,
-				  String twitterURL, String googlePlusURL, String instagramURL) {
-		this.name = name;
-		this.description = description;
-		this.accountType = accountType;
-		this.owner = owner;
-		this.homeURL = homeURL;
-		this.facebookURL = facebookURL;
-		this.twitterURL = twitterURL;
-		this.googlePlusURL = googlePlusURL;
-		this.instagramURL = instagramURL;
-	}
+    public Portal(String name, String description, AccountType accountType, Admin owner, String homeURL, String facebookURL,
+                  String twitterURL, String googlePlusURL, String instagramURL) {
+        this.name = name;
+        this.description = description;
+        this.accountType = accountType;
+        this.owner = owner;
+        this.homeURL = homeURL;
+        this.facebookURL = facebookURL;
+        this.twitterURL = twitterURL;
+        this.googlePlusURL = googlePlusURL;
+        this.instagramURL = instagramURL;
+    }
 
+    @Override
+    public String toLogString() {
+        return toLogString("id: " + id, "name: " + name, "admin: " + owner.toLogString(), "homeURL: " + homeURL, "facebookURL: " + facebookURL,
+                "twitterURL: " + twitterURL, "googlePlusURL: " + googlePlusURL, "instagramURL: " + instagramURL);
+    }
 
-	@Override
-	public String toLogString() {
-		return toLogString("id: " + id, "name: " + name, "admin: " + owner.toLogString(), "homeURL: " + homeURL, "facebookURL: " + facebookURL,
-				"twitterURL: " + twitterURL, "googlePlusURL: " + googlePlusURL, "instagramURL: " + instagramURL);
-	}
+    public String getName() {
+        return name;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public AccountType getAccountType() {
+        return accountType;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public void setAccountType(AccountType accountType) {
+        this.accountType = accountType;
+    }
 
-	public AccountType getAccountType() {
-		return accountType;
-	}
+    public Admin getOwner() {
+        return owner;
+    }
 
-	public void setAccountType(AccountType accountType) {
-		this.accountType = accountType;
-	}
+    public void setOwner(Admin owner) {
+        this.owner = owner;
+    }
 
-	public Admin getOwner() {
-		return owner;
-	}
+    public String getHomeURL() {
+        return homeURL;
+    }
 
-	public void setOwner(Admin owner) {
-		this.owner = owner;
-	}
+    public void setHomeURL(String homeURL) {
+        this.homeURL = homeURL;
+    }
 
-	public String getHomeURL() {
-		return homeURL;
-	}
+    public String getFacebookURL() {
+        return facebookURL;
+    }
 
-	public void setHomeURL(String homeURL) {
-		this.homeURL = homeURL;
-	}
+    public void setFacebookURL(String facebookURL) {
+        this.facebookURL = facebookURL;
+    }
 
-	public String getFacebookURL() {
-		return facebookURL;
-	}
+    public String getTwitterURL() {
+        return twitterURL;
+    }
 
-	public void setFacebookURL(String facebookURL) {
-		this.facebookURL = facebookURL;
-	}
+    public void setTwitterURL(String twitterURL) {
+        this.twitterURL = twitterURL;
+    }
 
-	public String getTwitterURL() {
-		return twitterURL;
-	}
+    public String getGooglePlusURL() {
+        return googlePlusURL;
+    }
 
-	public void setTwitterURL(String twitterURL) {
-		this.twitterURL = twitterURL;
-	}
+    public void setGooglePlusURL(String googlePlusURL) {
+        this.googlePlusURL = googlePlusURL;
+    }
 
-	public String getGooglePlusURL() {
-		return googlePlusURL;
-	}
+    public String getInstagramURL() {
+        return instagramURL;
+    }
 
-	public void setGooglePlusURL(String googlePlusURL) {
-		this.googlePlusURL = googlePlusURL;
-	}
+    public void setInstagramURL(String instagramURL) {
+        this.instagramURL = instagramURL;
+    }
 
-	public String getInstagramURL() {
-		return instagramURL;
-	}
+    public Set<PortalLoginConfiguration> getLoginConfigurations() {
+        return loginConfigurations;
+    }
 
-	public void setInstagramURL(String instagramURL) {
-		this.instagramURL = instagramURL;
-	}
+    public boolean hasSocialLoginEnabled() {
+        return loginConfigurations.stream()
+                .anyMatch(PortalLoginConfiguration::hasSocialLoginEnabled);
+    }
 
-	public Set<PortalLoginConfiguration> getLoginConfigurations() {
-		return loginConfigurations;
-	}
+    public Set<PortalNetworkConfiguration> getNetworkConfigurations() {
+        return networkConfigurations;
+    }
 
-	public boolean hasSocialLoginEnabled() {
-		return loginConfigurations.stream()
-				.anyMatch(PortalLoginConfiguration::hasSocialLoginEnabled);
-	}
+    public void setNetworkConfigurations(Set<PortalNetworkConfiguration> networkConfigurations) {
+        this.networkConfigurations = networkConfigurations;
+    }
 
-	public void setNetworkConfigurations(Set<PortalNetworkConfiguration> networkConfigurations) {
-		this.networkConfigurations = networkConfigurations;
-	}
+    public Set<PortalApp> getApplications() {
+        return applications;
+    }
 
-	public Set<PortalNetworkConfiguration> getNetworkConfigurations() {
-		return networkConfigurations;
-	}
+    public void setApplications(Set<PortalApp> applications) {
+        this.applications = applications;
+    }
 
-	public Set<PortalApp> getApplications() {
-		return applications;
-	}
-
-	public Map<PortalApplicationType, PortalApp> getApplicationsByType() {
-		return applications.stream()
-				.collect(Collectors.toMap(PortalApp::getType, Function.identity()));
-	}
+    public Map<PortalApplicationType, PortalApp> getApplicationsByType() {
+        return applications.stream()
+                .collect(Collectors.toMap(PortalApp::getType, Function.identity()));
+    }
 }

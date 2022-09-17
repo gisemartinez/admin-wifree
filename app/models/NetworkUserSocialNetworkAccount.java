@@ -11,51 +11,51 @@ import javax.persistence.ManyToOne;
 @Entity
 public class NetworkUserSocialNetworkAccount extends BaseModel {
 
-	@ManyToOne(optional = false)
-	private NetworkUser networkUser;
+    @ManyToOne(optional = false)
+    private NetworkUser networkUser;
 
-	private SocialNetworkType socialNetwork;
+    private SocialNetworkType socialNetwork;
 
-	private String accountId;
-
-
-	public NetworkUserSocialNetworkAccount() {
-	}
-
-	public NetworkUserSocialNetworkAccount(NetworkUser networkUser, SocialNetworkType socialNetwork, String accountId) {
-				this.networkUser = networkUser;
-		this.socialNetwork = socialNetwork;
-		this.accountId = accountId;
-	}
+    private String accountId;
 
 
-	@Override
-	public String toLogString() {
-		return toLogString("id: " + id, "networkUser: " + networkUser, "socialNetwork: " + socialNetwork, "accountId: " + accountId);
-	}
+    public NetworkUserSocialNetworkAccount() {
+    }
+
+    public NetworkUserSocialNetworkAccount(NetworkUser networkUser, SocialNetworkType socialNetwork, String accountId) {
+        this.networkUser = networkUser;
+        this.socialNetwork = socialNetwork;
+        this.accountId = accountId;
+    }
 
 
-	public NetworkUser getNetworkUser() {
-		return networkUser;
-	}
+    @Override
+    public String toLogString() {
+        return toLogString("id: " + id, "networkUser: " + networkUser, "socialNetwork: " + socialNetwork, "accountId: " + accountId);
+    }
 
-	public void setNetworkUser(NetworkUser networkUser) {
-		this.networkUser = networkUser;
-	}
 
-	public SocialNetworkType getSocialNetwork() {
-		return socialNetwork;
-	}
+    public NetworkUser getNetworkUser() {
+        return networkUser;
+    }
 
-	public void setSocialNetwork(SocialNetworkType socialNetwork) {
-		this.socialNetwork = socialNetwork;
-	}
+    public void setNetworkUser(NetworkUser networkUser) {
+        this.networkUser = networkUser;
+    }
 
-	public String getAccountId() {
-		return accountId;
-	}
+    public SocialNetworkType getSocialNetwork() {
+        return socialNetwork;
+    }
 
-	public void setAccountId(String accountId) {
-		this.accountId = accountId;
-	}
+    public void setSocialNetwork(SocialNetworkType socialNetwork) {
+        this.socialNetwork = socialNetwork;
+    }
+
+    public String getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
+    }
 }
